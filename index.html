@@ -9,26 +9,29 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
-            color: #333;
+            background-color: #1c1c1e;
+            color: #f8f9fa;
             line-height: 1.6;
         }
         .container {
             padding: 20px;
             max-width: 600px;
             margin: 0 auto;
+            background-color: #2b2b2d;
+            border-radius: 10px;
         }
         h1 {
             font-size: 2em;
-            color: #d9534f;
+            color: #ff4757;
             text-align: center;
             font-weight: bold;
+            margin-bottom: 10px;
         }
         h2 {
             font-size: 1.4em;
-            color: #d9534f;
+            color: #ff6348;
             margin-top: 1.5em;
-            border-bottom: 2px solid #d9534f;
+            border-bottom: 2px solid #ff6348;
             padding-bottom: 5px;
         }
         p {
@@ -36,7 +39,7 @@
         }
         .highlight {
             font-weight: bold;
-            color: #d9534f;
+            color: #ffa502;
         }
         .italic {
             font-style: italic;
@@ -44,7 +47,7 @@
         .large {
             font-size: 1.2em;
             font-weight: bold;
-            color: #d9534f;
+            color: #ffa502;
         }
         ul {
             list-style-type: none;
@@ -52,27 +55,36 @@
         }
         ul li {
             padding: 8px;
-            background-color: #f1f1f1;
+            background-color: #3a3a3c;
+            color: #f8f9fa;
             margin: 5px 0;
             border-radius: 5px;
             font-size: 0.9em;
         }
         .team-list {
             display: grid;
-            gap: 10px;
+            gap: 15px;
         }
         .team {
             padding: 10px;
-            background-color: #e9ecef;
+            background-color: #3a3a3c;
             border-radius: 5px;
-            text-align: center;
+            text-align: left;
+        }
+        .team-name {
+            font-size: 1em;
+            color: #ffa502;
             font-weight: bold;
-            color: #d9534f;
+        }
+        .team-desc {
+            font-size: 0.9em;
+            color: #f8f9fa;
+            margin-top: 3px;
         }
         .footer {
             text-align: center;
             font-size: 0.9em;
-            color: #666;
+            color: #ccc;
             margin-top: 20px;
             font-style: italic;
         }
@@ -90,11 +102,26 @@
 
         <h2>🏆 Le Squadre</h2>
         <div class="team-list">
-            <div class="team">Gli Elfi Erranti 🧳🎅 – Dominic, Chiara, Mia e Liam, la famiglia sempre in movimento!</div>
-            <div class="team">I Cilloni di Natale 🍢🎅 – Mattia, Valentina e Pier, il super team abruzzese.</div>
-            <div class="team">Le Merry Maknaes 🎄🌟 – Noemi e Laura, con un tocco K-pop per un Natale brillante!</div>
-            <div class="team">I Pixel di Natale 🎄💾 – Gianfranco e Ashley, la squadra tech con un tocco festivo!</div>
-            <div class="team">I Festeggiatori Zampettanti 🐾🍾 – Lorenzo, Sabrina e Ozzy, festosi e con tante “zampette” in azione!</div>
+            <div class="team">
+                <div class="team-name">Gli Elfi Erranti 🧳🎅</div>
+                <div class="team-desc">Dominic, Chiara, Mia e Liam, la famiglia sempre in movimento!</div>
+            </div>
+            <div class="team">
+                <div class="team-name">I Cilloni di Natale 🍢🎅</div>
+                <div class="team-desc">Mattia, Valentina e Pier, il super team abruzzese.</div>
+            </div>
+            <div class="team">
+                <div class="team-name">Le Merry Maknaes 🎄🌟</div>
+                <div class="team-desc">Noemi e Laura, con un tocco K-pop per un Natale brillante!</div>
+            </div>
+            <div class="team">
+                <div class="team-name">I Pixel di Natale 🎄💾</div>
+                <div class="team-desc">Gianfranco e Ashley, la squadra tech con un tocco festivo!</div>
+            </div>
+            <div class="team">
+                <div class="team-name">I Festeggiatori Zampettanti 🐾🍾</div>
+                <div class="team-desc">Lorenzo, Sabrina e Ozzy, festosi e con tante “zampette” in azione!</div>
+            </div>
         </div>
 
         <h2>🎖 Il Premio</h2>
@@ -124,7 +151,7 @@
             <li>Una sedia o poltrona “vestita” per Natale – con una coperta, un nastro, o un tocco di fantasia</li>
             <li>Un oggetto che “sostiene di essere natalizio” ma non lo è affatto – tipo un telecomando con un adesivo di Babbo Natale</li>
             <li>Qualcosa di rosso e bianco che non è natalizio ma ci crede – tipo una bottiglia di ketchup</li>
-            <li>Qualcosa che “fa rumore natalizio” ma non lo è – tipo un cucchiaio e una pentola usati come campane</li>
+            <li>Qualcosa che “fa rumore natalizio” ma non lo è – tipo un cucchiaio e una pentola usati come campane!</li>
             <li>Una decorazione così strana che va spiegata due volte – anche se nessuno la capirà mai</li>
             <li>Qualcosa che “vuole” essere un regalo, anche se è solo una scatola vuota</li>
         </ul>
