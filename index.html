@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caccia al Tesoro Natalizia di Famiglia</title>
     <style>
+        /* Stili di base */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #000; /* Sfondo nero */
-            color: #f8f9fa; /* Testo bianco */
+            background-color: #000;
+            color: #f8f9fa;
             line-height: 1.6;
         }
         .container {
@@ -19,27 +20,33 @@
             margin: 0 auto;
             background-color: #111;
             border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
         }
         h1 {
             font-size: 2em;
-            color: #33cc33; /* Verde brillante */
+            color: #33cc33;
             text-align: center;
             font-weight: bold;
             margin-bottom: 20px;
+            animation: fadeIn 1s ease-in-out;
         }
         h2 {
             font-size: 1.5em;
-            color: #ff4d4d; /* Rosso brillante */
+            color: #ff4d4d;
             margin-top: 1.5em;
             border-bottom: 2px dashed #ff4d4d;
             padding-bottom: 5px;
+            transition: color 0.3s;
+        }
+        h2:hover {
+            color: #33cc33;
         }
         p {
             margin: 0 0 1em 0;
         }
         .highlight {
             font-weight: bold;
-            color: #ff4d4d; /* Rosso brillante */
+            color: #ff4d4d;
         }
         .italic {
             font-style: italic;
@@ -47,7 +54,7 @@
         .large {
             font-size: 1.3em;
             font-weight: bold;
-            color: #33cc33; /* Verde brillante */
+            color: #33cc33;
         }
         ul {
             list-style-type: none;
@@ -62,9 +69,14 @@
             font-size: 1em;
             display: flex;
             align-items: center;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        ul li:hover {
+            background-color: #333;
+            transform: scale(1.05);
         }
         ul li span {
-            margin-right: 15px; /* Spazio tra emoji e testo */
+            margin-right: 15px;
             font-size: 1.5em;
         }
         .team-list {
@@ -75,10 +87,15 @@
             padding: 15px;
             background-color: #222;
             border-radius: 5px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .team:hover {
+            background-color: #333;
+            transform: scale(1.03);
         }
         .team-name {
             font-size: 1.2em;
-            color: #33cc33; /* Verde brillante */
+            color: #33cc33;
             font-weight: bold;
         }
         .team-desc {
@@ -111,6 +128,32 @@
         a:hover {
             color: #ff4d4d;
         }
+        /* Animazioni */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        /* Responsività */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 1.8em;
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+            .large {
+                font-size: 1.1em;
+            }
+            ul li {
+                font-size: 0.9em;
+            }
+            .team-name {
+                font-size: 1em;
+            }
+            .team-desc {
+                font-size: 0.9em;
+            }
+        }
     </style>
 </head>
 <body>
@@ -135,7 +178,7 @@
             </div>
             <div class="team">
                 <div class="team-name">Gli Spiriti dell’Arrosticino del Presente 🎄🍢</div>
-                <div class="team-desc">Pier, il suo fedele Baghera 🐕 e una misteriosa persona scelta da lui! Chi sarà? 🤷‍♂️</div>
+                <div class="team-desc">Pier, il suo fedele Baghera 🐕 e un misterioso compagno scelto da lui! Chi sarà? 🤷‍♂️</div>
             </div>
             <div class="team">
                 <div class="team-name">Le Merry Maknaes 🎄🌟</div>
@@ -188,7 +231,7 @@
         <p>La caccia al tesoro si conclude il <span class="highlight">24 dicembre a mezzanotte</span> (quando Babbo Natale inizia il turno). Quindi, ovunque siate, avete tempo fino alla fine della vigilia per completare la lista e condividere le vostre meraviglie! 🎁🌟</p>
 
         <h2>📲 Aggiunta al Gruppo WhatsApp</h2>
-        <p>Ho creato un gruppo WhatsApp e ho aggiunto alcuni di voi: Chiara. Ora tocca a voi! 👥</p>
+        <p>Ho creato un gruppo WhatsApp e ho aggiunto alcuni di voi: Chiara, Mia, Liam, Mattia, Pier, Noemi, Gianfranco e Lorenzo. Ora tocca a voi! 👥</p>
         <p><span class="highlight">Ogni partecipante</span> deve aggiungere il proprio partner (e anche i cani, se hanno uno smartphone! 🐶📱) per completare le squadre. Pronti a partire? 🚀</p>
 
         <p class="large">Siete pronti a trasformare questo Natale in un'avventura epica? 🚀 Prepariamoci a vivere il Natale più divertente, strano e memorabile di sempre! 🎄📸</p>
@@ -197,5 +240,3 @@
     </div>
 </body>
 </html>
-
-
