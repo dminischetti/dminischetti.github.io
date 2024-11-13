@@ -6,7 +6,7 @@
     <title>Caccia al Tesoro Natalizia di Famiglia</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Comic Sans MS', cursive, sans-serif;
             margin: 0;
             padding: 0;
             background-color: #000; /* Sfondo nero */
@@ -15,23 +15,23 @@
         }
         .container {
             padding: 20px;
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
             background-color: #111;
             border-radius: 10px;
         }
         h1 {
             font-size: 2em;
-            color: #ff4d4d; /* Rosso brillante */
+            color: #33cc33; /* Verde brillante */
             text-align: center;
             font-weight: bold;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         h2 {
-            font-size: 1.4em;
-            color: #33cc33; /* Verde brillante */
+            font-size: 1.5em;
+            color: #ff4d4d; /* Rosso brillante */
             margin-top: 1.5em;
-            border-bottom: 2px solid #33cc33;
+            border-bottom: 2px dashed #ff4d4d;
             padding-bottom: 5px;
         }
         p {
@@ -45,7 +45,7 @@
             font-style: italic;
         }
         .large {
-            font-size: 1.2em;
+            font-size: 1.3em;
             font-weight: bold;
             color: #33cc33; /* Verde brillante */
         }
@@ -54,113 +54,147 @@
             padding: 0;
         }
         ul li {
-            padding: 8px;
+            padding: 10px;
             background-color: #222;
             color: #f8f9fa;
-            margin: 5px 0;
+            margin: 8px 0;
             border-radius: 5px;
-            font-size: 0.9em;
+            font-size: 1em;
+            display: flex;
+            align-items: center;
+        }
+        ul li span {
+            margin-right: 15px; /* Spazio tra emoji e testo */
+            font-size: 1.5em;
         }
         .team-list {
             display: grid;
-            gap: 15px;
+            gap: 20px;
         }
         .team {
-            padding: 10px;
+            padding: 15px;
             background-color: #222;
             border-radius: 5px;
         }
         .team-name {
-            font-size: 1em;
+            font-size: 1.2em;
             color: #33cc33; /* Verde brillante */
             font-weight: bold;
         }
         .team-desc {
-            font-size: 0.9em;
+            font-size: 1em;
             color: #f8f9fa;
-            margin-top: 3px;
+            margin-top: 5px;
         }
         .footer {
             text-align: center;
-            font-size: 0.9em;
+            font-size: 1em;
             color: #ccc;
-            margin-top: 20px;
+            margin-top: 30px;
             font-style: italic;
+        }
+        .notice {
+            background-color: #222;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .notice p {
+            margin: 0;
+            color: #f8f9fa;
+        }
+        a {
+            color: #33cc33;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        a:hover {
+            color: #ff4d4d;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎉 Benvenuti al primo Gran Gioco di Caccia al Tesoro Natalizia di Famiglia! 🎉</h1>
+        <h1>🎉 Il Gran Gioco di Caccia al Tesoro Natalizia di Famiglia! 🎉</h1>
 
-        <p class="large">Quest’anno, per portare un po’ di allegria nelle feste, vi invito a partecipare a <span class="highlight">LA CACCIA AL TESORO NATALIZIA PIÙ DIVERTENTE DI SEMPRE!</span> 🎅🤶</p>
+        <p class="large">Quest’anno ho pensato: "Come posso rendere il Natale ancora più folle?" 🤔 E voilà, ecco a voi la <span class="highlight">CACCIA AL TESORO NATALIZIA PIÙ DIVERTENTE DI SEMPRE!</span> 🎅🤶</p>
 
         <h2>🎄 Come funziona?</h2>
-        <p>Ogni squadra deve trovare tutti gli oggetti della lista e scattarsi un <span class="italic">selfie</span> con ciascuno (niente foto prese da internet!). <span class="highlight">Più creativi siete, meglio è!</span> Voglio vedere cetrioli trasformati in alberi di Natale e cappelli di Babbo Natale su… qualsiasi cosa!</p>
-        <p>Quando trovate un oggetto, <span class="highlight">postate la foto nel gruppo!</span> Così tutti possono commentare, ridere e apprezzare le vostre trovate natalizie. 🎄📸</p>
+        <p>Ogni squadra deve trovare gli oggetti della lista qui sotto e scattarsi un <span class="italic">selfie</span> con ciascuno (no, le foto di Google non valgono! 😜). <span class="highlight">Più creativi siete, meglio è!</span> Voglio vedere cetrioli trasformati in alberi di Natale e cappelli di Babbo Natale su... beh, sorprendetemi! 🎁</p>
+        <p>Quando trovate un oggetto, <span class="highlight">postate la foto nel gruppo!</span> Così possiamo tutti ridere, piangere (dal ridere) e magari chiedervi "ma perché?!". 🎄📸</p>
 
         <h2>🏆 Le Squadre</h2>
         <div class="team-list">
             <div class="team">
                 <div class="team-name">Gli Elfi Erranti 🧳🎅</div>
-                <div class="team-desc">Dominic, Chiara, Mia e Liam, la famiglia sempre in movimento!</div>
+                <div class="team-desc">Dominic, Chiara, Mia e Liam – sempre in giro, forse stavolta si perdono meno! 😅</div>
             </div>
             <div class="team">
                 <div class="team-name">I Cilloni di Natale 🍢🎅</div>
-                <div class="team-desc">Mattia, Valentina e Pier, il super team abruzzese.</div>
+                <div class="team-desc">Mattia e Valentina – direttamente dall'Abruzzo con furore e arrosticini! 🍢</div>
+            </div>
+            <div class="team">
+                <div class="team-name">Gli Spiriti dell’Arrosticino del Presente 🎄🍢</div>
+                <div class="team-desc">Pier, il suo fedele Baghera 🐕 e un misterioso compagno scelto da lui! Chi sarà? 🤷‍♂️</div>
             </div>
             <div class="team">
                 <div class="team-name">Le Merry Maknaes 🎄🌟</div>
-                <div class="team-desc">Noemi e Laura, con un tocco K-pop per un Natale brillante!</div>
+                <div class="team-desc">Noemi e Laura – portando un po' di K-pop nel nostro Natale! 🎤</div>
             </div>
             <div class="team">
                 <div class="team-name">I Pixel di Natale 🎄💾</div>
-                <div class="team-desc">Gianfranco e Ashley, la squadra tech con un tocco festivo!</div>
+                <div class="team-desc">Gianfranco e Ashley – la tecnologia incontra il Natale! 🤖</div>
             </div>
             <div class="team">
                 <div class="team-name">I Festeggiatori Zampettanti 🐾🍾</div>
-                <div class="team-desc">Lorenzo, Sabrina e Ozzy, festosi e con tante “zampette” in azione!</div>
+                <div class="team-desc">Lorenzo, Sabrina e Ozzy – pronti a zampettare verso la vittoria! 🐾</div>
             </div>
         </div>
 
         <h2>🎖 Il Premio</h2>
-        <p>Alla fine della caccia al tesoro, una sola squadra sarà incoronata <span class="highlight">Campione del Natale</span> e guadagnerà la <span class="italic">Gloria Eterna</span> fino al prossimo anno! Il vincitore sarà annunciato il <span class="highlight">1º gennaio</span> per iniziare l'anno nuovo con un sorriso!</p>
+        <p>Alla fine della caccia al tesoro, una sola squadra sarà incoronata <span class="highlight">Campione del Natale</span> e guadagnerà la <span class="italic">Gloria Eterna</span> (fino al prossimo anno, poi scade 😜). Il vincitore sarà annunciato il <span class="highlight">1º gennaio</span> – così iniziamo l'anno con una risata! 🎆</p>
 
         <h2>🎅 La Lista degli Oggetti</h2>
+        <p>(Pronti? Via!)</p>
         <ul>
-            <li>Un calzino spaiato che potrebbe essere di un elfo distratto</li>
-            <li>Una decorazione natalizia così kitsch da farti dubitare delle scelte di chi l’ha comprata</li>
-            <li>Un cucchiaio o utensile da cucina trasformato in “bacchetta magica” natalizia – aggiungi glitter o un nastrino e voilà!</li>
-            <li>Un Babbo Natale che sembra aver bisogno di una vacanza</li>
-            <li>Un “biscotto di Natale” inaspettato - qualsiasi cibo potrebbe essere un dolce se ci credi abbastanza</li>
-            <li>Un cappello di Babbo Natale su qualcosa di strano – tipo un cuscino, una scopa o un porta ombrelli</li>
-            <li>Una bevanda “invernale” improvvisata – cioccolata calda? Va bene, ma anche un tè messo nel bicchiere di un frullato va bene</li>
-            <li>Un animaletto (vero o falso) vestito a festa che sembra perplesso dal Natale</li>
-            <li>Un pezzo di carta regalo riciclata così tante volte che sembra antica</li>
-            <li>Qualcosa con “troppo” glitter – se quando lo tocchi, hai glitter anche sui denti, hai trovato l’oggetto giusto</li>
-            <li>Un piatto di cibo che “sembra” una decorazione natalizia – sì, anche se è un’insalata con un po’ di fantasia</li>
-            <li>Un cartello o una scritta che puoi interpretare come “felice Natale” – anche se dice tutt’altro</li>
-            <li>Qualcosa che “sarebbe stato meglio non decorare per Natale” – tipo una pianta da ufficio o un pelapatate</li>
-            <li>Un elfo di fortuna fatto con cose di casa – un cucchiaio, uno scialle, e qualche nastro, e hai l’elfo fai-da-te!</li>
-            <li>Una decorazione che sembra “troppo seria” per essere di Natale – tipo una scultura d’arte con un cappellino natalizio</li>
-            <li>Una “renna” improvvisata – un animale (vero o finto) che potrebbe essere una renna se ci credi abbastanza</li>
-            <li>Un oggetto che ti fa dire “ma che c’entra col Natale?” – ma lo fotografi comunque</li>
-            <li>Qualcosa che sembra “il Grinch prima del caffè”</li>
-            <li>Un biglietto di auguri “creativo” – fatto con qualsiasi cosa, anche un tovagliolo o un post-it</li>
-            <li>Una sedia o poltrona “vestita” per Natale – con una coperta, un nastro, o un tocco di fantasia</li>
-            <li>Un oggetto che “sostiene di essere natalizio” ma non lo è affatto – tipo un telecomando con un adesivo di Babbo Natale</li>
-            <li>Qualcosa di rosso e bianco che non è natalizio ma ci crede – tipo una bottiglia di ketchup</li>
-            <li>Qualcosa che “fa rumore natalizio” ma non lo è – tipo un cucchiaio e una pentola usati come campane</li>
-            <li>Una decorazione così strana che va spiegata due volte – anche se nessuno la capirà mai</li>
-            <li>Qualcosa che “vuole” essere un regalo, anche se è solo una scatola vuota</li>
+            <li><span>🧦</span>Un calzino spaiato che potrebbe essere di un elfo distratto</li>
+            <li><span>🎄</span>Una decorazione natalizia così kitsch da farti dire "ma davvero?"</li>
+            <li><span>✨</span>Un cucchiaio magico – trasformalo in una bacchetta natalizia! 🪄</li>
+            <li><span>🎅</span>Un Babbo Natale che sembra aver bisogno di ferie (occhiaie incluse)</li>
+            <li><span>🍪</span>Un "biscotto di Natale" inaspettato – sì, anche una patatina può sognare!</li>
+            <li><span>🎩</span>Un cappello di Babbo Natale su qualcosa di... strano (si accettano idee folli)</li>
+            <li><span>☕</span>Una bevanda "invernale" improvvisata – sorprendici! 🥤</li>
+            <li><span>🐶</span>Un animaletto (vero o finto) vestito a festa che pensa "perché a me?"</li>
+            <li><span>🎁</span>Carta regalo riciclata così tante volte da essere vintage</li>
+            <li><span>💫</span>Qualcosa con TROPPO glitter – se brilli per tre giorni, è quello giusto</li>
+            <li><span>🍽️</span>Un piatto che sembra una decorazione natalizia – anche se è solo pasta al sugo 🍝</li>
+            <li><span>📝</span>Una scritta che puoi interpretare come "Felice Natale" – anche se dice tutt'altro!</li>
+            <li><span>🌵</span>Qualcosa che NON andrebbe decorato per Natale – tipo... il tuo spazzolino?</li>
+            <li><span>🧙</span>Un elfo fai-da-te – creatività al potere! ✂️</li>
+            <li><span>🖼️</span>Una decorazione troppo seria per Natale – una Monna Lisa con cappello?</li>
+            <li><span>🦌</span>Una "renna" improvvisata – il tuo cane con corna di carta conta!</li>
+            <li><span>🤔</span>Un oggetto che ti fa dire "Ma che c'entra col Natale?" – ma lo fotografi lo stesso</li>
+            <li><span>☹️</span>Qualcosa che sembra "il Grinch prima del caffè" ☕</li>
+            <li><span>📜</span>Un biglietto d'auguri creativo – anche su un tovagliolo va bene!</li>
+            <li><span>🛋️</span>Una sedia o poltrona "vestita" per Natale – stile passerella! 💃</li>
+            <li><span>📺</span>Un oggetto che "sostiene" di essere natalizio... ma proprio no</li>
+            <li><span>🍅</span>Qualcosa di rosso e bianco che ci prova – tipo una bottiglia di ketchup</li>
+            <li><span>🔔</span>Qualcosa che "fa rumore natalizio" ma non lo è – campane fai-da-te!</li>
+            <li><span>🤷</span>Una decorazione così strana che va spiegata due volte (o tre)</li>
+            <li><span>📦</span>Qualcosa che "vuole" essere un regalo – anche una scatola vuota con fiocco!</li>
         </ul>
 
         <h2>⏰ Termine Ultimo</h2>
-        <p>La caccia al tesoro si conclude il <span class="highlight">24 dicembre a mezzanotte</span>, in base al fuso orario del luogo in cui vi trovate. Quindi, indipendentemente da dove siete, avete tempo fino alla fine della vigilia di Natale per completare la vostra lista e postare le foto nel gruppo!</p>
+        <p>La caccia al tesoro si conclude il <span class="highlight">24 dicembre a mezzanotte</span> (quando Babbo Natale inizia il turno). Quindi, ovunque siate, avete tempo fino alla fine della vigilia per completare la lista e condividere le vostre meraviglie! 🎁🌟</p>
 
-        <p class="large">Siete pronti a trasformare questo Natale in un’avventura epica? 🚀 Prepariamoci a vivere il Natale più divertente e creativo di sempre! 🎄📸</p>
+        <h2>📲 Aggiunta al Gruppo WhatsApp</h2>
+        <p>Ho creato un gruppo WhatsApp e ho aggiunto alcuni di voi: Chiara, Mia, Liam, Mattia, Pier, Noemi, Gianfranco e Lorenzo. Ora tocca a voi! 👥</p>
+        <p><span class="highlight">Ogni partecipante</span> deve aggiungere il proprio partner (e anche i cani, se hanno uno smartphone! 🐶📱) per completare le squadre. Pronti a partire? 🚀</p>
 
-        <p class="footer"><span class="italic">PS:</span> La lista è stata creata da ChatGPT, quindi nessuno può incolpare me per questi oggetti strani! <span class="highlight">Buon divertimento!</span></p>
+        <p class="large">Siete pronti a trasformare questo Natale in un'avventura epica? 🚀 Prepariamoci a vivere il Natale più divertente, strano e memorabile di sempre! 🎄📸</p>
+
+        <p class="footer"><span class="italic">P.S.</span> La lista è stata creata da ChatGPT (lo so, colpa sua!), quindi nessuno può incolpare me per questi oggetti strani! <span class="highlight">Buon divertimento!</span> 😜</p>
     </div>
 </body>
 </html>
+
