@@ -13,6 +13,7 @@
             background-color: #000;
             color: #f8f9fa;
             line-height: 1.6;
+            overflow-x: hidden;
         }
         .container {
             padding: 20px;
@@ -21,6 +22,7 @@
             background-color: #111;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+            animation: fadeInContainer 1s ease-in-out;
         }
         h1 {
             font-size: 2em;
@@ -28,7 +30,7 @@
             text-align: center;
             font-weight: bold;
             margin-bottom: 20px;
-            animation: fadeIn 1s ease-in-out;
+            animation: slideIn 1.2s ease-in-out;
         }
         h2 {
             font-size: 1.5em;
@@ -37,12 +39,14 @@
             border-bottom: 2px dashed #ff4d4d;
             padding-bottom: 5px;
             transition: color 0.3s;
+            animation: slideIn 1.2s ease-in-out;
         }
         h2:hover {
             color: #33cc33;
         }
         p {
             margin: 0 0 1em 0;
+            animation: fadeIn 1.5s ease-in-out;
         }
         .highlight {
             font-weight: bold;
@@ -59,6 +63,7 @@
         ul {
             list-style-type: none;
             padding: 0;
+            animation: fadeInList 1.5s ease-in-out;
         }
         ul li {
             padding: 10px;
@@ -70,6 +75,7 @@
             display: flex;
             align-items: center;
             transition: background-color 0.3s ease, transform 0.3s ease;
+            animation: fadeInItem 1.8s ease-in-out;
         }
         ul li:hover {
             background-color: #333;
@@ -82,12 +88,14 @@
         .team-list {
             display: grid;
             gap: 20px;
+            animation: fadeInTeams 1.5s ease-in-out;
         }
         .team {
             padding: 15px;
             background-color: #222;
             border-radius: 5px;
             transition: background-color 0.3s ease, transform 0.3s ease;
+            animation: slideInTeam 1.5s ease-in-out;
         }
         .team:hover {
             background-color: #333;
@@ -109,16 +117,14 @@
             color: #ccc;
             margin-top: 30px;
             font-style: italic;
+            animation: fadeInFooter 2s ease-in-out;
         }
         .notice {
             background-color: #222;
             padding: 15px;
             border-radius: 5px;
             margin-top: 20px;
-        }
-        .notice p {
-            margin: 0;
-            color: #f8f9fa;
+            animation: fadeInNotice 1.8s ease-in-out;
         }
         a {
             color: #33cc33;
@@ -129,8 +135,40 @@
             color: #ff4d4d;
         }
         /* Animazioni */
+        @keyframes slideIn {
+            from { transform: translateX(-20px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInList {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeInItem {
+            from { transform: translateY(10px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes fadeInContainer {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
+        }
+        @keyframes fadeInTeams {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideInTeam {
+            from { transform: translateX(-10px); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+        @keyframes fadeInFooter {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInNotice {
+            from { opacity: 0; transform: translateY(10px); }
             to { opacity: 1; transform: translateY(0); }
         }
         /* Responsività */
@@ -238,5 +276,17 @@
 
         <p class="footer"><span class="italic">P.S.</span> La lista è stata creata da ChatGPT (lo so, colpa sua!), quindi nessuno può incolpare me per questi oggetti strani! <span class="highlight">Buon divertimento!</span> 😜</p>
     </div>
+
+    <!-- Smooth Scroll Script -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
