@@ -33,103 +33,133 @@ facebook_username: dominic.minischetti
 about_title: About me
 about_profile_image: images/IMG_4128.jpeg
 about_content: | # this will include new lines to allow paragraphs
-  Experienced Full Stack Developer with over 5 years of professional experience in designing and developing web applications using <mark>PHP</mark>, <mark>JS</mark>, <mark>MySQL</mark>, and <mark>SQL Server</mark>. Skilled in troubleshooting and resolving issues, collaborating with cross-functional teams, and implementing effective solutions. Bachelor of Technology in Computer Information Systems with a focus on <mark>Database management</mark>. Committed to staying current with emerging technologies and delivering seamless and intuitive interfaces that optimize system performance.
+  Experienced Full Stack Developer with over 5 years # Site
+repository: sproogen/resume-theme
+favicon: images/favicon.ico
+
+# Content configuration version
+version: 2
+
+# Personal info
+name: Dominic Minischetti
+title: PHP Backend Engineer
+email: dominic.minischetti@gmail.com
+website: www.minischetti.org
+phone: (+1) 347 606 6909
+
+# Dark Mode (true/false/never)
+darkmode: false
+
+# Social links
+linkedin_username: dminischetti
+github_username: dminischetti
+
+# About Section
+about_title: About Me
+about_profile_image: images/IMG_4128.jpeg
+about_content: |
+  PHP Backend Engineer with over 5 years of experience in eCommerce, logistics, and web application development. Proven track record in building high-performance systems and optimizing database architectures. Skilled in agile methodologies and dedicated to clean, efficient code and exceptional user experiences.
+
 content:
-  - title: Professional Experience # Title for the section
-    layout: list # Type of content section (list/text)
+  - title: Professional Experience
+    layout: list
     content:
       - layout: left
-        title: Full Stack Developer
-        sub_title: Polished.Com Inc
-        caption: May 2022 - Present
-        description: | # this will include new lines to allow paragraphs
-            - Designed and developed a Warehouse Management System using <mark>PHP</mark>, <mark>JS</mark>, and <mark>MySQL</mark>.
-            - Created an intuitive interface for the mobile application of the warehouse system.
-            - Collaborated with cross-functional teams to ensure optimal system performance.
-            - Contributed to the seamless management of the warehouse system for company success.
+        title: Backend PHP Developer
+        sub_title: BLOX Digital
+        caption: July 2024 - Present
+        description: |
+            - Enhancing CMS for media clients, troubleshooting to optimize system reliability.
+            - Collaborate with development teams to identify areas for improved system performance.
+
+      - layout: left
+        title: Backend PHP Developer
+        sub_title: Appliances Connection
+        caption: May 2022 - March 2024
+        description: |
+            - Built a Warehouse Management System (WMS) with PHP, JavaScript, and MySQL, improving inventory tracking and workflow efficiency.
+            - Developed responsive interfaces for warehouse operations, enhancing team productivity.
+
       - layout: left
         title: Full Stack Developer
         sub_title: Kingsleague GmbH
         caption: August 2021 - May 2022
-        description: | # this will include new lines to allow paragraphs
-            - Built server-side web applications using <mark>PHP</mark>, <mark>MySQL</mark>, <mark>Firebase</mark>, and <mark>JS</mark>.
-            - Troubleshot using Agile Kanban via <mark>JIRA</mark> and <mark>GIT</mark> for versioning.
-            - Implemented, developed, and optimized web software with <mark>Nginx</mark> and <mark>Docker</mark> for deployment.
-            - Identified and fixed performance issues on multi-source <mark>Mariadb</mark> replicas.
+        description: |
+            - Developed high-performance web applications with PHP, MySQL, Firebase, and Docker.
+            - Streamlined deployments with Nginx and Docker, and automated testing with Python and Selenium.
+
       - layout: left
-        title: DBA & Data Analyst
+        title: Data Analyst & Database Administrator
         sub_title: Eiffel srl
         caption: November 2012 - October 2015
-        description: | # this will include new lines to allow paragraphs
-            - Administered <mark>SQL Server</mark> databases and provided tutoring to less experienced administrators.
-            - Implemented SQL Server-based solutions for data consolidation and reporting.
-            - Handled daily database administration tasks, including monitoring <mark>SQL Server</mark> and managing user requests.
+        description: |
+            - Led SQL Server database administration, mentoring junior admins and implementing consolidated reporting solutions.
+            - Improved data analysis by implementing SQL Server-based solutions for efficient data consolidation.
+
       - layout: left
         title: Data Analyst
-        sub_title: Call2U srl
+        sub_title: Call2U
         caption: September 2010 - November 2012
-        description: | # this will include new lines to allow paragraphs
-            - Diagnosed and resolved software, hardware, and connectivity issues.
-            - Transferred, designed, adapted, installed, and maintained multiple instances of <mark>Service Manager</mark> on Windows platform using <mark>Microsoft SQL Server</mark> as <mark>T-SQL</mark> backend.
+        description: |
+            - Diagnosed and resolved technical issues, ensuring smooth operations across software and hardware systems.
+            - Maintained Service Manager instances and SQL Server backends for data integrity.
+
       - layout: left
         title: Frontend Developer
         sub_title: ASD Servizi
         caption: December 2006 - April 2008
-        description: | # this will include new lines to allow paragraphs
-            - Created websites and <mark>PHP</mark> applications, managed catalogs, and performed editorial advertising and copywriting for corporate image.
-            - Responsible for the design and maintenance of web services, including banner ads, hosting, domain name registration.
-            - Managed operator panel, Plesk server maintenance, domain and mailbox activation, and <mark>SQL</mark> database management.
-  - title: Education # Title for the section
-    layout: list # Type of content section (list/text)
+        description: |
+            - Built and managed websites and PHP applications, focusing on content management and web services.
+
+  - title: Education
+    layout: list
     content:
       - layout: left
-        title: New York City College of Technology
+        title: CUNY New York City College of Technology
         caption: 2020
-        sub_title: Bachelor Degree (GPA 3.7/4)
-        description: Bachelor of Technology in Computer Systems, Database Specialization. <br>Developed data analysis skills using <mark>Oracle SQL Developer</mark> and <mark>Microsoft SQL Server</mark> for designing and implementing multiple database management systems.
+        sub_title: Bachelor of Technology, Computer Information Systems (Database Track)
+        description: |
+          - GPA: 3.7/4. Specialized in Oracle SQL Developer, Microsoft SQL Server, and database management.
+
       - layout: left
         title: University of Bari, Italy
         caption: 2000
-        sub_title: Coursework in Computer Science
-        description: Acquired skills in designing, developing, and implementing software using programming languages such as <mark>Java</mark>, <mark>C++</mark>, and <mark>Python</mark>.
-  - title: Additional Courses # Title for the section
-    layout: text # Type of content section (list/text)
+        sub_title: Coursework in Computer and Information Sciences
+        description: |
+          - Gained a foundational understanding of programming with Java, C++, and Python.
+
+  - title: Certifications & Additional Courses
+    layout: text
     content: |
-        - <b>MongoDB Course</b>, MongoDB University, 2021
-        - <b>Project Management Course</b>, New York City College of Technology, 2019
-  - title: Technical Skills # Title for the section
-    layout: text # Type of content section (list/text)
+        - <b>MongoDB University</b> - MongoDB Course, 2021
+        - <b>NYC College of Technology</b> - Project Management, 2019
+
+  - title: Technical Skills
+    layout: text
     content: |
-        - <b>Programming languages:</b> PHP, Python, JavaScript
-        - <b>Framework and libraries:</b> Bootstrap, jQuery, Smarty
-        - <b>Development architecture:</b> Model-View-Controller (MVC)
-        - <b>API Development:</b> REST API
-        - <b>Databases:</b> SQL Server, MySQL, MariaDB, MongoDB
-        - <b>Development metodology:</b> Agile, Kanban
-        - <b>Operating systems and servers:</b> Linux, Apache, Nginx, IIS
-  - title: Soft Skills # Title for the section
-    layout: text # Type of content section (list/text)
+        - **Programming Languages**: PHP, Python, JavaScript
+        - **Frameworks & Libraries**: Bootstrap, jQuery, Smarty
+        - **Database Management**: SQL Server, MySQL, MariaDB, MongoDB
+        - **DevOps Tools**: Docker, Nginx, Git, Jenkins
+        - **API Development**: RESTful API design and integration
+        - **Development Methodologies**: Agile (Kanban), OOP, MVC Architecture
+        - **Operating Systems & Servers**: Linux, Apache, IIS, Windows
+
+  - title: Soft Skills
+    layout: text
     content: |
-          - Effective teamworking
-          - Clear and concise communication
-          - Efficient time management
-          - Adaptability and flexibility
-          - Creative problem-solving abilities
-          - Results-driven mindset
-          - Commitment to self-learning and continuous improvement
-  - title: Languages # Title for the section
-    layout: text # Type of content section (list/text)
+        - Collaborative and effective team player
+        - Clear communicator with a focus on detail
+        - Strong time management and organizational skills
+        - Adaptable to new tools and technologies
+        - Problem-solver with a results-driven mindset
+
+  - title: Languages
+    layout: text
     content: |
-        - <b>Italian</b> (native speaker)
-        - <b>English</b> (fluent)
-        - <b>Spanish</b> (elementary level)
+        - **Italian**: Native
+        - **English**: Fluent
+        - **Spanish**: Elementary
+
 # Footer
 footer_show_references: false
-# references_title: References on request (Override references text)
-# Build settings
-remote_theme: sproogen/resume-theme
-sass:
-  sass_dir: _sass
-  style: compressed
-#plugins:
-# - jekyll-seo-tag
