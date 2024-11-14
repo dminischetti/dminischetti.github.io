@@ -87,28 +87,17 @@ content:
             - Developed high-performance web applications with PHP, MySQL, Firebase, and Docker.
             - Streamlined deployments with Nginx and Docker, and automated testing with Python and Selenium.
 
-      - layout: left
-        title: Data Analyst & Database Administrator
-        sub_title: Eiffel srl
-        caption: November 2012 - October 2015
-        description: |
-            - Led SQL Server database administration, mentoring junior admins and implementing consolidated reporting solutions.
-            - Improved data analysis by implementing SQL Server-based solutions for efficient data consolidation.
+  - layout: left
+    title: Data Analyst & Database Administrator
+    sub_title: Call2U srl (rebranded as Eiffel srl)
+    caption: September 2010 - October 2015
+    description: |
+        - Diagnosed and resolved software, hardware, and connectivity issues, ensuring smooth system operations.
+        - Transitioned, designed, and maintained multiple instances of Service Manager on Windows platforms using Microsoft SQL Server as the T-SQL backend.
+        - Administered SQL Server databases and provided mentorship to junior administrators.
+        - Implemented SQL Server-based solutions for data consolidation and reporting, enhancing data analysis capabilities.
+        - Managed daily database administration tasks, including monitoring SQL Server performance and addressing user requests.
 
-      - layout: left
-        title: Data Analyst
-        sub_title: Call2U
-        caption: September 2010 - November 2012
-        description: |
-            - Diagnosed and resolved technical issues, ensuring smooth operations across software and hardware systems.
-            - Maintained Service Manager instances and SQL Server backends for data integrity.
-
-      - layout: left
-        title: Frontend Developer
-        sub_title: ASD Servizi
-        caption: December 2006 - April 2008
-        description: |
-            - Built and managed websites and PHP applications, focusing on content management and web services.
 
   - title: Education
     layout: list
