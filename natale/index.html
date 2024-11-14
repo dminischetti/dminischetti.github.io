@@ -5,7 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Caccia al Tesoro Natalizia di Famiglia</title>
     <style>
-        /* Stili di base */
+        /* Add styling for the language switcher */
+        .language-switch {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding: 10px;
+        }
+        .language-switch a {
+            color: #33cc33;
+            text-decoration: none;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s;
+        }
+        .language-switch a:hover {
+            color: #ff4d4d;
+        }
+        .language-switch img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+        }
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -195,6 +217,10 @@
     </style>
 </head>
 <body>
+        <div class="language-switch">
+        <a href="eng.html"><img src="us-flag-icon.png" alt="US Flag">English</a>
+    </div>
+    
     <div class="container">
         <h1>🎉 Il Gran Gioco di Caccia al Tesoro Natalizia di Famiglia! 🎉</h1>
 
