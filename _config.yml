@@ -87,17 +87,16 @@ content:
             - Developed high-performance web applications with PHP, MySQL, Firebase, and Docker.
             - Streamlined deployments with Nginx and Docker, and automated testing with Python and Selenium.
 
-  - layout: left
-    title: Data Analyst & Database Administrator
-    sub_title: Call2U srl (rebranded as Eiffel srl)
-    caption: September 2010 - October 2015
-    description: |
-        - Diagnosed and resolved software, hardware, and connectivity issues, ensuring smooth system operations.
-        - Transitioned, designed, and maintained multiple instances of Service Manager on Windows platforms using Microsoft SQL Server as the T-SQL backend.
-        - Administered SQL Server databases and provided mentorship to junior administrators.
-        - Implemented SQL Server-based solutions for data consolidation and reporting, enhancing data analysis capabilities.
-        - Managed daily database administration tasks, including monitoring SQL Server performance and addressing user requests.
-
+      - layout: left
+        title: Data Analyst & Database Administrator
+        sub_title: Call2U srl (rebranded as Eiffel srl)
+        caption: September 2010 - October 2015
+        description: |
+            - Diagnosed and resolved software, hardware, and connectivity issues, ensuring smooth system operations.
+            - Transitioned, designed, and maintained multiple instances of Service Manager on Windows platforms using Microsoft SQL Server as the T-SQL backend.
+            - Administered SQL Server databases and provided mentorship to junior administrators.
+            - Implemented SQL Server-based solutions for data consolidation and reporting, enhancing data analysis capabilities.
+            - Managed daily database administration tasks, including monitoring SQL Server performance and addressing user requests.
 
   - title: Education
     layout: list
