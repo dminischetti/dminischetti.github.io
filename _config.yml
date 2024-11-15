@@ -31,7 +31,7 @@ facebook_username: dominic.minischetti
 #   icon: font awesome brand icon name (eg. fab fa-twitter) (https://fontawesome.com/icons?d=gallery&m=free)
 #   url: Link url (eg. https://google.com)
 about_title: About me
-about_profile_image: images/IMG_4128.jpeg
+about_profile_image: images/profile.jpg
 about_content: | # this will include new lines to allow paragraphs
   Experienced Full Stack Developer with over 5 years # Site
 repository: sproogen/resume-theme
