@@ -1,63 +1,44 @@
-# Site
-repository: sproogen/resume-theme
-favicon: images/favicon.ico
-# Content configuration version
-version: 2
-
-# Personal info
-name: Dominic Minischetti
-title: Full Stack Developer
-email: dominic.minischetti@gmail.com
-website: www.minischetti.org
-
-# Dark Mode (true/false/never)
-darkmode: false
-
-# Social links
-linkedin_username: dominischetti
-twitter_username: dominischetti
-instagram_username: dminischetti
-facebook_username: dominic.minischetti
-# github_username:  sproogen
-# stackoverflow_username: "00000001"
-# youtube_username: globalmtb
-
-# Additional icon links
-# additional_links:
-# - title: itsgoingto.be
-#  icon: fas fa-globe
-#  url: https://www.itsgoingto.be
-# - title: another link
-#   icon: font awesome brand icon name (eg. fab fa-twitter) (https://fontawesome.com/icons?d=gallery&m=free)
-#   url: Link url (eg. https://google.com)
-about_title: About me
-about_profile_image: images/profile.jpg
-about_content: | # this will include new lines to allow paragraphs
-  Experienced Full Stack Developer with over 5 years # Site
+# Site Configuration
 repository: sproogen/resume-theme
 favicon: images/favicon.ico
 
 # Content configuration version
 version: 2
 
-# Personal info
+# Personal Info
 name: Dominic Minischetti
 title: PHP Backend Engineer
 email: dominic.minischetti@gmail.com
-website: www.minischetti.org
+website: https://minischetti.org
 
 # Dark Mode (true/false/never)
-darkmode: false
+darkmode: true  # Enabled dark mode support
 
-# Social links
+# Social Links with Icons
 linkedin_username: dminischetti
 github_username: dminischetti
+twitter_username: dominischetti
+instagram_username: dminischetti
+facebook_username: dominic.minischetti
+
+# Additional Icon Links
+additional_links:
+  - title: GitHub
+    icon: fab fa-github
+    url: https://github.com/dminischetti
+  - title: LinkedIn
+    icon: fab fa-linkedin
+    url: https://www.linkedin.com/in/dminischetti/
 
 # About Section
 about_title: About Me
 about_profile_image: images/profile.jpg
 about_content: |
+  **Building efficient solutions for real-world problems.**
+
   PHP Backend Engineer with over 5 years of experience in eCommerce, logistics, and web application development. Proven track record in building high-performance systems and optimizing database architectures. Skilled in agile methodologies and dedicated to clean, efficient code and exceptional user experiences.
+
+  Currently expanding my expertise in Laravel and modern PHP frameworks to deliver scalable and robust applications.
 
 content:
   - title: Professional Experience
@@ -98,6 +79,27 @@ content:
             - Implemented SQL Server-based solutions for data consolidation and reporting, enhancing data analysis capabilities.
             - Managed daily database administration tasks, including monitoring SQL Server performance and addressing user requests.
 
+  - title: Projects
+    layout: list
+    content:
+      - layout: left
+        title: Warehouse Management System (WMS)
+        sub_title: Appliances Connection
+        caption: 2023
+        description: |
+          - Developed a WMS that improved inventory tracking by 30%.
+          - Technologies used: PHP, JavaScript, MySQL.
+          - [View Project](https://github.com/dminischetti/wms-project)
+
+      - layout: left
+        title: E-commerce Platform Optimization
+        sub_title: Kingsleague GmbH
+        caption: 2022
+        description: |
+          - Optimized database queries, reducing page load times by 40%.
+          - Technologies used: PHP, MySQL, Docker.
+          - [View Project](https://github.com/dminischetti/ecommerce-optimization)
+
   - title: Education
     layout: list
     content:
@@ -116,16 +118,22 @@ content:
           - Gained a foundational understanding of programming with Java, C++, and Python.
 
   - title: Certifications & Additional Courses
-    layout: text
-    content: |
-        - <b>MongoDB University</b> - MongoDB Course, 2021
-        - <b>NYC College of Technology</b> - Project Management, 2019
+    layout: list
+    content:
+      - layout: left
+        title: MongoDB University
+        caption: 2021
+        sub_title: MongoDB Course
+      - layout: left
+        title: NYC College of Technology
+        caption: 2019
+        sub_title: Project Management
 
   - title: Technical Skills
     layout: text
     content: |
         - **Programming Languages**: PHP, Python, JavaScript
-        - **Frameworks & Libraries**: Bootstrap, jQuery, Smarty
+        - **Frameworks & Libraries**: Laravel, Bootstrap, jQuery, Smarty
         - **Database Management**: SQL Server, MySQL, MariaDB, MongoDB
         - **DevOps Tools**: Docker, Nginx, Git, Jenkins
         - **API Development**: RESTful API design and integration
@@ -145,13 +153,13 @@ content:
     layout: text
     content: |
         - **Italian**: Native
-        - **English**: Fluent
-        - **Spanish**: Elementary
+        - **English**: Fluent (professional proficiency)
+        - **Spanish**: Elementary (basic conversations)
 
 # Footer
 footer_show_references: false
-# references_title: References on request (Override references text)
-# Build settings
+
+# Build Settings
 remote_theme: sproogen/resume-theme
 sass:
   sass_dir: _sass
