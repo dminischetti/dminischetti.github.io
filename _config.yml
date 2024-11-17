@@ -79,27 +79,6 @@ content:
             - Implemented SQL Server-based solutions for data consolidation and reporting, enhancing data analysis capabilities.
             - Managed daily database administration tasks, including monitoring SQL Server performance and addressing user requests.
 
-  - title: Projects
-    layout: list
-    content:
-      - layout: left
-        title: Warehouse Management System (WMS)
-        sub_title: Appliances Connection
-        caption: 2023
-        description: |
-          - Developed a WMS that improved inventory tracking by 30%.
-          - Technologies used: PHP, JavaScript, MySQL.
-          - [View Project](https://github.com/dminischetti/wms-project)
-
-      - layout: left
-        title: E-commerce Platform Optimization
-        sub_title: Kingsleague GmbH
-        caption: 2022
-        description: |
-          - Optimized database queries, reducing page load times by 40%.
-          - Technologies used: PHP, MySQL, Docker.
-          - [View Project](https://github.com/dminischetti/ecommerce-optimization)
-
   - title: Education
     layout: list
     content:
