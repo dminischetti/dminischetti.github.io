@@ -1,6 +1,6 @@
 # Site Configuration
 repository: sproogen/resume-theme
-favicon: images/resume.png
+favicon: images/dmlogo.png
 
 # Content configuration version
 version: 2
