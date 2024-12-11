@@ -1,6 +1,6 @@
 ---
 title: "Resume"
-layout: single
+layout: resume
 permalink: /resume/
 ---
 
