@@ -19,9 +19,9 @@ locale                   : "en-US"
 rtl                      : # true, false (default) # turns direction of the page into right to left for RTL languages
 title                    : "minischetti.org"
 title_separator          : "-"
-subtitle                 : # site tagline that appears below site title in masthead
+subtitle                 : "Backend PHP Developer"
 name                     : "Dominic Minischetti"
-description              : "An amazing website."
+description              : "Experienced developer specializing in PHP, MySQL, and JS."
 url                      : "https://www.minischetti.org"
 baseurl                  : # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -114,9 +114,11 @@ analytics:
 # Site Author
 author:
   name             : "Dominic Minischetti"
-  avatar           : # path of avatar image, e.g. "/assets/images/bio-photo.jpg"
-  bio              : "I am an **amazing** person."
-  location         : "Brooklyn"
+  avatar           : "/assets/images/bio-photo.jpg"
+  bio              : > 
+    Experienced Full Stack Developer with over 5 years of professional experience in designing and developing web applications using PHP, JS, MySQL, and SQL Server. 
+    Committed to staying current with emerging technologies and delivering seamless and intuitive interfaces.
+  location         : "Brooklyn, NY"
   email            : "dominic.minischetti@gmail.com"
   links:
     - label: "Email"
@@ -125,15 +127,18 @@ author:
     - label: "Website"
       icon: "fas fa-fw fa-link"
       url: "https://www.minischetti.org"
+    - label: "LinkedIn"
+      icon: "fab fa-fw fa-linkedin"
+      url: "https://linkedin.com/in/dominischetti"
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      # url: "https://twitter.com/"
+      url: "https://twitter.com/dominischetti"
     - label: "Facebook"
       icon: "fab fa-fw fa-facebook-square"
       url: "https://www.facebook.com/dminischetti"
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      # url: "https://github.com/"
+      # url: "https://github.com/dminischetti"
     - label: "Instagram"
       icon: "fab fa-fw fa-instagram"
       # url: "https://instagram.com/"
