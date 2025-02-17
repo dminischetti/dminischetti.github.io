@@ -112,10 +112,14 @@ content:
         title: MongoDB University
         caption: 2021
         sub_title: MongoDB Course
+        description: |
+          - Completed a comprehensive course on MongoDB fundamentals, including data modeling, aggregation, and performance tuning.
       - layout: left
         title: NYC College of Technology
         caption: 2019
         sub_title: Project Management
+        description: |
+          - Gained essential skills in project planning, resource allocation, and team management to effectively lead technical projects.
 
   - title: Technical Skills
     layout: text
