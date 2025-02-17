@@ -17,19 +17,9 @@ darkmode: true  # Enabled dark mode support
 
 # Social Links with Icons
 linkedin_username: dminischetti
-github_username: dminischetti
 twitter_username: dominischetti
 instagram_username: dminischetti
 facebook_username: dominic.minischetti
-
-# Additional Icon Links
-additional_links:
-  - title: GitHub
-    icon: fab fa-github
-    url: https://github.com/dminischetti
-  - title: LinkedIn
-    icon: fab fa-linkedin
-    url: https://www.linkedin.com/in/dminischetti/
 
 # About Section
 about_title: About Me
