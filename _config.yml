@@ -11,7 +11,6 @@ title: PHP Backend Engineer | eCommerce & WMS Solutions | Performance-Focused Da
 email: dominic.minischetti@gmail.com
 phone: "(+1) 347 606 6909"
 website: https://minischetti.org
-location: Brooklyn, New York, United States
 
 # Dark Mode (true/false/never)
 darkmode: true  # Enabled dark mode support
@@ -21,7 +20,7 @@ linkedin_username: dminischetti
 instagram_username: dminischetti
 facebook_username: dominic.minischetti
 
-# Additional Icon Links (optional)
+# Additional Icon Links
 additional_links:
   - title: Blog
     icon: fas fa-blog
@@ -71,7 +70,7 @@ content:
         sub_title: Eiffel srl
         caption: November 2012 - October 2015
         description: |
-          - Porto Civitanova, Marches, Italy
+          - Porto Civitanova, Italy
           - Built websites and PHP applications, managing content updates, banners, and domain registrations.
           - Oversaw server administration using Plesk to ensure stable web services and efficient database maintenance.
       - layout: left
@@ -79,7 +78,7 @@ content:
         sub_title: Call2U
         caption: September 2010 - November 2012
         description: |
-          - Pescara, Abruzzi, Italy
+          - Pescara, Italy
           - Diagnosed and resolved software, hardware, and connectivity issues, minimizing downtime.
           - Maintained multiple SQL Server backends, ensuring stable data environments.
       - layout: left
@@ -87,7 +86,7 @@ content:
         sub_title: ASD Servizi
         caption: December 2006 - April 2008
         description: |
-          - Bari, Apulia, Italy
+          - Bari, Italy
           - Built and managed websites and PHP applications, including editing catalogs and managing editorial and web advertising content.
           - Handled all aspects of web services: design, updates, banners, hosting, and domain registrations.
           - Administered the Operator Panel and Plesk server for domain and mailbox activation and SQL database maintenance.
