@@ -7,8 +7,9 @@ version: 2
 
 # Personal Info
 name: Dominic Minischetti
-title: PHP Backend Engineer
+title: PHP Backend Engineer | eCommerce & WMS Solutions | Performance-Focused Database Management
 email: dominic.minischetti@gmail.com
+phone: "(+1) 347 606 6909"
 website: https://minischetti.org
 
 # Dark Mode (true/false/never)
@@ -34,11 +35,9 @@ additional_links:
 about_title: About Me
 about_profile_image: images/IMG_1687.JPG
 about_content: |
-  **Building efficient solutions for real-world problems.**
+  I am a dedicated PHP Backend Engineer with over five years of experience developing and optimizing high-performance web applications for eCommerce, logistics, and media. My background includes architecting Warehouse Management Systems (WMS), refining large-scale CMS platforms, and managing complex database environments. Adept at PHP, MySQL, Docker, and agile methodologies, I thrive on delivering clean code and robust solutions that streamline operations and elevate user experiences.
 
-  PHP Backend Engineer with over 5 years of experience in eCommerce, logistics, and web application development. Proven track record in building high-performance systems and optimizing database architectures. Skilled in agile methodologies and dedicated to clean, efficient code and exceptional user experiences.
-
-  Currently expanding my expertise in Laravel and modern PHP frameworks to deliver scalable and robust applications.
+  In every role, I focus on collaborative problem-solving, legacy code modernization, and continuous improvement. Currently seeking opportunities to deepen my impact on innovative projects while refining my leadership and technical skills in a dynamic, growth-oriented environment.
 
 content:
   - title: Professional Experience
@@ -49,52 +48,69 @@ content:
         sub_title: BLOX Digital
         caption: July 2024 - Present
         description: |
-            - Enhancing CMS for media clients, troubleshooting to optimize system reliability.
-            - Collaborate with development teams to identify areas for improved system performance.
-
+          - East Moline, Illinois, United States
+          - Drive the development of a large-scale enterprise CMS for diverse media outlets, emphasizing reliability and scalability.
+          - Implement optimized PHP solutions and refine SQL queries to boost system performance.
+          - Collaborate closely with cross-functional teams, ensuring seamless deployments and robust feature releases.
       - layout: left
         title: Backend PHP Developer
         sub_title: Appliances Connection
         caption: May 2022 - March 2024
         description: |
-            - Built a Warehouse Management System (WMS) with PHP, JavaScript, and MySQL, improving inventory tracking and workflow efficiency.
-            - Developed responsive interfaces for warehouse operations, enhancing team productivity.
-
+          - New York City Metropolitan Area
+          - Built a Warehouse Management System (WMS) using PHP, MySQL, and JavaScript, streamlining order fulfillment and inventory tracking.
+          - Created intuitive interfaces for handheld devices, supporting faster workflows.
+          - Coordinated with product teams to resolve technical issues and enhance overall performance.
       - layout: left
         title: Full Stack Developer
-        sub_title: Kingsleague GmbH
+        sub_title: Kingsleague
         caption: August 2021 - May 2022
         description: |
-            - Developed high-performance web applications with PHP, MySQL, Firebase, and Docker.
-            - Streamlined deployments with Nginx and Docker, and automated testing with Python and Selenium.
-
+          - Berlin, Germany
+          - Developed and launched new features using PHP, MySQL, and Firebase, elevating user engagement.
+          - Automated testing with Python and Selenium to improve code quality.
+          - Employed Docker for efficient deployments and version control.
       - layout: left
         title: Data Analyst & Database Administrator
-        sub_title: Call2U srl (rebranded as Eiffel srl)
-        caption: September 2010 - October 2015
+        sub_title: Eiffel srl
+        caption: November 2012 - October 2015
         description: |
-            - Diagnosed and resolved software, hardware, and connectivity issues, ensuring smooth system operations.
-            - Transitioned, designed, and maintained multiple instances of Service Manager on Windows platforms using Microsoft SQL Server as the T-SQL backend.
-            - Administered SQL Server databases and provided mentorship to junior administrators.
-            - Implemented SQL Server-based solutions for data consolidation and reporting, enhancing data analysis capabilities.
-            - Managed daily database administration tasks, including monitoring SQL Server performance and addressing user requests.
+          - Porto Civitanova, Marches, Italy
+          - Built websites and PHP applications, managing content updates, banners, and domain registrations.
+          - Oversaw server administration using Plesk to ensure stable web services and efficient database maintenance.
+      - layout: left
+        title: Data Analyst
+        sub_title: Call2U
+        caption: September 2010 - November 2012
+        description: |
+          - Pescara, Abruzzi, Italy
+          - Diagnosed and resolved software, hardware, and connectivity issues, minimizing downtime.
+          - Maintained multiple SQL Server backends, ensuring stable data environments.
+      - layout: left
+        title: Frontend Developer
+        sub_title: ASD Servizi
+        caption: December 2006 - April 2008
+        description: |
+          - Bari, Apulia, Italy
+          - Built and managed websites and PHP applications, including editing catalogs and managing editorial and web advertising content.
+          - Handled all aspects of web services: design, updates, banners, hosting, and domain registrations.
+          - Administered the Operator Panel and Plesk server for domain and mailbox activation and SQL database maintenance.
 
   - title: Education
     layout: list
     content:
       - layout: left
         title: CUNY New York City College of Technology
-        caption: 2020
+        caption: 2018 - 2020
         sub_title: Bachelor of Technology, Computer Information Systems (Database Track)
         description: |
-          - GPA: 3.7/4. Specialized in Oracle SQL Developer, Microsoft SQL Server, and database management.
-
+          - GPA: 3.7/4.0 (if applicable)
       - layout: left
-        title: University of Bari, Italy
+        title: Università degli Studi di Bari
         caption: 2000
         sub_title: Coursework in Computer and Information Sciences
         description: |
-          - Gained a foundational understanding of programming with Java, C++, and Python.
+          - Acquired foundational knowledge in programming with Java, C++, and Python.
 
   - title: Certifications & Additional Courses
     layout: list
@@ -111,10 +127,10 @@ content:
   - title: Technical Skills
     layout: text
     content: |
-        - **Programming Languages**: PHP, Python, JavaScript
+        - **Programming Languages**: PHP, Python, JavaScript, HTML
         - **Frameworks & Libraries**: Laravel, Bootstrap, jQuery, Smarty
-        - **Database Management**: SQL Server, MySQL, MariaDB, MongoDB
-        - **DevOps Tools**: Docker, Nginx, Git, Jenkins
+        - **Database Management**: MySQL, SQL Server, MariaDB, MongoDB, Domain Management
+        - **DevOps & Tools**: Docker, Nginx, Git, Jenkins, Plesk
         - **API Development**: RESTful API design and integration
         - **Development Methodologies**: Agile (Kanban), OOP, MVC Architecture
         - **Operating Systems & Servers**: Linux, Apache, IIS, Windows
@@ -122,18 +138,17 @@ content:
   - title: Soft Skills
     layout: text
     content: |
-        - Collaborative and effective team player
-        - Clear communicator with a focus on detail
-        - Strong time management and organizational skills
-        - Adaptable to new tools and technologies
-        - Problem-solver with a results-driven mindset
+        - Collaborative team player with strong communication skills
+        - Effective problem-solving and time management
+        - Adaptable and committed to continuous improvement
+        - Detail-oriented with a focus on quality and performance
 
   - title: Languages
     layout: text
     content: |
-        - **Italian**: Native
-        - **English**: Fluent (professional proficiency)
-        - **Spanish**: Elementary (basic conversations)
+        - **English**: Native or Bilingual
+        - **Italian**: Native or Bilingual
+        - **Spanish**: Elementary
 
 # Footer
 footer_show_references: false
