@@ -1,5 +1,5 @@
 ---
-layout: blog   # We'll cover custom layouts next if needed
+layout: default
 title: Blog
 permalink: /blog/
 ---
