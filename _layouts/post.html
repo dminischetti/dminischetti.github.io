@@ -9,7 +9,7 @@
   <style>
     /* Base and Dark Theme Styles */
     body {
-      background-color: #222; /* Updated to match resume page */
+      background-color: #222; /* Matches resume page background */
       color: #e0e0e0;
       font-family: 'Roboto', sans-serif;
       margin: 0;
@@ -23,18 +23,6 @@
     a:hover {
       text-decoration: underline;
       color: #ffffff; /* Brighter on hover */
-    }
-    /* Navigation Bar */
-    .navbar {
-      background-color: #1f1f1f;
-      padding: 1rem;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .navbar a {
-      margin: 0 0.5rem;
-      font-weight: bold;
     }
     /* Post Header */
     header {
@@ -74,16 +62,6 @@
   </style>
 </head>
 <body>
-  <!-- Navigation -->
-  <nav class="navbar">
-    <div class="nav-left">
-      <a href="{{ "/" | relative_url }}">Home</a>
-    </div>
-    <div class="nav-right">
-      <a href="{{ "/blog/" | relative_url }}">Blog</a>
-    </div>
-  </nav>
-
   <!-- Post Header -->
   <header>
     <h1>{{ page.title }}</h1>
