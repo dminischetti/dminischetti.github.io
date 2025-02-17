@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: blog   # We'll cover custom layouts next if needed
 title: Blog
 permalink: /blog/
 ---
@@ -7,7 +7,7 @@ permalink: /blog/
 # Blog
 
 {% for post in site.posts %}
-### [{{ post.title }}]({{ post.url }})
+## [{{ post.title }}]({{ post.url }})
 *Published on {{ post.date | date: "%B %d, %Y" }}*
 
 {{ post.excerpt }}
