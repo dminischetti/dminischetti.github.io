@@ -116,21 +116,6 @@ content:
           - Studied multiple programming languages including Java, C++, and Python.
           - Gained essential theoretical and practical skills in computing principles.
 
-    layout: list
-    content:
-      - layout: left
-        title: CUNY New York City College of Technology
-        caption: 2018 - 2020
-        sub_title: Bachelor of Technology, Computer Information Systems (Database Track)
-        description: |
-          - GPA: 3.7/4.0 (if applicable)
-      - layout: left
-        title: Università degli Studi di Bari
-        caption: 2000
-        sub_title: Coursework in Computer and Information Sciences
-        description: |
-          - Acquired foundational knowledge in programming with Java, C++, and Python.
-
   - title: Certifications & Additional Courses
     layout: list
     content:
