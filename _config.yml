@@ -24,7 +24,7 @@ facebook_username: dominic.minischetti
 # Additional Icon Links (optional)
 additional_links:
   - title: Blog
-    icon: fas fa-blog
+    icon: fas fa-newspaper
     url: https://minischetti.org/blog
 
 # About Section
