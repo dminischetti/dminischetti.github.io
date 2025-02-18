@@ -107,9 +107,9 @@ The biggest shift I made?
 I stopped measuring productivity by **how much I do.**
 
 Instead, I measure it by:  
-✅ How much progress I make on things that actually matter.  
-✅ How much energy I have left at the end of the day.  
-✅ How much freedom I create for myself by **removing** unnecessary work.
+- How much progress I make on things that actually matter.  
+- How much energy I have left at the end of the day.  
+- How much freedom I create for myself by **removing** unnecessary work.
 
 So if you’ve been optimizing, planning, and working harder—but still feel stuck?
 
