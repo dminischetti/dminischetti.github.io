@@ -80,7 +80,7 @@
 
   <!-- Blog Post Listing -->
   <main class="container">
-    {% for post in paginator.posts %}
+    {% for post in site.posts %}
       <article class="post">
         <h2><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h2>
         <div class="post-meta">
@@ -97,7 +97,7 @@
         <a class="read-more" href="{{ post.url | relative_url }}">Read More →</a>
       </article>
     {% endfor %}
-  </main>  
+  </main>
 
   <!-- Footer with Back to Resume Link -->
   <footer>
