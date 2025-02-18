@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>
     {% if paginator %}
-      {% assign overwriteTitle = page.title | append: ' Page ' | append: paginator.page %}
+      {% assign overwriteTitle = page.title | append: ' – Page ' | append: paginator.page %}
       {{ overwriteTitle }}
     {% else %}
       {% if page.title %}{{ page.title }}{% else %}{{ site.title }}{% endif %}
@@ -65,6 +65,28 @@
       color: #a0a0a0;
       margin-bottom: 0.5rem;
     }
+    /* Pagination Styling */
+    .pagination {
+      text-align: center;
+      margin: 2rem 0;
+    }
+    .pagination a,
+    .pagination span {
+      display: inline-block;
+      margin: 0 0.3rem;
+      padding: 0.5rem 0.8rem;
+      background: #333;
+      color: #e0e0e0;
+      text-decoration: none;
+      border-radius: 3px;
+    }
+    .pagination a:hover {
+      background: #444;
+    }
+    .pagination .current {
+      background: #555;
+      font-weight: bold;
+    }
     /* Footer & Back Link */
     .back-link {
       margin-top: 1rem;
@@ -104,6 +126,25 @@
         <a class="read-more" href="{{ post.url | relative_url }}">Read More →</a>
       </article>
     {% endfor %}
+
+    <!-- Pagination Navigation -->
+    {% if paginator.total_pages > 1 %}
+      <nav class="pagination">
+        {% if paginator.previous_page %}
+          <a href="{{ paginator.previous_page_path }}">Previous</a>
+        {% endif %}
+        {% for page in (1..paginator.total_pages) %}
+          {% if page == paginator.page %}
+            <span class="current">{{ page }}</span>
+          {% else %}
+            <a href="{{ paginator.paginate_path | replace: ':num', page }}">{{ page }}</a>
+          {% endif %}
+        {% endfor %}
+        {% if paginator.next_page %}
+          <a href="{{ paginator.next_page_path }}">Next</a>
+        {% endif %}
+      </nav>
+    {% endif %}
   </main>
 
   <!-- Footer with Back to Resume Link -->
@@ -111,23 +152,5 @@
     <a class="back-link" href="{{ "/" | relative_url }}">← Back to Resume</a>
     <p>&copy; {{ site.time | date: '%Y' }} {{ site.name }}. All rights reserved.</p>
   </footer>
-  {% if paginator.total_pages > 1 %}
-<nav class="pagination">
-  {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path }}" class="prev">Previous</a>
-  {% endif %}
-  {% for page in (1..paginator.total_pages) %}
-    {% if page == paginator.page %}
-      <span class="page current">{{ page }}</span>
-    {% else %}
-      <a href="{{ paginator.paginate_path | replace: ':num', page }}" class="page">{{ page }}</a>
-    {% endif %}
-  {% endfor %}
-  {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path }}" class="next">Next</a>
-  {% endif %}
-</nav>
-{% endif %}
-
 </body>
 </html>
