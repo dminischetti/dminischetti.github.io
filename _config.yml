@@ -156,6 +156,13 @@ content:
 # Footer
 footer_show_references: false
 
+# Pagination & Plugins (Top-level keys)
+plugins:
+  - jekyll-paginate
+
+paginate: 10
+paginate_path: "/blog/page:num/"
+
 # Build Settings
 remote_theme: sproogen/resume-theme
 sass:
