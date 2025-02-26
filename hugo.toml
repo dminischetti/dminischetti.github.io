@@ -1,0 +1,32 @@
+baseURL = "https://minischetti.org/"
+title = "Dominic Minischetti"
+theme = "PaperMod"
+languageCode = "en-us"
+paginate = 10
+
+[params]
+  env = "production"
+  ShowReadingTime = true
+  ShowShareButtons = true
+  ShowPostNavLinks = true
+  useHLJS = true
+  themeVariant = "dark"
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "Home"
+    url = "/"
+    weight = 1
+
+  [[menu.main]]
+    identifier = "blog"
+    name = "Blog"
+    url = "/posts/"
+    weight = 2
+
+  [[menu.main]]
+    identifier = "resume"
+    name = "Resume"
+    url = "/resume/"
+    weight = 3
