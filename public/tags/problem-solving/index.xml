@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Problem-Solving on Dominic Minischetti</title>
+    <link>http://localhost:1313/tags/problem-solving/</link>
+    <description>Recent content in Problem-Solving on Dominic Minischetti</description>
+    <generator>Hugo -- 0.144.2</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 20 Dec 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/problem-solving/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Why I, a Programmer, Still Use Paper Like It’s 1999</title>
+      <link>http://localhost:1313/posts/why-i-a-programmer-still-use-paper-like-its-1999/</link>
+      <pubDate>Fri, 20 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/why-i-a-programmer-still-use-paper-like-its-1999/</guid>
+      <description>Digital tools are powerful, but when it comes to problem-solving, nothing beats paper. Here’s why I, a programmer, still use analog methods.</description>
+    </item>
+  </channel>
+</rss>

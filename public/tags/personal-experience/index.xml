@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Personal Experience on Dominic Minischetti</title>
+    <link>http://localhost:1313/tags/personal-experience/</link>
+    <description>Recent content in Personal Experience on Dominic Minischetti</description>
+    <generator>Hugo -- 0.144.2</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/personal-experience/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Notion: The External Brain That Finally Works for Me</title>
+      <link>http://localhost:1313/posts/notion-the-external-brain-that-finally-works-for-me/</link>
+      <pubDate>Fri, 07 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/notion-the-external-brain-that-finally-works-for-me/</guid>
+      <description>Struggling to keep track of your ideas and tasks? Discover why Notion is the external brain I never knew I needed.</description>
+    </item>
+    <item>
+      <title>How Every Developer Writes Code (Whether They Admit It or Not)</title>
+      <link>http://localhost:1313/posts/how-every-developer-writes-code-whether-they-admit-it-or-not/</link>
+      <pubDate>Fri, 10 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/how-every-developer-writes-code-whether-they-admit-it-or-not/</guid>
+      <description>Coding isn’t as glamorous as it seems. Discover the hilariously relatable stages every developer goes through while writing code.</description>
+    </item>
+    <item>
+      <title>Why I, a Programmer, Still Use Paper Like It’s 1999</title>
+      <link>http://localhost:1313/posts/why-i-a-programmer-still-use-paper-like-its-1999/</link>
+      <pubDate>Fri, 20 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/why-i-a-programmer-still-use-paper-like-its-1999/</guid>
+      <description>Digital tools are powerful, but when it comes to problem-solving, nothing beats paper. Here’s why I, a programmer, still use analog methods.</description>
+    </item>
+    <item>
+      <title>The Eternal Quest for the Perfect App (A Saga in Too Many Downloads)</title>
+      <link>http://localhost:1313/posts/the-eternal-quest-for-the-perfect-app-a-saga-in-too-many-downloads/</link>
+      <pubDate>Fri, 13 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/the-eternal-quest-for-the-perfect-app-a-saga-in-too-many-downloads/</guid>
+      <description>Obsessed with finding the perfect app? You’re not alone. Join me on my endless quest for the ultimate productivity tools.</description>
+    </item>
+    <item>
+      <title>ADHD: The Director’s Cut (Now with Even More Bonus Features!)</title>
+      <link>http://localhost:1313/posts/adhd-the-directors-cut-now-with-even-more-bonus-features/</link>
+      <pubDate>Fri, 29 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/adhd-the-directors-cut-now-with-even-more-bonus-features/</guid>
+      <description>Living with ADHD is like an action movie with no pause button. Discover how I navigate the chaos and still get things done.</description>
+    </item>
+    <item>
+      <title>The Browser Wars: My Exhausting Journey to Finding the Least Annoying Setup</title>
+      <link>http://localhost:1313/posts/the-browser-wars-my-exhausting-journey-to-finding-the-least-annoying-setup/</link>
+      <pubDate>Fri, 22 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/the-browser-wars-my-exhausting-journey-to-finding-the-least-annoying-setup/</guid>
+      <description>Choosing a browser shouldn&amp;#39;t be this hard. From Safari’s WebKit prison to Windows’ Chromium clones, here’s my exhausting browser journey.</description>
+    </item>
+  </channel>
+</rss>

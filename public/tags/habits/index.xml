@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Habits on Dominic Minischetti</title>
+    <link>http://localhost:1313/tags/habits/</link>
+    <description>Recent content in Habits on Dominic Minischetti</description>
+    <generator>Hugo -- 0.144.2</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 15 Nov 2024 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/habits/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Real Reason We Struggle to Change (And How to Fix It for Good)</title>
+      <link>http://localhost:1313/posts/the-real-reason-we-struggle-to-change-and-how-to-fix-it-for-good/</link>
+      <pubDate>Fri, 15 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/the-real-reason-we-struggle-to-change-and-how-to-fix-it-for-good/</guid>
+      <description>Change isn&amp;#39;t about willpower—it&amp;#39;s about identity. Discover why habits fail and how shifting your identity leads to lasting change.</description>
+    </item>
+    <item>
+      <title>The Myth of Motivation (And What Actually Works Instead)</title>
+      <link>http://localhost:1313/posts/the-myth-of-motivation-and-what-actually-works-instead/</link>
+      <pubDate>Fri, 08 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/the-myth-of-motivation-and-what-actually-works-instead/</guid>
+      <description>Motivation is a lie. Discover why waiting to feel inspired keeps you stuck and learn practical strategies to take action anyway.</description>
+    </item>
+  </channel>
+</rss>

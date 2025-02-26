@@ -2,7 +2,9 @@ baseURL = "https://minischetti.org/"
 title = "Dominic Minischetti"
 theme = "PaperMod"
 languageCode = "en-us"
-paginate = 10
+
+[pagination]
+  pagerSize = 10
 
 [params]
   env = "production"
