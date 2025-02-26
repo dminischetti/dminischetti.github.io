@@ -3,7 +3,7 @@ name: Deploy Hugo site to GitHub Pages
 on:
   push:
     branches:
-      - main  # Change this if your default branch is not 'main'
+      - main  # Only build on push to main
 
 jobs:
   build:
@@ -11,10 +11,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-        with:
-          submodules: true  # Ensure submodules are initialized and updated
-          fetch-depth: 0    # Necessary for Hugo to get the full commit history
+        uses: actions/checkout@v2
 
       - name: Set up Hugo
         uses: peaceiris/actions-hugo@v2
@@ -24,12 +21,9 @@ jobs:
       - name: Build site
         run: hugo --minify
 
-      - name: Add .nojekyll
-        run: echo "" > ./public/.nojekyll
-
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./public
-          publish_branch: gh-pages  # Explicitly specify the deployment branch
+          cname: minischetti.org
