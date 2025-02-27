@@ -7,7 +7,8 @@ languageCode = "en-us"
   env = "production"
   ShowReadingTime = true
   ShowShareButtons = true
-  ShowPostNavLinks = true
+  ShowPostNavLinks = false
+  ShowPostDisqus = false
   useHLJS = true
   themeVariant = "dark"
 

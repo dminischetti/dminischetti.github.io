@@ -49,6 +49,9 @@
       <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
       {{- end }}
     </ul>
+    {{- if (.Param "ShowPostDisqus") }}
+    {{ template "_internal/disqus.html" . }}
+    {{- end }}
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
     {{- end }}
@@ -56,10 +59,6 @@
     {{- partial "share_icons.html" . -}}
     {{- end }}
   </footer>
-
-  {{- if (.Param "comments") }}
-    {{ template "_internal/disqus.html" . }}
-  {{- end }}
 
 </article>
 
