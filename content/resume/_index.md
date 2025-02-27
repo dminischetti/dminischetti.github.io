@@ -1,6 +1,7 @@
 ---
 title: "Dominic Minischetti"
 layout: "single"
+hiddenInHomeList: true
 ---
 ## PHP Backend Engineer | eCommerce & WMS Solutions | Performance-Focused DB Management  
 
