@@ -5,6 +5,7 @@ languageCode = "en-us"
 
 [pagination]
   pagerSize = 10
+  paginatePath = "page"
 
 [params]
   env = "production"
@@ -14,6 +15,12 @@ languageCode = "en-us"
   useHLJS = true
   themeVariant = "dark"
   disableHomePosts = true
+
+  # Social Media Handles
+  linkedin_username = "dominischetti"
+  twitter_username = "dominischetti"
+  instagram_username = "dminischetti"
+  facebook_username = "dominic.minischetti"
 
 [menu]
   [[menu.main]]
@@ -36,11 +43,11 @@ languageCode = "en-us"
 
 [params.seo]
   description = "Dominic Minischetti's personal blog and portfolio"
-  twitterHandle = "@YourTwitterHandle"
-  facebookAppID = "YourFacebookAppID"  # Optional
+  twitterHandle = "@dominischetti"  # Matches Twitter username
+  facebookAppID = ""  # Optional, remove if not used
 
 [outputs]
-  home = ["HTML", "RSS", "JSON"]
+  home = ["HTML", "RSS", "JSON", "RobotsTXT"]
 
 [markup]
   [markup.highlight]
@@ -54,15 +61,11 @@ languageCode = "en-us"
   [minify.tdewolff]
     keepWhitespace = false
 
-[minify]
-  disableXML = true
-  [minify.tdewolff]
-    keepWhitespace = false
-
 [caches]
   [caches.images]
     dir = ":cacheDir/images"
     maxAge = "24h"
+
   [caches.getjson]
     dir = ":cacheDir/json"
     maxAge = "1h"
@@ -71,15 +74,7 @@ languageCode = "en-us"
   tag = "tags"
   category = "categories"
 
-[pagination]
-  pagerSize = 10
-  paginatePath = "page"
-
 [sitemap]
   changefreq = "monthly"
   priority = 0.5
   filename = "sitemap.xml"
-
-[outputs]
-  home = ["HTML", "RSS", "JSON", "RobotsTXT"]
-
