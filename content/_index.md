@@ -20,7 +20,7 @@ When I’m not coding, I’m navigating life as a husband and dad. I’m married
 
 I live in Brooklyn but carry Italy with me—especially in my unapologetic love for good food and my refusal to accept anything less than perfection. My life is a blend of Italian soul and New York grit, and my work is proof that breaking the mold can build something better.
 
-This site is where my professional journey meets my personal chaos. Check out my [**Resume**](/resume) to see how I’ve turned mistakes into milestones. Or visit my [**Blog**](/blog) for my take on tech, life, and the constant quest for balance.
+This site is where my professional journey meets my personal chaos. Check out my [**Resume**](/resume) to see how I’ve turned mistakes into milestones. Or visit my [**Blog**](/posts) for my take on tech, life, and the constant quest for balance.
 
 If this resonates—or if you’re convinced that digital minimalism is just an excuse to buy more gadgets—reach out at [**dominic.minischetti@gmail.com**](mailto:dominic.minischetti@gmail.com).
 
