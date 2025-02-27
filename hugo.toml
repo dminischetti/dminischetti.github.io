@@ -12,6 +12,8 @@ languageCode = "en-us"
   useHLJS = true
   themeVariant = "dark"
   favicon = "/static/favicon.ico"
+[params.assets]
+  customCSS = ["css/custom-dark.css"]
 
 [menu]
   [[menu.main]]
