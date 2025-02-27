@@ -24,7 +24,7 @@ h6 {
 }
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
     font-size: 18px;
     line-height: 1.6;
     word-break: break-word;
@@ -52,6 +52,7 @@ h4,
 h5,
 h6 {
     line-height: 1.2;
+    font-family: 'Poppins', sans-serif; /* Ensure headers use Poppins */
 }
 
 h1,
