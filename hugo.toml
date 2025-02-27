@@ -35,3 +35,6 @@ languageCode = "en-us"
 [services]
   [services.disqus]
     shortname = 'minischetti-org'
+
+[pagination]
+  pagerSize = 6
