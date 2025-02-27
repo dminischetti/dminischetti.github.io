@@ -29,3 +29,41 @@ languageCode = "en-us"
     name = "Resume"
     url = "/resume/"
     weight = 3
+
+[params.seo]
+  description = "Dominic Minischetti's personal blog and portfolio"
+  twitterHandle = "@dominischetti"  # Matches Twitter username
+  facebookAppID = ""  # Optional, remove if not used
+
+[outputs]
+  home = ["HTML", "JSON", "RobotsTXT"]
+
+[markup]
+  [markup.highlight]
+    noClasses = false
+    style = "monokai"  # Choose from: monokai, dracula, github, etc.
+    lineNos = true
+    lineNumbersInTable = true
+
+[minify]
+  disableXML = true
+  [minify.tdewolff]
+    keepWhitespace = false
+
+[caches]
+  [caches.images]
+    dir = ":cacheDir/images"
+    maxAge = "24h"
+
+  [caches.getjson]
+    dir = ":cacheDir/json"
+    maxAge = "1h"
+
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
+[sitemap]
+  changefreq = "monthly"
+  priority = 0.5
+  filename = "sitemap.xml"
