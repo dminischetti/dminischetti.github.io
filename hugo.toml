@@ -6,9 +6,9 @@ languageCode = "en-us"
 [params]
   env = "production"
   ShowReadingTime = true
-  ShowShareButtons = true
+  ShowShareButtons = false
   ShowPostNavLinks = false
-  ShowPostDisqus = false
+  ShowPostDisqus = true
   useHLJS = true
   themeVariant = "dark"
 
