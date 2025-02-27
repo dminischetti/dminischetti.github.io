@@ -2,6 +2,7 @@
 title: "Love Notes (and Bugs) in the Silence of Home"
 link: love-notes-and-bugs-in-the-silence-of-home
 date: 2025-02-27T00:00:00
+comments: true
 ---
 {{< figure src="https://i.imgur.com/67XT5U4.jpeg" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
 
