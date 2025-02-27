@@ -1,7 +1,7 @@
 ---
-date: '2025-02-26T13:58:19-05:00'
-draft: true
-title: 'Dominic Minischetti'
+title: "Resume"
+description: "Dominic Minischetti's Resume"
+layout: "single"
 ---
 ### PHP Backend Engineer | eCommerce & WMS Solutions | Performance-Focused DB Management  
 
