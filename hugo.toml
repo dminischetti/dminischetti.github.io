@@ -29,3 +29,7 @@ languageCode = "en-us"
     name = "Resume"
     url = "/resume/"
     weight = 3
+
+[services]
+  [services.disqus]
+    shortname = 'minischetti-org'
