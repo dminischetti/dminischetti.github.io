@@ -2,7 +2,7 @@
 title: "Dominic Minischetti"
 description: "This is the homepage of Dominic Minischetti"
 ---
-{{< figure src="https://i.imgur.com/0SB0Q5v.png" alt="Dominic Minischetti" width="180" style="display: block; margin: 0 auto;" class="rounded" align="center" >}}
+{{< figure src="/static/dominic_photo.png" alt="Dominic Minischetti" width="180" style="display: block; margin: 0 auto;" class="rounded" align="center" >}}
 
 ## **👋 Hi, I'm Dominic**
 
