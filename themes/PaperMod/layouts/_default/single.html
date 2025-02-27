@@ -50,12 +50,14 @@
       {{- end }}
     </ul>
     <!-- Add the Human-Authored Badge right after the article content -->
+    {{- if eq .Section "posts" }}
     <div class="human-authored-badge">
       <a href="https://notbyai.fyi/" target="_blank" rel="noopener noreferrer">
         <img src="{{ "Written-By-Human-Not-By-AI-Badge-white.png" | relURL }}" alt="Written by Human" style="display: block; margin: 20px auto; max-width: 150px;">
       </a>
     </div>
-    {{- if (.Param "ShowPostDisqus") }}
+    {{- end }}
+    {{- if and (.Param "ShowPostDisqus") (eq .Section "posts") }}
     {{ template "_internal/disqus.html" . }}
     {{- end }}
     {{- if (.Param "ShowPostNavLinks") }}
