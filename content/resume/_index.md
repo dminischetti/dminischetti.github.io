@@ -1,9 +1,8 @@
 ---
-title: "Resume"
-description: "Dominic Minischetti's Resume"
+title: "Dominic Minischetti"
 layout: "single"
 ---
-### PHP Backend Engineer | eCommerce & WMS Solutions | Performance-Focused DB Management  
+** PHP Backend Engineer | eCommerce & WMS Solutions | Performance-Focused DB Management  
 
 ---
 
