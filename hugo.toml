@@ -16,12 +16,6 @@ languageCode = "en-us"
   themeVariant = "dark"
   disableHomePosts = true
 
-  # Social Media Handles
-  linkedin_username = "dominischetti"
-  twitter_username = "dominischetti"
-  instagram_username = "dminischetti"
-  facebook_username = "dominic.minischetti"
-
 [menu]
   [[menu.main]]
     identifier = "home"
