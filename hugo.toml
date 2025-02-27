@@ -1,0 +1,4 @@
+baseURL = "https://minischetti.org/"
+languageCode = "en-us"
+title = "Your Website Title"
+theme = "paper"
