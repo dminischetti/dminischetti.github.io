@@ -11,6 +11,7 @@ languageCode = "en-us"
   ShowPostDisqus = true
   useHLJS = true
   themeVariant = "dark"
+  favicon = "/static/favicon.ico"
 
 [menu]
   [[menu.main]]
