@@ -10,7 +10,6 @@ languageCode = "en-us"
   ShowPostNavLinks = true
   useHLJS = true
   themeVariant = "dark"
-  ShareButtons: ["whatsapp", "facebook", "twitter", "linkedin"]
 
 [menu]
   [[menu.main]]
