@@ -40,14 +40,23 @@
     background: var(--theme);
 }
 
-/* Static Rainbow Bar (No Gradient, Separate Colors) */
-.rainbow-bar {
-    width: 100%;
-    height: 5px;
+/* Rainbow Bar */
+.rainbow-wrapper {
     display: flex;
+    justify-content: center;
+    background: var(--theme);
+    width: 100%;
+}
+
+.rainbow-bar {
+    display: flex;
+    width: 100%;
+    max-width: var(--main-width);
+    height: 5px;
+    overflow: hidden;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    overflow: hidden;
+    margin: 0 auto;
 }
 
 .rainbow-bar div {
@@ -61,18 +70,25 @@
 .rainbow-bar .green { background: #80FF00; }
 .rainbow-bar .cyan { background: #00FF80; }
 .rainbow-bar .blue { background: #00FFFF; }
-.rainbow-bar .indigo { background: #0080FF; }
 .rainbow-bar .violet { background: #8000FF; }
 
 /* Header */
 .header {
+    width: 100%;
     background: var(--theme);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    padding: 0 20px;
+}
+
+.header-inner {
+    max-width: var(--main-width);
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
+    padding: 10px 0;
 }
 
 .nav {
