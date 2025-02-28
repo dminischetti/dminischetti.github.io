@@ -42,10 +42,9 @@
 
 /* Rainbow Bar */
 .rainbow-wrapper {
-    display: flex;
-    justify-content: center;
-    background: var(--theme);
     width: 100%;
+    max-width: var(--main-width);
+    margin: 0 auto;
 }
 
 .rainbow-bar {
@@ -83,12 +82,13 @@
 }
 
 .header-inner {
-    max-width: var(--main-width);
     width: 100%;
+    max-width: var(--main-width);
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 0;
+    padding: 10px 20px;
 }
 
 .nav {
