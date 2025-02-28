@@ -7,8 +7,6 @@ tags: ["love", "relationships", "work from home", "family", "mindset", "personal
 cover:
   image: "https://i.imgur.com/67XT5U4.jpeg"
 ---
-{{< figure src="https://i.imgur.com/67XT5U4.jpeg" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 I work from home, in an old Brooklyn apartment with high ceilings, creaky floors, and a history that whispers through the walls.  
 Our study is actually our daughter’s bedroom during off-hours, repurposed as a workspace where my wife and I sit at separate desks.  
 Just enough space to pass between us. Close, but not too close—perfect for love, and for concentration.

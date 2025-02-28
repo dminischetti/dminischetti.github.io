@@ -3,9 +3,9 @@ title: "ADHD: The Director’s Cut (Now with Even More Bonus Features!)"
 date: 2024-11-29T00:00:00
 description: "Living with ADHD is like an action movie with no pause button. Discover how I navigate the chaos and still get things done."
 tags: ["ADHD", "focus", "mental health", "mindset", "personal experience", "productivity"]
+cover:
+  image: "https://i.imgur.com/dObQDC1.png"
 ---
-{{< figure src="https://i.imgur.com/dObQDC1.png" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 My brain is like an over-engineered action movie. There’s **no pause button, no clear plot**, and just when you think we’re getting somewhere, BAM—**hard cut to a completely unrelated subplot.**
 
 One second, I’m working. Deep focus. Absolute flow. The kind of state productivity gurus dream about.  

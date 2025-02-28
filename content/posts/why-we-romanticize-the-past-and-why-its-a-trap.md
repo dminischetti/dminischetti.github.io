@@ -3,9 +3,9 @@ title: "Why We Romanticize the Past (And Why It’s a Trap)"
 date: 2024-10-04T00:00:00
 description: "We often think the past was better, but nostalgia tricks us. Discover why we romanticize the past and how to appreciate the present."
 tags: ["life lessons", "memories", "mindset", "nostalgia", "psychology", "self-awareness"]
+cover:
+  image: "https://i.imgur.com/MFFXAKN.png"
 ---
-{{< figure src="https://i.imgur.com/MFFXAKN.png" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 Ever caught yourself thinking, *“Things were better back then”*?
 
 Maybe it’s the childhood summers that seemed endless, the way music *used* to sound, or the feeling that life was simpler before everything became digital, fast, and exhausting.

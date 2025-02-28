@@ -3,9 +3,9 @@ title: "Changing My Mind Doesn’t Make Me Weak—It Makes Me Smarter"
 date: 2024-11-01T00:00:00
 description: "Changing your mind isn’t a weakness—it’s growth. Discover why evolving your perspective makes you smarter and more adaptable."
 tags: ["critical thinking", "mental agility", "mindset", "personal growth", "self-awareness"]
+cover:
+  image: "https://i.imgur.com/aFHYN9s.png"
 ---
-{{< figure src="https://i.imgur.com/aFHYN9s.png" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 There’s this idea that changing your mind is a sign of weakness. That once you take a stance on something, you have to defend it forever. That **certainty equals strength** and doubt means you don’t know what you’re doing.
 
 I completely disagree.

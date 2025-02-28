@@ -3,9 +3,9 @@ title: "Why We’re All Tired (And It’s Not Just Sleep Deprivation)"
 date: 2024-10-18T00:00:00
 description: "Tired all the time? It’s not just about sleep. Discover the 5 types of exhaustion and how to truly recharge."
 tags: ["burnout", "exhaustion", "lifestyle", "mental health", "productivity", "self-care"]
+cover:
+  image: "https://i.imgur.com/JVhUqYw.png"
 ---
-{{< figure src="https://i.imgur.com/JVhUqYw.png" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 I used to think I was just *tired.* Not enough sleep, too much work, a 9-month-old who thinks 3 AM is party time. Classic exhaustion, right?
 
 I’d chug coffee, get a few more hours of sleep when I could, and push through the day.  

@@ -3,9 +3,9 @@ title: "The Productivity Myth That’s Keeping You Stuck (And How to Escape It)"
 date: 2025-01-03T00:00:00
 description: "Productivity isn’t about doing more—it’s about doing what matters. Discover how to escape the productivity trap and find real progress."
 tags: ["efficiency", "focus", "mindset", "minimalism", "personal growth", "productivity"]
+cover:
+  image: "https://i.imgur.com/OthJQeT.png"
 ---
-{{< figure src="https://i.imgur.com/OthJQeT.png" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 For years, I thought productivity was about **doing more.**
 
 More tasks. More efficiency. More checkboxes. If I wasn’t constantly optimizing, planning, and squeezing every second for maximum output, I was failing.

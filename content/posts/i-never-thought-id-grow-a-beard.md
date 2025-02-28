@@ -3,9 +3,9 @@ title: "I Never Thought I’d Grow a Beard"
 date: 2024-12-27T00:00:00
 description: "Growing a beard was never in my plans. But this accidental experiment taught me more about identity than I expected."
 tags: ["grooming", "identity", "life lessons", "mindset", "personal growth", "self-discovery"]
+cover:
+  image: "https://i.imgur.com/Ttlfpfr.png"
 ---
-{{< figure src="https://i.imgur.com/Ttlfpfr.png" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 I’ve never been a beard guy.
 
 For most of my life, I thought of facial hair as something that just *happened* to other people—like an automatic feature they activated once they reached a certain age. I’d see guys with thick, full beards and think, *Yeah, that’s just not for me.*

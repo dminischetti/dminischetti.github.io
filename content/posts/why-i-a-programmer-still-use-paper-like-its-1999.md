@@ -3,9 +3,9 @@ title: "Why I, a Programmer, Still Use Paper Like It’s 1999"
 date: 2024-12-20T00:00:00
 description: "Digital tools are powerful, but when it comes to problem-solving, nothing beats paper. Here’s why I, a programmer, still use analog methods."
 tags: ["analog tools", "mindset", "personal experience", "problem-solving", "productivity", "tech"]
+cover:
+  image: "https://i.imgur.com/iYp0TuQ.png"
 ---
-{{< figure src="https://i.imgur.com/iYp0TuQ.png" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 I have spent my entire day in front of a screen. Writing code, debugging, fixing issues—every task is digital, every tool is virtual.
 
 And yet, whenever I need to **truly think**, whenever I need to **solve a problem**, I put my hands on something ancient.

@@ -3,9 +3,9 @@ title: "The Eternal Struggle of Finding the Perfect Backpack"
 date: 2024-09-27T00:00:00
 description: "The quest for the perfect backpack feels like an endless life mission. From too many pockets to uncomfortable straps, the search continues."
 tags: ["New York", "backpacks", "city life", "lifestyle", "minimalism", "product reviews"]
+cover:
+  image: "https://i.imgur.com/5talQqP.png"
 ---
-{{< figure src="https://i.imgur.com/5talQqP.png" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 I don’t know why, but finding the right backpack feels like some kind of life quest—like I’m a video game character on an endless side mission.
 
 I’ve owned backpacks. Plenty of them. But none of them have ever been *perfect*. There’s always *something* off. Too big. Too small. Too many pockets. Not enough pockets. Feels great when empty but turns into a brick when full.

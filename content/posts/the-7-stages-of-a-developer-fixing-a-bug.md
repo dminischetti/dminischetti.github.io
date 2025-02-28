@@ -3,9 +3,9 @@ title: "The 7 Stages of a Developer Fixing a Bug"
 date: 2025-01-31T00:00:00
 description: "Fixing a bug isn’t just about code—it’s an emotional rollercoaster. Discover the 7 stages every developer goes through while debugging."
 tags: ["coding humor", "debugging", "developer life", "programming", "software development", "tech"]
+cover:
+  image: "https://i.imgur.com/gN2u6fG.png"
 ---
-{{< figure src="https://i.imgur.com/gN2u6fG.png" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 If you’ve ever worked as a developer, you know that fixing a bug is never just *fixing a bug*. It’s an emotional rollercoaster, a psychological test, and sometimes, a personal attack on your own intelligence.
 
 It always follows the same pattern.

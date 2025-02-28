@@ -3,9 +3,9 @@ title: "The Productivity Lie We All Believe (And Why I’m Ditching It)"
 date: 2025-01-24T00:00:00
 description: "Multitasking is a lie. Discover why single-tasking is the real productivity superpower and how it’s transforming my focus and life."
 tags: ["efficiency", "focus", "mindset", "personal growth", "productivity", "single-tasking"]
+cover:
+  image: "https://i.imgur.com/swWNKtC.png"
 ---
-{{< figure src="https://i.imgur.com/swWNKtC.png" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 For years, I thought I had cracked the code to getting things done. I was a multitasker, a master of spinning plates. Answering messages while debugging code, cooking dinner while listening to a tech podcast, planning my week while pushing a stroller. I was convinced that this was peak efficiency.
 
 Turns out, I was dead wrong.

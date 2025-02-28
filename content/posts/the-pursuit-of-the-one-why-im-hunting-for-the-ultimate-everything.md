@@ -3,9 +3,9 @@ title: "The Pursuit of the One: Why I’m Hunting for the Ultimate Everything"
 date: 2024-12-06T00:00:00
 description: "Minimalism taken to the next level—finding the one perfect item for everything. Discover my quest for ultimate efficiency and portability."
 tags: ["efficiency", "lifestyle", "mindset", "minimalism", "personal philosophy", "productivity"]
+cover:
+  image: "https://i.imgur.com/rUaHFwE.png"
 ---
-{{< figure src="https://i.imgur.com/rUaHFwE.png" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 Most people collect things. I eliminate them.
 
 I’m not just talking about decluttering. I mean a full-scale **mission to find the absolute best**—the **one** perfect item in every category—so I never have to think about it again.

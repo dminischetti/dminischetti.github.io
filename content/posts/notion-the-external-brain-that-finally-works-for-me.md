@@ -3,9 +3,9 @@ title: "Notion: The External Brain That Finally Works for Me"
 date: 2025-02-07T00:00:00
 description: "Struggling to keep track of your ideas and tasks? Discover why Notion is the external brain I never knew I needed."
 tags: ["Notion", "digital tools", "organization", "personal experience", "productivity", "workflow"]
+cover:
+  image: "https://i.imgur.com/wT20Slc.jpeg"
 ---
-{{< figure src="https://i.imgur.com/wT20Slc.jpeg" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 For most of my life, I’ve been at war with **my own memory**.
 
 I’m great at solving problems, debugging complex code, figuring out tricky logic flows. But ask me where I saved that important note from last week? **Gone.** Ask me what I was about to do five seconds ago? **No idea.** My brain has this incredible ability to cling to completely useless information while ruthlessly discarding the things I actually need.

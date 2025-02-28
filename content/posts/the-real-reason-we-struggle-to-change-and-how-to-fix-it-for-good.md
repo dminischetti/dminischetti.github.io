@@ -3,9 +3,9 @@ title: "The Real Reason We Struggle to Change (And How to Fix It for Good)"
 date: 2024-11-15T00:00:00
 description: "Change isn't about willpower—it's about identity. Discover why habits fail and how shifting your identity leads to lasting change."
 tags: ["change", "habits", "identity", "mindset", "personal growth", "self-improvement"]
+cover:
+  image: "https://i.imgur.com/YYXAKLE.png"
 ---
-{{< figure src="https://i.imgur.com/YYXAKLE.png" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 I used to think change was about willpower.
 
 If I wanted to exercise more, eat better, focus longer, or wake up earlier, I just had to **try harder**. Push through the resistance. Be disciplined.

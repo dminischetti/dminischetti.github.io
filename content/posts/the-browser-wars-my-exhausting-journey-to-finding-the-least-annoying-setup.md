@@ -3,9 +3,9 @@ title: "The Browser Wars: My Exhausting Journey to Finding the Least Annoying Se
 date: 2024-11-22T00:00:00
 description: "Choosing a browser shouldn't be this hard. From Safari’s WebKit prison to Windows’ Chromium clones, here’s my exhausting browser journey."
 tags: ["browsers", "digital tools", "personal experience", "productivity", "tech", "web development"]
+cover:
+  image: "https://i.imgur.com/ehHdMvS.png"
 ---
-{{< figure src="https://i.imgur.com/ehHdMvS.png" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 I am a software developer. I build things for the web. I write code. I understand how browsers work.
 
 And yet, somehow, **choosing a default browser nearly broke me.**

@@ -32,4 +32,4 @@ services:
     shortname: "minischetti-org"
 
 pagination:
-  pagerSize: 6
+  pagerSize: 5

@@ -3,9 +3,9 @@ title: "The Myth of Motivation (And What Actually Works Instead)"
 date: 2024-11-08T00:00:00
 description: "Motivation is a lie. Discover why waiting to feel inspired keeps you stuck and learn practical strategies to take action anyway."
 tags: ["habits", "mindset", "motivation", "personal growth", "productivity", "self-discipline"]
+cover:
+  image: "https://i.imgur.com/FUXF6Om.png"
 ---
-{{< figure src="https://i.imgur.com/FUXF6Om.png" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 For years, I waited for motivation to strike.
 
 I thought productive people *felt* like doing things. That they had some magical drive I didn’t. That one day, I’d wake up, feel inspired, and finally become the person who exercises, writes consistently, or tackles big projects without procrastinating.

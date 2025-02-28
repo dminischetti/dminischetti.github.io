@@ -3,9 +3,9 @@ title: "The Eternal Quest for the Perfect App (A Saga in Too Many Downloads)"
 date: 2024-12-13T00:00:00
 description: "Obsessed with finding the perfect app? You’re not alone. Join me on my endless quest for the ultimate productivity tools."
 tags: ["apps", "digital tools", "mindset", "personal experience", "productivity", "tech"]
+cover:
+  image: "https://i.imgur.com/ER8yGsW.png"
 ---
-{{< figure src="https://i.imgur.com/ER8yGsW.png" width="100%" style="display: block; margin: 0 auto;" class="rounded" >}}
-
 Some people spend their free time watching movies, playing games, or reading books. I spend mine on an endless, slightly obsessive search for **the perfect app.**
 
 It doesn’t matter what it is—file manager, calendar, task manager, note-taking app, you name it. If I use it daily, I want it to be *just right*.
