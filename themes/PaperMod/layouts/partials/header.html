@@ -40,7 +40,16 @@
 {{- end }}
 
 <header class="header">
-    <div class="rainbow-bar"></div>
+    <div class="rainbow-bar">
+        <div class="red"></div>
+        <div class="orange"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+        <div class="cyan"></div>
+        <div class="blue"></div>
+        <div class="indigo"></div>
+        <div class="violet"></div>
+    </div>    
     <nav class="nav">
         <div class="logo">
             {{- $label_text := (site.Params.label.text | default site.Title) }}
