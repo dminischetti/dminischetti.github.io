@@ -8,7 +8,6 @@ params:
   ShowReadingTime: true
   ShowShareButtons: false
   ShowPostNavLinks: false
-  ShowPostDisqus: true
   useHLJS: true
   themeVariant: "dark"
   favicon: "/static/favicon.ico"

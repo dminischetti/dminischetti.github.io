@@ -61,7 +61,7 @@
     </ul>
 
     <!-- Disqus Comments Section -->
-    {{- if and (.Param "ShowPostDisqus") (eq .Section "posts") }}
+    {{- if eq .Section "posts" }}
     <div class="disqus-comments">
       {{ template "_internal/disqus.html" . }}
     </div>
