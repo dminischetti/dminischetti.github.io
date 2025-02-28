@@ -1,0 +1,36 @@
+baseURL: "https://minischetti.org/"
+title: "Dominic's Personal Sandbox"
+theme: "PaperMod"
+languageCode: "en-us"
+
+params:
+  env: "production"
+  ShowReadingTime: true
+  ShowShareButtons: false
+  ShowPostNavLinks: false
+  ShowPostDisqus: true
+  useHLJS: true
+  themeVariant: "dark"
+  favicon: "/static/favicon.ico"
+
+menu:
+  main:
+    - identifier: "home"
+      name: "Home"
+      url: "/"
+      weight: 1
+    - identifier: "blog"
+      name: "Blog"
+      url: "/posts/"
+      weight: 2
+    - identifier: "resume"
+      name: "Resume"
+      url: "/resume/"
+      weight: 3
+
+services:
+  disqus:
+    shortname: "minischetti-org"
+
+pagination:
+  pagerSize: 6
