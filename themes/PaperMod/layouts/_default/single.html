@@ -21,10 +21,10 @@
     {{- end }}
     {{- if not (.Param "hideMeta") }}
     <div class="post-meta">
-      {{- partial "post_meta.html" . -}}
-      {{- partial "translation_list.html" . -}}
-      {{- partial "edit_post.html" . -}}
-      {{- partial "post_canonical.html" . -}}
+      {{- partial "post_meta.html" . }}
+      {{- partial "translation_list.html" . }}
+      {{- partial "edit_post.html" . }}
+      {{- partial "post_canonical.html" . }}
     </div>
     {{- end }}
   </header>
@@ -42,37 +42,41 @@
   </div>
   {{- end }}
 
+  <!-- Human-Authored Badge after the content -->
+  {{- if eq .Section "posts" }}
+  <div class="human-authored-badge">
+    <a href="https://notbyai.fyi/" target="_blank" rel="noopener noreferrer">
+      <img src="{{ "/images/Written-By-Human-Not-By-AI-Badge-white.png" | relURL }}" alt="Written by Human" style="display: block; margin: 20px auto; max-width: 150px;">
+    </a>
+  </div>
+  {{- end }}
+
   <footer class="post-footer">
+    <!-- Tags for the post -->
     {{- $tags := .Language.Params.Taxonomies.tag | default "tags" }}
     <ul class="post-tags">
       {{- range ($.GetTerms $tags) }}
       <li><a href="{{ .Permalink }}">{{ .LinkTitle }}</a></li>
       {{- end }}
     </ul>
-    <!-- Add the Human-Authored Badge right after the article content -->
-    {{- if eq .Section "posts" }}
-    <div class="human-authored-badge">
-      <a href="https://notbyai.fyi/" target="_blank" rel="noopener noreferrer">
-        <img src="{{ "/images/Written-By-Human-Not-By-AI-Badge-white.png" | relURL }}" alt="Written by Human" style="display: block; margin: 20px auto; max-width: 150px;">
-      </a>
+
+    <!-- Disqus Comments Section -->
+    {{- if and (.Param "ShowPostDisqus") (eq .Section "posts") }}
+    <div class="disqus-comments">
+      {{ template "_internal/disqus.html" . }}
     </div>
-    <div id="cusdis_thread"
-      data-host="https://cusdis.com"
-      data-app-id="2d3e5f38-338a-45e0-af54-2bb2cfd62235"
-      data-page-id="{{ .Permalink | safeURL }}"
-      data-page-url="{{ .Permalink | safeURL }}"
-      data-page-title="{{ .Title }}"
-    ></div>
-    <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
     {{- end }}
+
+    <!-- Post Navigation Links -->
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}
     {{- end }}
+
+    <!-- Social Share Buttons -->
     {{- if (and site.Params.ShowShareButtons (ne .Params.disableShare true)) }}
-    {{- partial "share_icons.html" . -}}
+    {{- partial "share_icons.html" . }}
     {{- end }}
   </footer>
-
 </article>
 
 {{- end }}{{/* end main */}}
