@@ -59,9 +59,9 @@
     <div id="cusdis_thread"
       data-host="https://cusdis.com"
       data-app-id="2d3e5f38-338a-45e0-af54-2bb2cfd62235"
-      data-page-id="{{ PAGE_ID }}"
-      data-page-url="{{ PAGE_URL }}"
-      data-page-title="{{ PAGE_TITLE }}"
+      data-page-id="{{ .Permalink | safeURL }}"
+      data-page-url="{{ .Permalink | safeURL }}"
+      data-page-title="{{ .Title }}"
     ></div>
     <script async defer src="https://cusdis.com/js/cusdis.es.js"></script>
     {{- end }}
