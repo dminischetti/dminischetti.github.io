@@ -5,5 +5,4 @@ description: "This is the homepage of Dominic Minischetti"
 **Dominic’s Sandbox**  
 Welcome to my personal playground—a place where professional triumphs mix with life’s delightful chaos. Here you’ll find my **Resume** and plenty of musings on tech, life, and the eternal quest for balance. *(The name? A nod to that programmer’s love for sandboxes—and yes, my daughter even drew one for me!)*
 
-{{< figure src="[https://imgur.com/ftOxIIl](https://imgur.com/ftOxIIl)" alt="Sandbox" width="100%" style="display: block; margin: 0 auto;" align="center" >}}
-
+{{< figure src="[https://i.imgur.com/ftOxIIl.jpeg](https://i.imgur.com/ftOxIIl.jpeg)" alt="Dominic's Sandbox" width="100%" style="display: block; margin: 0 auto;" align="center" >}}
