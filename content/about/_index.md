@@ -1,5 +1,4 @@
 ---
-title: "Dominic Minischetti"
 layout: "single"
 ShowReadingTime: false
 ---
