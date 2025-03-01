@@ -4,24 +4,29 @@ description: "This is the homepage of Dominic Minischetti"
 ---
 {{< figure src="/images/dominic_photo.png" alt="Dominic Minischetti" width="180" style="display: block; margin: 0 auto;" class="rounded" align="center" >}}
 
-**👋 Hi, I'm Dominic**
+**Dominic’s Sandbox**  
+Welcome to my personal playground—a place where professional triumphs mix with life’s delightful chaos. Here you’ll find my **Resume** and plenty of musings on tech, life, and the eternal quest for balance. *(The name? A nod to that programmer’s love for sandboxes—and yes, my daughter even drew one for me!)*
 
-**I write code that works.** (And when it breaks, it does so with the flair of a *drama queen* 👑.) I also break systems just enough to fix them better 🔧.  
+---
 
-I’m a *PHP backend engineer* 💻, currently navigating the wild world of tech from my remote desk in *Brooklyn* 🗽. By day, I’m the guy who makes sure systems don’t implode, and even my *bugs* 🐞 come with a **complimentary fix**. (Or at least that’s what I tell my boss. 😅) By night, I’m a dad attempting to outsmart my kids with **“Dad Logic”** (spoiler: it never works 🤷‍♂️) and a husband trying to impress my wife with my never-ending collection of tech toys 🎮.  
+👋 **Hi, I’m Dominic**
 
-But my story isn’t as straightforward as a clean line of code. Born in *New York* 🗽, raised in *Italy* 🇮🇹, and now back in the city that never sleeps, I’ve mastered the art of being a *wandering soul* 🌍.  
+I write code that works. (And when it breaks, it does so with the flair of a *drama queen* 👑.) I also break systems just enough so I can fix them better 🔧.
 
-My journey from *Italy* 🇮🇹 to *New York* 🗽 (and back again… and then back once more) isn’t just about geography. It’s about *chasing opportunities* 🚀, *embracing uncertainty* 🤞, and mastering the art of *gesticulating* 🤌 while debating whether New York bagels 🥯 can ever truly compete with Italian bread (spoiler: they can’t, but they come close 🍞).  
+By day, I’m a *PHP backend engineer* 💻, navigating the wild tech world from my remote desk in *Brooklyn* 🗽. I make sure things don’t implode—and even my bugs 🐞 come with a **complimentary fix** (or so I tell my boss 😅).
 
-I didn’t follow the usual path. I spent nearly a decade wrestling with a *computer science degree* 🎓 that didn’t fit how my brain works. But that struggle shaped me into a developer who thinks differently—who looks beyond the obvious and finds solutions in the *unexpected* 🔍. I bring that same mindset to my work, where I build systems that (mostly) don’t crash and fix bugs no one else wants to touch 🐛.  
+When night falls, I switch gears to become a dad armed with **“Dad Logic”** (spoiler: it never works 🤷‍♂️) and a husband on a mission to dazzle my wife with my ever-growing collection of tech toys 🎮.
 
-When I’m not coding, I’m navigating life as a husband and dad. I’m married to my *anchor* ⚓ and my biggest critic—who’s always *right* (and I hate that) 😅. We’re raising two incredible kids: one whose *curiosity* reminds me to keep asking questions 🤔, and the other who ensures I *never* get a full night’s sleep 😴.  
+My life isn’t as straightforward as a neat line of code. Born in *New York* 🗽, raised in *Italy* 🇮🇹, and now back in the city that never sleeps, I’ve mastered the art of being a *wandering soul* 🌍.
 
-I live in *Brooklyn* 🗽 but carry *Italy* 🇮🇹 with me—especially in my unapologetic love for *good food* 🍕 and my refusal to accept anything less than *perfection* ✨. My life is a blend of *Italian soul* and *New York grit*, and my work is proof that *breaking the mold* can build something better 🛠️.  
+My journey from *Italy* 🇮🇹 to *New York* 🗽 (and back again… and then back once more) isn’t just a change of scenery—it’s about *chasing opportunities* 🚀, *embracing uncertainty* 🤞, and perfecting the art of *gesticulating* 🤌 while debating if New York bagels 🥯 can ever really compete with Italian bread (spoiler: they can’t, but they come pretty darn close 🍞).
 
-This site is where my professional journey meets my personal chaos. Check out my **Resume** to see how I’ve turned mistakes into milestones. Or visit **_Dominics Sandbox_**—my blog where I play, experiment, and share my take on tech, life, and the constant quest for balance ⚖️. (It’s called that because I’ve always had a sandbox as a programmer—and my daughter even used to tease me about it by drawing one for me!)  
+I didn’t follow the usual path. After nearly a decade wrestling with a *computer science degree* 🎓 that just didn’t fit my brain, I emerged as a developer who thinks differently—always looking beyond the obvious for the *unexpected* 🔍. This mindset helps me build systems that (mostly) don’t crash and fix bugs that everyone else avoids 🐛.
 
-If this resonates—or if you’re convinced that *digital minimalism* is just an excuse to buy more gadgets—reach out at **dominic.minischetti@gmail.com**.  
+When I’m not coding, I’m off navigating life as a husband and dad. I’m married to my *anchor* ⚓ (and my toughest—and always *right*—critic, sorry not sorry 😅). We’re raising two amazing kids: one whose *curiosity* keeps me asking questions 🤔, and another who makes sure I never get a full night’s sleep 😴.
+
+I call *Brooklyn* 🗽 home, but I carry *Italy* 🇮🇹 in my heart—especially when it comes to a love for *good food* 🍕 and a refusal to settle for anything less than *perfection* ✨. My life is a blend of *Italian soul* and *New York grit*, proving that sometimes, *breaking the mold* builds something even better 🛠️.
+
+If any of this resonates—or if you believe that *digital minimalism* is just a fancy excuse to splurge on gadgets—drop me a line at **dominic.minischetti@gmail.com**.
 
 But fair warning: I’m *stubborn* about Italian bread 🍞.
