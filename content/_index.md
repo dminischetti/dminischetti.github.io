@@ -5,7 +5,7 @@ description: "This is the homepage of Dominic Minischetti"
 
 **Welcome to my digital sandbox** – a place where technology, work, and life come together. Here, I share my experience as a developer, my thoughts on tech, and bits of my personal journey. Expect a mix of coding, problem-solving, and everyday adventures.
 
-*(Why "sandbox"? In programming, a sandbox is a safe space to test ideas. This site is my own sandbox—where I experiment, learn, and have fun! My daughter even drew a sandbox for me as a logo. ❤️)*
+*(Why "sandbox"? In programming, a sandbox is a safe space to test ideas. This site is my own sandbox—where I experiment, learn, and have fun! My daughter and daughter even drew a sandbox for me. ❤️)*
 
 ![Dominic's Sandbox](https://i.imgur.com/ftOxIIl.jpeg)  
 *This is the real sandbox my family created for me!*
@@ -15,7 +15,7 @@ I’m **Dominic Minischetti**, a backend developer who loves solving problems an
 
 ## 🚀 Explore More
 - **[About Me](/about/)** – More about my journey, experience, and interests.  
-- **[Blog](/posts/)** – Where I write about tech, work, and sometimes life itself.  
 - **[Resume](/resume/)** – My professional background, skills, and projects.  
+- **[Blog](/posts/)** – Where I write about tech, work, and sometimes life itself.  
 
 This site is my space to **share, experiment, and connect**—so feel free to explore and reach out. Thanks for stopping by!
