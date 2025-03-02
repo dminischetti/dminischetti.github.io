@@ -4,7 +4,7 @@ description: "This is the homepage of Dominic Minischetti"
 ---
 Welcome to my personal playground—a place where professional triumphs mix with life’s delightful chaos. Here, you'll find my **[Resume](/resume/)**, plenty of musings on **[tech and life](/posts/)**, and the eternal quest for balance.  
 
-*(The name? A nod to that programmer’s love for sandboxes—and yes, my daughter even drew one for me! ❤️)*  
+*(The name? A nod to that programmer’s love for sandboxes—and yes, my daughter and my wife even drew one for me! ❤️)*  
 
 ![Dominic's Sandbox](https://i.imgur.com/ftOxIIl.jpeg)
 
@@ -26,7 +26,7 @@ If you're into that, take a look at my **[Blog](/posts/)**!
 
 ## 💙 A Special Shoutout  
 
-To my wonderful daughter, who filled my life with **love, inspiration, and endless creativity**.  
+To my wonderful wife and daughter, who filled my life with **love, inspiration, and endless creativity**.  
 This little sandbox wouldn't exist without her. **❤️❤️❤️**  
 
 ---
