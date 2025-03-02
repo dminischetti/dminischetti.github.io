@@ -7,10 +7,8 @@ description: "This is the homepage of Dominic Minischetti"
 
 *(Why "sandbox"? In programming, a sandbox is a safe space to test ideas. This site is my own sandbox—where I experiment, learn, and have fun! My daughter and daughter even drew a sandbox for me. ❤️)*
 
-<div style="text-align: center;">
-  <img src="https://i.imgur.com/TuNwudS.png" alt="Dominic's Sandbox">
-  <p><em>This is the real sandbox my family created for me!</em></p>
-</div>
+![Dominic's Sandbox](https://i.imgur.com/TuNwudS.png)  
+*This is the real sandbox my family created for me!*
 
 ## ✨ About Me
 I’m **Dominic Minischetti**, a backend developer who loves solving problems and improving systems. My work is about making things **run smoothly**, but my life is about **enjoying the process**. I’m also a husband, dad, and curious mind who likes to explore new ideas.
