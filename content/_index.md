@@ -27,7 +27,7 @@ If you're into that, take a look at my **[Blog](/posts/)**!
 ## 💙 A Special Shoutout  
 
 To my wonderful wife and daughter, who filled my life with **love, inspiration, and endless creativity**.  
-This little sandbox wouldn't exist without her. **❤️❤️❤️**  
+This little sandbox wouldn't exist without them. **❤️❤️❤️**  
 
 ---
 
