@@ -7,7 +7,7 @@ description: "This is the homepage of Dominic Minischetti"
 
 *(Why "sandbox"? In programming, a sandbox is a safe space to test ideas. This site is my own sandbox—where I experiment, learn, and have fun! My daughter and daughter even drew a sandbox for me. ❤️)*
 
-![Dominic's Sandbox](https://i.imgur.com/bmeCCfR.png)  
+![Dominic's Sandbox](https://i.imgur.com/TuNwudS.png)  
 *This is the real sandbox my family created for me!*
 
 ## ✨ About Me
