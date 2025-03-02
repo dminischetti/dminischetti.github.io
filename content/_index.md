@@ -2,10 +2,7 @@
 title: "Dominic Minischetti"
 description: "This is the homepage of Dominic Minischetti"
 ---
----
-title: "Dominic Minischetti"
-description: "A digital sandbox where tech, life, and creativity meet."
----
+
 **Welcome to my digital sandbox** – a place where technology, work, and life come together. Here, I share my experience as a developer, my thoughts on tech, and bits of my personal journey. Expect a mix of coding, problem-solving, and everyday adventures.
 
 *(Why "sandbox"? In programming, a sandbox is a safe space to test ideas. This site is my own sandbox—where I experiment, learn, and have fun! My daughter even drew a sandbox for me as a logo. ❤️)*
