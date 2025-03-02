@@ -15,21 +15,29 @@ params:
 menu:
   main:
     - identifier: "home"
-      name: "🏠 Home"
+      name: "Home"
       url: "/"
       weight: 1
+      params:
+        icon: "fa-solid fa-house"
     - identifier: "about"
-      name: "ℹ️ About"
+      name: "About"
       url: "/about/"
       weight: 2
+      params:
+        icon: "fa-solid fa-info-circle"
     - identifier: "resume"
-      name: "📄 Resume"
+      name: "Resume"
       url: "/resume/"
       weight: 3
+      params:
+        icon: "fa-solid fa-file"
     - identifier: "blog"
-      name: "✍️ Blog"
+      name: "Blog"
       url: "/posts/"
       weight: 4
+      params:
+        icon: "fa-solid fa-pen"
 
 services:
   disqus:
