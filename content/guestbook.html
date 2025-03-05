@@ -57,6 +57,47 @@ layout: "page"
     transition: border-color 0.3s ease, background 0.3s ease;
 }
 
+/* Proper Border Contrast for Light & Dark Modes */
+@media (prefers-color-scheme: dark) {
+    .guestbooks___input-container input,
+    .guestbooks___input-container textarea {
+        border: 2px solid white; /* White border in dark mode */
+        background: var(--code-background-color);
+        color: var(--text-color);
+    }
+    
+    input[type="submit"] {
+        background-color: white;
+        color: black;
+        border: 2px solid white;
+    }
+
+    input[type="submit"]:hover {
+        background-color: var(--visited-color);
+        color: black;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    .guestbooks___input-container input,
+    .guestbooks___input-container textarea {
+        border: 2px solid black; /* Black border in light mode */
+        background: var(--code-background-color);
+        color: var(--text-color);
+    }
+    
+    input[type="submit"] {
+        background-color: black;
+        color: white;
+        border: 2px solid black;
+    }
+
+    input[type="submit"]:hover {
+        background-color: var(--visited-color);
+        color: white;
+    }
+}
+
 /* Ensure input fields are visible and distinct */
 .guestbooks___input-container input:focus,
 .guestbooks___input-container textarea:focus {
@@ -73,11 +114,8 @@ layout: "page"
 
 /* Submit Button */
 input[type="submit"] {
-    background-color: var(--link-color);
-    color: #fff;
     padding: 12px;
     font-size: 1rem;
-    border: none;
     border-radius: 6px;
     cursor: pointer;
     transition: background 0.3s, transform 0.1s;
@@ -86,7 +124,6 @@ input[type="submit"] {
 }
 
 input[type="submit"]:hover {
-    background-color: var(--visited-color);
     transform: scale(1.02);
 }
 
@@ -98,26 +135,4 @@ input[type="submit"]:hover {
     border-radius: 8px;
 }
 
-/* Dark Mode Adjustments */
-@media (prefers-color-scheme: dark) {
-    #guestbooks___guestbook-form-container {
-        background-color: var(--background-color);
-        border-color: var(--blockquote-color);
-    }
-
-    .guestbooks___input-container input,
-    .guestbooks___input-container textarea {
-        background: var(--code-background-color);
-        color: var(--text-color);
-        border-color: var(--blockquote-color);
-    }
-
-    input[type="submit"] {
-        background-color: var(--link-color);
-    }
-
-    input[type="submit"]:hover {
-        background-color: var(--visited-color);
-    }
-}
 </style>
