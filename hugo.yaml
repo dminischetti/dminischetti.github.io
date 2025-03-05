@@ -30,6 +30,10 @@ menu:
       name: "Blog"
       url: "/posts/"
       weight: 4
+    - identifier: "guestbook"
+      name: "Guestbook"
+      url: "/guestbook/"
+      weight: 4
 
 services:
   disqus:
