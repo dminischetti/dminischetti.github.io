@@ -4,32 +4,145 @@ url: "/guestbook/"
 layout: "page"
 ---
 
-<h1>Guestbook</h1>
-<p>Leave a message below!</p>
+{{ define "main" }}
+<article class="guestbook-container">
+    <h1>{{ .Title }}</h1>
+    <p>Leave a message below!</p>
 
-<!-- Embed with JavaScript -->
-<script async src="https://guestbooks.meadow.cafe/resources/js/embed_script/420/script.js"></script> 
-<div id="guestbooks___guestbook-form-container">
-    <form id="guestbooks___guestbook-form" action="https://guestbooks.meadow.cafe/guestbook/420/submit" method="post">
-        <div class="guestbooks___input-container">
-            <input placeholder="Name" type="text" id="name" name="name" required>
+    <div class="guestbook-form">
+        <script async src="https://guestbooks.meadow.cafe/resources/js/embed_script/420/script.js"></script> 
+        <div id="guestbooks___guestbook-form-container">
+            <form id="guestbooks___guestbook-form" action="https://guestbooks.meadow.cafe/guestbook/420/submit" method="post">
+                <div class="guestbooks___input-container">
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+                <div class="guestbooks___input-container">
+                    <label for="website">Website (optional):</label>
+                    <input type="url" id="website" name="website">
+                </div>
+                <div id="guestbooks___challenge-answer-container"></div>  
+                <br/>
+                <div class="guestbooks___input-container">
+                    <label for="text">Message:</label>
+                    <textarea id="text" name="text" required></textarea>
+                </div>
+                <br/>
+                <input type="submit" value="Submit">
+                <div id="guestbooks___error-message"></div>  
+            </form>
         </div>
-        <div class="guestbooks___input-container">
-            <input placeholder="Website (optional)" type="url" id="website" name="website">
-        </div>
-        <div id="guestbooks___challenge-answer-container"></div>  
-        <br/>
-        <div class="guestbooks___input-container">
-            <textarea placeholder="Message (plain text only)..." id="text" name="text" style="width: 100%; box-sizing: border-box; resize: vertical;" required></textarea>
-        </div>
-        <br/>
-        <input type="submit" value="Submit">
-        <div id="guestbooks___error-message"></div>  
-    </form>
-</div>
-<div id="guestbooks___guestbook-made-with" style="text-align: right;">
-    <small>Lovingly made with <a target="_blank" href="https://guestbooks.meadow.cafe">Guestbooks</a></small>
-</div>  
-<hr style="margin: 1em 0;"/>
-<h3 id="guestbooks___guestbook-messages-header">Messages</h3>
-<div id="guestbooks___guestbook-messages-container"></div>  
+    </div>
+
+    <div class="guestbook-footer">
+        <small>Lovingly made with <a target="_blank" href="https://guestbooks.meadow.cafe">Guestbooks</a></small>
+    </div>
+
+    <hr style="margin: 1em 0;"/>
+    <h3 id="guestbooks___guestbook-messages-header">Messages</h3>
+    <div id="guestbooks___guestbook-messages-container"></div>  
+</article>
+
+<style>
+    /* General Guestbook Styling */
+    .guestbook-container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: var(--background, #fff);
+        color: var(--text-color, #333);
+        border-radius: 10px;
+        box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .guestbook-container h1 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 10px;
+    }
+
+    .guestbook-container p {
+        text-align: center;
+        font-size: 1rem;
+        color: var(--secondary-text-color, #666);
+    }
+
+    .guestbook-form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .guestbooks___input-container {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+    }
+
+    .guestbooks___input-container label {
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+
+    .guestbooks___input-container input,
+    .guestbooks___input-container textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid var(--border-color, #ccc);
+        border-radius: 5px;
+        font-size: 1rem;
+        background: var(--input-bg, #f9f9f9);
+    }
+
+    .guestbooks___input-container textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    input[type="submit"] {
+        background-color: var(--primary-color, #007bff);
+        color: #fff;
+        padding: 10px;
+        font-size: 1rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    input[type="submit"]:hover {
+        background-color: var(--primary-hover-color, #0056b3);
+    }
+
+    .guestbook-footer {
+        text-align: right;
+        margin-top: 20px;
+    }
+
+    .guestbook-footer a {
+        color: var(--link-color, #007bff);
+        text-decoration: none;
+    }
+
+    .guestbook-footer a:hover {
+        text-decoration: underline;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .guestbook-container {
+            width: 90%;
+            padding: 15px;
+        }
+
+        .guestbook-container h1 {
+            font-size: 1.8rem;
+        }
+
+        .guestbooks___input-container input,
+        .guestbooks___input-container textarea {
+            font-size: 0.9rem;
+        }
+    }
+</style>
+{{ end }}
