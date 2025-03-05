@@ -1,30 +1,37 @@
 ---
-title: "Guestbook"
+title: "Welcome to My Guestbook"
 date: 2025-03-05
 layout: "page"
+ShowReadingTime: false
 ---
+<p>Feel free to leave a message below! I appreciate your comments and feedback. Note that messages won't appear immediately as they require moderation before being displayed.</p>
+
+<!-- Guestbook Form -->
 <script async src="https://guestbooks.meadow.cafe/resources/js/embed_script/420/script.js"></script>
 <div id="guestbooks___guestbook-form-container">
     <form id="guestbooks___guestbook-form" action="https://guestbooks.meadow.cafe/guestbook/420/submit" method="post">
         <div class="guestbooks___input-container">
-            <input placeholder="Name" type="text" id="name" name="name" required>
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your name" required>
         </div>
         <div class="guestbooks___input-container">
-            <input placeholder="Website (optional)" type="url" id="website" name="website">
+            <label for="website">Website (optional):</label>
+            <input type="url" id="website" name="website" placeholder="https://yourwebsite.com">
         </div>
         <div id="guestbooks___challenge-answer-container"></div>
-        <br />
         <div class="guestbooks___input-container">
-            <textarea placeholder="Message (plain text only)..." id="text" name="text"
-                style="width: 100%; box-sizing: border-box; resize: vertical;" required></textarea>
+            <label for="text">Message:</label>
+            <textarea id="text" name="text" placeholder="Write your message here (plain text only)..." required></textarea>
         </div>
-        <br />
         <input type="submit" value="Submit">
         <div id="guestbooks___error-message"></div>
     </form>
 </div>
-<hr style="margin: 1em 0;" />
+
+<hr style="margin: 1.5em 0;" />
+
 <h3 id="guestbooks___guestbook-messages-header">Messages</h3>
+<p><em>Messages will be displayed here once approved.</em></p>
 <div id="guestbooks___guestbook-messages-container"></div>
 
 <style>
@@ -40,45 +47,53 @@ layout: "page"
     --primary: black;
 }
 
+/* General Guestbook Container */
 #guestbooks___guestbook-form-container,
 #guestbooks___guestbook-messages-container {
     max-width: 100%;
     padding: 20px;
-    border: 1px solid var(--border, var(--border-light));
+    border: 1px solid var(--border-light);
     border-radius: 8px;
 }
 
 #guestbooks___guestbook-form-container {
-    background-color: var(--theme, var(--theme-light));
+    background-color: var(--theme-light);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
 }
 
 #guestbooks___guestbook-messages-container {
-    background-color: var(--entry, var(--entry-light));
+    background-color: var(--entry-light);
 }
 
+/* Input Fields */
 .guestbooks___input-container {
     display: flex;
     flex-direction: column;
     margin-bottom: 15px;
 }
 
+.guestbooks___input-container label {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--content-light);
+}
+
 .guestbooks___input-container input,
 .guestbooks___input-container textarea {
     width: 100%;
     padding: 12px;
-    border: 2px solid var(--border, var(--border-light));
+    border: 2px solid var(--border-light);
     border-radius: 6px;
     font-size: 1rem;
-    background: var(--entry, var(--entry-light));
-    color: var(--content, var(--content-light));
+    background: var(--entry-light);
+    color: var(--content-light);
     transition: border-color 0.3s ease, background 0.3s ease;
 }
 
 .guestbooks___input-container input:focus,
 .guestbooks___input-container textarea:focus {
     border-color: var(--primary, #007bff);
-    background: var(--theme, var(--theme-light));
+    background: var(--theme-light);
     outline: none;
 }
 
@@ -87,6 +102,7 @@ layout: "page"
     resize: vertical;
 }
 
+/* Submit Button */
 input[type="submit"] {
     padding: 12px;
     font-size: 1rem;
@@ -95,46 +111,50 @@ input[type="submit"] {
     transition: all 0.3s;
     font-weight: bold;
     text-transform: uppercase;
-    background-color: var(--content, var(--content-light));
-    color: var(--theme, var(--theme-light));
-    border: 2px solid var(--content, var(--content-light));
+    background-color: var(--content-light);
+    color: var(--theme-light);
+    border: 2px solid var(--content-light);
 }
 
 input[type="submit"]:hover {
-    background-color: var(--theme, var(--theme-light));
-    color: var(--content, var(--content-light));
-    border: 2px solid var(--content, var(--content-light));
+    background-color: var(--theme-light);
+    color: var(--content-light);
+    border: 2px solid var(--content-light);
 }
 
+/* Dark Mode */
 @media (prefers-color-scheme: dark) {
     #guestbooks___guestbook-form-container {
-        background-color: var(--theme, var(--theme-dark));
-        border-color: var(--border, var(--border-dark));
+        background-color: var(--theme-dark);
+        border-color: var(--border-dark);
+    }
+
+    #guestbooks___guestbook-messages-container {
+        background-color: var(--entry-dark);
+        border-color: var(--border-dark);
+    }
+
+    .guestbooks___input-container label {
+        color: var(--content-dark);
     }
 
     .guestbooks___input-container input,
     .guestbooks___input-container textarea {
-        border-color: var(--border, var(--border-dark));
-        background: var(--entry, var(--entry-dark));
-        color: var(--content, var(--content-dark));
-    }
-
-    #guestbooks___guestbook-messages-container {
-        background-color: var(--entry, var(--entry-dark));
-        border-color: var(--border, var(--border-dark));
+        border-color: var(--border-dark);
+        background: var(--entry-dark);
+        color: var(--content-dark);
     }
 
     input[type="submit"] {
-        background-color: var(--content, var(--content-dark));
-        color: var(--theme, var(--theme-light));
-        border-color: var(--content, var(--content-dark));
+        background-color: var(--content-dark);
+        color: var(--theme-dark);
+        border-color: var(--content-dark);
     }
 
     input[type="submit"]:hover {
-        background-color: var(--theme, var(--theme-light));
-        color: var(--content, var(--content-dark));
-        border-color: var(--content, var(--content-dark));
+        background-color: var(--theme-dark);
+        color: var(--content-dark);
+        border-color: var(--content-dark);
     }
 }
-
-    </style>
+</style>
