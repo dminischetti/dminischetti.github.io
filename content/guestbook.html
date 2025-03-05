@@ -57,47 +57,6 @@ layout: "page"
     transition: border-color 0.3s ease, background 0.3s ease;
 }
 
-/* Proper Border Contrast for Light & Dark Modes */
-@media (prefers-color-scheme: dark) {
-    .guestbooks___input-container input,
-    .guestbooks___input-container textarea {
-        border: 2px solid white; /* White border in dark mode */
-        background: var(--code-background-color);
-        color: var(--text-color);
-    }
-    
-    input[type="submit"] {
-        background-color: white;
-        color: black;
-        border: 2px solid white;
-    }
-
-    input[type="submit"]:hover {
-        background-color: var(--visited-color);
-        color: black;
-    }
-}
-
-@media (prefers-color-scheme: light) {
-    .guestbooks___input-container input,
-    .guestbooks___input-container textarea {
-        border: 2px solid black; /* Black border in light mode */
-        background: var(--code-background-color);
-        color: var(--text-color);
-    }
-    
-    input[type="submit"] {
-        background-color: black;
-        color: white;
-        border: 2px solid black;
-    }
-
-    input[type="submit"]:hover {
-        background-color: var(--visited-color);
-        color: white;
-    }
-}
-
 /* Ensure input fields are visible and distinct */
 .guestbooks___input-container input:focus,
 .guestbooks___input-container textarea:focus {
@@ -118,13 +77,53 @@ input[type="submit"] {
     font-size: 1rem;
     border-radius: 6px;
     cursor: pointer;
-    transition: background 0.3s, transform 0.1s;
+    transition: background 0.3s, transform 0.1s, color 0.3s, border-color 0.3s;
     font-weight: bold;
     text-transform: uppercase;
 }
 
-input[type="submit"]:hover {
-    transform: scale(1.02);
+/* Light Mode */
+@media (prefers-color-scheme: light) {
+    .guestbooks___input-container input,
+    .guestbooks___input-container textarea {
+        border: 2px solid black; /* FIX: Black border in light mode */
+        background: var(--code-background-color);
+        color: var(--text-color);
+    }
+
+    input[type="submit"] {
+        background-color: black;
+        color: white;
+        border: 2px solid black; /* FIX: Added black border */
+    }
+
+    input[type="submit"]:hover {
+        background-color: white;
+        color: black;
+        border: 2px solid black; /* FIX: Maintain visibility on hover */
+    }
+}
+
+/* Dark Mode */
+@media (prefers-color-scheme: dark) {
+    .guestbooks___input-container input,
+    .guestbooks___input-container textarea {
+        border: 2px solid white; /* FIX: White border in dark mode */
+        background: var(--code-background-color);
+        color: var(--text-color);
+    }
+
+    input[type="submit"] {
+        background-color: white;
+        color: black;
+        border: 2px solid white;
+    }
+
+    input[type="submit"]:hover {
+        background-color: black;
+        color: white; /* FIX: White text to stay readable */
+        border: 2px solid white;
+    }
 }
 
 /* Messages Section */
@@ -132,7 +131,5 @@ input[type="submit"]:hover {
     padding: 20px;
     background-color: var(--code-background-color);
     border: 1px solid var(--blockquote-color);
-    border-radius: 8px;
 }
-
 </style>
