@@ -1,0 +1,35 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+<p>Click on a photo to view it in full size and leave a comment!</p>
+
+<div class="gallery">
+    {{ range .Pages }}
+    <div class="photo">
+        <a href="{{ .RelPermalink }}">
+            <img src="{{ .Params.images | first }}" alt="{{ .Title }}">
+        </a>
+        <h2><a href="{{ .RelPermalink }}">{{ .Title }}</a></h2>
+    </div>
+    {{ end }}
+</div>
+
+<style>
+    .gallery {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 20px;
+        justify-items: center;
+        text-align: center;
+    }
+    .photo img {
+        width: 100%;
+        max-width: 300px;
+        height: auto;
+        border-radius: 5px;
+        transition: transform 0.2s;
+    }
+    .photo img:hover {
+        transform: scale(1.05);
+    }
+</style>
+{{ end }}
