@@ -28,109 +28,106 @@ layout: "page"
 <div id="guestbooks___guestbook-messages-container"></div>
 
 <style>
-    /* General Guestbook Styling */
-    #guestbooks___guestbook-form-container {
-        max-width: 600px;
-        width: 100%;
-        margin: 0 auto;
-        padding: 20px;
-        background-color: var(--background-color);
-        border: 1px solid var(--blockquote-color);
-        border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        transition: box-shadow 0.3s ease;
-    }
-    
-    /* Form Input Fields */
-    .guestbooks___input-container {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 15px;
-    }
-    
-    .guestbooks___input-container input,
-    .guestbooks___input-container textarea {
-        width: 100%;
-        padding: 12px;
-        border: 2px solid var(--blockquote-color);
-        border-radius: 6px;
-        font-size: 1rem;
-        background: var(--code-background-color);
-        color: var(--text-color);
-        transition: border-color 0.3s ease, background 0.3s ease;
-    }
-    
-    /* Focus state */
-    .guestbooks___input-container input:focus,
-    .guestbooks___input-container textarea:focus {
-        border-color: var(--link-color);
-        background: var(--background-color);
-        outline: none;
-    }
-    
-    /* Textarea Styling */
-    .guestbooks___input-container textarea {
-        min-height: 120px;
-        resize: vertical;
-    }
-    
-    /* Submit Button */
-    input[type="submit"] {
-        padding: 12px;
-        font-size: 1rem;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: background 0.3s, transform 0.1s, color 0.3s, border-color 0.3s;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-    
-    /* Light Mode */
-    @media (prefers-color-scheme: light) {
-        .guestbooks___input-container input:focus,
-        .guestbooks___input-container textarea:focus {
-            border: 2px solid black; /* Black border only when focused */
-        }
-    
-        input[type="submit"] {
-            background-color: black;
-            color: white;
-            border: 2px solid black;
-        }
-    
-        input[type="submit"]:hover {
-            background-color: white;
-            color: black;
-            border: 2px solid black;
-        }
-    }
-    
-    /* Dark Mode */
-    @media (prefers-color-scheme: dark) {
-        .guestbooks___input-container input,
-        .guestbooks___input-container textarea {
-            border: 2px solid white;
-            background: var(--code-background-color);
-            color: var(--text-color);
-        }
-    
-        input[type="submit"] {
-            background-color: white;
-            color: black;
-            border: 2px solid white;
-        }
-    
-        input[type="submit"]:hover {
-            background-color: black;
-            color: white;
-            border: 2px solid white;
-        }
-    }
-    
-    /* Messages Section */
-    #guestbooks___guestbook-messages-container {
-        padding: 20px;
-        background-color: var(--code-background-color);
-        border: 1px solid var(--blockquote-color);
-    }
+/* General Guestbook Styling */
+#guestbooks___guestbook-form-container {
+    max-width: 100%;
+    padding: 20px;
+    background-color: var(--body-bg, #fff);
+    border: 1px solid #000; /* Default for light mode */
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* Form Input Fields */
+.guestbooks___input-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+.guestbooks___input-container input,
+.guestbooks___input-container textarea {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid black; /* Ensure black border in light mode */
+    border-radius: 6px;
+    font-size: 1rem;
+    background: #f8f8f8;
+    color: #000;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+/* Ensure input fields are visible and distinct */
+.guestbooks___input-container input:focus,
+.guestbooks___input-container textarea:focus {
+    border-color: #007bff;
+    background: #fff;
+    outline: none;
+}
+
+/* Textarea Styling */
+.guestbooks___input-container textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Submit Button */
+input[type="submit"] {
+    padding: 12px;
+    font-size: 1rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.1s, color 0.3s, border-color 0.3s;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: black;
+    color: white;
+    border: 2px solid black;
+}
+
+input[type="submit"]:hover {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+}
+
+/* Dark Mode Styling (Handled via PaperMod’s .dark class) */
+html.dark #guestbooks___guestbook-form-container {
+    background-color: #1e1e1e;
+    border: 1px solid white;
+}
+
+html.dark .guestbooks___input-container input,
+html.dark .guestbooks___input-container textarea {
+    border: 2px solid white;
+    background: #333;
+    color: white;
+}
+
+html.dark input[type="submit"] {
+    background-color: white;
+    color: black;
+    border: 2px solid white;
+}
+
+html.dark input[type="submit"]:hover {
+    background-color: black;
+    color: white;
+    border: 2px solid white;
+}
+
+/* Messages Section */
+#guestbooks___guestbook-messages-container {
+    padding: 20px;
+    background-color: #f8f8f8;
+    border: 1px solid black;
+    border-radius: 8px;
+}
+
+/* Dark Mode Messages */
+html.dark #guestbooks___guestbook-messages-container {
+    background-color: #333;
+    border: 1px solid white;
+}
+
     </style>
