@@ -12,9 +12,9 @@ params:
   themeVariant: "dark"
 
 assets:
-  favicon16x16: /favicons/favicon-16x16.png
-  favicon32x32: /favicons/favicon-32x32.png
-  apple_touch_icon: /favicons/apple-touch-icon.png
+  favicon16x16: /static/favicons/favicon-16x16.png
+  favicon32x32: /static/favicons/favicon-32x32.png
+  apple_touch_icon: /static/favicons/apple-touch-icon.png
 
 menu:
   main:
