@@ -30,19 +30,15 @@ layout: "page"
 <style>
     /* General Guestbook Styling */
     #guestbooks___guestbook-form-container {
-        max-width: 600px; /* Added max-width for better readability */
-        width: 100%; /* Ensure responsiveness */
-        margin: 0 auto; /* Center the form */
+        max-width: 600px;
+        width: 100%;
+        margin: 0 auto;
         padding: 20px;
         background-color: var(--background-color);
         border: 1px solid var(--blockquote-color);
         border-radius: 8px;
-        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Slightly enhanced shadow */
-        transition: box-shadow 0.3s ease; /* Smooth shadow transition */
-    }
-    
-    #guestbooks___guestbook-form-container:hover {
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15); /* Subtle hover effect */
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        transition: box-shadow 0.3s ease;
     }
     
     /* Form Input Fields */
@@ -50,14 +46,6 @@ layout: "page"
         display: flex;
         flex-direction: column;
         margin-bottom: 15px;
-        position: relative; /* For potential label positioning */
-    }
-    
-    .guestbooks___input-container label {
-        margin-bottom: 5px;
-        font-weight: 600;
-        color: var(--text-color);
-        opacity: 0.8;
     }
     
     .guestbooks___input-container input,
@@ -69,70 +57,39 @@ layout: "page"
         font-size: 1rem;
         background: var(--code-background-color);
         color: var(--text-color);
-        transition: all 0.3s ease;
-        box-sizing: border-box; /* Prevent padding from affecting width */
+        transition: border-color 0.3s ease, background 0.3s ease;
     }
     
-    /* Enhanced focus state */
+    /* Focus state */
     .guestbooks___input-container input:focus,
     .guestbooks___input-container textarea:focus {
         border-color: var(--link-color);
-        box-shadow: 0 0 0 2px rgba(var(--link-color-rgb, 0, 0, 0), 0.2);
+        background: var(--background-color);
         outline: none;
     }
     
-    /* Error state for inputs */
-    .guestbooks___input-container input.error,
-    .guestbooks___input-container textarea.error {
-        border-color: #ff4136; /* Bright red for errors */
-        animation: shake 0.4s linear;
-    }
-    
-    @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        25% { transform: translateX(-5px); }
-        75% { transform: translateX(5px); }
-    }
-    
-    /* Textarea Specific Styling */
+    /* Textarea Styling */
     .guestbooks___input-container textarea {
         min-height: 120px;
-        max-height: 300px; /* Prevent excessive height */
         resize: vertical;
-        line-height: 1.5; /* Improved readability */
     }
     
-    /* Submit Button Enhanced */
+    /* Submit Button */
     input[type="submit"] {
-        padding: 12px 20px;
+        padding: 12px;
         font-size: 1rem;
         border-radius: 6px;
         cursor: pointer;
-        transition: all 0.3s ease;
+        transition: background 0.3s, transform 0.1s, color 0.3s, border-color 0.3s;
         font-weight: bold;
         text-transform: uppercase;
-        letter-spacing: 1px; /* Slightly spread out letters */
-        position: relative;
-        overflow: hidden; /* For potential hover effect */
-    }
-    
-    input[type="submit"]:hover {
-        transform: translateY(-2px); /* Slight lift effect */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    }
-    
-    input[type="submit"]:active {
-        transform: translateY(1px);
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     }
     
     /* Light Mode */
     @media (prefers-color-scheme: light) {
-        .guestbooks___input-container input,
-        .guestbooks___input-container textarea {
-            border: 2px solid black;
-            background: var(--code-background-color);
-            color: var(--text-color);
+        .guestbooks___input-container input:focus,
+        .guestbooks___input-container textarea:focus {
+            border: 2px solid black; /* Black border only when focused */
         }
     
         input[type="submit"] {
@@ -172,20 +129,8 @@ layout: "page"
     
     /* Messages Section */
     #guestbooks___guestbook-messages-container {
-        max-width: 600px; /* Consistent with form width */
-        margin: 20px auto; /* Center and add spacing */
         padding: 20px;
         background-color: var(--code-background-color);
         border: 1px solid var(--blockquote-color);
-        border-radius: 8px; /* Added to match form container */
-    }
-    
-    /* Responsive Adjustments */
-    @media screen and (max-width: 768px) {
-        #guestbooks___guestbook-form-container,
-        #guestbooks___guestbook-messages-container {
-            width: 95%;
-            padding: 15px;
-        }
     }
     </style>
