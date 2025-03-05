@@ -83,24 +83,32 @@ input[type="submit"] {
 }
 
 /* Light Mode */
+/* Light Mode: Always have a black border */
 @media (prefers-color-scheme: light) {
     .guestbooks___input-container input,
     .guestbooks___input-container textarea {
-        border: 2px solid black; /* FIX: Black border in light mode */
+        border: 2px solid black; /* Always black border */
         background: var(--code-background-color);
         color: var(--text-color);
     }
 
+    /* Keep border color on focus */
+    .guestbooks___input-container input:focus,
+    .guestbooks___input-container textarea:focus {
+        border: 2px solid var(--link-color); /* Slight highlight on focus */
+    }
+
+    /* Submit Button */
     input[type="submit"] {
         background-color: black;
         color: white;
-        border: 2px solid black; /* FIX: Added black border */
+        border: 2px solid black;
     }
 
     input[type="submit"]:hover {
         background-color: white;
         color: black;
-        border: 2px solid black; /* FIX: Maintain visibility on hover */
+        border: 2px solid black;
     }
 }
 
