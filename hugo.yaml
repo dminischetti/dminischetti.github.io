@@ -10,7 +10,6 @@ params:
   ShowPostNavLinks: false
   useHLJS: true
   themeVariant: "dark"
-  comments: true
 
 assets:
   favicon16x16: /static/favicons/favicon-16x16.png
