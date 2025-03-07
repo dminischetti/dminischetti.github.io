@@ -4,7 +4,7 @@ date: 2024-11-08T00:00:00
 description: "Motivation is a lie. Discover why waiting to feel inspired keeps you stuck and learn practical strategies to take action anyway."
 tags: ["habits", "mindset", "motivation", "personal growth", "productivity", "self-discipline"]
 cover:
-  image: "https://i.imgur.com/FUXF6Om.png"
+  image: "/images/the-myth-of-motivation-and-what-actually-works-instead.png"
 ---
 For years, I waited for motivation to strike.
 

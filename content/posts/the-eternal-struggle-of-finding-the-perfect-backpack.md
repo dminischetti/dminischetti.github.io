@@ -4,7 +4,7 @@ date: 2024-09-27T00:00:00
 description: "The quest for the perfect backpack feels like an endless life mission. From too many pockets to uncomfortable straps, the search continues."
 tags: ["New York", "backpacks", "city life", "lifestyle", "minimalism", "product reviews"]
 cover:
-  image: "https://i.imgur.com/5talQqP.png"
+  image: "/images/the-eternal-struggle-of-finding-the-perfect-backpack.png"
 ---
 I don’t know why, but finding the right backpack feels like some kind of life quest—like I’m a video game character on an endless side mission.
 

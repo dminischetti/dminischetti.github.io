@@ -4,7 +4,7 @@ date: 2025-02-07T00:00:00
 description: "Struggling to keep track of your ideas and tasks? Discover why Notion is the external brain I never knew I needed."
 tags: ["Notion", "digital tools", "organization", "personal experience", "productivity", "workflow"]
 cover:
-  image: "https://i.imgur.com/wT20Slc.jpeg"
+  image: "/images/notion-the-external-brain-that-finally-works-for-me.jpeg"
 ---
 For most of my life, I’ve been at war with **my own memory**.
 

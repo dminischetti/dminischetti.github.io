@@ -4,7 +4,7 @@ date: 2024-11-15T00:00:00
 description: "Change isn't about willpower—it's about identity. Discover why habits fail and how shifting your identity leads to lasting change."
 tags: ["change", "habits", "identity", "mindset", "personal growth", "self-improvement"]
 cover:
-  image: "https://i.imgur.com/YYXAKLE.png"
+  image: "/images/the-real-reason-we-struggle-to-change-and-how-to-fix-it-for-good.png"
 ---
 I used to think change was about willpower.
 

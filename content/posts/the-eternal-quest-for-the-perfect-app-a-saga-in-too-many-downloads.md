@@ -4,7 +4,7 @@ date: 2024-12-13T00:00:00
 description: "Obsessed with finding the perfect app? You’re not alone. Join me on my endless quest for the ultimate productivity tools."
 tags: ["apps", "digital tools", "mindset", "personal experience", "productivity", "tech"]
 cover:
-  image: "https://i.imgur.com/ER8yGsW.png"
+  image: "/images/the-eternal-quest-for-the-perfect-app-a-saga-in-too-many-downloads.png"
 ---
 Some people spend their free time watching movies, playing games, or reading books. I spend mine on an endless, slightly obsessive search for **the perfect app.**
 

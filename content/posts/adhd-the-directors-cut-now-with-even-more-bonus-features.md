@@ -4,7 +4,7 @@ date: 2024-11-29T00:00:00
 description: "Living with ADHD is like an action movie with no pause button. Discover how I navigate the chaos and still get things done."
 tags: ["ADHD", "focus", "mental health", "mindset", "personal experience", "productivity"]
 cover:
-  image: "https://i.imgur.com/dObQDC1.png"
+  image: "/images/adhd-the-directors-cut-now-with-even-more-bonus-features.png"
 ---
 My brain is like an over-engineered action movie. There’s **no pause button, no clear plot**, and just when you think we’re getting somewhere, BAM—**hard cut to a completely unrelated subplot.**
 

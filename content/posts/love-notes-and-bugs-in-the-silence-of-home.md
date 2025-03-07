@@ -5,7 +5,7 @@ date: 2025-02-27T00:00:00
 description: "A love story told in the quiet moments of working from home together."
 tags: ["love", "relationships", "work from home", "family", "mindset", "personal growth"]
 cover:
-  image: "https://i.imgur.com/67XT5U4.jpeg"
+  image: "/images/love-notes-and-bugs-in-the-silence-of-home.png"
 ---
 I work from home, in an old Brooklyn apartment with high ceilings, creaky floors, and a history that whispers through the walls.  
 Our study is actually our daughter’s bedroom during off-hours, repurposed as a workspace where my wife and I sit at separate desks.  

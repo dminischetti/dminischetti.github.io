@@ -4,7 +4,7 @@ date: 2024-12-06T00:00:00
 description: "Minimalism taken to the next level—finding the one perfect item for everything. Discover my quest for ultimate efficiency and portability."
 tags: ["efficiency", "lifestyle", "mindset", "minimalism", "personal philosophy", "productivity"]
 cover:
-  image: "https://i.imgur.com/rUaHFwE.png"
+  image: "/images/the-pursuit-of-the-one-why-im-hunting-for-the-ultimate-everything.png"
 ---
 Most people collect things. I eliminate them.
 
