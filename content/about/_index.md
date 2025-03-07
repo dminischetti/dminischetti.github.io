@@ -1,6 +1,7 @@
 ---
 layout: "single"
 ShowReadingTime: false
+disableShare: true
 ---
 {{< figure src="/images/dominic_photo.png" alt="Dominic Minischetti" width="180" style="display: block; margin: 0 auto;" class="rounded" align="center" >}}
 
