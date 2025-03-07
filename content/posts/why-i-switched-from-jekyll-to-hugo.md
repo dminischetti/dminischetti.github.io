@@ -47,15 +47,15 @@ Unlike Jekyll, where installing it feels like cracking a safe, Hugo is just a si
 
 - **On macOS**:
 
-        bashCopyEditbrew install hugo
+    brew install hugo
 - **On Windows**: Download it from [Hugo’s GitHub releases](https://github.com/gohugoio/hugo/releases) and add it to your PATH.
 - **On Linux**:
 
-        bashCopyEditsudo apt install hugo
+    sudo apt install hugo
 
 To verify the installation:
 
-    bashCopyEdithugo version
+    hugo version
 
 That’s it. No Bundler, no dependencies, no cursing at my screen.
 
@@ -75,11 +75,14 @@ It didn’t.
 
 To move the posts:
 
-    bashCopyEditmkdir -p content/postsmv _posts/* content/posts/
+    mkdir -p content/posts
+    mv _posts/* content/posts/
 
 Then, I had to clean up the front matter:
 
-    bashCopyEditfind content/posts -type f -name "*.md" -exec sed -i 's/layout: post//g' {} \;
+    find content/posts -type f -name "*.
+    md" -exec 
+    sed -i 's/layout: post//g' {} \;
 
 That was when I realized: Markdown is Markdown… **until it isn’t.**
 
@@ -96,11 +99,11 @@ I tested multiple themes before settling on PaperMod:
 
 Installing PaperMod was simple:
 
-    bashCopyEditgit submodule add https://github.com/adityatelange/hugo-PaperMod themes/PaperMod
+    git submodule add https://github.com/adityatelange/hugo-PaperMod themes/PaperMod
 
 Then, I updated `config.toml`:
 
-    tomlCopyEdittheme = "PaperMod"
+    theme = "PaperMod"
 
 For now, it works. But I’ll probably keep tweaking things forever.
 
@@ -110,7 +113,7 @@ For now, it works. But I’ll probably keep tweaking things forever.
 
 I ran:
 
-    bashCopyEdithugo server -D
+    hugo server -D
 
 …and was immediately greeted by broken links, missing images, and general chaos.
 
@@ -130,12 +133,14 @@ Since I was sticking with GitHub Pages, I had to tweak my deployment process.
 
 1. **Run Hugo’s build command**
 
-        bashCopyEdithugo
+        hugo
 
     This generates a `public/` folder with the static files.
 2. **Push to GitHub**
 
-        bashCopyEditcd publicgit initgit add .git commit -m "Deploy Hugo site"git push origin main
+        cd public
+        git initgit add .git commit -m "Deploy Hugo site"
+        git push origin main
 
 At first, I manually deployed, but I eventually set up **GitHub Actions** to automate everything.
 
@@ -145,15 +150,15 @@ At first, I manually deployed, but I eventually set up **GitHub Actions** to aut
 
 ### **Enable Dark Mode**
 
-    tomlCopyEdit[params] defaultTheme = "dark"
+    [params] defaultTheme = "dark"
 
 ### **Enable Search**
 
-    tomlCopyEdit[outputs] home = ["HTML", "RSS", "JSON"]
+    [outputs] home = ["HTML", "RSS", "JSON"]
 
 ### **Customize Sidebar Profile**
 
-    tomlCopyEdit[params.profileMode] enabled = true title = "About Me" subtitle = "Minimalist, Developer, Writer" imageUrl = "images/profile.jpg"
+    [params.profileMode] enabled = true title = "About Me" subtitle = "Minimalist, Developer, Writer" imageUrl = "images/profile.jpg"
 
 Every time I think I’m done tweaking, I find something else to change.
 

@@ -293,15 +293,12 @@ Wait. <strong>What was I doing?</strong></p>
   </div>
 
   
-  <div class="human-authored-badge">
-    <a href="https://notbyai.fyi/" target="_blank" rel="noopener noreferrer">
-      <img src="/images/Written-By-Human-Not-By-AI-Badge-white.png" alt="Written by Human" style="display: block; margin: 20px auto; max-width: 150px;">
-    </a>
-  </div>
 
   <footer class="post-footer">
     
-      <span class="likebtn-wrapper" data-ef_voting="grow" data-dislike_enabled="false" data-icon_dislike_show="false" data-counter_zero_show="true" data-counter_count="true" data-popup_position="bottom" data-lazy_load="true" data-loader_show="true" data-tooltip_enabled="false"></span>
+      <div align="right">
+        <span class="likebtn-wrapper" data-ef_voting="shake" data-dislike_enabled="false" data-icon_dislike_show="false" data-counter_clickable="true" data-counter_zero_show="true" data-counter_count="true" data-share_size="small" data-loader_show="true" data-tooltip_enabled="false" data-site_id="67cb04686fd08b80699cf556"></span>
+      </div>
       <script>(function(d,e,s){if(d.getElementById("likebtn_wjs"))return;a=d.createElement(e);m=d.getElementsByTagName(e)[0];a.async=1;a.id="likebtn_wjs";a.src=s;m.parentNode.insertBefore(a, m)})(document,"script","//w.likebtn.com/js/w/widget.js");</script>
 
     
@@ -313,21 +310,6 @@ Wait. <strong>What was I doing?</strong></p>
       <li><a href="http://localhost:1313/tags/personal-experience/">Personal Experience</a></li>
       <li><a href="http://localhost:1313/tags/productivity/">Productivity</a></li>
     </ul>
-    
-    
-<nav class="paginav">
-  <a class="prev" href="http://localhost:1313/posts/the-pursuit-of-the-one-why-im-hunting-for-the-ultimate-everything/">
-    <span class="title">« Prev</span>
-    <br>
-    <span>The Pursuit of the One: Why I’m Hunting for the Ultimate Everything</span>
-  </a>
-  <a class="next" href="http://localhost:1313/posts/the-browser-wars-my-exhausting-journey-to-finding-the-least-annoying-setup/">
-    <span class="title">Next »</span>
-    <br>
-    <span>The Browser Wars: My Exhausting Journey to Finding the Least Annoying Setup</span>
-  </a>
-</nav>
-
 
     
 
@@ -397,6 +379,30 @@ Wait. <strong>What was I doing?</strong></p>
         </a>
     </li>
 </ul>
+
+
+    
+<nav class="paginav">
+  <a class="prev" href="http://localhost:1313/posts/the-pursuit-of-the-one-why-im-hunting-for-the-ultimate-everything/">
+    <span class="title">« Prev</span>
+    <br>
+    <span>The Pursuit of the One: Why I’m Hunting for the Ultimate Everything</span>
+  </a>
+  <a class="next" href="http://localhost:1313/posts/the-browser-wars-my-exhausting-journey-to-finding-the-least-annoying-setup/">
+    <span class="title">Next »</span>
+    <br>
+    <span>The Browser Wars: My Exhausting Journey to Finding the Least Annoying Setup</span>
+  </a>
+</nav>
+
+
+    
+    <div class="human-authored-badge">
+      <a href="https://notbyai.fyi/" target="_blank" rel="noopener noreferrer">
+        <img src="/images/Written-By-Human-Not-By-AI-Badge-white.png" alt="Written by Human"
+          style="display: block; margin: 20px auto; max-width: 150px;">
+      </a>
+    </div>
 
   </footer>
 </article>
@@ -477,6 +483,53 @@ Wait. <strong>What was I doing?</strong></p>
         }
     })
 
+</script>
+<script>
+    document.querySelectorAll('pre > code').forEach((codeblock) => {
+        const container = codeblock.parentNode.parentNode;
+
+        const copybutton = document.createElement('button');
+        copybutton.classList.add('copy-code');
+        copybutton.innerHTML = 'copy';
+
+        function copyingDone() {
+            copybutton.innerHTML = 'copied!';
+            setTimeout(() => {
+                copybutton.innerHTML = 'copy';
+            }, 2000);
+        }
+
+        copybutton.addEventListener('click', (cb) => {
+            if ('clipboard' in navigator) {
+                navigator.clipboard.writeText(codeblock.textContent);
+                copyingDone();
+                return;
+            }
+
+            const range = document.createRange();
+            range.selectNodeContents(codeblock);
+            const selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+            try {
+                document.execCommand('copy');
+                copyingDone();
+            } catch (e) { };
+            selection.removeRange(range);
+        });
+
+        if (container.classList.contains("highlight")) {
+            container.appendChild(copybutton);
+        } else if (container.parentNode.firstChild == container) {
+            
+        } else if (codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.nodeName == "TABLE") {
+            
+            codeblock.parentNode.parentNode.parentNode.parentNode.parentNode.appendChild(copybutton);
+        } else {
+            
+            codeblock.parentNode.appendChild(copybutton);
+        }
+    });
 </script>
 </body>
 

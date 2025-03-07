@@ -14,8 +14,9 @@ description: "This is the homepage of Dominic Minischetti"
 I’m **Dominic Minischetti**, a backend developer who loves solving problems and improving systems. My work is about making things **run smoothly**, but my life is about **enjoying the process**. I’m also a husband, dad, and curious mind who likes to explore new ideas.
 
 ## 🚀 Explore More
-- **[About Me](/about/)** – More about my journey, experience, and interests.  
-- **[Resume](/resume/)** – My professional background, skills, and projects.  
-- **[Blog](/posts/)** – Where I write about tech, work, and sometimes life itself.  
+- **[About Me](/about/)** – More about my journey, experience, and interests. 
+- **[Resume](/resume/)** – My professional background, skills, and projects. 
+- **[Blog](/posts/)** – Where I write about tech, work, and sometimes life itself. 
+- **[Guestbook](/guestbook/)** - Leave a message and connect!
 
 This site is my space to **share, experiment, and connect**—so feel free to explore and reach out. Thanks for stopping by!
