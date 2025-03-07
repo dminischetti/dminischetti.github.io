@@ -22,23 +22,23 @@ assets:
 menu:
   main:
     - identifier: "home"
-      name: "Home"
+      name: "HOME"
       url: "/"
       weight: 1
     - identifier: "about"
-      name: "About"
+      name: "ME"
       url: "/about/"
       weight: 2
     - identifier: "resume"
-      name: "Resume"
+      name: "RESUME"
       url: "/resume/"
       weight: 3
     - identifier: "blog"
-      name: "Blog"
+      name: "BLOG"
       url: "/posts/"
       weight: 4
     - identifier: "guestbook"
-      name: "Guestbook"
+      name: "GSTBK"
       url: "/guestbook/"
       weight: 5
 
