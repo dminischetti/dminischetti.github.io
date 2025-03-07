@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Workflow on Dominic&#39;s Sandbox</title>
+    <link>http://localhost:1313/tags/workflow/</link>
+    <description>Recent content in Workflow on Dominic&#39;s Sandbox</description>
+    <generator>Hugo -- 0.144.2</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 07 Feb 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/workflow/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Notion: The External Brain That Finally Works for Me</title>
+      <link>http://localhost:1313/posts/notion-the-external-brain-that-finally-works-for-me/</link>
+      <pubDate>Fri, 07 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/notion-the-external-brain-that-finally-works-for-me/</guid>
+      <description>Struggling to keep track of your ideas and tasks? Discover why Notion is the external brain I never knew I needed.</description>
+    </item>
+  </channel>
+</rss>

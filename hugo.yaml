@@ -6,8 +6,10 @@ languageCode: "en-us"
 params:
   env: "production"
   ShowReadingTime: true
-  ShowShareButtons: false
+  ShowShareButtons: true
   ShowPostNavLinks: false
+  ShowBreadCrumbs: false
+  ShowPostNavLinks: true
   useHLJS: true
   themeVariant: "dark"
 
@@ -38,10 +40,6 @@ menu:
       name: "Guestbook"
       url: "/guestbook/"
       weight: 5
-
-services:
-  disqus:
-    shortname: "minischetti-org"
 
 pagination:
   pagerSize: 5

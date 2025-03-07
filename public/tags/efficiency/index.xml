@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Efficiency on Dominic&#39;s Sandbox</title>
+    <link>http://localhost:1313/tags/efficiency/</link>
+    <description>Recent content in Efficiency on Dominic&#39;s Sandbox</description>
+    <generator>Hugo -- 0.144.2</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/efficiency/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Productivity Lie We All Believe (And Why I’m Ditching It)</title>
+      <link>http://localhost:1313/posts/the-productivity-lie-we-all-believe-and-why-im-ditching-it/</link>
+      <pubDate>Fri, 24 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/the-productivity-lie-we-all-believe-and-why-im-ditching-it/</guid>
+      <description>Multitasking is a lie. Discover why single-tasking is the real productivity superpower and how it’s transforming my focus and life.</description>
+    </item>
+    <item>
+      <title>The Productivity Myth That’s Keeping You Stuck (And How to Escape It)</title>
+      <link>http://localhost:1313/posts/the-productivity-myth-thats-keeping-you-stuck-and-how-to-escape-it/</link>
+      <pubDate>Fri, 03 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/the-productivity-myth-thats-keeping-you-stuck-and-how-to-escape-it/</guid>
+      <description>Productivity isn’t about doing more—it’s about doing what matters. Discover how to escape the productivity trap and find real progress.</description>
+    </item>
+    <item>
+      <title>The Pursuit of the One: Why I’m Hunting for the Ultimate Everything</title>
+      <link>http://localhost:1313/posts/the-pursuit-of-the-one-why-im-hunting-for-the-ultimate-everything/</link>
+      <pubDate>Fri, 06 Dec 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/the-pursuit-of-the-one-why-im-hunting-for-the-ultimate-everything/</guid>
+      <description>Minimalism taken to the next level—finding the one perfect item for everything. Discover my quest for ultimate efficiency and portability.</description>
+    </item>
+  </channel>
+</rss>

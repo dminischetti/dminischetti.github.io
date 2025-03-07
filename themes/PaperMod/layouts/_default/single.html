@@ -60,13 +60,6 @@
       {{- end }}
     </ul>
 
-    <!-- Disqus Comments Section -->
-    {{- if eq .Section "posts" }}
-    <div class="disqus-comments">
-      {{ template "_internal/disqus.html" . }}
-    </div>
-    {{- end }}
-
     <!-- Post Navigation Links -->
     {{- if (.Param "ShowPostNavLinks") }}
     {{- partial "post_nav_links.html" . }}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>Focus on Dominic&#39;s Sandbox</title>
+    <link>http://localhost:1313/tags/focus/</link>
+    <description>Recent content in Focus on Dominic&#39;s Sandbox</description>
+    <generator>Hugo -- 0.144.2</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 24 Jan 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/focus/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>The Productivity Lie We All Believe (And Why I’m Ditching It)</title>
+      <link>http://localhost:1313/posts/the-productivity-lie-we-all-believe-and-why-im-ditching-it/</link>
+      <pubDate>Fri, 24 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/the-productivity-lie-we-all-believe-and-why-im-ditching-it/</guid>
+      <description>Multitasking is a lie. Discover why single-tasking is the real productivity superpower and how it’s transforming my focus and life.</description>
+    </item>
+    <item>
+      <title>The Productivity Myth That’s Keeping You Stuck (And How to Escape It)</title>
+      <link>http://localhost:1313/posts/the-productivity-myth-thats-keeping-you-stuck-and-how-to-escape-it/</link>
+      <pubDate>Fri, 03 Jan 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/the-productivity-myth-thats-keeping-you-stuck-and-how-to-escape-it/</guid>
+      <description>Productivity isn’t about doing more—it’s about doing what matters. Discover how to escape the productivity trap and find real progress.</description>
+    </item>
+    <item>
+      <title>ADHD: The Director’s Cut (Now with Even More Bonus Features!)</title>
+      <link>http://localhost:1313/posts/adhd-the-directors-cut-now-with-even-more-bonus-features/</link>
+      <pubDate>Fri, 29 Nov 2024 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/adhd-the-directors-cut-now-with-even-more-bonus-features/</guid>
+      <description>Living with ADHD is like an action movie with no pause button. Discover how I navigate the chaos and still get things done.</description>
+    </item>
+  </channel>
+</rss>
