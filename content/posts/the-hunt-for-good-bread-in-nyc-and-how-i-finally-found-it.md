@@ -1,6 +1,6 @@
 ---
 title: "The Hunt for Good Bread in NYC (And How I Finally Found It)"
-date: 2025-03-08T00:00:00
+date: 2025-03-07T00:00:00
 description: "My personal journey from bakery-hopping frustration to homemade bread perfection, thanks to a surprise Christmas gift and a little Italian know-how."
 tags: ["homemade bread", "Italian baking", "bread machine", "artisan bread", "foodie NYC", "Italian traditions", "semolina bread"]
 cover:
