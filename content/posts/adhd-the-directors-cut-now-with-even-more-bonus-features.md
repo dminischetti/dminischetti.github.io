@@ -1,5 +1,5 @@
 ---
-title: "The Director’s Cut (Now with Even More Bonus Features!)"
+title: "How I Outsmart My Own Brain to Get Things Do"
 date: 2024-11-29T00:00:00
 description: "Life feels like an action movie with no pause button. Discover how I navigate the chaos and still get things done."
 tags: ["focus", "productivity", "mindset", "personal experience", "mental strategies"]
