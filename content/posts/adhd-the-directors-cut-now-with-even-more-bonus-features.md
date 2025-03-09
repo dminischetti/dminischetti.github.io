@@ -6,9 +6,6 @@ tags: ["focus", "productivity", "mindset", "personal experience", "mental strate
 cover:
   image: "/images/adhd-the-directors-cut-now-with-even-more-bonus-features.png"
 ---
-
-## **My Brain: A High-Speed Action Movie with No Pause Button**
-
 My brain is like an over-engineered action movie. There’s **no pause button, no clear plot**, and just when you think we’re getting somewhere, BAM—**hard cut to a completely unrelated subplot.**
 
 One second, I’m working. Deep focus. Absolute flow. The kind of state productivity gurus dream about.  
