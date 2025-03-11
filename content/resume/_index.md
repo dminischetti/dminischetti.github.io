@@ -3,8 +3,6 @@ title: "Dominic Minischetti"
 layout: "single"
 ShowReadingTime: false
 ---
-
-# **Dominic Minischetti**  
 ### **PHP Backend Engineer | Performance Optimization | Scalable Web Systems**  
 
 ---
