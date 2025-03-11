@@ -1,0 +1,36 @@
+<div class="gallery">
+    {{ range site.Data.gallery.images }}
+    <div class="gallery-item">
+      <img src="{{ .src | absURL }}" alt="{{ .title }}" loading="lazy">
+      <div class="caption">{{ .title }}</div>
+    </div>
+    {{ end }}
+  </div>
+  
+  <style>
+    .gallery {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    .gallery-item {
+        background: white;
+        padding: 10px;
+        border-radius: 8px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        max-width: 300px;
+        text-align: center;
+    }
+    .gallery-item img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+        display: block;
+    }
+    .caption {
+        margin-top: 8px;
+        font-size: 14px;
+        color: #333;
+    }
+  </style>  
