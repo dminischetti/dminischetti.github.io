@@ -12,6 +12,8 @@ params:
   useHLJS: true
   themeVariant: "dark"
   ShowCodeCopyButtons: true
+  params:
+  googleAnalytics: "G-PS327TVEZ2"
   assets:
     favicon: "/favicons/favicon.ico"
     favicon16x16: "/favicons/favicon-16x16.png"
