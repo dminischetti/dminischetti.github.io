@@ -1,49 +1,51 @@
 ---
-title: "Why I Switched from Jekyll to Hugo (And Why You Might Want To, Too)"
+title: "Why I Switched from Jekyll to Hugo (And Why You Might Too)"
 date: 2025-03-03T00:00:00
 description: "Migrating from Jekyll to Hugo wasn’t as smooth as I expected, but it was worth it. Here’s what broke, what I learned, and why I’ll never go back."
 tags: ["blogging", "static site generators", "hugo", "jekyll", "web development", "self-hosting"]
 cover:
   image: "/images/why-i-switched-from-jekyll-to-hugo.png"
 ---
-I started blogging last summer because I wanted my own space on the internet. No algorithms deciding what gets seen, no distractions, no data-harvesting social platforms. Just me, my words, and a digital home I actually controlled.
+# **Why I Switched from Jekyll to Hugo (And Why You Might Too)**  
 
-At first, I went with Jekyll because it was GitHub Pages’ default option. It seemed simple enough. But the more I used it, the more I realized Jekyll was like an old car: it gets you where you need to go, but every time you take it out, you have to fix something under the hood.
+I started blogging last summer because I wanted my own space on the internet. No algorithms, no distractions, no social media noise—just a place I actually controlled.  
 
-The problems started piling up:
+At first, I went with Jekyll because it was GitHub Pages’ default. It worked… *until it didn’t.*  
 
-- **Slow build times** – A simple edit? Better grab a coffee.
-- **Ruby dependencies** – Installing Jekyll felt like summoning a demon sometimes.
-- **Outdated themes** – I wanted something modern, not a blog that looked straight out of 2012.
+Jekyll was like an old car—reliable but constantly needing maintenance. The issues kept piling up:  
 
-So, I started looking for alternatives. I tried:
+- **Slow build times** – A simple edit? Better grab a coffee.  
+- **Ruby dependencies** – Installing Jekyll felt like summoning a demon.  
+- **Outdated themes** – I wanted something modern, not a blog that looked straight out of 2012.  
 
-- **Ghost** – Looked great, but way too much for a simple blog.
-- **WordPress** – Too bloated. I didn’t need a content empire.
-- **Eleventy** – Cool, but I didn’t want to spend my time building the whole setup from scratch.
-- **Pelican** – Python-based, and while I respect that, it didn’t click with me.
+I tried alternatives:  
 
-Then, I found **Hugo**. It was fast, simple, and didn’t make me question my life choices.
+- **Ghost** – Overkill for a simple blog.  
+- **WordPress** – Too bloated.  
+- **Eleventy** – Cool, but required too much setup.  
+- **Pelican** – Python-based, but didn’t click with me.  
 
-* * *
+Then I found **Hugo**—fast, simple, and didn’t make me question my life choices.  
 
-## **Why I Host on GitHub Pages**
+---
 
-I kept everything on GitHub Pages because:
+## **Why I Stuck with GitHub Pages**  
 
-- **It’s free** – No hosting costs. Free is always good.
-- **Automatic updates** – Every Git commit deploys the site like magic.
-- **Easy domain linking** – My Namecheap domain worked right away, no headaches.
-- **No maintenance** – No server issues, no software updates. Just write and publish.
-- **Version control built-in** – I can roll back changes if I break something (which happens often).
+I kept everything on **GitHub Pages** because:  
 
-With Hugo and GitHub Pages, I focus on writing instead of fighting with servers.
+- **It’s free** – No hosting costs. Free is always good.  
+- **Automatic updates** – Every Git commit deploys the site instantly.  
+- **Easy domain linking** – My Namecheap domain worked without hassle.  
+- **No maintenance** – No server issues, no software updates. Just write and publish.  
+- **Version control built-in** – I can roll back changes if I break something (*which happens often*).  
 
-* * *
+With Hugo + GitHub Pages, I could focus on writing instead of debugging my blog.  
 
-## **Step 1: Installing Hugo (The First Time a Setup Actually Went Smoothly)**
+---
 
-Unlike Jekyll, where installing it feels like cracking a safe, Hugo is just a single binary.
+## **Step 1: Installing Hugo (For Once, a Smooth Setup)**  
+
+Unlike Jekyll, which requires `bundle install` and a blood sacrifice, Hugo is just a single binary.  
 
 - **On macOS**:
 

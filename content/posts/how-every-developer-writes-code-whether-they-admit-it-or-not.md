@@ -6,113 +6,116 @@ tags: ["coding humor", "developer life", "personal experience", "programming", "
 cover:
   image: "/images/how-every-developer-writes-code-whether-they-admit-it-or-not.png"
 ---
-People think developers write code in a smooth, structured way—like some kind of elegant digital architect.
+People think developers write code in a smooth, structured way—like some kind of **elegant digital architect**.
 
-They imagine us sitting in front of a screen, effortlessly typing out clean, efficient, and well-documented functions, sipping coffee, and feeling in complete control.
+They imagine us sitting in front of a screen, effortlessly typing out **clean, efficient, well-documented functions**, sipping coffee, and feeling **in complete control**.
 
-Yeah. No.
+Yeah. **No.**
 
-Here’s what actually happens.
-
----
-
-## **Step 1: The Grand Vision** (*"I know exactly how to do this."*)
-
-You get the ticket. You think, *Oh, this is simple.*
-
-You crack your knuckles. Open your editor. Start typing with confidence.
-
-You’re in the **zone**. The code is flowing. You are an unstoppable force. A coding genius. You should write a book about this.
+Here’s what **actually** happens.
 
 ---
 
-## **Step 2: The First Run** (*"Why is it broken?"*)
+## **Step 1: The Grand Vision** (*"I know exactly how to do this."*)  
 
-You confidently hit run.
+You get the ticket. You think, *Oh, this is simple.*  
 
-Immediate error.
+You crack your knuckles. Open your editor. Start typing with confidence.  
 
-Okay, no problem. A minor fix. You run it again.
-
-Different error.
-
-You frown. Maybe you mistyped something? You check the function names. Everything looks correct.
-
-Run it again.
-
-Now it’s **really** broken.
-
-This is the moment you realize: *You have no idea what you’re doing.*
+You’re in the **zone**. The code is flowing. You are an unstoppable force. A **coding genius.** You should write a book about this.  
 
 ---
 
-## **Step 3: The Google Phase** (*"Surely someone has solved this before."*)
+## **Step 2: The First Run** (*"Why is it broken?"*)  
 
-You open Google. You type something completely ridiculous, like:
+You confidently hit run.  
 
-> 
-> “PHP array error help please what is happening”
+**Immediate error.**  
 
-You find a Stack Overflow thread from 2012. Someone had a similar problem. The top answer is:
+Okay, no problem. A minor fix. You run it again.  
 
-> 
-> *"Have you tried restarting your computer?"*
+**Different error.**  
 
-You scroll down. Another answer looks promising. You copy and paste the code without reading it.
+You frown. Maybe you mistyped something? You check the function names. Everything **looks** correct.  
 
-It doesn't work.
+Run it again.  
 
----
+Now it’s **really** broken.  
 
-## **Step 4: The Deep Spiral** (*"I have made a terrible mistake."*)
-
-You start adding random print statements.
-
-You go deeper into Stack Overflow. You start reading answers from people who sound like they barely know what they’re doing, but at this point, you’re desperate.
-
-You begin questioning your life choices. *Maybe I should’ve been a chef? People always need food. Nobody ever asks a steak why it’s not iterating through an array properly.*
+This is the moment you realize: *You have no idea what you’re doing.*  
 
 ---
 
-## **Step 5: The Accidental Fix** (*"Wait... what?")*
+## **Step 3: The Google Phase** (*"Surely someone has solved this before."*)  
 
-You change one tiny thing—maybe a missing semicolon, maybe a different variable name—and suddenly…
+You open Google. You type something completely ridiculous, like:  
 
-**It works.**
+> **"PHP array error help please what is happening"**  
 
-You don’t know why. You don’t care. You immediately push the fix before it breaks again.
+You find a **Stack Overflow thread from 2012.** Someone had a similar problem. The top answer is:  
 
----
+> *"Have you tried restarting your computer?"*  
 
-## **Step 6: The "Good Enough" Phase** (*"I’ll refactor this later."*)
+You scroll down. Another answer **looks promising.** You copy and paste the code **without reading it.**  
 
-You know the code is messy. You **know** future-you will hate this.
-
-But you tell yourself: *"I’ll clean it up later."*
-
-You never do.
+It **doesn't work.**  
 
 ---
 
-## **Step 7: The Code Review Horror** (*"What was I thinking?"*)
+## **Step 4: The Deep Spiral** (*"I have made a terrible mistake."*)  
 
-Two weeks later, someone reviews your code.
+You start adding **random print statements.**  
 
-> 
-> "Hey, why is there a `console.log('WHY IS THIS BROKEN')` in here?"
+You go **deeper** into Stack Overflow. You start reading answers from **people who sound like they barely know what they’re doing**—but at this point, you’re desperate.  
 
-> 
-> "Is this function name supposed to be `fixThisPleaseFinal_v3()`?"
+You begin **questioning your life choices.**  
 
-> 
-> "Did you… copy this from Stack Overflow?"
+*Maybe I should’ve been a chef? People always need food. Nobody ever asks a steak why it’s not iterating through an array properly.*  
 
-You avoid eye contact. You pretend you didn’t see the comments. You consider changing your name and moving to another country.
+---
 
-But eventually, you fix it. You push the final version. The PR gets approved.
+## **Step 5: The Accidental Fix** (*"Wait... what?")*  
 
-And then…
+You change **one tiny thing**—maybe a missing semicolon, maybe a different variable name—and suddenly…  
 
-A new ticket comes in.
+**It works.**  
 
-And the cycle begins again.
+You **don’t know why.** You **don’t care.**  
+
+You immediately push the fix **before it breaks again.**  
+
+---
+
+## **Step 6: The "Good Enough" Phase** (*"I’ll refactor this later."*)  
+
+You know the code is **messy.** You **know** future-you will hate this.  
+
+But you tell yourself:  
+
+*"I’ll clean it up later."*  
+
+**You never do.**  
+
+---
+
+## **Step 7: The Code Review Horror** (*"What was I thinking?"*)  
+
+Two weeks later, someone **reviews your code.**  
+
+> **"Hey, why is there a `console.log('WHY IS THIS BROKEN')` in here?"**  
+
+> **"Is this function name supposed to be `fixThisPleaseFinal_v3()`?"**  
+
+> **"Did you… copy this from Stack Overflow?"**  
+
+You **avoid eye contact.** You **pretend you didn’t see the comments.**  
+
+You **consider changing your name and moving to another country.**  
+
+But eventually, you fix it. You push the final version. The PR gets approved.  
+
+And then…  
+
+A new ticket comes in.  
+
+And the **cycle begins again.**  

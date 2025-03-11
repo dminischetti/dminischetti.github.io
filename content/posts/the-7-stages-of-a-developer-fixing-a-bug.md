@@ -6,108 +6,154 @@ tags: ["coding humor", "debugging", "developer life", "programming", "software d
 cover:
   image: "/images/the-7-stages-of-a-developer-fixing-a-bug.png"
 ---
-If you’ve ever worked as a developer, you know that fixing a bug is never just *fixing a bug*. It’s an emotional rollercoaster, a psychological test, and sometimes, a personal attack on your own intelligence.
+If you’ve ever worked as a developer, you know that **fixing a bug is never just fixing a bug**.  
 
-It always follows the same pattern.
+It’s an **emotional rollercoaster**, a **psychological test**, and sometimes, **a personal attack on your own intelligence**.  
 
----
-
-## **1. Confidence** (*"This will be easy."*)
-
-You open the ticket, read the description, and think, *Oh, I see what’s happening. I’ll knock this out in 10 minutes.*
-
-Maybe you even tell your boss or a teammate: *“I’ll have a fix pushed soon.”*
-
-(A fatal mistake.)
-
-I’ve done this too many times. Every. Single. Time. I convince myself that it’s just a quick fix. I even schedule my next coffee break around it. It’s like walking into a trap that you built yourself… but you keep doing it anyway.
+And no matter how many times we do this, it always follows **the same pattern**.  
 
 ---
 
-## **2. Confusion** (*"Wait. What?"*)
+## **1. Confidence** (*"This will be easy."*)  
 
-You try the obvious fix. It doesn’t work.
+You open the ticket, read the description, and think, *Oh, I see what’s happening. I’ll knock this out in 10 minutes.*  
 
-You start looking at the logs. The logs don’t make sense.
+Maybe you even tell your boss or a teammate:  
+*"I’ll have a fix pushed soon."*  
 
-You check the database. The database values *should* be correct.
+(**A fatal mistake.**)  
 
-You stare at the code like it personally betrayed you. 
+Every. Single. Time. I convince myself that it’s just a quick fix.  
+I even schedule my next coffee break around it.  
 
-You read the same line of code for the tenth time, convinced you’re missing something. You start questioning your sanity. *This should work. Why doesn’t it work?*
-
-Welcome to the rabbit hole.
-
----
-
-## **3. Denial** (*"This bug shouldn’t even be possible."*)
-
-You reach the phase where you begin **questioning reality itself.**
-
-- *This code has been running fine for years. Why is it breaking now?*
-- *It works in local but not in production. What dark magic is this?*
-- *Did I introduce this bug? No… no, it can’t be me. Right? RIGHT?*
-
-At this point, I usually start suspecting cosmic interference. Mercury must be in retrograde. Maybe the server just hates me. Or maybe... just maybe... the compiler is broken?
-
-It’s clearly not my fault. It can’t be.
+It’s like **walking into a trap you built yourself**… but you keep doing it anyway.  
 
 ---
 
-## **4. Bargaining** (*"What if I just... add some debug logs?"*)
+## **2. Confusion** (*"Wait. What?"*)  
 
-At this point, you’re lost. You start throwing in `var_dump()`, `console.log()`, and debug prints like a desperate person tossing coins into a wishing well.
+You try the **obvious fix**. It doesn’t work.  
 
-I’ve been known to add so many logs that my console starts to look like the Matrix. I convince myself that more logs will lead to more understanding. It never does.
+You check the logs. **The logs don’t make sense.**  
 
-Nothing makes sense. You add more logs. You commit to a full-on print statement religion.
+You check the database. **The values should be correct.**  
 
-The logs only make things *worse.*
+You stare at the code like it **personally betrayed you.**  
 
----
+You read the same line **ten times**, convinced you’re missing something.  
+You start **questioning your sanity.**  
 
-## **5. Anger** (*"WHO WROTE THIS CODE?!"*)
+*"This should work. Why doesn’t it work?"*  
 
-You check `git blame`. You see a name.
-
-It’s your name.
-
-…Oh.
-
-This is the stage where I briefly contemplate quitting tech and becoming a goat farmer. Maybe life would be simpler if I just spent my days herding goats. Goats don’t have bugs.
+Welcome to the rabbit hole.  
 
 ---
 
-## **6. Acceptance** (*"Fine. I’ll actually debug this properly."*)
+## **3. Denial** (*"This bug shouldn’t even be possible."*)  
 
-You take a deep breath. You go back to the fundamentals. Step through the code. Check every assumption. Slowly, painfully, you start to *understand*.
+At this point, you start **questioning reality itself.**  
 
-You realize you were overcomplicating things. You stop treating it like a personal attack and start treating it like a problem to solve.
+- *This code has been running fine for years. Why is it breaking now?*  
+- *It works locally but not in production. What dark magic is this?*  
+- *Did I introduce this bug? No… no, it can’t be me. Right? RIGHT?*  
 
-And then, after hours (or days)…
+At this point, I start suspecting **cosmic interference.**  
 
-You find it.
+Mercury must be in retrograde.  
+Maybe the server just hates me.  
+Or maybe... just maybe...  
 
-The bug.
+**The compiler is broken.**  
 
-Some missing condition. A logic error. A typo. Something so small yet so catastrophic that you briefly consider quitting tech altogether.
+Clearly, **it’s not my fault.**  
 
-I’ve found bugs caused by a single misplaced semicolon. I’ve lost hours to a variable name that was one character off. And I’ve questioned my entire career choice because of a `<=` that should have been `<`.
+It **can’t** be.  
 
 ---
 
-## **7. Victory (and Regret)** (*"Fixed! …Oh no."*)
+## **4. Bargaining** (*"What if I just... add some debug logs?"*)  
 
-You push the fix. You celebrate. You feel like a god.
+You’re lost. Desperate.  
 
-Then you look at the time and realize: **you spent 6 hours fixing a one-line bug.**
+You start throwing in `var_dump()`, `console.log()`, and debug prints **like a mad scientist experimenting with electricity.**  
 
-You close the ticket. You move on. You tell yourself it won’t happen again.
+I’ve added **so many logs** that my console looked like **the Matrix**.  
 
-But deep down, you know the truth.
+*"Maybe if I just add one more debug statement, everything will make sense."*  
 
-It *always* happens again.
+It **never does.**  
 
-Because this is the life we chose. This is what we signed up for. The endless cycle of **confidence**, **confusion**, **denial**, **bargaining**, **anger**, **acceptance**, and **regret**. 
+Nothing makes sense. You add **more logs.**  
+You **commit to a full-on print statement religion.**  
 
-And honestly? I wouldn’t have it any other way.
+The logs only make things **worse.**  
+
+---
+
+## **5. Anger** (*"WHO WROTE THIS CODE?!"*)  
+
+You check `git blame`. You see a name.  
+
+It’s **your name.**  
+
+…Oh.  
+
+This is the stage where I briefly consider **quitting tech and becoming a goat farmer.**  
+
+Maybe life would be simpler if I just **herded goats.**  
+
+Goats **don’t** have bugs.  
+
+---
+
+## **6. Acceptance** (*"Fine. I’ll actually debug this properly."*)  
+
+You take a deep breath.  
+
+You **go back to the basics**.  
+
+Step through the code. **Check every assumption.**  
+Slowly, painfully, you start to **understand**.  
+
+You realize you were **overcomplicating things**.  
+You stop treating it like a **personal attack** and start treating it like **a problem to solve**.  
+
+And then, after **hours (or days)…**  
+
+You **find it.**  
+
+The bug.  
+
+Some missing condition. A logic error. A typo.  
+Something so **small yet so catastrophic** that you briefly consider quitting tech **again**.  
+
+I’ve lost hours to a **misplaced semicolon**.  
+I’ve questioned my **entire career** over a `<=` that should have been `<`.  
+
+And in this moment? I feel **both victorious and ashamed.**  
+
+---
+
+## **7. Victory (and Regret)** (*"Fixed! …Oh no."*)  
+
+You push the fix. You celebrate.  
+
+You feel like **a god.**  
+
+Then you look at the time and realize:  
+**You just spent 6 hours fixing a one-line bug.**  
+
+You close the ticket. You move on.  
+You tell yourself **it won’t happen again.**  
+
+But deep down, you know the truth.  
+
+It **always** happens again.  
+
+Because this is the life we chose.  
+
+The **endless cycle** of **confidence**, **confusion**, **denial**, **bargaining**, **anger**, **acceptance**, and **regret**.  
+
+And honestly?  
+
+**I wouldn’t have it any other way.**  

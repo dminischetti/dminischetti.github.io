@@ -3,26 +3,55 @@ layout: "single"
 ShowReadingTime: false
 disableShare: true
 ---
+
 {{< figure src="/images/dominic_photo.png" alt="Dominic Minischetti" width="180" style="display: block; margin: 0 auto;" class="rounded" align="center" >}}
 
-👋 **Hi, I’m Dominic**
+# **👋 Hi, I’m Dominic**  
 
-I write code that works. (And when it breaks, it does so with the flair of a *drama queen* 👑.) I also break systems just enough so I can fix them better.
+I write code that works. *(Most of the time.)* And when it breaks, it does so with the **dramatic flair of a telenovela character**. I also break things on purpose—because the best way to fix something is to *first see how it falls apart.*  
 
-By day, I’m a *PHP backend engineer* 💻, navigating the wild tech world from my remote desk in *Brooklyn* 🗽. I make sure things don’t implode—and even my bugs come with a **complimentary fix** (or so I tell my boss 😅).
+By day, I’m a **PHP backend engineer**, making sure systems don’t implode (or at least fail gracefully). I work remotely from **Brooklyn** 🗽, where my bugs come with **complimentary fixes**—or at least a very convincing explanation.  
 
-When night falls, I switch gears to become a dad armed with **“Dad Logic”** (spoiler: it never works 🤷‍♂️) and a husband on a mission to dazzle my wife with my ever-growing collection of tech toys 🎮.
+By night, I trade in debugging for **Dad Logic™** (which, let’s be honest, never works 🤷‍♂️) and a never-ending quest to impress my wife with the **tech gadgets she never asked for**.  
 
-My life isn’t as straightforward as a neat line of code. Born in *New York* 🗽, raised in *Italy* 🇮🇹, and now back in the city that never sleeps, I’ve mastered the art of being a *wandering soul*.
+---
 
-My journey from *Italy* 🇮🇹 to *New York* 🗽 (and back again… and then back once more) isn’t just a change of scenery—it’s about *chasing opportunities*, *embracing uncertainty* 🤞, and perfecting the art of *gesticulating* 🤌 while debating if New York bagels can ever really compete with Italian bread (spoiler: they can’t, but they come pretty darn close 🍞).
+## **🌍 A Life Between Two Worlds**  
 
-I didn’t follow the usual path. After nearly a decade wrestling with a *computer science degree* 🎓 that just didn’t fit my brain, I emerged as a developer who thinks differently—always looking beyond the obvious for the *unexpected* 🔍. This mindset helps me build systems that (mostly) don’t crash and fix bugs that everyone else avoids.
+Born in **New York** 🗽, raised in **Italy** 🇮🇹, and now back in the city that never sleeps, my life has been a series of loops—like a recursive function that just won’t quit.  
 
-When I’m not coding, I’m off navigating life as a husband and dad. I’m married to my *anchor* (and my toughest—and always *right*—critic, sorry not sorry 😅). We’re raising two amazing kids: one whose *curiosity* keeps me asking questions 🤔, and another who makes sure I never get a full night’s sleep 😴.
+I didn’t follow a straight path. After spending **nearly a decade wrestling with a computer science degree** that refused to cooperate, I built my own way forward. Instead of perfect grades, I gained a **problem-solving mindset** that helps me tackle challenges from unexpected angles.  
 
-I call *Brooklyn* 🗽 home sometimes, but I carry *Italy* 🇮🇹 in my heart—especially when it comes to a love for *good food* 🍝 and a refusal to settle for anything less than *perfection* ✨. My life is a blend of *Italian soul* and *New York grit*, proving that sometimes, *breaking the mold* builds something even better.
+And while my Italian roots run deep (especially when it comes to **good food** 🍝), my New York grit means I refuse to settle for anything less than **perfection**.  
 
-If any of this resonates—or if you believe that *digital minimalism* is just a fancy excuse to splurge on gadgets—drop me a line at **dominic.minischetti@gmail.com**.
+---
 
-But fair warning: I’m *stubborn* about Italian bread 🍞.
+## **💻 What I Do**  
+
+I love **building, fixing, and optimizing**—whether it’s backend systems, workflows, or my workspace setup that I will *never stop tweaking.*  
+
+My work revolves around:  
+✔ **PHP Development** – Making things work behind the scenes.  
+✔ **Problem-Solving** – Debugging what others avoid.  
+✔ **System Optimization** – Streamlining, automating, improving.  
+
+But beyond coding, I’m always **learning, exploring, and experimenting**—from **digital minimalism** (a great excuse to buy better gadgets) to **productivity hacks** (that I sometimes ignore).  
+
+---
+
+## **👨‍👩‍👧‍👦 Life Outside Code**  
+
+When I’m not deep in terminal commands, I’m:  
+- **Being a dad** – Raising two amazing kids: one who questions everything 🤔, and one who ensures I never sleep.  
+- **Being a husband** – To my *anchor*, my toughest critic, and the person who is *always right* (just ask her).  
+- **Debating bread superiority** – *New York bagels? Excellent. But let’s not pretend they beat real Italian bread.* 🍞  
+
+---
+
+## **📬 Let’s Connect**  
+
+If any of this resonates—or if you just want to debate **why Italian food will always win**—drop me a line at:  
+
+📧 **dominic.minischetti@gmail.com**  
+
+Fair warning: I *am* stubborn about bread.  
