@@ -12,8 +12,6 @@ params:
   useHLJS: true
   themeVariant: "dark"
   ShowCodeCopyButtons: true
-  params:
-  googleAnalytics: "G-PS327TVEZ2"
   assets:
     favicon: "/favicons/favicon.ico"
     favicon16x16: "/favicons/favicon-16x16.png"
@@ -46,3 +44,7 @@ menu:
 
 pagination:
   pagerSize: 5
+
+services:
+  googleAnalytics:
+    id: "G-PS327TVEZ2"
