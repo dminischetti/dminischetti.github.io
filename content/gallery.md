@@ -1,5 +1,7 @@
 ---
 title: "Photo Gallery"
+layout: "single"
+ShowReadingTime: false
 ---
 
 ![Alt text of image](202501/475448777_18480186820005931_7115446672618565899_n_17900376984106007.jpg)

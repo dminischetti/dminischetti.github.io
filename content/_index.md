@@ -25,6 +25,7 @@ Beyond code, I’m a **husband, dad, and tech enthusiast** who enjoys experiment
 📌 **[About Me](/about/)** – My journey, experience, and interests.  
 💼 **[Resume](/resume/)** – My professional background and projects.  
 📝 **[Blog](/posts/)** – Thoughts on tech, work, and life.  
+📷 **[Gallery](/gallery/)** – A collection of moments captured in photos.  
 💬 **[Guestbook](/guestbook/)** – Drop a message and say hi!  
 
 This site is my space to **build, share, and connect**—so feel free to explore, and thanks for stopping by!  
