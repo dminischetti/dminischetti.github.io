@@ -9,67 +9,13 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](202312/468720670_18468452971005931_2803210242476010042_n_18072617497447787.jpg)
-*Have a quacking Christmas!*
-
----
-
-![Alt text of image](202312/468555271_18468284608005931_8094874181754553063_n_17929478621793394.jpg)
-*“When you get stuck talk to the duck” they say…*
-
----
-
-![Alt text of image](202312/468541660_18468284419005931_7600179688250469145_n_18002853080332783.jpg)
-*Ciao, è la mia settimana.*
-
----
-
 ![Alt text of image](202306/351112916_724534699449739_3221355050622590752_n_17843600867996250.jpg)
 *Toilet Paper Dilemma: The Unexpected Twist 🚽 Who needs toilet paper holders? Say hello to the vertical marvel! A daring twist on the inwards or outwards debate. 😂🙌🧻 Embrace the unconventional, break free from norms! Are you ready to defy gravity in the name of toilet paper revolution? 🚀🙃*
 
 ---
 
-![Alt text of image](202304/330371531_633556201927381_4811899236336956917_n_17944325882624477.jpg)
-*Promemoria: Se trovi il pandoro a 4km da casa, prendi due buste. A meno che non vuoi fare il giocoliere con due palloni di cartone per 3.5km. Ashtag il filo di sopra non serve a un cazzo.*
-
----
-
 ![Alt text of image](202303/338426386_228747349686211_892479777024634891_n_17949521942413980.jpg)
 *Per essere felici non serve la laurea, i soldi, la casa col mutuo, la macchina. Basta avere qualcuno che ti vuole tanto bene e ti sente. Il resto viene da se.*
-
----
-
-![Alt text of image](202303/327355170_749058166926634_8187161059411450187_n_17979725621031276.jpg)
-
----
-
-![Alt text of image](202303/334523170_961993088511485_866067533026064636_n_17955348176307938.jpg)
-*Who seeks shall find.*
-
----
-
-![Alt text of image](202301/327319409_146438241567397_6640346564393596472_n_17975915287966296.jpg)
-*La spontaneità lascia trasparire chi davvero sei. #iregaliquellibbelli*
-
----
-
-![Alt text of image](202301/325538685_673413947856820_8388235417334721913_n_17915226056601543.jpg)
-*Amore è… spostare i giorni della settimana per tuo marito.*
-
----
-
-![Alt text of image](202212/319066213_1297089464421838_1748331800739876997_n_17984259691696341.jpg)
-*Basta un giorno così. A cancellare 120 giorni stronzi e.*
-
----
-
-![Alt text of image](202211/315864208_111766548418906_6317304597312423352_n_17979328087753422.jpg)
-*Everything you want is on the other side.*
-
----
-
-![Alt text of image](202210/312541953_1066702400688220_3041029472859638482_n_17951769659325713.jpg)
-*Happy Family Halloween. Mia, daddy and mummy! 😜*
 
 ---
 
@@ -80,11 +26,6 @@ ShowReadingTime: false
 
 ![Alt text of image](202207/296582817_1134275913820765_254023055292837720_n_18023507980399952.jpg)
 *Ciao sono Dominic, e voglio spid di poste.*
-
----
-
-![Alt text of image](202206/288900330_544358953818415_8931291508242332382_n_18010125781421230.jpg)
-*Anche i momenti belli arrivano*
 
 ---
 
@@ -110,11 +51,6 @@ ShowReadingTime: false
 
 ![Alt text of image](202108/240493721_1951239238386897_7460938537218336772_n_17883118580359585.jpg)
 *Santa Rosalia, Brooklyn, NY*
-
----
-
-![Alt text of image](202108/233175682_205512404866567_1728734246398570885_n_18085644919280202.jpg)
-*…and your trash goes “poof”! #raccoon #procione*
 
 ---
 
@@ -145,16 +81,6 @@ ShowReadingTime: false
 
 ![Alt text of image](202106/206319825_133263782157750_6630502438104810821_n_17871712034448709.jpg)
 *It was nice Meat-ing you! #rustelle #arrosticini #dabruzzonyc*
-
----
-
-![Alt text of image](202106/204876785_528670195233094_7646591473484347892_n_18000928444316831.jpg)
-*Oggi mare.*
-
----
-
-![Alt text of image](202105/194684375_4283311301736519_4858980984138917531_n_18170373919188432.jpg)
-*I believed I could. So I did.*
 
 ---
 
@@ -192,18 +118,8 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](202012/130923716_296954518405557_1915577441795976123_n_18082192258238546.jpg)
-*The usual, please!*
-
----
-
 ![Alt text of image](202012/129197837_390036042312941_5172243519867424161_n_17874765311004460.jpg)
 *Life is uncertain. Eat dessert first. #sweetfinals*
-
----
-
-![Alt text of image](202011/128073168_1065582770549590_7005198983622244023_n_17903143369586318.jpg)
-*Santa Clause is coming to toooown!!!! #christmasdecor*
 
 ---
 
@@ -217,21 +133,6 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](202009/118926725_320457202629649_4311474086996846104_n_17884770730736070.jpg)
-*(1/5) Completed... Let's go.*
-
----
-
-![Alt text of image](202008/117679359_2827376824175911_5309627763162585123_n_17877754258764949.jpg)
-*Vacanze 2020 - Stay Hungry, Stay Jealous.*
-
----
-
-![Alt text of image](202008/117157916_2510030629219421_8464210699406629250_n_17878416790761406.jpg)
-*Alcohol is like Photoshop to real life.*
-
----
-
 ![Alt text of image](202005/101051030_272491510570761_2759366138611607561_n_17874831304698452.jpg)
 *My art class today*
 
@@ -242,37 +143,8 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](202004/94484632_224519592166824_4986774812414462587_n_17870678428707238.jpg)
-*When your daughter makes scarcelle for you.*
-
----
-
-![Alt text of image](202004/94351655_289823938678612_3054216963613909416_n_17879183917591026.jpg)
-*Basket of Fruit is a still life painting by the Italian Baroque master @chiaracutelli, also known as Caravaggio.*
-
----
-
-![Alt text of image](202004/92844866_595765144342655_8350522351711497498_n_17869141933701671.jpg)
-*La "puppa" e il cavallo.*
-
----
-
-![Alt text of image](202004/91265992_464546710912590_4918098847749198038_n_17897121130463904.jpg)
-*Baciami, sole. Baciami tutto.*
-
----
-
 ![Alt text of image](202003/91218416_1163376560677068_5621023291856712168_n_17877270979591784.jpg)
 *Dite che mi sto ingrassando a stare fermo?*
-
----
-
-![Alt text of image](202003/90705970_2858328434280254_6911141035988409992_n_17894604139476453.jpg)
-*
----
-
-![Alt text of image](202002/83891505_200714307991611_4171816343948326620_n_18126108619040752.jpg)
-*Che bello andare...*
 
 ---
 
@@ -291,11 +163,6 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201912/75272153_194923401548835_1584133238355687306_n_18075980944165517.jpg)
-*Cose belle che ai trovano all'Ikea.*
-
----
-
 ![Alt text of image](201912/75312597_151852956107328_8824581796109631347_n_17850030562757275.jpg)
 *Live Love Pasta*
 
@@ -310,11 +177,6 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201910/70807344_168422124308950_404670471062698760_n_17847805711673936.jpg)
-*Responsabile Stazione Metropolitana. Auguri!*
-
----
-
 ![Alt text of image](201909/68695115_558323928045121_7151569658030951913_n_17868444028465527.jpg)
 *Eat Pasta. Run Fasta.*
 
@@ -322,11 +184,6 @@ ShowReadingTime: false
 
 ![Alt text of image](201909/67983938_376135149984318_5644019933012131320_n_17927617897309886.jpg)
 *Essential aspects of ... Negroni?*
-
----
-
-![Alt text of image](201909/67800957_390876884943587_7986528511568894970_n_17903983147362871.jpg)
-*Spaghetti?*
 
 ---
 
@@ -355,11 +212,6 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201906/65822972_1262030320638747_2853294987983420430_n_18045748504183687.jpg)
-*Ma dai, è un bellissimo costume!*
-
----
-
 ![Alt text of image](201906/63430826_395125477768541_1356483952598988303_n_18011389186210905.jpg)
 *Chitarrine al ragù di cervo.*
 
@@ -373,10 +225,6 @@ ShowReadingTime: false
 ![Alt text of image](201906/65162453_179014669771938_5222534529129190406_n_18076543201039916.jpg)
 *Sono in una cartolina.*
 
----
-
-![Alt text of image](201906/62035724_322308392028588_8092977089874018550_n_17903929618324147.jpg)
-*Gin lemon. (Non Tom Collins)*
 
 ---
 
@@ -404,33 +252,13 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201906/62109195_661691777634851_3591719992696584482_n_17877359962372697.jpg)
-*Ho dimenticato lo zaino a casa.*
-
----
-
-![Alt text of image](201906/61841775_2264618333791020_7369358122204258733_n_17851073068443898.jpg)
-*Arribaaaa*
-
----
-
 ![Alt text of image](201905/61250951_295034508045571_3911025262146990982_n_18047346667121199.jpg)
 *Happy Ending?*
 
 ---
 
-![Alt text of image](201905/59343126_136544004158894_1892202763676602529_n_17845353019452140.jpg)
-*Supportami tutto. #iloveyou #esami #esplodo*
-
----
-
 ![Alt text of image](201905/60366938_169367080733334_2582713959099841495_n_17882800894349605.jpg)
 *5 vasche di Inglese, 3 di Database, 7 di Matematica... #tempodiesami #mobbasta #ciossonno*
-
----
-
-![Alt text of image](201905/60236182_300250354232916_177170255889197570_n_17968666141249561.jpg)
-*A che serve caffè e muffin quando per colazione puoi avere due peperoni ripieni?*
 
 ---
 
@@ -449,28 +277,8 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201904/57572891_327814004458179_4463990862012007712_n_17856230488382710.jpg)
-*Pamela's Big Fig. Ah beh.*
-
----
-
-![Alt text of image](201904/56442085_2298825727104401_2336087982100862227_n_17884419217317682.jpg)
-*Heliophilia*
-
----
-
 ![Alt text of image](201904/55872694_421070435387210_8491699345086258293_n_17985584563220189.jpg)
 *Non si può comprare la felicità. Ma un caffè con un cornetto si. È ci va molto vicino.*
-
----
-
-![Alt text of image](201904/54731762_180318996284540_3985187048033530869_n_18051392560058083.jpg)
-*Bad mood hostage.*
-
----
-
-![Alt text of image](201903/54277410_306703113342020_4166889717230427052_n_17859148129365813.jpg)
-*Appiness*
 
 ---
 
@@ -481,11 +289,6 @@ ShowReadingTime: false
 
 ![Alt text of image](201903/54512475_387428905425023_5572601582386162858_n_17856774208365176.jpg)
 *Some people feel the rain. I get wet.*
-
----
-
-![Alt text of image](201903/52360289_300988263908016_1173161334968361198_n_18046294306001196.jpg)
-*Soffro di depressione alta.*
 
 ---
 
@@ -529,11 +332,6 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201902/51119596_598021740659761_1486258883655350006_n_17859068422333860.jpg)
-*When you can have perfectly healthy food. But two minutes are two minutes.*
-
----
-
 ![Alt text of image](201902/51467658_119189822487849_4572886484657589921_n_17914555150280863.jpg)
 *Silenzio. Parla Agnesi.*
 
@@ -549,63 +347,13 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201902/50237884_546670209170459_8976850722435119692_n_18000729760176307.jpg)
-*La Domenica Mattina : Caffè, Cornetti e Algebra*
-
----
-
-![Alt text of image](201901/50674054_374826939973833_7172035690690414372_n_17844921673355636.jpg)
-*Beautiful book to read on your birthday.*
-
----
-
-![Alt text of image](201810/42068916_1070038309825985_2047522290670960746_n_17985192829055344.jpg)
-*Il ritorno*
-
----
-
-![Alt text of image](201809/41843013_1798786526907888_5486647109242406506_n_17960021545081926.jpg)
-*Ti abbiamo mandato 3 multe. Con amore, TVB, il Dipartimento Automobilistico.*
-
----
-
-![Alt text of image](201809/41760201_284270595515375_544262105114038601_n_17975454796068064.jpg)
-*Studentesso Trasgressivo*
-
----
-
 ![Alt text of image](201809/40104010_1917182524994340_141369398303653888_n_17902774708231549.jpg)
 *Dimostrare la propria italianità al mare a New York.*
 
 ---
 
-![Alt text of image](201808/37709163_222993081708409_1438170104008278016_n_17893032706235112.jpg)
-*Scie chimiche livello esperto.*
-
----
-
-![Alt text of image](201807/37335444_1863854790590824_2606026631537491968_n_17890381057238594.jpg)
-*Maledizione, ho i funghi ai piedi!*
-
----
-
 ![Alt text of image](201807/36995048_151730155643895_3216928717997604864_n_17933754016156276.jpg)
 *Ehhhhhhh???*
-
----
-
-![Alt text of image](201807/36988930_224309501741609_2154142681259835392_n_17963841640034441.jpg)
-*Oggi voglio mangiare "italiano*
-
----
-
-![Alt text of image](201807/36665006_501723316943391_7644843960686346240_n_17959775251052586.jpg)
-*Si ricomincia.*
-
----
-
-![Alt text of image](201807/35928247_214126052642278_1355784707056336896_n_17959331116025612.jpg)
-*Tipico saluto barese*
 
 ---
 
@@ -624,43 +372,8 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201806/35001278_272279766678005_1944271646961434624_n_17934990391083040.jpg)
-*Expecto birra!!!*
-
----
-
-![Alt text of image](201806/34435060_468234020303297_3736797207387439104_n_17954657350037222.jpg)
-*ancora messaggi d'amore. #loveisinthewood*
-
----
-
-![Alt text of image](201806/35288691_344315149431157_8720139961552076800_n_17956874566021776.jpg)
-*In Italia si mangia.*
-
----
-
-![Alt text of image](201806/34756608_181529209201428_8955292736722829312_n_17929769548137783.jpg)
-*Ammangiare. Capitolo prezzi. #menu #prices #foodtime*
-
----
-
-![Alt text of image](201806/34891673_206205193352020_7807522336717930496_n_17926740325135659.jpg)
-*Sono bella, fescion, fenzi, faccio trend e sono un po' influenzer. #nudesgirls #pornohub #tagacaso*
-
----
-
-![Alt text of image](201806/33443292_209990936481632_3135889037378715648_n_17932074781090577.jpg)
-*Reasonable price for half gallon of water #volantinofferte*
-
----
-
 ![Alt text of image](201806/34823342_2039456166293483_3662335419506229248_n_17935565515120633.jpg)
 *Timed garbage bags container.*
-
----
-
-![Alt text of image](201806/34650424_1499586286816758_8912083162406846464_n_17844658861272083.jpg)
-*Local Xenophobia*
 
 ---
 
@@ -674,26 +387,11 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201806/34856555_1948347725478196_6229741460304953344_n_17938046362128178.jpg)
-*Messaggi d'amore*
-
----
-
 ![Alt text of image](201806/34789182_363923340796745_1204376741821284352_n_17924424313188227.jpg)
 
 ---
 
-![Alt text of image](201806/33116752_138719836996298_1028537297504567296_n_17926303585185886.jpg)
-
----
-
-![Alt text of image](201806/33349411_312392859533263_5981451453917560832_n_17951306968061953.jpg)
-*Soldi*
-
----
-
 ![Alt text of image](201805/32136051_1593881927401100_2993367634356994048_n_17919182563150021.jpg)
-*Bella New York.*
 
 ---
 
@@ -706,43 +404,8 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201804/30592378_2050372991894733_8316614237766025216_n_17939586634020408.jpg)
-*Miei cari amici Italiani, vi prego, smettetela di pubblicare foto in canotta o al mare... Qui fa freddo.*
-
----
-
 ![Alt text of image](201804/30591109_256595661550352_5074938227446513664_n_17866146244242664.jpg)
 *Gli alberi parlano.*
-
----
-
-![Alt text of image](201804/30592728_896975410482406_5666747663857483776_n_17910725698158783.jpg)
-*Okay, non mancherò.*
-
----
-
-![Alt text of image](201804/29738788_990376667812468_1868893905764745216_n_17911380976185411.jpg)
-*Sarà buona la bistecca qua!*
-
----
-
-![Alt text of image](201804/30084460_184814228807846_5888715005393633280_n_17929646005076125.jpg)
-*Break, broke, broken.*
-
----
-
-![Alt text of image](201804/29415367_321196691738606_4620350487881842688_n_17934817222041620.jpg)
-*Voi ridete e scherzate ma Gigi D'Alessio quasi quasi aveva ragione.*
-
----
-
-![Alt text of image](201803/28429098_2027962807461255_4027798739388203008_n_17917449901099706.jpg)
-*My personal Zoloft. CARBONARAAAAAAAA!!!!!*
-
----
-
-![Alt text of image](201803/28432849_394626294334175_1949560276416200704_n_17901989026176301.jpg)
-*È ufficiale: posso fare il pizzaiolo.*
 
 ---
 
@@ -756,36 +419,6 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201801/26871256_731002147096728_2421725530417004544_n_17848557100231440.jpg)
-*Thank you.*
-
----
-
-![Alt text of image](201801/26868704_149036659132336_585627324909617152_n_17879914984199317.jpg)
-*Bivva!!!*
-
----
-
-![Alt text of image](201801/26288953_1962184687129763_3669139244703547392_n_17896929211139797.jpg)
-*L’italiano: un opinione.*
-
----
-
-![Alt text of image](201801/26266905_356442778098727_4062499944836104192_n_17846570710226893.jpg)
-*Lasagna fritta... And I feel like home. :/*
-
----
-
-![Alt text of image](201801/26073276_2012961285614008_4732253326748418048_n_17894268268142450.jpg)
-*#lyrics*
-
----
-
-![Alt text of image](201801/25037171_326925504457407_2502069331844661248_n_17917503082045452.jpg)
-*Campofilò, provincia di New York.*
-
----
-
 ![Alt text of image](201801/26154826_1531766830194073_1947435839562711040_n_17917704763015279.jpg)
 *Questa vacanza a New York sta durando un po’ troppo.*
 
@@ -796,42 +429,7 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201712/24838861_360118261126361_6877338622060658688_n_17899002985112057.jpg)
-*Però sono un uomo felice e fortunato.*
-
----
-
-![Alt text of image](201712/24175249_372420306517646_6269862489278644224_n_17852961259211998.jpg)
-*Fuori la neve, il divano, una coperta, il camino acceso, una cioccolata calda... cazzo devo andare a lavoro! Ciao!*
-
----
-
-![Alt text of image](201712/24327229_1617182048364471_6846866997326643200_n_17895130312084242.jpg)
-*I may not be always with you, but I will always be there for you.*
-
----
-
-![Alt text of image](201711/24126789_1956206661297668_8529288489844342784_n_17910378997030199.jpg)
-*Distanze.*
-
----
-
 ![Alt text of image](201711/23668187_2045897625679502_4172842598177701888_n_17885381404142608.jpg)
-*
----
-
-![Alt text of image](201711/23594665_459624751105189_227194896555966464_n_17883855652185644.jpg)
-*Acquisti nostalgici. #efacciamocelounregaloognitanto*
-
----
-
-![Alt text of image](201711/23416959_167065033879236_5883062673813274624_n_17848187227211851.jpg)
-*Vabeh. Questa poi...*
-
----
-
-![Alt text of image](201711/23347635_2038579423079120_3567506020534059008_n_17901376759070776.jpg)
-*Vieni a New York... C'è Fika!!!*
 
 ---
 
@@ -845,11 +443,6 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201710/22802182_129061864461120_7954122163374522368_n_17892569641118072.jpg)
-*Ci son persone che sentono la pioggia, e poi ci sono io, io semplicemente mi bagno.*
-
----
-
 ![Alt text of image](201710/22793834_434006817001094_862179835307360256_n_17904748891045061.jpg)
 *Se non è zuppa è pan bagnato.*
 
@@ -860,58 +453,8 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201710/22582075_281823345663052_3660082743519215616_n_17903292589028273.jpg)
-*La consueta foto pre natalizia*
-
----
-
-![Alt text of image](201710/22580922_2061998400700148_3951255172268687360_n_17875245298173730.jpg)
-*Scarpe vecchie nuove :)
-*
----
-
 ![Alt text of image](201710/22582256_628160727533800_8838404883934609408_n_17846659993204661.jpg)
 *Schrsh... Schrsh... Schrsh... ❤️*
-
----
-
-![Alt text of image](201710/22427027_347169699044417_4723485735129186304_n_17904009832022849.jpg)
-*Come smettere di desiderare i #tortellini in 5 secondi.*
-
----
-
-![Alt text of image](201709/21879657_833301026845193_139208750580891648_n_17876818366135929.jpg)
-*#relaxationmode #dayoff*
-
----
-
-![Alt text of image](201709/21879444_272578079922736_5690369266725945344_n_17900291878030004.jpg)
-*#negoziassurdi*
-
----
-
-![Alt text of image](201709/21480017_1775758662452395_1391337557274394624_n_17892730372064804.jpg)
-*#iovivosenzapopcorn #obiettivoquasiraggiunto #chilavrebbedettomai #bra*
-
----
-
-![Alt text of image](201709/21435990_1661898830510004_4111181311782158336_n_17889887344078730.jpg)
-*È nu juorno buono?*
-
----
-
-![Alt text of image](201709/21480096_140579966550111_6399622294628466688_n_17886071107104851.jpg)
-*Crescete crescete miei cari cornetti. A domattina. Slurp!!!*
-
----
-
-![Alt text of image](201709/21373382_123739064949042_8393236939657969664_n_17888933386072308.jpg)
-*Ricominciamo?*
-
----
-
-![Alt text of image](201709/21433492_1732268537067387_6764140189129375744_n_17870265805175194.jpg)
-*If people were meant to pop out of bed, we'd all sleep in toasters.*
 
 ---
 
@@ -925,43 +468,13 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201708/21108022_476994935993221_3149527310890172416_n_17881670209124832.jpg)
-*C'è chi perde le chiavi, il portafogli, gli occhiali... e c'è anche chi perde l'uccello. #birds #posters #lostpet*
-
----
-
-![Alt text of image](201708/20905634_871375229691630_799477272745607168_n_17895908743050560.jpg)
-*Java programming in NYC.#eclipse #eclipse2017 #banana #sky*
-
----
-
 ![Alt text of image](201708/20902212_1114925701970836_8674888379394949120_n_17879198314093730.jpg)
 *...e non mi stressate l'anima. #nostress #happiness*
 
 ---
 
-![Alt text of image](201708/20836966_109065486455560_9192653120788758528_n_17893814632027923.jpg)
-*Mi serve un consiglio su quale serie TV vedere ora. #vlc #tvseries*
-
----
-
 ![Alt text of image](201708/20688586_515983892080163_1711256902215663616_n_17852519686198598.jpg)
 *Slurp!*
-
----
-
-![Alt text of image](201707/20184788_105519253450882_8210725890712141824_n_17864898376183394.jpg)
-*All by herself. <3*
-
----
-
-![Alt text of image](201707/19986204_1198624883616006_703167484445851648_n_17862841711169579.jpg)
-*Happiness.*
-
----
-
-![Alt text of image](201707/19984332_323534874772112_8156083873663418368_n_17862501724173852.jpg)
-*Ci siamo quasi.*
 
 ---
 
@@ -972,11 +485,6 @@ ShowReadingTime: false
 
 ![Alt text of image](201707/19933115_120491111898290_7747113943822237696_n_17862576865164143.jpg)
 *Girls just wanna have sun*
-
----
-
-![Alt text of image](201707/19624438_1154361108001462_702763864894210048_n_17872583548087019.jpg)
-*4th of July: Thank you Will Smith for saving us from the aliens.*
 
 ---
 
@@ -994,11 +502,6 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201706/19534457_1735786139782595_4422243738374373376_n_17885429740060518.jpg)
-*Corso Improvvisato su Come Rompere il Cazzo alla Gente facendosi I Cazzi Loro. Maestro.*
-
----
-
 ![Alt text of image](201706/19436392_108301716464793_8880646948147691520_n_17871280303085798.jpg)
 *Farsi del male per colpa del sonno.*
 
@@ -1006,11 +509,6 @@ ShowReadingTime: false
 
 ![Alt text of image](201706/18812707_133688190520346_7339716444457795584_n_17869628998121379.jpg)
 *Certi amori non finiscono  Fanno dei giri immensi  E poi ritornano... ...la carta igienica no. Quella non ritorna.*
-
----
-
-![Alt text of image](201705/18808898_1415091258571168_320455232305758208_n_17870511508097644.jpg)
-*People killin', people dyin'... Where is the looove???*
 
 ---
 
@@ -1034,11 +532,6 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201704/18095159_1310501499028246_9070256362558062592_n_17878419805031727.jpg)
-*New York, provincia di Macerata.*
-
----
-
 ![Alt text of image](201704/18096022_1528333827185043_6423986939724038144_n_17864866024090601.jpg)
 *New toys.*
 
@@ -1046,16 +539,6 @@ ShowReadingTime: false
 
 ![Alt text of image](201704/17817791_445121282489712_8399297701153341440_n_17855864569141382.jpg)
 *Italian bartender in action. #bartender #italians #pastapizzaprimavera*
-
----
-
-![Alt text of image](201703/17587414_270711443383080_3578885785492914176_n_17853092401159377.jpg)
-*Partire è un po'.... Rinascere. #departure #happiness  #reborn #letsgo*
-
----
-
-![Alt text of image](201703/17587521_445206095825364_3595076377679757312_n_17867294392112063.jpg)
-*Toroloco #italiangesture #turututtu*
 
 ---
 
@@ -1078,57 +561,12 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201703/17438751_1709995815965167_1325529617393516544_n_17855226913132151.jpg)
-*Cannone^2*
-
----
-
-![Alt text of image](201703/17596594_278030965969535_7378967995957116928_n_17866088350118694.jpg)
-*Catalto. Cataltro. Non Cataldo. #highness*
-
----
-
-![Alt text of image](201703/17596532_1900356933573984_5469299882592305152_n_17853045061154207.jpg)
-*Edward manidibbirra*
-
----
-
-![Alt text of image](201703/17586730_194910441010514_7068101291024580608_n_17865146434106744.jpg)
-*Birraaaahhhh*
-
----
-
-![Alt text of image](201703/17438073_1160786607381217_3196672264955232256_n_17867353906078248.jpg)
-
----
-
 ![Alt text of image](201703/17586871_1969835023239789_2097595339409195008_n_17865483535106836.jpg)
 *Il cane più posato del mondo.*
 
 ---
 
-![Alt text of image](201703/17438439_201391423682284_7496597993324281856_n_17865046633113067.jpg)
-*Valentine's day*
-
----
-
 ![Alt text of image](201703/17596139_431207320551620_671765505371013120_n_17876459122031163.jpg)
-
----
-
-![Alt text of image](201703/17662538_173061383211976_2758825951428083712_n_17865280681117041.jpg)
-
----
-
-![Alt text of image](201703/17587203_1807293152865271_1193035575733518336_n_17864977723110529.jpg)
-
----
-
-![Alt text of image](201703/17494102_1941513466067669_512691775131877376_n_17863337137093389.jpg)
-
----
-
-![Alt text of image](201703/17596380_272325379885456_2781539937512587264_n_17865105859111880.jpg)
 
 ---
 
@@ -1140,23 +578,7 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201703/17332614_243699306101324_8871912127128928256_n_17852546965164444.jpg)
-
----
-
-![Alt text of image](201703/17595867_882468398559202_1073675874777169920_n_17875623118031318.jpg)
-
----
-
 ![Alt text of image](201703/17596535_1413685978696491_6444452089522290688_n_17868057379076717.jpg)
-
----
-
-![Alt text of image](201703/17596026_440484136303116_8569425749499445248_n_17853059032154113.jpg)
-
----
-
-![Alt text of image](201703/17493795_196334400869069_2254703288886755328_n_17852241793181555.jpg)
 
 ---
 
@@ -1198,33 +620,13 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201703/17439292_1487607857924957_8692352111557476352_n_17875629625004139.jpg)
-*Addio Superman*
-
----
-
 ![Alt text of image](201703/17662421_1680958192208775_5229175184560226304_n_17877673507047733.jpg)
 *Dichiarazione d'amore*
 
 ---
 
-![Alt text of image](201703/17595883_422961281382503_8652549502869176320_n_17853631045151795.jpg)
-*Orsacchiotto giganteeeeee*
-
----
-
 ![Alt text of image](201703/17587281_825640380917986_8832088902597607424_n_17865609973102263.jpg)
 *Linea 38, Pescara*
-
----
-
-![Alt text of image](201703/17596707_1420716337980030_7779678501824626688_n_17867257561079710.jpg)
-*Me and my best friends*
-
----
-
-![Alt text of image](201703/17662492_611934069012145_1876715736995463168_n_17852356030180353.jpg)
-*Waiting for better times.*
 
 ---
 
@@ -1236,22 +638,7 @@ ShowReadingTime: false
 
 ---
 
-![Alt text of image](201703/17596115_1669046080065582_4282473244725870592_n_17864999707117656.jpg)
-*Parco due giugno*
-
----
-
 ![Alt text of image](201703/17596500_144553629405389_6230666012144959488_n_17865068902104677.jpg)
-
----
-
-![Alt text of image](201703/17587139_1901922900050025_5040058432963477504_n_17865186568128620.jpg)
-*Paneppomodo #felicita*
-
----
-
-![Alt text of image](201703/17438877_735608749942207_5996328095349473280_n_17853629941144674.jpg)
-*Al mare #lifeisabeach*
 
 ---
 
