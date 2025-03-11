@@ -56,7 +56,21 @@
         }
 
     </style>
-</noscript><meta property="og:url" content="http://localhost:1313/posts/the-7-stages-of-a-developer-fixing-a-bug/">
+</noscript>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-PS327TVEZ2"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-PS327TVEZ2');
+        }
+      </script><meta property="og:url" content="http://localhost:1313/posts/the-7-stages-of-a-developer-fixing-a-bug/">
   <meta property="og:site_name" content="Dominic&#39;s Sandbox">
   <meta property="og:title" content="The 7 Stages of a Developer Fixing a Bug">
   <meta property="og:description" content="Fixing a bug isn’t just about code—it’s an emotional rollercoaster. Discover the 7 stages every developer goes through while debugging.">
@@ -108,8 +122,8 @@
   "keywords": [
     "coding humor", "debugging", "developer life", "programming", "software development", "tech"
   ],
-  "articleBody": "If you’ve ever worked as a developer, you know that fixing a bug is never just fixing a bug. It’s an emotional rollercoaster, a psychological test, and sometimes, a personal attack on your own intelligence.\nIt always follows the same pattern.\n1. Confidence (“This will be easy.”) You open the ticket, read the description, and think, Oh, I see what’s happening. I’ll knock this out in 10 minutes.\nMaybe you even tell your boss or a teammate: “I’ll have a fix pushed soon.”\n(A fatal mistake.)\nI’ve done this too many times. Every. Single. Time. I convince myself that it’s just a quick fix. I even schedule my next coffee break around it. It’s like walking into a trap that you built yourself… but you keep doing it anyway.\n2. Confusion (“Wait. What?”) You try the obvious fix. It doesn’t work.\nYou start looking at the logs. The logs don’t make sense.\nYou check the database. The database values should be correct.\nYou stare at the code like it personally betrayed you.\nYou read the same line of code for the tenth time, convinced you’re missing something. You start questioning your sanity. This should work. Why doesn’t it work?\nWelcome to the rabbit hole.\n3. Denial (“This bug shouldn’t even be possible.”) You reach the phase where you begin questioning reality itself.\nThis code has been running fine for years. Why is it breaking now? It works in local but not in production. What dark magic is this? Did I introduce this bug? No… no, it can’t be me. Right? RIGHT? At this point, I usually start suspecting cosmic interference. Mercury must be in retrograde. Maybe the server just hates me. Or maybe… just maybe… the compiler is broken?\nIt’s clearly not my fault. It can’t be.\n4. Bargaining (“What if I just… add some debug logs?”) At this point, you’re lost. You start throwing in var_dump(), console.log(), and debug prints like a desperate person tossing coins into a wishing well.\nI’ve been known to add so many logs that my console starts to look like the Matrix. I convince myself that more logs will lead to more understanding. It never does.\nNothing makes sense. You add more logs. You commit to a full-on print statement religion.\nThe logs only make things worse.\n5. Anger (“WHO WROTE THIS CODE?!”) You check git blame. You see a name.\nIt’s your name.\n…Oh.\nThis is the stage where I briefly contemplate quitting tech and becoming a goat farmer. Maybe life would be simpler if I just spent my days herding goats. Goats don’t have bugs.\n6. Acceptance (“Fine. I’ll actually debug this properly.”) You take a deep breath. You go back to the fundamentals. Step through the code. Check every assumption. Slowly, painfully, you start to understand.\nYou realize you were overcomplicating things. You stop treating it like a personal attack and start treating it like a problem to solve.\nAnd then, after hours (or days)…\nYou find it.\nThe bug.\nSome missing condition. A logic error. A typo. Something so small yet so catastrophic that you briefly consider quitting tech altogether.\nI’ve found bugs caused by a single misplaced semicolon. I’ve lost hours to a variable name that was one character off. And I’ve questioned my entire career choice because of a \u003c= that should have been \u003c.\n7. Victory (and Regret) (“Fixed! …Oh no.”) You push the fix. You celebrate. You feel like a god.\nThen you look at the time and realize: you spent 6 hours fixing a one-line bug.\nYou close the ticket. You move on. You tell yourself it won’t happen again.\nBut deep down, you know the truth.\nIt always happens again.\nBecause this is the life we chose. This is what we signed up for. The endless cycle of confidence, confusion, denial, bargaining, anger, acceptance, and regret.\nAnd honestly? I wouldn’t have it any other way.\n",
-  "wordCount" : "651",
+  "articleBody": "If you’ve ever worked as a developer, you know that fixing a bug is never just fixing a bug.\nIt’s an emotional rollercoaster, a psychological test, and sometimes, a personal attack on your own intelligence.\nAnd no matter how many times we do this, it always follows the same pattern.\n1. Confidence (“This will be easy.”) You open the ticket, read the description, and think, Oh, I see what’s happening. I’ll knock this out in 10 minutes.\nMaybe you even tell your boss or a teammate:\n“I’ll have a fix pushed soon.”\n(A fatal mistake.)\nEvery. Single. Time. I convince myself that it’s just a quick fix.\nI even schedule my next coffee break around it.\nIt’s like walking into a trap you built yourself… but you keep doing it anyway.\n2. Confusion (“Wait. What?”) You try the obvious fix. It doesn’t work.\nYou check the logs. The logs don’t make sense.\nYou check the database. The values should be correct.\nYou stare at the code like it personally betrayed you.\nYou read the same line ten times, convinced you’re missing something.\nYou start questioning your sanity.\n“This should work. Why doesn’t it work?”\nWelcome to the rabbit hole.\n3. Denial (“This bug shouldn’t even be possible.”) At this point, you start questioning reality itself.\nThis code has been running fine for years. Why is it breaking now? It works locally but not in production. What dark magic is this? Did I introduce this bug? No… no, it can’t be me. Right? RIGHT? At this point, I start suspecting cosmic interference.\nMercury must be in retrograde.\nMaybe the server just hates me.\nOr maybe… just maybe…\nThe compiler is broken.\nClearly, it’s not my fault.\nIt can’t be.\n4. Bargaining (“What if I just… add some debug logs?”) You’re lost. Desperate.\nYou start throwing in var_dump(), console.log(), and debug prints like a mad scientist experimenting with electricity.\nI’ve added so many logs that my console looked like the Matrix.\n“Maybe if I just add one more debug statement, everything will make sense.”\nIt never does.\nNothing makes sense. You add more logs.\nYou commit to a full-on print statement religion.\nThe logs only make things worse.\n5. Anger (“WHO WROTE THIS CODE?!”) You check git blame. You see a name.\nIt’s your name.\n…Oh.\nThis is the stage where I briefly consider quitting tech and becoming a goat farmer.\nMaybe life would be simpler if I just herded goats.\nGoats don’t have bugs.\n6. Acceptance (“Fine. I’ll actually debug this properly.”) You take a deep breath.\nYou go back to the basics.\nStep through the code. Check every assumption.\nSlowly, painfully, you start to understand.\nYou realize you were overcomplicating things.\nYou stop treating it like a personal attack and start treating it like a problem to solve.\nAnd then, after hours (or days)…\nYou find it.\nThe bug.\nSome missing condition. A logic error. A typo.\nSomething so small yet so catastrophic that you briefly consider quitting tech again.\nI’ve lost hours to a misplaced semicolon.\nI’ve questioned my entire career over a \u003c= that should have been \u003c.\nAnd in this moment? I feel both victorious and ashamed.\n7. Victory (and Regret) (“Fixed! …Oh no.”) You push the fix. You celebrate.\nYou feel like a god.\nThen you look at the time and realize:\nYou just spent 6 hours fixing a one-line bug.\nYou close the ticket. You move on.\nYou tell yourself it won’t happen again.\nBut deep down, you know the truth.\nIt always happens again.\nBecause this is the life we chose.\nThe endless cycle of confidence, confusion, denial, bargaining, anger, acceptance, and regret.\nAnd honestly?\nI wouldn’t have it any other way.\n",
+  "wordCount" : "618",
   "inLanguage": "en",
   "image":"http://localhost:1313/images/the-7-stages-of-a-developer-fixing-a-bug.png","datePublished": "2025-01-31T00:00:00Z",
   "dateModified": "2025-01-31T00:00:00Z",
@@ -224,7 +238,7 @@
     <div class="post-description">
       Fixing a bug isn’t just about code—it’s an emotional rollercoaster. Discover the 7 stages every developer goes through while debugging.
     </div>
-    <div class="post-meta"><span title='2025-01-31 00:00:00 +0000 UTC'>January 31, 2025</span>&nbsp;·&nbsp;4 min
+    <div class="post-meta"><span title='2025-01-31 00:00:00 +0000 UTC'>January 31, 2025</span>&nbsp;·&nbsp;3 min
 
 
     </div>
@@ -232,62 +246,91 @@
 <figure class="entry-cover"><img loading="eager" src="http://localhost:1313/images/the-7-stages-of-a-developer-fixing-a-bug.png" alt="">
         
 </figure>
-  <div class="post-content"><p>If you’ve ever worked as a developer, you know that fixing a bug is never just <em>fixing a bug</em>. It’s an emotional rollercoaster, a psychological test, and sometimes, a personal attack on your own intelligence.</p>
-<p>It always follows the same pattern.</p>
+  <div class="post-content"><p>If you’ve ever worked as a developer, you know that <strong>fixing a bug is never just fixing a bug</strong>.</p>
+<p>It’s an <strong>emotional rollercoaster</strong>, a <strong>psychological test</strong>, and sometimes, <strong>a personal attack on your own intelligence</strong>.</p>
+<p>And no matter how many times we do this, it always follows <strong>the same pattern</strong>.</p>
 <hr>
 <h2 id="1-confidence-"><strong>1. Confidence</strong> (<em>&ldquo;This will be easy.&rdquo;</em>)<a hidden class="anchor" aria-hidden="true" href="#1-confidence-">#</a></h2>
 <p>You open the ticket, read the description, and think, <em>Oh, I see what’s happening. I’ll knock this out in 10 minutes.</em></p>
-<p>Maybe you even tell your boss or a teammate: <em>“I’ll have a fix pushed soon.”</em></p>
-<p>(A fatal mistake.)</p>
-<p>I’ve done this too many times. Every. Single. Time. I convince myself that it’s just a quick fix. I even schedule my next coffee break around it. It’s like walking into a trap that you built yourself… but you keep doing it anyway.</p>
+<p>Maybe you even tell your boss or a teammate:<br>
+<em>&ldquo;I’ll have a fix pushed soon.&rdquo;</em></p>
+<p>(<strong>A fatal mistake.</strong>)</p>
+<p>Every. Single. Time. I convince myself that it’s just a quick fix.<br>
+I even schedule my next coffee break around it.</p>
+<p>It’s like <strong>walking into a trap you built yourself</strong>… but you keep doing it anyway.</p>
 <hr>
 <h2 id="2-confusion-"><strong>2. Confusion</strong> (<em>&ldquo;Wait. What?&rdquo;</em>)<a hidden class="anchor" aria-hidden="true" href="#2-confusion-">#</a></h2>
-<p>You try the obvious fix. It doesn’t work.</p>
-<p>You start looking at the logs. The logs don’t make sense.</p>
-<p>You check the database. The database values <em>should</em> be correct.</p>
-<p>You stare at the code like it personally betrayed you.</p>
-<p>You read the same line of code for the tenth time, convinced you’re missing something. You start questioning your sanity. <em>This should work. Why doesn’t it work?</em></p>
+<p>You try the <strong>obvious fix</strong>. It doesn’t work.</p>
+<p>You check the logs. <strong>The logs don’t make sense.</strong></p>
+<p>You check the database. <strong>The values should be correct.</strong></p>
+<p>You stare at the code like it <strong>personally betrayed you.</strong></p>
+<p>You read the same line <strong>ten times</strong>, convinced you’re missing something.<br>
+You start <strong>questioning your sanity.</strong></p>
+<p><em>&ldquo;This should work. Why doesn’t it work?&rdquo;</em></p>
 <p>Welcome to the rabbit hole.</p>
 <hr>
 <h2 id="3-denial-"><strong>3. Denial</strong> (<em>&ldquo;This bug shouldn’t even be possible.&rdquo;</em>)<a hidden class="anchor" aria-hidden="true" href="#3-denial-">#</a></h2>
-<p>You reach the phase where you begin <strong>questioning reality itself.</strong></p>
+<p>At this point, you start <strong>questioning reality itself.</strong></p>
 <ul>
 <li><em>This code has been running fine for years. Why is it breaking now?</em></li>
-<li><em>It works in local but not in production. What dark magic is this?</em></li>
+<li><em>It works locally but not in production. What dark magic is this?</em></li>
 <li><em>Did I introduce this bug? No… no, it can’t be me. Right? RIGHT?</em></li>
 </ul>
-<p>At this point, I usually start suspecting cosmic interference. Mercury must be in retrograde. Maybe the server just hates me. Or maybe&hellip; just maybe&hellip; the compiler is broken?</p>
-<p>It’s clearly not my fault. It can’t be.</p>
+<p>At this point, I start suspecting <strong>cosmic interference.</strong></p>
+<p>Mercury must be in retrograde.<br>
+Maybe the server just hates me.<br>
+Or maybe&hellip; just maybe&hellip;</p>
+<p><strong>The compiler is broken.</strong></p>
+<p>Clearly, <strong>it’s not my fault.</strong></p>
+<p>It <strong>can’t</strong> be.</p>
 <hr>
 <h2 id="4-bargaining-"><strong>4. Bargaining</strong> (<em>&ldquo;What if I just&hellip; add some debug logs?&rdquo;</em>)<a hidden class="anchor" aria-hidden="true" href="#4-bargaining-">#</a></h2>
-<p>At this point, you’re lost. You start throwing in <code>var_dump()</code>, <code>console.log()</code>, and debug prints like a desperate person tossing coins into a wishing well.</p>
-<p>I’ve been known to add so many logs that my console starts to look like the Matrix. I convince myself that more logs will lead to more understanding. It never does.</p>
-<p>Nothing makes sense. You add more logs. You commit to a full-on print statement religion.</p>
-<p>The logs only make things <em>worse.</em></p>
+<p>You’re lost. Desperate.</p>
+<p>You start throwing in <code>var_dump()</code>, <code>console.log()</code>, and debug prints <strong>like a mad scientist experimenting with electricity.</strong></p>
+<p>I’ve added <strong>so many logs</strong> that my console looked like <strong>the Matrix</strong>.</p>
+<p><em>&ldquo;Maybe if I just add one more debug statement, everything will make sense.&rdquo;</em></p>
+<p>It <strong>never does.</strong></p>
+<p>Nothing makes sense. You add <strong>more logs.</strong><br>
+You <strong>commit to a full-on print statement religion.</strong></p>
+<p>The logs only make things <strong>worse.</strong></p>
 <hr>
 <h2 id="5-anger-"><strong>5. Anger</strong> (<em>&ldquo;WHO WROTE THIS CODE?!&rdquo;</em>)<a hidden class="anchor" aria-hidden="true" href="#5-anger-">#</a></h2>
 <p>You check <code>git blame</code>. You see a name.</p>
-<p>It’s your name.</p>
+<p>It’s <strong>your name.</strong></p>
 <p>…Oh.</p>
-<p>This is the stage where I briefly contemplate quitting tech and becoming a goat farmer. Maybe life would be simpler if I just spent my days herding goats. Goats don’t have bugs.</p>
+<p>This is the stage where I briefly consider <strong>quitting tech and becoming a goat farmer.</strong></p>
+<p>Maybe life would be simpler if I just <strong>herded goats.</strong></p>
+<p>Goats <strong>don’t</strong> have bugs.</p>
 <hr>
 <h2 id="6-acceptance-"><strong>6. Acceptance</strong> (<em>&ldquo;Fine. I’ll actually debug this properly.&rdquo;</em>)<a hidden class="anchor" aria-hidden="true" href="#6-acceptance-">#</a></h2>
-<p>You take a deep breath. You go back to the fundamentals. Step through the code. Check every assumption. Slowly, painfully, you start to <em>understand</em>.</p>
-<p>You realize you were overcomplicating things. You stop treating it like a personal attack and start treating it like a problem to solve.</p>
-<p>And then, after hours (or days)…</p>
-<p>You find it.</p>
+<p>You take a deep breath.</p>
+<p>You <strong>go back to the basics</strong>.</p>
+<p>Step through the code. <strong>Check every assumption.</strong><br>
+Slowly, painfully, you start to <strong>understand</strong>.</p>
+<p>You realize you were <strong>overcomplicating things</strong>.<br>
+You stop treating it like a <strong>personal attack</strong> and start treating it like <strong>a problem to solve</strong>.</p>
+<p>And then, after <strong>hours (or days)…</strong></p>
+<p>You <strong>find it.</strong></p>
 <p>The bug.</p>
-<p>Some missing condition. A logic error. A typo. Something so small yet so catastrophic that you briefly consider quitting tech altogether.</p>
-<p>I’ve found bugs caused by a single misplaced semicolon. I’ve lost hours to a variable name that was one character off. And I’ve questioned my entire career choice because of a <code>&lt;=</code> that should have been <code>&lt;</code>.</p>
+<p>Some missing condition. A logic error. A typo.<br>
+Something so <strong>small yet so catastrophic</strong> that you briefly consider quitting tech <strong>again</strong>.</p>
+<p>I’ve lost hours to a <strong>misplaced semicolon</strong>.<br>
+I’ve questioned my <strong>entire career</strong> over a <code>&lt;=</code> that should have been <code>&lt;</code>.</p>
+<p>And in this moment? I feel <strong>both victorious and ashamed.</strong></p>
 <hr>
 <h2 id="7-victory-and-regret-"><strong>7. Victory (and Regret)</strong> (<em>&ldquo;Fixed! …Oh no.&rdquo;</em>)<a hidden class="anchor" aria-hidden="true" href="#7-victory-and-regret-">#</a></h2>
-<p>You push the fix. You celebrate. You feel like a god.</p>
-<p>Then you look at the time and realize: <strong>you spent 6 hours fixing a one-line bug.</strong></p>
-<p>You close the ticket. You move on. You tell yourself it won’t happen again.</p>
+<p>You push the fix. You celebrate.</p>
+<p>You feel like <strong>a god.</strong></p>
+<p>Then you look at the time and realize:<br>
+<strong>You just spent 6 hours fixing a one-line bug.</strong></p>
+<p>You close the ticket. You move on.<br>
+You tell yourself <strong>it won’t happen again.</strong></p>
 <p>But deep down, you know the truth.</p>
-<p>It <em>always</em> happens again.</p>
-<p>Because this is the life we chose. This is what we signed up for. The endless cycle of <strong>confidence</strong>, <strong>confusion</strong>, <strong>denial</strong>, <strong>bargaining</strong>, <strong>anger</strong>, <strong>acceptance</strong>, and <strong>regret</strong>.</p>
-<p>And honestly? I wouldn’t have it any other way.</p>
+<p>It <strong>always</strong> happens again.</p>
+<p>Because this is the life we chose.</p>
+<p>The <strong>endless cycle</strong> of <strong>confidence</strong>, <strong>confusion</strong>, <strong>denial</strong>, <strong>bargaining</strong>, <strong>anger</strong>, <strong>acceptance</strong>, and <strong>regret</strong>.</p>
+<p>And honestly?</p>
+<p><strong>I wouldn’t have it any other way.</strong></p>
 
 
   </div>
@@ -391,7 +434,7 @@
   <a class="next" href="http://localhost:1313/posts/the-productivity-lie-we-all-believe-and-why-im-ditching-it/">
     <span class="title">Next »</span>
     <br>
-    <span>The Productivity Lie We All Believe (And Why I’m Ditching It)</span>
+    <span>The Multitasking Myth: Why Doing Less Makes You More Productive</span>
   </a>
 </nav>
 

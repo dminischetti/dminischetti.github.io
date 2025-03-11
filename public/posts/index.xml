@@ -9,14 +9,14 @@
     <lastBuildDate>Fri, 07 Mar 2025 00:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Logging Out for Good: Why I&#39;m Leaving Facebook and Instagram</title>
-      <link>http://localhost:1313/posts/logging-out-for-good-why-i-m-leaving-facebook-and-instagram/</link>
+      <title>The NYC Bread Hunt: How I Finally Found (and Made) the Perfect Loaf</title>
+      <link>http://localhost:1313/posts/the-hunt-for-good-bread-in-nyc-and-how-i-finally-found-it/</link>
       <pubDate>Fri, 07 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/logging-out-for-good-why-i-m-leaving-facebook-and-instagram/</guid>
-      <description>Social media was supposed to keep me connected with friends. Instead, it&amp;#39;s just ads, strangers, and reminders of things I can&amp;#39;t have anymore.</description>
+      <guid>http://localhost:1313/posts/the-hunt-for-good-bread-in-nyc-and-how-i-finally-found-it/</guid>
+      <description>My personal journey from bakery-hopping frustration to homemade bread perfection, thanks to a surprise Christmas gift and a little Italian know-how.</description>
     </item>
     <item>
-      <title>Why I Switched from Jekyll to Hugo (And Why You Might Want To, Too)</title>
+      <title>Why I Switched from Jekyll to Hugo (And Why You Might Too)</title>
       <link>http://localhost:1313/posts/why-i-switched-from-jekyll-to-hugo/</link>
       <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/why-i-switched-from-jekyll-to-hugo/</guid>
@@ -44,7 +44,7 @@
       <description>Fixing a bug isn’t just about code—it’s an emotional rollercoaster. Discover the 7 stages every developer goes through while debugging.</description>
     </item>
     <item>
-      <title>The Productivity Lie We All Believe (And Why I’m Ditching It)</title>
+      <title>The Multitasking Myth: Why Doing Less Makes You More Productive</title>
       <link>http://localhost:1313/posts/the-productivity-lie-we-all-believe-and-why-im-ditching-it/</link>
       <pubDate>Fri, 24 Jan 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/the-productivity-lie-we-all-believe-and-why-im-ditching-it/</guid>
@@ -58,14 +58,14 @@
       <description>Coding isn’t as glamorous as it seems. Discover the hilariously relatable stages every developer goes through while writing code.</description>
     </item>
     <item>
-      <title>The Productivity Myth That’s Keeping You Stuck (And How to Escape It)</title>
+      <title>The Productivity Trap: Why Doing More Is Keeping You Stuck</title>
       <link>http://localhost:1313/posts/the-productivity-myth-thats-keeping-you-stuck-and-how-to-escape-it/</link>
       <pubDate>Fri, 03 Jan 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/the-productivity-myth-thats-keeping-you-stuck-and-how-to-escape-it/</guid>
       <description>Productivity isn’t about doing more—it’s about doing what matters. Discover how to escape the productivity trap and find real progress.</description>
     </item>
     <item>
-      <title>I Never Thought I’d Grow a Beard</title>
+      <title>I Never Thought I’d Grow a Beard (But Here We Are)</title>
       <link>http://localhost:1313/posts/i-never-thought-id-grow-a-beard/</link>
       <pubDate>Fri, 27 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/i-never-thought-id-grow-a-beard/</guid>
@@ -79,25 +79,25 @@
       <description>Digital tools are powerful, but when it comes to problem-solving, nothing beats paper. Here’s why I, a programmer, still use analog methods.</description>
     </item>
     <item>
-      <title>The Eternal Quest for the Perfect App (A Saga in Too Many Downloads)</title>
+      <title>The Never-Ending Search for the Perfect App: Why I Can’t Stop Downloading</title>
       <link>http://localhost:1313/posts/the-eternal-quest-for-the-perfect-app-a-saga-in-too-many-downloads/</link>
       <pubDate>Fri, 13 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/the-eternal-quest-for-the-perfect-app-a-saga-in-too-many-downloads/</guid>
       <description>Obsessed with finding the perfect app? You’re not alone. Join me on my endless quest for the ultimate productivity tools.</description>
     </item>
     <item>
-      <title>The Pursuit of the One: Why I’m Hunting for the Ultimate Everything</title>
+      <title>The Pursuit of the Perfect: My Quest for the Ultimate Everything</title>
       <link>http://localhost:1313/posts/the-pursuit-of-the-one-why-im-hunting-for-the-ultimate-everything/</link>
       <pubDate>Fri, 06 Dec 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/the-pursuit-of-the-one-why-im-hunting-for-the-ultimate-everything/</guid>
       <description>Minimalism taken to the next level—finding the one perfect item for everything. Discover my quest for ultimate efficiency and portability.</description>
     </item>
     <item>
-      <title>ADHD: The Director’s Cut (Now with Even More Bonus Features!)</title>
+      <title>How I Outsmart My Own Brain to Get Things Done</title>
       <link>http://localhost:1313/posts/adhd-the-directors-cut-now-with-even-more-bonus-features/</link>
       <pubDate>Fri, 29 Nov 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/adhd-the-directors-cut-now-with-even-more-bonus-features/</guid>
-      <description>Living with ADHD is like an action movie with no pause button. Discover how I navigate the chaos and still get things done.</description>
+      <description>Life feels like an action movie with no pause button. Here&amp;#39;s how I handle the chaos and still get things done.</description>
     </item>
     <item>
       <title>The Browser Wars: My Exhausting Journey to Finding the Least Annoying Setup</title>
@@ -107,42 +107,42 @@
       <description>Choosing a browser shouldn&amp;#39;t be this hard. From Safari’s WebKit prison to Windows’ Chromium clones, here’s my exhausting browser journey.</description>
     </item>
     <item>
-      <title>The Real Reason We Struggle to Change (And How to Fix It for Good)</title>
+      <title>Why We Struggle to Change (And the Simple Fix That Works)</title>
       <link>http://localhost:1313/posts/the-real-reason-we-struggle-to-change-and-how-to-fix-it-for-good/</link>
       <pubDate>Fri, 15 Nov 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/the-real-reason-we-struggle-to-change-and-how-to-fix-it-for-good/</guid>
       <description>Change isn&amp;#39;t about willpower—it&amp;#39;s about identity. Discover why habits fail and how shifting your identity leads to lasting change.</description>
     </item>
     <item>
-      <title>The Myth of Motivation (And What Actually Works Instead)</title>
+      <title>The Motivation Myth: Why Waiting to Feel Inspired Will Keep You Stuck</title>
       <link>http://localhost:1313/posts/the-myth-of-motivation-and-what-actually-works-instead/</link>
       <pubDate>Fri, 08 Nov 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/the-myth-of-motivation-and-what-actually-works-instead/</guid>
       <description>Motivation is a lie. Discover why waiting to feel inspired keeps you stuck and learn practical strategies to take action anyway.</description>
     </item>
     <item>
-      <title>Changing My Mind Doesn’t Make Me Weak—It Makes Me Smarter</title>
+      <title>Why Changing Your Mind is a Sign of Intelligence, Not Weakness</title>
       <link>http://localhost:1313/posts/changing-my-mind-doesnt-make-me-weakit-makes-me-smarter/</link>
       <pubDate>Fri, 01 Nov 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/changing-my-mind-doesnt-make-me-weakit-makes-me-smarter/</guid>
       <description>Changing your mind isn’t a weakness—it’s growth. Discover why evolving your perspective makes you smarter and more adaptable.</description>
     </item>
     <item>
-      <title>Why We’re All Tired (And It’s Not Just Sleep Deprivation)</title>
+      <title>Why You’re Always Tired (And It’s Not Just About Sleep)</title>
       <link>http://localhost:1313/posts/why-were-all-tired-and-its-not-just-sleep-deprivation/</link>
       <pubDate>Fri, 18 Oct 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/why-were-all-tired-and-its-not-just-sleep-deprivation/</guid>
       <description>Tired all the time? It’s not just about sleep. Discover the 5 types of exhaustion and how to truly recharge.</description>
     </item>
     <item>
-      <title>Why We Romanticize the Past (And Why It’s a Trap)</title>
+      <title>Why We Romanticize the Past (And Why It Keeps Us Stuck)</title>
       <link>http://localhost:1313/posts/why-we-romanticize-the-past-and-why-its-a-trap/</link>
       <pubDate>Fri, 04 Oct 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/why-we-romanticize-the-past-and-why-its-a-trap/</guid>
       <description>We often think the past was better, but nostalgia tricks us. Discover why we romanticize the past and how to appreciate the present.</description>
     </item>
     <item>
-      <title>The Eternal Struggle of Finding the Perfect Backpack</title>
+      <title>The Best Everyday Backpack? My Never-Ending Search for the Perfect One</title>
       <link>http://localhost:1313/posts/the-eternal-struggle-of-finding-the-perfect-backpack/</link>
       <pubDate>Fri, 27 Sep 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/the-eternal-struggle-of-finding-the-perfect-backpack/</guid>
