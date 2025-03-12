@@ -30,13 +30,13 @@ ShowReadingTime: false
 
 ---
 
-![Hi duckieeee! 🦆](202203/276156643_292932812919889_2600641743052748119_n_17907224636346856.jpg)
-*Hi duckieeee! 🦆*
+![Quack to the Future](202203/276156643_292932812919889_2600641743052748119_n_17907224636346856.jpg)
+*Quack to the Future*
 
 ---
 
-![Status: away.](202201/271946512_405891917893376_6473240779589579787_n_17916064754104800.jpg)
-*Status: away.*
+![Lost in the Blanket Dimension](202201/271946512_405891917893376_6473240779589579787_n_17916064754104800.jpg)
+*Lost in the Blanket Dimension*
 
 ---
 
@@ -45,8 +45,8 @@ ShowReadingTime: false
 
 ---
 
-![Working with perks. #smartworking #kingsleague #cooltshirt](202110/246946907_642983106692900_6107196596492068696_n_17888538335376218.jpg)
-*Working with perks. #smartworking #kingsleague #cooltshirt*
+![Mission Control: Work Hard, Play Harde](202110/246946907_642983106692900_6107196596492068696_n_17888538335376218.jpg)
+*Mission Control: Work Hard, Play Harde*
 
 ---
 
@@ -80,8 +80,8 @@ ShowReadingTime: false
 
 ---
 
-![It was nice Meat-ing you! #rustelle #arrosticini #dabruzzonyc](202106/206319825_133263782157750_6630502438104810821_n_17871712034448709.jpg)
-*It was nice Meat-ing you! #rustelle #arrosticini #dabruzzonyc*
+![It was nice Meat-ing you!](202106/206319825_133263782157750_6630502438104810821_n_17871712034448709.jpg)
+*It was nice Meat-ing you!*
 
 ---
 
@@ -90,12 +90,13 @@ ShowReadingTime: false
 
 ---
 
-![Life is short. Enlarge it.](202103/160999900_918413202265463_6927623433138339435_n_17868230657369784.jpg)
-*Life is short. Enlarge it.*
+![Bunny Mafia: Too Cool to C](202103/160999900_918413202265463_6927623433138339435_n_17868230657369784.jpg)
+*Bunny Mafia: Too Cool to C*
 
 ---
 
-![](202101/140771960_765486444324252_5892982306058374536_n_17890639591863558.jpg)
+![Brooklyn’s Most Persuasive Wall](202101/140771960_765486444324252_5892982306058374536_n_17890639591863558.jpg)
+*Brooklyn’s Most Persuasive Wall*
 
 ---
 
@@ -119,8 +120,8 @@ ShowReadingTime: false
 
 ---
 
-![Life is uncertain. Eat dessert first. #sweetfinals](202012/129197837_390036042312941_5172243519867424161_n_17874765311004460.jpg)
-*Life is uncertain. Eat dessert first. #sweetfinals*
+![Life is uncertain. Eat dessert first.](202012/129197837_390036042312941_5172243519867424161_n_17874765311004460.jpg)
+*Life is uncertain. Eat dessert first.*
 
 ---
 
@@ -149,13 +150,13 @@ ShowReadingTime: false
 
 ---
 
-![Happy birthday to me! 🙃](202001/82236681_170507900926325_1351941083158987179_n_18047346697221530.jpg)
-*Happy birthday to me! 🙃*
+![Braving the Snow for Panzerotti Love](202001/82236681_170507900926325_1351941083158987179_n_18047346697221530.jpg)
+*Braving the Snow for Panzerotti Love*
 
 ---
 
-![If you treat yourself well on New Year’s Eve… (you’ll be set for the new year!)](202001/79291051_2585446285022186_7248066450923242689_n_18051067276204661.jpg)
-*If you treat yourself well on New Year’s Eve… (you’ll be set for the new year!)*
+![Fine Dining with a Side of Drama](202001/79291051_2585446285022186_7248066450923242689_n_18051067276204661.jpg)
+*Fine Dining with a Side of Drama*
 
 ---
 
@@ -169,12 +170,13 @@ ShowReadingTime: false
 
 ---
 
-![Good night :)](201910/74938941_608932689642317_7426492133293604537_n_17932477501321323.jpg)
-*Good night :)*
+![Public Transport: When Life Gives You Lemons](201910/74938941_608932689642317_7426492133293604537_n_17932477501321323.jpg)
+*Public Transport: When Life Gives You Lemons*
 
 ---
 
-![](201910/71528599_953601168324816_3387958101141153817_n_17845812094700288.jpg)
+![The Sistine Toilet: A Literary Masterpiece](201910/71528599_953601168324816_3387958101141153817_n_17845812094700288.jpg)
+The Sistine Toilet: A Literary Masterpiece
 
 ---
 
@@ -188,8 +190,8 @@ ShowReadingTime: false
 
 ---
 
-![Horizontal road markings.](201908/67104533_1323222987844606_3989805264988526429_n_17844255091565602.jpg)
-*Horizontal road markings.*
+![Cupid Was Out of Arr](201908/67104533_1323222987844606_3989805264988526429_n_17844255091565602.jpg)
+*Cupid Was Out of Arr*
 
 ---
 
@@ -198,13 +200,13 @@ ShowReadingTime: false
 
 ---
 
-![Stop.](201907/65123671_371025673600705_5942621445875436589_n_18080965270001339.jpg)
-*Stop.*
+![Mamma Mia, That’s A Lotta Luggage](201907/65123671_371025673600705_5942621445875436589_n_18080965270001339.jpg)
+*Mamma Mia, That’s A Lotta Luggage*
 
 ---
 
-![Woof!](201907/64790492_2117054438421053_4921994172747216567_n_18080276014042963.jpg)
-*Woof!*
+![Soulmates in Suffering](201907/64790492_2117054438421053_4921994172747216567_n_18080276014042963.jpg)
+*Soulmates in Suffering*
 
 ---
 
@@ -213,18 +215,18 @@ ShowReadingTime: false
 
 ---
 
-![Chitarrine (pasta) with venison ragù.](201906/63430826_395125477768541_1356483952598988303_n_18011389186210905.jpg)
-*Chitarrine (pasta) with venison ragù.*
+![Love at First Bite](201906/63430826_395125477768541_1356483952598988303_n_18011389186210905.jpg)
+*Love at First Bite*
 
 ---
 
-![In the little forest of my imagination, there’s a bunch of slightly crazy little creatures invented by me.](201906/62147376_125630558655134_1113070305924010953_n_18010180180210754.jpg)
-*In the little forest of my imagination, there’s a bunch of slightly crazy little creatures invented by me.*
+![Lost in the Woods, Send Pasta](201906/62147376_125630558655134_1113070305924010953_n_18010180180210754.jpg)
+*Lost in the Woods, Send Pasta*
 
 ---
 
-![I’m in a postcard.](201906/65162453_179014669771938_5222534529129190406_n_18076543201039916.jpg)
-*I’m in a postcard.*
+![Accidentally Hiked Into a Windows XP Wallpaper](201906/65162453_179014669771938_5222534529129190406_n_18076543201039916.jpg)
+*Accidentally Hiked Into a Windows XP Wallpaper*
 
 ---
 
@@ -233,8 +235,8 @@ ShowReadingTime: false
 
 ---
 
-![Then you look out from your room’s balcony and…](201906/62038666_2023451127766936_9048997349852759737_n_17917773598307186.jpg)
-*Then you look out from your room’s balcony and…*
+![BRB, Relocating Here Forever](201906/62038666_2023451127766936_9048997349852759737_n_17917773598307186.jpg)
+*BRB, Relocating Here Forever*
 
 ---
 
@@ -243,27 +245,28 @@ ShowReadingTime: false
 
 ---
 
-![](201906/61786591_134259454437011_1281001178240709905_n_18006349216220715.jpg)
+![Espresso: The Real Reason for Inner Peace](201906/61786591_134259454437011_1281001178240709905_n_18006349216220715.jpg)
+*Espresso: The Real Reason for Inner Peace*
 
 ---
 
-![Oh well.](201906/61780933_137043484060836_6996410145921194286_n_17846992228476264.jpg)
-*Oh well.*
+![When Your Wall Roasts You](201906/61780933_137043484060836_6996410145921194286_n_17846992228476264.jpg)
+*When Your Wall Roasts You*
 
 ---
 
-![Happy Ending?](201905/61250951_295034508045571_3911025262146990982_n_18047346667121199.jpg)
-*Happy Ending?*
+![Is This the Line for Free Pizza?](201905/61250951_295034508045571_3911025262146990982_n_18047346667121199.jpg)
+*Is This the Line for Free Pizza?*
 
 ---
 
-![5 “laps” of English, 3 of Database, 7 of Math… #examtime #enoughalready #imsleepy](201905/60366938_169367080733334_2582713959099841495_n_17882800894349605.jpg)
-*5 “laps” of English, 3 of Database, 7 of Math… #examtime #enoughalready #imsleepy*
+![5 “laps” of English, 3 of Database, 7 of Math…](201905/60366938_169367080733334_2582713959099841495_n_17882800894349605.jpg)
+*5 “laps” of English, 3 of Database, 7 of Math…*
 
 ---
 
-![Finds.](201904/58716093_838001689866106_2282913442508309311_n_17881511779338237.jpg)
-*Finds.*
+![Now Playing: 50 Shades of Nothing.](201904/58716093_838001689866106_2282913442508309311_n_17881511779338237.jpg)
+*Now Playing: 50 Shades of Nothing.*
 
 ---
 
