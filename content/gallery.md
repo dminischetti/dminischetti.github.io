@@ -270,13 +270,13 @@ The Sistine Toilet: A Literary Masterpiece
 
 ---
 
-![Easter Monday. It’s raining. Not that it matters here—they don’t have Easter Monday. Off to work. Bye.](201904/56563297_1304871106347197_6530213188657371724_n_17879130163340146.jpg)
-*Easter Monday. It’s raining. Not that it matters here—they don’t have Easter Monday. Off to work. Bye.*
+![Promised Sunshine. I’m Calling My Lawyer](201904/56563297_1304871106347197_6530213188657371724_n_17879130163340146.jpg)
+*Promised Sunshine. I’m Calling My Lawyer*
 
 ---
 
-![Godel Escher Bach](201904/56778631_215181979439508_9060016877695159464_n_18025827643182013.jpg)
-*Godel Escher Bach*
+![Hofstadter’s Law: This Chapter is Still Loading](201904/56778631_215181979439508_9060016877695159464_n_18025827643182013.jpg)
+*Hofstadter’s Law: This Chapter is Still Loading*
 
 ---
 
@@ -290,8 +290,8 @@ The Sistine Toilet: A Literary Masterpiece
 
 ---
 
-![Some people feel the rain. I get wet.](201903/54512475_387428905425023_5572601582386162858_n_17856774208365176.jpg)
-*Some people feel the rain. I get wet.*
+![So I’m the Chosen One Now?](201903/54512475_387428905425023_5572601582386162858_n_17856774208365176.jpg)
+*So I’m the Chosen One Now?*
 
 ---
 
@@ -300,23 +300,23 @@ The Sistine Toilet: A Literary Masterpiece
 
 ---
 
-![Oh yeah.](201903/53904114_335811003724378_2182426799642539045_n_17876910559318959.jpg)
-*Oh yeah.*
+![When Your Diet Requires Advanced Math](201903/53904114_335811003724378_2182426799642539045_n_17876910559318959.jpg)
+*When Your Diet Requires Advanced Math*
 
 ---
 
-![This thing has to stop. #cheesechallenge](201903/53908353_553739865137902_8749958691962335734_n_18019688965081518.jpg)
-*This thing has to stop. #cheesechallenge*
+![When ‘Say Cheese’ Goes Too Far](201903/53908353_553739865137902_8749958691962335734_n_18019688965081518.jpg)
+*When ‘Say Cheese’ Goes Too Far*
 
 ---
 
-![I don’t study, I don’t work, I don’t watch TV. I don’t go to the cinema, I don’t do sports.](201903/52661229_798259590532584_2333881526950337139_n_17951958799253532.jpg)
-*I don’t study, I don’t work, I don’t watch TV. I don’t go to the cinema, I don’t do sports.*
+![Auditioning for a 1940s Detective Flick](201903/52661229_798259590532584_2333881526950337139_n_17951958799253532.jpg)
+*Auditioning for a 1940s Detective Flick*
 
 ---
 
-![I feel like I’m tired tomorrow.](201903/52901936_1577537852391069_3342801893614848124_n_17961272779244699.jpg)
-*I feel like I’m tired tomorrow.*
+![Betrayed by the Weather App](201903/52901936_1577537852391069_3342801893614848124_n_17961272779244699.jpg)
+*Betrayed by the Weather App*
 
 ---
 
@@ -335,8 +335,8 @@ The Sistine Toilet: A Literary Masterpiece
 
 ---
 
-![Silence. Agnesi is speaking.](201902/51467658_119189822487849_4572886484657589921_n_17914555150280863.jpg)
-*Silence. Agnesi is speaking.*
+![Dear Future Me, Sorry for All the Carbs](201902/51467658_119189822487849_4572886484657589921_n_17914555150280863.jpg)
+*Dear Future Me, Sorry for All the Carbs*
 
 ---
 
@@ -355,8 +355,8 @@ The Sistine Toilet: A Literary Masterpiece
 
 ---
 
-![Ehhhhhhh???](201807/36995048_151730155643895_3216928717997604864_n_17933754016156276.jpg)
-*Ehhhhhhh???*
+![???](201807/36995048_151730155643895_3216928717997604864_n_17933754016156276.jpg)
+*???*
 
 ---
 
@@ -370,8 +370,8 @@ The Sistine Toilet: A Literary Masterpiece
 
 ---
 
-![See you soon, my friend…](201806/35269348_201427867180843_6041890701858308096_n_17893808947223016.jpg)
-*See you soon, my friend…*
+![Wait, It’s Not a Water Fountain?](201806/35269348_201427867180843_6041890701858308096_n_17893808947223016.jpg)
+*Wait, It’s Not a Water Fountain?*
 
 ---
 
@@ -380,8 +380,8 @@ The Sistine Toilet: A Literary Masterpiece
 
 ---
 
-![For my American friends: here’s a strange object called a dish rack (scolapiatti).](201806/34982374_232153280701628_3678979637548941312_n_17951331829012970.jpg)
-*For my American friends: here’s a strange object called a dish rack (scolapiatti).*
+![A strange object called a dish rack (scolapiatti).](201806/34982374_232153280701628_3678979637548941312_n_17951331829012970.jpg)
+*A strange object called a dish rack (scolapiatti).*
 
 ---
 
