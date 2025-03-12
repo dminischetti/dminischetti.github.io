@@ -5,8 +5,8 @@ ShowReadingTime: false
 ---
 
 
-![Finally Got the Keys to HOPE—Turns Out Rent’s Still Craz](202407/470189205_18471139087005931_5498663748772846088_n_18030007750980762.jpg)
-*Finally Got the Keys to HOPE—Turns Out Rent’s Still Craz*
+![Finally Got the Keys to HOPE—Turns Out Rent’s Still Crazy](202407/470189205_18471139087005931_5498663748772846088_n_18030007750980762.jpg)
+*Finally Got the Keys to HOPE—Turns Out Rent’s Still Crazy*
 
 ---
 
