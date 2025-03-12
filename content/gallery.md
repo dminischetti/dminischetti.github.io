@@ -170,11 +170,6 @@ ShowReadingTime: false
 
 ---
 
-![Public Transport: When Life Gives You Lemons](201910/74938941_608932689642317_7426492133293604537_n_17932477501321323.jpg)
-*Public Transport: When Life Gives You Lemons*
-
----
-
 ![The Sistine Toilet: A Literary Masterpiece](201910/71528599_953601168324816_3387958101141153817_n_17845812094700288.jpg)
 The Sistine Toilet: A Literary Masterpiece
 
