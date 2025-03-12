@@ -80,8 +80,8 @@ ShowReadingTime: false
 
 ---
 
-![It was nice Meat-ing you!](202106/206319825_133263782157750_6630502438104810821_n_17871712034448709.jpg)
-*It was nice Meat-ing you!*
+![Summer’s Sizzling Skewers: Meat the Heat](202106/206319825_133263782157750_6630502438104810821_n_17871712034448709.jpg)
+*Summer’s Sizzling Skewers: Meat the Heat*
 
 ---
 
