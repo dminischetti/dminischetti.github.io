@@ -340,8 +340,8 @@ The Sistine Toilet: A Literary Masterpiece
 
 ---
 
-![One day, someone will have to explain what Americans have against normal toilet paper. 🧻😂](201902/51363288_644090089374278_6655907149495389309_n_17971986490206716.jpg)
-*One day, someone will have to explain what Americans have against normal toilet paper. 🧻😂*
+![One day, someone will have to explain what some producers have against normal toilet paper.](201902/51363288_644090089374278_6655907149495389309_n_17971986490206716.jpg)
+*One day, someone will have to explain what some producers have against normal toilet paper.*
 
 ---
 
@@ -385,15 +385,18 @@ The Sistine Toilet: A Literary Masterpiece
 
 ---
 
-![](201806/34789182_363923340796745_1204376741821284352_n_17924424313188227.jpg)
+![Entering the Twilight Zone](201806/34789182_363923340796745_1204376741821284352_n_17924424313188227.jpg)
+*Entering the Twilight Zone*
 
 ---
 
-![](201805/32136051_1593881927401100_2993367634356994048_n_17919182563150021.jpg)
+![Times Square’s Official Handshake: The Single-Digit Wave](201805/32136051_1593881927401100_2993367634356994048_n_17919182563150021.jpg)
+*Times Square’s Official Handshake: The Single-Digit Wave*
 
 ---
 
-![](201805/31761326_2103213726591581_7947850965661515776_n_17915372458160860.jpg)
+![Darn! I'm Stuck in Prose](201805/31761326_2103213726591581_7947850965661515776_n_17915372458160860.jpg)
+*Darn! I'm Stuck in Prose*
 
 ---
 
@@ -402,8 +405,8 @@ The Sistine Toilet: A Literary Masterpiece
 
 ---
 
-![The trees speak.](201804/30591109_256595661550352_5074938227446513664_n_17866146244242664.jpg)
-*The trees speak.*
+![Breaking News: This Stump Demands a Lawyer.](201804/30591109_256595661550352_5074938227446513664_n_17866146244242664.jpg)
+*Breaking News: This Stump Demands a Lawyer.*
 
 ---
 
