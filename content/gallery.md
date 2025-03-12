@@ -5,13 +5,13 @@ ShowReadingTime: false
 ---
 
 
-![We can open another door!](202407/470189205_18471139087005931_5498663748772846088_n_18030007750980762.jpg)
-*We can open another door!*
+![Keys to the Big Apple](202407/470189205_18471139087005931_5498663748772846088_n_18030007750980762.jpg)
+*Keys to the Big Apple*
 
 ---
 
-![Toilet Paper Dilemma: The Unexpected Twist 🚽 Who needs toilet paper holders? Say hello to the vertical marvel! A daring twist on the inwards or outwards debate. 😂🙌🧻 Embrace the unconventional, break free from norms! Are you ready to defy gravity in the name of toilet paper revolution? 🚀🙃](202306/351112916_724534699449739_3221355050622590752_n_17843600867996250.jpg)
-*Toilet Paper Dilemma: The Unexpected Twist 🚽 Who needs toilet paper holders? Say hello to the vertical marvel! A daring twist on the inwards or outwards debate. 😂🙌🧻 Embrace the unconventional, break free from norms! Are you ready to defy gravity in the name of toilet paper revolution? 🚀🙃*
+![Toilet Paper Dilemma: Who needs toilet paper holders? Say hello to the vertical marvel! A daring twist on the inwards or outwards debate. Embrace the unconventional, break free from norms! Are you ready to defy gravity in the name of toilet paper revolution? 🚀🙃](202306/351112916_724534699449739_3221355050622590752_n_17843600867996250.jpg)
+*Toilet Paper Dilemma: Who needs toilet paper holders? Say hello to the vertical marvel! A daring twist on the inwards or outwards debate. Embrace the unconventional, break free from norms! Are you ready to defy gravity in the name of toilet paper revolution? 🚀🙃*
 
 ---
 
@@ -20,13 +20,13 @@ ShowReadingTime: false
 
 ---
 
-![The Italian… without the “beauty”! (Neapolitan expression) 🤷‍♂️🇮🇹](202210/311199991_1296399107564982_6940705111442976943_n_17941803011369545.jpg)
-*The Italian… without the “beauty”! (Neapolitan expression) 🤷‍♂️🇮🇹*
+![Certified Italian Beauty](202210/311199991_1296399107564982_6940705111442976943_n_17941803011369545.jpg)
+*Certified Italian Beauty*
 
 ---
 
-![Hi, I’m Dominic, and I want the Poste Italiane SPID.](202207/296582817_1134275913820765_254023055292837720_n_18023507980399952.jpg)
-*Hi, I’m Dominic, and I want the Poste Italiane SPID.*
+![Negotiations with the Local Boss](202207/296582817_1134275913820765_254023055292837720_n_18023507980399952.jpg)
+*Negotiations with the Local Boss*
 
 ---
 
