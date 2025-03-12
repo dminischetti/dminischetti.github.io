@@ -45,8 +45,8 @@ ShowReadingTime: false
 
 ---
 
-![Mission Control: Work Hard, Play Harde](202110/246946907_642983106692900_6107196596492068696_n_17888538335376218.jpg)
-*Mission Control: Work Hard, Play Harde*
+![Mission Control: Work Hard, Play Harder](202110/246946907_642983106692900_6107196596492068696_n_17888538335376218.jpg)
+*Mission Control: Work Hard, Play Harder*
 
 ---
 
@@ -60,8 +60,8 @@ ShowReadingTime: false
 
 ---
 
-![These Americans copy absolutely everything from us!](202107/223069846_183823617123430_2020683657545647273_n_17914192702804135.jpg)
-*These Americans copy absolutely everything from us!*
+![One Street, Two Explorers, Zero Clue](202107/223069846_183823617123430_2020683657545647273_n_17914192702804135.jpg)
+*One Street, Two Explorers, Zero Clue*
 
 ---
 
