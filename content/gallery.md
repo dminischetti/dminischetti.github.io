@@ -85,8 +85,8 @@ ShowReadingTime: false
 
 ---
 
-![Signs in Brooklyn.](202104/174834578_3126652957565720_2389660785461562010_n_18071934196276629.jpg)
-*Signs in Brooklyn.*
+![Park Here, Free Car Removal](202104/174834578_3126652957565720_2389660785461562010_n_18071934196276629.jpg)
+*Park Here, Free Car Removal*
 
 ---
 
