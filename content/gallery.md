@@ -31,8 +31,8 @@ ShowReadingTime: false
 
 ---
 
-![Quack to the Future](202203/276156643_292932812919889_2600641743052748119_n_17907224636346856.jpg)
-> *Quack to the Future*
+![Quack to the Sky](202203/276156643_292932812919889_2600641743052748119_n_17907224636346856.jpg)
+> *Quack to the Sky*
 
 ---
 
@@ -46,8 +46,8 @@ ShowReadingTime: false
 
 ---
 
-![Mission Control: Work Hard, Play Harder](202110/246946907_642983106692900_6107196596492068696_n_17888538335376218.jpg)
-> *Mission Control: Work Hard, Play Harder*
+![Juggling work, strategy, and just enough chaos to keep things interesting](202110/246946907_642983106692900_6107196596492068696_n_17888538335376218.jpg)
+> *Juggling work, strategy, and just enough chaos to keep things interesting*
 
 ---
 
