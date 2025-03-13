@@ -5,6 +5,8 @@ description: "Social media was supposed to keep me connected with friends. Inste
 tags: ["social media", "digital detox", "personal reflections"]
 cover:
   image: "/images/logging-out-for-good-why-i-m-leaving-facebook-and-instagram.png"
+aliases:
+- "/exit"
 ---
 There was a time when **Facebook and Instagram felt like a lifeline**—a way to stay connected with friends, share life’s moments, and keep some kind of bridge between us.  
 
