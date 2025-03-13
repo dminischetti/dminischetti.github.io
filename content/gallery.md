@@ -1,5 +1,6 @@
 ---
 title: "Photo Gallery"
+description: "A collection of travel shots, funny moments, and everyday snapshots from my life."
 layout: "single"
 ShowReadingTime: false
 ---
@@ -15,8 +16,8 @@ ShowReadingTime: false
 
 ---
 
-![To be happy, you don’t need a degree, money, a house with a mortgage, or a car. You just need someone who truly loves you and listens to you. The rest comes by itself. ❤️](202303/338426386_228747349686211_892479777024634891_n_17949521942413980.jpg)
-*To be happy, you don’t need a degree, money, a house with a mortgage, or a car. You just need someone who truly loves you and listens to you. The rest comes by itself. ❤️*
+![To be happy, you don’t need a degree, money, a house with a mortgage, or a car. You just need someone who truly loves you and listens to you. The rest comes by itself.](202303/338426386_228747349686211_892479777024634891_n_17949521942413980.jpg)
+*To be happy, you don’t need a degree, money, a house with a mortgage, or a car. You just need someone who truly loves you and listens to you. The rest comes by itself.*
 
 ---
 
@@ -90,8 +91,8 @@ ShowReadingTime: false
 
 ---
 
-![Bunny Mafia: Too Cool to C](202103/160999900_918413202265463_6927623433138339435_n_17868230657369784.jpg)
-*Bunny Mafia: Too Cool to C*
+![Bunny Mafia: Too Cool to Care](202103/160999900_918413202265463_6927623433138339435_n_17868230657369784.jpg)
+*Bunny Mafia: Too Cool to Care*
 
 ---
 
@@ -185,8 +186,8 @@ The Sistine Toilet: A Literary Masterpiece
 
 ---
 
-![Cupid Was Out of Arr](201908/67104533_1323222987844606_3989805264988526429_n_17844255091565602.jpg)
-*Cupid Was Out of Arr*
+![Cupid Was Out of Arrows](201908/67104533_1323222987844606_3989805264988526429_n_17844255091565602.jpg)
+*Cupid Was Out of Arrows*
 
 ---
 
@@ -275,8 +276,8 @@ The Sistine Toilet: A Literary Masterpiece
 
 ---
 
-![You can’t buy happiness. But you can buy coffee with a croissant, and that’s pretty close. ☕️🥐](201904/55872694_421070435387210_8491699345086258293_n_17985584563220189.jpg)
-*You can’t buy happiness. But you can buy coffee with a croissant, and that’s pretty close. ☕️🥐*
+![You can’t buy happiness. But you can buy coffee with a croissant, and that’s pretty close.](201904/55872694_421070435387210_8491699345086258293_n_17985584563220189.jpg)
+*You can’t buy happiness. But you can buy coffee with a croissant, and that’s pretty close.*
 
 ---
 
@@ -430,22 +431,23 @@ The Sistine Toilet: A Literary Masterpiece
 
 ---
 
-![](201711/23668187_2045897625679502_4172842598177701888_n_17885381404142608.jpg)
-Arthur Avenue: Where Tomatoes Have Murals and Streets Win Elections
+![Arthur Avenue: Where Tomatoes Have Murals and Streets Win Elections](201711/23668187_2045897625679502_4172842598177701888_n_17885381404142608.jpg)
+*Arthur Avenue: Where Tomatoes Have Murals and Streets Win Elections*
 
 ---
 
-![01. "Hello friend](201711/23161582_163791040874935_1670642914075607040_n_17897991097079855.jpg)
-*Plot Twist: My Shadow’s the Real Main Charac*
+![Plot Twist: My Shadow’s the Real Main Character](201711/23161582_163791040874935_1670642914075607040_n_17897991097079855.jpg)
+*Plot Twist: My Shadow’s the Real Main Character*
 
 ---
 
-![Lonely, sad university student… 😔](201711/23101175_159693681296554_7987463466212392960_n_17882750698138830.jpg)
+![NYC College of Technology: Where coffee is the official programming language.*
+](201711/23101175_159693681296554_7987463466212392960_n_17882750698138830.jpg)
 *NYC College of Technology: Where coffee is the official programming language.*
 
 ---
 
-![If it’s not soup, it’s soaked bread. (Meaning: it’s the same thing either way.)](201710/22793834_434006817001094_862179835307360256_n_17904748891045061.jpg)
+![Finally, a diet I can commit ](201710/22793834_434006817001094_862179835307360256_n_17904748891045061.jpg)
 *Finally, a diet I can commit *
 
 ---
@@ -460,27 +462,28 @@ Arthur Avenue: Where Tomatoes Have Murals and Streets Win Elections
 
 ---
 
-![Patience.](201709/21227705_734955316689102_4894593083263418368_n_17897262649023335.jpg)
+![When Your Playlist is Fire but Existential Dread is Louder..](201709/21227705_734955316689102_4894593083263418368_n_17897262649023335.jpg)
 *When Your Playlist is Fire but Existential Dread is Louder..*
 
 ---
 
-![Courage, I have it. It’s the fear that gets me.](201708/21148117_461114580939120_3711812025416941568_n_17896155658001961.jpg)
+![Me every Monday morning.](201708/21148117_461114580939120_3711812025416941568_n_17896155658001961.jpg)
 *Me every Monday morning.*
 
 ---
 
-![…and don’t stress my soul. #nostress #happiness](201708/20902212_1114925701970836_8674888379394949120_n_17879198314093730.jpg)
+![Sometimes my backpack is heavier than my life choices*
+](201708/20902212_1114925701970836_8674888379394949120_n_17879198314093730.jpg)
 *Sometimes my backpack is heavier than my life choices*
 
 ---
 
-![Slurp!](201708/20688586_515983892080163_1711256902215663616_n_17852519686198598.jpg)
+![When life gives you lemons, apparently it also gives you questionable branding choices](201708/20688586_515983892080163_1711256902215663616_n_17852519686198598.jpg)
 *When life gives you lemons, apparently it also gives you questionable branding choices*
 
 ---
 
-![Trabajar, Trabajar… I prefer the smell of the sea. 🌊](201707/19986028_1701086493252270_2625293210582253568_n_17873608774092420.jpg)
+![Crossing my legs, skipping my responsibilities.](201707/19986028_1701086493252270_2625293210582253568_n_17873608774092420.jpg)
 *Crossing my legs, skipping my responsibilities.*
 
 ---
@@ -490,8 +493,8 @@ Arthur Avenue: Where Tomatoes Have Murals and Streets Win Elections
 
 ---
 
-![](201707/19534851_1905755483002374_7587498751351062528_n_17864205631138741.jpg)
-The only love triangle I won’t regret.
+![The only love triangle I won’t regret.](201707/19534851_1905755483002374_7587498751351062528_n_17864205631138741.jpg)
+*The only love triangle I won’t regret.*
 
 ---
 
@@ -500,18 +503,18 @@ The only love triangle I won’t regret.
 
 ---
 
-![Again and again and again and again…](201706/19534032_303869040059652_9153619298361540608_n_17880179863065964.jpg)
+![Plotting my villain origin story… or just vibing to lo-fi beats.](201706/19534032_303869040059652_9153619298361540608_n_17880179863065964.jpg)
 *Plotting my villain origin story… or just vibing to lo-fi beats.*
 
 ---
 
-![Hurting yourself because you’re too sleepy.](201706/19436392_108301716464793_8880646948147691520_n_17871280303085798.jpg)
+![Trying to grow wings, still just getting anxiety.](201706/19436392_108301716464793_8880646948147691520_n_17871280303085798.jpg)
 *Trying to grow wings, still just getting anxiety.*
 
 ---
 
-![Some loves never end—they go around in circles and come back again… Toilet paper doesn’t. That never comes back. 🧻](201706/18812707_133688190520346_7339716444457795584_n_17869628998121379.jpg)
-*Some loves never end—they go around in circles and come back again… Toilet paper doesn’t. That never comes back. 🧻*
+![Some loves never end—they go around in circles and come back again… Toilet paper doesn’t. That never comes back.](201706/18812707_133688190520346_7339716444457795584_n_17869628998121379.jpg)
+*Some loves never end—they go around in circles and come back again… Toilet paper doesn’t. That never comes back.*
 
 ---
 
@@ -520,12 +523,12 @@ The only love triangle I won’t regret.
 
 ---
 
-![Sunday’s timballo di scrippelle](201704/18160257_1325434547577282_1401167667968081920_n_17855533732155915.jpg)
+![Lasagna: because happiness is best served in layers.](201704/18160257_1325434547577282_1401167667968081920_n_17855533732155915.jpg)
 *Lasagna: because happiness is best served in layers.*
 
 ---
 
-![When reading this sign you lick your lips thinking about Rye, Red Vermouth and Bitters, you’re getting sick in your head. And maybe also your liver.](201704/18161625_1861959660727135_8263656689710923776_n_17879244118060984.jpg)
+![Manhattan: Where dreams are made… and rent makes them cry.](201704/18161625_1861959660727135_8263656689710923776_n_17879244118060984.jpg)
 *Manhattan: Where dreams are made… and rent makes them cry.*
 
 ---
@@ -540,12 +543,12 @@ The only love triangle I won’t regret.
 
 ---
 
-![Italian bartender in action. #bartender #italians #pastapizzaprimavera](201704/17817791_445121282489712_8399297701153341440_n_17855864569141382.jpg)
+![Italian bartender in action.](201704/17817791_445121282489712_8399297701153341440_n_17855864569141382.jpg)
 *Italian bartender in action.*
 
 ---
 
-![Note](201703/17662054_274448339674085_3056567953563582464_n_17864860207106663.jpg)
+![Permanent ink, temporary marker. Love that stays, even when the writing fades.](201703/17662054_274448339674085_3056567953563582464_n_17864860207106663.jpg)
 *Permanent ink, temporary marker. Love that stays, even when the writing fades.*
 
 ---
@@ -555,61 +558,61 @@ The only love triangle I won’t regret.
 
 ---
 
-![](201703/17586961_1786186238366457_7169958892875546624_n_17854938178135737.jpg)
-Love so big, I had to put it on a billboard.
+![Love so big, I had to put it on a billboard.](201703/17586961_1786186238366457_7169958892875546624_n_17854938178135737.jpg)
+*Love so big, I had to put it on a billboard.*
 
 ---
 
-![Call me Peroni. #beerstagram #yay](201703/17662289_660751724114125_3229116452204183552_n_17875749559023689.jpg)
+![Call me Peroni.](201703/17662289_660751724114125_3229116452204183552_n_17875749559023689.jpg)
 *Call me Peroni.*
 
 ---
 
-![The calmest dog in the world.](201703/17586871_1969835023239789_2097595339409195008_n_17865483535106836.jpg)
+![Majestic. Wise. Possibly drunk. But still the goodest boy.](201703/17586871_1969835023239789_2097595339409195008_n_17865483535106836.jpg)
 *Majestic. Wise. Possibly drunk. But still the goodest boy.*
 
 ---
 
-![](201703/17596139_431207320551620_671765505371013120_n_17876459122031163.jpg)
-When love was young, blurry, and full of bracelets.
+![When love was young, blurry, and full of bracelets.](201703/17596139_431207320551620_671765505371013120_n_17876459122031163.jpg)
+*When love was young, blurry, and full of bracelets.*
 ---
 
-![](201703/17596120_287462955021498_7114071421210329088_n_17865391270099925.jpg)
-One beer to rule them all, and another to make sure you read it twice.
+![One beer to rule them all, and another to make sure you read it twice.](201703/17596120_287462955021498_7114071421210329088_n_17865391270099925.jpg)
+*One beer to rule them all, and another to make sure you read it twice.*
 ---
 
-![](201703/17587166_269800010113027_4450156597687091200_n_17864405071123579.jpg)
-To love, to life, and to pretending those fries count as a meal.
-
----
-
-![](201703/17596535_1413685978696491_6444452089522290688_n_17868057379076717.jpg)
-Camouflaged like a lazy jungle predator… but for naps.
+![To love, to life, and to pretending those fries count as a meal.](201703/17587166_269800010113027_4450156597687091200_n_17864405071123579.jpg)
+*To love, to life, and to pretending those fries count as a meal.*
 
 ---
 
-![](201703/17662034_313468815736339_8290139062921068544_n_17854975324132493.jpg)
-Sign says ‘Do not sit on the table’… But what if I AM the table?
+![Camouflaged like a lazy jungle predator… but for naps.](201703/17596535_1413685978696491_6444452089522290688_n_17868057379076717.jpg)
+*Camouflaged like a lazy jungle predator… but for naps.*
 
 ---
 
-![Arrosticini (lamb skewers)](201703/17493415_185512398626579_4709434689490780160_n_17872289101066635.jpg)
+![Sign says ‘Do not sit on the table’… But what if I AM the table?](201703/17662034_313468815736339_8290139062921068544_n_17854975324132493.jpg)
+*Sign says ‘Do not sit on the table’… But what if I AM the table?*
+
+---
+
+![Arrosticini (Smoke is just extra seasoning.)](201703/17493415_185512398626579_4709434689490780160_n_17872289101066635.jpg)
 *Arrosticini (Smoke is just extra seasoning.)*
 
 ---
 
-![](201703/17662647_615080265357291_6057205004752650240_n_17869654237069020.jpg)
-When your dinner date has more charm than you.
+![When your dinner date has more charm than you.](201703/17662647_615080265357291_6057205004752650240_n_17869654237069020.jpg)
+*When your dinner date has more charm than you.*
 
 ---
 
-![](201703/17586879_1687251118242025_5851557237566210048_n_17852121859186959.jpg)
-Focused. Determined. Probably lost.
+![Focused. Determined. Probably lost.](201703/17586879_1687251118242025_5851557237566210048_n_17852121859186959.jpg)
+*Focused. Determined. Probably lost.*
 
 ---
 
-![](201703/17586629_245653242565620_7646053943167942656_n_17852324845171690.jpg)
-New hair, new me. Vogue, call me.
+![New hair, new me. Vogue, call me.](201703/17586629_245653242565620_7646053943167942656_n_17852324845171690.jpg)
+*New hair, new me. Vogue, call me.*
 
 ---
 
@@ -618,45 +621,45 @@ New hair, new me. Vogue, call me.
 
 ---
 
-![](201703/17596160_1380613868625657_673302210309783552_n_17864144374124606.jpg)
-When you tell the sommelier to bring just one bottle, but he really gets you.
+![When you tell the sommelier to bring just one bottle, but he really gets you.](201703/17596160_1380613868625657_673302210309783552_n_17864144374124606.jpg)
+*When you tell the sommelier to bring just one bottle, but he really gets you.*
 
 ---
 
-![](201703/17662246_1438408949800201_6828463474780143616_n_17852106934189190.jpg)
-When you watch one spaghetti western and suddenly feel bilingual.
+![When you watch one spaghetti western and suddenly feel bilingual.](201703/17662246_1438408949800201_6828463474780143616_n_17852106934189190.jpg)
+*When you watch one spaghetti western and suddenly feel bilingual.*
 
 ---
 
-![](201703/17493568_1083501908421414_4601855688690368512_n_17863077403093792.jpg)
-Signing the contract with my liver for one last drink. It didn’t read the fine print.
+![Signing the contract with my liver for one last drink. It didn’t read the fine print.](201703/17493568_1083501908421414_4601855688690368512_n_17863077403093792.jpg)
+*Signing the contract with my liver for one last drink. It didn’t read the fine print.*
 
 ---
 
-![Declaration of love ❤️](201703/17662421_1680958192208775_5229175184560226304_n_17877673507047733.jpg)
+![Romance level: grand gesture or mild vandalism?](201703/17662421_1680958192208775_5229175184560226304_n_17877673507047733.jpg)
 *Romance level: grand gesture or mild vandalism?*
 
 ---
 
-![Line 38, Pescara](201703/17587281_825640380917986_8832088902597607424_n_17865609973102263.jpg)
+![Last bus to love left 5 minutes ago. Now I live here.](201703/17587281_825640380917986_8832088902597607424_n_17865609973102263.jpg)
 *Last bus to love left 5 minutes ago. Now I live here.*
 
 ---
 
-![](201703/17662286_273917089703013_5441386568013053952_n_17865402262111378.jpg)
-Local man forgets shoes, decides to become one with the beach railing instead.
+![Local man forgets shoes, decides to become one with the beach railing instead.](201703/17662286_273917089703013_5441386568013053952_n_17865402262111378.jpg)
+*Local man forgets shoes, decides to become one with the beach railing instead.*
 
 ---
 
-![](201703/17595995_298494840569462_9104989565512318976_n_17863089256095169.jpg)
-King of the Rock: Now taking applications for loyal subjects. Must be able to swim.
+![King of the Rock: Now taking applications for loyal subjects. Must be able to swim.](201703/17595995_298494840569462_9104989565512318976_n_17863089256095169.jpg)
+*King of the Rock: Now taking applications for loyal subjects. Must be able to swim.*
 
 ---
 
-![](201703/17596500_144553629405389_6230666012144959488_n_17865068902104677.jpg)
-Walking on water? Nah, just casually flexing my sea-level dominance.
+![Walking on water? Nah, just casually flexing my sea-level dominance.](201703/17596500_144553629405389_6230666012144959488_n_17865068902104677.jpg)
+*Walking on water? Nah, just casually flexing my sea-level dominance.*
 
 ---
 
-![Parco Due Giugno #relax](201703/17662645_325680114496878_9130216532666744832_n_17862941059095925.jpg)
+![I'm so cool, even the background fades in admiration.](201703/17662645_325680114496878_9130216532666744832_n_17862941059095925.jpg)
 *I'm so cool, even the background fades in admiration.*
