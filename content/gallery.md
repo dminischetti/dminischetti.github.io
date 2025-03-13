@@ -175,9 +175,9 @@ ShowReadingTime: false
 
 {{< gallery-item	
     src="why-do-american-elevators-have-to-be-so-complicated-️.png"
-    alt="Why do American elevators have to be so complicated? 🤷‍♂️"
-    caption="Why do American elevators have to be so complicated? 🤷‍♂️"
-    identifier="why-do-american-elevators-have-to-be-so-complicated-️" >}}
+    alt="Why do some elevators have to be so complicated? 🤷‍♂️"
+    caption="Why do some elevators have to be so complicated? 🤷‍♂️"
+    identifier="why-do-some-elevators-have-to-be-so-complicated-️" >}}
 
 ---
 
