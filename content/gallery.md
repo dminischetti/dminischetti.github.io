@@ -7,167 +7,167 @@ ShowReadingTime: false
 
 
 ![Finally Got the Keys to HOPE—Turns Out Rent’s Still Crazy](202407/470189205_18471139087005931_5498663748772846088_n_18030007750980762.jpg)
-*Finally Got the Keys to HOPE—Turns Out Rent’s Still Crazy*
+Jul 2024 : *Finally Got the Keys to HOPE—Turns Out Rent’s Still Crazy*
 
 ---
 
 ![Who needs toilet paper holders? Say hello to the vertical marvel! A daring twist on the inwards or outwards debate. Embrace the unconventional, break free from norms!](202306/351112916_724534699449739_3221355050622590752_n_17843600867996250.jpg)
-*Who needs toilet paper holders? Say hello to the vertical marvel! A daring twist on the inwards or outwards debate. Embrace the unconventional, break free from norms!*
+Jun 2023 : *Who needs toilet paper holders? Say hello to the vertical marvel! A daring twist on the inwards or outwards debate. Embrace the unconventional, break free from norms!*
 
 ---
 
 ![To be happy, you don’t need a degree, money, a house with a mortgage, or a car. You just need someone who truly loves you and listens to you. The rest comes by itself.](202303/338426386_228747349686211_892479777024634891_n_17949521942413980.jpg)
-*To be happy, you don’t need a degree, money, a house with a mortgage, or a car. You just need someone who truly loves you and listens to you. The rest comes by itself.*
+Mar  2023 : *To be happy, you don’t need a degree, money, a house with a mortgage, or a car. You just need someone who truly loves you and listens to you. The rest comes by itself.*
 
 ---
 
 ![Certified Italian Beauty](202210/311199991_1296399107564982_6940705111442976943_n_17941803011369545.jpg)
-*Certified Italian Beauty*
+Oct 2022 : *Certified Italian Beauty*
 
 ---
 
 ![Negotiations with the Local Boss](202207/296582817_1134275913820765_254023055292837720_n_18023507980399952.jpg)
-*Negotiations with the Local Boss*
+Jul 2022 : *Negotiations with the Local Boss*
 
 ---
 
 ![Quack to the Future](202203/276156643_292932812919889_2600641743052748119_n_17907224636346856.jpg)
-*Quack to the Future*
+Mar  2022 : *Quack to the Future*
 
 ---
 
 ![Lost in the Blanket Dimension](202201/271946512_405891917893376_6473240779589579787_n_17916064754104800.jpg)
-*Lost in the Blanket Dimension*
+Jan 2022 : *Lost in the Blanket Dimension*
 
 ---
 
 ![Santa as right: visit people once a year!](202112/269924644_111261131309940_6577450504397619996_n_17934631828846223.jpg)
-*Santa as right: visit people once a year!*
+Dec 2021 : *Santa as right: visit people once a year!*
 
 ---
 
 ![Mission Control: Work Hard, Play Harder](202110/246946907_642983106692900_6107196596492068696_n_17888538335376218.jpg)
-*Mission Control: Work Hard, Play Harder*
+Oct 2021 : *Mission Control: Work Hard, Play Harder*
 
 ---
 
 ![Santa Rosalia, Brooklyn, NY](202108/240493721_1951239238386897_7460938537218336772_n_17883118580359585.jpg)
-*Santa Rosalia, Brooklyn, NY*
+Aug 2021 : *Santa Rosalia, Brooklyn, NY*
 
 ---
 
 ![Is this the “language of the street”?](202107/225769089_4466266416755928_2796584123203184008_n_18233238076067596.jpg)
-*Is this the “language of the street”?*
+Jul 2021 : *Is this the “language of the street”?*
 
 ---
 
 ![One Street, Two Explorers, Zero Clue](202107/223069846_183823617123430_2020683657545647273_n_17914192702804135.jpg)
-*One Street, Two Explorers, Zero Clue*
+Jul 2021 : *One Street, Two Explorers, Zero Clue*
 
 ---
 
 ![They spelled “wrong” wrong. 😂](202107/220695470_256876782517975_4382010133640113650_n_17911436125902223.jpg)
-*They spelled “wrong” wrong. 😂*
+Jul 2021 : *They spelled “wrong” wrong. 😂*
 
 ---
 
 ![bar: n. m. A place to drink a good coffee with a croissant, a glass of cold water, and a dirty ashtray right in front of you.](202107/218965025_2986628148275087_2206345405580970118_n_17882914097494323.jpg)
-*bar: n. m. A place to drink a good coffee with a croissant, a glass of cold water, and a dirty ashtray right in front of you.*
+Jul 2021 : *bar: n. m. A place to drink a good coffee with a croissant, a glass of cold water, and a dirty ashtray right in front of you.*
 
 ---
 
 ![Love, fire and relax.](202107/210260246_296975595457756_6256784254318949990_n_18124438888210074.jpg)
-*Love, fire and relax.*
+Jul 2021 : *Love, fire and relax.*
 
 ---
 
 ![Summer’s Sizzling Skewers: Meat the Heat](202106/206319825_133263782157750_6630502438104810821_n_17871712034448709.jpg)
-*Summer’s Sizzling Skewers: Meat the Heat*
+Jun 2021 : *Summer’s Sizzling Skewers: Meat the Heat*
 
 ---
 
 ![Park Here, Free Car Removal](202104/174834578_3126652957565720_2389660785461562010_n_18071934196276629.jpg)
-*Park Here, Free Car Removal*
+Apr   2021 : *Park Here, Free Car Removal*
 
 ---
 
 ![Bunny Mafia: Too Cool to Care](202103/160999900_918413202265463_6927623433138339435_n_17868230657369784.jpg)
-*Bunny Mafia: Too Cool to Care*
+Mar  2021 : *Bunny Mafia: Too Cool to Care*
 
 ---
 
 ![Brooklyn’s Most Persuasive Wall](202101/140771960_765486444324252_5892982306058374536_n_17890639591863558.jpg)
-*Brooklyn’s Most Persuasive Wall*
+Jan 2021 : *Brooklyn’s Most Persuasive Wall*
 
 ---
 
 ![If there’s a heaven for me, I’m sure it has a beach attached to it.](202101/139630411_241898704103936_7023671688269488544_n_18055094377279159.jpg)
-*If there’s a heaven for me, I’m sure it has a beach attached to it.*
+Jan 2021 : *If there’s a heaven for me, I’m sure it has a beach attached to it.*
 
 ---
 
 ![R stands for Right, right?](202101/139996083_226197368989959_1498084870363358584_n_17936874619450916.jpg)
-*R stands for Right, right?*
+Jan 2021 : *R stands for Right, right?*
 
 ---
 
 ![Why do American elevators have to be so complicated? 🤷‍♂️](202101/139562821_393310368636054_458936574988538231_n_17901994024727890.jpg)
-*Why do American elevators have to be so complicated? 🤷‍♂️*
+Jan 2021 : *Why do American elevators have to be so complicated? 🤷‍♂️*
 
 ---
 
 ![My gifts are not under the three, they’re around it. ❤️](202012/132064438_3542182792565013_7294793281769882041_n_18141016096120664.jpg)
-*My gifts are not under the three, they’re around it. ❤️*
+Dec 2020 : *My gifts are not under the three, they’re around it. ❤️*
 
 ---
 
 ![Life is uncertain. Eat dessert first.](202012/129197837_390036042312941_5172243519867424161_n_17874765311004460.jpg)
-*Life is uncertain. Eat dessert first.*
+Dec 2020 : *Life is uncertain. Eat dessert first.*
 
 ---
 
 ![Life is too short to drink cheap beer.](202011/126399645_388835192538641_6175625900994968440_n_18117168772160892.jpg)
-*Life is too short to drink cheap beer.*
+Nov 2020 : *Life is too short to drink cheap beer.*
 
 ---
 
 ![In the morning, you must be happy. ☀️](202009/120204510_1698862606934971_7462702436610166717_n_17859799310123917.jpg)
-*In the morning, you must be happy. ☀️*
+Sep 2020 : *In the morning, you must be happy. ☀️*
 
 ---
 
 ![My art class today](202005/101051030_272491510570761_2759366138611607561_n_17874831304698452.jpg)
-*My art class today*
+May 2020 : *My art class today*
 
 ---
 
 ![Female pastry chef cream (crema pasticcera)](202005/95980936_1084220321950900_881351259433800168_n_17871493765728152.jpg)
-*Female pastry chef cream (crema pasticcera)*
+May 2020 : *Female pastry chef cream (crema pasticcera)*
 
 ---
 
 ![Do you think I’m getting fat from not moving around?](202003/91218416_1163376560677068_5621023291856712168_n_17877270979591784.jpg)
-*Do you think I’m getting fat from not moving around?*
+Mar  2020 : *Do you think I’m getting fat from not moving around?*
 
 ---
 
 ![Braving the Snow for Panzerotti Love](202001/82236681_170507900926325_1351941083158987179_n_18047346697221530.jpg)
-*Braving the Snow for Panzerotti Love*
+Jan 2020 : *Braving the Snow for Panzerotti Love*
 
 ---
 
 ![Fine Dining with a Side of Drama](202001/79291051_2585446285022186_7248066450923242689_n_18051067276204661.jpg)
-*Fine Dining with a Side of Drama*
+Jan 2020 : *Fine Dining with a Side of Drama*
 
 ---
 
 ![Me and my new friend](201912/79159051_789818584831330_3013097637454942976_n_17845428316875980.jpg)
-*Me and my new friend*
+Dec 2019 : *Me and my new friend*
 
 ---
 
 ![Live Love Pasta](201912/75312597_151852956107328_8824581796109631347_n_17850030562757275.jpg)
-*Live Love Pasta*
+Dec 2019 : *Live Love Pasta*
 
 ---
 
@@ -177,489 +177,489 @@ The Sistine Toilet: A Literary Masterpiece
 ---
 
 ![Eat Pasta. Run Fasta.](201909/68695115_558323928045121_7151569658030951913_n_17868444028465527.jpg)
-*Eat Pasta. Run Fasta.*
+Sep 2019 : *Eat Pasta. Run Fasta.*
 
 ---
 
 ![Essential aspects of ... Negroni?](201909/67983938_376135149984318_5644019933012131320_n_17927617897309886.jpg)
-*Essential aspects of ... Negroni?*
+Sep 2019 : *Essential aspects of ... Negroni?*
 
 ---
 
 ![Cupid Was Out of Arrows](201908/67104533_1323222987844606_3989805264988526429_n_17844255091565602.jpg)
-*Cupid Was Out of Arrows*
+Aug 2019 : *Cupid Was Out of Arrows*
 
 ---
 
 ![My daughter is a rebel.](201908/67932815_116740296316084_5508458124497359975_n_17892237925375143.jpg)
-*My daughter is a rebel.*
+Aug 2019 : *My daughter is a rebel.*
 
 ---
 
 ![Mamma Mia, That’s A Lotta Luggage](201907/65123671_371025673600705_5942621445875436589_n_18080965270001339.jpg)
-*Mamma Mia, That’s A Lotta Luggage*
+Jul 2019 : *Mamma Mia, That’s A Lotta Luggage*
 
 ---
 
 ![Soulmates in Suffering](201907/64790492_2117054438421053_4921994172747216567_n_18080276014042963.jpg)
-*Soulmates in Suffering*
+Jul 2019 : *Soulmates in Suffering*
 
 ---
 
 ![Local kebab skewers.](201907/64739985_478604872899713_248930490024884015_n_17877859096376010.jpg)
-*Local kebab skewers.*
+Jul 2019 : *Local kebab skewers.*
 
 ---
 
 ![Love at First Bite](201906/63430826_395125477768541_1356483952598988303_n_18011389186210905.jpg)
-*Love at First Bite*
+Jun 2019 : *Love at First Bite*
 
 ---
 
 ![Lost in the Woods, Send Pasta](201906/62147376_125630558655134_1113070305924010953_n_18010180180210754.jpg)
-*Lost in the Woods, Send Pasta*
+Jun 2019 : *Lost in the Woods, Send Pasta*
 
 ---
 
 ![Accidentally Hiked Into a Windows XP Wallpaper](201906/65162453_179014669771938_5222534529129190406_n_18076543201039916.jpg)
-*Accidentally Hiked Into a Windows XP Wallpaper*
+Jun 2019 : *Accidentally Hiked Into a Windows XP Wallpaper*
 
 ---
 
 ![Mediterranean passion.](201906/64630765_451011778815696_2556830311793915910_n_17918264422305787.jpg)
-*Mediterranean passion.*
+Jun 2019 : *Mediterranean passion.*
 
 ---
 
 ![BRB, Relocating Here Forever](201906/62038666_2023451127766936_9048997349852759737_n_17917773598307186.jpg)
-*BRB, Relocating Here Forever*
+Jun 2019 : *BRB, Relocating Here Forever*
 
 ---
 
 ![You don’t just drink wine. You choose it, look at it, smell it, sip it, taste it… and talk about it. 🍷](201906/62412984_345945246098463_1123995242817069518_n_17979657979259624.jpg)
-*You don’t just drink wine. You choose it, look at it, smell it, sip it, taste it… and talk about it. 🍷*
+Jun 2019 : *You don’t just drink wine. You choose it, look at it, smell it, sip it, taste it… and talk about it. 🍷*
 
 ---
 
 ![Espresso: The Real Reason for Inner Peace](201906/61786591_134259454437011_1281001178240709905_n_18006349216220715.jpg)
-*Espresso: The Real Reason for Inner Peace*
+Jun 2019 : *Espresso: The Real Reason for Inner Peace*
 
 ---
 
 ![When Your Wall Roasts You](201906/61780933_137043484060836_6996410145921194286_n_17846992228476264.jpg)
-*When Your Wall Roasts You*
+Jun 2019 : *When Your Wall Roasts You*
 
 ---
 
 ![Is This the Line for Free Pizza?](201905/61250951_295034508045571_3911025262146990982_n_18047346667121199.jpg)
-*Is This the Line for Free Pizza?*
+May 2019 : *Is This the Line for Free Pizza?*
 
 ---
 
 ![5 “laps” of English, 3 of Database, 7 of Math…](201905/60366938_169367080733334_2582713959099841495_n_17882800894349605.jpg)
-*5 “laps” of English, 3 of Database, 7 of Math…*
+May 2019 : *5 “laps” of English, 3 of Database, 7 of Math…*
 
 ---
 
 ![Now Playing: 50 Shades of Nothing.](201904/58716093_838001689866106_2282913442508309311_n_17881511779338237.jpg)
-*Now Playing: 50 Shades of Nothing.*
+Apr   2019 : *Now Playing: 50 Shades of Nothing.*
 
 ---
 
 ![Promised Sunshine. I’m Calling My Lawyer](201904/56563297_1304871106347197_6530213188657371724_n_17879130163340146.jpg)
-*Promised Sunshine. I’m Calling My Lawyer*
+Apr   2019 : *Promised Sunshine. I’m Calling My Lawyer*
 
 ---
 
 ![Hofstadter’s Law: This Chapter is Still Loading](201904/56778631_215181979439508_9060016877695159464_n_18025827643182013.jpg)
-*Hofstadter’s Law: This Chapter is Still Loading*
+Apr   2019 : *Hofstadter’s Law: This Chapter is Still Loading*
 
 ---
 
 ![You can’t buy happiness. But you can buy coffee with a croissant, and that’s pretty close.](201904/55872694_421070435387210_8491699345086258293_n_17985584563220189.jpg)
-*You can’t buy happiness. But you can buy coffee with a croissant, and that’s pretty close.*
+Apr   2019 : *You can’t buy happiness. But you can buy coffee with a croissant, and that’s pretty close.*
 
 ---
 
 ![Sorry, I don’t have time.](201903/54277624_1236194259878534_4238407834921072132_n_18050292136060845.jpg)
-*Sorry, I don’t have time.*
+Mar  2019 : *Sorry, I don’t have time.*
 
 ---
 
 ![So I’m the Chosen One Now?](201903/54512475_387428905425023_5572601582386162858_n_17856774208365176.jpg)
-*So I’m the Chosen One Now?*
+Mar  2019 : *So I’m the Chosen One Now?*
 
 ---
 
 ![MTA: May Take Awhile](201903/54247892_884395391903905_3066907639953222514_n_18014999440176288.jpg)
-*MTA: May Take Awhile*
+Mar  2019 : *MTA: May Take Awhile*
 
 ---
 
 ![When Your Diet Requires Advanced Math](201903/53904114_335811003724378_2182426799642539045_n_17876910559318959.jpg)
-*When Your Diet Requires Advanced Math*
+Mar  2019 : *When Your Diet Requires Advanced Math*
 
 ---
 
 ![When ‘Say Cheese’ Goes Too Far](201903/53908353_553739865137902_8749958691962335734_n_18019688965081518.jpg)
-*When ‘Say Cheese’ Goes Too Far*
+Mar  2019 : *When ‘Say Cheese’ Goes Too Far*
 
 ---
 
 ![Auditioning for a 1940s Detective Flick](201903/52661229_798259590532584_2333881526950337139_n_17951958799253532.jpg)
-*Auditioning for a 1940s Detective Flick*
+Mar  2019 : *Auditioning for a 1940s Detective Flick*
 
 ---
 
 ![Betrayed by the Weather App](201903/52901936_1577537852391069_3342801893614848124_n_17961272779244699.jpg)
-*Betrayed by the Weather App*
+Mar  2019 : *Betrayed by the Weather App*
 
 ---
 
 ![TooClose](201903/51861611_126926061711298_3723976538532483681_n_18036290941070042.jpg)
-*TooClose*
+Mar  2019 : *TooClose*
 
 ---
 
 ![Let’s get ready for the selfies.](201902/51296238_2069294039819499_9001121943884002829_n_18036117355024372.jpg)
-*Let’s get ready for the selfies.*
+Feb 2019 : *Let’s get ready for the selfies.*
 
 ---
 
 ![And I feel like I’m in Italy!](201902/50855071_1993227467648873_8587216748714806038_n_17916053743304547.jpg)
-*And I feel like I’m in Italy!*
+Feb 2019 : *And I feel like I’m in Italy!*
 
 ---
 
 ![Dear Future Me, Sorry for All the Carbs](201902/51467658_119189822487849_4572886484657589921_n_17914555150280863.jpg)
-*Dear Future Me, Sorry for All the Carbs*
+Feb 2019 : *Dear Future Me, Sorry for All the Carbs*
 
 ---
 
 ![Great. I’m going to be late for work again.](201902/52569319_136249667411633_6942365227087316215_n_18002546311134596.jpg)
-*Great. I’m going to be late for work again.*
+Feb 2019 : *Great. I’m going to be late for work again.*
 
 ---
 
 ![One day, someone will have to explain what some producers have against normal toilet paper.](201902/51363288_644090089374278_6655907149495389309_n_17971986490206716.jpg)
-*One day, someone will have to explain what some producers have against normal toilet paper.*
+Feb 2019 : *One day, someone will have to explain what some producers have against normal toilet paper.*
 
 ---
 
 ![Showing your Italian-ness at the beach in New York.](201809/40104010_1917182524994340_141369398303653888_n_17902774708231549.jpg)
-*Showing your Italian-ness at the beach in New York.*
+Sep 2018 : *Showing your Italian-ness at the beach in New York.*
 
 ---
 
 ![???](201807/36995048_151730155643895_3216928717997604864_n_17933754016156276.jpg)
-*???*
+Jul 2018 : *???*
 
 ---
 
 ![Lobsta Roll](201807/35617106_2205792232977274_4574101244951396352_n_17930931955182187.jpg)
-*Lobsta Roll*
+Jul 2018 : *Lobsta Roll*
 
 ---
 
 ![Relax in Buast’n, Masciacciutz](201807/35928279_1055500114597594_8114553970862587904_n_17895855484219371.jpg)
-*Relax in Buast’n, Masciacciutz*
+Jul 2018 : *Relax in Buast’n, Masciacciutz*
 
 ---
 
 ![Wait, It’s Not a Water Fountain?](201806/35269348_201427867180843_6041890701858308096_n_17893808947223016.jpg)
-*Wait, It’s Not a Water Fountain?*
+Jun 2018 : *Wait, It’s Not a Water Fountain?*
 
 ---
 
 ![Timed garbage bags container.](201806/34823342_2039456166293483_3662335419506229248_n_17935565515120633.jpg)
-*Timed garbage bags container.*
+Jun 2018 : *Timed garbage bags container.*
 
 ---
 
 ![A strange object called a dish rack (scolapiatti).](201806/34982374_232153280701628_3678979637548941312_n_17951331829012970.jpg)
-*A strange object called a dish rack (scolapiatti).*
+Jun 2018 : *A strange object called a dish rack (scolapiatti).*
 
 ---
 
 ![Proper amounts of coffee in a small cup. ☕️](201806/33464511_139382686930720_6736985687897145344_n_17943352534078083.jpg)
-*Proper amounts of coffee in a small cup. ☕️*
+Jun 2018 : *Proper amounts of coffee in a small cup. ☕️*
 
 ---
 
 ![Entering the Twilight Zone](201806/34789182_363923340796745_1204376741821284352_n_17924424313188227.jpg)
-*Entering the Twilight Zone*
+Jun 2018 : *Entering the Twilight Zone*
 
 ---
 
 ![Times Square’s Official Handshake: The Single-Digit Wave](201805/32136051_1593881927401100_2993367634356994048_n_17919182563150021.jpg)
-*Times Square’s Official Handshake: The Single-Digit Wave*
+May 2018 : *Times Square’s Official Handshake: The Single-Digit Wave*
 
 ---
 
 ![Darn! I'm Stuck in Prose](201805/31761326_2103213726591581_7947850965661515776_n_17915372458160860.jpg)
-*Darn! I'm Stuck in Prose*
+May 2018 : *Darn! I'm Stuck in Prose*
 
 ---
 
 ![The sea is far away, but you, sun… take me with you! ☀️](201805/31198300_1652755661429037_3911932620664995840_n_17924735479092091.jpg)
-*The sea is far away, but you, sun… take me with you! ☀️*
+May 2018 : *The sea is far away, but you, sun… take me with you! ☀️*
 
 ---
 
 ![Breaking News: This Stump Demands a Lawyer.](201804/30591109_256595661550352_5074938227446513664_n_17866146244242664.jpg)
-*Breaking News: This Stump Demands a Lawyer.*
+Apr   2018 : *Breaking News: This Stump Demands a Lawyer.*
 
 ---
 
 ![My bike ver. 1.2](201802/28158137_697700087285506_6265176542519754752_n_17901112429151718.jpg)
-*My bike ver. 1.2*
+Feb 2018 : *My bike ver. 1.2*
 
 ---
 
 ![You gotta catch ’em all!](201802/26872518_347579559055034_4057601212512468992_n_17923932055056682.jpg)
-*You gotta catch ’em all!*
+Feb 2018 : *You gotta catch ’em all!*
 
 ---
 
 ![This vacation in New York is lasting a bit too long.](201801/26154826_1531766830194073_1947435839562711040_n_17917704763015279.jpg)
-*This vacation in New York is lasting a bit too long.*
+Jan 2018 : *This vacation in New York is lasting a bit too long.*
 
 ---
 
 ![Baby it’s cold outside.](201712/25008125_204996700073487_7748804425770074112_n_17856128830210508.jpg)
-*Baby it’s cold outside.*
+Dec 2017 : *Baby it’s cold outside.*
 
 ---
 
 ![Arthur Avenue: Where Tomatoes Have Murals and Streets Win Elections](201711/23668187_2045897625679502_4172842598177701888_n_17885381404142608.jpg)
-*Arthur Avenue: Where Tomatoes Have Murals and Streets Win Elections*
+Nov 2017 : *Arthur Avenue: Where Tomatoes Have Murals and Streets Win Elections*
 
 ---
 
 ![Plot Twist: My Shadow’s the Real Main Character](201711/23161582_163791040874935_1670642914075607040_n_17897991097079855.jpg)
-*Plot Twist: My Shadow’s the Real Main Character*
+Nov 2017 : *Plot Twist: My Shadow’s the Real Main Character*
 
 ---
 
 ![NYC College of Technology: Where coffee is the official programming language.*
 ](201711/23101175_159693681296554_7987463466212392960_n_17882750698138830.jpg)
-*NYC College of Technology: Where coffee is the official programming language.*
+Nov 2017 : *NYC College of Technology: Where coffee is the official programming language.*
 
 ---
 
 ![Finally, a diet I can commit ](201710/22793834_434006817001094_862179835307360256_n_17904748891045061.jpg)
-*Finally, a diet I can commit *
+Oct 2017 : *Finally, a diet I can commit *
 
 ---
 
 ![Tonight I’ll read the first book I find on my bedside table…](201710/22637635_1727817797259231_3812437929431662592_n_17892593002098617.jpg)
-*Tonight I’ll read the first book I find on my bedside table…*
+Oct 2017 : *Tonight I’ll read the first book I find on my bedside table…*
 
 ---
 
 ![Schrsh... Schrsh... Schrsh... ❤️](201710/22582256_628160727533800_8838404883934609408_n_17846659993204661.jpg)
-*Schrsh... Schrsh... Schrsh... ❤️*
+Oct 2017 : *Schrsh... Schrsh... Schrsh... ❤️*
 
 ---
 
 ![When Your Playlist is Fire but Existential Dread is Louder..](201709/21227705_734955316689102_4894593083263418368_n_17897262649023335.jpg)
-*When Your Playlist is Fire but Existential Dread is Louder..*
+Sep 2017 : *When Your Playlist is Fire but Existential Dread is Louder..*
 
 ---
 
 ![Me every Monday morning.](201708/21148117_461114580939120_3711812025416941568_n_17896155658001961.jpg)
-*Me every Monday morning.*
+Aug 2017 : *Me every Monday morning.*
 
 ---
 
 ![Sometimes my backpack is heavier than my life choices*
 ](201708/20902212_1114925701970836_8674888379394949120_n_17879198314093730.jpg)
-*Sometimes my backpack is heavier than my life choices*
+Aug 2017 : *Sometimes my backpack is heavier than my life choices*
 
 ---
 
 ![When life gives you lemons, apparently it also gives you questionable branding choices](201708/20688586_515983892080163_1711256902215663616_n_17852519686198598.jpg)
-*When life gives you lemons, apparently it also gives you questionable branding choices*
+Aug 2017 : *When life gives you lemons, apparently it also gives you questionable branding choices*
 
 ---
 
 ![Crossing my legs, skipping my responsibilities.](201707/19986028_1701086493252270_2625293210582253568_n_17873608774092420.jpg)
-*Crossing my legs, skipping my responsibilities.*
+Jul 2017 : *Crossing my legs, skipping my responsibilities.*
 
 ---
 
 ![Girls just wanna have sun](201707/19933115_120491111898290_7747113943822237696_n_17862576865164143.jpg)
-*Girls just wanna have sun*
+Jul 2017 : *Girls just wanna have sun*
 
 ---
 
 ![The only love triangle I won’t regret.](201707/19534851_1905755483002374_7587498751351062528_n_17864205631138741.jpg)
-*The only love triangle I won’t regret.*
+Jul 2017 : *The only love triangle I won’t regret.*
 
 ---
 
 ![Many people look for happiness like they look for their hat: they always have it on their head. 🎩](201707/19534222_720358324831583_8497038478066843648_n_17886467794017859.jpg)
-*Many people look for happiness like they look for their hat: they always have it on their head. 🎩*
+Jul 2017 : *Many people look for happiness like they look for their hat: they always have it on their head. 🎩*
 
 ---
 
 ![Plotting my villain origin story… or just vibing to lo-fi beats.](201706/19534032_303869040059652_9153619298361540608_n_17880179863065964.jpg)
-*Plotting my villain origin story… or just vibing to lo-fi beats.*
+Jun 2017 : *Plotting my villain origin story… or just vibing to lo-fi beats.*
 
 ---
 
 ![Trying to grow wings, still just getting anxiety.](201706/19436392_108301716464793_8880646948147691520_n_17871280303085798.jpg)
-*Trying to grow wings, still just getting anxiety.*
+Jun 2017 : *Trying to grow wings, still just getting anxiety.*
 
 ---
 
 ![Some loves never end—they go around in circles and come back again… Toilet paper doesn’t. That never comes back.](201706/18812707_133688190520346_7339716444457795584_n_17869628998121379.jpg)
-*Some loves never end—they go around in circles and come back again… Toilet paper doesn’t. That never comes back.*
+Jun 2017 : *Some loves never end—they go around in circles and come back again… Toilet paper doesn’t. That never comes back.*
 
 ---
 
 ![Money to buy, no time to play. #fendercd60 #acousticguitar](201705/18646653_455828454809290_34159975144095744_n_17870014741099378.jpg)
-*Money to buy, no time to play.*
+May 2017 : *Money to buy, no time to play.*
 
 ---
 
 ![Lasagna: because happiness is best served in layers.](201704/18160257_1325434547577282_1401167667968081920_n_17855533732155915.jpg)
-*Lasagna: because happiness is best served in layers.*
+Apr   2017 : *Lasagna: because happiness is best served in layers.*
 
 ---
 
 ![Manhattan: Where dreams are made… and rent makes them cry.](201704/18161625_1861959660727135_8263656689710923776_n_17879244118060984.jpg)
-*Manhattan: Where dreams are made… and rent makes them cry.*
+Apr   2017 : *Manhattan: Where dreams are made… and rent makes them cry.*
 
 ---
 
 ![You’ve never played hide and seek until you’ve played it with these guys.](201704/18161822_207128279793386_8499660065974779904_n_17878482589056057.jpg)
-*You’ve never played hide and seek until you’ve played it with these guys.*
+Apr   2017 : *You’ve never played hide and seek until you’ve played it with these guys.*
 
 ---
 
 ![New toys.](201704/18096022_1528333827185043_6423986939724038144_n_17864866024090601.jpg)
-*New toys.*
+Apr   2017 : *New toys.*
 
 ---
 
 ![Italian bartender in action.](201704/17817791_445121282489712_8399297701153341440_n_17855864569141382.jpg)
-*Italian bartender in action.*
+Apr   2017 : *Italian bartender in action.*
 
 ---
 
 ![Permanent ink, temporary marker. Love that stays, even when the writing fades.](201703/17662054_274448339674085_3056567953563582464_n_17864860207106663.jpg)
-*Permanent ink, temporary marker. Love that stays, even when the writing fades.*
+Mar  2017 : *Permanent ink, temporary marker. Love that stays, even when the writing fades.*
 
 ---
 
 ![I’ve got the pawah](201703/17493535_1423522974359883_1781162167882481664_n_17870662099065444.jpg)
-*I’ve got the pawah*
+Mar  2017 : *I’ve got the pawah*
 
 ---
 
 ![Love so big, I had to put it on a billboard.](201703/17586961_1786186238366457_7169958892875546624_n_17854938178135737.jpg)
-*Love so big, I had to put it on a billboard.*
+Mar  2017 : *Love so big, I had to put it on a billboard.*
 
 ---
 
 ![Call me Peroni.](201703/17662289_660751724114125_3229116452204183552_n_17875749559023689.jpg)
-*Call me Peroni.*
+Mar  2017 : *Call me Peroni.*
 
 ---
 
 ![Majestic. Wise. Possibly drunk. But still the goodest boy.](201703/17586871_1969835023239789_2097595339409195008_n_17865483535106836.jpg)
-*Majestic. Wise. Possibly drunk. But still the goodest boy.*
+Mar  2017 : *Majestic. Wise. Possibly drunk. But still the goodest boy.*
 
 ---
 
 ![When love was young, blurry, and full of bracelets.](201703/17596139_431207320551620_671765505371013120_n_17876459122031163.jpg)
-*When love was young, blurry, and full of bracelets.*
+Mar  2017 : *When love was young, blurry, and full of bracelets.*
 ---
 
 ![One beer to rule them all, and another to make sure you read it twice.](201703/17596120_287462955021498_7114071421210329088_n_17865391270099925.jpg)
-*One beer to rule them all, and another to make sure you read it twice.*
+Mar  2017 : *One beer to rule them all, and another to make sure you read it twice.*
 ---
 
 ![To love, to life, and to pretending those fries count as a meal.](201703/17587166_269800010113027_4450156597687091200_n_17864405071123579.jpg)
-*To love, to life, and to pretending those fries count as a meal.*
+Mar  2017 : *To love, to life, and to pretending those fries count as a meal.*
 
 ---
 
 ![Camouflaged like a lazy jungle predator… but for naps.](201703/17596535_1413685978696491_6444452089522290688_n_17868057379076717.jpg)
-*Camouflaged like a lazy jungle predator… but for naps.*
+Mar  2017 : *Camouflaged like a lazy jungle predator… but for naps.*
 
 ---
 
 ![Sign says ‘Do not sit on the table’… But what if I AM the table?](201703/17662034_313468815736339_8290139062921068544_n_17854975324132493.jpg)
-*Sign says ‘Do not sit on the table’… But what if I AM the table?*
+Mar  2017 : *Sign says ‘Do not sit on the table’… But what if I AM the table?*
 
 ---
 
 ![Arrosticini (Smoke is just extra seasoning.)](201703/17493415_185512398626579_4709434689490780160_n_17872289101066635.jpg)
-*Arrosticini (Smoke is just extra seasoning.)*
+Mar  2017 : *Arrosticini (Smoke is just extra seasoning.)*
 
 ---
 
 ![When your dinner date has more charm than you.](201703/17662647_615080265357291_6057205004752650240_n_17869654237069020.jpg)
-*When your dinner date has more charm than you.*
+Mar  2017 : *When your dinner date has more charm than you.*
 
 ---
 
 ![Focused. Determined. Probably lost.](201703/17586879_1687251118242025_5851557237566210048_n_17852121859186959.jpg)
-*Focused. Determined. Probably lost.*
+Mar  2017 : *Focused. Determined. Probably lost.*
 
 ---
 
 ![New hair, new me. Vogue, call me.](201703/17586629_245653242565620_7646053943167942656_n_17852324845171690.jpg)
-*New hair, new me. Vogue, call me.*
+Mar  2017 : *New hair, new me. Vogue, call me.*
 
 ---
 
 ![Scene of a crime](201703/17661891_407627196278319_4062721144241782784_n_17875928512055535.jpg)
-*Scene of a crime*
+Mar  2017 : *Scene of a crime*
 
 ---
 
 ![When you tell the sommelier to bring just one bottle, but he really gets you.](201703/17596160_1380613868625657_673302210309783552_n_17864144374124606.jpg)
-*When you tell the sommelier to bring just one bottle, but he really gets you.*
+Mar  2017 : *When you tell the sommelier to bring just one bottle, but he really gets you.*
 
 ---
 
 ![When you watch one spaghetti western and suddenly feel bilingual.](201703/17662246_1438408949800201_6828463474780143616_n_17852106934189190.jpg)
-*When you watch one spaghetti western and suddenly feel bilingual.*
+Mar  2017 : *When you watch one spaghetti western and suddenly feel bilingual.*
 
 ---
 
 ![Signing the contract with my liver for one last drink. It didn’t read the fine print.](201703/17493568_1083501908421414_4601855688690368512_n_17863077403093792.jpg)
-*Signing the contract with my liver for one last drink. It didn’t read the fine print.*
+Mar  2017 : *Signing the contract with my liver for one last drink. It didn’t read the fine print.*
 
 ---
 
 ![Romance level: grand gesture or mild vandalism?](201703/17662421_1680958192208775_5229175184560226304_n_17877673507047733.jpg)
-*Romance level: grand gesture or mild vandalism?*
+Mar  2017 : *Romance level: grand gesture or mild vandalism?*
 
 ---
 
 ![Last bus to love left 5 minutes ago. Now I live here.](201703/17587281_825640380917986_8832088902597607424_n_17865609973102263.jpg)
-*Last bus to love left 5 minutes ago. Now I live here.*
+Mar  2017 : *Last bus to love left 5 minutes ago. Now I live here.*
 
 ---
 
 ![Local man forgets shoes, decides to become one with the beach railing instead.](201703/17662286_273917089703013_5441386568013053952_n_17865402262111378.jpg)
-*Local man forgets shoes, decides to become one with the beach railing instead.*
+Mar  2017 : *Local man forgets shoes, decides to become one with the beach railing instead.*
 
 ---
 
 ![King of the Rock: Now taking applications for loyal subjects. Must be able to swim.](201703/17595995_298494840569462_9104989565512318976_n_17863089256095169.jpg)
-*King of the Rock: Now taking applications for loyal subjects. Must be able to swim.*
+Mar  2017 : *King of the Rock: Now taking applications for loyal subjects. Must be able to swim.*
 
 ---
 
 ![Walking on water? Nah, just casually flexing my sea-level dominance.](201703/17596500_144553629405389_6230666012144959488_n_17865068902104677.jpg)
-*Walking on water? Nah, just casually flexing my sea-level dominance.*
+Mar  2017 : *Walking on water? Nah, just casually flexing my sea-level dominance.*
 
 ---
 
 ![I'm so cool, even the background fades in admiration.](201703/17662645_325680114496878_9130216532666744832_n_17862941059095925.jpg)
-*I'm so cool, even the background fades in admiration.*
+Mar  2017 : *I'm so cool, even the background fades in admiration.*
