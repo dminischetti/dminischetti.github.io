@@ -1,9 +1,7 @@
 <figure class="gallery-item">
-    <a href="{{ .Get "src" }}" data-lightbox="gallery" data-title="{{ .Get "caption" }}">
-      <img src="{{ .Get "src" }}" alt="{{ .Get "alt" }}" loading="lazy">
-    </a>
+    <img src="{{ .Get "src" }}" alt="{{ .Get "alt" }}" loading="lazy">
     <figcaption>
-      {{ .Get "caption" }}
+        <p>{{ .Get "caption" }}</p>
       <div class="like-container">
         <!-- LikeBtn.com BEGIN -->
         <span class="likebtn-wrapper"
