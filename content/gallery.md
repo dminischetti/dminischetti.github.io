@@ -561,7 +561,7 @@ Love so big, I had to put it on a billboard.
 ---
 
 ![Call me Peroni. #beerstagram #yay](201703/17662289_660751724114125_3229116452204183552_n_17875749559023689.jpg)
-*Call me Peroni. #beerstagram #yay*
+*Call me Peroni.*
 
 ---
 
@@ -594,19 +594,22 @@ Sign says ‘Do not sit on the table’… But what if I AM the table?
 ---
 
 ![Arrosticini (lamb skewers)](201703/17493415_185512398626579_4709434689490780160_n_17872289101066635.jpg)
-*Arrosticini (lamb skewers)*
+*Arrosticini (Smoke is just extra seasoning.)*
 
 ---
 
 ![](201703/17662647_615080265357291_6057205004752650240_n_17869654237069020.jpg)
+When your dinner date has more charm than you.
 
 ---
 
 ![](201703/17586879_1687251118242025_5851557237566210048_n_17852121859186959.jpg)
+Focused. Determined. Probably lost.
 
 ---
 
 ![](201703/17586629_245653242565620_7646053943167942656_n_17852324845171690.jpg)
+New hair, new me. Vogue, call me.
 
 ---
 
@@ -616,38 +619,44 @@ Sign says ‘Do not sit on the table’… But what if I AM the table?
 ---
 
 ![](201703/17596160_1380613868625657_673302210309783552_n_17864144374124606.jpg)
+When you tell the sommelier to bring just one bottle, but he really gets you.
 
 ---
 
 ![](201703/17662246_1438408949800201_6828463474780143616_n_17852106934189190.jpg)
+When you watch one spaghetti western and suddenly feel bilingual.
 
 ---
 
 ![](201703/17493568_1083501908421414_4601855688690368512_n_17863077403093792.jpg)
+Signing the contract with my liver for one last drink. It didn’t read the fine print.
 
 ---
 
 ![Declaration of love ❤️](201703/17662421_1680958192208775_5229175184560226304_n_17877673507047733.jpg)
-*Declaration of love ❤️*
+*Romance level: grand gesture or mild vandalism?*
 
 ---
 
 ![Line 38, Pescara](201703/17587281_825640380917986_8832088902597607424_n_17865609973102263.jpg)
-*Line 38, Pescara*
+*Last bus to love left 5 minutes ago. Now I live here.*
 
 ---
 
 ![](201703/17662286_273917089703013_5441386568013053952_n_17865402262111378.jpg)
+Local man forgets shoes, decides to become one with the beach railing instead.
 
 ---
 
 ![](201703/17595995_298494840569462_9104989565512318976_n_17863089256095169.jpg)
+King of the Rock: Now taking applications for loyal subjects. Must be able to swim.
 
 ---
 
 ![](201703/17596500_144553629405389_6230666012144959488_n_17865068902104677.jpg)
+Walking on water? Nah, just casually flexing my sea-level dominance.
 
 ---
 
 ![Parco Due Giugno #relax](201703/17662645_325680114496878_9130216532666744832_n_17862941059095925.jpg)
-*Parco Due Giugno #relax*
+*I'm so cool, even the background fades in admiration.*
