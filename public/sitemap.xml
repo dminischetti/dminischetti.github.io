@@ -8,6 +8,21 @@
     <loc>http://localhost:1313/posts/</loc>
     <lastmod>2026-03-14T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>http://localhost:1313/tags/file-formats/</loc>
+    <lastmod>2025-03-13T12:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/images/</loc>
+    <lastmod>2025-03-13T12:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/png-vs-jpg/</loc>
+    <lastmod>2025-03-13T12:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/tags/</loc>
+    <lastmod>2025-03-13T12:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/why-you-should-save-images-as-png-instead-of-jpg-most-of-the-time/</loc>
+    <lastmod>2025-03-13T12:00:00+00:00</lastmod>
+  </url><url>
     <loc>http://localhost:1313/tags/artisan-bread/</loc>
     <lastmod>2025-03-07T00:00:00+00:00</lastmod>
   </url><url>
@@ -29,16 +44,10 @@
     <loc>http://localhost:1313/tags/semolina-bread/</loc>
     <lastmod>2025-03-07T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
-    <lastmod>2025-03-07T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/posts/the-hunt-for-good-bread-in-nyc-and-how-i-finally-found-it/</loc>
     <lastmod>2025-03-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/photos/</loc>
-    <lastmod>2025-03-05T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/guestbook/</loc>
     <lastmod>2025-03-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/blogging/</loc>
@@ -279,5 +288,7 @@
     <loc>http://localhost:1313/resume/</loc>
   </url><url>
     <loc>http://localhost:1313/gallery/</loc>
+  </url><url>
+    <loc>http://localhost:1313/guestbook/</loc>
   </url>
 </urlset>

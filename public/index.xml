@@ -6,158 +6,21 @@
     <description>Recent content in Dominic Minischetti on Dominic&#39;s Sandbox</description>
     <generator>Hugo -- 0.144.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 07 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 13 Mar 2025 12:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Why You Should Save Images as PNG Instead of JPG (Most of the Time!)</title>
+      <link>http://localhost:1313/posts/why-you-should-save-images-as-png-instead-of-jpg-most-of-the-time/</link>
+      <pubDate>Thu, 13 Mar 2025 12:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/why-you-should-save-images-as-png-instead-of-jpg-most-of-the-time/</guid>
+      <description>A breakdown of why PNG is often the better choice over JPG—because nobody wants their images looking like they were printed on a potato.</description>
+    </item>
     <item>
       <title>The NYC Bread Hunt: How I Finally Found (and Made) the Perfect Loaf</title>
       <link>http://localhost:1313/posts/the-hunt-for-good-bread-in-nyc-and-how-i-finally-found-it/</link>
       <pubDate>Fri, 07 Mar 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/the-hunt-for-good-bread-in-nyc-and-how-i-finally-found-it/</guid>
       <description>My personal journey from bakery-hopping frustration to homemade bread perfection, thanks to a surprise Christmas gift and a little Italian know-how.</description>
-    </item>
-    <item>
-      <title>Welcome to my Guestbook!</title>
-      <link>http://localhost:1313/guestbook/</link>
-      <pubDate>Wed, 05 Mar 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/guestbook/</guid>
-      <description>&lt;p&gt;Feel free to leave a message below! I appreciate your comments and feedback. Note that messages won&#39;t appear
-    immediately as they require moderation before being displayed.&lt;/p&gt;
-
-&lt;script async src=&#34;https://guestbooks.meadow.cafe/resources/js/embed_script/420/script.js&#34;&gt;&lt;/script&gt;
-&lt;div id=&#34;guestbooks___guestbook-form-container&#34;&gt;
-    &lt;form id=&#34;guestbooks___guestbook-form&#34; action=&#34;https://guestbooks.meadow.cafe/guestbook/420/submit&#34; method=&#34;post&#34;&gt;
-        &lt;div class=&#34;guestbooks___input-container&#34;&gt;
-            &lt;input placeholder=&#34;Name&#34; type=&#34;text&#34; id=&#34;name&#34; name=&#34;name&#34; required&gt;
-        &lt;/div&gt;
-        &lt;div class=&#34;guestbooks___input-container&#34;&gt;
-            &lt;input placeholder=&#34;Website (optional)&#34; type=&#34;url&#34; id=&#34;website&#34; name=&#34;website&#34;&gt;
-        &lt;/div&gt;
-        &lt;div id=&#34;guestbooks___challenge-answer-container&#34;&gt;&lt;/div&gt;
-        &lt;br /&gt;
-        &lt;div class=&#34;guestbooks___input-container&#34;&gt;
-            &lt;textarea placeholder=&#34;Message (plain text only)...&#34; id=&#34;text&#34; name=&#34;text&#34;
-                style=&#34;width: 100%; box-sizing: border-box; resize: vertical;&#34; required&gt;&lt;/textarea&gt;
-        &lt;/div&gt;
-        &lt;br /&gt;
-        &lt;input type=&#34;submit&#34; value=&#34;Submit&#34;&gt;
-        &lt;div id=&#34;guestbooks___error-message&#34;&gt;&lt;/div&gt;
-    &lt;/form&gt;
-&lt;/div&gt;
-&lt;hr style=&#34;margin: 1em 0;&#34; /&gt;
-&lt;h3 id=&#34;guestbooks___guestbook-messages-header&#34;&gt;Messages&lt;/h3&gt;
-&lt;p&gt;&lt;em&gt;Messages will be displayed here once approved.&lt;/em&gt;&lt;/p&gt;
-&lt;div id=&#34;guestbooks___guestbook-messages-container&#34;&gt;&lt;/div&gt;
-
-&lt;style&gt;
-    :root {
-        --theme-light: #fff;
-        --theme-dark: #1d1e20;
-        --border-light: black;
-        --border-dark: white;
-        --entry-light: #f8f8f8;
-        --entry-dark: #2e2e33;
-        --content-light: #000;
-        --content-dark: white;
-        --primary: black;
-    }
-
-    #guestbooks___guestbook-form-container,
-    #guestbooks___guestbook-messages-container {
-        max-width: 100%;
-        padding: 20px;
-        border: 1px solid var(--border, var(--border-light));
-        border-radius: 8px;
-    }
-
-    #guestbooks___guestbook-form-container {
-        background-color: var(--theme, var(--theme-light));
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-    }
-
-    #guestbooks___guestbook-messages-container {
-        background-color: var(--entry, var(--entry-light));
-    }
-
-    .guestbooks___input-container {
-        display: flex;
-        flex-direction: column;
-        margin-bottom: 15px;
-    }
-
-    .guestbooks___input-container input,
-    .guestbooks___input-container textarea {
-        width: 100%;
-        padding: 12px;
-        border: 2px solid var(--border, var(--border-light));
-        border-radius: 6px;
-        font-size: 1rem;
-        background: var(--entry, var(--entry-light));
-        color: var(--content, var(--content-light));
-        transition: border-color 0.3s ease, background 0.3s ease;
-    }
-
-    .guestbooks___input-container input:focus,
-    .guestbooks___input-container textarea:focus {
-        border-color: var(--primary, #007bff);
-        background: var(--theme, var(--theme-light));
-        outline: none;
-    }
-
-    .guestbooks___input-container textarea {
-        min-height: 120px;
-        resize: vertical;
-    }
-
-    input[type=&#34;submit&#34;] {
-        padding: 12px;
-        font-size: 1rem;
-        border-radius: 6px;
-        cursor: pointer;
-        transition: all 0.3s;
-        font-weight: bold;
-        text-transform: uppercase;
-        background-color: var(--content, var(--content-light));
-        color: var(--theme, var(--theme-light));
-        border: 2px solid var(--content, var(--content-light));
-    }
-
-    input[type=&#34;submit&#34;]:hover {
-        background-color: var(--theme, var(--theme-light));
-        color: var(--content, var(--content-light));
-        border: 2px solid var(--content, var(--content-light));
-    }
-
-    @media (prefers-color-scheme: dark) {
-        #guestbooks___guestbook-form-container {
-            background-color: var(--theme, var(--theme-dark));
-            border-color: var(--border, var(--border-dark));
-        }
-
-        .guestbooks___input-container input,
-        .guestbooks___input-container textarea {
-            border-color: var(--border, var(--border-dark));
-            background: var(--entry, var(--entry-dark));
-            color: var(--content, var(--content-dark));
-        }
-
-        #guestbooks___guestbook-messages-container {
-            background-color: var(--entry, var(--entry-dark));
-            border-color: var(--border, var(--border-dark));
-        }
-
-        input[type=&#34;submit&#34;] {
-            background-color: var(--content, var(--content-dark));
-            color: var(--theme, var(--theme-light));
-            border-color: var(--content, var(--content-dark));
-        }
-
-        input[type=&#34;submit&#34;]:hover {
-            background-color: var(--theme, var(--theme-light));
-            color: var(--content, var(--content-dark));
-            border-color: var(--content, var(--content-dark));
-        }
-    }
-&lt;/style&gt;</description>
     </item>
     <item>
       <title>Why I Switched from Jekyll to Hugo (And Why You Might Too)</title>
@@ -298,6 +161,150 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/gallery/</guid>
       <description>A collection of travel shots, funny moments, and everyday snapshots from my life.</description>
+    </item>
+    <item>
+      <title>Welcome to my Guestbook!</title>
+      <link>http://localhost:1313/guestbook/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/guestbook/</guid>
+      <description>&lt;p&gt;Feel free to leave a message below! I appreciate your comments and feedback. Note that messages won&#39;t appear
+    immediately as they require moderation before being displayed.&lt;/p&gt;
+
+&lt;script async src=&#34;https://guestbooks.meadow.cafe/resources/js/embed_script/420/script.js&#34;&gt;&lt;/script&gt;
+&lt;div id=&#34;guestbooks___guestbook-form-container&#34;&gt;
+    &lt;form id=&#34;guestbooks___guestbook-form&#34; action=&#34;https://guestbooks.meadow.cafe/guestbook/420/submit&#34; method=&#34;post&#34;&gt;
+        &lt;div class=&#34;guestbooks___input-container&#34;&gt;
+            &lt;input placeholder=&#34;Name&#34; type=&#34;text&#34; id=&#34;name&#34; name=&#34;name&#34; required&gt;
+        &lt;/div&gt;
+        &lt;div class=&#34;guestbooks___input-container&#34;&gt;
+            &lt;input placeholder=&#34;Website (optional)&#34; type=&#34;url&#34; id=&#34;website&#34; name=&#34;website&#34;&gt;
+        &lt;/div&gt;
+        &lt;div id=&#34;guestbooks___challenge-answer-container&#34;&gt;&lt;/div&gt;
+        &lt;br /&gt;
+        &lt;div class=&#34;guestbooks___input-container&#34;&gt;
+            &lt;textarea placeholder=&#34;Message (plain text only)...&#34; id=&#34;text&#34; name=&#34;text&#34;
+                style=&#34;width: 100%; box-sizing: border-box; resize: vertical;&#34; required&gt;&lt;/textarea&gt;
+        &lt;/div&gt;
+        &lt;br /&gt;
+        &lt;input type=&#34;submit&#34; value=&#34;Submit&#34;&gt;
+        &lt;div id=&#34;guestbooks___error-message&#34;&gt;&lt;/div&gt;
+    &lt;/form&gt;
+&lt;/div&gt;
+&lt;hr style=&#34;margin: 1em 0;&#34; /&gt;
+&lt;h3 id=&#34;guestbooks___guestbook-messages-header&#34;&gt;Messages&lt;/h3&gt;
+&lt;p&gt;&lt;em&gt;Messages will be displayed here once approved.&lt;/em&gt;&lt;/p&gt;
+&lt;div id=&#34;guestbooks___guestbook-messages-container&#34;&gt;&lt;/div&gt;
+
+&lt;style&gt;
+    :root {
+        --theme-light: #fff;
+        --theme-dark: #1d1e20;
+        --border-light: black;
+        --border-dark: white;
+        --entry-light: #f8f8f8;
+        --entry-dark: #2e2e33;
+        --content-light: #000;
+        --content-dark: white;
+        --primary: black;
+    }
+
+    #guestbooks___guestbook-form-container,
+    #guestbooks___guestbook-messages-container {
+        max-width: 100%;
+        padding: 20px;
+        border: 1px solid var(--border, var(--border-light));
+        border-radius: 8px;
+    }
+
+    #guestbooks___guestbook-form-container {
+        background-color: var(--theme, var(--theme-light));
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    }
+
+    #guestbooks___guestbook-messages-container {
+        background-color: var(--entry, var(--entry-light));
+    }
+
+    .guestbooks___input-container {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 15px;
+    }
+
+    .guestbooks___input-container input,
+    .guestbooks___input-container textarea {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid var(--border, var(--border-light));
+        border-radius: 6px;
+        font-size: 1rem;
+        background: var(--entry, var(--entry-light));
+        color: var(--content, var(--content-light));
+        transition: border-color 0.3s ease, background 0.3s ease;
+    }
+
+    .guestbooks___input-container input:focus,
+    .guestbooks___input-container textarea:focus {
+        border-color: var(--primary, #007bff);
+        background: var(--theme, var(--theme-light));
+        outline: none;
+    }
+
+    .guestbooks___input-container textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    input[type=&#34;submit&#34;] {
+        padding: 12px;
+        font-size: 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: all 0.3s;
+        font-weight: bold;
+        text-transform: uppercase;
+        background-color: var(--content, var(--content-light));
+        color: var(--theme, var(--theme-light));
+        border: 2px solid var(--content, var(--content-light));
+    }
+
+    input[type=&#34;submit&#34;]:hover {
+        background-color: var(--theme, var(--theme-light));
+        color: var(--content, var(--content-light));
+        border: 2px solid var(--content, var(--content-light));
+    }
+
+    @media (prefers-color-scheme: dark) {
+        #guestbooks___guestbook-form-container {
+            background-color: var(--theme, var(--theme-dark));
+            border-color: var(--border, var(--border-dark));
+        }
+
+        .guestbooks___input-container input,
+        .guestbooks___input-container textarea {
+            border-color: var(--border, var(--border-dark));
+            background: var(--entry, var(--entry-dark));
+            color: var(--content, var(--content-dark));
+        }
+
+        #guestbooks___guestbook-messages-container {
+            background-color: var(--entry, var(--entry-dark));
+            border-color: var(--border, var(--border-dark));
+        }
+
+        input[type=&#34;submit&#34;] {
+            background-color: var(--content, var(--content-dark));
+            color: var(--theme, var(--theme-light));
+            border-color: var(--content, var(--content-dark));
+        }
+
+        input[type=&#34;submit&#34;]:hover {
+            background-color: var(--theme, var(--theme-light));
+            color: var(--content, var(--content-dark));
+            border-color: var(--content, var(--content-dark));
+        }
+    }
+&lt;/style&gt;</description>
     </item>
   </channel>
 </rss>
