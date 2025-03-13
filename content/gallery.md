@@ -5,9 +5,11 @@ layout: "single"
 ShowReadingTime: false
 ---
 
-
-![Finally Got the Keys to my Next Wild Adventure](finally-got-the-keys-to-my-next-wild-adventure.jpg)
-> *Finally Got the Keys to my Next Wild Adventure*
+{{< gallery-item 
+    src="finally-got-the-keys-to-my-next-wild-adventure.jpg" 
+    alt="Adventure keys" 
+    caption="Finally Got the Keys to my Next Wild Adventure" 
+    identifier="finally-got-the-keys" >}}
 
 ---
 
