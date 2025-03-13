@@ -1,6 +1,6 @@
 ---
 title: "Logging Out for Good: Why I’m Leaving Facebook and Instagram"
-date: 2026-03-14T00:00:00
+date: 2025-03-13T00:00:00
 description: "Social media was supposed to keep me connected with friends. Instead, it's just ads, strangers, and reminders of things I can't have anymore."
 tags: ["social media", "digital detox", "personal reflections"]
 cover:

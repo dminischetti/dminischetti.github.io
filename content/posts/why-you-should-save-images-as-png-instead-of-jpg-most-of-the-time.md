@@ -1,6 +1,6 @@
 ---
 title: "Why You Should Save Images as PNG Instead of JPG (Most of the Time!)"
-date: 2025-03-13T12:00:00Z
+date: 2025-03-16T12:00:00Z
 description: "A breakdown of why PNG is often the better choice over JPG—because nobody wants their images looking like they were printed on a potato."
 tags: ["images", "file formats", "PNG vs JPG"]
 cover:
