@@ -2,16 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2026-03-14T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2026-03-14T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/tags/artisan-bread/</loc>
     <lastmod>2025-03-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/bread-machine/</loc>
+    <lastmod>2025-03-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2025-03-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/foodie-nyc/</loc>
@@ -24,6 +21,9 @@
     <lastmod>2025-03-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/italian-traditions/</loc>
+    <lastmod>2025-03-07T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2025-03-07T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/semolina-bread/</loc>
