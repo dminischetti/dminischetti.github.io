@@ -431,21 +431,22 @@ The Sistine Toilet: A Literary Masterpiece
 ---
 
 ![](201711/23668187_2045897625679502_4172842598177701888_n_17885381404142608.jpg)
+Arthur Avenue: Where Tomatoes Have Murals and Streets Win Elections
 
 ---
 
 ![01. "Hello friend](201711/23161582_163791040874935_1670642914075607040_n_17897991097079855.jpg)
-*01. "Hello friend*
+*Plot Twist: My Shadow’s the Real Main Charac*
 
 ---
 
 ![Lonely, sad university student… 😔](201711/23101175_159693681296554_7987463466212392960_n_17882750698138830.jpg)
-*Lonely, sad university student… 😔*
+*NYC College of Technology: Where coffee is the official programming language.*
 
 ---
 
 ![If it’s not soup, it’s soaked bread. (Meaning: it’s the same thing either way.)](201710/22793834_434006817001094_862179835307360256_n_17904748891045061.jpg)
-*If it’s not soup, it’s soaked bread. (Meaning: it’s the same thing either way.)*
+*Finally, a diet I can commit *
 
 ---
 
@@ -460,27 +461,27 @@ The Sistine Toilet: A Literary Masterpiece
 ---
 
 ![Patience.](201709/21227705_734955316689102_4894593083263418368_n_17897262649023335.jpg)
-*Patience.*
+*When Your Playlist is Fire but Existential Dread is Louder..*
 
 ---
 
 ![Courage, I have it. It’s the fear that gets me.](201708/21148117_461114580939120_3711812025416941568_n_17896155658001961.jpg)
-*Courage, I have it. It’s the fear that gets me.*
+*Me every Monday morning.*
 
 ---
 
 ![…and don’t stress my soul. #nostress #happiness](201708/20902212_1114925701970836_8674888379394949120_n_17879198314093730.jpg)
-*…and don’t stress my soul. #nostress #happiness*
+*Sometimes my backpack is heavier than my life choices*
 
 ---
 
 ![Slurp!](201708/20688586_515983892080163_1711256902215663616_n_17852519686198598.jpg)
-*Slurp!*
+*When life gives you lemons, apparently it also gives you questionable branding choices*
 
 ---
 
 ![Trabajar, Trabajar… I prefer the smell of the sea. 🌊](201707/19986028_1701086493252270_2625293210582253568_n_17873608774092420.jpg)
-*Trabajar, Trabajar… I prefer the smell of the sea. 🌊*
+*Crossing my legs, skipping my responsibilities.*
 
 ---
 
@@ -490,6 +491,7 @@ The Sistine Toilet: A Literary Masterpiece
 ---
 
 ![](201707/19534851_1905755483002374_7587498751351062528_n_17864205631138741.jpg)
+The only love triangle I won’t regret.
 
 ---
 
@@ -499,12 +501,12 @@ The Sistine Toilet: A Literary Masterpiece
 ---
 
 ![Again and again and again and again…](201706/19534032_303869040059652_9153619298361540608_n_17880179863065964.jpg)
-*Again and again and again and again…*
+*Plotting my villain origin story… or just vibing to lo-fi beats.*
 
 ---
 
 ![Hurting yourself because you’re too sleepy.](201706/19436392_108301716464793_8880646948147691520_n_17871280303085798.jpg)
-*Hurting yourself because you’re too sleepy.*
+*Trying to grow wings, still just getting anxiety.*
 
 ---
 
@@ -514,17 +516,17 @@ The Sistine Toilet: A Literary Masterpiece
 ---
 
 ![Money to buy, no time to play. #fendercd60 #acousticguitar](201705/18646653_455828454809290_34159975144095744_n_17870014741099378.jpg)
-*Money to buy, no time to play. #fendercd60 #acousticguitar*
+*Money to buy, no time to play.*
 
 ---
 
 ![Sunday’s timballo di scrippelle](201704/18160257_1325434547577282_1401167667968081920_n_17855533732155915.jpg)
-*Sunday’s timballo di scrippelle*
+*Fresh out of the oven, just like my questionable life decisions.*
 
 ---
 
 ![When reading this sign you lick your lips thinking about Rye, Red Vermouth and Bitters, you’re getting sick in your head. And maybe also your liver.](201704/18161625_1861959660727135_8263656689710923776_n_17879244118060984.jpg)
-*When reading this sign you lick your lips thinking about Rye, Red Vermouth and Bitters, you’re getting sick in your head. And maybe also your liver.*
+*Manhattan: Where dreams are made… and rent makes them cry.*
 
 ---
 
@@ -539,7 +541,7 @@ The Sistine Toilet: A Literary Masterpiece
 ---
 
 ![Italian bartender in action. #bartender #italians #pastapizzaprimavera](201704/17817791_445121282489712_8399297701153341440_n_17855864569141382.jpg)
-*Italian bartender in action. #bartender #italians #pastapizzaprimavera*
+*Italian bartender in action.*
 
 ---
 
