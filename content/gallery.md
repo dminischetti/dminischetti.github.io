@@ -521,7 +521,7 @@ The only love triangle I won’t regret.
 ---
 
 ![Sunday’s timballo di scrippelle](201704/18160257_1325434547577282_1401167667968081920_n_17855533732155915.jpg)
-*Fresh out of the oven, just like my questionable life decisions.*
+*Lasagna: because happiness is best served in layers.*
 
 ---
 
@@ -546,7 +546,7 @@ The only love triangle I won’t regret.
 ---
 
 ![Note](201703/17662054_274448339674085_3056567953563582464_n_17864860207106663.jpg)
-*Note*
+*Permanent ink, temporary marker. Love that stays, even when the writing fades.*
 
 ---
 
@@ -556,6 +556,7 @@ The only love triangle I won’t regret.
 ---
 
 ![](201703/17586961_1786186238366457_7169958892875546624_n_17854938178135737.jpg)
+Love so big, I had to put it on a billboard.
 
 ---
 
@@ -565,27 +566,30 @@ The only love triangle I won’t regret.
 ---
 
 ![The calmest dog in the world.](201703/17586871_1969835023239789_2097595339409195008_n_17865483535106836.jpg)
-*The calmest dog in the world.*
+*Majestic. Wise. Possibly drunk. But still the goodest boy.*
 
 ---
 
 ![](201703/17596139_431207320551620_671765505371013120_n_17876459122031163.jpg)
-
+When love was young, blurry, and full of bracelets.
 ---
 
 ![](201703/17596120_287462955021498_7114071421210329088_n_17865391270099925.jpg)
-
+One beer to rule them all, and another to make sure you read it twice.
 ---
 
 ![](201703/17587166_269800010113027_4450156597687091200_n_17864405071123579.jpg)
+To love, to life, and to pretending those fries count as a meal.
 
 ---
 
 ![](201703/17596535_1413685978696491_6444452089522290688_n_17868057379076717.jpg)
+Camouflaged like a lazy jungle predator… but for naps.
 
 ---
 
 ![](201703/17662034_313468815736339_8290139062921068544_n_17854975324132493.jpg)
+Sign says ‘Do not sit on the table’… But what if I AM the table?
 
 ---
 
