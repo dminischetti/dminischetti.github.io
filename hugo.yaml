@@ -4,6 +4,7 @@ theme: "PaperMod"
 languageCode: "en-us"
 
 params:
+  hamBurgerMenu: true
   env: "production"
   ShowReadingTime: true
   ShowShareButtons: true
@@ -28,27 +29,27 @@ params:
 menu:
   main:
     - identifier: "home"
-      name: "HME"
+      name: "Home"
       url: "/"
       weight: 1
     - identifier: "about"
-      name: "ME"
+      name: "About"
       url: "/about/"
       weight: 2
     - identifier: "resume"
-      name: "CV"
+      name: "Resume"
       url: "/resume/"
       weight: 3
     - identifier: "blog"
-      name: "BLG"
+      name: "Blog"
       url: "/posts/"
       weight: 4
     - identifier: "gallery"
-      name: "PIC"
+      name: "Gallery"
       url: "/gallery/"
       weight: 5
     - identifier: "guestbook"
-      name: "GUESTS"
+      name: "Guestbook"
       url: "/guestbook/"
       weight: 6
 

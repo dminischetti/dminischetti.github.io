@@ -50,6 +50,33 @@
 <!-- Header Content Below -->
 <header class="header">
     <div class="header-inner">
+
+        <!-- Hamburger Menu Button -->
+         <button id="menu-trigger" aria-haspopup="menu" aria-label="Menu Button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        <!-- Overlay Background for Menu -->
+        <div id="menu-overlay"></div>
+
+        <nav id="mobile-menu">
+            <button id="close-menu">&times;</button>
+            <ul>
+            {{- range site.Menus.main }}
+                <li>
+                    <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}">
+                        {{ .Name }}
+                    </a>
+                </li>
+            {{- end }}
+            </ul>
+        </nav>
+
         <div class="logo">
             {{- $label_text := (site.Params.label.text | default site.Title) }}
             {{- if site.Title }}
@@ -132,7 +159,7 @@
 
     <!-- Restored Menu Section -->
     {{- $currentPage := . }}
-    <ul id="menu">
+    <ul id="menu" class="desktop-menu">
         {{- range site.Menus.main }}
         {{- $menu_item_url := (cond (strings.HasSuffix .URL "/") .URL (printf "%s/" .URL) ) | absLangURL }}
         {{- $page_url:= $currentPage.Permalink | absLangURL }}
@@ -158,3 +185,46 @@
         {{- end }}
     </ul>
 </header>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuTrigger = document.getElementById("menu-trigger");
+        const menu = document.getElementById("mobile-menu");
+        const overlay = document.getElementById("menu-overlay");
+        const closeMenuButton = document.getElementById("close-menu");
+
+        function toggleMenu() {
+            menu.classList.toggle("visible");
+            overlay.classList.toggle("visible");
+        }
+
+        menuTrigger.addEventListener("click", toggleMenu);
+        overlay.addEventListener("click", toggleMenu);
+        closeMenuButton.addEventListener("click", toggleMenu);
+
+        // Close on ESC key
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && menu.classList.contains("visible")) {
+                toggleMenu();
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const desktopMenu = document.querySelector(".desktop-menu");
+
+        function toggleDesktopMenu() {
+            if (window.innerWidth <= 1024) {
+                desktopMenu.style.display = "none";
+            } else {
+                desktopMenu.style.display = "flex"; // Adjust if needed
+            }
+        }
+
+        // Run on page load
+        toggleDesktopMenu();
+
+        // Run whenever window is resized
+        window.addEventListener("resize", toggleDesktopMenu);
+    });
+</script>

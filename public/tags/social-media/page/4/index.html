@@ -109,6 +109,58 @@
 
 <header class="header">
     <div class="header-inner">
+
+<button id="menu-trigger" aria-haspopup="menu" aria-label="Menu Button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+</button>
+
+
+<div id="menu-overlay"></div>
+
+
+<nav id="mobile-menu">
+    
+    <button id="close-menu">&times;</button>
+
+    <ul>
+        <li>
+            <a href="http://localhost:1313/" title="Home">
+                Home
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:1313/about/" title="About">
+                About
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:1313/resume/" title="Resume">
+                Resume
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:1313/posts/" title="Blog">
+                Blog
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:1313/gallery/" title="Gallery">
+                Gallery
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:1313/guestbook/" title="Guestbook">
+                Guestbook
+            </a>
+        </li>
+    </ul>
+</nav>
+
         <div class="logo">
             <a href="http://localhost:1313/" accesskey="h" title="Dominic&#39;s Sandbox (Alt + H)">Dominic&#39;s Sandbox</a>
         </div>
@@ -138,40 +190,65 @@
     </div>
 
     
-    <ul id="menu">
+    <ul id="menu" class="desktop-menu">
         <li>
-            <a href="http://localhost:1313/" title="HME">
-                <span>HME</span>
+            <a href="http://localhost:1313/" title="Home">
+                <span>Home</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/about/" title="ME">
-                <span>ME</span>
+            <a href="http://localhost:1313/about/" title="About">
+                <span>About</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/resume/" title="CV">
-                <span>CV</span>
+            <a href="http://localhost:1313/resume/" title="Resume">
+                <span>Resume</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/posts/" title="BLG">
-                <span>BLG</span>
+            <a href="http://localhost:1313/posts/" title="Blog">
+                <span>Blog</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/gallery/" title="PIC">
-                <span>PIC</span>
+            <a href="http://localhost:1313/gallery/" title="Gallery">
+                <span>Gallery</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/guestbook/" title="GUESTS">
-                <span>GUESTS</span>
+            <a href="http://localhost:1313/guestbook/" title="Guestbook">
+                <span>Guestbook</span>
             </a>
         </li>
     </ul>
 </header>
-<main class="main"> 
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuTrigger = document.getElementById("menu-trigger");
+        const menu = document.getElementById("mobile-menu");
+        const overlay = document.getElementById("menu-overlay");
+        const closeMenuButton = document.getElementById("close-menu");
+    
+        function toggleMenu() {
+            menu.classList.toggle("visible");
+            overlay.classList.toggle("visible");
+        }
+    
+        menuTrigger.addEventListener("click", toggleMenu);
+        overlay.addEventListener("click", toggleMenu);
+        closeMenuButton.addEventListener("click", toggleMenu);
+    
+        
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && menu.classList.contains("visible")) {
+                toggleMenu();
+            }
+        });
+    });
+    </script>
+    <main class="main"> 
   <header class="page-header">
     <h1>
       Social Media
@@ -179,7 +256,7 @@
   </header> 
 
     <article class="post-entry tag-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/why-we-struggle-to-change-simple-fix-that-works.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/posts/why-we-struggle-to-change-simple-fix-that-works.png" alt="">
 </figure>
       <header class="entry-header">
         <h2 class="entry-hint-parent">Why We Struggle to Change (And the Simple Fix That Works)
@@ -197,7 +274,7 @@ And for a while, it worked. I’d wake up early, go to the gym, power through ta
     </article>
 
     <article class="post-entry tag-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/motivation-myth-why-waiting-keeps-you-stuck.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/posts/motivation-myth-why-waiting-keeps-you-stuck.png" alt="">
 </figure>
       <header class="entry-header">
         <h2 class="entry-hint-parent">The Motivation Myth: Why Waiting to Feel Inspired Will Keep You Stuck
@@ -218,7 +295,7 @@ Because here’s the truth:
     </article>
 
     <article class="post-entry tag-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/why-changing-your-mind-is-a-sign-of-intelligence.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/posts/why-changing-your-mind-is-a-sign-of-intelligence.png" alt="">
 </figure>
       <header class="entry-header">
         <h2 class="entry-hint-parent">Why Changing Your Mind is a Sign of Intelligence, Not Weakness
@@ -236,7 +313,7 @@ The Art of Arguing With Yourself It’s easy to believe your opinion is right. A
     </article>
 
     <article class="post-entry tag-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/why-youre-always-tired-not-just-about-sleep.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/posts/why-youre-always-tired-not-just-about-sleep.png" alt="">
 </figure>
       <header class="entry-header">
         <h2 class="entry-hint-parent">Why You’re Always Tired (And It’s Not Just About Sleep)
@@ -255,7 +332,7 @@ I blamed it on parenthood. On work. On stress. I figured, “This is just adulth
     </article>
 
     <article class="post-entry tag-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/why-we-romanticize-the-past-and-why-it-keeps-us-stuck.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/posts/why-we-romanticize-the-past-and-why-it-keeps-us-stuck.png" alt="">
 </figure>
       <header class="entry-header">
         <h2 class="entry-hint-parent">Why We Romanticize the Past (And Why It Keeps Us Stuck)

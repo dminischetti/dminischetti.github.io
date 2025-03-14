@@ -125,6 +125,56 @@
 
 <header class="header">
     <div class="header-inner">
+
+        
+         <button id="menu-trigger" aria-haspopup="menu" aria-label="Menu Button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+            </svg>
+        </button>
+
+        
+        <div id="menu-overlay"></div>
+
+        <nav id="mobile-menu">
+            <button id="close-menu">&times;</button>
+            <ul>
+                <li>
+                    <a href="http://localhost:1313/" title="Home">
+                        Home
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:1313/about/" title="About">
+                        About
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:1313/resume/" title="Resume">
+                        Resume
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:1313/posts/" title="Blog">
+                        Blog
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:1313/gallery/" title="Gallery">
+                        Gallery
+                    </a>
+                </li>
+                <li>
+                    <a href="http://localhost:1313/guestbook/" title="Guestbook">
+                        Guestbook
+                    </a>
+                </li>
+            </ul>
+        </nav>
+
         <div class="logo">
             <a href="http://localhost:1313/" accesskey="h" title="Dominic&#39;s Sandbox (Alt + H)">Dominic&#39;s Sandbox</a>
         </div>
@@ -154,40 +204,82 @@
     </div>
 
     
-    <ul id="menu">
+    <ul id="menu" class="desktop-menu">
         <li>
-            <a href="http://localhost:1313/" title="HME">
-                <span class="active">HME</span>
+            <a href="http://localhost:1313/" title="Home">
+                <span class="active">Home</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/about/" title="ME">
-                <span>ME</span>
+            <a href="http://localhost:1313/about/" title="About">
+                <span>About</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/resume/" title="CV">
-                <span>CV</span>
+            <a href="http://localhost:1313/resume/" title="Resume">
+                <span>Resume</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/posts/" title="BLG">
-                <span>BLG</span>
+            <a href="http://localhost:1313/posts/" title="Blog">
+                <span>Blog</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/gallery/" title="PIC">
-                <span>PIC</span>
+            <a href="http://localhost:1313/gallery/" title="Gallery">
+                <span>Gallery</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/guestbook/" title="GUESTS">
-                <span>GUESTS</span>
+            <a href="http://localhost:1313/guestbook/" title="Guestbook">
+                <span>Guestbook</span>
             </a>
         </li>
     </ul>
 </header>
-<main class="main"> 
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuTrigger = document.getElementById("menu-trigger");
+        const menu = document.getElementById("mobile-menu");
+        const overlay = document.getElementById("menu-overlay");
+        const closeMenuButton = document.getElementById("close-menu");
+
+        function toggleMenu() {
+            menu.classList.toggle("visible");
+            overlay.classList.toggle("visible");
+        }
+
+        menuTrigger.addEventListener("click", toggleMenu);
+        overlay.addEventListener("click", toggleMenu);
+        closeMenuButton.addEventListener("click", toggleMenu);
+
+        
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && menu.classList.contains("visible")) {
+                toggleMenu();
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const desktopMenu = document.querySelector(".desktop-menu");
+
+        function toggleDesktopMenu() {
+            if (window.innerWidth <= 1024) {
+                desktopMenu.style.display = "none";
+            } else {
+                desktopMenu.style.display = "flex"; 
+            }
+        }
+
+        
+        toggleDesktopMenu();
+
+        
+        window.addEventListener("resize", toggleDesktopMenu);
+    });
+</script><main class="main"> 
   <div class="post-content"><h1 id="welcome-to-my-sandbox"><strong>Welcome to My Sandbox</strong><a hidden class="anchor" aria-hidden="true" href="#welcome-to-my-sandbox">#</a></h1>
 <p>A <strong>sandbox</strong> is a place to <strong>experiment, build, and explore</strong>—and that’s exactly what this site is. Here, I share my journey as a developer, my thoughts on tech, and the occasional life insight. Expect a mix of <strong>coding, problem-solving, and everyday adventures.</strong></p>
 <p><em>(Why &ldquo;sandbox&rdquo;? In programming, a sandbox is a space to test ideas safely. This site is my personal sandbox—where I tinker, learn, and have fun! My daughter even drew a sandbox just for me. ❤️)</em></p>

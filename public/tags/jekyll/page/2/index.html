@@ -109,6 +109,58 @@
 
 <header class="header">
     <div class="header-inner">
+
+<button id="menu-trigger" aria-haspopup="menu" aria-label="Menu Button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+</button>
+
+
+<div id="menu-overlay"></div>
+
+
+<nav id="mobile-menu">
+    
+    <button id="close-menu">&times;</button>
+
+    <ul>
+        <li>
+            <a href="http://localhost:1313/" title="Home">
+                Home
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:1313/about/" title="About">
+                About
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:1313/resume/" title="Resume">
+                Resume
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:1313/posts/" title="Blog">
+                Blog
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:1313/gallery/" title="Gallery">
+                Gallery
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:1313/guestbook/" title="Guestbook">
+                Guestbook
+            </a>
+        </li>
+    </ul>
+</nav>
+
         <div class="logo">
             <a href="http://localhost:1313/" accesskey="h" title="Dominic&#39;s Sandbox (Alt + H)">Dominic&#39;s Sandbox</a>
         </div>
@@ -138,40 +190,65 @@
     </div>
 
     
-    <ul id="menu">
+    <ul id="menu" class="desktop-menu">
         <li>
-            <a href="http://localhost:1313/" title="HME">
-                <span>HME</span>
+            <a href="http://localhost:1313/" title="Home">
+                <span>Home</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/about/" title="ME">
-                <span>ME</span>
+            <a href="http://localhost:1313/about/" title="About">
+                <span>About</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/resume/" title="CV">
-                <span>CV</span>
+            <a href="http://localhost:1313/resume/" title="Resume">
+                <span>Resume</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/posts/" title="BLG">
-                <span>BLG</span>
+            <a href="http://localhost:1313/posts/" title="Blog">
+                <span>Blog</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/gallery/" title="PIC">
-                <span>PIC</span>
+            <a href="http://localhost:1313/gallery/" title="Gallery">
+                <span>Gallery</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/guestbook/" title="GUESTS">
-                <span>GUESTS</span>
+            <a href="http://localhost:1313/guestbook/" title="Guestbook">
+                <span>Guestbook</span>
             </a>
         </li>
     </ul>
 </header>
-<main class="main"> 
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuTrigger = document.getElementById("menu-trigger");
+        const menu = document.getElementById("mobile-menu");
+        const overlay = document.getElementById("menu-overlay");
+        const closeMenuButton = document.getElementById("close-menu");
+    
+        function toggleMenu() {
+            menu.classList.toggle("visible");
+            overlay.classList.toggle("visible");
+        }
+    
+        menuTrigger.addEventListener("click", toggleMenu);
+        overlay.addEventListener("click", toggleMenu);
+        closeMenuButton.addEventListener("click", toggleMenu);
+    
+        
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && menu.classList.contains("visible")) {
+                toggleMenu();
+            }
+        });
+    });
+    </script>
+    <main class="main"> 
   <header class="page-header">
     <h1>
       Jekyll
@@ -179,7 +256,7 @@
   </header> 
 
     <article class="post-entry tag-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/the-7-stages-of-a-developer-fixing-a-bug.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/posts/the-7-stages-of-a-developer-fixing-a-bug.png" alt="">
 </figure>
       <header class="entry-header">
         <h2 class="entry-hint-parent">The 7 Stages of a Developer Fixing a Bug
@@ -197,7 +274,7 @@ And no matter how many times we do this, it always follows the same pattern.
     </article>
 
     <article class="post-entry tag-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/multitasking-myth-why-doing-less-boosts-productivity.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/posts/multitasking-myth-why-doing-less-boosts-productivity.png" alt="">
 </figure>
       <header class="entry-header">
         <h2 class="entry-hint-parent">The Multitasking Myth: Why Doing Less Makes You More Productive
@@ -218,7 +295,7 @@ Turns out, I was dead wrong. Multitasking isn’t a productivity hack. It’s a 
     </article>
 
     <article class="post-entry tag-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/how-every-developer-writes-code.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/posts/how-every-developer-writes-code.png" alt="">
 </figure>
       <header class="entry-header">
         <h2 class="entry-hint-parent">How Every Developer Writes Code (Whether They Admit It or Not)
@@ -238,7 +315,7 @@ You crack your knuckles. Open your editor. Start typing with confidence.
     </article>
 
     <article class="post-entry tag-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/productivity-trap-why-doing-more-keeps-you-stuck.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/posts/productivity-trap-why-doing-more-keeps-you-stuck.png" alt="">
 </figure>
       <header class="entry-header">
         <h2 class="entry-hint-parent">The Productivity Trap: Why Doing More Is Keeping You Stuck
@@ -260,7 +337,7 @@ But then something strange happened.
     </article>
 
     <article class="post-entry tag-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/i-never-thought-id-grow-a-beard.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/posts/i-never-thought-id-grow-a-beard.png" alt="">
 </figure>
       <header class="entry-header">
         <h2 class="entry-hint-parent">I Never Thought I’d Grow a Beard (But Here We Are)

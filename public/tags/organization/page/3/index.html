@@ -109,6 +109,58 @@
 
 <header class="header">
     <div class="header-inner">
+
+<button id="menu-trigger" aria-haspopup="menu" aria-label="Menu Button">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+        stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
+        <line x1="3" y1="12" x2="21" y2="12"></line>
+        <line x1="3" y1="6" x2="21" y2="6"></line>
+        <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+</button>
+
+
+<div id="menu-overlay"></div>
+
+
+<nav id="mobile-menu">
+    
+    <button id="close-menu">&times;</button>
+
+    <ul>
+        <li>
+            <a href="http://localhost:1313/" title="Home">
+                Home
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:1313/about/" title="About">
+                About
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:1313/resume/" title="Resume">
+                Resume
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:1313/posts/" title="Blog">
+                Blog
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:1313/gallery/" title="Gallery">
+                Gallery
+            </a>
+        </li>
+        <li>
+            <a href="http://localhost:1313/guestbook/" title="Guestbook">
+                Guestbook
+            </a>
+        </li>
+    </ul>
+</nav>
+
         <div class="logo">
             <a href="http://localhost:1313/" accesskey="h" title="Dominic&#39;s Sandbox (Alt + H)">Dominic&#39;s Sandbox</a>
         </div>
@@ -138,40 +190,65 @@
     </div>
 
     
-    <ul id="menu">
+    <ul id="menu" class="desktop-menu">
         <li>
-            <a href="http://localhost:1313/" title="HME">
-                <span>HME</span>
+            <a href="http://localhost:1313/" title="Home">
+                <span>Home</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/about/" title="ME">
-                <span>ME</span>
+            <a href="http://localhost:1313/about/" title="About">
+                <span>About</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/resume/" title="CV">
-                <span>CV</span>
+            <a href="http://localhost:1313/resume/" title="Resume">
+                <span>Resume</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/posts/" title="BLG">
-                <span>BLG</span>
+            <a href="http://localhost:1313/posts/" title="Blog">
+                <span>Blog</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/gallery/" title="PIC">
-                <span>PIC</span>
+            <a href="http://localhost:1313/gallery/" title="Gallery">
+                <span>Gallery</span>
             </a>
         </li>
         <li>
-            <a href="http://localhost:1313/guestbook/" title="GUESTS">
-                <span>GUESTS</span>
+            <a href="http://localhost:1313/guestbook/" title="Guestbook">
+                <span>Guestbook</span>
             </a>
         </li>
     </ul>
 </header>
-<main class="main"> 
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const menuTrigger = document.getElementById("menu-trigger");
+        const menu = document.getElementById("mobile-menu");
+        const overlay = document.getElementById("menu-overlay");
+        const closeMenuButton = document.getElementById("close-menu");
+    
+        function toggleMenu() {
+            menu.classList.toggle("visible");
+            overlay.classList.toggle("visible");
+        }
+    
+        menuTrigger.addEventListener("click", toggleMenu);
+        overlay.addEventListener("click", toggleMenu);
+        closeMenuButton.addEventListener("click", toggleMenu);
+    
+        
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape" && menu.classList.contains("visible")) {
+                toggleMenu();
+            }
+        });
+    });
+    </script>
+    <main class="main"> 
   <header class="page-header">
     <h1>
       Organization
@@ -179,7 +256,7 @@
   </header> 
 
     <article class="post-entry tag-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/why-i-a-programmer-still-use-paper-like-its-1999.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/posts/why-i-a-programmer-still-use-paper-like-its-1999.png" alt="">
 </figure>
       <header class="entry-header">
         <h2 class="entry-hint-parent">Why I, a Programmer, Still Use Paper Like It’s 1999
@@ -198,7 +275,7 @@ Why Do I Do This? People at my last job called me old-school. Some thought I was
     </article>
 
     <article class="post-entry tag-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/never-ending-search-for-the-perfect-app.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/posts/never-ending-search-for-the-perfect-app.png" alt="">
 </figure>
       <header class="entry-header">
         <h2 class="entry-hint-parent">The Never-Ending Search for the Perfect App: Why I Can’t Stop Downloading
@@ -218,7 +295,7 @@ I convince myself that somewhere, hidden among a sea of mediocre software, the p
     </article>
 
     <article class="post-entry tag-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/pursuit-of-perfect-quest-for-ultimate-everything.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/posts/pursuit-of-perfect-quest-for-ultimate-everything.png" alt="">
 </figure>
       <header class="entry-header">
         <h2 class="entry-hint-parent">The Pursuit of the Perfect: My Quest for the Ultimate Everything
@@ -239,7 +316,7 @@ Everything I own must be the best, the most compact, the most portable.
     </article>
 
     <article class="post-entry tag-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/how-i-outsmart-my-brain-to-get-things-done.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/posts/how-i-outsmart-my-brain-to-get-things-done.png" alt="">
 </figure>
       <header class="entry-header">
         <h2 class="entry-hint-parent">How I Outsmart My Own Brain to Get Things Done
@@ -259,7 +336,7 @@ Wait. What was I doing?
     </article>
 
     <article class="post-entry tag-entry"> 
-<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/browser-wars-journey-to-least-annoying-setup.png" alt="">
+<figure class="entry-cover"><img loading="lazy" src="http://localhost:1313/images/posts/browser-wars-journey-to-least-annoying-setup.png" alt="">
 </figure>
       <header class="entry-header">
         <h2 class="entry-hint-parent">The Browser Wars: My Exhausting Journey to Finding the Least Annoying Setup
