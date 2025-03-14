@@ -5,48 +5,6 @@
     cursor: pointer;
     padding: 10px;
     z-index: 1001;
-    color: var(--menu-text);
-    position: relative;
-}
-
-/* Dark Mode Support */
-:root {
-    --menu-bg-light: white;
-    --menu-bg-dark: black;
-    --menu-text-light: black;
-    --menu-text-dark: white;
-    --menu-hover-light: rgba(0, 0, 0, 0.1);
-    --menu-hover-dark: rgba(255, 255, 255, 0.2);
-}
-
-/* Ensure menu is hidden by default */
-#mobile-menu {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;
-    max-width: 300px;
-    height: 100%;
-    background: var(--menu-bg-light);
-    box-shadow: -4px 0px 10px rgba(0, 0, 0, 0.3);
-    transition: right 0.3s ease-in-out;
-    z-index: 1002;
-    padding-top: 60px;
-    padding-right: 20px;
-    visibility: hidden;
-    opacity: 0;
-}
-
-/* Show menu when active */
-#mobile-menu.visible {
-    right: 0;
-    visibility: visible;
-    opacity: 1;
-}
-
-/* Apply dark mode styles */
-body.dark #mobile-menu {
-    background: var(--menu-bg-dark);
 }
 
 /* Menu Items */
@@ -62,22 +20,14 @@ body.dark #mobile-menu {
 }
 
 #mobile-menu a {
-    color: var(--menu-text-light);
+    color: white;
     text-decoration: none;
     font-size: 18px;
     display: block;
 }
 
-body.dark #mobile-menu a {
-    color: var(--menu-text-dark);
-}
-
 #mobile-menu a:hover {
-    background: var(--menu-hover-light);
-}
-
-body.dark #mobile-menu a:hover {
-    background: var(--menu-hover-dark);
+    background: rgba(255, 255, 255, 0.2);
 }
 
 /* Overlay Background */
@@ -90,16 +40,22 @@ body.dark #mobile-menu a:hover {
     background: rgba(0, 0, 0, 0.5);
     z-index: 1000;
     display: none;
-    visibility: hidden;
-    opacity: 0;
-    transition: opacity 0.3s ease-in-out;
 }
 
 /* Show overlay when menu is active */
 #menu-overlay.visible {
     display: block;
-    visibility: visible;
-    opacity: 1;
+}
+
+#close-menu {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: white;
+    cursor: pointer;
 }
 
 /* Close Button */
@@ -110,15 +66,49 @@ body.dark #mobile-menu a:hover {
     background: none;
     border: none;
     font-size: 30px;
-    color: var(--menu-text-light);
+    color: white;
     cursor: pointer;
 }
 
-body.dark #close-menu {
-    color: var(--menu-text-dark);
+/* Ensure Menu is Fixed & Has Enough Padding for Close Button */
+#mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: 100%;
+    background: black;
+    box-shadow: -4px 0px 10px rgba(0, 0, 0, 0.3);
+    transition: right 0.3s ease-in-out;
+    z-index: 1002;
+    padding-top: 60px;
+    padding-right: 20px; /* Fix close button alignment */
 }
 
-/* Hide desktop menu on mobile */
+/* Show menu when activated */
+#mobile-menu.visible {
+    right: 0;
+}
+
+/* Overlay Background */
+#menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: none;
+}
+
+/* Show overlay when menu is active */
+#menu-overlay.visible {
+    display: block;
+}
+
+/* Hide desktop menu by default on small screens */
 @media screen and (max-width: 768px) {
     .desktop-menu {
         display: none !important;
