@@ -52,3 +52,9 @@ pagination:
 services:
   googleAnalytics:
     id: "G-PS327TVEZ2"
+
+outputs:
+  home: ["HTML", "RSS"]
+  section: ["HTML", "RSS"]
+  taxonomy: ["HTML", "RSS"]
+  term: ["HTML", "RSS"]
