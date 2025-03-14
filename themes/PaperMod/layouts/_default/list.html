@@ -92,14 +92,14 @@
     {{- end }}
 
     <!-- 📩 Subscribe Form (After Post List) -->
-<div class="subscribe-minimal">
-  <p>📩 Enjoying the posts? Get new ones via email!</p>
-  <form action="https://buttondown.com/api/emails/embed-subscribe/minischetti" method="post" target="popupwindow"
-      onsubmit="window.open('https://buttondown.com/minischetti', 'popupwindow')">
-      <input type="email" name="email" placeholder="Your email..." required>
-      <input type="submit" value="Subscribe">
-  </form>
-</div>
+    <div class="subscribe-minimal">
+      <p>📩 Enjoying the posts? Get new ones via email!</p>
+      <form action="https://buttondown.com/api/emails/embed-subscribe/minischetti" method="post" target="popupwindow"
+          onsubmit="window.open('https://buttondown.com/minischetti', 'popupwindow')">
+          <input type="email" name="email" placeholder="Your email..." required>
+          <input type="submit" value="Subscribe">
+      </form>
+    </div>
 
     {{- if gt $paginator.TotalPages 1 }}
     <footer class="page-footer">
