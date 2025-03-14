@@ -6,6 +6,7 @@
     padding: 10px;
     z-index: 1001;
     color: var(--menu-text);
+    position: relative;
 }
 
 /* Dark Mode Support */
@@ -18,7 +19,7 @@
     --menu-hover-dark: rgba(255, 255, 255, 0.2);
 }
 
-/* Ensure menu is positioned correctly */
+/* Ensure menu is hidden by default */
 #mobile-menu {
     position: fixed;
     top: 0;
@@ -31,7 +32,7 @@
     transition: right 0.3s ease-in-out;
     z-index: 1002;
     padding-top: 60px;
-    padding-right: 20px; /* Fix close button alignment */
+    padding-right: 20px;
     visibility: hidden;
     opacity: 0;
 }
@@ -117,7 +118,7 @@ body.dark #close-menu {
     color: var(--menu-text-dark);
 }
 
-/* Hide desktop menu by default on small screens */
+/* Hide desktop menu on mobile */
 @media screen and (max-width: 768px) {
     .desktop-menu {
         display: none !important;
