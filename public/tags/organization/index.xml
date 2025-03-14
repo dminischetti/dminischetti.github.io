@@ -10,9 +10,9 @@
     <atom:link href="http://localhost:1313/tags/organization/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Notion: The External Brain That Finally Works for Me</title>
-      <link>http://localhost:1313/posts/notion-the-external-brain-that-finally-works-for-me/</link>
+      <link>http://localhost:1313/posts/notion-external-brain-that-works-for-me/</link>
       <pubDate>Fri, 07 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/notion-the-external-brain-that-finally-works-for-me/</guid>
+      <guid>http://localhost:1313/posts/notion-external-brain-that-works-for-me/</guid>
       <description>Struggling to keep track of your ideas and tasks? Discover why Notion is the external brain I never knew I needed.</description>
       <content:encoded><![CDATA[<p>For most of my life, I’ve been at war with <strong>my own memory</strong>.</p>
 <p>I’m great at solving problems, debugging complex code, and figuring out tricky logic flows. But ask me where I saved that important note from last week? <strong>Gone.</strong> Ask me what I was about to do five seconds ago? <strong>No idea.</strong></p>

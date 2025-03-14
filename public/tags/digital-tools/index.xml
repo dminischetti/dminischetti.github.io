@@ -10,9 +10,9 @@
     <atom:link href="http://localhost:1313/tags/digital-tools/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Notion: The External Brain That Finally Works for Me</title>
-      <link>http://localhost:1313/posts/notion-the-external-brain-that-finally-works-for-me/</link>
+      <link>http://localhost:1313/posts/notion-external-brain-that-works-for-me/</link>
       <pubDate>Fri, 07 Feb 2025 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/notion-the-external-brain-that-finally-works-for-me/</guid>
+      <guid>http://localhost:1313/posts/notion-external-brain-that-works-for-me/</guid>
       <description>Struggling to keep track of your ideas and tasks? Discover why Notion is the external brain I never knew I needed.</description>
       <content:encoded><![CDATA[<p>For most of my life, I’ve been at war with <strong>my own memory</strong>.</p>
 <p>I’m great at solving problems, debugging complex code, and figuring out tricky logic flows. But ask me where I saved that important note from last week? <strong>Gone.</strong> Ask me what I was about to do five seconds ago? <strong>No idea.</strong></p>
@@ -64,9 +64,9 @@
     </item>
     <item>
       <title>The Never-Ending Search for the Perfect App: Why I Can’t Stop Downloading</title>
-      <link>http://localhost:1313/posts/the-eternal-quest-for-the-perfect-app-a-saga-in-too-many-downloads/</link>
+      <link>http://localhost:1313/posts/never-ending-search-for-the-perfect-app/</link>
       <pubDate>Fri, 13 Dec 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/the-eternal-quest-for-the-perfect-app-a-saga-in-too-many-downloads/</guid>
+      <guid>http://localhost:1313/posts/never-ending-search-for-the-perfect-app/</guid>
       <description>Obsessed with finding the perfect app? You’re not alone. Join me on my endless quest for the ultimate productivity tools.</description>
       <content:encoded><![CDATA[<p>Some people spend their free time <strong>watching movies, playing games, or reading books</strong>.<br>
 I spend mine on an endless, slightly obsessive search for <strong>the perfect app.</strong></p>
@@ -161,9 +161,9 @@ I like my <strong>hardware customizable</strong> and my <strong>software open</s
     </item>
     <item>
       <title>The Browser Wars: My Exhausting Journey to Finding the Least Annoying Setup</title>
-      <link>http://localhost:1313/posts/the-browser-wars-my-exhausting-journey-to-finding-the-least-annoying-setup/</link>
+      <link>http://localhost:1313/posts/browser-wars-journey-to-least-annoying-setup/</link>
       <pubDate>Fri, 22 Nov 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/the-browser-wars-my-exhausting-journey-to-finding-the-least-annoying-setup/</guid>
+      <guid>http://localhost:1313/posts/browser-wars-journey-to-least-annoying-setup/</guid>
       <description>Choosing a browser shouldn&amp;#39;t be this hard. From Safari’s WebKit prison to Windows’ Chromium clones, here’s my exhausting browser journey.</description>
       <content:encoded><![CDATA[<p>I’m a software developer. I build things for the web. I write code.<br>
 I understand how browsers work.</p>

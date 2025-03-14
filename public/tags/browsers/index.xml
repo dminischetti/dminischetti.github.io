@@ -10,9 +10,9 @@
     <atom:link href="http://localhost:1313/tags/browsers/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>The Browser Wars: My Exhausting Journey to Finding the Least Annoying Setup</title>
-      <link>http://localhost:1313/posts/the-browser-wars-my-exhausting-journey-to-finding-the-least-annoying-setup/</link>
+      <link>http://localhost:1313/posts/browser-wars-journey-to-least-annoying-setup/</link>
       <pubDate>Fri, 22 Nov 2024 00:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/the-browser-wars-my-exhausting-journey-to-finding-the-least-annoying-setup/</guid>
+      <guid>http://localhost:1313/posts/browser-wars-journey-to-least-annoying-setup/</guid>
       <description>Choosing a browser shouldn&amp;#39;t be this hard. From Safari’s WebKit prison to Windows’ Chromium clones, here’s my exhausting browser journey.</description>
       <content:encoded><![CDATA[<p>I’m a software developer. I build things for the web. I write code.<br>
 I understand how browsers work.</p>

@@ -4,7 +4,7 @@ date: 2024-12-27T00:00:00
 description: "Growing a beard was never in my plans. But this accidental experiment taught me more about identity than I expected."
 tags: ["grooming", "identity", "life lessons", "mindset", "personal growth", "self-discovery"]
 cover:
-  image: "/images/i-never-thought-id-grow-a-beard.png"
+  image: "/images/posts/i-never-thought-id-grow-a-beard.png"
 ---
 I’ve never been a **beard guy.**  
 
