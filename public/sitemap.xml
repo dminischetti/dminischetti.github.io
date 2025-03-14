@@ -2,19 +2,19 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/</loc>
-    <lastmod>2025-03-16T12:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/posts/</loc>
-    <lastmod>2025-03-16T12:00:00+00:00</lastmod>
-  </url><url>
     <loc>http://localhost:1313/tags/digital-detox/</loc>
+    <lastmod>2025-03-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/</loc>
     <lastmod>2025-03-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/posts/logging-out-for-good-why-i-m-leaving-facebook-and-instagram/</loc>
     <lastmod>2025-03-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/personal-reflections/</loc>
+    <lastmod>2025-03-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>http://localhost:1313/posts/</loc>
     <lastmod>2025-03-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/social-media/</loc>
@@ -46,9 +46,6 @@
   </url><url>
     <loc>http://localhost:1313/posts/nyc-bread-hunt-found-and-made-perfect-loaf/</loc>
     <lastmod>2025-03-07T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>http://localhost:1313/photos/</loc>
-    <lastmod>2025-03-05T00:00:00+00:00</lastmod>
   </url><url>
     <loc>http://localhost:1313/tags/blogging/</loc>
     <lastmod>2025-03-03T00:00:00+00:00</lastmod>
@@ -281,13 +278,9 @@
     <loc>http://localhost:1313/posts/best-everyday-backpack-never-ending-search/</loc>
     <lastmod>2024-09-27T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/about/</loc>
-  </url><url>
     <loc>http://localhost:1313/archives/</loc>
   </url><url>
     <loc>http://localhost:1313/categories/</loc>
-  </url><url>
-    <loc>http://localhost:1313/resume/</loc>
   </url><url>
     <loc>http://localhost:1313/gallery/</loc>
   </url><url>

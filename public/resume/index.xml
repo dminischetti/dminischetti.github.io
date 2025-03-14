@@ -1,11 +1,105 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/">
   <channel>
-    <title>Dominic Minischetti on Dominic&#39;s Sandbox</title>
+    <title>Resumes on Dominic&#39;s Sandbox</title>
     <link>http://localhost:1313/resume/</link>
-    <description>Recent content in Dominic Minischetti on Dominic&#39;s Sandbox</description>
+    <description>Recent content in Resumes on Dominic&#39;s Sandbox</description>
     <generator>Hugo -- 0.144.2</generator>
     <language>en-us</language>
     <atom:link href="http://localhost:1313/resume/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Dominic Minischetti</title>
+      <link>http://localhost:1313/resume/resume/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/resume/resume/</guid>
+      <description>&lt;h3 id=&#34;php-backend-engineer--performance-optimization--scalable-web-systems&#34;&gt;&lt;strong&gt;PHP Backend Engineer | Performance Optimization | Scalable Web Systems&lt;/strong&gt;&lt;/h3&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;about-me&#34;&gt;&lt;strong&gt;About Me&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;Backend engineer with &lt;strong&gt;5+ years&lt;/strong&gt; of experience in &lt;strong&gt;PHP, MySQL, and scalable backend systems&lt;/strong&gt;, specializing in &lt;strong&gt;eCommerce, CMS platforms, and WMS development&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;I design and optimize &lt;strong&gt;high-performance applications&lt;/strong&gt; with a strong focus on &lt;strong&gt;database efficiency, clean architecture, and maintainable code&lt;/strong&gt;. Experienced in &lt;strong&gt;legacy code modernization, API development, and DevOps workflows&lt;/strong&gt;, I thrive on &lt;strong&gt;solving complex problems&lt;/strong&gt; and improving system performance.&lt;/p&gt;</description>
+      <content:encoded><![CDATA[<h3 id="php-backend-engineer--performance-optimization--scalable-web-systems"><strong>PHP Backend Engineer | Performance Optimization | Scalable Web Systems</strong></h3>
+<hr>
+<h2 id="about-me"><strong>About Me</strong></h2>
+<p>Backend engineer with <strong>5+ years</strong> of experience in <strong>PHP, MySQL, and scalable backend systems</strong>, specializing in <strong>eCommerce, CMS platforms, and WMS development</strong>.</p>
+<p>I design and optimize <strong>high-performance applications</strong> with a strong focus on <strong>database efficiency, clean architecture, and maintainable code</strong>. Experienced in <strong>legacy code modernization, API development, and DevOps workflows</strong>, I thrive on <strong>solving complex problems</strong> and improving system performance.</p>
+<p>Currently seeking opportunities to contribute <strong>scalable, efficient solutions</strong> while growing in a <strong>collaborative, problem-solving environment</strong>.</p>
+<hr>
+<h2 id="experience"><strong>Experience</strong></h2>
+<h3 id="backend-php-developer--blox-digital"><strong>Backend PHP Developer | BLOX Digital</strong></h3>
+<p>📍 <em>Jul 2024 - Present</em> | <em>Remote</em></p>
+<ul>
+<li><strong>Developing scalable CMS solutions</strong> for media organizations, optimizing PHP and MySQL for performance.</li>
+<li><strong>Enhancing system efficiency</strong> by refining SQL queries and backend processes.</li>
+<li><strong>Collaborating with cross-functional teams</strong> to streamline deployments and feature rollouts.</li>
+</ul>
+<hr>
+<h3 id="backend-php-developer--appliances-connection"><strong>Backend PHP Developer | Appliances Connection</strong></h3>
+<p>📍 <em>May 2022 - Mar 2024</em> | <em>Remote</em></p>
+<ul>
+<li><strong>Built a Warehouse Management System (WMS)</strong>, improving inventory tracking and order fulfillment.</li>
+<li><strong>Designed responsive UIs</strong> for handheld warehouse devices, enhancing operational workflows.</li>
+<li><strong>Worked closely with product teams</strong> to troubleshoot and optimize technical processes.</li>
+</ul>
+<hr>
+<h3 id="full-stack-developer--kingsleague"><strong>Full Stack Developer | Kingsleague</strong></h3>
+<p>📍 <em>Aug 2021 - May 2022</em></p>
+<ul>
+<li><strong>Developed key platform features</strong> using PHP, MySQL, and Firebase, increasing user engagement.</li>
+<li><strong>Automated testing with Python &amp; Selenium</strong>, improving code reliability.</li>
+<li><strong>Implemented Docker</strong> for streamlined deployments and environment consistency.</li>
+</ul>
+<hr>
+<h3 id="data-analyst--database-administrator--eiffel-srl"><strong>Data Analyst &amp; Database Administrator | Eiffel srl</strong></h3>
+<p>📍 <em>Nov 2012 - Oct 2015</em></p>
+<ul>
+<li><strong>Built and maintained PHP-based web applications</strong> with dynamic content management.</li>
+<li><strong>Managed SQL databases &amp; server administration</strong> for multiple web properties.</li>
+</ul>
+<hr>
+<h3 id="it--database-support-roles"><strong>IT &amp; Database Support Roles</strong></h3>
+<p>📍 <em>Various roles between 2006 - 2012</em></p>
+<ul>
+<li><strong>Diagnosed &amp; resolved</strong> software/hardware issues, ensuring minimal downtime.</li>
+<li><strong>Administered SQL databases &amp; web servers</strong>, maintaining data integrity.</li>
+</ul>
+<hr>
+<h2 id="education"><strong>Education</strong></h2>
+<h3 id="btech-computer-information-systems-database-track"><strong>B.Tech, Computer Information Systems (Database Track)</strong></h3>
+<p>📍 <em>CUNY New York City College of Technology</em> | <em>2018 - 2020</em></p>
+<ul>
+<li><strong>Advanced coursework in</strong> database management, software engineering, and network security.</li>
+<li><strong>GPA:</strong> 3.7/4.0</li>
+</ul>
+<hr>
+<h2 id="certifications--additional-learning"><strong>Certifications &amp; Additional Learning</strong></h2>
+<ul>
+<li><strong>MongoDB Course | MongoDB University (2021)</strong></li>
+<li><strong>Project Management | NYC College of Technology (2019)</strong></li>
+</ul>
+<hr>
+<h2 id="technical-skills"><strong>Technical Skills</strong></h2>
+<h3 id="programming--frameworks"><strong>Programming &amp; Frameworks</strong></h3>
+<p>✅ PHP (Laravel, Smarty) | Python | JavaScript (jQuery, Bootstrap) | HTML/CSS</p>
+<h3 id="databases--apis"><strong>Databases &amp; APIs</strong></h3>
+<p>✅ MySQL | MariaDB | SQL Server | MongoDB | RESTful API Development</p>
+<h3 id="devops--infrastructure"><strong>DevOps &amp; Infrastructure</strong></h3>
+<p>✅ Docker | Git | Jenkins | Nginx | Apache | Plesk | Linux Administration</p>
+<h3 id="development-methodologies"><strong>Development Methodologies</strong></h3>
+<p>✅ Agile (Kanban) | OOP | MVC Architecture</p>
+<hr>
+<h2 id="soft-skills"><strong>Soft Skills</strong></h2>
+<p>✔ <strong>Problem-Solving &amp; Debugging</strong> – Strong analytical mindset for diagnosing &amp; fixing complex issues.<br>
+✔ <strong>Collaboration &amp; Communication</strong> – Works effectively with cross-functional teams.<br>
+✔ <strong>Adaptability &amp; Continuous Learning</strong> – Keeps up with industry trends &amp; modern tech stacks.<br>
+✔ <strong>Attention to Detail</strong> – Focus on writing maintainable, high-quality code.</p>
+<hr>
+<h2 id="languages"><strong>Languages</strong></h2>
+<ul>
+<li><strong>English</strong> – Fluent</li>
+<li><strong>Italian</strong> – Native</li>
+<li><strong>Spanish</strong> – Basic</li>
+</ul>
+]]></content:encoded>
+    </item>
   </channel>
 </rss>
