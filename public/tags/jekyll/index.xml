@@ -14,6 +14,160 @@
       <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/why-i-switched-from-jekyll-to-hugo/</guid>
       <description>Migrating from Jekyll to Hugo wasn’t as smooth as I expected, but it was worth it. Here’s what broke, what I learned, and why I’ll never go back.</description>
+      <content:encoded><![CDATA[<h1 id="why-i-switched-from-jekyll-to-hugo-and-why-you-might-too"><strong>Why I Switched from Jekyll to Hugo (And Why You Might Too)</strong></h1>
+<p>I started blogging last summer because I wanted my own space on the internet. No algorithms, no distractions, no social media noise—just a place I actually controlled.</p>
+<p>At first, I went with Jekyll because it was GitHub Pages’ default. It worked… <em>until it didn’t.</em></p>
+<p>Jekyll was like an old car—reliable but constantly needing maintenance. The issues kept piling up:</p>
+<ul>
+<li><strong>Slow build times</strong> – A simple edit? Better grab a coffee.</li>
+<li><strong>Ruby dependencies</strong> – Installing Jekyll felt like summoning a demon.</li>
+<li><strong>Outdated themes</strong> – I wanted something modern, not a blog that looked straight out of 2012.</li>
+</ul>
+<p>I tried alternatives:</p>
+<ul>
+<li><strong>Ghost</strong> – Overkill for a simple blog.</li>
+<li><strong>WordPress</strong> – Too bloated.</li>
+<li><strong>Eleventy</strong> – Cool, but required too much setup.</li>
+<li><strong>Pelican</strong> – Python-based, but didn’t click with me.</li>
+</ul>
+<p>Then I found <strong>Hugo</strong>—fast, simple, and didn’t make me question my life choices.</p>
+<hr>
+<h2 id="why-i-stuck-with-github-pages"><strong>Why I Stuck with GitHub Pages</strong></h2>
+<p>I kept everything on <strong>GitHub Pages</strong> because:</p>
+<ul>
+<li><strong>It’s free</strong> – No hosting costs. Free is always good.</li>
+<li><strong>Automatic updates</strong> – Every Git commit deploys the site instantly.</li>
+<li><strong>Easy domain linking</strong> – My Namecheap domain worked without hassle.</li>
+<li><strong>No maintenance</strong> – No server issues, no software updates. Just write and publish.</li>
+<li><strong>Version control built-in</strong> – I can roll back changes if I break something (<em>which happens often</em>).</li>
+</ul>
+<p>With Hugo + GitHub Pages, I could focus on writing instead of debugging my blog.</p>
+<hr>
+<h2 id="step-1-installing-hugo-for-once-a-smooth-setup"><strong>Step 1: Installing Hugo (For Once, a Smooth Setup)</strong></h2>
+<p>Unlike Jekyll, which requires <code>bundle install</code> and a blood sacrifice, Hugo is just a single binary.</p>
+<ul>
+<li>
+<p><strong>On macOS</strong>:</p>
+<p>brew install hugo</p>
+</li>
+<li>
+<p><strong>On Windows</strong>: Download it from <a href="https://github.com/gohugoio/hugo/releases">Hugo’s GitHub releases</a> and add it to your PATH.</p>
+</li>
+<li>
+<p><strong>On Linux</strong>:</p>
+<p>sudo apt install hugo</p>
+</li>
+</ul>
+<p>To verify the installation:</p>
+<pre><code>hugo version
+</code></pre>
+<p>That’s it. No Bundler, no dependencies, no cursing at my screen.</p>
+<hr>
+<h2 id="step-2-moving-my-jekyll-posts-this-should-have-been-easy-but"><strong>Step 2: Moving My Jekyll Posts (This Should Have Been Easy, But…)</strong></h2>
+<p>At first, I thought I could just copy my Markdown files into Hugo’s <code>content/posts/</code> folder, and everything would work.</p>
+<p>It didn’t.</p>
+<h3 id="what-broke"><strong>What Broke?</strong></h3>
+<ul>
+<li><strong>Folder structure</strong> – Jekyll stores posts in <code>_posts/</code>, but Hugo expects them in <code>content/posts/</code>.</li>
+<li><strong>Front matter differences</strong> – Jekyll uses YAML, but Hugo supports TOML, YAML, or JSON.</li>
+<li><strong>Permalinks</strong> – Jekyll and Hugo structure URLs differently.</li>
+</ul>
+<p>To move the posts:</p>
+<pre><code>mkdir -p content/posts
+mv _posts/* content/posts/
+</code></pre>
+<p>Then, I had to clean up the front matter:</p>
+<pre><code>find content/posts -type f -name &quot;*.
+md&quot; -exec 
+sed -i 's/layout: post//g' {} \;
+</code></pre>
+<p>That was when I realized: Markdown is Markdown… <strong>until it isn’t.</strong></p>
+<hr>
+<h2 id="step-3-choosing-a-theme-a-black-hole-of-decision-making"><strong>Step 3: Choosing a Theme (A Black Hole of Decision Making)</strong></h2>
+<p>I tested multiple themes before settling on PaperMod:</p>
+<ul>
+<li><strong>Mainroad</strong> – Clean, but too plain.</li>
+<li><strong>Anubis</strong> – A dark theme with style, but not quite what I wanted.</li>
+<li><strong>Hello-Friend</strong> – Nice, but missing features I needed.</li>
+<li><strong>PaperMod</strong> – Minimalist, fast, and easy to tweak.</li>
+</ul>
+<p>Installing PaperMod was simple:</p>
+<pre><code>git submodule add https://github.com/adityatelange/hugo-PaperMod themes/PaperMod
+</code></pre>
+<p>Then, I updated <code>config.toml</code>:</p>
+<pre><code>theme = &quot;PaperMod&quot;
+</code></pre>
+<p>For now, it works. But I’ll probably keep tweaking things forever.</p>
+<hr>
+<h2 id="step-4-fixing-my-broken-blog-because-of-course-it-was-broken"><strong>Step 4: Fixing My Broken Blog (Because of Course It Was Broken)</strong></h2>
+<p>I ran:</p>
+<pre><code>hugo server -D
+</code></pre>
+<p>…and was immediately greeted by broken links, missing images, and general chaos.</p>
+<h3 id="what-went-wrong"><strong>What Went Wrong?</strong></h3>
+<ul>
+<li><strong>Jekyll’s <code>/assets/</code> folder didn’t move</strong> – I had to copy it manually.</li>
+<li><strong>Relative links broke</strong> – Hugo handles them differently than Jekyll.</li>
+<li><strong>Markdown formatting was stricter</strong> – Sloppy formatting? Not happening.</li>
+</ul>
+<p>After fixing those, my site <strong>finally</strong> worked.</p>
+<hr>
+<h2 id="step-5-deploying-to-github-pages-this-also-should-have-been-easy-but"><strong>Step 5: Deploying to GitHub Pages (This Also Should Have Been Easy, But…)</strong></h2>
+<p>Since I was sticking with GitHub Pages, I had to tweak my deployment process.</p>
+<ol>
+<li>
+<p><strong>Run Hugo’s build command</strong></p>
+<pre><code> hugo
+</code></pre>
+<p>This generates a <code>public/</code> folder with the static files.</p>
+</li>
+<li>
+<p><strong>Push to GitHub</strong></p>
+<pre><code> cd public
+ git initgit add .git commit -m &quot;Deploy Hugo site&quot;
+ git push origin main
+</code></pre>
+</li>
+</ol>
+<p>At first, I manually deployed, but I eventually set up <strong>GitHub Actions</strong> to automate everything.</p>
+<hr>
+<h2 id="step-6-customizing-papermod-because-i-cant-leave-things-alone"><strong>Step 6: Customizing PaperMod (Because I Can’t Leave Things Alone)</strong></h2>
+<h3 id="enable-dark-mode"><strong>Enable Dark Mode</strong></h3>
+<pre><code>[params] defaultTheme = &quot;dark&quot;
+</code></pre>
+<h3 id="enable-search"><strong>Enable Search</strong></h3>
+<pre><code>[outputs] home = [&quot;HTML&quot;, &quot;RSS&quot;, &quot;JSON&quot;]
+</code></pre>
+<h3 id="customize-sidebar-profile"><strong>Customize Sidebar Profile</strong></h3>
+<pre><code>[params.profileMode] enabled = true title = &quot;About Me&quot; subtitle = &quot;Minimalist, Developer, Writer&quot; imageUrl = &quot;images/profile.jpg&quot;
+</code></pre>
+<p>Every time I think I’m done tweaking, I find something else to change.</p>
+<hr>
+<h2 id="was-it-worth-it"><strong>Was It Worth It?</strong></h2>
+<ul>
+<li><strong>Hugo is fast</strong> – My site builds in milliseconds instead of making me wait.</li>
+<li><strong>No more Ruby dependencies</strong> – No <code>bundle exec</code>, no errors, no wasted time.</li>
+<li><strong>PaperMod works out of the box</strong> – A rare theme that doesn’t require days of customization.</li>
+</ul>
+<h3 id="what-id-do-differently"><strong>What I’d Do Differently</strong></h3>
+<ul>
+<li>Plan URL redirects better. My old Jekyll links broke, and I had to fix them manually.</li>
+<li>Test locally before pushing. I pushed broken pages more than once.</li>
+<li>Take notes while migrating. Some mistakes could have been avoided if I had written things down.</li>
+</ul>
+<hr>
+<h2 id="why-ill-keep-blogging"><strong>Why I’ll Keep Blogging</strong></h2>
+<p>This whole migration wasn’t just about switching platforms.</p>
+<ul>
+<li><strong>A personal blog is like a journal</strong> – It helps me organize my thoughts.</li>
+<li><strong>It’s my escape from social media</strong> – No ads, no distractions, no algorithm deciding what gets seen.</li>
+<li><strong>It’s mine, forever</strong> – No company can shadowban or de-platform me.</li>
+</ul>
+<p>I don’t know if PaperMod will be my final theme. I don’t know if I’ll keep tweaking every little thing.</p>
+<p>What I do know is this:</p>
+<p>I like writing. I like experimenting. And I like having a space that’s truly mine.</p>
+<p>If you&rsquo;re thinking of switching to Hugo, do it. Just be ready for the unexpected.</p>
+]]></content:encoded>
     </item>
   </channel>
 </rss>

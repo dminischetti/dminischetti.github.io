@@ -14,6 +14,96 @@
       <pubDate>Fri, 22 Nov 2024 00:00:00 +0000</pubDate>
       <guid>http://localhost:1313/posts/the-browser-wars-my-exhausting-journey-to-finding-the-least-annoying-setup/</guid>
       <description>Choosing a browser shouldn&amp;#39;t be this hard. From Safari’s WebKit prison to Windows’ Chromium clones, here’s my exhausting browser journey.</description>
+      <content:encoded><![CDATA[<p>I’m a software developer. I build things for the web. I write code.<br>
+I understand how browsers work.</p>
+<p>And yet, somehow, <strong>choosing a default browser nearly broke me.</strong></p>
+<p>It wasn’t supposed to be this complicated. <strong>It’s just a browser.</strong><br>
+A glorified <strong>tab holder</strong>. A tool to open Stack Overflow, forget why I opened it, and then open another tab instead.</p>
+<p>But the moment I tried to pick <em>the one</em>—<strong>the browser that would rule them all</strong>—I descended into <strong>a personal crisis so deep I started questioning reality itself.</strong></p>
+<hr>
+<h2 id="round-1-the-iphone-problem-or-apples-webkit-prison"><strong>Round 1: The iPhone Problem (Or: Apple’s WebKit Prison)</strong></h2>
+<p>I thought I had a choice.</p>
+<p>I really did.</p>
+<p>I believed I could just <strong>install Chrome or Firefox on my iPhone</strong> and live a normal life.</p>
+<p>What a fool I was.</p>
+<p>Because Apple, in its infinite wisdom, doesn’t actually let you <strong>use</strong> a real browser on iOS.<br>
+No matter what I install—<strong>Chrome, Firefox, Brave, Edge, Vivaldi, Opera, or a browser hand-coded by an underground group of free software rebels</strong>—they’re <strong>all WebKit underneath.</strong></p>
+<p>Which means every browser on iPhone is just <strong>Safari wearing a cheap disguise.</strong></p>
+<ul>
+<li><strong>Chrome?</strong> Safari with Google Sync.</li>
+<li><strong>Firefox?</strong> Safari with different branding.</li>
+<li><strong>Brave?</strong> Safari with a tinfoil hat.</li>
+</ul>
+<p>There is no escape. Safari is the law.</p>
+<p>I tried resisting. I tried using Chrome on my iPhone, <strong>convincing myself it was different.</strong><br>
+It wasn’t.</p>
+<p>The pages loaded the same. The bugs were the same.<br>
+The only difference? <strong>A Google logo and more tracking.</strong></p>
+<p>At some point, I accepted my fate. <strong>If everything is WebKit, I might as well use the original.</strong></p>
+<p>Fine. <strong>Safari wins on iPhone.</strong><br>
+Not because I love it, but because Apple made sure that fighting it would be a <strong>slow, battery-draining death.</strong></p>
+<hr>
+<h2 id="round-2-the-windows-browser-crisis-or-where-every-browser-is-the-same-anyway"><strong>Round 2: The Windows Browser Crisis (Or: Where Every Browser is the Same Anyway)</strong></h2>
+<p>On Windows, the situation should be better. No WebKit dictatorship. No artificial restrictions. <strong>Freedom.</strong></p>
+<p>Or so I thought.</p>
+<p>In reality, <strong>every Windows browser is just Chromium with different personality issues.</strong></p>
+<ul>
+<li><strong>Chrome</strong> – The original Chromium overlord. <strong>Fast, powerful, but eats RAM like it’s a competitive sport</strong> and makes you sign into a Google account just to exist.</li>
+<li><strong>Brave</strong> – Chrome, but constantly reminding you that it’s better than Chrome. <strong>Also, why does it keep asking me about crypto?</strong></li>
+<li><strong>Vivaldi</strong> – For people who think <strong>customizing a browser is a personality trait.</strong></li>
+<li><strong>Opera</strong> – Who even uses Opera? Who are you people? <strong>Reveal yourselves.</strong></li>
+<li><strong>Firefox</strong> – The only non-Chromium option, so I wanted to love it. <strong>But somehow, it makes every website feel slightly off</strong>, and the font rendering gives me trust issues.</li>
+</ul>
+<p>At this point, I realized something horrifying.</p>
+<p><strong>Every time I tried a new browser, I ended up back in Chrome’s arms.</strong></p>
+<p>Not because I <em>wanted</em> to, but because <strong>the entire web is optimized for Chromium.</strong></p>
+<p>I wanted to love Firefox. I even tried convincing myself that <strong>the slightly-off fonts were a feature.</strong><br>
+But in the end, it just made me feel like I was in an <strong>alternate universe where everything was almost right… but not quite.</strong></p>
+<p>So, I gave up. If I had to use Chromium, I might as well use <strong>the version that’s optimized for Windows</strong> and doesn’t aggressively push Google services on me.</p>
+<p>And that’s how <strong>Edge won by default.</strong></p>
+<hr>
+<h2 id="round-3-the-syncing-nightmare-or-how-i-glued-this-mess-together"><strong>Round 3: The Syncing Nightmare (Or: How I Glued This Mess Together)</strong></h2>
+<p>So now I had:</p>
+<ul>
+<li><strong>Safari on iPhone</strong> (<em>because Apple won’t let me have nice things</em>).</li>
+<li><strong>Edge on Windows</strong> (<em>because all Chromium browsers are the same, and Edge just integrates better</em>).</li>
+</ul>
+<p>But now came the <strong>real</strong> problem.</p>
+<p><strong>How do I sync bookmarks between two browsers that don’t want to talk to each other?</strong></p>
+<ul>
+<li>Google wants me to <strong>use Chrome on everything</strong> like some kind of cross-platform cult.</li>
+<li>Apple wants me to <strong>use Safari on everything</strong> because I made the mistake of owning an iPhone.</li>
+<li>Microsoft wants me to <strong>embrace Edge fully</strong> and probably switch to Bing while I’m at it.</li>
+</ul>
+<p>I refused to let any of them win.</p>
+<p>So I <strong>hacked my way out</strong> with <strong>iCloud Bookmarks Extension for Edge.</strong></p>
+<ul>
+<li>Now <strong>Safari and Edge share bookmarks</strong> like two kids forced to get along.</li>
+<li>I don’t need Google.</li>
+<li>I don’t need third-party syncing tools.</li>
+<li>And best of all, <strong>I can finally stop switching browsers every two weeks.</strong></li>
+</ul>
+<hr>
+<h2 id="final-thoughts-the-browser-wars-were-a-lie"><strong>Final Thoughts: The Browser Wars Were a Lie</strong></h2>
+<p>After all this research, testing, and <strong>questioning my life choices</strong>, I have one conclusion:</p>
+<p><strong>All browsers are terrible.</strong></p>
+<ul>
+<li>Some track you aggressively.</li>
+<li>Some drain your battery.</li>
+<li>Some crash randomly.</li>
+<li>Some make you feel guilty for using them.</li>
+</ul>
+<p>But in the end? <strong>A browser is just a tool.</strong></p>
+<p>The best one is <strong>the one that gets in your way the least.</strong></p>
+<p>For me, that means:</p>
+<p>✔ <strong>Safari on iPhone</strong> (<em>because fighting Apple is exhausting</em>).<br>
+✔ <strong>Edge on Windows</strong> (<em>because if all Chromium browsers are the same, I might as well pick the one with better Windows integration</em>).<br>
+✔ <strong>iCloud Sync</strong> (<em>because I refuse to let Google own my bookmarks</em>).</p>
+<p>Is it perfect? No.<br>
+Is it better than switching browsers every week? <strong>Yes.</strong><br>
+Will I probably change my mind in six months? <strong>Also yes.</strong></p>
+<p>Because let’s be real—<strong>the moment you finally settle on a setup, something new comes along to break everything.</strong></p>
+]]></content:encoded>
     </item>
   </channel>
 </rss>

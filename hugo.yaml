@@ -12,7 +12,13 @@ params:
   useHLJS: true
   themeVariant: "dark"
   ShowCodeCopyButtons: true
+  ShowFullTextinRSS: true
+  socialIcons:
+    - name: "linkedin"
+      url: "https://linkedin.com/in/dminischetti"
   assets:
+    disableFingerprinting: true
+    disableHLJS: true
     favicon: "/favicons/favicon.ico"
     favicon16x16: "/favicons/favicon-16x16.png"
     favicon32x32: "/favicons/favicon-32x32.png"
@@ -54,7 +60,7 @@ services:
     id: "G-PS327TVEZ2"
 
 outputs:
-  home: ["HTML", "RSS"]
+  home: ["HTML", "RSS", "JSON"]
   section: ["HTML", "RSS"]
   taxonomy: ["HTML", "RSS"]
   term: ["HTML", "RSS"]
