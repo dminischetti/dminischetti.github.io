@@ -24,7 +24,7 @@ By night, I trade in debugging for **Dad Logic™** (which, let’s be honest, n
 
 ## **🌍 A Life Between Two Worlds**  
 
-Born in **New York** 🗽, raised in **Italy** 🇮🇹, and now back in the city that never sleeps, my life has been a series of loops—like a recursive function that just won’t quit.  
+Born in **New York**, raised in **Italy**, and now back in the city that never sleeps, my life has been a series of loops—like a recursive function that just won’t quit.  
 
 I didn’t follow a straight path. After spending **nearly a decade wrestling with a computer science degree** that refused to cooperate, I built my own way forward. Instead of perfect grades, I gained a **problem-solving mindset** that helps me tackle challenges from unexpected angles.  
 
