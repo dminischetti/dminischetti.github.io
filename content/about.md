@@ -4,7 +4,13 @@ ShowReadingTime: false
 disableShare: true
 ---
 
-{{< figure src="/images/dominic_photo.png" alt="Dominic Minischetti" width="180" style="display: block; margin: 0 auto;" class="rounded" align="center" >}}
+{{< figure 
+  src="/images/dominic_photo.png" 
+  alt="Dominic Minischetti" 
+  width="200" 
+  class="about-photo shadow-lg rounded-full mx-auto mt-4 mb-6" 
+  style="max-width: 100%; border: 3px solid rgba(255,255,255,0.1); box-shadow: 0 4px 30px rgba(255,255,255,0.15); backdrop-filter: blur(5px);" 
+>}}
 
 # **👋 Hi, I’m Dominic**  
 
