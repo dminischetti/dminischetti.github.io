@@ -8,10 +8,10 @@ disableShare: true
   src="/images/dominic_photo.png" 
   alt="Dominic Minischetti" 
   width="200" 
+  align="center" 
   class="about-photo shadow-lg rounded-full mx-auto mt-4 mb-6" 
   style="max-width: 100%; border: 3px solid rgba(255,255,255,0.1); box-shadow: 0 4px 30px rgba(255,255,255,0.15); backdrop-filter: blur(5px);" 
 >}}
-
 # **👋 Hi, I’m Dominic**  
 
 I write code that works. *(Most of the time.)* And when it breaks, it does so with the **dramatic flair of a telenovela character**. I also break things on purpose—because the best way to fix something is to *first see how it falls apart.*  
