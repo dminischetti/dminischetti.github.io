@@ -9,7 +9,7 @@ A **sandbox** is a place to **experiment, build, and explore**—and that’s ex
 
 *(Why "sandbox"? In programming, a sandbox is a space to test ideas safely. This site is my personal sandbox—where I tinker, learn, and have fun! My daughter even drew a sandbox just for me. ❤️)*  
 
-{{< figure src="https://i.imgur.com/TuNwudS.png" alt="Dominic's Sandbox" width="100%" style="display: block; margin: 0 auto;" align="center" >}}  
+{{< figure src="/images/sandbox.png" alt="Dominic's Sandbox" width="100%" style="display: block; margin: 0 auto;" align="center" >}}  
 *My family's custom-built sandbox!*
 
 ---
