@@ -6,8 +6,128 @@
     <description>Recent content in Posts on Dominic&#39;s Sandbox</description>
     <generator>Hugo -- 0.144.2</generator>
     <language>en-us</language>
-    <lastBuildDate>Thu, 13 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 01 Apr 2025 09:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>How a CMS Can Make or Break Digital Publishing (And Why I’m All In with BLOX)</title>
+      <link>http://localhost:1313/posts/cms-digital-publishing-blox-nxt/</link>
+      <pubDate>Tue, 01 Apr 2025 09:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/cms-digital-publishing-blox-nxt/</guid>
+      <description>A look at why a great CMS is essential for digital publishing, how BLOX Digital is leading the way, and why I&amp;#39;m excited about BLOX NXT.</description>
+      <content:encoded><![CDATA[<p>Ever tried cooking a full meal with no kitchen tools? No knives, no stove, no pots—just your bare hands and sheer determination. Sounds impossible, right? That’s exactly what running a news website without a <strong>Content Management System (CMS)</strong> feels like.</p>
+<p>I should know. <strong>I work as a backend PHP developer at BLOX Digital</strong>, where I make sure newsrooms don’t have to suffer through that nightmare. And I don’t just work on CMS platforms—I believe in them. <strong>I don’t just write code for a CMS; I also write about it.</strong></p>
+<p>For me, my job and my blog are deeply connected. Every day, I see firsthand how the right CMS makes a newsroom more efficient, helps journalists focus on their work instead of fighting with bad software, and ensures that digital news operations actually generate revenue. And when I see how technology can solve real-world problems, I naturally want to talk about it. <strong>That’s why I blog—not just because I love writing, but because my work fuels my passion, and my passion fuels my work.</strong></p>
+<h2 id="so-what-exactly-is-a-cms">So, What Exactly Is a CMS?</h2>
+<p>Alright, let’s make this simple. A CMS is basically <strong>the control center of a website</strong>. It lets journalists and editors write, edit, publish, and organize their content <strong>without touching a single line of code</strong>.</p>
+<p>Think of it like a <strong>kitchen</strong>. You don’t need to be a chef to make a meal if you’ve got an oven, a knife, and a few good recipes. Same with a CMS—it gives media companies the tools to keep their sites updated, organized, and profitable, without needing a developer for every little change.</p>
+<p>Without a CMS? Every update is manual. Every layout change is a headache. Every article is a potential disaster waiting to happen. <strong>It’s not pretty.</strong></p>
+<h2 id="why-should-you-care">Why Should You Care?</h2>
+<p>Even if you don’t run a news site, you’ve probably experienced <strong>what happens when a CMS is bad (or nonexistent).</strong></p>
+<ul>
+<li><strong>A painfully slow website</strong> (the kind that makes you question all your life choices).</li>
+<li><strong>Articles impossible to find</strong> (why is the latest election update buried under &ldquo;10 Surprising Uses for Olive Oil&rdquo;?).</li>
+<li><strong>A paywall that feels like a trap</strong> (one second you’re reading, the next you’re being asked to hand over your credit card like it’s a ransom demand).</li>
+</ul>
+<p>A <strong>good CMS</strong>, though? It keeps everything <strong>fast, smooth, and user-friendly</strong>. It helps news sites work efficiently while making sure journalists <strong>actually get paid</strong>.</p>
+<p>And that’s exactly what we do at <strong>BLOX Digital</strong>.</p>
+<h2 id="why-blox-digital-and-why-im-excited-about-blox-nxt">Why BLOX Digital? (And Why I’m Excited About BLOX NXT)</h2>
+<p>At <strong>BLOX Digital</strong>, we don’t just build CMS platforms. We build <strong>the CMS platform</strong>.</p>
+<ul>
+<li><strong>Powering 2,000+ news sites</strong> across the U.S.</li>
+<li><strong>Serving 6.8 billion pageviews a year</strong></li>
+<li><strong>Helping media companies stay profitable</strong> while keeping journalism accessible</li>
+</ul>
+<h3 id="how">How?</h3>
+<ul>
+<li><strong>BLOX CMS</strong> – The foundation. This is what keeps content flowing, newsrooms running, and websites from breaking every five minutes.</li>
+<li><strong>BLOX Audience+</strong> – The smart paywall. Instead of slamming the door in readers’ faces, it nudges them toward subscriptions in a way that makes sense.</li>
+<li><strong>BLOX YieldUp</strong> – Our ad revenue optimizer that helps media companies make money without turning their sites into a mess.</li>
+</ul>
+<p>But the thing I’m really excited about?</p>
+<h3 id="blox-nxt-the-future-of-digital-publishing">BLOX NXT: The Future of Digital Publishing</h3>
+<p>BLOX NXT is a complete reimagining of how CMS platforms should work. It’s not just an upgrade—it’s a whole new system.</p>
+<ul>
+<li><strong>Real-time collaboration</strong> – No more “this article is locked by another user.” Multiple people can edit at once, like Google Docs but made for journalism.</li>
+<li><strong>AI-powered tools</strong> – Smart tagging, automated recommendations, and workflow optimization so editors spend less time clicking buttons and more time creating content.</li>
+<li><strong>One-click publishing to multiple platforms</strong> – Website, mobile app, social media, email newsletters, even print—all from one place.</li>
+<li><strong>A modern, intuitive interface</strong> – Let’s be real, some CMS dashboards look like they were built in 2005. BLOX NXT looks and feels like it belongs in 2025.</li>
+</ul>
+<p>And here’s the best part: it’s rolling out now.</p>
+<p>Early partners are already using BLOX NXT, and the feedback has been outstanding. Editors love the speed and collaboration, media execs love the revenue potential, and developers (like me!) love that it makes content management a whole lot less painful.</p>
+<h2 id="the-biggest-challenge-its-not-the-techits-the-people">The Biggest Challenge? It’s Not the Tech—It’s the People.</h2>
+<p>You’d think every media company would jump on this, right? But nope.</p>
+<p>Guy Tasaka, a longtime digital media expert, put it best:</p>
+<blockquote>
+<p><em>“All the technology the industry needs to be wildly successful exists today, but the culture won’t let them use it.”</em></p></blockquote>
+<p>Basically? The tools are here. The AI-powered automation, the smarter paywalls, the revenue-focused features—they all exist. But some media companies still resist change.</p>
+<p>They see their websites as expenses instead of investments. They stick to outdated workflows because &ldquo;that’s how we’ve always done it.&rdquo;</p>
+<p>And that’s why BLOX NXT isn’t just about better tech—it’s about making sure journalism can keep up with the digital world.</p>
+<h2 id="the-bottom-line-my-job-and-my-blog-are-one-and-the-same">The Bottom Line: My Job and My Blog Are One and the Same</h2>
+<p>I don’t just work on CMS platforms—I believe in them.</p>
+<p>That’s why I write about them. What I do at BLOX Digital and what I write here are the same thing: helping media companies survive and thrive in the digital age.</p>
+<p>My work fuels my blog. My blog fuels my passion for my work. It’s all connected.</p>
+<p>Newsrooms don’t have time to waste on bad tech. Readers don’t have patience for clunky websites. And journalism deserves better tools.</p>
+<p>That’s why BLOX NXT matters. And that’s why I can’t stop talking about it.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>The Quiet Room</title>
+      <link>http://localhost:1313/posts/the-quiet-room-life-after-social-media/</link>
+      <pubDate>Thu, 27 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/the-quiet-room-life-after-social-media/</guid>
+      <description>What I found after closing the door on social media: quiet, moka, and everything just as it was.</description>
+      <content:encoded><![CDATA[<p>After I closed the door on social media, I found myself in a <strong>quiet room</strong>.</p>
+<p>No scroll, no buzz, no filters. Just <em>stillness</em>.</p>
+<p>And you know what? I didn’t miss it. Not even a little.</p>
+<p>Life didn’t change. A couple of friends reached out privately, and it was fun—like running into someone at the market and chatting spontaneously. Maybe others will follow, maybe not. It’s fine. My days are still what they’ve always been: a little chaotic, often beautiful, and somehow always too short.</p>
+<p>In this quiet room, I didn’t discover enlightenment or productivity hacks. I didn’t become a new person. I just realized I still like being me—<strong>offline too</strong>.</p>
+<p>This blog isn’t a megaphone. It’s a <strong>lamp in a quiet room</strong>. A place to sit down, take off the performance, and speak plainly. If you’ve found your way here, welcome. I’m glad you did.</p>
+<p>There’s a <strong>moka on the stove</strong>, quietly bubbling. The chair is yours if you want it.</p>
+<p>I don’t know how often I’ll write. I just know that when I do, it will be <em>real</em>. No hashtags. No metrics. Just this.</p>
+<p>Thanks for stepping inside.<br>
+- D.</p>
+]]></content:encoded>
+    </item>
+    <item>
+      <title>Why You Should Save Images as PNG Instead of JPG (Most of the Time!)</title>
+      <link>http://localhost:1313/posts/why-save-images-as-png-instead-of-jpg/</link>
+      <pubDate>Fri, 21 Mar 2025 12:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/why-save-images-as-png-instead-of-jpg/</guid>
+      <description>A breakdown of why PNG is often the better choice over JPG—because nobody wants their images looking like they were printed on a potato.</description>
+      <content:encoded><![CDATA[<p>So, you’re about to save an image, and that little dropdown asks: <strong>PNG or JPG?</strong> And suddenly, you pause. You squint at the screen, question all your life choices, and wonder why this is even a decision you have to make.</p>
+<p>Well, let me tell you—<strong>it is</strong>. Because choosing the wrong format can absolutely ruin your image. And you won’t even realize it until it’s too late, like when you zoom in and see that your once-crisp design now looks like it was printed on a cereal box from the ‘90s.</p>
+<p>Let’s get into it.</p>
+<h2 id="1-png-keeps-your-image-sharpjpg-smudges-it-like-a-greasy-fingerprint"><strong>1. PNG Keeps Your Image Sharp—JPG Smudges It Like a Greasy Fingerprint</strong></h2>
+<p>You ever seen a JPG up close? It’s not pretty.</p>
+<p>JPG <strong>compresses</strong> images by basically throwing away data, which means the more you save, the more quality you lose. It’s like making a photocopy of a photocopy—after a while, everything looks a little&hellip; <em>off</em>.</p>
+<p>PNG, on the other hand, keeps <strong>everything</strong>. Every pixel, every little detail. If you’ve ever saved a screenshot of text as a JPG and then wondered why it suddenly looks like it was written in crayon, you already know the struggle.</p>
+<p>So, if you care about <strong>keeping things crisp</strong>, <strong>PNG is your best friend</strong>.</p>
+<h2 id="2-transparency-because-not-everything-needs-a-white-box-around-it"><strong>2. Transparency. Because Not Everything Needs a White Box Around It.</strong></h2>
+<p>Ever tried saving a logo as a JPG and ended up with an ugly white background? Yeah. That’s because JPG doesn’t do <strong>transparency</strong>.</p>
+<p>PNG? <strong>Perfectly clean, invisible backgrounds.</strong></p>
+<p>This is huge if you’re working with <strong>logos, icons, or anything you need to layer over other images</strong>. If you’re making graphics and saving them as JPGs, you’re basically giving yourself extra work because now you have to go back and remove that stupid white box.</p>
+<p>Or, you know, just <strong>use PNG from the start and save yourself the headache</strong>.</p>
+<h2 id="3-png-keeps-text-and-sharp-lines-looking-sharpjpg-butchers-them"><strong>3. PNG Keeps Text and Sharp Lines Looking Sharp—JPG Butchers Them</strong></h2>
+<p>JPG has a bad habit of turning sharp edges into <strong>blurry, blocky nonsense</strong>. Letters, graphs, clean vector lines—it all gets smudged like someone took their thumb and rubbed it across the screen.</p>
+<p>If you’re making infographics, charts, UI elements, or anything with text, <strong>stick with PNG</strong>. Otherwise, you’ll zoom in and wonder why your carefully designed text now looks like it was pulled from an old fax machine.</p>
+<p>And no, increasing the JPG quality to 100% won’t <em>completely</em> fix it. That’s like putting a band-aid on a broken bone.</p>
+<h2 id="4-color-gradients-stay-smooth-in-pngjpg-turns-them-into-a-stripey-mess"><strong>4. Color Gradients Stay Smooth in PNG—JPG Turns Them Into a Stripey Mess</strong></h2>
+<p>You ever seen an image where a soft color gradient turns into a series of ugly bands instead of a smooth transition? That’s JPG compression <strong>at work</strong>.</p>
+<p>PNG keeps <strong>all</strong> the subtle color details, while JPG tries to “simplify” them, which is just a fancy way of saying “ruins them.”</p>
+<p>If you’re working on <strong>art, backgrounds, or anything with a soft color fade</strong>, don’t even think about saving as JPG. Unless you <em>like</em> your images looking like they came from an early 2000s PowerPoint slide.</p>
+<h2 id="5-you-can-save-png-over-and-over-without-losing-qualityjpg-degrades-every-time"><strong>5. You Can Save PNG Over and Over Without Losing Quality—JPG Degrades Every Time</strong></h2>
+<p>JPG is like a VHS tape. Every time you copy, edit, and save it, the quality <strong>gets worse</strong>.</p>
+<p>PNG? <strong>Doesn’t budge.</strong></p>
+<p>This is <strong>huge</strong> if you’re working on something that requires multiple edits. Save as PNG, and you’ll always have a clean, perfect file. Save as JPG, and after a few rounds, you’ll be looking at something that resembles abstract art—but not in a good way.</p>
+<p>Also, if you’re archiving old photos, <strong>PNG is the way to go</strong>. Because one day, Future You is gonna open that JPG and ask, <em>“Why does this look like a pixelated disaster?”</em></p>
+<h2 id="but-waitwhen-is-jpg-actually-better"><strong>But Wait—When Is JPG Actually Better?</strong></h2>
+<p>Look, JPG <strong>isn’t evil</strong>. It’s just… situational.</p>
+<p>If you’re dealing with <strong>big photos and need to save space</strong>, JPG is fine. It’s great for sharing images on the web, sending memes, or saving a bunch of random pictures that <strong>don’t need to be perfect</strong>.</p>
+<p>But if you’re working with <strong>logos, text, sharp details, or anything you want to keep pristine</strong>, <strong>PNG is the move</strong>.</p>
+<h2 id="final-thoughts"><strong>Final Thoughts</strong></h2>
+<p>So next time you’re about to hit &ldquo;Save As,&rdquo; ask yourself: <strong>Do I care about transparency? Do I need sharp edges? Will I be editing this later?</strong> If the answer to any of those is yes, <strong>PNG all the way</strong>.</p>
+]]></content:encoded>
+    </item>
     <item>
       <title>Logging Out for Good: Why I’m Leaving Facebook and Instagram</title>
       <link>http://localhost:1313/posts/logging-out-for-good-why-i-m-leaving-facebook-and-instagram/</link>
