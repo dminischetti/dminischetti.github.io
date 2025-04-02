@@ -2,7 +2,7 @@
 title: "Best Minimalist Desk Setup for Productivity in 2025 (Remote Work Edition)"
 description: "Build a distraction-free, minimalist workspace that boosts your productivity in 2025. A witty, smart guide for remote workers, developers, and deep work fanatics."
 date: 2025-04-05T00:00:00
-tags: ["minimalism", "desk setup", "productivity", "remote work", "adhd", "workspace"]
+tags: ["minimalism", "desk setup", "productivity", "remote work", "workspace"]
 categories: ["Workspaces", "Productivity"]
 draft: false
 showToc: true
@@ -12,7 +12,7 @@ cover:
 ---
 Looking to summon laser-sharp focus, deep work, and maybe even impress your cat with your organizational skills? This minimalist desk setup guide might not get you a promotion (no promises), but it *will* help you build a distraction-free workspace so intentional that your brain has no choice but to show up and do the work.
 
-I’ve refined this setup through remote work, ADHD tendencies, parenting chaos, and a borderline obsession with minimalism. The result? A desk that looks simple—but works like a tactical command center for productivity.
+I’ve refined this setup through remote work, parenting chaos, and a borderline obsession with minimalism. The result? A desk that looks simple—but works like a tactical command center for productivity.
 
 Ready to build yours? Let’s break it down by gear, layout, sensory hacks, and a few unpopular (but genius) rules that keep me productive and sane. Spoiler: no plants. Sorry, ficus lovers.
 

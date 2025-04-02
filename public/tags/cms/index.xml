@@ -9,10 +9,10 @@
     <lastBuildDate>Tue, 01 Apr 2025 09:00:00 +0000</lastBuildDate>
     <atom:link href="http://localhost:1313/tags/cms/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Why a CMS is the Secret Sauce for Digital Success (And Why I Love Working at BLOX Digital)</title>
-      <link>http://localhost:1313/posts/why-a-cms-is-the-secret-sauce-for-digital-success/</link>
+      <title>How a CMS Can Make or Break Digital Publishing (And Why I’m All In with BLOX)</title>
+      <link>http://localhost:1313/posts/cms-digital-publishing-blox-nxt/</link>
       <pubDate>Tue, 01 Apr 2025 09:00:00 +0000</pubDate>
-      <guid>http://localhost:1313/posts/why-a-cms-is-the-secret-sauce-for-digital-success/</guid>
+      <guid>http://localhost:1313/posts/cms-digital-publishing-blox-nxt/</guid>
       <description>A look at why a great CMS is essential for digital publishing, how BLOX Digital is leading the way, and why I&amp;#39;m excited about BLOX NXT.</description>
       <content:encoded><![CDATA[<p>Ever tried cooking a full meal with no kitchen tools? No knives, no stove, no pots—just your bare hands and sheer determination. Sounds impossible, right? That’s exactly what running a news website without a <strong>Content Management System (CMS)</strong> feels like.</p>
 <p>I should know. <strong>I work as a backend PHP developer at BLOX Digital</strong>, where I make sure newsrooms don’t have to suffer through that nightmare. And I don’t just work on CMS platforms—I believe in them. <strong>I don’t just write code for a CMS; I also write about it.</strong></p>
@@ -24,49 +24,50 @@
 <h2 id="why-should-you-care">Why Should You Care?</h2>
 <p>Even if you don’t run a news site, you’ve probably experienced <strong>what happens when a CMS is bad (or nonexistent).</strong></p>
 <ul>
-<li><strong>A painfully slow website</strong> (<em>the kind that makes you question all your life choices</em>).</li>
-<li><strong>Articles impossible to find</strong> (<em>why is the latest election update buried under &ldquo;10 Surprising Uses for Olive Oil&rdquo;?</em>).</li>
-<li><strong>A paywall that feels like a trap</strong> (<em>one second you’re reading, the next you’re being asked to hand over your credit card like it’s a ransom demand</em>).</li>
+<li><strong>A painfully slow website</strong> (the kind that makes you question all your life choices).</li>
+<li><strong>Articles impossible to find</strong> (why is the latest election update buried under &ldquo;10 Surprising Uses for Olive Oil&rdquo;?).</li>
+<li><strong>A paywall that feels like a trap</strong> (one second you’re reading, the next you’re being asked to hand over your credit card like it’s a ransom demand).</li>
 </ul>
 <p>A <strong>good CMS</strong>, though? It keeps everything <strong>fast, smooth, and user-friendly</strong>. It helps news sites work efficiently while making sure journalists <strong>actually get paid</strong>.</p>
 <p>And that’s exactly what we do at <strong>BLOX Digital</strong>.</p>
 <h2 id="why-blox-digital-and-why-im-excited-about-blox-nxt">Why BLOX Digital? (And Why I’m Excited About BLOX NXT)</h2>
 <p>At <strong>BLOX Digital</strong>, we don’t just build CMS platforms. We build <strong>the CMS platform</strong>.</p>
-<p>✔️ <strong>Powering 2,000+ news sites</strong> across the U.S.<br>
-✔️ <strong>Serving 6.8 billion pageviews a year</strong> (yes, <em>billion</em> with a &ldquo;B&rdquo;).<br>
-✔️ <strong>Helping media companies stay profitable</strong> while keeping journalism accessible.</p>
+<ul>
+<li><strong>Powering 2,000+ news sites</strong> across the U.S.</li>
+<li><strong>Serving 6.8 billion pageviews a year</strong></li>
+<li><strong>Helping media companies stay profitable</strong> while keeping journalism accessible</li>
+</ul>
 <h3 id="how">How?</h3>
-<p>✔️ <strong>BLOX CMS</strong> – The foundation. This is what keeps <strong>content flowing, newsrooms running, and websites from breaking</strong> every five minutes.<br>
-✔️ <strong>BLOX Audience+</strong> – The <strong>smart paywall</strong>. Instead of slamming the door in readers’ faces, it <strong>nudges them toward subscriptions</strong> in a way that makes sense for them. (<em>If you read 50 articles a month, you should probably be paying for it, right?</em>)<br>
-✔️ <strong>BLOX YieldUp</strong> – Our <strong>ad revenue optimizer</strong> that helps media companies <strong>make money without turning their sites into an unreadable mess</strong>.</p>
-<p>But the thing I’m <strong>really excited about</strong>?</p>
+<ul>
+<li><strong>BLOX CMS</strong> – The foundation. This is what keeps content flowing, newsrooms running, and websites from breaking every five minutes.</li>
+<li><strong>BLOX Audience+</strong> – The smart paywall. Instead of slamming the door in readers’ faces, it nudges them toward subscriptions in a way that makes sense.</li>
+<li><strong>BLOX YieldUp</strong> – Our ad revenue optimizer that helps media companies make money without turning their sites into a mess.</li>
+</ul>
+<p>But the thing I’m really excited about?</p>
 <h3 id="blox-nxt-the-future-of-digital-publishing">BLOX NXT: The Future of Digital Publishing</h3>
-<p>BLOX NXT is <strong>a complete reimagining</strong> of how CMS platforms should work. It’s <strong>not just an upgrade—it’s a whole new system.</strong></p>
-<p>🚀 <strong>Real-time collaboration</strong> – No more “this article is locked by another user” nonsense. <strong>Multiple people can edit at once, like Google Docs, but built for journalism.</strong><br>
-🤖 <strong>AI-powered tools</strong> – Smart tagging, automated recommendations, and workflow optimization so <strong>editors spend less time clicking buttons and more time creating content</strong>.<br>
-📢 <strong>One-click publishing to multiple platforms</strong> – Website, mobile app, social media, email newsletters, even print—<strong>all from one place</strong>.<br>
-✨ <strong>A modern, intuitive interface</strong> – Let’s be real, some CMS dashboards look like they were built in 2005. <strong>BLOX NXT actually looks and feels like a 2025 platform.</strong></p>
-<p>And here’s the best part: <strong>it’s rolling out now.</strong></p>
-<p>Early partners are already using BLOX NXT, and the feedback has been <strong>amazing</strong>. Editors love the <strong>speed and collaboration</strong>, media execs love the <strong>revenue potential</strong>, and developers (<em>like me!</em>) love that <strong>it makes content management a whole lot less painful</strong>.</p>
+<p>BLOX NXT is a complete reimagining of how CMS platforms should work. It’s not just an upgrade—it’s a whole new system.</p>
+<ul>
+<li><strong>Real-time collaboration</strong> – No more “this article is locked by another user.” Multiple people can edit at once, like Google Docs but made for journalism.</li>
+<li><strong>AI-powered tools</strong> – Smart tagging, automated recommendations, and workflow optimization so editors spend less time clicking buttons and more time creating content.</li>
+<li><strong>One-click publishing to multiple platforms</strong> – Website, mobile app, social media, email newsletters, even print—all from one place.</li>
+<li><strong>A modern, intuitive interface</strong> – Let’s be real, some CMS dashboards look like they were built in 2005. BLOX NXT looks and feels like it belongs in 2025.</li>
+</ul>
+<p>And here’s the best part: it’s rolling out now.</p>
+<p>Early partners are already using BLOX NXT, and the feedback has been outstanding. Editors love the speed and collaboration, media execs love the revenue potential, and developers (like me!) love that it makes content management a whole lot less painful.</p>
 <h2 id="the-biggest-challenge-its-not-the-techits-the-people">The Biggest Challenge? It’s Not the Tech—It’s the People.</h2>
 <p>You’d think every media company would jump on this, right? But nope.</p>
 <p>Guy Tasaka, a longtime digital media expert, put it best:</p>
 <blockquote>
 <p><em>“All the technology the industry needs to be wildly successful exists today, but the culture won’t let them use it.”</em></p></blockquote>
-<p>Basically? <strong>The tools are here.</strong> The AI-powered automation, the smarter paywalls, the revenue-focused features—they all exist. But some media companies <strong>still resist change</strong>.</p>
-<p>They see their websites as <strong>expenses</strong> instead of <strong>investments</strong>. They stick to <strong>outdated workflows</strong> because &ldquo;that’s how we’ve always done it.&rdquo;</p>
-<p>And that’s why <strong>BLOX NXT isn’t just about better tech—it’s about making sure journalism can keep up with the digital world</strong>.</p>
+<p>Basically? The tools are here. The AI-powered automation, the smarter paywalls, the revenue-focused features—they all exist. But some media companies still resist change.</p>
+<p>They see their websites as expenses instead of investments. They stick to outdated workflows because &ldquo;that’s how we’ve always done it.&rdquo;</p>
+<p>And that’s why BLOX NXT isn’t just about better tech—it’s about making sure journalism can keep up with the digital world.</p>
 <h2 id="the-bottom-line-my-job-and-my-blog-are-one-and-the-same">The Bottom Line: My Job and My Blog Are One and the Same</h2>
 <p>I don’t just work on CMS platforms—I believe in them.</p>
-<p>That’s why I write about them. <strong>What I do at BLOX Digital and what I write here are the same thing: helping media companies survive and thrive in the digital age.</strong></p>
-<p>My work fuels my blog. My blog fuels my passion for my work. <strong>It’s all connected.</strong></p>
-<p>Newsrooms don’t have time to waste on bad tech. Readers don’t have patience for clunky websites. And journalism <strong>deserves better tools.</strong></p>
-<p>That’s why <strong>BLOX NXT matters</strong>. And that’s why I can’t stop talking about it.</p>
-<h2 id="lets-talk">Let’s Talk</h2>
-<p>🤬 Ever hit a paywall that made you irrationally angry?<br>
-😤 Tried reading an article on a slow, clunky website?<br>
-🤔 Wondered what actually happens behind the scenes when news gets published?</p>
-<p>Drop a comment—I’d love to hear your thoughts! And if you’re <strong>as hyped as I am about BLOX NXT</strong>, stay tuned. <strong>Big things are coming.</strong> 🚀</p>
+<p>That’s why I write about them. What I do at BLOX Digital and what I write here are the same thing: helping media companies survive and thrive in the digital age.</p>
+<p>My work fuels my blog. My blog fuels my passion for my work. It’s all connected.</p>
+<p>Newsrooms don’t have time to waste on bad tech. Readers don’t have patience for clunky websites. And journalism deserves better tools.</p>
+<p>That’s why BLOX NXT matters. And that’s why I can’t stop talking about it.</p>
 ]]></content:encoded>
     </item>
   </channel>
