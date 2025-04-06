@@ -1,7 +1,7 @@
 ---
 title: "Thank You, Little Car: Lessons from the Roads That Raised Me"
 date: 2025-04-04T00:00:00
-description: "A heartfelt reflection on how everyday drives during college shaped a life of gratitude, curiosity, and personal growth."
+description: "A heartfelt reflection on how everyday drives shaped a life of gratitude, curiosity, and personal growth."
 tags: ["Gratitude", "Personal Growth", "Life Lessons", "Reflection", "Self-Discovery"]
 cover:
   image: "/images/posts/thank-you-little-car-lessons-roads-that-raised-me.png"
