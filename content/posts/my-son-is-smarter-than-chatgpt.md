@@ -1,7 +1,7 @@
 ---
 title: "My Son Is Smarter Than ChatGPT"
 description: "A deep dive into the insane things my baby son is doing."
-date: 2025-04-08T00:00:00
+date: 2025-04-11T00:00:00
 slug: "my-son-is-smarter-than-chatgpt"
 tags: ["parenting", "development", "science", "babies", "cognition"]
 categories: ["parenting"]
