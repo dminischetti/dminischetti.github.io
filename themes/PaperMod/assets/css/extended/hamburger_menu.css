@@ -29,7 +29,6 @@
     z-index: 1003;
 }
 
-/* Mobile Menu Wrapper */
 #mobile-menu {
     position: fixed;
     top: 0;
@@ -66,7 +65,6 @@
     transition: background 0.2s ease-in-out;
 }
 
-/* Overlay */
 #menu-overlay {
     position: fixed;
     top: 0;
@@ -82,38 +80,42 @@
     display: block;
 }
 
-/* Light Mode Styles */
-body:not(.dark) #mobile-menu {
-    background: black;
-    color: white;
+/* === Light Theme === */
+@media (prefers-color-scheme: light) {
+    #mobile-menu {
+        background: black;
+        color: white;
+    }
+
+    #mobile-menu a {
+        color: white;
+    }
+
+    #mobile-menu a:hover {
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+    #close-menu {
+        color: white;
+    }
 }
 
-body:not(.dark) #mobile-menu a {
-    color: white;
-}
+/* === Dark Theme === */
+@media (prefers-color-scheme: dark) {
+    #mobile-menu {
+        background: #f0f0f0;
+        color: black;
+    }
 
-body:not(.dark) #mobile-menu a:hover {
-    background: rgba(255, 255, 255, 0.15);
-}
+    #mobile-menu a {
+        color: black;
+    }
 
-body:not(.dark) #close-menu {
-    color: white;
-}
+    #mobile-menu a:hover {
+        background: rgba(0, 0, 0, 0.1);
+    }
 
-/* Dark Mode Styles */
-body.dark #mobile-menu {
-    background: #f0f0f0;
-    color: black;
-}
-
-body.dark #mobile-menu a {
-    color: black;
-}
-
-body.dark #mobile-menu a:hover {
-    background: rgba(0, 0, 0, 0.1);
-}
-
-body.dark #close-menu {
-    color: black;
+    #close-menu {
+        color: black;
+    }
 }
