@@ -1,7 +1,7 @@
 ---
 title: "Best Minimalist Desk Setup for Productivity in 2025 (Remote Work Edition)"
 description: "Build a distraction-free, minimalist workspace that boosts your productivity in 2025. A witty, smart guide for remote workers, developers, and deep work fanatics."
-date: 2025-04-18T00:00:00
+date: 2025-04-24T00:00:00
 tags: ["minimalism", "desk setup", "productivity", "remote work", "workspace"]
 categories: ["Workspaces", "Productivity"]
 draft: false
