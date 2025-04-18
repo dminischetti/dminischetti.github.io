@@ -25,11 +25,11 @@
     background: none;
     border: none;
     font-size: 30px;
-    color: white;
     cursor: pointer;
     z-index: 1003;
 }
 
+/* Mobile Menu Wrapper */
 #mobile-menu {
     position: fixed;
     top: 0;
@@ -37,7 +37,6 @@
     width: 70%;
     max-width: 300px;
     height: 100%;
-    background: black;
     box-shadow: -4px 0 10px rgba(0, 0, 0, 0.3);
     transition: right 0.3s ease-in-out;
     z-index: 1002;
@@ -61,17 +60,13 @@
 }
 
 #mobile-menu a {
-    color: white;
     text-decoration: none;
     font-size: 18px;
     display: block;
     transition: background 0.2s ease-in-out;
 }
 
-#mobile-menu a:hover {
-    background: rgba(255, 255, 255, 0.15);
-}
-
+/* Overlay */
 #menu-overlay {
     position: fixed;
     top: 0;
@@ -87,6 +82,25 @@
     display: block;
 }
 
+/* Light Mode Styles */
+body:not(.dark) #mobile-menu {
+    background: black;
+    color: white;
+}
+
+body:not(.dark) #mobile-menu a {
+    color: white;
+}
+
+body:not(.dark) #mobile-menu a:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+body:not(.dark) #close-menu {
+    color: white;
+}
+
+/* Dark Mode Styles */
 body.dark #mobile-menu {
     background: #f0f0f0;
     color: black;
