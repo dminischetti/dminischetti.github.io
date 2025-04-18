@@ -52,17 +52,17 @@
     <div class="header-inner">
 
         <!-- Hamburger Menu Button -->
-         <!-- <button id="menu-trigger" aria-haspopup="menu" aria-label="Menu Button">
+        <button id="menu-trigger" aria-haspopup="menu" aria-label="Menu Button">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu">
                 <line x1="3" y1="12" x2="21" y2="12"></line>
                 <line x1="3" y1="6" x2="21" y2="6"></line>
                 <line x1="3" y1="18" x2="21" y2="18"></line>
             </svg>
-        </button> -->
+        </button> 
 
         <!-- Overlay Background for Menu -->
-        <!-- <div id="menu-overlay"></div>
+        <div id="menu-overlay"></div>
 
         <nav id="mobile-menu">
             <button id="close-menu">&times;</button>
@@ -75,7 +75,7 @@
                 </li>
             {{- end }}
             </ul>
-        </nav> -->
+        </nav>
 
         <div class="logo">
             {{- $label_text := (site.Params.label.text | default site.Title) }}
@@ -186,7 +186,7 @@
     </ul>
 </header>
 
-<!-- <script>
+<script>
     document.addEventListener("DOMContentLoaded", function () {
         const menuTrigger = document.getElementById("menu-trigger");
         const menu = document.getElementById("mobile-menu");
@@ -227,4 +227,4 @@
         // Run whenever window is resized
         window.addEventListener("resize", toggleDesktopMenu);
     });
-</script> -->
+</script>
