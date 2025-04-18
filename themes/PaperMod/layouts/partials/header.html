@@ -210,21 +210,4 @@
         });
     });
 
-    document.addEventListener("DOMContentLoaded", function () {
-        const desktopMenu = document.querySelector(".desktop-menu");
-
-        function toggleDesktopMenu() {
-            if (window.innerWidth <= 1024) {
-                desktopMenu.style.display = "none";
-            } else {
-                desktopMenu.style.display = "flex"; // Adjust if needed
-            }
-        }
-
-        // Run on page load
-        toggleDesktopMenu();
-
-        // Run whenever window is resized
-        window.addEventListener("resize", toggleDesktopMenu);
-    });
 </script>
