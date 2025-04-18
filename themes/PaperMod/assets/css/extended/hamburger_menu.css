@@ -80,42 +80,40 @@
     display: block;
 }
 
-/* === Light Theme === */
 @media (prefers-color-scheme: light) {
     #mobile-menu {
-        background: black;
-        color: white;
+        background: black !important;
+        color: white !important;
     }
 
     #mobile-menu a {
-        color: white;
+        color: white !important;
     }
 
     #mobile-menu a:hover {
-        background: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.15) !important;
     }
 
     #close-menu {
-        color: white;
+        color: white !important;
     }
 }
 
-/* === Dark Theme === */
 @media (prefers-color-scheme: dark) {
     #mobile-menu {
-        background: #f0f0f0;
-        color: black;
+        background: #f0f0f0 !important;
+        color: black !important;
     }
 
     #mobile-menu a {
-        color: black;
+        color: black !important;
     }
 
     #mobile-menu a:hover {
-        background: rgba(0, 0, 0, 0.1);
+        background: rgba(0, 0, 0, 0.1) !important;
     }
 
     #close-menu {
-        color: black;
+        color: black !important;
     }
 }
