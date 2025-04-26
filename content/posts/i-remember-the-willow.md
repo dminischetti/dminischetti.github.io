@@ -4,7 +4,6 @@ date: 2025-04-17T00:00:00
 author: "Dominic Minischetti"
 tags: ["poetry", "focus", "minimalism", "relationships"]
 categories: ["Reflections"]
-summary: "A poetic reflection on inner struggle, sensitivity, memory, love, and how the mind experiences the world differently—through the eyes of someone who feels everything deeply."
 cover:
   image: "/images/posts/i-remember-the-willow.png"
 ---
