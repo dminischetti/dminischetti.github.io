@@ -109,3 +109,4 @@ Minimalism isn’t about having less—it’s about making space for what actual
 Build your setup like you’re designing a spacecraft: no fluff, just function—with a little bit of style and a sense of humor.
 
 And if all else fails... blame the chair. It probably reclined without your consent.
+
