@@ -104,7 +104,7 @@ Want your brain to know it's go time? Train it like a Pavlovian productivity dog
 
 Your desk doesn’t need to be inspirational. It needs to be operational.
 
-Minimalism isn’t about having less—it’s about making space for what actually matters. For me, that’s focus, sanity, and just enough structure to stop me from falling into a YouTube rabbit hole at 9:03 a.m.
+Minimalism isn’t about having less—it’s about making space for what actually matters. For me, that’s focus, sanity, and just enough structure to stop me from falling into a YouTube rabbit hole.
 
 Build your setup like you’re designing a spacecraft: no fluff, just function—with a little bit of style and a sense of humor.
 
