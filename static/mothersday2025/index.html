@@ -4,7 +4,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="robots" content="noindex, nofollow">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>B STRONG – Quiet Hero, Loud Love</title>
 
     <link
@@ -20,7 +22,7 @@
     <script src="script.js" defer></script>
 </head>
 
-<body>
+<body ontouchstart="">
 
     <div id="preloader">
         <div class="loader-circle"></div>
@@ -32,12 +34,12 @@
 
     <section class="scene active" id="scene-0" data-bg="stars">
         <h1>Mission Briefing</h1>
-        <p>This message is classified.<br>If you’ve ever saved the day with a banana, you’re cleared.</p>
+        <p>This message is classified.<br>If you've ever saved the day with a banana, you're cleared.</p>
         <button class="btn-start" onclick="nextScene()">Start Mission</button>
     </section>
 
     <section class="scene" id="scene-poster" data-bg="stars">
-        <img src="assets/poster.gif" alt="Mother's Day Poster" class="poster" />
+        <img src="assets/poster.gif" alt="Mother's Day Poster" class="poster" loading="lazy" />
         <button class="btn-next" onclick="nextScene()">Continue</button>
     </section>
 
@@ -92,10 +94,10 @@
         <h2>🧠 Mental Map of a Morning</h2>
         <pre>
             06:30 – You guide morning chaos like a symphony.  
-            07:00 – Little M can’t find her socks. Again.  
+            07:00 – Little M can't find her socks. Again.  
             07:10 – Baby L is chewing the table corner. Again.  
-            07:15 – You are brushing teeth while answering “Where do stars go in the morning?”  
-            07:30 – You smile. But also whisper “Send help.”  
+            07:15 – You are brushing teeth while answering "Where do stars go in the morning?"  
+            07:30 – You smile. But also whisper "Send help."  
             07:35 – Baby L spit up on your clean shirt. Okay. Round 2
             07:40 – Forgot to drink water. Remembered to hug. Worth it.
             07:41 – Calm reinstalled. Battery: 38%. Heart: 102%.
@@ -107,12 +109,12 @@
         <h2>📅 Mission Logs</h2>
       
         <p>Mission 004: Save the afternoon with a banana and a smile</p>
-        <p>Mission 008: Reboot Dad’s brain with one sentence and a tilted smile</p>
+        <p>Mission 008: Reboot Dad's brain with one sentence and a tilted smile</p>
         <p>Mission 009: Organize, explain, nourish, listen — all at once</p>
         <p>Mission 010: Cook, cuddle, clean — all with baby in one arm</p>
-        <p>Mission 012: Convince the universe dinner can be late but love can’t</p>
+        <p>Mission 012: Convince the universe dinner can be late but love can't</p>
         <p>Mission 013: Make bedtime feel like magic. Even when everyone cries.</p>
-        <p>Mission 014: Be everywhere at once — and still remember to say “I love you”</p>
+        <p>Mission 014: Be everywhere at once — and still remember to say "I love you"</p>
         <p class="mission-footer">*Ongoing. Every day. Without applause.*</p>
 
         <button class="btn-next" onclick="nextScene()">Continue</button>
@@ -122,11 +124,11 @@
         <h2>🕵️ Secret Decoder</h2>
         <ul id="decoder-lines">
             <li><strong>That look over her glasses:</strong> You're about to learn something.</li>
-            <li><strong>That silent pause before replying:</strong> She’s choosing love over being right. As usual.</li>
-            <li><strong>The hand on Little M’s chest:</strong> She’s regulating two heartbeats at once.</li>
+            <li><strong>That silent pause before replying:</strong> She's choosing love over being right. As usual.</li>
+            <li><strong>The hand on Little M's chest:</strong> She's regulating two heartbeats at once.</li>
             <li><strong>That long blink before she answers:</strong> Decoding five emotions at once.</li>
-            <li><strong>The smile while cleaning Baby L’s second mess:</strong> Choosing love over frustration.</li>
-            <li><strong>The paused breath when Little M asks “Why?” again:</strong> Parenting with poetry and grit.</li>
+            <li><strong>The smile while cleaning Baby L's second mess:</strong> Choosing love over frustration.</li>
+            <li><strong>The paused breath when Little M asks "Why?" again:</strong> Parenting with poetry and grit.</li>
           </ul>
          <button class="btn-next" onclick="nextScene()">Continue</button>
     </section>
@@ -143,17 +145,17 @@
     <section class="scene" id="scene-7" data-bg="default">
         <h2>📬 Messages from Your Crew</h2>
         <div class="envelopes">
-          <div class="envelope">
-            <img src="assets/envelope.svg" alt="From D" />
-            <p class="msg hidden">From D: When I feel lost, you don’t fix it — you make it feel safe anyway.</p>
+          <div class="envelope" role="button" aria-label="Message from D">
+            <img src="assets/envelope.svg" alt="From D" loading="lazy" />
+            <p class="msg hidden">From D: When I feel lost, you don't fix it — you make it feel safe anyway.</p>
           </div>
-          <div class="envelope">
-            <img src="assets/envelope.svg" alt="From Little M" />
+          <div class="envelope" role="button" aria-label="Message from Little M">
+            <img src="assets/envelope.svg" alt="From Little M" loading="lazy" />
             <p class="msg hidden">From Little M: You still brush my hair, and make magic feel real. Best mom spell ever. 🪄</p>
           </div>
-          <div class="envelope">
-            <img src="assets/envelope.svg" alt="From Baby L" />
-            <p class="msg hidden">From Baby L: I don’t say much, but I look for you in every room. And I eat better when you smile.</p>
+          <div class="envelope" role="button" aria-label="Message from Baby L">
+            <img src="assets/envelope.svg" alt="From Baby L" loading="lazy" />
+            <p class="msg hidden">From Baby L: I don't say much, but I look for you in every room. And I eat better when you smile.</p>
           </div>
         </div>        
         <button class="btn-next" onclick="nextScene()">Continue</button>
@@ -169,7 +171,7 @@
       
         <div class="diary-entry">
           <h3>April 9 — The Quiet Lullaby Revolution</h3>
-          <p>No one wanted to sleep. The house was wild. You didn’t raise your voice. You sang. And they listened. So did I.</p>
+          <p>No one wanted to sleep. The house was wild. You didn't raise your voice. You sang. And they listened. So did I.</p>
         </div>
       
         <div class="diary-entry">
@@ -199,8 +201,8 @@
         <p>We wrote this to remind you.</p>
         <p class="signature">With all our love,<br><em>Your allies: M, L, D</em></p>
 
-        <span class="easter-egg" onclick="revealEasterEgg()">⭐</span>
-        <div id="easter-msg" class="hidden">“P.S. You’re the kind of magic they don’t teach at school.”</div>
+        <span class="easter-egg" role="button" aria-label="Find easter egg" onclick="revealEasterEgg()">⭐</span>
+        <div id="easter-msg" class="hidden">"P.S. You're the kind of magic they don't teach at school."</div>
         <button id="refresh-btn" class="btn-next hidden" onclick="restartExperience()">↻ Watch Again</button>
 
 
@@ -208,6 +210,8 @@
 
     </section>
 
+    <!-- iOS viewport fix -->
+    <div id="viewport-fix" style="position: fixed; width: 100%; height: 100vh; top: 0; left: 0; pointer-events: none; z-index: -999;"></div>
 </body>
 
 </html>
