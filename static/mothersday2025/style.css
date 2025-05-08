@@ -109,7 +109,37 @@ ul li::before {
 }
 
 /* Buttons */
-.btn-start,
+.btn-start{
+    background: #ff7ec9;
+    color: #0e0b16;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 1.1rem;
+    padding: 1rem 2.5rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 
+      0 0 10px rgba(255, 126, 201, 0.6),
+      0 0 20px rgba(255, 126, 201, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-start:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+      0 0 15px rgba(255, 126, 201, 0.8),
+      0 0 30px rgba(255, 126, 201, 0.4);
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 10px rgba(255, 126, 201, 0.6); }
+    50% { box-shadow: 0 0 20px rgba(255, 126, 201, 0.9); }
+    100% { box-shadow: 0 0 10px rgba(255, 126, 201, 0.6); }
+  }
+  .btn-start {
+    animation: pulse 2s infinite;
+  }
 .btn-next {
   background: var(--accent);
   color: #0e0b16;
@@ -542,3 +572,52 @@ ul li::before {
     padding-bottom: 160px;
   }
   
+  #scene-0 {
+    background: linear-gradient(135deg, #1a0b2e 0%, #0e0b16 100%);
+    text-align: center;
+    padding: 2rem;
+  }
+  
+  #scene-0 h1 {
+    font-family: 'Playfair Display', serif;
+    color: #ff7ec9;
+    font-size: 2.2rem;
+    margin-bottom: 1.5rem;
+    text-shadow: 0 0 15px rgba(255, 126, 201, 0.4);
+    letter-spacing: 1px;
+  }
+  
+  #scene-0 p {
+    font-family: 'Montserrat', sans-serif;
+    color: #e2d1f9;
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 300px;
+    margin: 0 auto 2.5rem;
+  }
+  #scene-0::after {
+    content: "🍌";
+    font-size: 2rem;
+    display: block;
+    margin-top: 1.5rem;
+    opacity: 0.8;
+    animation: float 3s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .classified-stamp {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-family: 'Courier New', monospace;
+    color: #ff7ec9;
+    border: 2px dashed #ff7ec9;
+    padding: 0.3rem 0.6rem;
+    transform: rotate(15deg);
+    opacity: 0.7;
+    font-size: 0.8rem;
+  }
