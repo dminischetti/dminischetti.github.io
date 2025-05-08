@@ -4,16 +4,27 @@ const startTime = Date.now();
 // Scene management
 let currentScene = 0;
 const scenes = document.querySelectorAll(".scene");
-
 function nextScene() {
     if (scenes[currentScene]) scenes[currentScene].classList.remove("active");
     currentScene++;
-    if (scenes[currentScene]) {
-        scenes[currentScene].classList.add("active");
-        animateScene(currentScene);
-        setBackgroundFromScene(scenes[currentScene]);
+    const scene = scenes[currentScene]; // ✅ questo mancava
+  
+    if (scene) {
+      scene.classList.add("active");
+      animateScene(currentScene);
+      setBackgroundFromScene(scene);
+  
+      // ✅ Fade-in del bottone dopo 2 secondi
+      const nextButton = scene.querySelector(".btn-next");
+      if (nextButton) {
+        nextButton.classList.remove("visible");
+        setTimeout(() => {
+          nextButton.classList.add("visible");
+        }, 1000);
+      }
     }
-}
+  }
+  
 
 // GSAP scene entrance
 function animateScene(index) {
@@ -26,6 +37,13 @@ function animateScene(index) {
         duration: 1,
         ease: "power2.out"
     });
+
+    if (scene.id === "scene-1") {
+        typeWriter(
+          "Protocol B engaged…\nAccess granted: Silent Hero confirmed.",
+          "typewriter"
+        );
+      }      
 
     // If decoder scene, animate lines
     if (scene.id === "scene-5") {
@@ -46,6 +64,14 @@ function animateScene(index) {
             gsap.set(button, { zIndex: 100 }); // Ensure button is above credits animation
         }
     }
+
+    if (scene.id === "scene-10") {
+        // Delay night mode activation by 6 seconds
+        setTimeout(() => {
+          scene.classList.add("night-mode");
+        }, 6000);
+      }      
+     
 }
 
 // Floating hearts logic
@@ -97,9 +123,11 @@ setInterval(heartBurst, 9000);
 // Easter egg click
 function revealEasterEgg() {
     const msg = document.getElementById("easter-msg");
+    const refreshBtn = document.getElementById("refresh-btn");
     if (msg) msg.classList.remove("hidden");
-}
-
+    if (refreshBtn) refreshBtn.classList.remove("hidden");
+  }
+  
 // Dynamic particles background
 function setBackgroundFromScene(scene) {
     if (!scene) return;
@@ -212,3 +240,29 @@ window.onload = () => {
         }
     });
 };
+
+function typeWriter(text, elementId, speed = 50, callback) {
+    let i = 0;
+    const element = document.getElementById(elementId);
+    if (!element) return;
+  
+    function type() {
+      if (i < text.length) {
+        element.innerHTML += text.charAt(i);
+        i++;
+        setTimeout(type, speed);
+      } else if (callback) {
+        callback();
+      }
+    }
+  
+    element.innerHTML = ""; // clear any previous text
+    type();
+  }
+  
+  function restartExperience() {
+    currentScene = -1;
+    document.querySelectorAll(".scene").forEach(scene => scene.classList.remove("active", "blur-background"));
+    nextScene();
+  }
+  

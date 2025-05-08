@@ -7,13 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>B STRONG – Quiet Hero, Loud Love</title>
 
-<link
+    <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Montserrat:wght@300;600&family=Dancing+Script&display=swap"
         rel="stylesheet" />
 
-<link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="style.css" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/@tsparticles/preset-stars@2.11.1/tsparticles.preset.stars.bundle.min.js"
         defer></script>
@@ -22,45 +22,73 @@
 
 <body>
 
-<div id="preloader">
+    <div id="preloader">
         <div class="loader-circle"></div>
-      </div>
+    </div>
 
-<div id="tsparticles"></div>
+    <div id="tsparticles"></div>
 
-<div id="hearts-container"></div>
+    <div id="hearts-container"></div>
 
-<section class="scene active" id="scene-0" data-bg="stars">
+    <section class="scene active" id="scene-0" data-bg="stars">
         <h1>Mission Briefing</h1>
-        <p>This message is classified.<br>Only the bravest hearts may proceed.</p>
+        <p>This message is classified.<br>If you’ve ever saved the day with a banana, you’re cleared.</p>
         <button class="btn-start" onclick="nextScene()">Start Mission</button>
     </section>
 
-<section class="scene" id="scene-poster" data-bg="stars">
+    <section class="scene" id="scene-poster" data-bg="stars">
         <img src="assets/poster.gif" alt="Mother's Day Poster" class="poster" />
         <button class="btn-next" onclick="nextScene()">Continue</button>
     </section>
 
-<section class="scene" id="scene-1" data-bg="stars">
-        <p>Protocol B engaged…<br>Access granted: Silent Hero confirmed.</p>
-        <h1>B STRONG</h1>
-        <p class="tagline">Quiet Hero, Loud Love</p>
+    <section class="scene" id="scene-1" data-bg="stars">
+        <p class="typewriter-text" id="typewriter">
+            Protocol Bimba engaged…<br>Access granted: Silent Hero confirmed.
+        </p>
+        <h1>MAMMAGNETIC</h1>
+        <p class="tagline">No cape. Just courage and cuddles.</p>
         <button class="btn-next" onclick="nextScene()">Continue</button>
     </section>
 
-<section class="scene" id="scene-2" data-bg="default">
-        <h2>🗂️ Identity B</h2>
-        <p><strong>Code name:</strong> B</p>
+    <section class="scene" id="scene-2" data-bg="default">
+        <h2>🌌 Code Name: B</h2>
         <p><strong>Role:</strong> Mom, gravitational center of our galaxy</p>
-        <ul>
-            <li>Neutralizes panic & spilled mugs</li>
-            <li>Translates cries into swift action</li>
-            <li>Always has the answer — even in silence</li>
-        </ul>
+        <p>🛡️ Chiara Protocol — Abilities Log</p>
+          <ul class="b-abilities mobile">
+            <li>
+              <strong>Power</strong><br />
+              Converts tantrums into hugs with zero casualties
+            </li>
+            <li>
+              <strong>Perception</strong><br />
+              Detects beauty in operational chaos
+            </li>
+            <li>
+              <strong>Emotional OS</strong><br />
+              Synced by 06:42 a.m.
+            </li>
+            <li>
+              <strong>Translation Module</strong><br />
+              Cries, sighs, half-sentences — decoded
+            </li>
+            <li>
+              <strong>Instinct AI</strong><br />
+              Feels needs before they surface
+            </li>
+            <li>
+              <strong>Gesture Decoder</strong><br />
+              Reads glances. Acts instantly.
+            </li>
+            <li>
+              <strong>Answer Engine</strong><br />
+              Silent. Instant. Always right.
+            </li>
+          </ul>
+                    
         <button class="btn-next" onclick="nextScene()">Continue</button>
     </section>
 
-<section class="scene" id="scene-3" data-bg="default">
+    <section class="scene" id="scene-3" data-bg="default">
         <h2>🧠 Mental Map of a Day</h2>
         <pre>
 07:00 – Where are the pajamas?
@@ -72,7 +100,7 @@
         <button class="btn-next" onclick="nextScene()">Continue</button>
     </section>
 
-<section class="scene" id="scene-4" data-bg="default">
+    <section class="scene" id="scene-4" data-bg="default">
         <h2>📅 Mission Logs</h2>
         <p>Mission 004: Save the afternoon with a banana and a smile</p>
         <p>Mission 007: Diffuse meltdown with one glance</p>
@@ -80,7 +108,7 @@
         <button class="btn-next" onclick="nextScene()">Continue</button>
     </section>
 
-<section class="scene" id="scene-5" data-bg="default">
+    <section class="scene" id="scene-5" data-bg="default">
         <h2>🕵️ Secret Decoder</h2>
         <ul id="decoder-lines">
             <li><strong>Half-closed eyes:</strong> emotional scan in progress</li>
@@ -90,7 +118,7 @@
         <button class="btn-next" onclick="nextScene()">Continue</button>
     </section>
 
-<section class="scene" id="scene-6" data-bg="petals">
+    <section class="scene" id="scene-6" data-bg="petals">
         <h2>🦋 Your Butterfly Effect</h2>
         <p>You smiled through exhaustion → Mia breathed easier</p>
         <p>You whispered “It’s okay” → Liam slept peacefully</p>
@@ -98,26 +126,26 @@
         <button class="btn-next" onclick="nextScene()">Continue</button>
     </section>
 
-<section class="scene" id="scene-7" data-bg="default">
-<h2>📬 Messages from Your Crew</h2>
-<div class="envelopes">
-<div class="envelope">
-<img src="assets/envelope.svg" alt="From D" />
-<p class="msg hidden">From D: You're the love I run home to.</p>
-</div>
-<div class="envelope">
-<img src="assets/envelope.svg" alt="From Mia" />
-<p class="msg hidden">From Mia: Best pancakes, best cuddles, best mom 💖</p>
-</div>
-<div class="envelope">
-<img src="assets/envelope.svg" alt="From Liam" />
-<p class="msg hidden">From Liam: 🍼❤️ (Translation: I love you!)</p>
-</div>
-</div>
-<button class="btn-next" onclick="nextScene()">Continue</button>
-</section>
+    <section class="scene" id="scene-7" data-bg="default">
+        <h2>📬 Messages from Your Crew</h2>
+        <div class="envelopes">
+            <div class="envelope">
+                <img src="assets/envelope.svg" alt="From D" />
+                <p class="msg hidden">From D: You're the love I run home to.</p>
+            </div>
+            <div class="envelope">
+                <img src="assets/envelope.svg" alt="From Mia" />
+                <p class="msg hidden">From Mia: Best pancakes, best cuddles, best mom 💖</p>
+            </div>
+            <div class="envelope">
+                <img src="assets/envelope.svg" alt="From Liam" />
+                <p class="msg hidden">From Liam: 🍼❤️ (Translation: I love you!)</p>
+            </div>
+        </div>
+        <button class="btn-next" onclick="nextScene()">Continue</button>
+    </section>
 
-<section class="scene" id="scene-8" data-bg="default">
+    <section class="scene" id="scene-8" data-bg="default">
         <h2>📓 The Magical Diary of Chiara</h2>
         <div class="diary-entry">
             <h3>April 22 — The Shoes in the Fridge</h3>
@@ -134,28 +162,31 @@
         <button class="btn-next" onclick="nextScene()">Continue</button>
     </section>
 
-<section class="scene" id="scene-9" data-bg="glow">
-<div class="credits">
-<h2>🎬 Credits</h2>
-<p><strong>Directed by:</strong> Love</p>
-<p><strong>Written by:</strong> Instinct</p>
-<p><strong>Starring:</strong> Chiara</p>
-<p><strong>Supporting Cast:</strong> Mia, Liam, Little One</p>
-<p><strong>Produced by:</strong> Coffee, Hope, and Patience</p>
-<p><strong>Soundtrack:</strong> Laughter, Tiny Feet, Midnight Whispers</p>
-</div>
-<button class="btn-next" onclick="nextScene()">Final Scene</button>
-</section>
+    <section class="scene" id="scene-9" data-bg="glow">
+        <div class="credits">
+            <h2>🎬 Credits</h2>
+            <p><strong>Directed by:</strong> Love</p>
+            <p><strong>Written by:</strong> Instinct</p>
+            <p><strong>Starring:</strong> Chiara</p>
+            <p><strong>Supporting Cast:</strong> Mia, Liam, Little One</p>
+            <p><strong>Produced by:</strong> Coffee, Hope, and Patience</p>
+            <p><strong>Soundtrack:</strong> Laughter, Tiny Feet, Midnight Whispers</p>
+        </div>
+        <button class="btn-next" onclick="nextScene()">Final Scene</button>
+    </section>
 
-<section class="scene" id="scene-10" data-bg="stars">
+    <section class="scene" id="scene-10" data-bg="stars">
         <p>If you ever forget how important you are,<br>come back here.</p>
         <p>We wrote this to remind you.</p>
         <p class="signature">With all our love,<br><em>Your allies: M, L, D</em></p>
 
-<span class="easter-egg" onclick="revealEasterEgg()">⭐</span>
+        <span class="easter-egg" onclick="revealEasterEgg()">⭐</span>
         <div id="easter-msg" class="hidden">“P.S. You’re the kind of magic they don’t teach at school.”</div>
+        <button id="refresh-btn" class="btn-next hidden" onclick="restartExperience()">↻ Watch Again</button>
 
-<div id="heart-counter" class="bonus-message hidden">You found all our hearts. 💗</div>
+
+        <div id="heart-counter" class="bonus-message hidden">You found all our hearts. 💗</div>
+
     </section>
 
 </body>

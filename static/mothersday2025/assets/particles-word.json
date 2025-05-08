@@ -1,0 +1,27 @@
+{
+    "particles": {
+      "number": { "value": 0 },
+      "shape": {
+        "type": "char",
+        "character": {
+          "value": ["C", "H", "I", "A", "R", "A"],
+          "font": "Playfair Display",
+          "style": "",
+          "weight": "700",
+          "fill": true
+        }
+      },
+      "color": { "value": "#ff7ec9" },
+      "size": { "value": 40 },
+      "move": {
+        "enable": true,
+        "speed": 1,
+        "direction": "none",
+        "straight": false
+      }
+    },
+    "background": {
+      "color": "#05030a"
+    }
+  }
+  

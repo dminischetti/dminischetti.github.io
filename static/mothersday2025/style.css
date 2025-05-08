@@ -157,30 +157,30 @@
   
   /* Envelope Message */
   .envelope .msg {
-    position: absolute;
-    top: 130%;
+    position: fixed;
+    top: 50%;
     left: 50%;
-    transform: translateX(-50%) translateY(10px);
+    transform: translate(-50%, -50%) scale(0.9);
     background: var(--message-bg);
     color: var(--text);
-    padding: 1rem;
-    border-radius: 10px;
-    width: 220px;
-    box-sizing: border-box;
-    font-size: 0.95rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    width: 80vw;
+    max-width: 300px;
+    font-size: 1rem;
     opacity: 0;
     pointer-events: none;
-    transition: all 0.4s ease, transform 0.4s ease;
-    box-shadow: 0 0 15px rgba(255, 126, 201, 0.3);
+    transition: all 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 0 30px rgba(255, 126, 201, 0.5);
     border: 1px solid var(--accent);
-    z-index: 20;
-  }
+    z-index: 1000;
+  }  
   
   .envelope .msg.revealed {
     opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
     pointer-events: auto;
-    transform: translateX(-50%) translateY(0);
-  }
+  }  
   
   /* Optional: if using .hidden class logic */
   .msg.hidden.revealed {
@@ -356,5 +356,98 @@
       padding: 0.8rem 1.5rem;
       max-width: calc(100% - 3rem);
     }
+  }
+  
+  .typewriter-text {
+    white-space: pre-wrap;
+    font-family: 'Courier New', monospace;
+    color: var(--text);
+    font-size: 1rem;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .btn-next.hidden {
+    opacity: 0;
+    pointer-events: none;
+  }
+  
+  .btn-next {
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+  }
+  
+  .btn-next.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }  
+  
+  .scene.night-mode {
+    background: #05030a; /* ancora più scuro */
+    color: #ff7ec9;
+    transition: background 2s ease, color 2s ease;
+  }
+  
+  .scene.night-mode p:not(.signature):not(#easter-msg):not(#heart-counter),
+  .scene.night-mode h2,
+  .scene.night-mode .btn-next {
+    opacity: 0.1;
+    filter: blur(1px);
+    transition: opacity 2s ease, filter 2s ease;
+  }
+  
+  .scene.night-mode .signature,
+  .scene.night-mode #easter-msg,
+  .scene.night-mode #refresh-btn,
+  .scene.night-mode .easter-egg {
+    opacity: 1 !important;
+    filter: none !important;
+    color: var(--accent);
+    transition: opacity 2s ease;
+  }
+  /* Pulsante finale durante night-mode */
+#scene-10.night-mode #refresh-btn {
+    background: #ef7ec99c;
+    color: #0e0b16;
+    box-shadow: 0 0 20px rgba(255, 0, 140, 0.4);
+    border: none;
+    font-weight: bold;
+  }
+  
+  #scene-10.night-mode #refresh-btn:hover {
+    background: #ff7ec9;
+  }
+  
+  .b-abilities.mobile {
+    list-style: none;
+    padding: 0;
+    margin: 2rem auto;
+    max-width: 500px;
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text);
+    text-align: left;
+  }
+  
+  .b-abilities.mobile li {
+    margin-bottom: 1.8rem;
+    position: relative;
+    padding-left: 1.4rem;
+  }
+  
+  .b-abilities.mobile li::before {
+    content: "💠";
+    position: absolute;
+    left: 0;
+    top: 0.2rem;
+    color: var(--accent);
+    font-size: 1rem;
+  }
+  
+  .b-abilities.mobile strong {
+    color: var(--accent);
+    display: block;
+    margin-bottom: 0.2rem;
   }
   
