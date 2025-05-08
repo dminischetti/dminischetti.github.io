@@ -184,6 +184,11 @@ function revealEasterEgg() {
             { opacity: 0, y: 10 }, 
             { opacity: 1, y: 0, duration: 0.5 }
         );
+        
+        // Add the revealed class for color transition
+        setTimeout(() => {
+            msg.classList.add("revealed");
+        }, 300);
     }
     
     if (refreshBtn) {

@@ -174,14 +174,14 @@ ul li::before {
 }
 
 .envelope {
-  position: relative;
-  width: 100px;
-  height: 100px;
-  cursor: pointer;
-  transform-style: preserve-3d;
-  transition: transform 0.6s ease;
-  touch-action: manipulation;
-}
+    position: relative;
+    width: 75px;  /* Reduced from 100px to 75px (75%) */
+    height: 75px; /* Reduced from 100px to 75px (75%) */
+    cursor: pointer;
+    transform-style: preserve-3d;
+    transition: transform 0.6s ease;
+    touch-action: manipulation;
+  }
 
 .envelope img {
   width: 100%;
@@ -190,30 +190,30 @@ ul li::before {
 }
 
 .envelope .msg {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: var(--message-bg);
-  color: var(--text);
-  padding: 1.5rem;
-  border-radius: 12px;
-  width: 85vw;
-  max-width: 300px;
-  font-size: 1rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease;
-  box-shadow: 0 0 30px rgba(255, 126, 201, 0.5);
-  border: 1px solid var(--accent);
-  z-index: 1000;
-  display: block;
-}  
-
-.envelope .msg.revealed {
-  opacity: 1;
-  pointer-events: auto;
-}
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--message-bg);
+    color: var(--text);
+    padding: 1.5rem;
+    border-radius: 12px;
+    width: 85vw;
+    max-width: 300px;
+    font-size: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 30px rgba(255, 126, 201, 0.5);
+    border: 1px solid var(--accent);
+    z-index: 1000;
+    display: block;
+  }  
+  
+  .envelope .msg.revealed {
+    opacity: 1;
+    pointer-events: auto;
+  }
 
 /* Optional: if using .hidden class logic */
 .msg.hidden.revealed {
@@ -323,11 +323,18 @@ ul li::before {
 }
 
 #easter-msg {
-  margin-top: 1rem;
-  font-style: italic;
-  color: var(--gold);
-  font-size: 1.1rem;
-}
+    margin-top: 1rem;
+    font-style: italic;
+    color: #ffd700; /* Initial yellow color */
+    font-size: 1.1rem;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+    transition: color 1.5s ease, text-shadow 1.5s ease;
+  }
+  
+  #easter-msg.revealed {
+    color: #ffd700;
+    text-shadow: 0 0 5px rgba(255, 215, 0, 0.5);
+  }
 
 .hidden {
   display: none !important;
@@ -508,3 +515,30 @@ ul li::before {
   padding-top: 1.5rem;
   padding-bottom: 80px;
 }
+
+/* Pulsanti Continue - versione FISSA (default per scene principali) */
+.btn-next.fixed {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 0;
+    z-index: 10;
+  }
+  
+/* Pulsanti Continue - versione STATICA (alla fine della scena) */
+.btn-next.static {
+    display: block;
+    margin: 2rem auto 0 auto;
+    position: static;
+    text-align: center;
+    left: auto;
+    transform: none;
+  }
+  
+  
+  /* Scene con pulsante statico: spazio extra in fondo per respiro visivo */
+  .scene.static-button {
+    padding-bottom: 160px;
+  }
+  

@@ -40,19 +40,18 @@
 
     <section class="scene" id="scene-poster" data-bg="stars">
         <img src="assets/poster.gif" alt="Mother's Day Poster" class="poster" loading="lazy" />
-        <button class="btn-next" onclick="nextScene()">Continue</button>
+        <button class="btn-next fixed" onclick="nextScene()">Continue</button>
     </section>
 
     <section class="scene" id="scene-1" data-bg="stars">
         <p class="typewriter-text" id="typewriter">
-            Protocol Bimba engaged…<br>Access granted: Silent Hero confirmed.
         </p>
         <h1>MAMMAGNETIC</h1>
         <p class="tagline">No cape. Just courage and cuddles.</p>
-        <button class="btn-next" onclick="nextScene()">Continue</button>
+        <button class="btn-next fixed" onclick="nextScene()">Continue</button>
     </section>
 
-    <section class="scene" id="scene-2" data-bg="default">
+    <section class="scene static-button" id="scene-2" data-bg="default">
         <h2>🌌 Code Name: B</h2>
         <p><strong>Role:</strong> Mom, gravitational center of our galaxy</p>
         <p>🛡️ Miss C Protocol — Abilities Log</p>
@@ -87,22 +86,35 @@
             </li>
           </ul>
                     
-        <button class="btn-next" onclick="nextScene()">Continue</button>
+        <button class="btn-next static" onclick="nextScene()">Continue</button>
     </section>
 
     <section class="scene" id="scene-3" data-bg="default">
         <h2>🧠 Mental Map of a Morning</h2>
         <pre>
-            06:30 – You guide morning chaos like a symphony.  
-            07:00 – Little M can't find her socks. Again.  
-            07:10 – Baby L is chewing the table corner. Again.  
-            07:15 – You are brushing teeth while answering "Where do stars go in the morning?"  
-            07:30 – You smile. But also whisper "Send help."  
-            07:35 – Baby L spit up on your clean shirt. Okay. Round 2
-            07:40 – Forgot to drink water. Remembered to hug. Worth it.
-            07:41 – Calm reinstalled. Battery: 38%. Heart: 102%.
-    </pre>
-        <button class="btn-next" onclick="nextScene()">Continue</button>
+06:30 – You guide morning chaos
+        like a symphony.
+07:00 – Little M can't find the
+        right socks.
+07:10 – Baby L is chewing the
+        table corner. Apparently
+        delicious.
+07:15 – You are brushing teeth 
+        while answering 
+        "Where do stars go in
+        the morning?"
+07:30 – You smile. But also
+        whisper "Send help."
+07:35 – Baby L spit up on your
+        clean shirt.
+        Okay. Round 2.
+07:40 – Forgot to drink water.
+        Remembered to hug.
+        Worth it.
+07:41 – Calm reinstalled.
+        Battery: 38%. Heart: 102%.
+                </pre>
+        <button class="btn-next fixed" onclick="nextScene()">Continue</button>
     </section>
 
     <section class="scene" id="scene-4" data-bg="default">
@@ -117,7 +129,7 @@
         <p>Mission 014: Be everywhere at once — and still remember to say "I love you"</p>
         <p class="mission-footer">*Ongoing. Every day. Without applause.*</p>
 
-        <button class="btn-next" onclick="nextScene()">Continue</button>
+        <button class="btn-next fixed" onclick="nextScene()">Continue</button>
       </section>
 
     <section class="scene" id="scene-5" data-bg="default">
@@ -130,7 +142,7 @@
             <li><strong>The smile while cleaning Baby L's second mess:</strong> Choosing love over frustration.</li>
             <li><strong>The paused breath when Little M asks "Why?" again:</strong> Parenting with poetry and grit.</li>
           </ul>
-         <button class="btn-next" onclick="nextScene()">Continue</button>
+         <button class="btn-next fixed" onclick="nextScene()">Continue</button>
     </section>
 
     <section class="scene" id="scene-6" data-bg="petals">
@@ -139,7 +151,7 @@
         <p>When you let silence hold us → We all felt heard</p>
         <p>When you chose kindness mid-chaos → We chose it too</p>
         <p>When you believed in us → We started believing in ourselves</p>        
-        <button class="btn-next" onclick="nextScene()">Continue</button>
+        <button class="btn-next fixed" onclick="nextScene()">Continue</button>
     </section>
 
     <section class="scene" id="scene-7" data-bg="default">
@@ -158,10 +170,10 @@
             <p class="msg hidden">From Baby L: I don't say much, but I look for you in every room. And I eat better when you smile.</p>
           </div>
         </div>        
-        <button class="btn-next" onclick="nextScene()">Continue</button>
+        <button class="btn-next fixed" onclick="nextScene()">Continue</button>
     </section>
 
-    <section class="scene" id="scene-8" data-bg="default">
+    <section class="scene  static-button" id="scene-8" data-bg="default">
         <h2>📓 The Magical Diary of Miss C</h2>
       
         <div class="diary-entry">
@@ -179,7 +191,7 @@
           <p>Little M declared war on every sock in the drawer. You found the pink ones with stars. You won. No one even noticed.</p>
         </div>
       
-        <button class="btn-next" onclick="nextScene()">Continue</button>
+        <button class="btn-next static" onclick="nextScene()">Continue</button>
       </section>
       
 
@@ -193,17 +205,17 @@
             <p><strong>Produced by:</strong> Deep breaths, stubborn hope, and hugs</p>
             <p><strong>Soundtrack:</strong> Floor creaking, tiny feet, and one soft voice that steadies everything</p>
         </div>
-        <button class="btn-next" onclick="nextScene()">Final Scene</button>
+        <button class="btn-next fixed" onclick="nextScene()">Final Scene</button>
     </section>
 
     <section class="scene" id="scene-10" data-bg="stars">
         <p>If you ever forget how important you are,<br>come back here.</p>
         <p>We wrote this to remind you.</p>
-        <p class="signature">With all our love,<br><em>Your allies: Little M, Baby L, Big D</em></p>
+        <p class="signature">With all our love,<br><em>Your allies:<br>Little M, Baby L, Big D</em></p>
 
         <span class="easter-egg" role="button" aria-label="Find easter egg" onclick="revealEasterEgg()">⭐</span>
         <div id="easter-msg" class="hidden">"P.S. You're the kind of magic they don't teach at school."</div>
-        <button id="refresh-btn" class="btn-next hidden" onclick="restartExperience()">↻ Watch Again</button>
+        <button id="refresh-btn" class="btn-next fixed hidden" onclick="restartExperience()">↻ Watch Again</button>
 
 
         <div id="heart-counter" class="bonus-message hidden">You found all our hearts. 💗</div>
