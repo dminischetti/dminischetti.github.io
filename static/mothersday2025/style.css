@@ -621,3 +621,106 @@ ul li::before {
     opacity: 0.7;
     font-size: 0.8rem;
   }
+
+/* ===== ENHANCED CODE NAME: B SECTION ===== */
+#scene-2 {
+    background: rgba(14, 11, 22, 0.85); /* Semi-transparent dark bg */
+    backdrop-filter: blur(5px); /* Frosted glass effect */
+  }
+  
+  #scene-2 h2 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #ff9ad3; /* Softer pink */
+    text-shadow: 0 0 12px rgba(255, 154, 211, 0.4);
+  }
+  
+  #scene-2 p {
+    margin: 0.5rem 0 1.5rem;
+    font-size: 1.1rem;
+  }
+  
+  /* Ability Cards - Enhanced */
+  .b-abilities.mobile {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    width: 100%;
+    max-width: 380px;
+    margin: 1.5rem auto;
+  }
+  
+  .b-abilities.mobile li {
+    background: linear-gradient(145deg, rgba(33, 33, 45, 0.8), rgba(20, 18, 31, 0.9));
+    border-radius: 12px;
+    padding: 1.2rem;
+    border: 1px solid rgba(255, 126, 201, 0.2);
+    box-shadow: 
+      0 4px 15px rgba(0, 0, 0, 0.3),
+      0 0 0 1px rgba(255, 126, 201, 0.1),
+      0 0 20px rgba(255, 126, 201, 0.05) inset;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  
+  .b-abilities.mobile li:hover {
+    transform: translateY(-3px);
+    box-shadow: 
+      0 6px 20px rgba(0, 0, 0, 0.4),
+      0 0 0 1px rgba(255, 126, 201, 0.3),
+      0 0 25px rgba(255, 126, 201, 0.1) inset;
+  }
+  
+  .b-abilities.mobile li::before {
+    content: "✦"; /* Changed to elegant star */
+    color: #ff9ad3;
+    font-size: 1.1rem;
+    top: 1rem;
+    left: 0.8rem;
+  }
+  
+  .b-abilities.mobile strong {
+    color: #ff9ad3;
+    font-size: 1.05rem;
+    margin-bottom: 0.4rem;
+    display: inline-block;
+    padding-left: 1.6rem; /* Align text with bullet */
+  }
+  
+  .b-abilities.mobile li br {
+    display: none; /* Remove line breaks for cleaner layout */
+  }
+  
+  /* Role Header Styling */
+  #scene-2 p:first-of-type {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 1.2rem;
+    color: #e2d1f9;
+    margin-bottom: 0.5rem;
+  }
+  
+  #scene-2 p:nth-of-type(2) {
+    font-family: 'Courier New', monospace;
+    color: #ff9ad3;
+    background: rgba(255, 126, 201, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px dashed rgba(255, 126, 201, 0.4);
+  }
+  
+  /* Button Enhancement */
+  #scene-2 .btn-next.static {
+    background: linear-gradient(135deg, #ff7ec9, #ff9ad3);
+    border: none;
+    font-weight: 600;
+    margin-top: 1.5rem;
+    box-shadow: 0 0 20px rgba(255, 126, 201, 0.4);
+  }
+
+/* iOS Specific Fixes */
+@supports (-webkit-touch-callout: none) {
+  #scene-2 {
+    height: -webkit-fill-available;
+  }
+}
