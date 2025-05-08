@@ -111,13 +111,24 @@ ul li::before {
 /* Buttons */
 .btn-start,
 .btn-next {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 0;
-    z-index: 10; /* Ensure button is always on top */
-  }
+  background: var(--accent);
+  color: #0e0b16;
+  border: none;
+  font-size: 1.1rem;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: background 0.3s;
+  box-shadow: 0 0 15px rgba(255, 126, 201, 0.3);
+  z-index: 10;
+  -webkit-appearance: none; /* Removes default iOS styling */
+  touch-action: manipulation; /* Improves touch responsiveness */
+  user-select: none;
+  position: relative;
+  bottom: 0;
+  min-width: 180px;
+}
 
 .btn-start:hover,
 .btn-next:hover {
@@ -179,30 +190,30 @@ ul li::before {
 }
 
 .envelope .msg {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--message-bg);
-    color: var(--text);
-    padding: 1.5rem;
-    border-radius: 12px;
-    width: 85vw;
-    max-width: 300px;
-    font-size: 1rem;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s ease;
-    box-shadow: 0 0 30px rgba(255, 126, 201, 0.5);
-    border: 1px solid var(--accent);
-    z-index: 1000;
-    display: block;
-  }  
-  
-  .envelope .msg.revealed {
-    opacity: 1;
-    pointer-events: auto;
-  }
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--message-bg);
+  color: var(--text);
+  padding: 1.5rem;
+  border-radius: 12px;
+  width: 85vw;
+  max-width: 300px;
+  font-size: 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 30px rgba(255, 126, 201, 0.5);
+  border: 1px solid var(--accent);
+  z-index: 1000;
+  display: block;
+}  
+
+.envelope .msg.revealed {
+  opacity: 1;
+  pointer-events: auto;
+}
 
 /* Optional: if using .hidden class logic */
 .msg.hidden.revealed {
@@ -422,10 +433,10 @@ ul li::before {
 .b-abilities.mobile {
   list-style: none;
   padding: 0;
-  margin: 1rem;
+  margin: 1.5rem auto;
   max-width: 330px;
   font-size: 0.95rem;
-  line-height: 1.4;
+  line-height: 1.5;
   color: var(--text);
   text-align: left;
 }
@@ -448,7 +459,7 @@ ul li::before {
 .b-abilities.mobile strong {
   color: var(--accent);
   display: block;
-  margin-bottom: 0.1rem;
+  margin-bottom: 0.2rem;
 }
 
 /* Fix for scene-6 impact text */
@@ -495,5 +506,5 @@ ul li::before {
 /* Ensure fixed padding in all scenes */
 .scene {
   padding-top: 1.5rem;
-  padding-bottom: 100px;
+  padding-bottom: 80px;
 }
