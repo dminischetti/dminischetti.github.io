@@ -19,6 +19,7 @@ body {
   background: var(--bg);
   color: var(--text);
   overflow-x: hidden;
+  overflow-y: auto;
   -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
   overscroll-behavior: contain; /* Prevents overscroll effects */
 }
@@ -42,7 +43,7 @@ h2 {
 
 /* Main Scene Container */
 .scene {
-  position: fixed;
+  position: relative;
   inset: 0;
   width: 100vw;
   height: 100%;
@@ -83,10 +84,12 @@ h2 {
 
 pre {
   font-family: 'Courier New', monospace;
-  font-size: 0.9rem;
+  word-wrap: break-word;        /* handle very long words */
+  white-space: pre-line;        /* lines wrap more naturally */
+  font-size: 0.85rem;
+  padding: 0.8rem 1rem;
   color: #f0caff;
   background: var(--soft);
-  padding: 1rem;
   border-radius: 8px;
   width: 100%;
   max-width: 350px;
@@ -148,6 +151,7 @@ ul li::before {
 /* Credits Scene Button */
 #scene-9 .btn-next {
   position: fixed;
+  z-index: 9999; /* Increase above .credits */
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
