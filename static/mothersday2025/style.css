@@ -189,32 +189,31 @@ ul li::before {
   filter: drop-shadow(0 0 6px var(--accent));
 }
 
-/* Envelope Message */
 .envelope .msg {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0.9);
-  background: var(--message-bg);
-  color: var(--text);
-  padding: 1.5rem;
-  border-radius: 12px;
-  width: 85vw;
-  max-width: 300px;
-  font-size: 1rem;
-  opacity: 0;
-  pointer-events: none;
-  transition: all 0.3s ease, transform 0.3s ease;
-  box-shadow: 0 0 30px rgba(255, 126, 201, 0.5);
-  border: 1px solid var(--accent);
-  z-index: 1000;
-}  
-
-.envelope .msg.revealed {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-  pointer-events: auto;
-}  
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--message-bg);
+    color: var(--text);
+    padding: 1.5rem;
+    border-radius: 12px;
+    width: 85vw;
+    max-width: 300px;
+    font-size: 1rem;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 0 30px rgba(255, 126, 201, 0.5);
+    border: 1px solid var(--accent);
+    z-index: 1000;
+    display: block;
+  }  
+  
+  .envelope .msg.revealed {
+    opacity: 1;
+    pointer-events: auto;
+  }
 
 /* Optional: if using .hidden class logic */
 .msg.hidden.revealed {

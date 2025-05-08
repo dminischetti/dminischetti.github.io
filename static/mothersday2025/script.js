@@ -134,9 +134,13 @@ function createFloatingHeart() {
         heart.remove();
         activeHearts--;
         heartClicks++;
-        const heartCounterMsg = document.getElementById("heart-counter");
-        if (heartClicks >= 3 && heartCounterMsg) {
-            heartCounterMsg.classList.remove("hidden");
+        
+        // Check if heart counter should be displayed
+        if (heartClicks >= 3) {
+            const heartCounterMsg = document.getElementById("heart-counter");
+            if (heartCounterMsg) {
+                heartCounterMsg.classList.remove("hidden");
+            }
         }
     });
 
@@ -234,18 +238,38 @@ function setBackgroundFromScene(scene) {
 
     if (typeof tsParticles !== 'undefined') { // Check if tsParticles is loaded
         if (configFile) {
-            tsParticles.loadJSON("tsparticles", configFile)
-                .catch(error => {
-                    console.error("Error loading particles:", error);
-                });
+            try {
+                // For direct preset usage (stars)
+                if (bg === "stars" && window.innerWidth <= 768) {
+                    tsParticles.load("tsparticles", {
+                        preset: "stars",
+                        particles: {
+                            number: {
+                                value: 30 // Reduced from default
+                            },
+                            move: {
+                                speed: 0.3 // Slower for better performance
+                            }
+                        }
+                    });
+                } else {
+                    // For JSON config files
+                    fetch(configFile)
+                        .then(response => response.json())
+                        .then(config => tsParticles.load("tsparticles", config))
+                        .catch(error => {
+                            console.error("Error loading particles:", error);
+                        });
+                }
+            } catch (error) {
+                console.error("Error with particles:", error);
+            }
         } else {
             const particlesInstance = tsParticles.domItem(0);
             if (particlesInstance) {
                 particlesInstance.destroy();
             }
         }
-    } else {
-        console.warn("tsParticles library not loaded.");
     }
 }
 
@@ -277,11 +301,10 @@ window.onload = () => {
         setTimeout(() => {
             preloader.classList.add("loaded");
             setTimeout(() => {
-                // Remove preloader from DOM after animation completes for better performance
                 preloader.style.display = 'none';
             }, 1100);
         }, delayBeforeFadeStart);
-    }   
+    }  
 
     // Initialize first scene
     if (scenes.length > 0 && scenes[currentScene]) {
@@ -314,23 +337,20 @@ window.onload = () => {
             const msg = this.querySelector(".msg");
             if (msg) {
                 const isRevealed = msg.classList.contains("revealed");
-
+        
                 // Close all other messages first
                 document.querySelectorAll('.envelope .msg.revealed').forEach(otherMsg => {
                     if (otherMsg !== msg) {
                         otherMsg.classList.remove("revealed");
-                        otherMsg.classList.add("hidden");
-                        otherMsg.closest('.envelope')?.classList.remove('clicked');
+                        otherMsg.parentElement.classList.remove('clicked');
                     }
                 });
-
+        
                 // Toggle current message
                 if (isRevealed) {
                     msg.classList.remove("revealed");
-                    msg.classList.add("hidden");
                     this.classList.remove("clicked");
                 } else {
-                    msg.classList.remove("hidden");
                     msg.classList.add("revealed");
                     this.classList.add("clicked");
                 }

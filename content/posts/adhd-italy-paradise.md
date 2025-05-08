@@ -8,8 +8,6 @@ categories: ["Life", "Culture", "ADHD"]
 cover:
   image: "/images/posts/adhd-italy-paradise.png"
 ---
-# Welcome to Italy: The ADHD-Friendly Paradise You Didn’t Know You Needed
-
 If ADHD were a country, it would sound like an Italian piazza at aperitivo hour: voices overlapping, kids running wild, someone shouting "Scusa!"—and nobody really listening.
 
 ## Italy, Where ADHD Isn’t a Diagnosis—It’s a Lifestyle
