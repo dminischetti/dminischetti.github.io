@@ -172,14 +172,32 @@
          <button class="btn-next static" onclick="nextScene()">Continue</button>
     </section>
 
-    <section class="scene" id="scene-6" data-bg="petals">
+    <section class="scene" id="scene-impact" data-bg="petals">
         <h2>🌊 Her Silent Impact</h2>
-        <p>When you softened your voice → Our whole home exhaled</p>
-        <p>When you let silence hold us → We all felt heard</p>
-        <p>When you chose kindness mid-chaos → We chose it too</p>
-        <p>When you believed in us → We started believing in ourselves</p>        
-        <button class="btn-next fixed" onclick="nextScene()">Continue</button>
-    </section>
+
+        <div class="cause-effect-grid">
+        <!-- Row 1 -->
+        <div class="cause">When you softened your voice</div>
+        <div class="arrow">⤳</div>
+        <div class="effect">Our whole home exhaled</div>
+        
+        <!-- Row 2 -->
+        <div class="cause">When you chose kindness mid-chaos</div>
+        <div class="arrow">⤳</div>
+        <div class="effect">We all felt heard</div>
+
+        <!-- Row 3 -->
+        <div class="cause">When you let silence hold us</div>
+        <div class="arrow">⤳</div>
+        <div class="effect">We chose it too</div>
+
+        <!-- Row 4 -->
+        <div class="cause">When you believed in us</div>
+        <div class="arrow">⤳</div>
+        <div class="effect">We started believing in ourselve</div>
+    </div>
+  <button class="btn-next fixed" onclick="nextScene()">Continue</button>
+</section>
 
     <section class="scene" id="scene-7" data-bg="default">
         <h2>📬 Messages from Your Crew</h2>
