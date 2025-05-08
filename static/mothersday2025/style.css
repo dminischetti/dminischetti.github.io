@@ -33,11 +33,11 @@
   
   /* Main Scene Container */
   .scene {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: fixed;
+    inset: 0;
     width: 100vw;
     min-height: 100vh;            /* allows expansion if needed */
+
     padding: 2rem;
     display: none;
     flex-direction: column;
