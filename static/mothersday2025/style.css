@@ -904,3 +904,124 @@
     0% { opacity: 0.3; }
     100% { opacity: 1; }
 }
+
+.cursor {
+    animation: blink 0.7s infinite;
+    color: var(--accent);
+}
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+/* Terminal Styling */
+.terminal-container {
+    width: 90%;
+    max-width: 500px;
+    margin: 1rem auto;
+    background: rgba(20, 18, 31, 0.9);
+    border-radius: 8px;
+    box-shadow: 0 0 30px rgba(255, 126, 201, 0.3);
+    overflow: hidden;
+    border: 1px solid rgba(255, 126, 201, 0.2);
+}
+
+.terminal-header {
+    background: linear-gradient(to right, #2a2139, #1a1426);
+    padding: 0.5rem 1rem;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 126, 201, 0.1);
+}
+
+.terminal-buttons {
+    display: flex;
+    gap: 6px;
+}
+
+.terminal-btn {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+}
+
+.terminal-btn.red { background: #ff5f56; }
+.terminal-btn.yellow { background: #ffbd2e; }
+.terminal-btn.green { background: #27c93f; }
+
+.terminal-title {
+    flex-grow: 1;
+    text-align: center;
+    font-family: 'Courier New', monospace;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.8rem;
+}
+
+.terminal-body {
+    padding: 1.5rem;
+    min-height: 120px;
+    position: relative;
+}
+
+.typewriter-text {
+    white-space: pre-wrap;
+    font-family: 'Courier New', monospace;
+    color: #9effcb;
+    font-size: 1rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.terminal-cursor {
+    display: inline-block;
+    width: 8px;
+    height: 16px;
+    background: var(--accent);
+    animation: blink 0.8s infinite;
+    vertical-align: middle;
+    margin-left: 2px;
+}
+
+/* Magnetic Title Reveal */
+.reveal-container {
+    margin-top: 2rem;
+    perspective: 1000px;
+}
+
+.magnetic-title {
+    font-family: 'Playfair Display', serif;
+    color: var(--accent);
+    font-size: 2.8rem;
+    margin: 1rem 0;
+    text-shadow: 0 0 15px rgba(255, 126, 201, 0.5);
+    transform-style: preserve-3d;
+    animation: floatIn 1.5s ease-out forwards;
+    opacity: 0;
+    transform: rotateX(45deg) translateY(20px);
+}
+
+.tagline {
+    font-style: italic;
+    font-size: 1.2rem;
+    color: #ffd6f6;
+    margin-top: 0.5rem;
+    opacity: 0;
+    animation: fadeIn 1s ease-out 1s forwards;
+}
+
+/* Animations */
+@keyframes blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
+
+@keyframes floatIn {
+    to {
+        opacity: 1;
+        transform: rotateX(0) translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}

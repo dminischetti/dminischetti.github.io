@@ -381,31 +381,91 @@ window.onload = () => {
     document.addEventListener('touchmove', function() {}, {passive: true});
 };
 
-// Optimized typewriter function
-function typeWriter(text, elementId, speed = 40, callback) {
+function typeWriter(text, elementId, options = {}, callback) {
+    const {
+        speed = 120,        // Base speed (ms per character)
+        jitter = 0.3,        // Random speed variation (0-1)
+        pauseOnPunctuation = true,  // Longer pauses for punctuation
+        cursorElement = null // Optional cursor element to control
+    } = options;
+
     let i = 0;
     const element = document.getElementById(elementId);
     if (!element) return;
-  
-    // Pre-calculate total duration for performance optimization
-    const totalDuration = text.length * speed;
-    
-    // For very short texts or low-end devices, make it faster
-    const actualSpeed = (totalDuration > 3000 || window.innerWidth < 400) ? speed * 0.8 : speed;
-  
+
+    // Clear previous content
+    element.innerHTML = "";
+
+    // Show cursor if provided
+    if (cursorElement) {
+        cursorElement.style.display = 'inline-block';
+        cursorElement.style.opacity = '1';
+    }
+
+    function calculateDelay(char) {
+        let delay = speed;
+        
+        // Random variation
+        delay *= 1 + (Math.random() * jitter - jitter/2);
+        
+        // Longer pauses for punctuation
+        if (pauseOnPunctuation) {
+            if (char === '.' || char === '!' || char === '?') delay *= 3;
+            else if (char === ',' || char === ';') delay *= 2;
+            else if (char === '\n') delay *= 4; // Extra pause for new lines
+        }
+        
+        return Math.max(20, delay); // Minimum delay
+    }
+
     function type() {
         if (i < text.length) {
-            element.innerHTML += text.charAt(i);
+            const char = text.charAt(i);
+            element.innerHTML += char;
             i++;
-            setTimeout(type, actualSpeed);
+            
+            setTimeout(type, calculateDelay(char));
         } else if (callback) {
+            // Hide cursor when done
+            if (cursorElement) {
+                cursorElement.style.opacity = '0';
+                setTimeout(() => cursorElement.style.display = 'none', 500);
+            }
             callback();
         }
     }
-  
-    element.innerHTML = ""; // clear any previous text
+
     type();
 }
+
+// Usage example with the "Silent Hero" message
+typeWriter(
+    "SYSTEM TERMINAL\n\n" +
+    "Port scanning detected...\n" +
+    "Signal strength: High\n" +
+    "Fragment secured.\n\n" +
+    "Silent Hero confirmed.",
+    "terminal-output",
+    {
+        speed: 100,
+        jitter: 0.4,
+        pauseOnPunctuation: true
+    },
+    () => {
+        // Completion callback
+        console.log("Terminal message complete");
+        
+        // Example GSAP animation (requires GSAP library)
+        if (typeof gsap !== 'undefined') {
+            gsap.to(".confirmation-badge", {
+                opacity: 1,
+                scale: 1.2,
+                duration: 0.8,
+                ease: "back.out"
+            });
+        }
+    }
+);
   
 // Enhanced restart function
 function restartExperience() {
