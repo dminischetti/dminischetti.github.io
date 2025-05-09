@@ -139,91 +139,36 @@ function getMaxHeartsForDevice() {
 }
 
 function createFloatingHeart() {
-    const maxHeartsOnScreen = getMaxHeartsForDevice();
-    
-    // Limit maximum concurrent hearts for performance
-    if (activeHearts >= maxHeartsOnScreen) {
-        // Recycle oldest heart instead of creating new one
-        if (hearts.length > 0) {
-            const oldestHeart = hearts.shift();
-            if (oldestHeart && document.body.contains(oldestHeart)) {
-                oldestHeart.remove();
-                activeHearts--;
-            }
-        }
-    }
-    
-    if (activeHearts >= maxHeartsOnScreen) return;
-    activeHearts++;
-    
-    const heart = document.createElement("span");
-    heart.dataset.removed = "false";
-    heart.classList.add("heart");
-    heart.innerText = "💗"; 
-    
-    // Randomize position but keep hearts more centered on mobile
-    const viewportWidth = window.innerWidth;
-    const isMobile = viewportWidth <= 768;
-    
-    // More centered on mobile
-    const leftPosition = isMobile ? 
-        `${30 + Math.random() * 40}vw` : 
-        `${20 + Math.random() * 60}vw`;
-        
-    heart.style.left = leftPosition;
-    heart.style.bottom = "-20px"; // Start from below the viewport
-    
-    const heartsContainer = document.getElementById("hearts-container");
-    if (heartsContainer) {
-        heartsContainer.appendChild(heart);
-        hearts.push(heart); // Add to hearts array
-    } else {
-        console.error("Hearts container not found!");
-        activeHearts--;
-        return;
-    }
+  const heart = document.createElement("span");
+  heart.classList.add("heart");
+  heart.innerText = "💗";
 
-    // Make hearts larger touch targets for mobile
-    heart.style.fontSize = isMobile ? "2rem" : "1.8rem";
-    heart.style.padding = isMobile ? "12px" : "10px";
+  // Position heart randomly across screen width
+  heart.style.left = `${Math.random() * 90 + 5}vw`; // from 5vw to 95vw
+  heart.style.bottom = "-40px"; // start off-screen below
 
-    // Use passive event listeners for better performance
-heart.addEventListener("click", () => {
-    if (heart.dataset.removed === "true") return;
-    heart.dataset.removed = "true";
+  // Optional: size variation
+  const scale = Math.random() * 0.4 + 0.8; // random scale between 0.8 and 1.2
+  heart.style.transform = `scale(${scale})`;
+
+  // Append to container
+  document.getElementById("hearts-container").appendChild(heart);
+
+  // Add click handler
+  heart.addEventListener("click", () => {
     heart.remove();
-    activeHearts--;
     heartClicks++;
-    
-    const index = hearts.indexOf(heart);
-    if (index > -1) hearts.splice(index, 1);
-
     if (heartClicks >= 3) {
-        const heartCounterMsg = document.getElementById("heart-counter");
-        if (heartCounterMsg) heartCounterMsg.classList.remove("hidden");
+      document.getElementById("heart-counter").classList.remove("hidden");
     }
-}, { passive: true });
+  });
 
-
-    // Animate using GSAP for better performance
-    gsap.to(heart, {
-        y: -(Math.random() * 150 + 100), // Random float height
-        opacity: 0,
-        duration: 4,
-        ease: "power1.out",
-onComplete: () => {
-    if (heart.dataset.removed === "true") return;
-    heart.dataset.removed = "true";
-
-    if (document.body.contains(heart)) {
-        heart.remove();
-        const index = hearts.indexOf(heart);
-        if (index > -1) hearts.splice(index, 1);
-        activeHearts--;
-    }
+  // Remove heart after animation ends (5s)
+  setTimeout(() => {
+    heart.remove();
+  }, 5000);
 }
-    });
-}
+
 
 // More efficient heart burst function
 function heartBurst() {

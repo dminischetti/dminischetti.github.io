@@ -1008,3 +1008,27 @@ body {
   transform: translateX(-50%);
   z-index: 10;
 }
+
+.heart {
+  position: fixed;
+  bottom: -40px; /* starts off-screen */
+  left: 50%;
+  transform: translateX(-50%) scale(1);
+  font-size: 1.5rem;
+  color: var(--accent);
+  animation: floatUp 5s linear forwards;
+  pointer-events: auto;
+  cursor: pointer;
+  z-index: 99;
+}
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-150vh) scale(1.2);
+    opacity: 0;
+  }
+}
