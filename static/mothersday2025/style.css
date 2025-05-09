@@ -1254,3 +1254,14 @@ body {
     contain: content;
     will-change: contents;
 }
+
+.heart-shape {
+    fill: currentColor;
+    filter: drop-shadow(0 2px 4px rgba(255, 126, 201, 0.4));
+    transition: all 0.3s ease;
+}
+
+.heart:hover {
+    filter: brightness(1.2) drop-shadow(0 0 8px var(--accent));
+    transform: scale(1.1);
+}

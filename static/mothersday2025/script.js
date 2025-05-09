@@ -22,6 +22,9 @@ function nextScene() {
 
     isAnimating = true;
 
+    // heartBurst();
+    // if (currentScene % 2 === 0) heartBurst();
+
     window.scrollTo({
         top: 0,
         behavior: "smooth"
@@ -125,54 +128,80 @@ function getMaxHeartsForDevice() {
 }
 
 function createFloatingHeart() {
-    const heart = document.createElement("span");
-    heart.classList.add("heart");
-    heart.innerText = "💗";
-
-    heart.style.left = `${Math.random() * 90 + 5}vw`;
-    heart.style.bottom = "-40px";
-
-    const scale = Math.random() * 0.4 + 0.8;
-    heart.style.transform = `scale(${scale})`;
-
+    if (activeHearts >= getMaxHeartsForDevice()) return;
+    
+    const heart = document.createElement("div");
+    heart.innerHTML = '❤️';
+    heart.style.position = 'fixed';
+    heart.style.fontSize = '32px';
+    heart.style.cursor = 'pointer';
+    
+    const startX = gsap.utils.random(20, 80);
+    const startY = gsap.utils.random(50, 80);
+    
+    heart.style.left = `${startX}%`;
+    heart.style.top = `${startY}%`;
+    
     document.getElementById("hearts-container").appendChild(heart);
+    activeHearts++;
+    const velocityX = gsap.utils.random(-2, 2);
+    let velocityY = gsap.utils.random(-8, -12);
+    const gravity = 0.5;
+    let rotation = gsap.utils.random(-15, 15);
 
-    heart.addEventListener("click", () => {
-        heart.remove();
+    gsap.to(heart, {
+        duration: 3,
+        ease: "power1.out",
+        onUpdate: () => {
+            velocityY += gravity;
+            rotation += velocityX * 0.5;
+            gsap.set(heart, {
+                x: `+=${velocityX}`,
+                y: `+=${velocityY}`,
+                rotation: rotation,
+                scale: 1 - (gsap.getProperty(heart, "progress") * 0.5)
+            });
+        },
+        onComplete: () => {
+            heart.remove();
+            activeHearts--;
+        }
+    });
+   heart.addEventListener('click', () => {
+        gsap.to(heart, {
+            scale: 2,
+            opacity: 0,
+            duration: 0.3,
+            onComplete: () => heart.remove()
+        });
         heartClicks++;
         if (heartClicks >= 3) {
             document.getElementById("heart-counter").classList.remove("hidden");
         }
     });
-
-    setTimeout(() => {
-        heart.remove();
-    }, 5000);
 }
 
 function heartBurst() {
     if (!document.hasFocus() || document.hidden) return;
 
-    const isMobile = window.innerWidth <= 768;
-    const burstCount = isMobile ? 2 : 3;
-    const delayBetweenHearts = isMobile ? 1000 : 800;
-
+    // Create 2-3 hearts per click with slight variation
+    const burstCount = window.innerWidth <= 768 ? 2 : 3; 
+    const baseDelay = 100; // Milliseconds between hearts
+    
     for (let i = 0; i < burstCount; i++) {
         setTimeout(() => {
-            if (document.hasFocus() && !document.hidden) {
-                createFloatingHeart();
-            }
-        }, i * delayBetweenHearts);
+            createFloatingHeart();
+        }, i * baseDelay);
     }
 }
 
-function getHeartIntervalForDevice() {
-    if (window.innerWidth <= 480) return 15000;
-    if (window.innerWidth <= 768) return 12000;
-    return 9000;
-}
+// function getHeartIntervalForDevice() {
+//     if (window.innerWidth <= 480) return 15000;
+//     if (window.innerWidth <= 768) return 12000;
+//     return 9000;
+// }
 
-const heartInterval = setInterval(heartBurst, getHeartIntervalForDevice());
+// const heartInterval = setInterval(heartBurst, getHeartIntervalForDevice());
 
 function revealEasterEgg() {
     const msg = document.getElementById("easter-msg");
@@ -493,6 +522,12 @@ function setupEventListeners() {
     if (document.getElementById('tsparticles')) {
         resizeObserver.observe(document.getElementById('tsparticles'));
     }
+
+    document.addEventListener('click', function(e) {
+        if(!e.target.closest('.envelope')) {
+            heartBurst();
+        }
+    });
 }
 
 function goToPreviousScene() {
@@ -737,3 +772,30 @@ window.onload = () => {
         );
     }
 };
+
+function throttle(callback, limit) {
+    let waiting = false;
+    return function() {
+        if (!waiting) {
+            callback.apply(this, arguments);
+            waiting = true;
+            setTimeout(() => {
+                waiting = false;
+            }, limit);
+        }
+    };
+}
+
+// Update the click listener to use throttle
+document.addEventListener('click', throttle(function(e) {
+    if(!e.target.closest('.envelope')) {
+        heartBurst();
+    }
+}, 300)); // 300ms cooldown between bursts
+
+// Add touch-specific listener
+document.addEventListener('touchend', throttle(function(e) {
+    if(!e.target.closest('.envelope')) {
+        heartBurst();
+    }
+}, 300));
