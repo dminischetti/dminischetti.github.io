@@ -102,7 +102,7 @@ function animateScene(index) {
     }
     
     // Special handling for the credits scene button z-index
-    if (scene.id === "scene-credits") {
+    if (scene.id === "scene-9") {
         const button = scene.querySelector(".btn-next");
         if (button) {
             gsap.set(button, { zIndex: 100 }); // Ensure button is above credits animation
