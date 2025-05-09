@@ -598,110 +598,184 @@ function adjustUIForScreenSize() {
 }
 
 // Optimized typewriter effect
-function typeWriter(text, elementId, options = {}, callback) {
-    const {
-        speed = 120,              // Base speed (ms per character)
-        jitter = 0.3,             // Random speed variation (0-1)
-        pauseOnPunctuation = true, // Longer pauses for punctuation
-        cursorElement = null,     // Optional cursor element to control
-        batchSize = 1             // Number of characters to add at once (for performance)
-    } = options;
+// function typeWriter(text, elementId, options = {}, callback) {
+//     const {
+//         speed = 120,              // Base speed (ms per character)
+//         jitter = 0.3,             // Random speed variation (0-1)
+//         pauseOnPunctuation = true, // Longer pauses for punctuation
+//         cursorElement = null,     // Optional cursor element to control
+//         batchSize = 1             // Number of characters to add at once (for performance)
+//     } = options;
 
-    let i = 0;
-    const element = document.getElementById(elementId);
-    if (!element) return;
+//     let i = 0;
+//     const element = document.getElementById(elementId);
+//     if (!element) return;
 
-    // Clear previous content
-    element.innerHTML = "";
+//     // Clear previous content
+//     element.innerHTML = "";
     
-    // Check if we should use requestAnimationFrame for better performance
-    const useRAF = window.innerWidth <= 768;
-    let lastTimestamp = 0;
-    let nextDelay = 0;
+//     // Check if we should use requestAnimationFrame for better performance
+//     const useRAF = window.innerWidth <= 768;
+//     let lastTimestamp = 0;
+//     let nextDelay = 0;
 
-    // Show cursor if provided
-    if (cursorElement) {
-        cursorElement.style.display = 'inline-block';
-        cursorElement.style.opacity = '1';
+//     // Show cursor if provided
+//     if (cursorElement) {
+//         cursorElement.style.display = 'inline-block';
+//         cursorElement.style.opacity = '1';
+//     }
+
+//     function calculateDelay(char) {
+//         let delay = speed;
+        
+//         // Random variation
+//         delay *= 1 + (Math.random() * jitter - jitter/2);
+        
+//         // Longer pauses for punctuation
+//         if (pauseOnPunctuation) {
+//             if (char === '.' || char === '!' || char === '?') delay *= 3;
+//             else if (char === ',' || char === ';') delay *= 2;
+//             else if (char === '\n') delay *= 4; // Extra pause for new lines
+//         }
+        
+//         return Math.max(20, delay); // Minimum delay
+//     }
+
+//     function typeRAF(timestamp) {
+//         if (lastTimestamp === 0) {
+//             lastTimestamp = timestamp;
+//         }
+        
+//         const elapsed = timestamp - lastTimestamp;
+        
+//         if (elapsed >= nextDelay) {
+//             if (i < text.length) {
+//                 // Process in small batches for better performance
+//                 const batch = Math.min(batchSize, text.length - i);
+//                 let batchText = '';
+                
+//                 for (let j = 0; j < batch; j++) {
+//                     batchText += text.charAt(i + j);
+//                 }
+                
+//                 element.innerHTML += batchText;
+//                 i += batch;
+                
+//                 // Calculate delay for next batch
+//                 nextDelay = calculateDelay(text.charAt(i - 1));
+//                 lastTimestamp = timestamp;
+                
+//                 requestAnimationFrame(typeRAF);
+//             } else if (callback) {
+//                 // Hide cursor when done
+//                 if (cursorElement) {
+//                     cursorElement.style.opacity = '0';
+//                     setTimeout(() => cursorElement.style.display = 'none', 500);
+//                 }
+//                 callback();
+//             }
+//         } else {
+//             requestAnimationFrame(typeRAF);
+//         }
+//     }
+
+//     function typeTimeout() {
+//         if (i < text.length) {
+//             const char = text.charAt(i);
+//             element.innerHTML += char;
+//             i++;
+            
+//             setTimeout(typeTimeout, calculateDelay(char));
+//         } else if (callback) {
+//             // Hide cursor when done
+//             if (cursorElement) {
+//                 cursorElement.style.opacity = '0';
+//                 setTimeout(() => cursorElement.style.display = 'none', 500);
+//             }
+//             callback();
+//         }
+//     }
+
+//     // Use the appropriate method based on device capability
+//     if (useRAF) {
+//         requestAnimationFrame(typeRAF);
+//     } else {
+//         typeTimeout();
+//     }
+// }
+
+
+function typeWriter(text, elementId, options = {}, callback) {
+    const targetElement = document.getElementById(elementId);
+    if (!targetElement) {
+        console.error(`Element #${elementId} not found`);
+        return;
     }
 
-    function calculateDelay(char) {
-        let delay = speed;
-        
-        // Random variation
-        delay *= 1 + (Math.random() * jitter - jitter/2);
-        
-        // Longer pauses for punctuation
-        if (pauseOnPunctuation) {
-            if (char === '.' || char === '!' || char === '?') delay *= 3;
-            else if (char === ',' || char === ';') delay *= 2;
-            else if (char === '\n') delay *= 4; // Extra pause for new lines
+    // Clear any existing content
+    targetElement.textContent = "";
+
+    // Font loading check
+    const fontCheck = setInterval(() => {
+        if (document.fonts?.check('1rem Montserrat')) {
+            clearInterval(fontCheck);
+            startTypewriter();
         }
-        
-        return Math.max(20, delay); // Minimum delay
+    }, 100);
+
+    // Fallback if document.fonts isn't supported
+    if (!document.fonts) setTimeout(startTypewriter, 1000);
+
+    function startTypewriter() {
+        // Visibility check
+        if (!isElementVisible(targetElement)) {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        observer.unobserve(targetElement);
+                        startTyping();
+                    }
+                });
+            });
+            observer.observe(targetElement);
+        } else {
+            startTyping();
+        }
     }
 
-    function typeRAF(timestamp) {
-        if (lastTimestamp === 0) {
-            lastTimestamp = timestamp;
-        }
-        
-        const elapsed = timestamp - lastTimestamp;
-        
-        if (elapsed >= nextDelay) {
+    function startTyping() {
+        let i = 0;
+        const { speed = 100, jitter = 0.3 } = options;
+        const fragment = document.createDocumentFragment();
+        const textNode = document.createTextNode("");
+        fragment.appendChild(textNode);
+
+        targetElement.appendChild(fragment);
+
+        function type() {
             if (i < text.length) {
-                // Process in small batches for better performance
-                const batch = Math.min(batchSize, text.length - i);
-                let batchText = '';
-                
-                for (let j = 0; j < batch; j++) {
-                    batchText += text.charAt(i + j);
-                }
-                
-                element.innerHTML += batchText;
-                i += batch;
-                
-                // Calculate delay for next batch
-                nextDelay = calculateDelay(text.charAt(i - 1));
-                lastTimestamp = timestamp;
-                
-                requestAnimationFrame(typeRAF);
+                textNode.nodeValue += text.charAt(i);
+                i++;
+                setTimeout(type, speed * (1 + Math.random() * jitter));
             } else if (callback) {
-                // Hide cursor when done
-                if (cursorElement) {
-                    cursorElement.style.opacity = '0';
-                    setTimeout(() => cursorElement.style.display = 'none', 500);
-                }
                 callback();
             }
-        } else {
-            requestAnimationFrame(typeRAF);
         }
-    }
 
-    function typeTimeout() {
-        if (i < text.length) {
-            const char = text.charAt(i);
-            element.innerHTML += char;
-            i++;
-            
-            setTimeout(typeTimeout, calculateDelay(char));
-        } else if (callback) {
-            // Hide cursor when done
-            if (cursorElement) {
-                cursorElement.style.opacity = '0';
-                setTimeout(() => cursorElement.style.display = 'none', 500);
-            }
-            callback();
-        }
+        // Start with a small delay to ensure layout
+        requestAnimationFrame(() => setTimeout(type, 100));
     }
+}
 
-    // Use the appropriate method based on device capability
-    if (useRAF) {
-        requestAnimationFrame(typeRAF);
-    } else {
-        typeTimeout();
-    }
+// Helper function
+function isElementVisible(el) {
+    const rect = el.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
 }
 
 // Enhanced restart function
@@ -799,6 +873,8 @@ window.onload = () => {
         });
     }
 
+    
+
     // Handle preloader
     handlePreloader(() => {
         // Initialize first scene
@@ -828,34 +904,51 @@ window.onload = () => {
     
     // Initialize terminal typewriter effect if present
     const typewriterElement = document.getElementById("typewriter");
-    if (typewriterElement) {
-        typeWriter(
-            "SYSTEM TERMINAL\n\n" +
-            "Port scanning detected...\n" +
-            "Signal strength: High\n" +
-            "Fragment secured.\n\n" +
-            "Wonder Mamma confirmed.",
-            "typewriter",
-            {
-                speed: window.innerWidth <= 768 ? 80 : 100,
-                jitter: window.innerWidth <= 768 ? 0.2 : 0.4,
-                pauseOnPunctuation: true,
-                batchSize: window.innerWidth <= 480 ? 2 : 1 // Process characters in batches on mobile
-            },
-            () => {
-                // Completion callback
-                console.log("Terminal message complete");
+    // if (typewriterElement) {
+    //     typeWriter(
+    //         "SYSTEM TERMINAL\n\n" +
+    //         "Port scanning detected...\n" +
+    //         "Signal strength: High\n" +
+    //         "Fragment secured.\n\n" +
+    //         "Wonder Mamma confirmed.",
+    //         "typewriter",
+    //         {
+    //             speed: window.innerWidth <= 768 ? 80 : 100,
+    //             jitter: window.innerWidth <= 768 ? 0.2 : 0.4,
+    //             pauseOnPunctuation: true,
+    //             batchSize: window.innerWidth <= 480 ? 2 : 1 // Process characters in batches on mobile
+    //         },
+    //         () => {
+    //             // Completion callback
+    //             console.log("Terminal message complete");
                 
-                // Example GSAP animation (requires GSAP library)
-                if (typeof gsap !== 'undefined') {
-                    gsap.to(".confirmation-badge", {
-                        opacity: 1,
-                        scale: 1.2,
-                        duration: 0.8,
-                        ease: "back.out"
-                    });
-                }
-            }
-        );
-    }
+    //             // Example GSAP animation (requires GSAP library)
+    //             if (typeof gsap !== 'undefined') {
+    //                 gsap.to(".confirmation-badge", {
+    //                     opacity: 1,
+    //                     scale: 1.2,
+    //                     duration: 0.8,
+    //                     ease: "back.out"
+    //                 });
+    //             }
+    //         }
+    //     );
+    // }
+    if (typewriterElement) {
+    // Pre-set dimensions to prevent layout shift
+    typewriterElement.style.minHeight = `${typewriterElement.offsetHeight}px`;
+    
+    typeWriter(
+        "SYSTEM TERMINAL\n\nPort scanning detected...\nSignal strength: High\nFragment secured.\n\nWonder Mamma confirmed.",
+        "typewriter",
+        {
+            speed: window.innerWidth <= 768 ? 80 : 100,
+            jitter: window.innerWidth <= 768 ? 0.2 : 0.4
+        },
+        () => {
+            // console.log("Terminal message complete");
+            // Add your completion animations here
+        }
+    );
+}
 };

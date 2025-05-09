@@ -1117,3 +1117,11 @@ body {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
 }
+
+#typewriter {
+    font-family: 'Montserrat', sans-serif;
+    white-space: pre-wrap;
+    overflow: hidden;
+    contain: content;
+    will-change: contents;
+}
