@@ -266,21 +266,48 @@ function setBackgroundFromScene(scene) {
                 // For lightweight config on low-performance devices
                 if (isLowPerformance) {
                     // Use lightweight config
-                    const config = {
-                        particles: {
-                            number: { value: bg === "stars" ? 30 : 15 },
-                            size: { value: 3 },
-                            opacity: { value: 0.8 },
-                            move: {
-                                enable: true,
-                                speed: 0.3,
-                                direction: "none",
-                                random: true,
-                                straight: false,
-                                outMode: "out"
-                            }
-                        }
-                    };
+// In the setBackgroundFromScene function, modify the light config:
+const config = {
+    particles: {
+        number: { 
+            value: bg === "stars" ? 30 : 15,
+            density: {
+                enable: true,
+                value_area: 800
+            }
+        },
+        size: { 
+            value: 3,
+            random: true 
+        },
+        opacity: {
+            value: 0.8,
+            animation: {
+                enable: true,
+                minimumValue: 0.3,
+                speed: 1
+            }
+        },
+        move: {
+            enable: true,
+            speed: 0.3,
+            direction: "none",
+            random: true,
+            straight: false,
+            outMode: "bounce", // Changed from "out"
+            bounce: true
+        }
+    },
+    interactivity: {
+        detect_on: "canvas",
+        events: {
+            onhover: {
+                enable: true,
+                mode: "repulse"
+            }
+        }
+    }
+};
                     
                     // Load the lightweight config
                     if (bg === "stars") {
@@ -490,7 +517,7 @@ function setupEventListeners() {
     // Throttled resize handler
     window.addEventListener('resize', throttle(function() {
         // Adjust UI elements based on new screen size
-        adjustUIForScreenSize();
+        // adjustUIForScreenSize();
     }, 250), { passive: true });
     
     // Visibility change - pause animations when tab not visible
@@ -503,6 +530,16 @@ function setupEventListeners() {
             gsap.resumeAll();
         }
     });
+
+        // Add resize observer for particles
+    const resizeObserver = new ResizeObserver(entries => {
+        const particles = tsParticles.domItem(0);
+        if (particles) particles.refresh();
+    });
+    
+    if (document.getElementById('tsparticles')) {
+        resizeObserver.observe(document.getElementById('tsparticles'));
+    }
 }
 
 // Go to previous scene functionality
@@ -765,13 +802,16 @@ window.onload = () => {
     // Handle preloader
     handlePreloader(() => {
         // Initialize first scene
-        if (scenes.length > 0 && scenes[currentScene]) {
-            scenes[currentScene].classList.add("active");
-            animateScene(currentScene);
+    if (scenes.length > 0 && scenes[currentScene]) {
+        // First make scene active
+        scenes[currentScene].classList.add("active");
+        
+        // Then initialize particles AFTER DOM update
+        requestAnimationFrame(() => {
             setBackgroundFromScene(scenes[currentScene]);
-        } else {
-            console.error("No scenes found or initial scene is missing.");
-        }
+            animateScene(currentScene);
+        });
+    }
         
         // Initialize envelope interactions
         setupEnvelopeInteractions();
@@ -783,7 +823,7 @@ window.onload = () => {
         lazyLoadImages();
         
         // Adjust UI based on screen size
-        adjustUIForScreenSize();
+        // adjustUIForScreenSize();
     });
     
     // Initialize terminal typewriter effect if present
