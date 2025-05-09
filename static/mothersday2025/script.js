@@ -133,9 +133,9 @@ const hearts = [];
 
 // Adjust max hearts based on device capability
 function getMaxHeartsForDevice() {
-    if (window.innerWidth <= 480) return 3; // Small phones
-    if (window.innerWidth <= 768) return 4; // Tablets
-    return 5; // Desktop
+    if (window.innerWidth <= 480) return 4; // Small phones
+    if (window.innerWidth <= 768) return 7; // Tablets
+    return 8; // Desktop
 }
 
 function createFloatingHeart() {
@@ -323,10 +323,9 @@ function setBackgroundFromScene(scene) {
 // Improved preloader with animation progress
 function handlePreloader(callback) {
     const preloader = document.getElementById("preloader");
-    if (!preloader) {
-        if (callback) callback();
-        return;
-    }
+    setTimeout(() => {
+    preloader.classList.add("loaded");
+    }, 1200);
     
     const timeAssetsLoaded = Date.now();
     const elapsedTimeSinceScriptStart = timeAssetsLoaded - startTime;
