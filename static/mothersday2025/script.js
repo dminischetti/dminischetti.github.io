@@ -22,9 +22,6 @@ function nextScene() {
 
     isAnimating = true;
 
-    // heartBurst();
-    // if (currentScene % 2 === 0) heartBurst();
-
     window.scrollTo({
         top: 0,
         behavior: "smooth"
@@ -184,9 +181,8 @@ function createFloatingHeart() {
 function heartBurst() {
     if (!document.hasFocus() || document.hidden) return;
 
-    // Create 2-3 hearts per click with slight variation
     const burstCount = window.innerWidth <= 768 ? 2 : 3; 
-    const baseDelay = 100; // Milliseconds between hearts
+    const baseDelay = 100;
     
     for (let i = 0; i < burstCount; i++) {
         setTimeout(() => {
@@ -194,14 +190,6 @@ function heartBurst() {
         }, i * baseDelay);
     }
 }
-
-// function getHeartIntervalForDevice() {
-//     if (window.innerWidth <= 480) return 15000;
-//     if (window.innerWidth <= 768) return 12000;
-//     return 9000;
-// }
-
-// const heartInterval = setInterval(heartBurst, getHeartIntervalForDevice());
 
 function revealEasterEgg() {
     const msg = document.getElementById("easter-msg");
@@ -523,11 +511,14 @@ function setupEventListeners() {
         resizeObserver.observe(document.getElementById('tsparticles'));
     }
 
-    document.addEventListener('click', function(e) {
+        const handleClick = throttle(function(e) {
         if(!e.target.closest('.envelope')) {
             heartBurst();
         }
-    });
+    }, 300);
+
+    document.addEventListener('click', handleClick);
+    document.addEventListener('touchend', handleClick);
 }
 
 function goToPreviousScene() {
@@ -772,30 +763,3 @@ window.onload = () => {
         );
     }
 };
-
-function throttle(callback, limit) {
-    let waiting = false;
-    return function() {
-        if (!waiting) {
-            callback.apply(this, arguments);
-            waiting = true;
-            setTimeout(() => {
-                waiting = false;
-            }, limit);
-        }
-    };
-}
-
-// Update the click listener to use throttle
-document.addEventListener('click', throttle(function(e) {
-    if(!e.target.closest('.envelope')) {
-        heartBurst();
-    }
-}, 300)); // 300ms cooldown between bursts
-
-// Add touch-specific listener
-document.addEventListener('touchend', throttle(function(e) {
-    if(!e.target.closest('.envelope')) {
-        heartBurst();
-    }
-}, 300));
