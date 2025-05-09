@@ -23,7 +23,7 @@ function nextScene() {
     isAnimating = true;
 
     heartBurst();
-    
+
     window.scrollTo({
         top: 0,
         behavior: "smooth"
@@ -122,23 +122,23 @@ const hearts = [];
 
 function getMaxHeartsForDevice() { return 9999; }
 
-function createFloatingHeart() {
+function createFloatingHeart(clickX, clickY) {
     if (activeHearts >= getMaxHeartsForDevice()) return;
-
+    
     const heart = document.createElement("div");
     heart.innerHTML = '❤️';
     heart.style.position = 'fixed';
     heart.style.fontSize = '32px';
     heart.style.cursor = 'pointer';
-
-    const startX = gsap.utils.random(20, 80);
-    const startY = gsap.utils.random(50, 80);
-
-    heart.style.left = `${startX}%`;
-    heart.style.top = `${startY}%`;
-
+    
+    // Set initial position to click coordinates
+    heart.style.left = `${clickX}px`;
+    heart.style.top = `${clickY}px`;
+    
     document.getElementById("hearts-container").appendChild(heart);
     activeHearts++;
+
+    // Randomize movement parameters
     const velocityX = gsap.utils.random(-2, 2);
     let velocityY = gsap.utils.random(-8, -12);
     const gravity = 0.5;
@@ -162,6 +162,8 @@ function createFloatingHeart() {
             activeHearts--;
         }
     });
+
+    // Keep existing click interaction
     heart.addEventListener('click', () => {
         gsap.to(heart, {
             scale: 2,
@@ -176,16 +178,31 @@ function createFloatingHeart() {
     });
 }
 
-function heartBurst() {
-    if (document.hidden) return;
+function heartBurst(e) {
     if (!document.hasFocus() || document.hidden) return;
+
+    // Default to center position if no event
+    let clickX = window.innerWidth / 2;
+    let clickY = window.innerHeight / 2;
+
+    // If event exists, get coordinates
+    if (e) {
+        if (e.type === 'touchend' && e.changedTouches) {
+            const touch = e.changedTouches[0];
+            clickX = touch.clientX;
+            clickY = touch.clientY;
+        } else if (e.clientX) {
+            clickX = e.clientX;
+            clickY = e.clientY;
+        }
+    }
 
     const burstCount = window.innerWidth <= 768 ? 2 : 3;
     const baseDelay = 100;
-
+    
     for (let i = 0; i < burstCount; i++) {
         setTimeout(() => {
-            createFloatingHeart();
+            createFloatingHeart(clickX, clickY);
         }, i * baseDelay);
     }
 }
@@ -491,11 +508,9 @@ function setupEventListeners() {
 
     document.addEventListener('visibilitychange', function () {
         if (document.hidden) {
-
-            gsap.pauseAll();
+            gsap.globalTimeline.pause(); // Correct method
         } else {
-
-            gsap.resumeAll();
+            gsap.globalTimeline.resume(); // Correct method
         }
     });
 
@@ -508,12 +523,13 @@ function setupEventListeners() {
         resizeObserver.observe(document.getElementById('tsparticles'));
     }
 
-    const handleClick = throttle(function (e) {
-        heartBurst()
+    const handleClick = throttle(function(e) {
+        heartBurst(e); // Pass the event object
     }, 300);
 
+    // Add proper touch listener
     document.addEventListener('click', handleClick);
-    document.addEventListener('touchend', handleClick);
+    document.addEventListener('touchend', handleClick); // Not touchstart
 }
 
 function goToPreviousScene() {
