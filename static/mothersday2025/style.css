@@ -444,8 +444,15 @@ ul li::before {
 }
 
 #scene-2 {
-    background: rgba(14, 11, 22, 0.85);
-    backdrop-filter: blur(5px);
+  background: rgba(14, 11, 22, 0.85);
+  backdrop-filter: blur(5px);
+  position: relative; /* Changed from fixed */
+  height: auto; /* Allow content to expand */
+  min-height: 100vh; /* But still fill viewport */
+  overflow-y: auto; /* Enable scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth iOS scrolling */
+  padding-bottom: 160px; /* Space for button */
+  touch-action: pan-y;
 }
 
 #scene-2 h2 {
@@ -901,14 +908,6 @@ body {
   bottom: calc(30px + env(safe-area-inset-bottom));
 }
 
-/* Modified for #scene-2 */
-#scene-2 {
-  background: rgba(14, 11, 22, 0.85);
-  backdrop-filter: blur(5px);
-  position: relative; /* Make this a positioning context for the absolute button */
-  padding-bottom: 120px !important; /* Adjust based on button height + some extra */
-}
-
 #scene-2 h2 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
@@ -988,15 +987,13 @@ body {
 }
 
 #scene-2 .btn-next.static {
-  background: linear-gradient(135deg, #ff7ec9, #ff9ad3);
-  border: none;
-  font-weight: 600;
-  margin: 1.5rem auto 0 auto;
-  box-shadow: 0 0 20px rgba(255, 126, 201, 0.4);
-  position: absolute; /* Changed to absolute */
-  bottom: 30px;      /* Position at the bottom of #scene-2 */
-  left: 50%;
-  transform: translateX(-50%);
+  position: sticky; /* Changed from absolute */
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  transform: none; /* Remove translateX */
+  margin: 2rem auto 0 auto;
+  width: calc(100% - 3rem); /* Account for padding */
 }
 
 /* Revert the general .scene.static-button padding */

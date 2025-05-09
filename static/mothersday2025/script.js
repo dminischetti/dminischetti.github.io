@@ -807,12 +807,7 @@ window.onload = () => {
         document.documentElement.style.height = '100%';
         document.body.style.height = '100%';
         document.body.style.webkitOverflowScrolling = 'touch';
-        
-        // Fix for iOS Safari scrolling issues
-        document.addEventListener('touchmove', function(e) {
-            e.preventDefault();
-        }, { passive: false });
-        
+              
         // Fix for iOS Safari input focus issues
         document.querySelectorAll('input, textarea').forEach(input => {
             input.addEventListener('focus', function() {
