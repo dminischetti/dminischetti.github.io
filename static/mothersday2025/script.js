@@ -6,12 +6,29 @@ let currentScene = 0;
 const scenes = document.querySelectorAll(".scene");
 let isAnimating = false; // Flag to prevent multiple rapid transitions
 
+// Throttle function to limit function calls
+function throttle(callback, limit) {
+  let waiting = false;
+  return function() {
+    if (!waiting) {
+      callback.apply(this, arguments);
+      waiting = true;
+      setTimeout(() => {
+        waiting = false;
+      }, limit);
+    }
+  };
+}
+
 function nextScene() {
     if (isAnimating) return; // Prevent rapid multi-clicks
     isAnimating = true;
     
     // Scroll to top before changing scenes
-    window.scrollTo(0, 0);
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth" // Use smooth scrolling for better UX
+    });
     
     if (scenes[currentScene]) {
         scenes[currentScene].classList.remove("active");
@@ -46,11 +63,14 @@ function animateScene(index) {
     const scene = scenes[index];
     if (!scene) return; // Guard clause if scene doesn't exist
 
+    // Detect low-power mode or low-performance devices
+    const isLowPerformance = navigator.hardwareConcurrency <= 4 || window.innerWidth <= 768;
+    
     // Use simpler animation for better mobile performance
-    gsap.fromTo(scene, { opacity: 0, y: 20 }, {
+    gsap.fromTo(scene, { opacity: 0, y: isLowPerformance ? 10 : 20 }, {
         opacity: 1,
         y: 0,
-        duration: 0.8,
+        duration: isLowPerformance ? 0.5 : 0.8,
         ease: "power2.out"
     });
 
@@ -58,20 +78,27 @@ function animateScene(index) {
     if (scene.id === "scene-1") {
         typeWriter(
             "Protocol B engaged…\nAccess granted:\nWonder Mamma confirmed.",
-            "typewriter"
+            "typewriter",
+            {
+                speed: isLowPerformance ? 80 : 100, // Slightly faster on mobile
+                jitter: isLowPerformance ? 0.2 : 0.4
+            }
         );
     }
 
     // If decoder scene, animate lines with slight performance improvements
     if (scene.id === "scene-5") {
         const lines = scene.querySelectorAll("li");
-        gsap.fromTo(lines, { opacity: 0, x: -10 }, {
-            opacity: 1,
-            x: 0,
-            duration: 0.5,
-            stagger: 0.4, // Slightly faster for mobile
-            ease: "power2.out"
-        });
+        gsap.fromTo(lines, 
+            { opacity: 0, x: isLowPerformance ? -5 : -10 }, 
+            {
+                opacity: 1,
+                x: 0,
+                duration: isLowPerformance ? 0.3 : 0.5,
+                stagger: isLowPerformance ? 0.3 : 0.4,
+                ease: "power2.out"
+            }
+        );
     }
     
     // Special handling for the credits scene button z-index
@@ -94,17 +121,37 @@ function animateScene(index) {
                     refreshBtn.classList.remove("hidden");
                 }, 500);
             }
-        }, 6000);
+        }, isLowPerformance ? 4000 : 6000); // Shorter delay on mobile
     }
 }
 
 // Optimized floating hearts logic
 let heartClicks = 0;
-const maxHeartsOnScreen = 5; // Limit concurrent hearts for better performance
 let activeHearts = 0;
+const hearts = [];
+
+// Adjust max hearts based on device capability
+function getMaxHeartsForDevice() {
+    if (window.innerWidth <= 480) return 3; // Small phones
+    if (window.innerWidth <= 768) return 4; // Tablets
+    return 5; // Desktop
+}
 
 function createFloatingHeart() {
+    const maxHeartsOnScreen = getMaxHeartsForDevice();
+    
     // Limit maximum concurrent hearts for performance
+    if (activeHearts >= maxHeartsOnScreen) {
+        // Recycle oldest heart instead of creating new one
+        if (hearts.length > 0) {
+            const oldestHeart = hearts.shift();
+            if (oldestHeart && document.body.contains(oldestHeart)) {
+                oldestHeart.remove();
+                activeHearts--;
+            }
+        }
+    }
+    
     if (activeHearts >= maxHeartsOnScreen) return;
     activeHearts++;
     
@@ -113,12 +160,21 @@ function createFloatingHeart() {
     heart.innerText = "💗"; 
     
     // Randomize position but keep hearts more centered on mobile
-    heart.style.left = `${20 + Math.random() * 60}vw`; // Template string corretta
+    const viewportWidth = window.innerWidth;
+    const isMobile = viewportWidth <= 768;
+    
+    // More centered on mobile
+    const leftPosition = isMobile ? 
+        `${30 + Math.random() * 40}vw` : 
+        `${20 + Math.random() * 60}vw`;
+        
+    heart.style.left = leftPosition;
     heart.style.bottom = "-20px"; // Start from below the viewport
     
     const heartsContainer = document.getElementById("hearts-container");
     if (heartsContainer) {
         heartsContainer.appendChild(heart);
+        hearts.push(heart); // Add to hearts array
     } else {
         console.error("Hearts container not found!");
         activeHearts--;
@@ -126,14 +182,20 @@ function createFloatingHeart() {
     }
 
     // Make hearts larger touch targets for mobile
-    heart.style.fontSize = "1.8rem";
-    heart.style.padding = "10px";
+    heart.style.fontSize = isMobile ? "2rem" : "1.8rem";
+    heart.style.padding = isMobile ? "12px" : "10px";
 
-    // Handle heart touch
+    // Use passive event listeners for better performance
     heart.addEventListener("click", () => {
         heart.remove();
         activeHearts--;
         heartClicks++;
+        
+        // Remove from hearts array
+        const index = hearts.indexOf(heart);
+        if (index > -1) {
+            hearts.splice(index, 1);
+        }
         
         // Check if heart counter should be displayed
         if (heartClicks >= 3) {
@@ -142,15 +204,26 @@ function createFloatingHeart() {
                 heartCounterMsg.classList.remove("hidden");
             }
         }
-    });
+    }, { passive: true });
 
-    // Auto-remove hearts to prevent performance issues
-    setTimeout(() => {
-        if (document.body.contains(heart)) {
-            heart.remove();
-            activeHearts--;
+    // Animate using GSAP for better performance
+    gsap.to(heart, {
+        y: -(Math.random() * 150 + 100), // Random float height
+        opacity: 0,
+        duration: 4,
+        ease: "power1.out",
+        onComplete: () => {
+            if (document.body.contains(heart)) {
+                heart.remove();
+                // Remove from hearts array
+                const index = hearts.indexOf(heart);
+                if (index > -1) {
+                    hearts.splice(index, 1);
+                }
+                activeHearts--;
+            }
         }
-    }, 5000);
+    });
 }
 
 // More efficient heart burst function
@@ -158,19 +231,28 @@ function heartBurst() {
     if (!document.hasFocus() || document.hidden) return; // Only create hearts if tab is active and visible
     
     // Create fewer hearts on mobile
-    const burstCount = 2; // Reduced from 3 for better performance
-    let delay = 0;
+    const isMobile = window.innerWidth <= 768;
+    const burstCount = isMobile ? 2 : 3; 
+    const delayBetweenHearts = isMobile ? 1000 : 800;
     
     for (let i = 0; i < burstCount; i++) {
         setTimeout(() => {
-            createFloatingHeart();
-        }, delay);
-        delay += 1000; // Slightly longer delay for better performance
+            if (document.hasFocus() && !document.hidden) {
+                createFloatingHeart();
+            }
+        }, i * delayBetweenHearts);
     }
 }
 
+// Adjust heart burst frequency based on device capability
+function getHeartIntervalForDevice() {
+    if (window.innerWidth <= 480) return 15000; // Small phones
+    if (window.innerWidth <= 768) return 12000; // Tablets
+    return 9000; // Desktop
+}
+
 // Less frequent heart bursts for mobile
-const heartInterval = setInterval(heartBurst, 12000); // Increased from 9000 for performance
+const heartInterval = setInterval(heartBurst, getHeartIntervalForDevice());
 
 // Better touch handling for Easter egg
 function revealEasterEgg() {
@@ -179,7 +261,7 @@ function revealEasterEgg() {
     
     if (msg) {
         msg.classList.remove("hidden");
-        // Add subtle animation
+        // Use GSAP for smoother animation
         gsap.fromTo(msg, 
             { opacity: 0, y: 10 }, 
             { opacity: 1, y: 0, duration: 0.5 }
@@ -208,33 +290,26 @@ function setBackgroundFromScene(scene) {
     const bg = scene.getAttribute("data-bg");
     let configFile = "";
 
-    // For mobile, we'll use lighter particle configurations
+    // Cache to avoid unnecessary reloads
+    const particlesCache = window.particlesCache || {};
+    window.particlesCache = particlesCache;
+
+    // Determine if we should use lightweight config
+    const isLowPerformance = navigator.hardwareConcurrency <= 4 || 
+                             window.innerWidth <= 768 || 
+                             navigator.connection?.saveData || 
+                             navigator.connection?.effectiveType === 'slow-2g' ||
+                             navigator.connection?.effectiveType === '2g';
+
     switch (bg) {
         case "stars":
-            configFile = "assets/particles-stars.json";
-            // Reduce particle count for mobile
-            if (window.innerWidth <= 768) {
-                if (typeof tsParticles !== 'undefined') {
-                    tsParticles.load("tsparticles", {
-                        preset: "stars",
-                        particles: {
-                            number: {
-                                value: 30 // Reduced from default
-                            },
-                            move: {
-                                speed: 0.3 // Slower for better performance
-                            }
-                        }
-                    });
-                    return;
-                }
-            }
+            configFile = isLowPerformance ? "assets/particles-stars-light.json" : "assets/particles-stars.json";
             break;
         case "petals":
-            configFile = "assets/particles-petals.json";
+            configFile = isLowPerformance ? "assets/particles-petals-light.json" : "assets/particles-petals.json";
             break;
         case "glow":
-            configFile = "assets/particles-goldglow.json";
+            configFile = isLowPerformance ? "assets/particles-goldglow-light.json" : "assets/particles-goldglow.json";
             break;
         default:
             configFile = ""; // No specific particle config
@@ -244,27 +319,50 @@ function setBackgroundFromScene(scene) {
     if (typeof tsParticles !== 'undefined') { // Check if tsParticles is loaded
         if (configFile) {
             try {
-                // For direct preset usage (stars)
-                if (bg === "stars" && window.innerWidth <= 768) {
-                    tsParticles.load("tsparticles", {
-                        preset: "stars",
+                // For lightweight config on low-performance devices
+                if (isLowPerformance) {
+                    // Use lightweight config
+                    const config = {
                         particles: {
-                            number: {
-                                value: 30 // Reduced from default
-                            },
+                            number: { value: bg === "stars" ? 30 : 15 },
+                            size: { value: 3 },
+                            opacity: { value: 0.8 },
                             move: {
-                                speed: 0.3 // Slower for better performance
+                                enable: true,
+                                speed: 0.3,
+                                direction: "none",
+                                random: true,
+                                straight: false,
+                                outMode: "out"
                             }
                         }
-                    });
-                } else {
-                    // For JSON config files
-                    fetch(configFile)
-                        .then(response => response.json())
-                        .then(config => tsParticles.load("tsparticles", config))
-                        .catch(error => {
-                            console.error("Error loading particles:", error);
+                    };
+                    
+                    // Load the lightweight config
+                    if (bg === "stars") {
+                        tsParticles.load("tsparticles", {
+                            ...config,
+                            preset: "stars"
                         });
+                    } else {
+                        tsParticles.load("tsparticles", config);
+                    }
+                } else {
+                    // Use cached config if available
+                    if (particlesCache[configFile]) {
+                        tsParticles.load("tsparticles", particlesCache[configFile]);
+                    } else {
+                        // Fetch and cache the config
+                        fetch(configFile)
+                            .then(response => response.json())
+                            .then(config => {
+                                particlesCache[configFile] = config;
+                                tsParticles.load("tsparticles", config);
+                            })
+                            .catch(error => {
+                                console.error("Error loading particles:", error);
+                            });
+                    }
                 }
             } catch (error) {
                 console.error("Error with particles:", error);
@@ -278,56 +376,84 @@ function setBackgroundFromScene(scene) {
     }
 }
 
-// Initial load with improved mobile handling
-window.onload = () => {
-    // Detect iOS Safari
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+// Improved preloader with animation progress
+function handlePreloader(callback) {
+    const preloader = document.getElementById("preloader");
+    if (!preloader) {
+        if (callback) callback();
+        return;
+    }
     
-    if (isIOS && isSafari) {
-        // iOS Safari-specific fixes
-        document.documentElement.style.height = '100%';
-        document.body.style.height = '100%';
-        document.body.style.webkitOverflowScrolling = 'touch';
+    const timeAssetsLoaded = Date.now();
+    const elapsedTimeSinceScriptStart = timeAssetsLoaded - startTime;
+    const minPreloaderDisplayDuration = 1200;
+
+    let delayBeforeFadeStart = 0;
+    if (elapsedTimeSinceScriptStart < minPreloaderDisplayDuration) {
+        delayBeforeFadeStart = minPreloaderDisplayDuration - elapsedTimeSinceScriptStart;
     }
 
-    // Handle preloader
-    const preloader = document.getElementById("preloader");
-    if (preloader) {
-        const timeAssetsLoaded = Date.now();
-        const elapsedTimeSinceScriptStart = timeAssetsLoaded - startTime;
-        const minPreloaderDisplayDuration = 1200;
-
-        let delayBeforeFadeStart = 0;
-        if (elapsedTimeSinceScriptStart < minPreloaderDisplayDuration) {
-            delayBeforeFadeStart = minPreloaderDisplayDuration - elapsedTimeSinceScriptStart;
-        }
-
+    // Animate preloader progress if element exists
+    const progressBar = document.getElementById("preloader-progress");
+    if (progressBar) {
+        gsap.to(progressBar, {
+            width: "100%",
+            duration: delayBeforeFadeStart / 1000,
+            ease: "power1.inOut",
+            onComplete: () => {
+                preloader.classList.add("loaded");
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                    if (callback) callback();
+                }, 1100);
+            }
+        });
+    } else {
         setTimeout(() => {
             preloader.classList.add("loaded");
             setTimeout(() => {
                 preloader.style.display = 'none';
+                if (callback) callback();
             }, 1100);
         }, delayBeforeFadeStart);
-    }  
-
-    // Initialize first scene
-    if (scenes.length > 0 && scenes[currentScene]) {
-        scenes[currentScene].classList.add("active");
-        animateScene(currentScene);
-        setBackgroundFromScene(scenes[currentScene]);
-    } else {
-        console.error("No scenes found or initial scene is missing.");
     }
+}
+
+// Enhanced lazy loading of images
+function lazyLoadImages() {
+    const lazyImages = document.querySelectorAll("img[data-src]");
     
-    // Enhanced envelope interaction for mobile
+    if ('IntersectionObserver' in window) {
+        const imageObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+                    img.src = img.dataset.src;
+                    img.removeAttribute("data-src");
+                    imageObserver.unobserve(img);
+                }
+            });
+        });
+        
+        lazyImages.forEach(img => imageObserver.observe(img));
+    } else {
+        // Fallback for older browsers
+        lazyImages.forEach(img => {
+            img.src = img.dataset.src;
+            img.removeAttribute("data-src");
+        });
+    }
+}
+
+// Improved envelope interaction handler with touch support
+function setupEnvelopeInteractions() {
     const envelopes = document.querySelectorAll(".envelope");
     
     envelopes.forEach(envelope => {
         // Add better visual indicator for tappable items
         envelope.style.transition = "transform 0.3s ease";
         
-        // Add touch handlers with improved experience
+        // Add touch feedback
         envelope.addEventListener("touchstart", function() {
             this.style.transform = "scale(1.05)";
         }, { passive: true });
@@ -336,6 +462,16 @@ window.onload = () => {
             this.style.transform = "";
         }, { passive: true });
         
+        // Mouse feedback for desktop
+        envelope.addEventListener("mouseenter", function() {
+            this.style.transform = "scale(1.05)";
+        });
+        
+        envelope.addEventListener("mouseleave", function() {
+            this.style.transform = "";
+        });
+        
+        // Click/tap handler
         envelope.addEventListener("click", function(e) {
             e.stopPropagation(); // Prevent event bubbling
             
@@ -351,117 +487,144 @@ window.onload = () => {
                     }
                 });
         
-                // Toggle current message
+                // Toggle current message with animation
                 if (isRevealed) {
-                    msg.classList.remove("revealed");
-                    this.classList.remove("clicked");
+                    gsap.to(msg, {
+                        opacity: 0,
+                        y: -10,
+                        duration: 0.3,
+                        onComplete: () => {
+                            msg.classList.remove("revealed");
+                            this.classList.remove("clicked");
+                        }
+                    });
                 } else {
                     msg.classList.add("revealed");
                     this.classList.add("clicked");
+                    gsap.fromTo(msg, 
+                        { opacity: 0, y: 10 },
+                        { opacity: 1, y: 0, duration: 0.3 }
+                    );
                 }
             }
         });
     });
     
-    // Close envelope messages when tapping elsewhere (outside an envelope)
+    // Close envelope messages when tapping elsewhere
     document.addEventListener('click', function(event) {
         const clickedElement = event.target;
-        // If the click is not on an envelope or its descendant message
         if (!clickedElement.closest('.envelope')) {
             document.querySelectorAll('.envelope .msg.revealed').forEach(msg => {
-                msg.classList.remove("revealed");
-                msg.classList.add("hidden");
-                msg.closest('.envelope')?.classList.remove('clicked');
+                gsap.to(msg, {
+                    opacity: 0,
+                    y: -10,
+                    duration: 0.3,
+                    onComplete: () => {
+                        msg.classList.remove("revealed");
+                        msg.closest('.envelope')?.classList.remove('clicked');
+                    }
+                });
             });
         }
     });
+}
 
+// Event handling with passive event listeners
+function setupEventListeners() {
     // Add passive touch listeners to improve scroll performance
     document.addEventListener('touchstart', function() {}, {passive: true});
     document.addEventListener('touchmove', function() {}, {passive: true});
-};
-
-// Uso d'esempio corretto con l'id "typewriter" (invece di "terminal-output")
-typeWriter(
-    "SYSTEM TERMINAL\n\n" +
-    "Port scanning detected...\n" +
-    "Signal strength: High\n" +
-    "Fragment secured.\n\n" +
-    "Silent Hero confirmed.",
-    "typewriter",
-    {
-        speed: 100,
-        jitter: 0.4,
-        pauseOnPunctuation: true
-    },
-    () => {
-        // Completion callback
-        console.log("Terminal message complete");
-        
-        // Example GSAP animation (requires GSAP library)
-        if (typeof gsap !== 'undefined') {
-            gsap.to(".confirmation-badge", {
-                opacity: 1,
-                scale: 1.2,
-                duration: 0.8,
-                ease: "back.out"
-            });
-        }
-    }
-);
-
-// Enhanced restart function
-function restartExperience() {
-    // Reset heart counter
-    heartClicks = 0;
     
-    // Show preloader briefly for transition
-    const preloader = document.getElementById("preloader");
-    if (preloader) {
-        preloader.style.display = 'flex';
-        preloader.classList.remove("loaded");
+    // Handle back button for better UX
+    window.addEventListener('popstate', function(event) {
+        if (currentScene > 0) {
+            event.preventDefault();
+            goToPreviousScene();
+            return false;
+        }
+    });
+    
+    // Throttled resize handler
+    window.addEventListener('resize', throttle(function() {
+        // Adjust UI elements based on new screen size
+        adjustUIForScreenSize();
+    }, 250), { passive: true });
+    
+    // Visibility change - pause animations when tab not visible
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            // Pause animations to save battery
+            gsap.pauseAll();
+        } else {
+            // Resume animations
+            gsap.resumeAll();
+        }
+    });
+}
+
+// Go to previous scene functionality
+function goToPreviousScene() {
+    if (currentScene <= 0 || isAnimating) return;
+    isAnimating = true;
+    
+    // Scroll to top
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+    
+    if (scenes[currentScene]) {
+        scenes[currentScene].classList.remove("active");
+    }
+    
+    currentScene--;
+    
+    if (scenes[currentScene]) {
+        scenes[currentScene].classList.add("active");
+        animateScene(currentScene);
+        setBackgroundFromScene(scenes[currentScene]);
+        
+        const nextButton = scenes[currentScene].querySelector(".btn-next");
+        if (nextButton) {
+            nextButton.classList.add("visible");
+        }
         
         setTimeout(() => {
-            // Reset scene state
-            currentScene = -1;
-            document.querySelectorAll(".scene").forEach(scene => {
-                scene.classList.remove("active", "night-mode");
-                
-                // Reset any scene-specific states
-                if (scene.id === "scene-10") {
-                    const easterMsg = document.getElementById("easter-msg");
-                    const heartCounter = document.getElementById("heart-counter");
-                    const refreshBtn = document.getElementById("refresh-btn");
-                    
-                    if (easterMsg) easterMsg.classList.add("hidden");
-                    if (heartCounter) heartCounter.classList.add("hidden");
-                    if (refreshBtn) refreshBtn.classList.add("hidden");
-                }
-            });
-            
-            // Hide preloader
-            preloader.classList.add("loaded");
-            
-            // Start from first scene
-            setTimeout(() => {
-                nextScene();
-            }, 300);
-        }, 500);
+            isAnimating = false;
+        }, 1000);
     } else {
-        // Fallback if no preloader
-        currentScene = -1;
-        document.querySelectorAll(".scene").forEach(scene => 
-            scene.classList.remove("active", "night-mode"));
-        nextScene();
+        isAnimating = false;
     }
 }
 
+// Adjust UI based on screen size
+function adjustUIForScreenSize() {
+    const isMobile = window.innerWidth <= 768;
+    const isSmallPhone = window.innerWidth <= 480;
+    
+    // Adjust text sizes
+    document.querySelectorAll('.scene h1').forEach(heading => {
+        heading.style.fontSize = isSmallPhone ? '1.5rem' : (isMobile ? '1.8rem' : '2.2rem');
+    });
+    
+    document.querySelectorAll('.scene p').forEach(paragraph => {
+        paragraph.style.fontSize = isSmallPhone ? '0.9rem' : (isMobile ? '1rem' : '1.2rem');
+    });
+    
+    // Adjust button sizes
+    document.querySelectorAll('.btn-next').forEach(button => {
+        button.style.padding = isSmallPhone ? '8px 16px' : (isMobile ? '10px 20px' : '12px 24px');
+    });
+}
+
+// Optimized typewriter effect
 function typeWriter(text, elementId, options = {}, callback) {
     const {
-        speed = 120,        // Base speed (ms per character)
-        jitter = 0.3,        // Random speed variation (0-1)
-        pauseOnPunctuation = true,  // Longer pauses for punctuation
-        cursorElement = null // Optional cursor element to control
+        speed = 120,              // Base speed (ms per character)
+        jitter = 0.3,             // Random speed variation (0-1)
+        pauseOnPunctuation = true, // Longer pauses for punctuation
+        cursorElement = null,     // Optional cursor element to control
+        batchSize = 1             // Number of characters to add at once (for performance)
     } = options;
 
     let i = 0;
@@ -470,6 +633,11 @@ function typeWriter(text, elementId, options = {}, callback) {
 
     // Clear previous content
     element.innerHTML = "";
+    
+    // Check if we should use requestAnimationFrame for better performance
+    const useRAF = window.innerWidth <= 768;
+    let lastTimestamp = 0;
+    let nextDelay = 0;
 
     // Show cursor if provided
     if (cursorElement) {
@@ -493,13 +661,51 @@ function typeWriter(text, elementId, options = {}, callback) {
         return Math.max(20, delay); // Minimum delay
     }
 
-    function type() {
+    function typeRAF(timestamp) {
+        if (lastTimestamp === 0) {
+            lastTimestamp = timestamp;
+        }
+        
+        const elapsed = timestamp - lastTimestamp;
+        
+        if (elapsed >= nextDelay) {
+            if (i < text.length) {
+                // Process in small batches for better performance
+                const batch = Math.min(batchSize, text.length - i);
+                let batchText = '';
+                
+                for (let j = 0; j < batch; j++) {
+                    batchText += text.charAt(i + j);
+                }
+                
+                element.innerHTML += batchText;
+                i += batch;
+                
+                // Calculate delay for next batch
+                nextDelay = calculateDelay(text.charAt(i - 1));
+                lastTimestamp = timestamp;
+                
+                requestAnimationFrame(typeRAF);
+            } else if (callback) {
+                // Hide cursor when done
+                if (cursorElement) {
+                    cursorElement.style.opacity = '0';
+                    setTimeout(() => cursorElement.style.display = 'none', 500);
+                }
+                callback();
+            }
+        } else {
+            requestAnimationFrame(typeRAF);
+        }
+    }
+
+    function typeTimeout() {
         if (i < text.length) {
             const char = text.charAt(i);
             element.innerHTML += char;
             i++;
             
-            setTimeout(type, calculateDelay(char));
+            setTimeout(typeTimeout, calculateDelay(char));
         } else if (callback) {
             // Hide cursor when done
             if (cursorElement) {
@@ -510,5 +716,159 @@ function typeWriter(text, elementId, options = {}, callback) {
         }
     }
 
-    type();
+    // Use the appropriate method based on device capability
+    if (useRAF) {
+        requestAnimationFrame(typeRAF);
+    } else {
+        typeTimeout();
+    }
 }
+
+// Enhanced restart function
+function restartExperience() {
+    // Reset heart counter
+    heartClicks = 0;
+    
+    // Clean up hearts
+    hearts.forEach(heart => {
+        if (document.body.contains(heart)) {
+            heart.remove();
+        }
+    });
+    hearts.length = 0;
+    activeHearts = 0;
+    
+    // Show preloader briefly for transition
+    const preloader = document.getElementById("preloader");
+    if (preloader) {
+        preloader.style.display = 'flex';
+        preloader.classList.remove("loaded");
+        
+        // Clean up GSAP animations
+        gsap.killTweensOf("*");
+        
+        setTimeout(() => {
+            // Reset scene state
+            currentScene = -1;
+            document.querySelectorAll(".scene").forEach(scene => {
+                scene.classList.remove("active", "night-mode");
+                
+                // Reset any scene-specific states
+                if (scene.id === "scene-10") {
+                    const easterMsg = document.getElementById("easter-msg");
+                    const heartCounter = document.getElementById("heart-counter");
+                    const refreshBtn = document.getElementById("refresh-btn");
+                    
+                    if (easterMsg) easterMsg.classList.add("hidden");
+                    if (heartCounter) heartCounter.classList.add("hidden");
+                    if (refreshBtn) refreshBtn.classList.add("hidden");
+                }
+            });
+            
+            // Reset any open envelopes
+            document.querySelectorAll('.envelope .msg.revealed').forEach(msg => {
+                msg.classList.remove("revealed");
+                msg.closest('.envelope')?.classList.remove('clicked');
+            });
+            
+            // Hide preloader
+            preloader.classList.add("loaded");
+            
+            // Start from first scene
+            setTimeout(() => {
+                nextScene();
+            }, 300);
+        }, 500);
+    } else {
+        // Fallback if no preloader
+        currentScene = -1;
+        document.querySelectorAll(".scene").forEach(scene => 
+            scene.classList.remove("active", "night-mode"));
+        nextScene();
+    }
+}
+
+// Main initialization
+window.onload = () => {
+    // Detect iOS Safari
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+    const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+    
+    if (isIOS && isSafari) {
+        // iOS Safari-specific fixes
+        document.documentElement.style.height = '100%';
+        document.body.style.height = '100%';
+        document.body.style.webkitOverflowScrolling = 'touch';
+        
+        // Fix for iOS Safari scrolling issues
+        document.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+        
+        // Fix for iOS Safari input focus issues
+        document.querySelectorAll('input, textarea').forEach(input => {
+            input.addEventListener('focus', function() {
+                setTimeout(() => {
+                    window.scrollTo(0, 0);
+                }, 50);
+            });
+        });
+    }
+
+    // Handle preloader
+    handlePreloader(() => {
+        // Initialize first scene
+        if (scenes.length > 0 && scenes[currentScene]) {
+            scenes[currentScene].classList.add("active");
+            animateScene(currentScene);
+            setBackgroundFromScene(scenes[currentScene]);
+        } else {
+            console.error("No scenes found or initial scene is missing.");
+        }
+        
+        // Initialize envelope interactions
+        setupEnvelopeInteractions();
+        
+        // Setup other event listeners
+        setupEventListeners();
+        
+        // Begin lazy loading images
+        lazyLoadImages();
+        
+        // Adjust UI based on screen size
+        adjustUIForScreenSize();
+    });
+    
+    // Initialize terminal typewriter effect if present
+    const typewriterElement = document.getElementById("typewriter");
+    if (typewriterElement) {
+        typeWriter(
+            "SYSTEM TERMINAL\n\n" +
+            "Port scanning detected...\n" +
+            "Signal strength: High\n" +
+            "Fragment secured.\n\n" +
+            "Wonder Mamma confirmed.",
+            "typewriter",
+            {
+                speed: window.innerWidth <= 768 ? 80 : 100,
+                jitter: window.innerWidth <= 768 ? 0.2 : 0.4,
+                pauseOnPunctuation: true,
+                batchSize: window.innerWidth <= 480 ? 2 : 1 // Process characters in batches on mobile
+            },
+            () => {
+                // Completion callback
+                console.log("Terminal message complete");
+                
+                // Example GSAP animation (requires GSAP library)
+                if (typeof gsap !== 'undefined') {
+                    gsap.to(".confirmation-badge", {
+                        opacity: 1,
+                        scale: 1.2,
+                        duration: 0.8,
+                        ease: "back.out"
+                    });
+                }
+            }
+        );
+    }
+};
