@@ -22,6 +22,8 @@ function nextScene() {
 
     isAnimating = true;
 
+    heartBurst();
+    
     window.scrollTo({
         top: 0,
         behavior: "smooth"
@@ -118,27 +120,23 @@ let heartClicks = 0;
 let activeHearts = 0;
 const hearts = [];
 
-function getMaxHeartsForDevice() {
-    if (window.innerWidth <= 480) return 4;
-    if (window.innerWidth <= 768) return 7;
-    return 8;
-}
+function getMaxHeartsForDevice() { return 9999; }
 
 function createFloatingHeart() {
     if (activeHearts >= getMaxHeartsForDevice()) return;
-    
+
     const heart = document.createElement("div");
     heart.innerHTML = '❤️';
     heart.style.position = 'fixed';
     heart.style.fontSize = '32px';
     heart.style.cursor = 'pointer';
-    
+
     const startX = gsap.utils.random(20, 80);
     const startY = gsap.utils.random(50, 80);
-    
+
     heart.style.left = `${startX}%`;
     heart.style.top = `${startY}%`;
-    
+
     document.getElementById("hearts-container").appendChild(heart);
     activeHearts++;
     const velocityX = gsap.utils.random(-2, 2);
@@ -164,7 +162,7 @@ function createFloatingHeart() {
             activeHearts--;
         }
     });
-   heart.addEventListener('click', () => {
+    heart.addEventListener('click', () => {
         gsap.to(heart, {
             scale: 2,
             opacity: 0,
@@ -179,11 +177,12 @@ function createFloatingHeart() {
 }
 
 function heartBurst() {
+    if (document.hidden) return;
     if (!document.hasFocus() || document.hidden) return;
 
-    const burstCount = window.innerWidth <= 768 ? 2 : 3; 
+    const burstCount = window.innerWidth <= 768 ? 2 : 3;
     const baseDelay = 100;
-    
+
     for (let i = 0; i < burstCount; i++) {
         setTimeout(() => {
             createFloatingHeart();
@@ -422,8 +421,6 @@ function setupEnvelopeInteractions() {
         });
 
         envelope.addEventListener("click", function (e) {
-            e.stopPropagation();
-
             const msg = this.querySelector(".msg");
             if (msg) {
                 const isRevealed = msg.classList.contains("revealed");
@@ -511,10 +508,8 @@ function setupEventListeners() {
         resizeObserver.observe(document.getElementById('tsparticles'));
     }
 
-        const handleClick = throttle(function(e) {
-        if(!e.target.closest('.envelope')) {
-            heartBurst();
-        }
+    const handleClick = throttle(function (e) {
+        heartBurst()
     }, 300);
 
     document.addEventListener('click', handleClick);
