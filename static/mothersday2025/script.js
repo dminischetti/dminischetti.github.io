@@ -21,6 +21,7 @@ function throttle(callback, limit) {
 }
 
 function nextScene() {
+    if (isAnimating || currentScene >= scenes.length - 1) return; // Prevent invalid jumps
     if (isAnimating) return; // Prevent rapid multi-clicks
     isAnimating = true;
     
@@ -156,6 +157,7 @@ function createFloatingHeart() {
     activeHearts++;
     
     const heart = document.createElement("span");
+    heart.dataset.removed = "false";
     heart.classList.add("heart");
     heart.innerText = "💗"; 
     
@@ -186,25 +188,22 @@ function createFloatingHeart() {
     heart.style.padding = isMobile ? "12px" : "10px";
 
     // Use passive event listeners for better performance
-    heart.addEventListener("click", () => {
-        heart.remove();
-        activeHearts--;
-        heartClicks++;
-        
-        // Remove from hearts array
-        const index = hearts.indexOf(heart);
-        if (index > -1) {
-            hearts.splice(index, 1);
-        }
-        
-        // Check if heart counter should be displayed
-        if (heartClicks >= 3) {
-            const heartCounterMsg = document.getElementById("heart-counter");
-            if (heartCounterMsg) {
-                heartCounterMsg.classList.remove("hidden");
-            }
-        }
-    }, { passive: true });
+heart.addEventListener("click", () => {
+    if (heart.dataset.removed === "true") return;
+    heart.dataset.removed = "true";
+    heart.remove();
+    activeHearts--;
+    heartClicks++;
+    
+    const index = hearts.indexOf(heart);
+    if (index > -1) hearts.splice(index, 1);
+
+    if (heartClicks >= 3) {
+        const heartCounterMsg = document.getElementById("heart-counter");
+        if (heartCounterMsg) heartCounterMsg.classList.remove("hidden");
+    }
+}, { passive: true });
+
 
     // Animate using GSAP for better performance
     gsap.to(heart, {
@@ -212,17 +211,17 @@ function createFloatingHeart() {
         opacity: 0,
         duration: 4,
         ease: "power1.out",
-        onComplete: () => {
-            if (document.body.contains(heart)) {
-                heart.remove();
-                // Remove from hearts array
-                const index = hearts.indexOf(heart);
-                if (index > -1) {
-                    hearts.splice(index, 1);
-                }
-                activeHearts--;
-            }
-        }
+onComplete: () => {
+    if (heart.dataset.removed === "true") return;
+    heart.dataset.removed = "true";
+
+    if (document.body.contains(heart)) {
+        heart.remove();
+        const index = hearts.indexOf(heart);
+        if (index > -1) hearts.splice(index, 1);
+        activeHearts--;
+    }
+}
     });
 }
 
@@ -749,7 +748,7 @@ function restartExperience() {
         
         setTimeout(() => {
             // Reset scene state
-            currentScene = -1;
+            currentScene = 0;
             document.querySelectorAll(".scene").forEach(scene => {
                 scene.classList.remove("active", "night-mode");
                 
@@ -776,7 +775,11 @@ function restartExperience() {
             
             // Start from first scene
             setTimeout(() => {
-                nextScene();
+currentScene = 0;
+const firstScene = scenes[currentScene];
+firstScene.classList.add("active");
+animateScene(currentScene);
+setBackgroundFromScene(firstScene);
             }, 300);
         }, 500);
     } else {
@@ -784,7 +787,12 @@ function restartExperience() {
         currentScene = -1;
         document.querySelectorAll(".scene").forEach(scene => 
             scene.classList.remove("active", "night-mode"));
-        nextScene();
+currentScene = 0;
+const firstScene = scenes[currentScene];
+firstScene.classList.add("active");
+animateScene(currentScene);
+setBackgroundFromScene(firstScene);
+
     }
 }
 
