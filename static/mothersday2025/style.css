@@ -62,8 +62,8 @@ body {
 .scene {
     position: fixed;
     inset: 0;
-    width: 100vw;
-    height: 100%;
+    /* width: 100vw;
+    height: 100%; */
     padding: 1.5rem;
     display: none;
     flex-direction: column;
@@ -884,4 +884,19 @@ ul li::before {
 
 @keyframes fadeIn {
     to { opacity: 1; }
+}
+
+/* give the body a little bottom padding behind the home bar */
+body {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* your scene-2 needs extra bottom room beyond the normal 80px or 160px */
+.scene.static-button {
+  padding-bottom: calc(160px + env(safe-area-inset-bottom));
+}
+
+/* any fixed button at the very bottom also needs to lift up */
+.btn-next.fixed {
+  bottom: calc(30px + env(safe-area-inset-bottom));
 }
