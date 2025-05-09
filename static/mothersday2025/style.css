@@ -71,8 +71,6 @@ body {
 .scene {
     position: fixed;
     inset: 0;
-    /* width: 100vw;
-    height: 100%; */
     padding: 1.5rem;
     display: none;
     flex-direction: column;
@@ -100,7 +98,6 @@ body {
 
 .scene[data-bg="stars"] {
     z-index: 0;
-    /* Let particles show through */
     background: transparent !important;
 }
 
@@ -279,7 +276,6 @@ ul li::before {
     transform: translateX(-50%);
     animation: pulse 2s infinite;
     z-index: 2;
-    /* Always stay above everything */
 }
 
 .btn-next {
@@ -413,7 +409,6 @@ ul li::before {
     height: 100%;
     pointer-events: none;
     z-index: 1;
-    /* Between particles and content */
 }
 
 .classified-stamp {
@@ -466,17 +461,11 @@ ul li::before {
     background: rgba(14, 11, 22, 0.85);
     backdrop-filter: blur(5px);
     position: relative;
-    /* Changed from fixed */
     height: auto;
-    /* Allow content to expand */
     min-height: 100vh;
-    /* But still fill viewport */
     overflow-y: auto;
-    /* Enable scrolling */
     -webkit-overflow-scrolling: touch;
-    /* Smooth iOS scrolling */
     padding-bottom: 160px;
-    /* Space for button */
     touch-action: pan-y;
 }
 
@@ -766,7 +755,6 @@ ul li::before {
     }
 }
 
-/* Cinematic Credits Styles */
 #scene-9 {
     background: linear-gradient(to bottom, #000000 0%, #0e0b16 100%);
     overflow: hidden;
@@ -866,7 +854,6 @@ ul li::before {
     }
 }
 
-/* Add star twinkling effect */
 #scene-9::before {
     content: "";
     position: absolute;
@@ -894,7 +881,6 @@ ul li::before {
     }
 }
 
-/* Terminal Styling */
 .terminal-container {
     width: 90%;
     max-width: 500px;
@@ -991,17 +977,14 @@ ul li::before {
     }
 }
 
-/* give the body a little bottom padding behind the home bar */
 body {
     padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* your scene-2 needs extra bottom room beyond the normal 80px or 160px */
 .scene.static-button {
     padding-bottom: calc(160px + env(safe-area-inset-bottom));
 }
 
-/* any fixed button at the very bottom also needs to lift up */
 .btn-next.fixed {
     bottom: calc(30px + env(safe-area-inset-bottom));
 }
@@ -1086,27 +1069,20 @@ body {
 
 #scene-2 .btn-next.static {
     position: sticky;
-    /* Changed from absolute */
     bottom: 30px;
     left: 0;
     right: 0;
     transform: none;
-    /* Remove translateX */
     margin: 2rem auto 0 auto;
     width: calc(100% - 3rem);
-    /* Account for padding */
 }
 
-/* Revert the general .scene.static-button padding */
 .scene.static-button {
     padding-bottom: 80px;
-    /* Reset to the original value */
 }
 
-/* Adjust the fixed button bottom position generally */
 .btn-next.fixed {
     bottom: 30px;
-    /* Keep this consistent for other fixed buttons */
     left: 50%;
     transform: translateX(-50%);
     z-index: 10;
@@ -1115,7 +1091,6 @@ body {
 .heart {
     position: fixed;
     bottom: -40px;
-    /* starts off-screen */
     left: 50%;
     transform: translateX(-50%) scale(1);
     font-size: 1.5rem;
@@ -1138,10 +1113,7 @@ body {
     }
 }
 
-/* In your CSS file */
 #scene-10 .signature {
-    font-size: 2.5rem;
-    /* Increased from 1.8rem */
     line-height: 1.2;
     margin-top: 2rem;
     text-shadow: 0 0 15px rgba(255, 126, 201, 0.5);
@@ -1152,7 +1124,6 @@ body {
     display: inline-block;
 }
 
-/* Add this animation */
 @keyframes gentle-pulse {
 
     0%,
@@ -1165,7 +1136,6 @@ body {
     }
 }
 
-/* Mobile adjustment */
 @media (max-width: 768px) {
     #scene-10 .signature {
         font-size: 2rem;
