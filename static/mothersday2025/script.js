@@ -21,8 +21,8 @@ function throttle(callback, limit) {
 }
 
 function nextScene() {
-    if (isAnimating || currentScene >= scenes.length - 1) return; // Prevent invalid jumps
-    if (isAnimating) return; // Prevent rapid multi-clicks
+if (isAnimating || currentScene >= scenes.length - 1) return;
+
     isAnimating = true;
     
     // Scroll to top before changing scenes

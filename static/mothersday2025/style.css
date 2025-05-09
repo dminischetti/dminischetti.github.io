@@ -586,6 +586,13 @@ ul li::before {
     text-align: center;
     opacity: 0.8;
 }
+#scene-2 {
+  position: relative;
+  min-height: 100vh;
+  overflow-y: auto;
+  padding-top: 2rem;
+  padding-bottom: calc(160px + env(safe-area-inset-bottom));
+}
 
 #scene-6 {
     background: linear-gradient(135deg, #0e0b16 0%, #1a0b2e 100%);
