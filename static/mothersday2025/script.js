@@ -130,15 +130,12 @@ function createFloatingHeart(clickX, clickY) {
     heart.style.position = 'fixed';
     heart.style.fontSize = '32px';
     heart.style.cursor = 'pointer';
-    
-    // Set initial position to click coordinates
     heart.style.left = `${clickX}px`;
     heart.style.top = `${clickY}px`;
     
     document.getElementById("hearts-container").appendChild(heart);
     activeHearts++;
 
-    // Randomize movement parameters
     const velocityX = gsap.utils.random(-2, 2);
     let velocityY = gsap.utils.random(-8, -12);
     const gravity = 0.5;
@@ -163,7 +160,6 @@ function createFloatingHeart(clickX, clickY) {
         }
     });
 
-    // Keep existing click interaction
     heart.addEventListener('click', () => {
         gsap.to(heart, {
             scale: 2,
@@ -181,11 +177,9 @@ function createFloatingHeart(clickX, clickY) {
 function heartBurst(e) {
     if (!document.hasFocus() || document.hidden) return;
 
-    // Default to center position if no event
     let clickX = window.innerWidth / 2;
     let clickY = window.innerHeight / 2;
 
-    // If event exists, get coordinates
     if (e) {
         if (e.type === 'touchend' && e.changedTouches) {
             const touch = e.changedTouches[0];
@@ -251,13 +245,13 @@ function setBackgroundFromScene(scene) {
 
     switch (bg) {
         case "stars":
-            configFile = isLowPerformance ? "assets/particles-stars-light.json" : "assets/particles-stars.json";
+            configFile = "assets/particles-stars.json";
             break;
         case "petals":
-            configFile = isLowPerformance ? "assets/particles-petals-light.json" : "assets/particles-petals.json";
+            configFile = "assets/particles-petals.json";
             break;
         case "glow":
-            configFile = isLowPerformance ? "assets/particles-goldglow-light.json" : "assets/particles-goldglow.json";
+            configFile = "assets/particles-goldglow.json";
             break;
         default:
             configFile = "";
@@ -508,9 +502,9 @@ function setupEventListeners() {
 
     document.addEventListener('visibilitychange', function () {
         if (document.hidden) {
-            gsap.globalTimeline.pause(); // Correct method
+            gsap.globalTimeline.pause();
         } else {
-            gsap.globalTimeline.resume(); // Correct method
+            gsap.globalTimeline.resume();
         }
     });
 
@@ -524,12 +518,11 @@ function setupEventListeners() {
     }
 
     const handleClick = throttle(function(e) {
-        heartBurst(e); // Pass the event object
+        heartBurst(e);
     }, 300);
 
-    // Add proper touch listener
     document.addEventListener('click', handleClick);
-    document.addEventListener('touchend', handleClick); // Not touchstart
+    document.addEventListener('touchend', handleClick);
 }
 
 function goToPreviousScene() {
