@@ -75,7 +75,7 @@ function animateScene(index) {
     }
     
     // Special handling for the credits scene button z-index
-    if (scene.id === "scene-9") {
+    if (scene.id === "scene-credits") {
         const button = scene.querySelector(".btn-next");
         if (button) {
             gsap.set(button, { zIndex: 100 }); // Ensure button is above credits animation
@@ -113,7 +113,7 @@ function createFloatingHeart() {
     heart.innerText = "💗"; 
     
     // Randomize position but keep hearts more centered on mobile
-    heart.style.left = `${20 + Math.random() * 60}vw`; // Keep within 20-80% of viewport
+    heart.style.left = `${20 + Math.random() * 60}vw`; // Template string corretta
     heart.style.bottom = "-20px"; // Start from below the viewport
     
     const heartsContainer = document.getElementById("hearts-container");
@@ -381,6 +381,81 @@ window.onload = () => {
     document.addEventListener('touchmove', function() {}, {passive: true});
 };
 
+// Uso d'esempio corretto con l'id "typewriter" (invece di "terminal-output")
+typeWriter(
+    "SYSTEM TERMINAL\n\n" +
+    "Port scanning detected...\n" +
+    "Signal strength: High\n" +
+    "Fragment secured.\n\n" +
+    "Silent Hero confirmed.",
+    "typewriter",
+    {
+        speed: 100,
+        jitter: 0.4,
+        pauseOnPunctuation: true
+    },
+    () => {
+        // Completion callback
+        console.log("Terminal message complete");
+        
+        // Example GSAP animation (requires GSAP library)
+        if (typeof gsap !== 'undefined') {
+            gsap.to(".confirmation-badge", {
+                opacity: 1,
+                scale: 1.2,
+                duration: 0.8,
+                ease: "back.out"
+            });
+        }
+    }
+);
+
+// Enhanced restart function
+function restartExperience() {
+    // Reset heart counter
+    heartClicks = 0;
+    
+    // Show preloader briefly for transition
+    const preloader = document.getElementById("preloader");
+    if (preloader) {
+        preloader.style.display = 'flex';
+        preloader.classList.remove("loaded");
+        
+        setTimeout(() => {
+            // Reset scene state
+            currentScene = -1;
+            document.querySelectorAll(".scene").forEach(scene => {
+                scene.classList.remove("active", "night-mode");
+                
+                // Reset any scene-specific states
+                if (scene.id === "scene-10") {
+                    const easterMsg = document.getElementById("easter-msg");
+                    const heartCounter = document.getElementById("heart-counter");
+                    const refreshBtn = document.getElementById("refresh-btn");
+                    
+                    if (easterMsg) easterMsg.classList.add("hidden");
+                    if (heartCounter) heartCounter.classList.add("hidden");
+                    if (refreshBtn) refreshBtn.classList.add("hidden");
+                }
+            });
+            
+            // Hide preloader
+            preloader.classList.add("loaded");
+            
+            // Start from first scene
+            setTimeout(() => {
+                nextScene();
+            }, 300);
+        }, 500);
+    } else {
+        // Fallback if no preloader
+        currentScene = -1;
+        document.querySelectorAll(".scene").forEach(scene => 
+            scene.classList.remove("active", "night-mode"));
+        nextScene();
+    }
+}
+
 function typeWriter(text, elementId, options = {}, callback) {
     const {
         speed = 120,        // Base speed (ms per character)
@@ -436,79 +511,4 @@ function typeWriter(text, elementId, options = {}, callback) {
     }
 
     type();
-}
-
-// Usage example with the "Silent Hero" message
-typeWriter(
-    "SYSTEM TERMINAL\n\n" +
-    "Port scanning detected...\n" +
-    "Signal strength: High\n" +
-    "Fragment secured.\n\n" +
-    "Silent Hero confirmed.",
-    "terminal-output",
-    {
-        speed: 100,
-        jitter: 0.4,
-        pauseOnPunctuation: true
-    },
-    () => {
-        // Completion callback
-        console.log("Terminal message complete");
-        
-        // Example GSAP animation (requires GSAP library)
-        if (typeof gsap !== 'undefined') {
-            gsap.to(".confirmation-badge", {
-                opacity: 1,
-                scale: 1.2,
-                duration: 0.8,
-                ease: "back.out"
-            });
-        }
-    }
-);
-  
-// Enhanced restart function
-function restartExperience() {
-    // Reset heart counter
-    heartClicks = 0;
-    
-    // Show preloader briefly for transition
-    const preloader = document.getElementById("preloader");
-    if (preloader) {
-        preloader.style.display = 'flex';
-        preloader.classList.remove("loaded");
-        
-        setTimeout(() => {
-            // Reset scene state
-            currentScene = -1;
-            document.querySelectorAll(".scene").forEach(scene => {
-                scene.classList.remove("active", "night-mode");
-                
-                // Reset any scene-specific states
-                if (scene.id === "scene-10") {
-                    const easterMsg = document.getElementById("easter-msg");
-                    const heartCounter = document.getElementById("heart-counter");
-                    const refreshBtn = document.getElementById("refresh-btn");
-                    
-                    if (easterMsg) easterMsg.classList.add("hidden");
-                    if (heartCounter) heartCounter.classList.add("hidden");
-                    if (refreshBtn) refreshBtn.classList.add("hidden");
-                }
-            });
-            
-            // Hide preloader
-            preloader.classList.add("loaded");
-            
-            // Start from first scene
-            setTimeout(() => {
-                nextScene();
-            }, 300);
-        }, 500);
-    } else {
-        // Fallback if no preloader
-        currentScene = -1;
-        document.querySelectorAll(".scene").forEach(scene => 
-            scene.classList.remove("active", "night-mode"));
-        nextScene();
-    }
 }
