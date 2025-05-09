@@ -324,7 +324,6 @@ ul li::before {
 }
 
 .btn-start:hover {
-    transform: translateY(-3px);
     box-shadow: 
       0 0 15px rgba(255, 126, 201, 0.8),
       0 0 30px rgba(255, 126, 201, 0.4);

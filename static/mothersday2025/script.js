@@ -57,7 +57,7 @@ function animateScene(index) {
     // Type writer effect for scene 1
     if (scene.id === "scene-1") {
         typeWriter(
-            "Protocol B engaged…\nAccess granted: Silent Hero confirmed.",
+            "Protocol B engaged…\nAccess granted: Wonder Mamma confirmed.",
             "typewriter"
         );
     }
