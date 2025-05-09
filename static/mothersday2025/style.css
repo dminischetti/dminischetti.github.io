@@ -24,34 +24,39 @@ body {
 }
 
 #preloader {
-  position: fixed;
-  z-index: 9999;
-  width: 100vw;
-  height: 100vh;
-  background: #0e0b16;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: opacity 1s ease;
+    position: fixed;
+    z-index: 9999;
+    width: 100vw;
+    height: 100vh;
+    background: #0e0b16;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease;
 }
 
 #preloader.loaded {
-  opacity: 0;
-  pointer-events: none;
+    opacity: 0;
+    pointer-events: none;
 }
 
 .loader-circle {
-  width: 40px;
-  height: 40px;
-  border: 4px solid var(--accent);
-  border-top: 4px solid transparent;
-  border-radius: 50%;
-  animation: spin 1.2s linear infinite;
+    width: 40px;
+    height: 40px;
+    border: 4px solid var(--accent);
+    border-top: 4px solid transparent;
+    border-radius: 50%;
+    animation: spin 1.2s linear infinite;
 }
 
 @keyframes spin {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 #tsparticles {
@@ -94,11 +99,13 @@ body {
 }
 
 .scene[data-bg="stars"] {
-    z-index: 0; /* Let particles show through */
+    z-index: 0;
+    /* Let particles show through */
     background: transparent !important;
 }
 
-h1, h2 {
+h1,
+h2 {
     font-family: 'Playfair Display', serif;
     color: var(--accent);
     margin-bottom: 1rem;
@@ -262,16 +269,17 @@ ul li::before {
     padding: 1rem 2.5rem;
     border-radius: 50px;
     cursor: pointer;
-    box-shadow: 
-      0 0 10px rgba(255, 126, 201, 0.6),
-      0 0 20px rgba(255, 126, 201, 0.3);
+    box-shadow:
+        0 0 10px rgba(255, 126, 201, 0.6),
+        0 0 20px rgba(255, 126, 201, 0.3);
     transition: all 0.3s ease;
     position: fixed;
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
     animation: pulse 2s infinite;
-    z-index: 2; /* Always stay above everything */
+    z-index: 2;
+    /* Always stay above everything */
 }
 
 .btn-next {
@@ -334,9 +342,9 @@ ul li::before {
 }
 
 .btn-start:hover {
-    box-shadow: 
-      0 0 15px rgba(255, 126, 201, 0.8),
-      0 0 30px rgba(255, 126, 201, 0.4);
+    box-shadow:
+        0 0 15px rgba(255, 126, 201, 0.8),
+        0 0 30px rgba(255, 126, 201, 0.4);
 }
 
 #refresh-btn {
@@ -404,7 +412,8 @@ ul li::before {
     width: 100%;
     height: 100%;
     pointer-events: none;
-    z-index: 1; /* Between particles and content */
+    z-index: 1;
+    /* Between particles and content */
 }
 
 .classified-stamp {
@@ -454,15 +463,21 @@ ul li::before {
 }
 
 #scene-2 {
-  background: rgba(14, 11, 22, 0.85);
-  backdrop-filter: blur(5px);
-  position: relative; /* Changed from fixed */
-  height: auto; /* Allow content to expand */
-  min-height: 100vh; /* But still fill viewport */
-  overflow-y: auto; /* Enable scrolling */
-  -webkit-overflow-scrolling: touch; /* Smooth iOS scrolling */
-  padding-bottom: 160px; /* Space for button */
-  touch-action: pan-y;
+    background: rgba(14, 11, 22, 0.85);
+    backdrop-filter: blur(5px);
+    position: relative;
+    /* Changed from fixed */
+    height: auto;
+    /* Allow content to expand */
+    min-height: 100vh;
+    /* But still fill viewport */
+    overflow-y: auto;
+    /* Enable scrolling */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth iOS scrolling */
+    padding-bottom: 160px;
+    /* Space for button */
+    touch-action: pan-y;
 }
 
 #scene-2 h2 {
@@ -524,10 +539,10 @@ ul li::before {
     background: linear-gradient(145deg, rgba(33, 33, 45, 0.8), rgba(20, 18, 31, 0.9));
     border-radius: 12px;
     border: 1px solid rgba(255, 126, 201, 0.2);
-    box-shadow: 
-      0 4px 15px rgba(0, 0, 0, 0.3),
-      0 0 0 1px rgba(255, 126, 201, 0.1),
-      0 0 20px rgba(255, 126, 201, 0.05) inset;
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 126, 201, 0.1),
+        0 0 20px rgba(255, 126, 201, 0.05) inset;
 }
 
 .b-abilities.mobile li::before {
@@ -618,7 +633,8 @@ ul li::before {
     margin: 1.5rem auto;
 }
 
-.cause, .effect {
+.cause,
+.effect {
     padding: 0.8rem;
     font-size: 0.95rem;
     line-height: 1.4;
@@ -655,44 +671,99 @@ ul li::before {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 @keyframes pulse {
-    0% { box-shadow: 0 0 10px rgba(255, 126, 201, 0.6); }
-    50% { box-shadow: 0 0 20px rgba(255, 126, 201, 0.9); }
-    100% { box-shadow: 0 0 10px rgba(255, 126, 201, 0.6); }
+    0% {
+        box-shadow: 0 0 10px rgba(255, 126, 201, 0.6);
+    }
+
+    50% {
+        box-shadow: 0 0 20px rgba(255, 126, 201, 0.9);
+    }
+
+    100% {
+        box-shadow: 0 0 10px rgba(255, 126, 201, 0.6);
+    }
 }
 
 @keyframes scrollUp {
-    0% { transform: translateY(100%); }
-    100% { transform: translateY(-120%); }
+    0% {
+        transform: translateY(100%);
+    }
+
+    100% {
+        transform: translateY(-120%);
+    }
 }
 
 @keyframes glowFade {
-    0%, 100% { opacity: 0.5; }
-    50% { opacity: 1; }
+
+    0%,
+    100% {
+        opacity: 0.5;
+    }
+
+    50% {
+        opacity: 1;
+    }
 }
 
 @keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 @keyframes missionAppear {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes fadeSlide {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes pulseStar {
-    0%, 100% { transform: scale(1); opacity: 0.7; }
-    50% { transform: scale(1.3); opacity: 1; }
+
+    0%,
+    100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    50% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
 }
 
 /* Cinematic Credits Styles */
@@ -784,9 +855,11 @@ ul li::before {
         top: 100%;
         transform: translateX(-50%) rotateX(20deg);
     }
+
     10% {
         transform: translateX(-50%) rotateX(20deg);
     }
+
     100% {
         top: -300%;
         transform: translateX(-50%) rotateX(20deg);
@@ -802,18 +875,23 @@ ul li::before {
     right: 0;
     bottom: 0;
     background:
-        radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 70% 30%, var(--accent), rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 30% 70%, var(--accent), rgba(0,0,0,0));
+        radial-gradient(2px 2px at 20px 30px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 130px 80px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 70% 30%, var(--accent), rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 30% 70%, var(--accent), rgba(0, 0, 0, 0));
     animation: twinkle 3s infinite alternate;
 }
 
 @keyframes twinkle {
-    0% { opacity: 0.3; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 0.3;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 /* Terminal Styling */
@@ -847,9 +925,17 @@ ul li::before {
     border-radius: 50%;
 }
 
-.terminal-btn.red { background: #ff5f56; }
-.terminal-btn.yellow { background: #ffbd2e; }
-.terminal-btn.green { background: #27c93f; }
+.terminal-btn.red {
+    background: #ff5f56;
+}
+
+.terminal-btn.yellow {
+    background: #ffbd2e;
+}
+
+.terminal-btn.green {
+    background: #27c93f;
+}
 
 .terminal-title {
     flex-grow: 1;
@@ -900,152 +986,162 @@ ul li::before {
 }
 
 @keyframes fadeIn {
-    to { opacity: 1; }
+    to {
+        opacity: 1;
+    }
 }
 
 /* give the body a little bottom padding behind the home bar */
 body {
-  padding-bottom: env(safe-area-inset-bottom);
+    padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* your scene-2 needs extra bottom room beyond the normal 80px or 160px */
 .scene.static-button {
-  padding-bottom: calc(160px + env(safe-area-inset-bottom));
+    padding-bottom: calc(160px + env(safe-area-inset-bottom));
 }
 
 /* any fixed button at the very bottom also needs to lift up */
 .btn-next.fixed {
-  bottom: calc(30px + env(safe-area-inset-bottom));
+    bottom: calc(30px + env(safe-area-inset-bottom));
 }
 
 #scene-2 h2 {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-  color: #ff9ad3;
-  text-shadow: 0 0 12px rgba(255, 154, 211, 0.4);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #ff9ad3;
+    text-shadow: 0 0 12px rgba(255, 154, 211, 0.4);
 }
 
 #scene-2 p {
-  margin: 0.5rem 0;
-  font-size: 1.1rem;
+    margin: 0.5rem 0;
+    font-size: 1.1rem;
 }
 
 #scene-2 p:first-of-type {
-  font-family: 'Montserrat', sans-serif;
-  font-weight: 300;
-  font-size: 1.2rem;
-  color: #e2d1f9;
-  margin-bottom: 0.5rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    font-size: 1.2rem;
+    color: #e2d1f9;
+    margin-bottom: 0.5rem;
 }
 
 #scene-2 p:nth-of-type(2) {
-  font-family: 'Courier New', monospace;
-  color: #ff9ad3;
-  background: rgba(255, 126, 201, 0.1);
-  padding: 0.5rem 1rem;
-  border-radius: 20px;
-  display: inline-block;
-  border: 1px dashed rgba(255, 126, 201, 0.4);
+    font-family: 'Courier New', monospace;
+    color: #ff9ad3;
+    background: rgba(255, 126, 201, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    display: inline-block;
+    border: 1px dashed rgba(255, 126, 201, 0.4);
 }
 
 .b-abilities.mobile {
-  list-style: none;
-  padding: 0;
-  margin: 1rem auto;
-  max-width: 330px;
-  font-size: 0.95rem;
-  line-height: 1.4;
-  color: var(--text);
-  text-align: left;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.8rem;
+    list-style: none;
+    padding: 0;
+    margin: 1rem auto;
+    max-width: 330px;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: var(--text);
+    text-align: left;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0.8rem;
 }
 
 .b-abilities.mobile li {
-  position: relative;
-  margin-bottom: 0.8rem;
-  padding: 0.8rem;
-  background: linear-gradient(145deg, rgba(33, 33, 45, 0.8), rgba(20, 18, 31, 0.9));
-  border-radius: 12px;
-  border: 1px solid rgba(255, 126, 201, 0.2);
-  box-shadow:
-    0 4px 15px rgba(0, 0, 0, 0.3),
-    0 0 0 1px rgba(255, 126, 201, 0.1),
-    0 0 20px rgba(255, 126, 201, 0.05) inset;
+    position: relative;
+    margin-bottom: 0.8rem;
+    padding: 0.8rem;
+    background: linear-gradient(145deg, rgba(33, 33, 45, 0.8), rgba(20, 18, 31, 0.9));
+    border-radius: 12px;
+    border: 1px solid rgba(255, 126, 201, 0.2);
+    box-shadow:
+        0 4px 15px rgba(0, 0, 0, 0.3),
+        0 0 0 1px rgba(255, 126, 201, 0.1),
+        0 0 20px rgba(255, 126, 201, 0.05) inset;
 }
 
 .b-abilities.mobile li::before {
-  content: "✦";
-  position: absolute;
-  left: 0.8rem;
-  top: 1rem;
-  color: #ff9ad3;
-  font-size: 1.1rem;
+    content: "✦";
+    position: absolute;
+    left: 0.8rem;
+    top: 1rem;
+    color: #ff9ad3;
+    font-size: 1.1rem;
 }
 
 .b-abilities.mobile strong {
-  color: var(--accent);
-  display: inline-block;
-  margin-bottom: 0.2rem;
-  font-size: 1.05rem;
-  padding-left: 1.6rem;
+    color: var(--accent);
+    display: inline-block;
+    margin-bottom: 0.2rem;
+    font-size: 1.05rem;
+    padding-left: 1.6rem;
 }
 
 .b-abilities.mobile li br {
-  display: none;
+    display: none;
 }
 
 #scene-2 .btn-next.static {
-  position: sticky; /* Changed from absolute */
-  bottom: 30px;
-  left: 0;
-  right: 0;
-  transform: none; /* Remove translateX */
-  margin: 2rem auto 0 auto;
-  width: calc(100% - 3rem); /* Account for padding */
+    position: sticky;
+    /* Changed from absolute */
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    transform: none;
+    /* Remove translateX */
+    margin: 2rem auto 0 auto;
+    width: calc(100% - 3rem);
+    /* Account for padding */
 }
 
 /* Revert the general .scene.static-button padding */
 .scene.static-button {
-  padding-bottom: 80px; /* Reset to the original value */
+    padding-bottom: 80px;
+    /* Reset to the original value */
 }
 
 /* Adjust the fixed button bottom position generally */
 .btn-next.fixed {
-  bottom: 30px; /* Keep this consistent for other fixed buttons */
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 10;
+    bottom: 30px;
+    /* Keep this consistent for other fixed buttons */
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
 }
 
 .heart {
-  position: fixed;
-  bottom: -40px; /* starts off-screen */
-  left: 50%;
-  transform: translateX(-50%) scale(1);
-  font-size: 1.5rem;
-  color: var(--accent);
-  animation: floatUp 5s linear forwards;
-  pointer-events: auto;
-  cursor: pointer;
-  z-index: 99;
+    position: fixed;
+    bottom: -40px;
+    /* starts off-screen */
+    left: 50%;
+    transform: translateX(-50%) scale(1);
+    font-size: 1.5rem;
+    color: var(--accent);
+    animation: floatUp 5s linear forwards;
+    pointer-events: auto;
+    cursor: pointer;
+    z-index: 99;
 }
 
 @keyframes floatUp {
-  0% {
-    transform: translateY(0) scale(1);
-    opacity: 1;
-  }
-  100% {
-    transform: translateY(-150vh) scale(1.2);
-    opacity: 0;
-  }
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-150vh) scale(1.2);
+        opacity: 0;
+    }
 }
 
 /* In your CSS file */
 #scene-10 .signature {
-    font-size: 2.5rem; /* Increased from 1.8rem */
+    font-size: 2.5rem;
+    /* Increased from 1.8rem */
     line-height: 1.2;
     margin-top: 2rem;
     text-shadow: 0 0 15px rgba(255, 126, 201, 0.5);
@@ -1058,8 +1154,15 @@ body {
 
 /* Add this animation */
 @keyframes gentle-pulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.05); }
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.05);
+    }
 }
 
 /* Mobile adjustment */
@@ -1070,52 +1173,108 @@ body {
     }
 }
 
-  .mission-entry:nth-child(1) { animation-delay: 0.1s; }
-  .mission-entry:nth-child(2) { animation-delay: 0.3s; }
-  .mission-entry:nth-child(3) { animation-delay: 0.5s; }
-  .mission-entry:nth-child(4) { animation-delay: 0.7s; }
-  .mission-entry:nth-child(5) { animation-delay: 0.9s; }
-  .mission-entry:nth-child(6) { animation-delay: 1.1s; }
-  .mission-entry:nth-child(7) { animation-delay: 1.3s; }
-  .mission-entry:nth-child(8) { animation-delay: 1.5s; }
-  .mission-entry:nth-child(9) { animation-delay: 1.7s; }
-  
-  .cause { animation-delay: 0.1s; }
-  .arrow { animation-delay: 0.2s; }
-  .effect { animation-delay: 0.3s; }
-  .cause:nth-child(4) { animation-delay: 0.4s; }
-  .arrow:nth-child(5) { animation-delay: 0.5s; }
-  .effect:nth-child(6) { animation-delay: 0.6s; }
-  
-  #scene-9::before {
+.mission-entry:nth-child(1) {
+    animation-delay: 0.1s;
+}
+
+.mission-entry:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.mission-entry:nth-child(3) {
+    animation-delay: 0.5s;
+}
+
+.mission-entry:nth-child(4) {
+    animation-delay: 0.7s;
+}
+
+.mission-entry:nth-child(5) {
+    animation-delay: 0.9s;
+}
+
+.mission-entry:nth-child(6) {
+    animation-delay: 1.1s;
+}
+
+.mission-entry:nth-child(7) {
+    animation-delay: 1.3s;
+}
+
+.mission-entry:nth-child(8) {
+    animation-delay: 1.5s;
+}
+
+.mission-entry:nth-child(9) {
+    animation-delay: 1.7s;
+}
+
+.cause {
+    animation-delay: 0.1s;
+}
+
+.arrow {
+    animation-delay: 0.2s;
+}
+
+.effect {
+    animation-delay: 0.3s;
+}
+
+.cause:nth-child(4) {
+    animation-delay: 0.4s;
+}
+
+.arrow:nth-child(5) {
+    animation-delay: 0.5s;
+}
+
+.effect:nth-child(6) {
+    animation-delay: 0.6s;
+}
+
+#scene-9::before {
     content: "";
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     bottom: 0;
-    background: 
-        radial-gradient(2px 2px at 20px 30px, #fff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 130px 80px, #fff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 70% 30%, var(--accent), rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 30% 70%, var(--accent), rgba(0,0,0,0));
+    background:
+        radial-gradient(2px 2px at 20px 30px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 130px 80px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 70% 30%, var(--accent), rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 30% 70%, var(--accent), rgba(0, 0, 0, 0));
     animation: twinkle 3s infinite alternate;
 }
 
 @keyframes twinkle {
-    0% { opacity: 0.3; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 0.3;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 .cursor {
     animation: blink 0.7s infinite;
     color: var(--accent);
 }
+
 @keyframes blink {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0; }
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
 }
 
 #typewriter {

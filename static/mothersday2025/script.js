@@ -8,41 +8,41 @@ let isAnimating = false; // Flag to prevent multiple rapid transitions
 
 // Throttle function to limit function calls
 function throttle(callback, limit) {
-  let waiting = false;
-  return function() {
-    if (!waiting) {
-      callback.apply(this, arguments);
-      waiting = true;
-      setTimeout(() => {
-        waiting = false;
-      }, limit);
-    }
-  };
+    let waiting = false;
+    return function () {
+        if (!waiting) {
+            callback.apply(this, arguments);
+            waiting = true;
+            setTimeout(() => {
+                waiting = false;
+            }, limit);
+        }
+    };
 }
 
 function nextScene() {
-if (isAnimating || currentScene >= scenes.length - 1) return;
+    if (isAnimating || currentScene >= scenes.length - 1) return;
 
     isAnimating = true;
-    
+
     // Scroll to top before changing scenes
     window.scrollTo({
         top: 0,
         behavior: "smooth" // Use smooth scrolling for better UX
     });
-    
+
     if (scenes[currentScene]) {
         scenes[currentScene].classList.remove("active");
     }
-    
+
     currentScene++;
     const scene = scenes[currentScene];
-  
+
     if (scene) {
         scene.classList.add("active");
         animateScene(currentScene);
         setBackgroundFromScene(scene);
-  
+
         // Fade-in of the button after animation completes
         const nextButton = scene.querySelector(".btn-next");
         if (nextButton) {
@@ -66,7 +66,7 @@ function animateScene(index) {
 
     // Detect low-power mode or low-performance devices
     const isLowPerformance = navigator.hardwareConcurrency <= 4 || window.innerWidth <= 768;
-    
+
     // Use simpler animation for better mobile performance
     gsap.fromTo(scene, { opacity: 0, y: isLowPerformance ? 10 : 20 }, {
         opacity: 1,
@@ -90,8 +90,8 @@ function animateScene(index) {
     // If decoder scene, animate lines with slight performance improvements
     if (scene.id === "scene-5") {
         const lines = scene.querySelectorAll("li");
-        gsap.fromTo(lines, 
-            { opacity: 0, x: isLowPerformance ? -5 : -10 }, 
+        gsap.fromTo(lines,
+            { opacity: 0, x: isLowPerformance ? -5 : -10 },
             {
                 opacity: 1,
                 x: 0,
@@ -101,7 +101,7 @@ function animateScene(index) {
             }
         );
     }
-    
+
     // Special handling for the credits scene button z-index
     if (scene.id === "scene-9") {
         const button = scene.querySelector(".btn-next");
@@ -139,46 +139,46 @@ function getMaxHeartsForDevice() {
 }
 
 function createFloatingHeart() {
-  const heart = document.createElement("span");
-  heart.classList.add("heart");
-  heart.innerText = "💗";
+    const heart = document.createElement("span");
+    heart.classList.add("heart");
+    heart.innerText = "💗";
 
-  // Position heart randomly across screen width
-  heart.style.left = `${Math.random() * 90 + 5}vw`; // from 5vw to 95vw
-  heart.style.bottom = "-40px"; // start off-screen below
+    // Position heart randomly across screen width
+    heart.style.left = `${Math.random() * 90 + 5}vw`; // from 5vw to 95vw
+    heart.style.bottom = "-40px"; // start off-screen below
 
-  // Optional: size variation
-  const scale = Math.random() * 0.4 + 0.8; // random scale between 0.8 and 1.2
-  heart.style.transform = `scale(${scale})`;
+    // Optional: size variation
+    const scale = Math.random() * 0.4 + 0.8; // random scale between 0.8 and 1.2
+    heart.style.transform = `scale(${scale})`;
 
-  // Append to container
-  document.getElementById("hearts-container").appendChild(heart);
+    // Append to container
+    document.getElementById("hearts-container").appendChild(heart);
 
-  // Add click handler
-  heart.addEventListener("click", () => {
-    heart.remove();
-    heartClicks++;
-    if (heartClicks >= 3) {
-      document.getElementById("heart-counter").classList.remove("hidden");
-    }
-  });
+    // Add click handler
+    heart.addEventListener("click", () => {
+        heart.remove();
+        heartClicks++;
+        if (heartClicks >= 3) {
+            document.getElementById("heart-counter").classList.remove("hidden");
+        }
+    });
 
-  // Remove heart after animation ends (5s)
-  setTimeout(() => {
-    heart.remove();
-  }, 5000);
+    // Remove heart after animation ends (5s)
+    setTimeout(() => {
+        heart.remove();
+    }, 5000);
 }
 
 
 // More efficient heart burst function
 function heartBurst() {
     if (!document.hasFocus() || document.hidden) return; // Only create hearts if tab is active and visible
-    
+
     // Create fewer hearts on mobile
     const isMobile = window.innerWidth <= 768;
-    const burstCount = isMobile ? 2 : 3; 
+    const burstCount = isMobile ? 2 : 3;
     const delayBetweenHearts = isMobile ? 1000 : 800;
-    
+
     for (let i = 0; i < burstCount; i++) {
         setTimeout(() => {
             if (document.hasFocus() && !document.hidden) {
@@ -202,26 +202,26 @@ const heartInterval = setInterval(heartBurst, getHeartIntervalForDevice());
 function revealEasterEgg() {
     const msg = document.getElementById("easter-msg");
     const refreshBtn = document.getElementById("refresh-btn");
-    
+
     if (msg) {
         msg.classList.remove("hidden");
         // Use GSAP for smoother animation
-        gsap.fromTo(msg, 
-            { opacity: 0, y: 10 }, 
+        gsap.fromTo(msg,
+            { opacity: 0, y: 10 },
             { opacity: 1, y: 0, duration: 0.5 }
         );
-        
+
         // Add the revealed class for color transition
         setTimeout(() => {
             msg.classList.add("revealed");
         }, 300);
     }
-    
+
     if (refreshBtn) {
         setTimeout(() => {
             refreshBtn.classList.remove("hidden");
-            gsap.fromTo(refreshBtn, 
-                { opacity: 0, y: 10 }, 
+            gsap.fromTo(refreshBtn,
+                { opacity: 0, y: 10 },
                 { opacity: 1, y: 0, duration: 0.5 }
             );
         }, 300);
@@ -239,11 +239,11 @@ function setBackgroundFromScene(scene) {
     window.particlesCache = particlesCache;
 
     // Determine if we should use lightweight config
-    const isLowPerformance = navigator.hardwareConcurrency <= 4 || 
-                             window.innerWidth <= 768 || 
-                             navigator.connection?.saveData || 
-                             navigator.connection?.effectiveType === 'slow-2g' ||
-                             navigator.connection?.effectiveType === '2g';
+    const isLowPerformance = navigator.hardwareConcurrency <= 4 ||
+        window.innerWidth <= 768 ||
+        navigator.connection?.saveData ||
+        navigator.connection?.effectiveType === 'slow-2g' ||
+        navigator.connection?.effectiveType === '2g';
 
     switch (bg) {
         case "stars":
@@ -266,49 +266,49 @@ function setBackgroundFromScene(scene) {
                 // For lightweight config on low-performance devices
                 if (isLowPerformance) {
                     // Use lightweight config
-// In the setBackgroundFromScene function, modify the light config:
-const config = {
-    particles: {
-        number: { 
-            value: bg === "stars" ? 30 : 15,
-            density: {
-                enable: true,
-                value_area: 800
-            }
-        },
-        size: { 
-            value: 3,
-            random: true 
-        },
-        opacity: {
-            value: 0.8,
-            animation: {
-                enable: true,
-                minimumValue: 0.3,
-                speed: 1
-            }
-        },
-        move: {
-            enable: true,
-            speed: 0.3,
-            direction: "none",
-            random: true,
-            straight: false,
-            outMode: "bounce", // Changed from "out"
-            bounce: true
-        }
-    },
-    interactivity: {
-        detect_on: "canvas",
-        events: {
-            onhover: {
-                enable: true,
-                mode: "repulse"
-            }
-        }
-    }
-};
-                    
+                    // In the setBackgroundFromScene function, modify the light config:
+                    const config = {
+                        particles: {
+                            number: {
+                                value: bg === "stars" ? 30 : 15,
+                                density: {
+                                    enable: true,
+                                    value_area: 800
+                                }
+                            },
+                            size: {
+                                value: 3,
+                                random: true
+                            },
+                            opacity: {
+                                value: 0.8,
+                                animation: {
+                                    enable: true,
+                                    minimumValue: 0.3,
+                                    speed: 1
+                                }
+                            },
+                            move: {
+                                enable: true,
+                                speed: 0.3,
+                                direction: "none",
+                                random: true,
+                                straight: false,
+                                outMode: "bounce", // Changed from "out"
+                                bounce: true
+                            }
+                        },
+                        interactivity: {
+                            detect_on: "canvas",
+                            events: {
+                                onhover: {
+                                    enable: true,
+                                    mode: "repulse"
+                                }
+                            }
+                        }
+                    };
+
                     // Load the lightweight config
                     if (bg === "stars") {
                         tsParticles.load("tsparticles", {
@@ -351,9 +351,9 @@ const config = {
 function handlePreloader(callback) {
     const preloader = document.getElementById("preloader");
     setTimeout(() => {
-    preloader.classList.add("loaded");
+        preloader.classList.add("loaded");
     }, 1200);
-    
+
     const timeAssetsLoaded = Date.now();
     const elapsedTimeSinceScriptStart = timeAssetsLoaded - startTime;
     const minPreloaderDisplayDuration = 1200;
@@ -392,7 +392,7 @@ function handlePreloader(callback) {
 // Enhanced lazy loading of images
 function lazyLoadImages() {
     const lazyImages = document.querySelectorAll("img[data-src]");
-    
+
     if ('IntersectionObserver' in window) {
         const imageObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
@@ -404,7 +404,7 @@ function lazyLoadImages() {
                 }
             });
         });
-        
+
         lazyImages.forEach(img => imageObserver.observe(img));
     } else {
         // Fallback for older browsers
@@ -418,37 +418,37 @@ function lazyLoadImages() {
 // Improved envelope interaction handler with touch support
 function setupEnvelopeInteractions() {
     const envelopes = document.querySelectorAll(".envelope");
-    
+
     envelopes.forEach(envelope => {
         // Add better visual indicator for tappable items
         envelope.style.transition = "transform 0.3s ease";
-        
+
         // Add touch feedback
-        envelope.addEventListener("touchstart", function() {
+        envelope.addEventListener("touchstart", function () {
             this.style.transform = "scale(1.05)";
         }, { passive: true });
-        
-        envelope.addEventListener("touchend", function() {
+
+        envelope.addEventListener("touchend", function () {
             this.style.transform = "";
         }, { passive: true });
-        
+
         // Mouse feedback for desktop
-        envelope.addEventListener("mouseenter", function() {
+        envelope.addEventListener("mouseenter", function () {
             this.style.transform = "scale(1.05)";
         });
-        
-        envelope.addEventListener("mouseleave", function() {
+
+        envelope.addEventListener("mouseleave", function () {
             this.style.transform = "";
         });
-        
+
         // Click/tap handler
-        envelope.addEventListener("click", function(e) {
+        envelope.addEventListener("click", function (e) {
             e.stopPropagation(); // Prevent event bubbling
-            
+
             const msg = this.querySelector(".msg");
             if (msg) {
                 const isRevealed = msg.classList.contains("revealed");
-        
+
                 // Close all other messages first
                 document.querySelectorAll('.envelope .msg.revealed').forEach(otherMsg => {
                     if (otherMsg !== msg) {
@@ -456,7 +456,7 @@ function setupEnvelopeInteractions() {
                         otherMsg.parentElement.classList.remove('clicked');
                     }
                 });
-        
+
                 // Toggle current message with animation
                 if (isRevealed) {
                     gsap.to(msg, {
@@ -471,7 +471,7 @@ function setupEnvelopeInteractions() {
                 } else {
                     msg.classList.add("revealed");
                     this.classList.add("clicked");
-                    gsap.fromTo(msg, 
+                    gsap.fromTo(msg,
                         { opacity: 0, y: 10 },
                         { opacity: 1, y: 0, duration: 0.3 }
                     );
@@ -479,9 +479,9 @@ function setupEnvelopeInteractions() {
             }
         });
     });
-    
+
     // Close envelope messages when tapping elsewhere
-    document.addEventListener('click', function(event) {
+    document.addEventListener('click', function (event) {
         const clickedElement = event.target;
         if (!clickedElement.closest('.envelope')) {
             document.querySelectorAll('.envelope .msg.revealed').forEach(msg => {
@@ -502,26 +502,26 @@ function setupEnvelopeInteractions() {
 // Event handling with passive event listeners
 function setupEventListeners() {
     // Add passive touch listeners to improve scroll performance
-    document.addEventListener('touchstart', function() {}, {passive: true});
-    document.addEventListener('touchmove', function() {}, {passive: true});
-    
+    document.addEventListener('touchstart', function () { }, { passive: true });
+    document.addEventListener('touchmove', function () { }, { passive: true });
+
     // Handle back button for better UX
-    window.addEventListener('popstate', function(event) {
+    window.addEventListener('popstate', function (event) {
         if (currentScene > 0) {
             event.preventDefault();
             goToPreviousScene();
             return false;
         }
     });
-    
+
     // Throttled resize handler
-    window.addEventListener('resize', throttle(function() {
+    window.addEventListener('resize', throttle(function () {
         // Adjust UI elements based on new screen size
         // adjustUIForScreenSize();
     }, 250), { passive: true });
-    
+
     // Visibility change - pause animations when tab not visible
-    document.addEventListener('visibilitychange', function() {
+    document.addEventListener('visibilitychange', function () {
         if (document.hidden) {
             // Pause animations to save battery
             gsap.pauseAll();
@@ -531,12 +531,12 @@ function setupEventListeners() {
         }
     });
 
-        // Add resize observer for particles
+    // Add resize observer for particles
     const resizeObserver = new ResizeObserver(entries => {
         const particles = tsParticles.domItem(0);
         if (particles) particles.refresh();
     });
-    
+
     if (document.getElementById('tsparticles')) {
         resizeObserver.observe(document.getElementById('tsparticles'));
     }
@@ -546,29 +546,29 @@ function setupEventListeners() {
 function goToPreviousScene() {
     if (currentScene <= 0 || isAnimating) return;
     isAnimating = true;
-    
+
     // Scroll to top
     window.scrollTo({
         top: 0,
         behavior: "smooth"
     });
-    
+
     if (scenes[currentScene]) {
         scenes[currentScene].classList.remove("active");
     }
-    
+
     currentScene--;
-    
+
     if (scenes[currentScene]) {
         scenes[currentScene].classList.add("active");
         animateScene(currentScene);
         setBackgroundFromScene(scenes[currentScene]);
-        
+
         const nextButton = scenes[currentScene].querySelector(".btn-next");
         if (nextButton) {
             nextButton.classList.add("visible");
         }
-        
+
         setTimeout(() => {
             isAnimating = false;
         }, 1000);
@@ -581,16 +581,16 @@ function goToPreviousScene() {
 function adjustUIForScreenSize() {
     const isMobile = window.innerWidth <= 768;
     const isSmallPhone = window.innerWidth <= 480;
-    
+
     // Adjust text sizes
     document.querySelectorAll('.scene h1').forEach(heading => {
         heading.style.fontSize = isSmallPhone ? '1.5rem' : (isMobile ? '1.8rem' : '2.2rem');
     });
-    
+
     document.querySelectorAll('.scene p').forEach(paragraph => {
         paragraph.style.fontSize = isSmallPhone ? '0.9rem' : (isMobile ? '1rem' : '1.2rem');
     });
-    
+
     // Adjust button sizes
     document.querySelectorAll('.btn-next').forEach(button => {
         button.style.padding = isSmallPhone ? '8px 16px' : (isMobile ? '10px 20px' : '12px 24px');
@@ -613,7 +613,7 @@ function adjustUIForScreenSize() {
 
 //     // Clear previous content
 //     element.innerHTML = "";
-    
+
 //     // Check if we should use requestAnimationFrame for better performance
 //     const useRAF = window.innerWidth <= 768;
 //     let lastTimestamp = 0;
@@ -627,17 +627,17 @@ function adjustUIForScreenSize() {
 
 //     function calculateDelay(char) {
 //         let delay = speed;
-        
+
 //         // Random variation
 //         delay *= 1 + (Math.random() * jitter - jitter/2);
-        
+
 //         // Longer pauses for punctuation
 //         if (pauseOnPunctuation) {
 //             if (char === '.' || char === '!' || char === '?') delay *= 3;
 //             else if (char === ',' || char === ';') delay *= 2;
 //             else if (char === '\n') delay *= 4; // Extra pause for new lines
 //         }
-        
+
 //         return Math.max(20, delay); // Minimum delay
 //     }
 
@@ -645,26 +645,26 @@ function adjustUIForScreenSize() {
 //         if (lastTimestamp === 0) {
 //             lastTimestamp = timestamp;
 //         }
-        
+
 //         const elapsed = timestamp - lastTimestamp;
-        
+
 //         if (elapsed >= nextDelay) {
 //             if (i < text.length) {
 //                 // Process in small batches for better performance
 //                 const batch = Math.min(batchSize, text.length - i);
 //                 let batchText = '';
-                
+
 //                 for (let j = 0; j < batch; j++) {
 //                     batchText += text.charAt(i + j);
 //                 }
-                
+
 //                 element.innerHTML += batchText;
 //                 i += batch;
-                
+
 //                 // Calculate delay for next batch
 //                 nextDelay = calculateDelay(text.charAt(i - 1));
 //                 lastTimestamp = timestamp;
-                
+
 //                 requestAnimationFrame(typeRAF);
 //             } else if (callback) {
 //                 // Hide cursor when done
@@ -684,7 +684,7 @@ function adjustUIForScreenSize() {
 //             const char = text.charAt(i);
 //             element.innerHTML += char;
 //             i++;
-            
+
 //             setTimeout(typeTimeout, calculateDelay(char));
 //         } else if (callback) {
 //             // Hide cursor when done
@@ -782,7 +782,7 @@ function isElementVisible(el) {
 function restartExperience() {
     // Reset heart counter
     heartClicks = 0;
-    
+
     // Clean up hearts
     hearts.forEach(heart => {
         if (document.body.contains(heart)) {
@@ -791,62 +791,62 @@ function restartExperience() {
     });
     hearts.length = 0;
     activeHearts = 0;
-    
+
     // Show preloader briefly for transition
     const preloader = document.getElementById("preloader");
     if (preloader) {
         preloader.style.display = 'flex';
         preloader.classList.remove("loaded");
-        
+
         // Clean up GSAP animations
         gsap.killTweensOf("*");
-        
+
         setTimeout(() => {
             // Reset scene state
             currentScene = 0;
             document.querySelectorAll(".scene").forEach(scene => {
                 scene.classList.remove("active", "night-mode");
-                
+
                 // Reset any scene-specific states
                 if (scene.id === "scene-10") {
                     const easterMsg = document.getElementById("easter-msg");
                     const heartCounter = document.getElementById("heart-counter");
                     const refreshBtn = document.getElementById("refresh-btn");
-                    
+
                     if (easterMsg) easterMsg.classList.add("hidden");
                     if (heartCounter) heartCounter.classList.add("hidden");
                     if (refreshBtn) refreshBtn.classList.add("hidden");
                 }
             });
-            
+
             // Reset any open envelopes
             document.querySelectorAll('.envelope .msg.revealed').forEach(msg => {
                 msg.classList.remove("revealed");
                 msg.closest('.envelope')?.classList.remove('clicked');
             });
-            
+
             // Hide preloader
             preloader.classList.add("loaded");
-            
+
             // Start from first scene
             setTimeout(() => {
-currentScene = 0;
-const firstScene = scenes[currentScene];
-firstScene.classList.add("active");
-animateScene(currentScene);
-setBackgroundFromScene(firstScene);
+                currentScene = 0;
+                const firstScene = scenes[currentScene];
+                firstScene.classList.add("active");
+                animateScene(currentScene);
+                setBackgroundFromScene(firstScene);
             }, 300);
         }, 500);
     } else {
         // Fallback if no preloader
         currentScene = -1;
-        document.querySelectorAll(".scene").forEach(scene => 
+        document.querySelectorAll(".scene").forEach(scene =>
             scene.classList.remove("active", "night-mode"));
-currentScene = 0;
-const firstScene = scenes[currentScene];
-firstScene.classList.add("active");
-animateScene(currentScene);
-setBackgroundFromScene(firstScene);
+        currentScene = 0;
+        const firstScene = scenes[currentScene];
+        firstScene.classList.add("active");
+        animateScene(currentScene);
+        setBackgroundFromScene(firstScene);
 
     }
 }
@@ -856,16 +856,16 @@ window.onload = () => {
     // Detect iOS Safari
     const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
     const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-    
+
     if (isIOS && isSafari) {
         // iOS Safari-specific fixes
         document.documentElement.style.height = '100%';
         document.body.style.height = '100%';
         document.body.style.webkitOverflowScrolling = 'touch';
-              
+
         // Fix for iOS Safari input focus issues
         document.querySelectorAll('input, textarea').forEach(input => {
-            input.addEventListener('focus', function() {
+            input.addEventListener('focus', function () {
                 setTimeout(() => {
                     window.scrollTo(0, 0);
                 }, 50);
@@ -873,35 +873,35 @@ window.onload = () => {
         });
     }
 
-    
+
 
     // Handle preloader
     handlePreloader(() => {
         // Initialize first scene
-    if (scenes.length > 0 && scenes[currentScene]) {
-        // First make scene active
-        scenes[currentScene].classList.add("active");
-        
-        // Then initialize particles AFTER DOM update
-        requestAnimationFrame(() => {
-            setBackgroundFromScene(scenes[currentScene]);
-            animateScene(currentScene);
-        });
-    }
-        
+        if (scenes.length > 0 && scenes[currentScene]) {
+            // First make scene active
+            scenes[currentScene].classList.add("active");
+
+            // Then initialize particles AFTER DOM update
+            requestAnimationFrame(() => {
+                setBackgroundFromScene(scenes[currentScene]);
+                animateScene(currentScene);
+            });
+        }
+
         // Initialize envelope interactions
         setupEnvelopeInteractions();
-        
+
         // Setup other event listeners
         setupEventListeners();
-        
+
         // Begin lazy loading images
         lazyLoadImages();
-        
+
         // Adjust UI based on screen size
         // adjustUIForScreenSize();
     });
-    
+
     // Initialize terminal typewriter effect if present
     const typewriterElement = document.getElementById("typewriter");
     // if (typewriterElement) {
@@ -921,7 +921,7 @@ window.onload = () => {
     //         () => {
     //             // Completion callback
     //             console.log("Terminal message complete");
-                
+
     //             // Example GSAP animation (requires GSAP library)
     //             if (typeof gsap !== 'undefined') {
     //                 gsap.to(".confirmation-badge", {
@@ -935,20 +935,20 @@ window.onload = () => {
     //     );
     // }
     if (typewriterElement) {
-    // Pre-set dimensions to prevent layout shift
-    typewriterElement.style.minHeight = `${typewriterElement.offsetHeight}px`;
-    
-    typeWriter(
-        "SYSTEM TERMINAL\n\nPort scanning detected...\nSignal strength: High\nFragment secured.\n\nWonder Mamma confirmed.",
-        "typewriter",
-        {
-            speed: window.innerWidth <= 768 ? 80 : 100,
-            jitter: window.innerWidth <= 768 ? 0.2 : 0.4
-        },
-        () => {
-            // console.log("Terminal message complete");
-            // Add your completion animations here
-        }
-    );
-}
+        // Pre-set dimensions to prevent layout shift
+        typewriterElement.style.minHeight = `${typewriterElement.offsetHeight}px`;
+
+        typeWriter(
+            "SYSTEM TERMINAL\n\nPort scanning detected...\nSignal strength: High\nFragment secured.\n\nWonder Mamma confirmed.",
+            "typewriter",
+            {
+                speed: window.innerWidth <= 768 ? 80 : 100,
+                jitter: window.innerWidth <= 768 ? 0.2 : 0.4
+            },
+            () => {
+                // console.log("Terminal message complete");
+                // Add your completion animations here
+            }
+        );
+    }
 };
