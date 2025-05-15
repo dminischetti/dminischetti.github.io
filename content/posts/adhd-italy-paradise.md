@@ -68,7 +68,7 @@ Because while the world says *“Be more productive,”*
 Italy says:  
 **“Wait, what were we talking about again?”**
 
-# 21 Reasons Italy Is Secretly the Best Place on Earth for People with ADHD
+# 10 Reasons Italy Is Secretly the Best Place on Earth for People with ADHD
 
 Whether you're diagnosed, self-diagnosed, or just living in beautiful chaos, Italy might be the unofficial capital of neurodivergent harmony. Here's why:
 
