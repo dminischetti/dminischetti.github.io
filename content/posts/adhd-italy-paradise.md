@@ -24,37 +24,37 @@ No one in Italy says they have ADHD. But spend a day with them, and you might wo
 
 Let’s walk through a classic Italian day:
 
-### ☕ 8:00 AM – Wake Up (Barely)
+### 8:00 AM – Wake Up (Barely)
 
 Waking up isn’t about energy—it’s about caffeine. The day begins with coffee. Maybe cookies. Then: the sacred moment.
 
 Time for the slow, unhurried poop. No multitasking. No phones. Just 30–40 minutes of bathroom mindfulness, ending with a bidet.  
 Because an Italian without a bidet? That’s not an Italian. That’s… French. (Shhh.)
 
-### 🥐 9:15 AM – Out the Door… Straight to the Bar
+### 9:15 AM – Out the Door… Straight to the Bar
 
 Technically at work. Emotionally still waking up. Nothing begins without Coffee #2.
 
 Where? The neighborhood bar. With coworkers. With a croissant. With detailed gossip about Maria at the supermarket.  
 The barista knows more about your personal life than your therapist—and you tell him everything, proudly.
 
-### 📞 10:30 AM – Obligatory Call to Mamma
+### 10:30 AM – Obligatory Call to Mamma
 
 Because *mamma è mamma*. Skip it, and she’ll haunt your dreams with passive-aggressive guilt:  
 _"I know you’re busy… imagine if you ever remembered I exist."_
 
-### 🍆 12:30 PM – Lunch Like a Human
+### 12:30 PM – Lunch Like a Human
 
 Forget desk salads. Real lunch is sacred. Eggplant parmigiana, bread, talk of Bari’s football glory, maybe a beer.  
 Post-lunch nap? Not official, but deeply desired.
 
 While Americans hop onto Zoom, Italians battle gravity. So—Coffee #3.
 
-### 🚶 3:00 PM – Back to Work... ish
+### 3:00 PM – Back to Work... ish
 
 Maybe you step outside for air. A 20-minute walk turns into three chats, two village updates, and a bit of gossip about your sister-in-law’s cousin’s dog.
 
-### 🕔 5:00 PM – Technically the End of the Workday
+### 5:00 PM – Technically the End of the Workday
 
 You finished 20% of what you planned. But:
 
