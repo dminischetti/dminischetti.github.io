@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <title>Buon Compleanno Chiara ✨</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #ffd700;
+      --rose-gold: #e8b4a6;
+      --deep-rose: #d4958a;
+      --champagne: #f7e7ce;
+      --cream: #faf8f5;
+      --deep-brown: #4a3728;
+      --text-dark: #2c1810;
+      --shadow-gold: rgba(255, 215, 0, 0.3);
+      --shadow-rose: rgba(212, 149, 138, 0.4);
+      --gradient-primary: linear-gradient(135deg, #ffd700 0%, #e8b4a6 50%, #d4958a 100%);
+      --gradient-secondary: linear-gradient(45deg, #f7e7ce 0%, #faf8f5 100%);
+      --gradient-radial: radial-gradient(circle at center, rgba(255,215,0,0.1) 0%, transparent 70%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--cream);
+      color: var(--text-dark);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Particle System Background */
+    .particles-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -2;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 50%;
+      opacity: 0;
+      animation: sparkle 3s ease-in-out infinite;
+    }
+
+    @keyframes sparkle {
+      0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+      50% { opacity: 1; transform: scale(1) rotate(180deg); }
+    }
+
+    /* Animated Gradient Background */
+    .bg-gradient {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-secondary);
+      z-index: -1;
+    }
+
+    .bg-gradient::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-radial);
+      animation: pulse 4s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.3; transform: scale(1); }
+      50% { opacity: 0.6; transform: scale(1.1); }
+    }
+
+    /* Main Container */
+    .page-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 2rem 1rem;
+      position: relative;
+    }
+
+    /* Header Section */
+    .header-section {
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 10;
+    }
+
+    .birthday-badge {
+      display: inline-block;
+      background: var(--gradient-primary);
+      color: white;
+      padding: 0.5rem 1.5rem;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      box-shadow: 0 4px 15px var(--shadow-gold);
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(-8px); }
+      60% { transform: translateY(-4px); }
+    }
+
+    .main-title {
+      font-family: 'Dancing Script', cursive;
+      font-size: clamp(3rem, 8vw, 6rem);
+      font-weight: 700;
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 1rem;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      animation: titleShine 3s ease-in-out infinite;
+      position: relative;
+    }
+
+    @keyframes titleShine {
+      0%, 100% { filter: brightness(1); }
+      50% { filter: brightness(1.2) drop-shadow(0 0 10px rgba(255,215,0,0.5)); }
+    }
+
+    .subtitle {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-style: italic;
+      color: var(--deep-brown);
+      margin-bottom: 0.5rem;
+    }
+
+    .date-stamp {
+      font-size: 1rem;
+      color: var(--deep-rose);
+      font-weight: 500;
+    }
+
+    /* Main Content Card */
+    .main-card {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-radius: 32px;
+      padding: 3rem;
+      max-width: 900px;
+      width: 100%;
+      box-shadow: 
+        0 25px 80px rgba(0,0,0,0.1),
+        0 0 0 1px rgba(255,255,255,0.8),
+        inset 0 1px 0 rgba(255,255,255,0.9);
+      position: relative;
+      overflow: hidden;
+      animation: cardFloat 6s ease-in-out infinite;
+    }
+
+    @keyframes cardFloat {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(0.5deg); }
+    }
+
+    .main-card::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: conic-gradient(from 0deg, transparent, rgba(255,215,0,0.1), transparent);
+      animation: rotate 10s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes rotate {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    /* Video Section */
+    .video-section {
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    .video-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      text-align: center;
+      color: var(--deep-brown);
+      margin-bottom: 1.5rem;
+      position: relative;
+    }
+
+    .video-title::after {
+      content: '✨';
+      margin-left: 0.5rem;
+      animation: twinkle 1.5s ease-in-out infinite;
+    }
+
+    @keyframes twinkle {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.7; transform: scale(1.2); }
+    }
+
+    .video-container {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 
+        0 20px 60px rgba(0,0,0,0.15),
+        0 0 0 3px rgba(255,215,0,0.3);
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      background: linear-gradient(45deg, var(--gold), var(--rose-gold));
+      padding: 4px;
+    }
+
+    .video-container:hover {
+      transform: scale(1.02) translateY(-8px);
+      box-shadow: 
+        0 30px 80px rgba(0,0,0,0.2),
+        0 0 0 6px rgba(255,215,0,0.4),
+        0 0 30px rgba(255,215,0,0.3);
+    }
+
+    .video-wrapper {
+      border-radius: 20px;
+      overflow: hidden;
+      background: #000;
+      position: relative;
+    }
+
+    video {
+      width: 100%;
+      height: auto;
+      display: block;
+      border-radius: 20px;
+    }
+
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(45deg, rgba(255,215,0,0.1), rgba(232,180,166,0.1));
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      border-radius: 20px;
+    }
+
+    .video-container:hover .video-overlay {
+      opacity: 1;
+    }
+
+    /* Play Button Overlay */
+    .play-overlay {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 80px;
+      height: 80px;
+      background: rgba(255,215,0,0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .play-overlay::before {
+      content: '▶';
+      font-size: 2rem;
+      color: white;
+      margin-left: 4px;
+    }
+
+    video:not([controls]):hover + .play-overlay {
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    /* Action Buttons */
+    .actions-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      align-items: center;
+      margin-bottom: 3rem;
+      position: relative;
+      z-index: 5;
+    }
+
+    .primary-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.5rem 3rem;
+      background: var(--gradient-primary);
+      color: white;
+      font-weight: 700;
+      font-size: 1.2rem;
+      text-decoration: none;
+      border-radius: 60px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      box-shadow: 
+        0 15px 35px var(--shadow-gold),
+        0 5px 15px rgba(0,0,0,0.1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .primary-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .primary-btn:hover::before {
+      left: 100%;
+    }
+
+    .primary-btn:hover {
+      transform: translateY(-4px) scale(1.05);
+      box-shadow: 
+        0 20px 50px var(--shadow-gold),
+        0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .btn-icon {
+      font-size: 1.4rem;
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Message Section */
+    .message-section {
+      background: linear-gradient(135deg, rgba(247,231,206,0.6), rgba(250,248,245,0.8));
+      padding: 3rem;
+      border-radius: 28px;
+      text-align: center;
+      position: relative;
+      border: 2px solid rgba(255,215,0,0.2);
+      backdrop-filter: blur(10px);
+      z-index: 5;
+    }
+
+    .message-section::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
+      background: var(--gradient-primary);
+      border-radius: 28px;
+      z-index: -1;
+      opacity: 0.3;
+      animation: borderGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes borderGlow {
+      0%, 100% { opacity: 0.3; }
+      50% { opacity: 0.6; }
+    }
+
+    .hearts-decoration {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      animation: heartBeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    .message-text {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: var(--deep-brown);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
+      font-style: italic;
+    }
+
+    .signature {
+      font-size: 1.1rem;
+      color: var(--deep-rose);
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    .love-note {
+      font-size: 0.95rem;
+      color: var(--deep-brown);
+      opacity: 0.8;
+      font-style: italic;
+    }
+
+    /* Floating Elements */
+    .floating-elements {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .floating-heart {
+      position: absolute;
+      font-size: 1.5rem;
+      color: var(--rose-gold);
+      animation: floatUp 12s linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10%, 90% {
+        opacity: 0.6;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .floating-star {
+      position: absolute;
+      font-size: 1.2rem;
+      color: var(--gold);
+      animation: floatStar 15s linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatStar {
+      0% {
+        transform: translateY(100vh) translateX(0px) rotate(0deg);
+        opacity: 0;
+      }
+      10%, 90% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-100px) translateX(50px) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .page-container {
+        padding: 1rem 0.5rem;
+      }
+      
+      .main-card {
+        padding: 2rem 1.5rem;
+        margin: 0 0.5rem;
+      }
+      
+      .video-title {
+        font-size: 1.5rem;
+      }
+      
+      .primary-btn {
+        padding: 1.2rem 2rem;
+        font-size: 1.1rem;
+      }
+      
+      .message-section {
+        padding: 2rem 1.5rem;
+      }
+      
+      .message-text {
+        font-size: 1.1rem;
+      }
+    }
+
+    /* Special Birthday Animation */
+    .birthday-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .birthday-animation.active {
+      opacity: 1;
+    }
+
+    .confetti {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      background: var(--gold);
+      animation: confettiFall 3s ease-out forwards;
+    }
+
+    @keyframes confettiFall {
+      0% {
+        transform: translateY(-100vh) rotate(0deg);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-gradient"></div>
+  
+  <div class="particles-container" id="particles"></div>
+  
+  <div class="floating-elements">
+    <div class="floating-heart" style="left: 10%; animation-delay: 0s;">💖</div>
+    <div class="floating-heart" style="left: 20%; animation-delay: 2s;">💝</div>
+    <div class="floating-heart" style="left: 30%; animation-delay: 4s;">💕</div>
+    <div class="floating-heart" style="left: 50%; animation-delay: 6s;">💗</div>
+    <div class="floating-heart" style="left: 70%; animation-delay: 8s;">💖</div>
+    <div class="floating-heart" style="left: 80%; animation-delay: 10s;">💝</div>
+    <div class="floating-star" style="left: 15%; animation-delay: 1s;">✨</div>
+    <div class="floating-star" style="left: 35%; animation-delay: 3s;">⭐</div>
+    <div class="floating-star" style="left: 55%; animation-delay: 5s;">🌟</div>
+    <div class="floating-star" style="left: 75%; animation-delay: 7s;">✨</div>
+    <div class="floating-star" style="left: 85%; animation-delay: 9s;">⭐</div>
+  </div>
+
+  <div class="birthday-animation" id="birthdayAnimation"></div>
+
+  <div class="page-container">
+    <div class="header-section">
+      <div class="birthday-badge">🎉 COMPLEANNO SPECIALE 🎉</div>
+      <h1 class="main-title">Buon Compleanno Bimba!</h1>
+      <p class="subtitle">Con tutto il nostro amore</p>
+      <p class="date-stamp">Un giorno magico per una persona speciale</p>
+    </div>
+
+    <div class="main-card">
+      <div class="video-section">
+        <h2 class="video-title">Il nostro messaggio per te</h2>
+        <div class="video-container">
+          <div class="video-wrapper">
+            <video controls playsinline preload="metadata" id="birthdayVideo">
+              <source src="/videos/book.mp4" type="video/mp4">
+              Il tuo browser non supporta la riproduzione video.
+            </video>
+            <div class="video-overlay"></div>
+          </div>
+        </div>
+      </div>
+
+      <p style="text-align: center; font-style: italic; color: #6a4a3c; margin: 2rem 0 1rem;">
+        E se ti va, qui sotto trovi anche il libro che abbiamo scritto per te.
+      </p>
+
+      <div class="actions-section">
+        <a href="https://www.canva.com/design/DAGphrIEQZU/UzsvQvuyqJTigbo5W9F_nQ/view?utm_content=DAGphrIEQZU&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h0a2dfc3b4b"
+           target="_blank" rel="noopener noreferrer" class="primary-btn" id="bookBtn">
+          <span class="btn-icon">📚</span>
+          <span>Apri il tuo libro digitale</span>
+          <span class="btn-icon">✨</span>
+        </a>
+      </div>
+
+      <div class="message-section">
+        <div class="hearts-decoration">💖 💝 💖</div>
+        <p class="message-text">
+          "Ogni giorno con te è un regalo prezioso. Oggi celebriamo non solo il tuo compleanno, ma la gioia che porti nelle nostre vite."
+        </p>
+        <p class="signature">Con infinito amore,<br>Dominic, Mia e Liam</p>
+        <p class="love-note">Sei il cuore della nostra famiglia ❤️</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Particle System
+    function createParticles() {
+      const container = document.getElementById('particles');
+      const particleCount = 50;
+      
+      for (let i = 0; i < particleCount; i++) {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+        particle.style.left = Math.random() * 100 + '%';
+        particle.style.top = Math.random() * 100 + '%';
+        particle.style.animationDelay = Math.random() * 3 + 's';
+        particle.style.animationDuration = (Math.random() * 2 + 2) + 's';
+        container.appendChild(particle);
+      }
+    }
+
+    // Birthday Confetti Animation
+    function createConfetti() {
+      const container = document.getElementById('birthdayAnimation');
+      const colors = ['#ffd700', '#e8b4a6', '#d4958a', '#f7e7ce'];
+      
+      for (let i = 0; i < 100; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * 100 + '%';
+        confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+        confetti.style.animationDelay = Math.random() * 2 + 's';
+        confetti.style.animationDuration = (Math.random() * 2 + 3) + 's';
+        container.appendChild(confetti);
+      }
+      
+      container.classList.add('active');
+      
+      setTimeout(() => {
+        container.classList.remove('active');
+        container.innerHTML = '';
+      }, 5000);
+    }
+
+    // Advanced Interactions
+    document.addEventListener('DOMContentLoaded', function() {
+      createParticles();
+      
+      // Trigger confetti on page load
+      setTimeout(createConfetti, 1000);
+      
+      // Book button interactions
+      const bookBtn = document.getElementById('bookBtn');
+      bookBtn.addEventListener('click', function(e) {
+        // Create ripple effect
+        const ripple = document.createElement('div');
+        const rect = this.getBoundingClientRect();
+        const size = Math.max(rect.width, rect.height);
+        const x = e.clientX - rect.left - size / 2;
+        const y = e.clientY - rect.top - size / 2;
+        
+        ripple.style.cssText = `
+          position: absolute;
+          width: ${size}px;
+          height: ${size}px;
+          left: ${x}px;
+          top: ${y}px;
+          background: rgba(255,255,255,0.4);
+          border-radius: 50%;
+          transform: scale(0);
+          animation: ripple 0.8s ease-out;
+          pointer-events: none;
+          z-index: 1000;
+        `;
+        
+        this.style.position = 'relative';
+        this.appendChild(ripple);
+        
+        setTimeout(() => {
+          ripple.remove();
+        }, 800);
+        
+        // Trigger confetti
+        setTimeout(createConfetti, 100);
+      });
+
+      // Video interaction
+      const video = document.getElementById('birthdayVideo');
+      video.addEventListener('play', function() {
+        createConfetti();
+      });
+
+      // Parallax effect for floating elements
+      window.addEventListener('scroll', function() {
+        const scrolled = window.pageYOffset;
+        const rate = scrolled * -0.5;
+        
+        document.querySelector('.floating-elements').style.transform = 
+          `translate3d(0, ${rate}px, 0)`;
+      });
+
+      // Advanced mouse tracking for card
+      const card = document.querySelector('.main-card');
+      card.addEventListener('mousemove', function(e) {
+        const rect = this.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+        const rotateX = (y - centerY) / 20;
+        const rotateY = (centerX - x) / 20;
+        
+        this.style.transform = `
+          perspective(1000px) 
+          rotateX(${rotateX}deg) 
+          rotateY(${rotateY}deg) 
+          translateZ(10px)
+        `;
+      });
+      
+      card.addEventListener('mouseleave', function() {
+        this.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateZ(0)';
+      });
+
+      // Smooth scrolling
+      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute('href'));
+          if (target) {
+            target.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    });
+
+    // Add dynamic CSS for ripple
+    const rippleStyle = document.createElement('style');
+    rippleStyle.textContent = `
+      @keyframes ripple {
+        to {
+          transform: scale(2);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(rippleStyle);
+
+    // Performance optimization
+    let ticking = false;
+    function updateAnimations() {
+      // Optimize animations based on viewport
+      const elements = document.querySelectorAll('.floating-heart, .floating-star');
+      elements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top > window.innerHeight + 100 || rect.bottom < -100) {
+          el.style.animationPlayState = 'paused';
+        } else {
+          el.style.animationPlayState = 'running';
+        }
+      });
+      ticking = false;
+    }
+
+    function requestAnimationUpdate() {
+      if (!ticking) {
+        requestAnimationFrame(updateAnimations);
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', requestAnimationUpdate);
+    window.addEventListener('resize', requestAnimationUpdate);
+  </script>
+</body>
+</html>
