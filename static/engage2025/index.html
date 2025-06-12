@@ -539,12 +539,19 @@
         
         <main>
             <p class="subtitle">Parola per parola:</p>
-            <div class="video-container">
-                <video id="slideshowVideo" controls poster="data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='450' viewBox='0 0 800 450'%3E%3Crect fill='%23161f38' width='800' height='450'/%3E%3Cpath fill='%23ff4d94' d='M400,225 Q450,200 500,225 T600,225' stroke='%23ff4d94' stroke-width='2' fill='none'/%3E%3Ccircle fill='%23ff4d94' cx='400' cy='225' r='30'/%3E%3C/svg%3E">
-                    <source src="/anniversary-video-compressed.mov" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="video-overlay"></div>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/5-2hU4M2_tE?si=xSTRHnWimlrXAINw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            </div>
+
+            <div class="controls">
+                <button class="control-btn" id="playBtn">
+                    <i class="fas fa-play"></i> Play Slideshow
+                </button>
+                <button class="control-btn" id="fullscreenBtn">
+                    <i class="fas fa-expand"></i> Fullscreen
+                </button>
+                <button class="control-btn" id="heartBtn">
+                    <i class="fas fa-heart"></i> Send Love
+                </button>
             </div>
             
             <div class="message-container">
