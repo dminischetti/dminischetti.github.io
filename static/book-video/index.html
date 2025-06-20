@@ -22,13 +22,11 @@
       --border-radius: 20px;
       --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
     }
-
     body {
       font-family: var(--font-body);
       background: var(--gradient-primary);
@@ -39,24 +37,20 @@
       overflow-x: hidden;
       min-height: 100vh;
     }
-
     @keyframes gradientShift {
       0%, 100% { background-position: 0% 50%; }
       50% { background-position: 100% 50%; }
     }
-
     .container {
       max-width: 100%;
       padding: 15px;
       margin: 0 auto;
       text-align: center;
     }
-
     .header {
       margin: 20px 0 30px;
       position: relative;
     }
-
     h1 {
       font-family: var(--font-display);
       font-size: 2.5rem;
@@ -67,24 +61,20 @@
       position: relative;
       z-index: 2;
     }
-
     @keyframes titleFloat {
       0%, 100% { transform: translateY(0) scale(1); }
       50% { transform: translateY(-5px) scale(1.02); }
     }
-
     .subtitle {
       font-size: 1.1rem;
       margin: 15px 0;
       color: var(--text-light);
       animation: fadeInUp 1s ease 0.5s both;
     }
-
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
     .interactive-hearts {
       position: absolute;
       top: 0;
@@ -94,7 +84,6 @@
       pointer-events: none;
       z-index: 1;
     }
-
     .heart {
       position: absolute;
       font-size: 1.5rem;
@@ -104,18 +93,15 @@
       pointer-events: all;
       transition: var(--transition);
     }
-
     .heart:hover {
       transform: scale(1.5) rotate(15deg);
       color: var(--accent);
     }
-
     @keyframes floatHeart {
       0%, 100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
       25% { transform: translateY(-10px) rotate(5deg); opacity: 1; }
       75% { transform: translateY(-5px) rotate(-5deg); opacity: 1; }
     }
-
     .video-container {
       background-color: #000;
       margin: 25px auto;
@@ -128,24 +114,20 @@
       animation: slideInLeft 1s ease 0.3s both;
       position: relative;
     }
-
     .video-container:hover {
       box-shadow: var(--shadow-hover);
       transform: translateY(-5px);
     }
-
     @keyframes slideInLeft {
       from { opacity: 0; transform: translateX(-50px); }
       to { opacity: 1; transform: translateX(0); }
     }
-
     video {
       background-color: #000;
       width: 100%;
       display: block;
       border-radius: var(--border-radius);
     }
-
     .play-overlay {
       position: absolute;
       top: 50%;
@@ -164,17 +146,14 @@
       transition: var(--transition);
       backdrop-filter: blur(10px);
     }
-
     .play-overlay:hover {
       transform: translate(-50%, -50%) scale(1.1);
       background: rgba(255, 105, 180, 1);
     }
-
     .play-overlay.hidden {
       opacity: 0;
       pointer-events: none;
     }
-
     .cta-button {
       display: inline-block;
       margin: 25px auto;
@@ -192,7 +171,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .cta-button::before {
       content: '';
       position: absolute;
@@ -203,27 +181,22 @@
       background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
       transition: left 0.5s;
     }
-
     .cta-button:hover::before {
       left: 100%;
     }
-
     .cta-button:hover {
       transform: translateY(-3px) scale(1.05);
       box-shadow: var(--shadow-hover);
       background-position: 100% 100%;
     }
-
     @keyframes slideInRight {
       from { opacity: 0; transform: translateX(50px); }
       to { opacity: 1; transform: translateX(0); }
     }
-
     @keyframes buttonGlow {
       from { box-shadow: var(--shadow), 0 0 20px rgba(255, 105, 180, 0.3); }
       to { box-shadow: var(--shadow-hover), 0 0 30px rgba(255, 105, 180, 0.5); }
     }
-
     .message {
       margin: 30px auto;
       padding: 25px;
@@ -239,7 +212,6 @@
       position: relative;
       overflow: hidden;
     }
-
     .message::before {
       content: '';
       position: absolute;
@@ -250,17 +222,14 @@
       background: linear-gradient(45deg, transparent, rgba(255, 105, 180, 0.1), transparent);
       animation: shimmer 3s ease infinite;
     }
-
     @keyframes shimmer {
       0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
       100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
     }
-
     .message:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow-hover);
     }
-
     .signature {
       margin-top: 15px;
       font-family: var(--font-display);
@@ -269,7 +238,6 @@
       position: relative;
       z-index: 2;
     }
-
     .cursor {
       position: fixed;
       width: 20px;
@@ -283,10 +251,8 @@
       opacity: 0;
       mix-blend-mode: difference;
     }
-
     .cursor.active { opacity: 1; }
     .cursor.hover { width: 40px; height: 40px; }
-
     .floating-elements {
       position: fixed;
       top: 0;
@@ -296,20 +262,17 @@
       pointer-events: none;
       z-index: 0;
     }
-
     .floating-element {
       position: absolute;
       font-size: 1.2rem;
       opacity: 0.3;
       animation: float 6s ease-in-out infinite;
     }
-
     @keyframes float {
       0%, 100% { transform: translateY(0) rotate(0deg); }
       33% { transform: translateY(-20px) rotate(5deg); }
       66% { transform: translateY(-10px) rotate(-5deg); }
     }
-
     .celebration-btn {
       position: fixed;
       bottom: 20px;
@@ -326,33 +289,121 @@
       transition: var(--transition);
       z-index: 1000;
     }
-
     .celebration-btn:hover {
       transform: scale(1.1) rotate(15deg);
       box-shadow: var(--shadow-hover);
     }
-
+    
+    /* Easter Egg - Hidden in heart */
+    .signature .secret-heart {
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-block;
+    }
+    
+    .signature .secret-heart:hover {
+      transform: scale(1.1);
+    }
+    
+    .signature .secret-heart:active {
+      transform: scale(1.3);
+    }
+    
+    .signature .secret-heart.clicked {
+      animation: heartBeat 0.3s ease;
+    }
+    
+    @keyframes heartBeat {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.4); }
+      100% { transform: scale(1); }
+    }
+    
+    .secret-video-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+      backdrop-filter: blur(20px);
+    }
+    
+    .secret-video-modal.show {
+      display: flex;
+      animation: fadeIn 0.5s ease;
+    }
+    
+    .secret-video-container {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+      background: var(--white);
+      border-radius: var(--border-radius);
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+      animation: scaleIn 0.5s ease;
+    }
+    
+    .secret-close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      width: 40px;
+      height: 40px;
+      background: rgba(255, 105, 180, 0.9);
+      border: none;
+      border-radius: 50%;
+      color: white;
+      font-size: 1.2rem;
+      cursor: pointer;
+      z-index: 10001;
+      transition: var(--transition);
+    }
+    
+    .secret-close-btn:hover {
+      background: rgba(255, 105, 180, 1);
+      transform: scale(1.1);
+    }
+    
+    .secret-video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    
+    @keyframes scaleIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+    
     /* Tablet Styles */
     @media (min-width: 768px) {
       .container {
         max-width: 750px;
         padding: 25px;
       }
-
       h1 { font-size: 3.5rem; }
       .subtitle { font-size: 1.3rem; }
       .cta-button { font-size: 1.2rem; padding: 20px 40px; }
       .message { font-size: 1.2rem; padding: 30px; }
       .signature { font-size: 1.4rem; }
     }
-
     /* Desktop Styles */
     @media (min-width: 1024px) {
       .container {
         max-width: 900px;
         padding: 40px;
       }
-
       h1 { font-size: 4rem; }
       .subtitle { font-size: 1.5rem; }
       
@@ -360,21 +411,17 @@
         max-width: 700px;
         margin: 40px auto;
       }
-
       .cta-button { 
         font-size: 1.3rem; 
         padding: 22px 45px;
         margin: 35px auto;
       }
-
       .message { 
         font-size: 1.3rem; 
         padding: 35px;
         margin: 40px auto;
       }
-
       .signature { font-size: 1.5rem; }
-
       .cursor { display: block; }
       
       /* Desktop-only hover effects */
@@ -384,7 +431,6 @@
       .floating-element:nth-child(odd) { animation-delay: -2s; }
       .floating-element:nth-child(even) { animation-delay: -4s; }
     }
-
     /* Mobile-only styles */
     @media (max-width: 767px) {
       .cursor { display: none; }
@@ -396,11 +442,22 @@
         height: 50px;
         font-size: 1.2rem;
       }
-
       .play-overlay {
         width: 60px;
         height: 60px;
         font-size: 1.5rem;
+      }
+      
+      .secret-video-container {
+        max-width: 95%;
+        max-height: 80%;
+        margin: 20px;
+      }
+      
+      .secret-close-btn {
+        width: 35px;
+        height: 35px;
+        font-size: 1rem;
       }
     }
   </style>
@@ -408,14 +465,12 @@
 <body>
 <div class="cursor"></div>
 <div class="floating-elements"></div>
-
 <div class="container">
   <div class="header">
     <div class="interactive-hearts"></div>
     <h1>Buon Compleanno Bimba!</h1>
     <p class="subtitle">Con tutto il nostro amore ✨</p>
   </div>
-
   <div class="video-container">
     <video controls playsinline preload="metadata" id="birthdayVideo">
       <source src="/video/book.mp4" type="video/mp4">
@@ -423,36 +478,41 @@
     </video>
     <div class="play-overlay" id="playOverlay">▶</div>
   </div>
-
   <a href="https://www.canva.com/design/DAGphrIEQZU/UzsvQvuyqJTigbo5W9F_nQ/view"
      target="_blank" class="cta-button">
     📚 Apri il tuo libro digitale ✨
   </a>
-
   <div class="message">
     "Ogni giorno con te è un regalo prezioso. Oggi festeggiamo non solo il tuo compleanno, ma la felicità che porti nelle nostre vite."
-    <div class="signature">Con tantissimo amore,<br>Dominic, Mia e Liam ❤️</div>
+    <div class="signature">Con tantissimo amore,<br>Dominic, Mia e Liam <span class="secret-heart" id="easterEgg">❤️</span></div>
+  </div>
+</div>
+
+<!-- Secret Video Modal -->
+<div class="secret-video-modal" id="secretModal">
+  <div class="secret-video-container">
+    <button class="secret-close-btn" id="closeSecret">×</button>
+    <video class="secret-video" controls id="secretVideo">
+      <source src="/video/book-old.mp4" type="video/mp4">
+      Il tuo browser non supporta il video.
+    </video>
   </div>
 </div>
 
 <button class="celebration-btn" id="celebrateBtn">🎉</button>
-
 <script>
   // Enhanced cursor tracking (desktop only)
   const cursor = document.querySelector('.cursor');
   let mouseX = 0, mouseY = 0;
   let cursorX = 0, cursorY = 0;
-
   document.addEventListener('mousemove', (e) => {
     mouseX = e.clientX;
     mouseY = e.clientY;
     cursor.classList.add('active');
   });
-
   document.addEventListener('mouseleave', () => {
     cursor.classList.remove('active');
   });
-
   // Smooth cursor animation
   function animateCursor() {
     const dx = mouseX - cursorX;
@@ -464,13 +524,11 @@
     requestAnimationFrame(animateCursor);
   }
   animateCursor();
-
   // Cursor hover effects
   document.querySelectorAll('a, button, video, .heart').forEach(el => {
     el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
     el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
   });
-
   // Enhanced confetti system
   function createConfetti(count = 100) {
     const colors = ['#ff6b6b', '#4ecdc4', '#45b7d1', '#96ceb4', '#ffeaa7', '#fd79a8', '#fdcb6e'];
@@ -516,7 +574,6 @@
       setTimeout(() => confetti.remove(), (duration + delay) * 1000);
     }
   }
-
   // Add confetti animation
   const style = document.createElement('style');
   style.innerHTML = `
@@ -528,7 +585,6 @@
     }
   `;
   document.head.appendChild(style);
-
   // Create floating hearts
   function createHearts() {
     const heartsContainer = document.querySelector('.interactive-hearts');
@@ -557,7 +613,6 @@
       heartsContainer.appendChild(heart);
     }
   }
-
   // Create floating background elements
   function createFloatingElements() {
     const container = document.querySelector('.floating-elements');
@@ -574,31 +629,89 @@
       container.appendChild(element);
     }
   }
-
   // Video controls
   const video = document.getElementById('birthdayVideo');
   const playOverlay = document.getElementById('playOverlay');
-
   playOverlay.addEventListener('click', () => {
     video.play();
     playOverlay.classList.add('hidden');
     createConfetti(150);
   });
-
   video.addEventListener('play', () => {
     playOverlay.classList.add('hidden');
     createConfetti(80);
   });
-
   video.addEventListener('pause', () => {
     playOverlay.classList.remove('hidden');
   });
-
   video.addEventListener('ended', () => {
     playOverlay.classList.remove('hidden');
     createConfetti(200);
   });
-
+  // Initialize interactive elements
+  createHearts();
+  createFloatingElements();
+  
+  // Easter Egg functionality - Triple tap heart
+  const easterEgg = document.getElementById('easterEgg');
+  const secretModal = document.getElementById('secretModal');
+  const secretVideo = document.getElementById('secretVideo');
+  const closeSecret = document.getElementById('closeSecret');
+  
+  let clickCount = 0;
+  let clickTimer = null;
+  
+  function handleEasterEggClick() {
+    clickCount++;
+    easterEgg.classList.add('clicked');
+    
+    // Remove animation class after animation completes
+    setTimeout(() => {
+      easterEgg.classList.remove('clicked');
+    }, 300);
+    
+    // Reset counter after 2 seconds of no clicks
+    if (clickTimer) clearTimeout(clickTimer);
+    clickTimer = setTimeout(() => {
+      clickCount = 0;
+    }, 2000);
+    
+    // Open secret video after 3 clicks
+    if (clickCount === 3) {
+      secretModal.classList.add('show');
+      createConfetti(150);
+      clickCount = 0; // Reset counter
+      if (clickTimer) clearTimeout(clickTimer);
+    }
+  }
+  
+  easterEgg.addEventListener('click', handleEasterEggClick);
+  easterEgg.addEventListener('touchend', (e) => {
+    e.preventDefault();
+    handleEasterEggClick();
+  });
+  
+  closeSecret.addEventListener('click', () => {
+    secretModal.classList.remove('show');
+    secretVideo.pause();
+  });
+  
+  // Close modal when clicking outside
+  secretModal.addEventListener('click', (e) => {
+    if (e.target === secretModal) {
+      secretModal.classList.remove('show');
+      secretVideo.pause();
+    }
+  });
+  
+  // Close modal with Escape key
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && secretModal.classList.contains('show')) {
+      secretModal.classList.remove('show');
+      secretVideo.pause();
+    }
+  });
+  
   // Celebration button
   document.getElementById('celebrateBtn').addEventListener('click', () => {
     createConfetti(150);
@@ -610,17 +723,12 @@
       }, index * 200);
     });
   });
-
-  // Initialize interactive elements
-  createHearts();
-  createFloatingElements();
-
+  
   // Touch interactions for mobile
   let touchStartY = 0;
   document.addEventListener('touchstart', (e) => {
     touchStartY = e.touches[0].clientY;
   });
-
   document.addEventListener('touchend', (e) => {
     const touchEndY = e.changedTouches[0].clientY;
     const diff = touchStartY - touchEndY;
@@ -630,7 +738,6 @@
       createConfetti(50);
     }
   });
-
   // Auto-trigger some confetti on load
   setTimeout(() => createConfetti(30), 2000);
 </script>
