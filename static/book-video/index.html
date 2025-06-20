@@ -460,6 +460,42 @@
         font-size: 1rem;
       }
     }
+    /* Fullscreen Game Modal */
+#gameModal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  backdrop-filter: blur(10px);
+}
+
+#gameModal.show {
+  display: flex;
+  animation: fadeIn 0.4s ease;
+}
+
+#gameModal .secret-video-container {
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+}
+
+#gameModal iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
   </style>
 </head>
 <body>
@@ -498,6 +534,15 @@
     </video>
   </div>
 </div>
+
+<!-- Game Modal Fullscreen -->
+<div class="secret-video-modal" id="gameModal">
+  <div class="secret-video-container">
+    <button class="secret-close-btn" id="closeGame">×</button>
+    <iframe id="gameFrame" src="" allowfullscreen></iframe>
+  </div>
+</div>
+
 
 <button class="celebration-btn" id="celebrateBtn">🎉</button>
 <script>
@@ -740,32 +785,57 @@
   });
   // Auto-trigger some confetti on load
   setTimeout(() => createConfetti(30), 2000);
-  // Easter Egg 2 - Double click on blue heart to open Tetris game
-  const tetrisEgg = document.getElementById('tetrisEgg');
-  let tetrisClickCount = 0;
-  let tetrisTimer = null;
+// Easter Egg 2 - Double click on blue heart to open Tetris/Snake game in modal
+const tetrisEgg = document.getElementById('tetrisEgg');
+const gameModal = document.getElementById('gameModal');
+const gameFrame = document.getElementById('gameFrame');
+const closeGame = document.getElementById('closeGame');
 
-  function handleTetrisClick() {
-    tetrisClickCount++;
+let tetrisClickCount = 0;
+let tetrisTimer = null;
 
-    tetrisEgg.classList.add('clicked');
-    setTimeout(() => tetrisEgg.classList.remove('clicked'), 300);
+function handleTetrisClick() {
+  tetrisClickCount++;
+  tetrisEgg.classList.add('clicked');
 
-    if (tetrisTimer) clearTimeout(tetrisTimer);
-    tetrisTimer = setTimeout(() => { tetrisClickCount = 0; }, 1000);
+  setTimeout(() => tetrisEgg.classList.remove('clicked'), 300);
 
-    if (tetrisClickCount === 2) {
-      window.open("https://snake-game-howtobedev.netlify.app/", "_blank");
-      createConfetti(100);
-      tetrisClickCount = 0;
-    }
+  if (tetrisTimer) clearTimeout(tetrisTimer);
+  tetrisTimer = setTimeout(() => { tetrisClickCount = 0; }, 1000);
+
+  if (tetrisClickCount === 2) {
+    gameFrame.src = "https://snake-game-howtobedev.netlify.app/";
+    gameModal.classList.add('show');
+    createConfetti(100);
+    tetrisClickCount = 0;
   }
+}
 
-  tetrisEgg.addEventListener('click', handleTetrisClick);
-  tetrisEgg.addEventListener('touchend', (e) => {
-    e.preventDefault();
-    handleTetrisClick();
-  });
+tetrisEgg.addEventListener('click', handleTetrisClick);
+tetrisEgg.addEventListener('touchend', (e) => {
+  e.preventDefault();
+  handleTetrisClick();
+});
+
+// Close Game Modal
+closeGame.addEventListener('click', () => {
+  gameModal.classList.remove('show');
+  gameFrame.src = ""; // Stop the game
+});
+
+gameModal.addEventListener('click', (e) => {
+  if (e.target === gameModal) {
+    gameModal.classList.remove('show');
+    gameFrame.src = "";
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && gameModal.classList.contains('show')) {
+    gameModal.classList.remove('show');
+    gameFrame.src = "";
+  }
+});
 </script>
 </body>
 </html>
