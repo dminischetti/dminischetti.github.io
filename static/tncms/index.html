@@ -11,36 +11,30 @@
             padding: 0;
             box-sizing: border-box;
         }
-
         body {
             font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Roboto Mono', monospace;
             background: #0d1117;
             color: #c9d1d9;
             line-height: 1.4;
         }
-
         .container {
             max-width: 1400px;
             margin: 0 auto;
             padding: 20px;
         }
-
         .header {
             text-align: center;
             margin-bottom: 30px;
         }
-
         .header h1 {
             color: #58a6ff;
             font-size: 2.5em;
             margin-bottom: 10px;
         }
-
         .header p {
             color: #8b949e;
             font-size: 1em;
         }
-
         .controls {
             display: grid;
             grid-template-columns: 1fr auto;
@@ -48,20 +42,17 @@
             margin-bottom: 20px;
             align-items: start;
         }
-
         .input-section {
             display: flex;
             flex-direction: column;
             gap: 10px;
         }
-
         .filter-section {
             display: flex;
             flex-direction: column;
             gap: 10px;
             min-width: 280px;
         }
-
         textarea {
             width: 100%;
             height: 200px;
@@ -74,38 +65,32 @@
             font-size: 13px;
             resize: vertical;
         }
-
         textarea:focus {
             outline: none;
             border-color: #58a6ff;
             box-shadow: 0 0 0 3px rgba(88, 166, 255, 0.1);
         }
-
         .filter-group {
             background: #21262d;
             border: 1px solid #30363d;
             border-radius: 8px;
             padding: 15px;
         }
-
         .filter-group h3 {
             color: #f0f6fc;
             margin-bottom: 10px;
             font-size: 14px;
         }
-
         .filter-controls {
             display: flex;
             flex-direction: column;
             gap: 8px;
         }
-
         .filter-row {
             display: flex;
             gap: 8px;
             align-items: center;
         }
-
         input, select {
             background: #0d1117;
             border: 1px solid #30363d;
@@ -115,12 +100,10 @@
             font-family: inherit;
             font-size: 12px;
         }
-
         input:focus, select:focus {
             outline: none;
             border-color: #58a6ff;
         }
-
         button {
             background: #238636;
             border: none;
@@ -133,21 +116,17 @@
             transition: background 0.2s;
             position: relative;
         }
-
         button:hover {
             background: #2ea043;
         }
-
         button.secondary {
             background: #21262d;
             border: 1px solid #30363d;
             color: #c9d1d9;
         }
-
         button.secondary:hover {
             background: #30363d;
         }
-
         .floating-toolbar {
             position: fixed;
             bottom: 20px;
@@ -162,12 +141,10 @@
             box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
             z-index: 1000;
         }
-
         .floating-toolbar button {
             padding: 6px 12px;
             font-size: 11px;
         }
-
         .stats {
             background: #161b22;
             border: 1px solid #30363d;
@@ -178,23 +155,19 @@
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             gap: 15px;
         }
-
         .stat-item {
             text-align: center;
         }
-
         .stat-value {
             font-size: 1.5em;
             font-weight: bold;
             color: #58a6ff;
         }
-
         .stat-label {
             color: #8b949e;
             font-size: 0.9em;
             margin-top: 5px;
         }
-
         .heatmap {
             background: #161b22;
             border: 1px solid #30363d;
@@ -202,13 +175,11 @@
             padding: 15px;
             margin-bottom: 20px;
         }
-
         .heatmap h3 {
             color: #f0f6fc;
             margin-bottom: 10px;
             font-size: 14px;
         }
-
         .heatmap-bar {
             display: flex;
             height: 40px;
@@ -217,25 +188,21 @@
             overflow: hidden;
             margin-bottom: 10px;
         }
-
         .heatmap-segment {
             height: 100%;
             transition: opacity 0.2s;
             cursor: pointer;
             position: relative;
         }
-
         .heatmap-segment:hover {
             opacity: 0.8;
         }
-
         .heatmap-legend {
             display: flex;
             justify-content: space-between;
             font-size: 11px;
             color: #8b949e;
         }
-
         .log-entries {
             background: #0d1117;
             border: 1px solid #30363d;
@@ -243,31 +210,25 @@
             max-height: 70vh;
             overflow-y: auto;
         }
-
         .log-entry {
             border-bottom: 1px solid #21262d;
             padding: 15px;
             transition: all 0.3s ease;
             position: relative;
         }
-
         .log-entry:hover {
             background: #161b22;
         }
-
         .log-entry:last-child {
             border-bottom: none;
         }
-
         .log-entry.bookmarked {
             border-left: 4px solid #f1c40f;
         }
-
         .log-entry.highlighted {
             background: rgba(255, 193, 7, 0.1);
             border-left: 3px solid #ffc107;
         }
-
         .log-header {
             display: grid;
             grid-template-columns: auto 1fr auto auto auto;
@@ -279,19 +240,16 @@
             background: inherit;
             z-index: 10;
         }
-
         .timestamp {
             color: #7c3aed;
             font-weight: bold;
             font-size: 12px;
         }
-
         .timestamp .relative-time {
             color: #8b949e;
             font-size: 10px;
             display: block;
         }
-
         .level {
             padding: 4px 8px;
             border-radius: 4px;
@@ -299,53 +257,43 @@
             font-weight: bold;
             text-transform: uppercase;
         }
-
         .level-error {
             background: #da3633;
             color: white;
         }
-
         .level-debug {
             background: #1f6feb;
             color: white;
         }
-
         .level-info {
             background: #238636;
             color: white;
         }
-
         .level-warning {
             background: #fb8500;
             color: white;
         }
-
         .level-notice {
             background: #fbbf24;
             color: #000;
         }
-
         .level-fatal {
             background: #dc2626;
             color: white;
             animation: pulse 2s infinite;
         }
-
         @keyframes pulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.7; }
         }
-
         .server {
             color: #79c0ff;
             font-size: 12px;
         }
-
         .pid {
             color: #ffa657;
             font-size: 12px;
         }
-
         .bookmark-btn {
             background: none;
             border: none;
@@ -355,30 +303,24 @@
             padding: 4px;
             transition: color 0.2s;
         }
-
         .bookmark-btn:hover {
             color: #f1c40f;
         }
-
         .bookmark-btn.active {
             color: #f1c40f;
         }
-
         .log-details {
             display: grid;
             grid-template-columns: 1fr;
             gap: 10px;
         }
-
         .filename {
             color: #a5f3fc;
             font-size: 12px;
         }
-
         .filename .line-number {
             color: #fbbf24;
         }
-
         .message {
             background: #21262d;
             border-left: 3px solid #58a6ff;
@@ -387,19 +329,15 @@
             color: #f0f6fc;
             font-size: 13px;
         }
-
         .message.php-error {
             border-left-color: #da3633;
         }
-
         .message.php-notice {
             border-left-color: #fbbf24;
         }
-
         .message.php-warning {
             border-left-color: #fb8500;
         }
-
         .php-insight {
             background: #2d1b69;
             border: 1px solid #553c9a;
@@ -409,13 +347,11 @@
             font-size: 11px;
             color: #c4b5fd;
         }
-
         .php-insight .insight-title {
             font-weight: bold;
             color: #a78bfa;
             margin-bottom: 3px;
         }
-
         .stack-trace {
             background: #161b22;
             border: 1px solid #30363d;
@@ -426,7 +362,6 @@
             transition: max-height 0.3s ease;
             overflow: hidden;
         }
-
         .stack-trace-header {
             color: #fbbf24;
             margin-bottom: 5px;
@@ -436,24 +371,19 @@
             align-items: center;
             gap: 8px;
         }
-
         .stack-trace-header:hover {
             color: #fde047;
         }
-
         .stack-trace-content {
             color: #94a3b8;
             white-space: pre-wrap;
         }
-
         .stack-trace.collapsed {
             max-height: 40px;
         }
-
         .stack-trace.collapsed .stack-trace-content {
             display: none;
         }
-
         .group-header {
             background: #21262d;
             border: 1px solid #30363d;
@@ -467,12 +397,10 @@
             align-items: center;
             transition: all 0.3s ease;
         }
-
         .group-header:hover {
             background: #30363d;
             transform: translateY(-1px);
         }
-
         .group-count {
             background: #238636;
             color: white;
@@ -480,16 +408,6 @@
             border-radius: 12px;
             font-size: 11px;
         }
-
-        .group-similarity {
-            background: #1f6feb;
-            color: white;
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-size: 10px;
-            margin-left: 5px;
-        }
-
         .group-content {
             margin-left: 20px;
             border-left: 2px solid #30363d;
@@ -497,24 +415,20 @@
             transition: all 0.3s ease;
             overflow: hidden;
         }
-
         .group-content.collapsed {
             max-height: 0;
             padding: 0 0 0 15px;
         }
-
         .no-logs {
             text-align: center;
             padding: 60px 20px;
             color: #8b949e;
         }
-
         .regex-highlight {
             background: rgba(255, 193, 7, 0.3);
             padding: 1px 2px;
             border-radius: 2px;
         }
-
         .keyboard-shortcuts {
             position: fixed;
             top: 50%;
@@ -528,44 +442,36 @@
             z-index: 2000;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
         }
-
         .keyboard-shortcuts h3 {
             color: #f0f6fc;
             margin-bottom: 15px;
         }
-
         .shortcut-item {
             display: flex;
             justify-content: space-between;
             margin-bottom: 8px;
             font-size: 12px;
         }
-
         .shortcut-key {
             background: #0d1117;
             padding: 2px 6px;
             border-radius: 3px;
             border: 1px solid #30363d;
         }
-
         @media (max-width: 768px) {
             .controls {
                 grid-template-columns: 1fr;
             }
-            
             .log-header {
                 grid-template-columns: 1fr;
                 gap: 8px;
             }
-            
             .stats {
                 grid-template-columns: repeat(2, 1fr);
             }
-            
             .container {
                 padding: 15px;
             }
-
             .floating-toolbar {
                 flex-direction: row;
                 bottom: 10px;
@@ -581,11 +487,9 @@
             <h1>LogLens Local</h1>
             <p>Enhanced PHP log parser for backend developers</p>
         </div>
-
         <div class="controls">
             <div class="input-section">
                 <textarea id="logInput" placeholder="Paste your raw log entries here...
-
 Example:
 Aug  1 16:04:12 172.20.10.2 townnews-error[1492212]: [filename=...] [level=error] [line=919] [message=...] [time=...] #0 ... #1 ...
 
@@ -599,7 +503,6 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
                     <button class="secondary" onclick="toggleShortcuts()">Shortcuts (?)</button>
                 </div>
             </div>
-
             <div class="filter-section">
                 <div class="filter-group">
                     <h3>Filters</h3>
@@ -629,7 +532,6 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
                         </div>
                     </div>
                 </div>
-
                 <div class="filter-group">
                     <h3>Options</h3>
                     <div class="filter-controls">
@@ -661,7 +563,6 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
                 </div>
             </div>
         </div>
-
         <div id="stats" class="stats" style="display: none;">
             <div class="stat-item">
                 <div class="stat-value" id="totalCount">0</div>
@@ -680,7 +581,6 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
                 <div class="stat-label">Time Range</div>
             </div>
         </div>
-
         <div id="heatmap" class="heatmap" style="display: none;">
             <h3>Error Frequency Timeline</h3>
             <div class="heatmap-bar" id="heatmapBar"></div>
@@ -689,7 +589,6 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
                 <span>High</span>
             </div>
         </div>
-
         <div id="logOutput" class="log-entries">
             <div class="no-logs">
                 <h3>No logs to display</h3>
@@ -698,14 +597,12 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             </div>
         </div>
     </div>
-
     <div class="floating-toolbar" id="floatingToolbar">
         <button onclick="copyAllLogs()">📋 Copy All</button>
         <button onclick="collapseAllGroups()">📁 Collapse All</button>
         <button onclick="expandAllGroups()">📂 Expand All</button>
         <button onclick="clearBookmarks()">⭐ Clear Bookmarks</button>
     </div>
-
     <div class="keyboard-shortcuts" id="keyboardShortcuts">
         <h3>Keyboard Shortcuts</h3>
         <div class="shortcut-item">
@@ -732,16 +629,18 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             <button class="secondary" onclick="toggleShortcuts()">Close</button>
         </div>
     </div>
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-core.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-php.min.js"></script>
     <script>
+        // LogLens Local - JavaScript Logic
+        // This script handles parsing, filtering, and rendering of log entries.
+
         let parsedLogs = [];
         let filteredLogs = [];
         let bookmarkedLogs = new Set();
         let currentRegex = null;
 
-        // PHP error patterns and insights
+        // PHP error patterns and insights for generating helpful suggestions.
         const phpInsights = {
             'Undefined array key': {
                 title: 'Undefined Array Key',
@@ -769,13 +668,16 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             }
         };
 
+        /**
+         * Main function to parse log input from the textarea.
+         * It splits the input, parses each line, applies filters, and renders the output.
+         */
         function parseLog() {
             const input = document.getElementById('logInput').value.trim();
             if (!input) return;
 
             const lines = input.split('\n').filter(line => line.trim());
             parsedLogs = [];
-
             lines.forEach((line, index) => {
                 const parsed = parseLogLine(line);
                 if (parsed) {
@@ -791,46 +693,54 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             showFloatingToolbar();
         }
 
+        /**
+         * Parses a single log line using a robust regex pattern.
+         * @param {string} line The raw log string.
+         * @returns {object|null} The parsed log object or null if parsing fails.
+         */
         function parseLogLine(line) {
-            const patterns = [
-                /^(\w+\s+\d+\s+\d+:\d+:\d+)\s+([^\s]+)\s+([^[]+)\[(\d+)\]:\s*(.+)$/,
-            ];
+            // Updated regex to correctly parse the example log format.
+            const pattern = /^(\w+\s+\d+\s+\d{2}:\d{2}:\d{2})\s+([^\[\]]+)\s+([^\[]+)\[(\d+)\]:\s*(.+)$/;
+            const match = line.match(pattern);
 
-            for (const pattern of patterns) {
-                const match = line.match(pattern);
-                if (match) {
-                    const [, timestamp, server, service, pid, content] = match;
-                    
-                    const parsed = {
-                        timestamp,
-                        server,
-                        service,
-                        pid,
-                        content,
-                        raw: line,
-                        parsedDate: parseTimestamp(timestamp)
-                    };
-
-                    parseStructuredContent(parsed, content);
-                    return parsed;
-                }
+            if (match) {
+                const [, timestamp, server, service, pid, content] = match;
+                
+                const parsed = {
+                    timestamp,
+                    server,
+                    service,
+                    pid,
+                    content,
+                    raw: line,
+                    parsedDate: parseTimestamp(timestamp)
+                };
+                parseStructuredContent(parsed, content);
+                return parsed;
             }
-
             return null;
         }
 
+        /**
+         * Parses a timestamp string and returns a Date object. Assumes the current year.
+         * @param {string} timestamp The timestamp string (e.g., "Aug 1 16:04:12").
+         * @returns {Date} The parsed Date object.
+         */
         function parseTimestamp(timestamp) {
-            // Convert "Aug 1 16:04:12" to proper date
             const year = new Date().getFullYear();
             const dateStr = `${timestamp} ${year}`;
             return new Date(dateStr);
         }
 
+        /**
+         * Parses the structured content of a log line (e.g., [key=value]).
+         * @param {object} parsed The log object to populate.
+         * @param {string} content The structured content part of the log line.
+         */
         function parseStructuredContent(parsed, content) {
             const kvPattern = /\[([^=]+)=([^\]]*)\]/g;
             let match;
             const fields = {};
-
             while ((match = kvPattern.exec(content)) !== null) {
                 fields[match[1]] = match[2];
             }
@@ -838,22 +748,24 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             parsed.level = fields.level || 'info';
             parsed.filename = fields.filename || 'Unknown';
             parsed.line = fields.line || '';
-            parsed.message = fields.message || '';
-            parsed.time = fields.time || '';
+            parsed.message = fields.message || content; // Fallback to content if no message is found.
 
             // Extract and highlight stack trace
-            const stackMatch = content.match(/#\d+[^#]*(?:#\d+[^#]*)*/);
+            const stackMatch = content.match(/#\d+[^\n]*(?:\n#\d+[^\n]*)*/);
             if (stackMatch) {
                 parsed.stackTrace = highlightStackTrace(stackMatch[0]);
             }
 
-            // Generate signature for grouping with similarity
-            parsed.signature = generateSignature(parsed);
-            parsed.similarity = calculateSimilarity(parsed);
+            // Generate signature for grouping based on message prefix
+            parsed.similarity = parsed.message.toLowerCase().split(/\s+/).slice(0, 5).join(' ');
         }
 
+        /**
+         * Highlights PHP syntax in a stack trace string.
+         * @param {string} stackTrace The raw stack trace string.
+         * @returns {string} The HTML-formatted stack trace.
+         */
         function highlightStackTrace(stackTrace) {
-            // Simple PHP syntax highlighting for stack traces
             return stackTrace
                 .replace(/(\w+)::/g, '<span style="color: #79c0ff">$1</span>::')
                 .replace(/->(\w+)/g, '-><span style="color: #ffa657">$1</span>')
@@ -861,50 +773,9 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
                 .replace(/\((\d+)\)/g, '(<span style="color: #fbbf24">$1</span>)');
         }
 
-        function generateSignature(log) {
-            const key = `${log.service}-${log.filename}-${log.line}-${log.level}`;
-            return key.replace(/\d+/g, 'N');
-        }
-
-        function calculateSimilarity(log) {
-            // Simple similarity score based on message content
-            const words = log.message.toLowerCase().split(/\s+/);
-            return words.slice(0, 5).join(' '); // Use first 5 words as similarity key
-        }
-
-        function levenshteinDistance(str1, str2) {
-            const matrix = [];
-            const n = str1.length;
-            const m = str2.length;
-
-            if (n === 0) return m;
-            if (m === 0) return n;
-
-            for (let i = 0; i <= m; i++) {
-                matrix[i] = [i];
-            }
-
-            for (let j = 0; j <= n; j++) {
-                matrix[0][j] = j;
-            }
-
-            for (let i = 1; i <= m; i++) {
-                for (let j = 1; j <= n; j++) {
-                    if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
-                        matrix[i][j] = matrix[i - 1][j - 1];
-                    } else {
-                        matrix[i][j] = Math.min(
-                            matrix[i - 1][j - 1] + 1,
-                            matrix[i][j - 1] + 1,
-                            matrix[i - 1][j] + 1
-                        );
-                    }
-                }
-            }
-
-            return matrix[m][n];
-        }
-
+        /**
+         * Applies filters from the UI to the parsed logs.
+         */
         function applyFilters() {
             const levelFilter = document.getElementById('levelFilter').value;
             const messageFilter = document.getElementById('messageFilter').value.toLowerCase();
@@ -918,7 +789,7 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
                 try {
                     currentRegex = new RegExp(regexPattern, 'gi');
                 } catch (e) {
-                    // Invalid regex, ignore
+                    console.error("Invalid regex:", e);
                 }
             }
 
@@ -931,30 +802,39 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             });
         }
 
+        /**
+         * Updates the statistics displayed in the stats bar.
+         */
         function updateStats() {
             document.getElementById('stats').style.display = 'block';
             document.getElementById('totalCount').textContent = parsedLogs.length;
             
-            const errorCount = parsedLogs.filter(log => log.level === 'error').length;
+            const errorCount = parsedLogs.filter(log => log.level === 'error' || log.level === 'fatal').length;
             document.getElementById('errorCount').textContent = errorCount;
 
             const uniqueFiles = new Set(parsedLogs.map(log => log.filename)).size;
             document.getElementById('uniqueFiles').textContent = uniqueFiles;
-
+            
             if (parsedLogs.length > 0) {
-                const first = parsedLogs[0].timestamp;
-                const last = parsedLogs[parsedLogs.length - 1].timestamp;
-                document.getElementById('timeRange').textContent = `${first} - ${last.split(' ').slice(1).join(' ')}`;
+                const firstDate = parsedLogs[0].parsedDate;
+                const lastDate = parsedLogs[parsedLogs.length - 1].parsedDate;
+                const timeDiffMs = lastDate - firstDate;
+                const timeDiffMin = Math.floor(timeDiffMs / 60000);
+                document.getElementById('timeRange').textContent = `${timeDiffMin} minutes`;
+            } else {
+                 document.getElementById('timeRange').textContent = '-';
             }
         }
 
+        /**
+         * Generates the heatmap timeline visualization.
+         */
         function generateHeatmap() {
             if (parsedLogs.length === 0) return;
             
             document.getElementById('heatmap').style.display = 'block';
             const heatmapBar = document.getElementById('heatmapBar');
             
-            // Group logs by hour
             const hourlyData = {};
             parsedLogs.forEach(log => {
                 const hour = log.parsedDate.getHours();
@@ -966,7 +846,7 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             
             for (let hour = 0; hour < 24; hour++) {
                 const count = hourlyData[hour] || 0;
-                const intensity = count / maxCount;
+                const intensity = maxCount > 0 ? count / maxCount : 0;
                 const segment = document.createElement('div');
                 segment.className = 'heatmap-segment';
                 segment.style.width = `${100/24}%`;
@@ -976,6 +856,9 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             }
         }
 
+        /**
+         * Renders the log entries based on filters and grouping options.
+         */
         function renderLogs() {
             const output = document.getElementById('logOutput');
             const groupSimilar = document.getElementById('groupSimilar').checked;
@@ -985,66 +868,52 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
                 return;
             }
 
-            if (groupSimilar) {
-                renderGroupedLogs(output);
-            } else {
-                renderFlatLogs(output);
-            }
-        }
-
-        function renderGroupedLogs(output) {
-            const groups = {};
-            
-            filteredLogs.forEach(log => {
-                const key = log.similarity;
-                if (!groups[key]) {
-                    groups[key] = [];
-                }
-                groups[key].push(log);
-            });
-
             let html = '';
-            Object.keys(groups).forEach(key => {
-                const logs = groups[key];
-                const firstLog = logs[0];
-                const count = logs.length;
-                
-                // Calculate similarity score
-                const avgSimilarity = logs.length > 1 ? 
-                    Math.round((1 - (levenshteinDistance(logs[0].message, logs[1]?.message || '') / Math.max(logs[0].message.length, logs[1]?.message?.length || 0))) * 100) : 100;
-
-                html += `
-                    <div class="group-header" onclick="toggleGroup('${btoa(key)}')">
-                        <div>
-                            <strong>${firstLog.service}</strong> - ${firstLog.filename}:${firstLog.line} 
-                            ${firstLog.message.substring(0, 100)}${firstLog.message.length > 100 ? '...' : ''}
-                        </div>
-                        <div>
-                            <span class="group-count">${count}</span>
-                            ${logs.length > 1 ? `<span class="group-similarity">${avgSimilarity}%</span>` : ''}
-                        </div>
-                    </div>
-                    <div class="group-content" id="group-${btoa(key)}">
-                `;
-
-                logs.forEach(log => {
-                    html += renderLogEntry(log);
+            if (groupSimilar) {
+                const groups = {};
+                filteredLogs.forEach(log => {
+                    const key = log.similarity;
+                    if (!groups[key]) {
+                        groups[key] = [];
+                    }
+                    groups[key].push(log);
                 });
 
-                html += '</div>';
-            });
-
+                Object.keys(groups).forEach(key => {
+                    const logs = groups[key];
+                    const firstLog = logs[0];
+                    const count = logs.length;
+                    
+                    html += `
+                        <div class="group-header" onclick="toggleGroup('${btoa(key)}')">
+                            <div>
+                                <strong>${firstLog.service}</strong> - ${firstLog.filename}:${firstLog.line} 
+                                ${firstLog.message.substring(0, 100)}${firstLog.message.length > 100 ? '...' : ''}
+                            </div>
+                            <div>
+                                <span class="group-count">${count}</span>
+                            </div>
+                        </div>
+                        <div class="group-content" id="group-${btoa(key)}">
+                    `;
+                    logs.forEach(log => {
+                        html += renderLogEntry(log);
+                    });
+                    html += '</div>';
+                });
+            } else {
+                filteredLogs.forEach(log => {
+                    html += renderLogEntry(log);
+                });
+            }
             output.innerHTML = html;
         }
 
-        function renderFlatLogs(output) {
-            let html = '';
-            filteredLogs.forEach(log => {
-                html += renderLogEntry(log);
-            });
-            output.innerHTML = html;
-        }
-
+        /**
+         * Renders a single log entry as an HTML string.
+         * @param {object} log The log object to render.
+         * @returns {string} The HTML string for the log entry.
+         */
         function renderLogEntry(log) {
             const collapseStack = document.getElementById('collapseStack').checked;
             const showRelativeTime = document.getElementById('showRelativeTime').checked;
@@ -1053,19 +922,13 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             const relativeTime = showRelativeTime ? getRelativeTime(log.parsedDate) : '';
             const isBookmarked = bookmarkedLogs.has(log.originalIndex);
             
-            // Apply regex highlighting
             let highlightedMessage = log.message;
             if (currentRegex) {
-                highlightedMessage = log.message.replace(currentRegex, '<span class="regex-highlight">            if (parsedLogs.length > 0) {
-                const first = parsedLogs[0].timestamp;
-                const last = parsedLogs[parsedLogs.length - 1].timestamp;
-                document.getElementById('timeRange').textContent = `${first} - ${last.split(' ').slice(1).join(' ')}`;</span>');
+                highlightedMessage = log.message.replace(currentRegex, `<span class="regex-highlight">$&</span>`);
             }
             
-            // Get PHP insight
             const insight = phpInsightsEnabled ? getPHPInsight(log.message) : null;
             
-            // Determine message class based on PHP error type
             let messageClass = '';
             const message = log.message.toLowerCase();
             if (message.includes('fatal error') || message.includes('parse error')) {
@@ -1080,7 +943,7 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
                 <div class="log-entry ${isBookmarked ? 'bookmarked' : ''}" data-index="${log.originalIndex}">
                     <div class="log-header">
                         <div class="timestamp">
-                            ${formatTimestamp(log.timestamp)}
+                            ${formatTimestamp(log.parsedDate)}
                             ${relativeTime ? `<span class="relative-time">${relativeTime}</span>` : ''}
                         </div>
                         <div class="server">${log.server}</div>
@@ -1115,22 +978,40 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             `;
         }
 
-        function formatTimestamp(timestamp) {
+        /**
+         * Formats a Date object to a string based on the selected timezone.
+         * @param {Date} date The Date object to format.
+         * @returns {string} The formatted date string.
+         */
+        function formatTimestamp(date) {
             const timezone = document.getElementById('timezoneSelect').value;
-            const date = new Date(timestamp + ' ' + new Date().getFullYear());
-            
+            const options = {
+                year: 'numeric', month: 'short', day: 'numeric',
+                hour: '2-digit', minute: '2-digit', second: '2-digit',
+                hour12: false
+            };
+
             switch (timezone) {
                 case 'utc':
-                    return date.toUTCString().slice(0, -4);
+                    options.timeZone = 'UTC';
+                    break;
                 case 'est':
-                    return date.toLocaleString('en-US', { timeZone: 'America/New_York' });
+                    options.timeZone = 'America/New_York';
+                    break;
                 case 'pst':
-                    return date.toLocaleString('en-US', { timeZone: 'America/Los_Angeles' });
-                default:
-                    return timestamp;
+                    options.timeZone = 'America/Los_Angeles';
+                    break;
+                default: // local
+                    return date.toLocaleString('en-US', options);
             }
+            return date.toLocaleString('en-US', options);
         }
 
+        /**
+         * Calculates the relative time string (e.g., "5s ago").
+         * @param {Date} date The date to compare against the current time.
+         * @returns {string} The relative time string.
+         */
         function getRelativeTime(date) {
             const now = new Date();
             const diffMs = now - date;
@@ -1145,6 +1026,11 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             return `${diffSecs}s ago`;
         }
 
+        /**
+         * Gets a PHP insight object based on the log message.
+         * @param {string} message The log message string.
+         * @returns {object|null} The insight object or null.
+         */
         function getPHPInsight(message) {
             for (const [pattern, insight] of Object.entries(phpInsights)) {
                 if (message.includes(pattern)) {
@@ -1154,6 +1040,10 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             return null;
         }
 
+        /**
+         * Toggles the visibility of a log group.
+         * @param {string} signature The base64-encoded group signature.
+         */
         function toggleGroup(signature) {
             const group = document.getElementById(`group-${signature}`);
             if (group) {
@@ -1161,6 +1051,10 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             }
         }
 
+        /**
+         * Toggles the visibility of a stack trace section.
+         * @param {HTMLElement} element The header element of the stack trace.
+         */
         function toggleStackTrace(element) {
             const stackTrace = element.parentElement;
             stackTrace.classList.toggle('collapsed');
@@ -1170,11 +1064,14 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
                 span.textContent = 'Stack Trace (click to expand)';
             } else {
                 span.textContent = 'Stack Trace (click to collapse)';
-                // Trigger Prism highlighting
                 Prism.highlightAllUnder(stackTrace);
             }
         }
 
+        /**
+         * Toggles the bookmarked status of a log entry.
+         * @param {number} index The original index of the log entry.
+         */
         function toggleBookmark(index) {
             if (bookmarkedLogs.has(index)) {
                 bookmarkedLogs.delete(index);
@@ -1184,14 +1081,19 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             renderLogs();
         }
 
+        /**
+         * Shows the floating toolbar.
+         */
         function showFloatingToolbar() {
             document.getElementById('floatingToolbar').style.display = 'flex';
         }
 
+        /**
+         * Copies all filtered logs to the clipboard.
+         */
         function copyAllLogs() {
             const logText = filteredLogs.map(log => log.raw).join('\n');
             navigator.clipboard.writeText(logText).then(() => {
-                // Visual feedback
                 const btn = event.target;
                 const originalText = btn.textContent;
                 btn.textContent = '✅ Copied!';
@@ -1199,6 +1101,9 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             });
         }
 
+        /**
+         * Collapses all log groups and stack traces.
+         */
         function collapseAllGroups() {
             document.querySelectorAll('.group-content').forEach(group => {
                 group.classList.add('collapsed');
@@ -1208,6 +1113,9 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             });
         }
 
+        /**
+         * Expands all log groups and stack traces.
+         */
         function expandAllGroups() {
             document.querySelectorAll('.group-content').forEach(group => {
                 group.classList.remove('collapsed');
@@ -1217,11 +1125,17 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             });
         }
 
+        /**
+         * Clears all bookmarks.
+         */
         function clearBookmarks() {
             bookmarkedLogs.clear();
             renderLogs();
         }
 
+        /**
+         * Exports the filtered logs to a JSON file.
+         */
         function exportLogs() {
             const data = {
                 timestamp: new Date().toISOString(),
@@ -1240,6 +1154,9 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             URL.revokeObjectURL(url);
         }
 
+        /**
+         * Clears all log data from the app.
+         */
         function clearAll() {
             document.getElementById('logInput').value = '';
             document.getElementById('logOutput').innerHTML = '<div class="no-logs"><h3>No logs to display</h3><p>Paste log entries above and click "Parse Logs" to get started</p><p><small>Press Ctrl+Enter to parse quickly</small></p></div>';
@@ -1251,10 +1168,12 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             bookmarkedLogs.clear();
         }
 
+        /**
+         * Loads a log file from the user's computer.
+         */
         function loadFile() {
             const file = document.getElementById('fileInput').files[0];
             if (!file) return;
-
             const reader = new FileReader();
             reader.onload = function(e) {
                 document.getElementById('logInput').value = e.target.result;
@@ -1263,12 +1182,15 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             reader.readAsText(file);
         }
 
+        /**
+         * Toggles the keyboard shortcuts modal.
+         */
         function toggleShortcuts() {
             const shortcuts = document.getElementById('keyboardShortcuts');
             shortcuts.style.display = shortcuts.style.display === 'block' ? 'none' : 'block';
         }
 
-        // Keyboard shortcuts
+        // Keyboard shortcuts event listener
         document.addEventListener('keydown', function(e) {
             // Ctrl+Enter: Parse logs
             if (e.ctrlKey && e.key === 'Enter') {
@@ -1309,7 +1231,7 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             }
         });
 
-        // Auto-apply filters when changed
+        // Event listeners for auto-applying filters
         ['levelFilter', 'messageFilter', 'filenameFilter', 'serverFilter', 'regexFilter'].forEach(id => {
             document.getElementById(id).addEventListener('input', () => {
                 if (parsedLogs.length > 0) {
@@ -1319,6 +1241,7 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             });
         });
 
+        // Event listeners for rendering options
         ['groupSimilar', 'collapseStack', 'showRelativeTime', 'phpInsights'].forEach(id => {
             document.getElementById(id).addEventListener('change', () => {
                 if (parsedLogs.length > 0) {
@@ -1327,13 +1250,14 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
             });
         });
 
+        // Event listener for timezone change
         document.getElementById('timezoneSelect').addEventListener('change', () => {
             if (parsedLogs.length > 0) {
                 renderLogs();
             }
         });
 
-        // URL parameter loading
+        // URL parameter loading on window load
         window.addEventListener('load', function() {
             const urlParams = new URLSearchParams(window.location.search);
             const logData = urlParams.get('logs');
@@ -1345,10 +1269,7 @@ Keyboard shortcuts: Ctrl+Enter to parse, Esc to clear, ? for help"></textarea>
                     console.error('Error loading logs from URL:', e);
                 }
             }
-        });
-
-        // Auto-highlight syntax after rendering
-        document.addEventListener('DOMContentLoaded', function() {
+            // Initial highlighting for the example logs in the textarea
             Prism.highlightAll();
         });
     </script>
