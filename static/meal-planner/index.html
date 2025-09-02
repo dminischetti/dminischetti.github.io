@@ -723,21 +723,6 @@
             font-weight: 600;
         }
 
-        .picker-search {
-            padding: 12px 16px;
-            border-bottom: 0.5px solid var(--border-secondary);
-        }
-
-        .search-input {
-            width: 100%;
-            height: 36px;
-            padding: 0 12px;
-            background: var(--bg-tertiary);
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-        }
-
         .picker-options {
             max-height: 300px;
             overflow-y: auto;
@@ -847,9 +832,6 @@
         <div class="picker-header">
             <span class="picker-title" id="pickerTitle">Select Meal</span>
             <button class="picker-done" onclick="closePicker()">Done</button>
-        </div>
-        <div class="picker-search">
-            <input type="text" class="search-input" placeholder="Search..." id="pickerSearch" oninput="filterPicker()">
         </div>
         <div class="picker-options" id="pickerOptions"></div>
     </div>
@@ -1184,27 +1166,8 @@
             const picker = document.getElementById('mealPicker');
             const title = document.getElementById('pickerTitle');
             const options = document.getElementById('pickerOptions');
-            const search = document.getElementById('pickerSearch');
 
             title.textContent = `Select ${type.charAt(0).toUpperCase() + type.slice(1)}`;
-            search.value = '';
-
-            let items = [];
-            if (type === 'lunch') {
-                items = meals.lunch;
-            } else if (type === 'dinner') {
-                const mode = modes[k] || 'regular';
-                const isWeekend = getIndex(k) >= 5;
-                items = mode === 'quick' ? meals.dinner.quick :
-                    mode === 'delivery' ? meals.dinner.delivery :
-                        isWeekend ? meals.dinner.weekend :
-                            meals.dinner.regular;
-                if (!isWeekend && mode === 'regular') {
-                    items = [...items, ...meals.dinner.other];
-                }
-            } else {
-                items = ['None', ...meals.side];
-            }
 
             const current = (data[k] || {})[type];
             options.innerHTML = items.map(item =>
@@ -1213,7 +1176,12 @@
 
             picker.classList.add('show');
             document.body.classList.add('no-scroll');
-            setTimeout(() => document.getElementById('pickerSearch').focus(), 0);
+
+            // Nice UX: scroll the currently selected item into view
+            const selected = options.querySelector('.picker-option.selected');
+            if (selected) {
+                options.scrollTop = selected.offsetTop - 100;
+            }
         }
 
         document.addEventListener('keydown', (e) => {
@@ -1243,14 +1211,6 @@
             document.getElementById('mealPicker').classList.remove('show');
             document.body.classList.remove('no-scroll');
             currentPicker = null;
-        }
-
-        function filterPicker() {
-            const query = document.getElementById('pickerSearch').value.toLowerCase();
-            const options = document.querySelectorAll('.picker-option');
-            options.forEach(opt => {
-                opt.style.display = opt.textContent.toLowerCase().includes(query) ? 'block' : 'none';
-            });
         }
 
         function addSwipeToDismiss(panel, onDismiss) {
@@ -1503,7 +1463,6 @@
                 if (i >= 5 && !weekendOn[week]) return;
                 const k = getKey(i);
                 const d = data[k] || {};
-
                 shareContent += `${day}\n`;
                 if (d.lunch) shareContent += `  Lunch: ${d.lunch}\n`;
                 if (d.dinner) {
@@ -1514,10 +1473,6 @@
                 if (!d.lunch && !d.dinner) shareContent += `  No meals\n`;
                 shareContent += '\n';
             });
-
-            document.getElementById('shareTitle').textContent = 'Meal Plan';
-            document.getElementById('shareText').textContent = shareContent;
-            showModal('shareModal');
 
             if (!trySystemShare('Meal Plan', shareContent)) {
                 document.getElementById('shareTitle').textContent = 'Meal Plan';
