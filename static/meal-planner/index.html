@@ -641,6 +641,29 @@
             animation: slideIn 0.3s ease-out;
         }
 
+        /* lock button in day header */
+        .lock-btn {
+            background: none;
+            border: 0;
+            padding: 6px;
+            margin-right: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            line-height: 1;
+            color: var(--text-secondary);
+        }
+
+        .lock-btn[aria-pressed="true"] {
+            color: var(--accent-danger);
+        }
+
+        .day-card.locked .day-name::after {
+            content: " · locked";
+            color: var(--text-tertiary);
+            font-weight: 500;
+            font-size: 12px;
+        }
+
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -918,6 +941,7 @@
         let weekendPlanEnabled = {};
         let currentShareContent = '';
         let weekendPlanByWeek = { this: false, next: false }; // single toggle per week
+        let lockedDays = {}; // { [dayKey]: true }
 
         function isWeekendEnabled() {
             return !!weekendPlanByWeek[selectedWeek];
@@ -998,6 +1022,10 @@
                 }
             }
 
+            if (lockedDays && lockedDays[dayKey] !== undefined) {
+                delete lockedDays[dayKey];
+            }
+
             weekendPlanByWeek[selectedWeek] = false;
 
             currentShareContent = '';
@@ -1036,12 +1064,16 @@
                 }
 
                 const date = getDateForIndex(index, selectedWeek);
-                const dayKey = getDayKeyFromDate(date, selectedWeek);
+                const isWknd = isWeekendDate(date);
 
+                // Skip rendering Sat/Sun when weekend planning is OFF
+                if (isWknd && !isWeekendEnabled()) return;
+
+                const dayKey = getDayKeyFromDate(date, selectedWeek);
                 if (!mealData[dayKey]) mealData[dayKey] = { lunch: '', dinner: '', dinnerSide: '' };
                 if (weekendPlanEnabled[dayKey] === undefined) weekendPlanEnabled[dayKey] = false; // legacy no-op
 
-                const card = createDayCard(name, date, isWeekendDate(date), dayKey);
+                const card = createDayCard(name, date, isWknd, dayKey);
                 container.appendChild(card);
             });
 
@@ -1061,6 +1093,17 @@
             card.className = `day-card ${isWeekend ? 'weekend' : ''} ${hasMeals ? 'has-meals' : ''} ${(isWeekend && !isWeekendEnabled()) ? 'optional' : ''}`;
 
             const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+            const locked = !!lockedDays[dayKey];
+            card.className = `day-card ${isWeekend ? 'weekend' : ''} ${hasMeals ? 'has-meals' : ''} ${(isWeekend && !isWeekendEnabled()) ? 'optional' : ''} ${locked ? 'locked' : ''}`;
+
+            const headerRight = `
+  <button class="lock-btn"
+          aria-label="Lock day from shuffle"
+          aria-pressed="${locked ? 'true' : 'false'}"
+          onclick="toggleLock(event, '${dayKey}')">${locked ? '🔒' : '🔓'}</button>
+  <span class="chevron">▼</span>
+`;
+
 
             if (isWeekend) {
                 card.innerHTML = `
@@ -1072,7 +1115,7 @@
           <span class="day-date">${dateStr}</span>
         </div>
       </div>
-      <span class="chevron">▼</span>
+      ${headerRight}
     </div>
     <div class="meals-content">
       ${isWeekendEnabled()
@@ -1095,7 +1138,7 @@
                                 <span class="day-date">${dateStr}</span>
                             </div>
                         </div>
-                        <span class="chevron">▼</span>
+                        ${headerRight}
                     </div>
                     <div class="meals-content">
                         ${createMeals(dayKey, false)}
@@ -1110,11 +1153,30 @@
                 if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleDay(header); }
             });
             const updateAria = () => header.setAttribute('aria-expanded', card.classList.contains('expanded') ? 'true' : 'false');
+            // prevent header toggle when clicking lock
+            card.querySelector('.lock-btn').addEventListener('click', e => e.stopPropagation());
             card.addEventListener('transitionend', updateAria);
             setTimeout(updateAria, 0);
 
             return card;
         }
+
+        function isDayLocked(dayKey) { return !!lockedDays[dayKey]; }
+
+        function toggleLock(e, dayKey) {
+            e?.stopPropagation?.();
+            lockedDays[dayKey] = !lockedDays[dayKey];
+            saveState();
+            // refresh just this card UI
+            const card = [...document.querySelectorAll('.day-card')].find(c => c.dataset.dayKey === dayKey);
+            if (card) {
+                card.classList.toggle('locked', lockedDays[dayKey]);
+                const btn = card.querySelector('.lock-btn');
+                btn.setAttribute('aria-pressed', lockedDays[dayKey] ? 'true' : 'false');
+                btn.textContent = lockedDays[dayKey] ? '🔒' : '🔓';
+            }
+        }
+
 
         function formatWeekRange(which = selectedWeek) {
             const start = getStartOfWeek(new Date(), which);
@@ -1267,7 +1329,8 @@
             }).filter(dayKey => {
                 const [, y, m, day] = dayKey.split('-').map(Number);
                 const d = new Date(y, m, day);
-                return !isWeekendDate(d) || isWeekendEnabled();
+                const weekendOk = !isWeekendDate(d) || isWeekendEnabled();
+                return weekendOk && !isDayLocked(dayKey); // <-- NEW
             });
         }
 
@@ -1513,30 +1576,34 @@
         // --- Local storage keys ---
         const LS_KEYS = {
             MEALS: 'mealPlanner.mealData',
-            WEEKENDS: 'mealPlanner.weekendPlan',           // legacy per-day (kept for compatibility)
-            WEEKEND_WEEK: 'mealPlanner.weekendPlanByWeek', // NEW per-week toggle
+            WEEKENDS: 'mealPlanner.weekendPlan',
+            WEEKEND_WEEK: 'mealPlanner.weekendPlanByWeek',
             WEEK: 'mealPlanner.selectedWeek',
-            THEME: 'mealPlanner.theme'
+            THEME: 'mealPlanner.theme',
+            LOCKS: 'mealPlanner.lockedDays' // <-- NEW
         };
 
         // --- Local storage helpers ---
         function saveState() {
             localStorage.setItem(LS_KEYS.MEALS, JSON.stringify(mealData));
-            localStorage.setItem(LS_KEYS.WEEKENDS, JSON.stringify(weekendPlanEnabled)); // legacy
-            localStorage.setItem(LS_KEYS.WEEKEND_WEEK, JSON.stringify(weekendPlanByWeek)); // new
+            localStorage.setItem(LS_KEYS.WEEKENDS, JSON.stringify(weekendPlanEnabled));
+            localStorage.setItem(LS_KEYS.WEEKEND_WEEK, JSON.stringify(weekendPlanByWeek));
             localStorage.setItem(LS_KEYS.WEEK, selectedWeek);
+            localStorage.setItem(LS_KEYS.LOCKS, JSON.stringify(lockedDays)); // NEW
         }
 
         function loadState() {
             try {
                 const savedMeals = JSON.parse(localStorage.getItem(LS_KEYS.MEALS) || '{}');
-                const savedWeekends = JSON.parse(localStorage.getItem(LS_KEYS.WEEKENDS) || '{}'); // legacy
-                const savedWeekendWeek = JSON.parse(localStorage.getItem(LS_KEYS.WEEKEND_WEEK) || '{}'); // new
+                const savedWeekends = JSON.parse(localStorage.getItem(LS_KEYS.WEEKENDS) || '{}');
+                const savedWeekendWeek = JSON.parse(localStorage.getItem(LS_KEYS.WEEKEND_WEEK) || '{}');
                 const savedWeek = localStorage.getItem(LS_KEYS.WEEK);
+                const savedLocks = JSON.parse(localStorage.getItem(LS_KEYS.LOCKS) || '{}'); // NEW
                 if (savedWeek === 'this' || savedWeek === 'next') selectedWeek = savedWeek;
                 mealData = savedMeals;
                 weekendPlanEnabled = savedWeekends;
                 weekendPlanByWeek = { this: !!savedWeekendWeek.this, next: !!savedWeekendWeek.next };
+                lockedDays = savedLocks; // NEW
             } catch { /* ignore */ }
         }
 
