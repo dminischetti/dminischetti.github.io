@@ -3,9 +3,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="color-scheme" content="light dark">
     <title>Weekly Meal Planner</title>
     <style>
         * {
@@ -19,7 +21,6 @@
         }
 
         :root {
-            /* iOS-optimized colors */
             --bg-primary: #f2f2f7;
             --bg-secondary: white;
             --bg-tertiary: #f2f2f7;
@@ -77,7 +78,6 @@
             padding-bottom: calc(90px + var(--safe-area-bottom));
         }
 
-        /* Header - iOS style */
         .header {
             background: var(--bg-secondary);
             padding-top: var(--safe-area-top);
@@ -89,27 +89,10 @@
             -webkit-backdrop-filter: blur(20px);
         }
 
-        .header-content {
-            padding: 12px 16px;
-        }
-
-        .header-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header-title {
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
-
-        .header-actions {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-        }
+        .header-content { padding: 12px 16px; }
+        .header-top { display: flex; justify-content: space-between; align-items: center; }
+        .header-title { font-size: 20px; font-weight: 600; letter-spacing: -0.5px; }
+        .header-actions { display: flex; gap: 8px; align-items: center; }
 
         .week-toggle {
             display: flex;
@@ -118,37 +101,14 @@
             padding: 2px;
             height: 32px;
         }
-
         .week-btn {
-            padding: 0 12px;
-            border: none;
-            background: transparent;
-            color: var(--text-secondary);
-            font-size: 13px;
-            font-weight: 600;
-            border-radius: 7px;
-            transition: all 0.2s;
+            padding: 0 12px; border: none; background: transparent;
+            color: var(--text-secondary); font-size: 13px; font-weight: 600;
+            border-radius: 7px; transition: all 0.2s;
         }
+        .week-btn.active { background: var(--bg-secondary); color: var(--text-primary); box-shadow: var(--shadow-sm); }
+        .theme-btn { width: 32px; height: 32px; border: none; background: transparent; font-size: 20px; display: flex; align-items: center; justify-content: center; border-radius: 16px; }
 
-        .week-btn.active {
-            background: var(--bg-secondary);
-            color: var(--text-primary);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .theme-btn {
-            width: 32px;
-            height: 32px;
-            border: none;
-            background: transparent;
-            font-size: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 16px;
-        }
-
-        /* Weekend Toggle */
         .weekend-bar {
             background: var(--bg-secondary);
             padding: 12px 16px;
@@ -157,655 +117,191 @@
             align-items: center;
             border-bottom: 0.5px solid var(--border-color);
         }
-
-        .weekend-label {
-            font-size: 15px;
-            color: var(--text-primary);
-        }
+        .weekend-label { font-size: 15px; color: var(--text-primary); }
 
         .ios-switch {
-            width: 51px;
-            height: 31px;
-            background: var(--toggle-bg);
-            border-radius: 16px;
-            position: relative;
-            transition: background 0.3s;
+            width: 51px; height: 31px; background: var(--toggle-bg);
+            border-radius: 16px; position: relative; transition: background 0.3s;
         }
-
-        .ios-switch.active {
-            background: var(--accent-success);
-        }
-
+        .ios-switch.active { background: var(--accent-success); }
         .ios-switch::after {
-            content: '';
-            position: absolute;
-            width: 27px;
-            height: 27px;
-            background: white;
-            border-radius: 14px;
-            top: 2px;
-            left: 2px;
-            transition: transform 0.3s;
+            content: ''; position: absolute; width: 27px; height: 27px; background: white;
+            border-radius: 14px; top: 2px; left: 2px; transition: transform 0.3s;
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
         }
+        .ios-switch.active::after { transform: translateX(20px); }
 
-        .ios-switch.active::after {
-            transform: translateX(20px);
-        }
-
-        /* Days List */
-        .days-list {
-            background: var(--bg-primary);
-        }
-
-        .day-cell {
-            background: var(--bg-secondary);
-            margin-bottom: 0.5px;
-            transition: all 0.3s;
-        }
-
-        .day-cell.weekend {
-            background: var(--bg-tertiary);
-        }
+        .days-list { background: var(--bg-primary); }
+        .day-cell { background: var(--bg-secondary); margin-bottom: 0.5px; transition: all 0.3s; }
+        .day-cell.weekend { background: var(--bg-tertiary); }
 
         .day-header {
-            padding: 12px 16px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            min-height: 52px;
-            position: relative;
+            padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; min-height: 52px; position: relative;
         }
+        .day-header::after { content: ''; position: absolute; bottom: 0; left: 16px; right: 0; height: 0.5px; background: var(--border-secondary); }
+        .day-cell.expanded .day-header::after { opacity: 0; }
 
-        .day-header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 16px;
-            right: 0;
-            height: 0.5px;
-            background: var(--border-secondary);
-        }
+        .day-left { display: flex; align-items: center; gap: 12px; flex: 1; }
+        .day-indicator { width: 8px; height: 8px; border-radius: 4px; background: var(--accent-success); opacity: 0; transition: opacity 0.3s; }
+        .day-cell.has-meals .day-indicator { opacity: 1; }
 
-        .day-cell.expanded .day-header::after {
-            opacity: 0;
-        }
+        .day-info { flex: 1; }
+        .day-name { font-size: 17px; font-weight: 400; color: var(--text-primary); }
+        .day-date { font-size: 13px; color: var(--text-tertiary); margin-top: 2px; }
 
-        .day-left {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex: 1;
-        }
+        .day-right { display: flex; align-items: center; gap: 8px; }
+        .day-badge { padding: 2px 6px; border-radius: 10px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
+        .badge-quick { background: var(--accent-warning); color: white; }
+        .badge-delivery { background: var(--accent-purple); color: white; }
+        .lock-icon { font-size: 14px; color: var(--text-tertiary); }
+        .chevron { font-size: 14px; color: var(--text-tertiary); transition: transform 0.3s; margin-left: 4px; }
+        .day-cell.expanded .chevron { transform: rotate(180deg); }
 
-        .day-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 4px;
-            background: var(--accent-success);
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
+        .meals-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: var(--bg-secondary); }
+        .day-cell.expanded .meals-content { max-height: 1000px; }
 
-        .day-cell.has-meals .day-indicator {
-            opacity: 1;
-        }
+        .meal-group { padding: 16px; border-bottom: 0.5px solid var(--border-secondary); }
+        .meal-group:last-child { border-bottom: none; }
+        .meal-label { font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
 
-        .day-info {
-            flex: 1;
-        }
-
-        .day-name {
-            font-size: 17px;
-            font-weight: 400;
-            color: var(--text-primary);
-        }
-
-        .day-date {
-            font-size: 13px;
-            color: var(--text-tertiary);
-            margin-top: 2px;
-        }
-
-        .day-right {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .day-badge {
-            padding: 2px 6px;
-            border-radius: 10px;
-            font-size: 11px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
-
-        .badge-quick {
-            background: var(--accent-warning);
-            color: white;
-        }
-
-        .badge-delivery {
-            background: var(--accent-purple);
-            color: white;
-        }
-
-        .lock-icon {
-            font-size: 14px;
-            color: var(--text-tertiary);
-        }
-
-        .chevron {
-            font-size: 14px;
-            color: var(--text-tertiary);
-            transition: transform 0.3s;
-            margin-left: 4px;
-        }
-
-        .day-cell.expanded .chevron {
-            transform: rotate(180deg);
-        }
-
-        /* Meals Content */
-        .meals-content {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-            background: var(--bg-secondary);
-        }
-
-        .day-cell.expanded .meals-content {
-            max-height: 1000px;
-        }
-
-        .meal-group {
-            padding: 16px;
-            border-bottom: 0.5px solid var(--border-secondary);
-        }
-
-        .meal-group:last-child {
-            border-bottom: none;
-        }
-
-        .meal-label {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-
-        /* Input Fields - iOS optimized */
-        .meal-field {
-            position: relative;
-            margin-bottom: 12px;
-        }
-
+        .meal-field { position: relative; margin-bottom: 12px; }
         .meal-input {
-            width: 100%;
-            height: 44px;
-            padding: 0 44px 0 16px;
-            border: 1px solid var(--border-secondary);
-            border-radius: 10px;
-            background: var(--input-bg);
-            font-size: 16px;
-            color: var(--text-primary);
-            -webkit-appearance: none;
-            appearance: none;
+            width: 100%; height: 44px; padding: 0 44px 0 16px;
+            border: 1px solid var(--border-secondary); border-radius: 10px;
+            background: var(--input-bg); font-size: 16px; color: var(--text-primary);
+            -webkit-appearance: none; appearance: none;
         }
-
-        .meal-input:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-        }
+        .meal-input:focus { outline: none; border-color: var(--accent-primary); }
 
         .shuffle-btn {
-            position: absolute;
-            right: 6px;
-            top: 6px;
-            width: 32px;
-            height: 32px;
-            border: none;
-            border-radius: 8px;
-            background: var(--bg-tertiary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
+            position: absolute; right: 6px; top: 6px; width: 32px; height: 32px;
+            border: none; border-radius: 8px; background: var(--bg-tertiary);
+            display: flex; align-items: center; justify-content: center; font-size: 16px;
         }
+        .shuffle-btn:active { background: var(--accent-warning); transform: scale(0.95); }
 
-        .shuffle-btn:active {
-            background: var(--accent-warning);
-            transform: scale(0.95);
-        }
-
-        /* Dinner Mode Pills */
-        .mode-pills {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-        }
-
+        .mode-pills { display: flex; gap: 8px; margin-bottom: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
         .mode-pill {
-            flex: 1;
-            min-width: 80px;
-            height: 36px;
-            border: 1px solid var(--border-secondary);
-            background: var(--bg-tertiary);
-            border-radius: 18px;
-            font-size: 14px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
-            transition: all 0.2s;
+            flex: 1; min-width: 80px; height: 36px; border: 1px solid var(--border-secondary);
+            background: var(--bg-tertiary); border-radius: 18px; font-size: 14px; font-weight: 600;
+            display: flex; align-items: center; justify-content: center; gap: 4px; transition: all 0.2s;
         }
+        .mode-pill.active { background: var(--accent-primary); color: white; border-color: var(--accent-primary); }
+        .mode-pill.active.quick { background: var(--accent-warning); border-color: var(--accent-warning); }
+        .mode-pill.active.delivery { background: var(--accent-purple); border-color: var(--accent-purple); }
 
-        .mode-pill.active {
-            background: var(--accent-primary);
-            color: white;
-            border-color: var(--accent-primary);
-        }
-
-        .mode-pill.active.quick {
-            background: var(--accent-warning);
-            border-color: var(--accent-warning);
-        }
-
-        .mode-pill.active.delivery {
-            background: var(--accent-purple);
-            border-color: var(--accent-purple);
-        }
-
-        /* Day Actions */
-        .day-actions {
-            padding: 12px 16px;
-            background: var(--bg-tertiary);
-            display: flex;
-            gap: 8px;
-        }
-
+        .day-actions { padding: 12px 16px; background: var(--bg-tertiary); display: flex; gap: 8px; }
         .action-btn {
-            flex: 1;
-            height: 36px;
-            border: 1px solid var(--border-secondary);
-            background: var(--bg-secondary);
-            border-radius: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 4px;
+            flex: 1; height: 36px; border: 1px solid var(--border-secondary);
+            background: var(--bg-secondary); border-radius: 10px; font-size: 13px; font-weight: 600;
+            display: flex; align-items: center; justify-content: center; gap: 4px;
         }
+        .action-btn:active { background: var(--bg-tertiary); transform: scale(0.98); }
+        .action-btn.locked { background: var(--accent-danger); color: white; border-color: var(--accent-danger); }
 
-        .action-btn:active {
-            background: var(--bg-tertiary);
-            transform: scale(0.98);
-        }
-
-        .action-btn.locked {
-            background: var(--accent-danger);
-            color: white;
-            border-color: var(--accent-danger);
-        }
-
-        /* Bottom Tab Bar */
         .tab-bar {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--bg-secondary);
-            padding-bottom: var(--safe-area-bottom);
-            border-top: 0.5px solid var(--border-color);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 1000;
+            position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-secondary);
+            padding-bottom: var(--safe-area-bottom); border-top: 0.5px solid var(--border-color);
+            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: 1000;
         }
+        .tab-bar-content { display: flex; padding: 8px 0; }
+        .tab-btn { flex: 1; padding: 8px; border: none; background: transparent; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+        .tab-btn:active { opacity: 0.6; }
+        .tab-icon { font-size: 24px; }
+        .tab-label { font-size: 10px; font-weight: 500; }
+        .tab-btn.shuffle { color: var(--accent-warning); }
+        .tab-btn.grocery { color: var(--accent-success); }
+        .tab-btn.share { color: var(--accent-primary); }
+        .tab-btn.clear { color: var(--accent-danger); }
 
-        .tab-bar-content {
-            display: flex;
-            padding: 8px 0;
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 8px;
-            border: none;
-            background: transparent;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .tab-btn:active {
-            opacity: 0.6;
-        }
-
-        .tab-icon {
-            font-size: 24px;
-        }
-
-        .tab-label {
-            font-size: 10px;
-            font-weight: 500;
-        }
-
-        .tab-btn.shuffle {
-            color: var(--accent-warning);
-        }
-
-        .tab-btn.grocery {
-            color: var(--accent-success);
-        }
-
-        .tab-btn.share {
-            color: var(--accent-primary);
-        }
-
-        .tab-btn.clear {
-            color: var(--accent-danger);
-        }
-
-        /* iOS Modal */
-        .ios-modal {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: var(--modal-backdrop);
-            display: none;
-            z-index: 2000;
-        }
-
-        .ios-modal.show {
-            display: block;
-        }
-
+        .ios-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--modal-backdrop); display: none; z-index: 2000; }
+        .ios-modal.show { display: block; }
         .ios-modal-content {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--bg-secondary);
-            border-radius: 12px 12px 0 0;
-            max-height: 90vh;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
+            position: absolute; bottom: 0; left: 0; right: 0; background: var(--bg-secondary);
+            border-radius: 12px 12px 0 0; max-height: 90vh; transform: translateY(100%); transition: transform 0.3s ease;
         }
-
-        .ios-modal.show .ios-modal-content {
-            transform: translateY(0);
-        }
-
-        .modal-handle {
-            width: 36px;
-            height: 5px;
-            background: var(--border-color);
-            border-radius: 3px;
-            margin: 8px auto;
-        }
-
-        .modal-header {
-            padding: 8px 16px 16px;
-            border-bottom: 0.5px solid var(--border-secondary);
-        }
-
-        .modal-title {
-            font-size: 20px;
-            font-weight: 600;
-            text-align: center;
-        }
-
+        .ios-modal.show .ios-modal-content { transform: translateY(0); }
+        .modal-handle { width: 36px; height: 5px; background: var(--border-color); border-radius: 3px; margin: 8px auto; }
+        .modal-header { padding: 8px 16px 16px; border-bottom: 0.5px solid var(--border-secondary); }
+        .modal-title { font-size: 20px; font-weight: 600; text-align: center; }
         .modal-body {
-            padding: 16px;
-            max-height: 60vh;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
+            padding: 16px; max-height: 60vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
             padding-bottom: calc(16px + var(--safe-area-bottom));
         }
+        .modal-actions { padding: 12px 16px; padding-bottom: calc(12px + var(--safe-area-bottom)); display: flex; gap: 12px; border-top: 0.5px solid var(--border-secondary); }
+        .modal-btn { flex: 1; height: 50px; border: none; border-radius: 12px; font-size: 17px; font-weight: 600; }
+        .modal-btn.primary { background: var(--accent-primary); color: white; }
+        .modal-btn.secondary { background: var(--bg-tertiary); color: var(--text-primary); }
+        .modal-btn:active { opacity: 0.8; }
 
-        .modal-actions {
-            padding: 12px 16px;
-            padding-bottom: calc(12px + var(--safe-area-bottom));
-            display: flex;
-            gap: 12px;
-            border-top: 0.5px solid var(--border-secondary);
-        }
+        .grocery-section { margin-bottom: 24px; }
+        .grocery-title { font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
+        .grocery-item { display: flex; align-items: center; padding: 10px 0; border-bottom: 0.5px solid var(--border-secondary); }
+        .grocery-item:last-child { border-bottom: none; }
+        .grocery-check { width: 22px; height: 22px; margin-right: 12px; accent-color: var(--accent-primary); }
 
-        .modal-btn {
-            flex: 1;
-            height: 50px;
-            border: none;
-            border-radius: 12px;
-            font-size: 17px;
-            font-weight: 600;
-        }
+        .share-text { background: var(--bg-tertiary); border-radius: 10px; padding: 12px; font-family: 'SF Mono', monospace; font-size: 13px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
 
-        .modal-btn.primary {
-            background: var(--accent-primary);
-            color: white;
-        }
+        .empty-state { text-align: center; padding: 48px 24px; color: var(--text-tertiary); }
+        .empty-icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
 
-        .modal-btn.secondary {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-        }
+        .share-text, .search-input, .picker-option, input.meal-input { -webkit-user-select: text; user-select: text; }
 
-        .modal-btn:active {
-            opacity: 0.8;
-        }
+        @keyframes shuffle-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .shuffling { animation: shuffle-spin 0.5s ease; }
 
-        /* Grocery List */
-        .grocery-section {
-            margin-bottom: 24px;
-        }
-
-        .grocery-title {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
-        }
-
-        .grocery-item {
-            display: flex;
-            align-items: center;
-            padding: 10px 0;
-            border-bottom: 0.5px solid var(--border-secondary);
-        }
-
-        .grocery-item:last-child {
-            border-bottom: none;
-        }
-
-        .grocery-check {
-            width: 22px;
-            height: 22px;
-            margin-right: 12px;
-            accent-color: var(--accent-primary);
-        }
-
-        /* Share Content */
-        .share-text {
-            background: var(--bg-tertiary);
-            border-radius: 10px;
-            padding: 12px;
-            font-family: 'SF Mono', monospace;
-            font-size: 13px;
-            line-height: 1.5;
-            white-space: pre-wrap;
-            word-break: break-word;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 48px 24px;
-            color: var(--text-tertiary);
-        }
-
-        .empty-icon {
-            font-size: 48px;
-            margin-bottom: 12px;
-            opacity: 0.5;
-        }
-
-        .share-text,
-        .search-input,
-        .picker-option,
-        input.meal-input {
-            -webkit-user-select: text;
-            user-select: text;
-        }
-
-        /* Animations */
-        @keyframes shuffle-spin {
-            from {
-                transform: rotate(0deg);
-            }
-
-            to {
-                transform: rotate(360deg);
-            }
-        }
-
-        .shuffling {
-            animation: shuffle-spin 0.5s ease;
-        }
-
-        /* Dropdown for meals - iOS style */
         .meal-picker {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--bg-secondary);
-            border-radius: 12px 12px 0 0;
-            max-height: 50vh;
-            transform: translateY(100%);
-            transition: transform 0.3s;
-            z-index: 3000;
-            display: none;
+            position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-secondary);
+            border-radius: 12px 12px 0 0; max-height: 50vh; transform: translateY(100%); transition: transform 0.3s;
+            z-index: 3000; display: none;
         }
+        .meal-picker.show { display: block; transform: translateY(0); }
+        .picker-header { padding: 16px; border-bottom: 0.5px solid var(--border-secondary); display: flex; justify-content: space-between; align-items: center; }
+        .picker-title { font-size: 17px; font-weight: 600; }
+        .picker-done { color: var(--accent-primary); font-size: 17px; font-weight: 600; }
+        .picker-options { max-height: 300px; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: var(--safe-area-bottom); }
+        .picker-option { padding: 14px 16px; border-bottom: 0.5px solid var(--border-secondary); font-size: 17px; }
+        .picker-option:active { background: var(--bg-tertiary); }
+        .picker-option.selected { color: var(--accent-primary); }
+        .picker-option.selected::after { content: '✓'; float: right; color: var(--accent-primary); }
+        .picker-group { padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; background: var(--bg-tertiary); }
 
-        .meal-picker.show {
-            display: block;
-            transform: translateY(0);
-        }
+        input, textarea, button { -webkit-appearance: none; appearance: none; }
 
-        .picker-header {
-            padding: 16px;
-            border-bottom: 0.5px solid var(--border-secondary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
+        .no-scroll { overflow: hidden; position: fixed; width: 100%; }
 
-        .picker-title {
-            font-size: 17px;
-            font-weight: 600;
-        }
-
-        .picker-done {
-            color: var(--accent-primary);
-            font-size: 17px;
-            font-weight: 600;
-        }
-
-        .picker-options {
-            max-height: 300px;
-            overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
-            padding-bottom: var(--safe-area-bottom);
-        }
-
-        .picker-option {
-            padding: 14px 16px;
-            border-bottom: 0.5px solid var(--border-secondary);
-            font-size: 17px;
-        }
-
-        .picker-option:active {
-            background: var(--bg-tertiary);
-        }
-
-        .picker-option.selected {
-            color: var(--accent-primary);
-        }
-
-        .picker-option.selected::after {
-            content: '✓';
-            float: right;
-            color: var(--accent-primary);
-        }
-
-        .picker-group {
-            padding: 8px 16px;
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            background: var(--bg-tertiary);
-        }
-
-        /* Utility */
-        input,
-        textarea,
-        button {
-            -webkit-appearance: none;
-            appearance: none;
-        }
-
-        .no-scroll {
-            overflow: hidden;
-            position: fixed;
-            width: 100%;
+        :focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 2px; }
+        @media (prefers-reduced-motion: reduce) {
+            * { animation: none !important; transition: none !important; }
         }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <!-- Header -->
         <div class="header">
             <div class="header-content">
                 <div class="header-top">
                     <h1 class="header-title">Meal Planner</h1>
                     <div class="header-actions">
-                        <div class="week-toggle">
-                            <button class="week-btn" id="thisWeek" onclick="selectWeek('this')">This</button>
-                            <button class="week-btn active" id="nextWeek" onclick="selectWeek('next')">Next</button>
+                        <div class="week-toggle" role="tablist" aria-label="Week selector">
+                            <button class="week-btn" id="thisWeek" onclick="selectWeek('this')" role="tab" aria-selected="false">This</button>
+                            <button class="week-btn active" id="nextWeek" onclick="selectWeek('next')" role="tab" aria-selected="true">Next</button>
                         </div>
-                        <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
+                        <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme">🌙</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <!-- Weekend Toggle -->
         <div class="weekend-bar">
-            <span class="weekend-label">Include weekend meals</span>
-            <div class="ios-switch" id="weekendSwitch" role="switch" aria-checked="false" tabindex="0"
-                onclick="toggleWeekend()"></div>
+            <span class="weekend-label" id="weekendLabel">Include weekend meals</span>
+            <div class="ios-switch" id="weekendSwitch" role="switch" aria-checked="false" aria-labelledby="weekendLabel" tabindex="0" onclick="toggleWeekend()"></div>
         </div>
 
-        <!-- Days List -->
         <div class="days-list" id="daysList"></div>
     </div>
 
-    <!-- Bottom Tab Bar -->
     <div class="tab-bar">
         <div class="tab-bar-content">
             <button class="tab-btn shuffle" onclick="shuffleAll()">
@@ -827,8 +323,7 @@
         </div>
     </div>
 
-    <!-- Meal Picker -->
-    <div class="meal-picker" id="mealPicker">
+    <div class="meal-picker" id="mealPicker" role="dialog" aria-modal="true" aria-labelledby="pickerTitle">
         <div class="picker-header">
             <span class="picker-title" id="pickerTitle">Select Meal</span>
             <button class="picker-done" onclick="closePicker()">Done</button>
@@ -836,7 +331,6 @@
         <div class="picker-options" id="pickerOptions"></div>
     </div>
 
-    <!-- Grocery Modal -->
     <div class="ios-modal" id="groceryModal">
         <div class="ios-modal-content">
             <div class="modal-handle"></div>
@@ -851,7 +345,6 @@
         </div>
     </div>
 
-    <!-- Share Modal -->
     <div class="ios-modal" id="shareModal">
         <div class="ios-modal-content">
             <div class="modal-handle"></div>
@@ -869,7 +362,6 @@
     </div>
 
     <script>
-        // Meal data
         const meals = {
             lunch: [
                 "Ravioli burro e salvia", "Spaghetti al limone", "Pasta e ceci",
@@ -903,7 +395,6 @@
             ]
         };
 
-        // Ingredients map
         const ingredients = {
             "Ravioli burro e salvia": ["Ravioli", "Burro", "Salvia", "Parmigiano"],
             "Spaghetti al limone": ["Spaghetti", "Limone", "Burro", "Parmigiano"],
@@ -964,7 +455,6 @@
             "Colacena": ["Latte", "Cereali"]
         };
 
-        // State
         let data = {};
         let week = 'next';
         let weekendOn = {};
@@ -972,8 +462,9 @@
         let modes = {};
         let currentPicker = null;
         let shareContent = '';
+        let lastOpen = null;
+        let untrapPicker = null;
 
-        // Initialize
         function init() {
             load();
             syncWeekToggle();
@@ -988,9 +479,10 @@
         function syncWeekToggle() {
             document.getElementById('thisWeek').classList.toggle('active', week === 'this');
             document.getElementById('nextWeek').classList.toggle('active', week === 'next');
+            document.getElementById('thisWeek').setAttribute('aria-selected', String(week === 'this'));
+            document.getElementById('nextWeek').setAttribute('aria-selected', String(week === 'next'));
         }
 
-        // Theme
         function setTheme() {
             const saved = localStorage.getItem('theme');
             const dark = saved ? saved === 'dark' :
@@ -1007,18 +499,19 @@
             document.getElementById('themeBtn').textContent = next === 'dark' ? '☀️' : '🌙';
         }
 
-        // Week
         function selectWeek(w) {
-            if (week !== w) lastOpen = null;     // reset if switching
+            if (week !== w) lastOpen = null;
             week = w;
             document.getElementById('thisWeek').classList.toggle('active', w === 'this');
             document.getElementById('nextWeek').classList.toggle('active', w === 'next');
+            document.getElementById('thisWeek').setAttribute('aria-selected', String(w === 'this'));
+            document.getElementById('nextWeek').setAttribute('aria-selected', String(w === 'next'));
             updateWeekend(); save(); render();
         }
 
         function toggleWeekend() {
             weekendOn[week] = !weekendOn[week];
-            if (!weekendOn[week] && lastOpen && getIndex(lastOpen) >= 5) lastOpen = null; // was Sat/Sun
+            if (!weekendOn[week] && lastOpen && getIndex(lastOpen) >= 5) lastOpen = null;
             updateWeekend();
             if (!weekendOn[week]) {
                 for (let i = 5; i <= 6; i++) {
@@ -1038,50 +531,53 @@
 
         document.getElementById('weekendSwitch').addEventListener('keydown', (e) => {
             if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleWeekend(); }
-        });
+        }, { passive: true });
 
-        // Render
         function render() {
             const list = document.getElementById('daysList');
             const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            const start = getWeekStart();
 
             list.innerHTML = days.map((name, i) => {
                 if (i >= 5 && !weekendOn[week]) return '';
-
-                const k = getKey(i);
+                const k = getKey(i, start);
                 const d = data[k] || { lunch: '', dinner: '', side: '' };
                 const isWeekend = i >= 5;
                 const isLocked = locked[k];
                 const mode = modes[k] || 'regular';
                 const hasMeals = d.lunch || d.dinner;
-                const date = getDate(i);
+                const date = getDate(i, start);
 
                 let badges = '';
-                if (isLocked) badges += '<span class="lock-icon">🔒</span>';
+                if (isLocked) badges += '<span class="lock-icon" aria-hidden="true">🔒</span>';
                 if (mode === 'quick') badges += '<span class="day-badge badge-quick">Quick</span>';
                 if (mode === 'delivery') badges += '<span class="day-badge badge-delivery">Delivery</span>';
+
+                const labelId = `day-${k}-label`;
+                const panelId = `panel-${k}`;
 
                 return `
                     <div class="day-cell ${isWeekend ? 'weekend' : ''} ${hasMeals ? 'has-meals' : ''}" id="day-${k}">
                         <div class="day-header"
-                        role="button"
-                        aria-expanded="false"
-                        tabindex="0"
-                        onclick="toggleDay('${k}')"
-                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDay('${k}')}">
+                             role="button"
+                             aria-expanded="false"
+                             aria-controls="${panelId}"
+                             tabindex="0"
+                             onclick="toggleDay('${k}')"
+                             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDay('${k}')}">
                             <div class="day-left">
-                                <div class="day-indicator"></div>
+                                <div class="day-indicator" aria-hidden="true"></div>
                                 <div class="day-info">
-                                    <div class="day-name">${name}</div>
+                                    <div class="day-name" id="${labelId}">${name}</div>
                                     <div class="day-date">${date.toLocaleDateString('en', { month: 'short', day: 'numeric' })}</div>
                                 </div>
                             </div>
                             <div class="day-right">
                                 ${badges}
-                                <span class="chevron">▼</span>
+                                <span class="chevron" aria-hidden="true">▼</span>
                             </div>
                         </div>
-                        <div class="meals-content">
+                        <div class="meals-content" id="${panelId}" role="region" aria-labelledby="${labelId}">
                             ${renderMeals(k, isWeekend)}
                         </div>
                     </div>
@@ -1093,7 +589,7 @@
                 cell.classList.add('expanded');
                 cell.querySelector('.day-header')?.setAttribute('aria-expanded', 'true');
             } else {
-                setTimeout(() => toggleDay(getKey(0)), 100);
+                setTimeout(() => toggleDay(getKey(0, start)), 100);
             }
         }
 
@@ -1112,7 +608,7 @@
                         <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}', 'lunch', this)">🎲</button>
                     </div>
                 </div>
-                
+
                 <div class="meal-group">
                     <div class="meal-label">Dinner</div>
                     ${!isWeekend ? `
@@ -1131,7 +627,7 @@
                             onclick="openPicker('${k}', 'dinner')">
                         <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}', 'dinner', this)">🎲</button>
                     </div>
-                    
+
                     ${mode !== 'delivery' ? `
                         <div style="margin-top: 12px;">
                             <div class="meal-label">Side Dish</div>
@@ -1142,9 +638,9 @@
                                 <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}', 'side', this)">🎲</button>
                             </div>
                         </div>
-                    ` : ''}
+                    ` : `<div aria-hidden="true" aria-disabled="true"></div>`}
                 </div>
-                
+
                 <div class="day-actions">
                     <button class="action-btn ${isLocked ? 'locked' : ''}"
                         onclick="toggleLock('${k}')">${isLocked ? '🔒 Locked' : '🔓 Lock'}</button>
@@ -1160,7 +656,30 @@
             selectMeal(opt.dataset.value);
         });
 
-        // Picker
+        document.getElementById('pickerOptions').addEventListener('keydown', (e) => {
+            const opts = Array.from(e.currentTarget.querySelectorAll('.picker-option'));
+            const i = opts.indexOf(document.activeElement);
+            if (e.key === 'ArrowDown') { (opts[i + 1] || opts[0])?.focus(); e.preventDefault(); }
+            if (e.key === 'ArrowUp') { (opts[i - 1] || opts.at(-1))?.focus(); e.preventDefault(); }
+            if (e.key === 'Enter' || e.key === ' ') {
+                const v = document.activeElement?.dataset.value; if (v) selectMeal(v);
+            }
+        });
+
+        function trapFocus(container) {
+            const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
+            const nodes = () => Array.from(container.querySelectorAll(FOCUSABLE)).filter(el => !el.disabled && el.offsetParent !== null);
+            function onKey(e) {
+                if (e.key !== 'Tab') return;
+                const list = nodes(); if (!list.length) return;
+                const first = list[0], last = list[list.length - 1];
+                if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
+                else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
+            }
+            container.addEventListener('keydown', onKey);
+            return () => container.removeEventListener('keydown', onKey);
+        }
+
         function openPicker(k, type) {
             currentPicker = { key: k, type: type };
             const picker = document.getElementById('mealPicker');
@@ -1169,7 +688,6 @@
 
             title.textContent = `Select ${type.charAt(0).toUpperCase() + type.slice(1)}`;
 
-            // Build the options list (previously removed accidentally)
             let items = [];
             if (type === 'lunch') {
                 items = meals.lunch;
@@ -1180,24 +698,23 @@
                     : mode === 'delivery' ? meals.dinner.delivery
                         : isWeekend ? meals.dinner.weekend
                             : meals.dinner.regular;
-                // include "other" only for weekdays in regular mode
                 if (!isWeekend && mode === 'regular') {
                     items = [...items, ...meals.dinner.other];
                 }
             } else {
-                // side
                 items = ['None', ...meals.side];
             }
 
             const current = (data[k] || {})[type];
             options.innerHTML = items.map(item =>
-                `<div class="picker-option ${item === current ? 'selected' : ''}" data-value="${item}">${item}</div>`
+                `<div class="picker-option ${item === current ? 'selected' : ''}" data-value="${item}" tabindex="0">${item}</div>`
             ).join('');
 
             picker.classList.add('show');
             document.body.classList.add('no-scroll');
+            untrapPicker = trapFocus(picker);
+            picker.querySelector('.picker-done')?.focus();
 
-            // Scroll the selected option into view
             const selected = options.querySelector('.picker-option.selected');
             if (selected) options.scrollTop = selected.offsetTop - 100;
         }
@@ -1215,7 +732,6 @@
         function trySystemShare(title, text) {
             if (navigator.share) {
                 navigator.share({ title, text }).catch(() => {
-                    // fallback to modal if user cancels or share fails
                     document.getElementById('shareTitle').textContent = title;
                     document.getElementById('shareText').textContent = text;
                     showModal('shareModal');
@@ -1228,6 +744,7 @@
         function closePicker() {
             document.getElementById('mealPicker').classList.remove('show');
             document.body.classList.remove('no-scroll');
+            untrapPicker?.(); untrapPicker = null;
             currentPicker = null;
         }
 
@@ -1244,7 +761,7 @@
                 if (deltaY > 90) onDismiss();
                 panel.style.transform = '';
                 startY = null; deltaY = 0;
-            });
+            }, { passive: true });
         }
 
         function selectMeal(value) {
@@ -1263,9 +780,6 @@
             closePicker();
         }
 
-        // Day actions
-        let lastOpen = null;
-
         function toggleDay(k) {
             const cell = document.getElementById(`day-${k}`);
             const opening = !cell.classList.contains('expanded');
@@ -1283,6 +797,7 @@
             } else {
                 lastOpen = null;
             }
+            save();
         }
 
         function toggleLock(k) {
@@ -1295,10 +810,12 @@
             modes[k] = mode;
             if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
 
-            // Clear invalid selections
-            const validDinner = mode === 'quick' ? meals.dinner.quick :
-                mode === 'delivery' ? meals.dinner.delivery :
-                    meals.dinner.regular;
+            const isWeekend = getIndex(k) >= 5;
+            const validDinner = mode === 'quick' ? meals.dinner.quick
+                : mode === 'delivery' ? meals.dinner.delivery
+                    : isWeekend ? meals.dinner.weekend
+                        : meals.dinner.regular;
+
             if (data[k].dinner && !validDinner.includes(data[k].dinner)) {
                 data[k].dinner = '';
             }
@@ -1306,6 +823,14 @@
 
             save();
             render();
+        }
+
+        function pickDifferent(pool, prev) {
+            if (!pool.length) return '';
+            if (pool.length === 1) return pool[0];
+            let choice; let tries = 0;
+            do { choice = pool[Math.floor(Math.random() * pool.length)]; tries++; } while (choice === prev && tries < 6);
+            return choice;
         }
 
         function shuffleMeal(k, type, btn) {
@@ -1328,7 +853,12 @@
                 pool = meals.side;
             }
 
-            data[k][type] = pool[Math.floor(Math.random() * pool.length)];
+            const i = getIndex(k);
+            const prevKey = getKey(i - 1);
+            const prev = data[prevKey] || {};
+            const prevVal = prev[type];
+
+            data[k][type] = pickDifferent(pool, prevVal);
 
             setTimeout(() => {
                 btn?.classList.remove('shuffling');
@@ -1341,19 +871,22 @@
 
             if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
 
+            const i = getIndex(k);
+            const prevKey = getKey(i - 1);
+            const prev = data[prevKey] || {};
             const mode = modes[k] || 'regular';
-            const isWeekend = getIndex(k) >= 5;
+            const isWeekend = i >= 5;
 
-            data[k].lunch = meals.lunch[Math.floor(Math.random() * meals.lunch.length)];
+            data[k].lunch = pickDifferent(meals.lunch, prev.lunch);
 
             const dinnerPool = mode === 'quick' ? meals.dinner.quick :
                 mode === 'delivery' ? meals.dinner.delivery :
                     isWeekend ? meals.dinner.weekend :
                         meals.dinner.regular;
-            data[k].dinner = dinnerPool[Math.floor(Math.random() * dinnerPool.length)];
+            data[k].dinner = pickDifferent(dinnerPool, prev.dinner);
 
             if (mode !== 'delivery') {
-                data[k].side = meals.side[Math.floor(Math.random() * meals.side.length)];
+                data[k].side = pickDifferent(meals.side, prev.side);
             }
 
             save();
@@ -1366,7 +899,6 @@
             render();
         }
 
-        // Week actions
         function shuffleAll() {
             for (let i = 0; i < 7; i++) {
                 if (i >= 5 && !weekendOn[week]) continue;
@@ -1383,11 +915,11 @@
                 delete locked[k];
                 delete modes[k];
             }
+            lastOpen = null;
             save();
             render();
         }
 
-        // Grocery
         function showGrocery() {
             const list = document.getElementById('groceryList');
             const items = {};
@@ -1472,7 +1004,6 @@
             return `${start.toLocaleDateString('en', fmt)} - ${end.toLocaleDateString('en', fmt)}`;
         }
 
-        // Share
         function sharePlan() {
             const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
             shareContent = `📅 Meal Plan - ${week === 'this' ? 'This' : 'Next'} Week\n${weekRange()}\n\n`;
@@ -1509,7 +1040,6 @@
             });
         }
 
-        // Modals
         function showModal(id) {
             document.getElementById(id).classList.add('show');
             document.body.classList.add('no-scroll');
@@ -1520,7 +1050,6 @@
             document.body.classList.remove('no-scroll');
         }
 
-        // Touch to close modals
         document.addEventListener('click', e => {
             if (e.target.classList.contains('ios-modal')) {
                 e.target.classList.remove('show');
@@ -1528,9 +1057,8 @@
             }
         });
 
-        // Utilities
-        function getKey(index) {
-            const date = getDate(index);
+        function getKey(index, startRef) {
+            const date = getDate(index, startRef);
             return `${week}-${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
         }
 
@@ -1541,8 +1069,8 @@
             return Math.floor((date - start) / 86400000);
         }
 
-        function getDate(index) {
-            const start = getWeekStart();
+        function getDate(index, startRef) {
+            const start = startRef || getWeekStart();
             const date = new Date(start);
             date.setDate(start.getDate() + index);
             return date;
@@ -1550,20 +1078,20 @@
 
         function getWeekStart() {
             const now = new Date();
-            const mondayIndex = (now.getDay() + 6) % 7; // Mon=0..Sun=6
+            const mondayIndex = (now.getDay() + 6) % 7;
             const start = new Date(now);
             start.setDate(now.getDate() - mondayIndex + (week === 'next' ? 7 : 0));
             start.setHours(0, 0, 0, 0);
             return start;
         }
 
-        // Storage
         function save() {
             localStorage.setItem('mealData', JSON.stringify(data));
             localStorage.setItem('mealWeek', week);
             localStorage.setItem('mealWeekend', JSON.stringify(weekendOn));
             localStorage.setItem('mealLocked', JSON.stringify(locked));
             localStorage.setItem('mealModes', JSON.stringify(modes));
+            localStorage.setItem('mealLastOpen', lastOpen || '');
         }
 
         function load() {
@@ -1573,12 +1101,13 @@
                 weekendOn = JSON.parse(localStorage.getItem('mealWeekend') || '{}');
                 locked = JSON.parse(localStorage.getItem('mealLocked') || '{}');
                 modes = JSON.parse(localStorage.getItem('mealModes') || '{}');
+                lastOpen = localStorage.getItem('mealLastOpen') || null;
             } catch { }
         }
 
-        // Start
+        document.addEventListener('touchmove', () => {}, { passive: true });
+
         init();
     </script>
 </body>
-
 </html>
