@@ -795,6 +795,9 @@
             "Carbonara",
             "Frittata di pasta",
             "Pasta e fagioli",
+        ];
+
+        const additionalLunchOptions = [
             "Custom..."
         ];
 
@@ -806,11 +809,6 @@
             "Pollo allo spiedo",
             "Pollo al limone",
             "Merluzzo",
-            "Pizza Delivery",
-            "Greco Delivery",
-            "Chinese Delivery",
-            "Vietnamese Delivery",
-            "Ramen Delivery",
             "Hamburger",
             "Cordon bleu",
             "Würstel",
@@ -821,6 +819,14 @@
             "Pollo al forno",
             "Scaloppine al limone",
             "Caprese",
+        ];
+
+        const additionalDinnerOptions = [
+            "Pizza Delivery",
+            "Greco Delivery",
+            "Chinese Delivery",
+            "Vietnamese Delivery",
+            "Ramen Delivery",
             "Colacena",
             "Custom..."
         ];
@@ -838,6 +844,10 @@
             "Zucchine trifolate",
             "Insalata di cetrioli",
             "Insalata mista",
+        ];
+
+        const additionalSideDishOptions = [
+            "Nothing",
             "Custom..."
         ];
 
@@ -855,6 +865,9 @@
             "Polenta col sugo",
             "Cannelloni",
             "Bistecca",
+        ];
+
+        const additionalWeekendOptions = [
             "Custom..."
         ];
 
@@ -935,6 +948,22 @@
             "Custom...": []
         };
 
+        function combinedLunches() { return [...lunchOptions, ...additionalLunchOptions]; }
+        function combinedDinners(isWeekend) {
+            return (isWeekend && isWeekendEnabled())
+                ? [...weekendOptions, ...additionalWeekendOptions]
+                : [...dinnerOptions, ...additionalDinnerOptions];
+        }
+        function combinedSides() { return [...sideDishOptions, ...additionalSideDishOptions]; }
+
+        const NO_INGREDIENT_ITEMS = new Set([
+            ...additionalLunchOptions,
+            ...additionalDinnerOptions,
+            ...additionalSideDishOptions,
+            ...additionalWeekendOptions,
+            "Nothing"
+        ]);
+
         // Data structure to store meals
         let mealData = {};
         let selectedWeek = 'next'; // Default to next week
@@ -961,6 +990,7 @@
                         mealData[k].dinner = '';
                         mealData[k].dinnerSide = '';
                     }
+                    if (lockedDays && lockedDays[k]) delete lockedDays[k]; // pulizia lock weekend
                 });
             } else {
                 // turning ON: clear dinners that aren't in weekendOptions
@@ -1007,6 +1037,12 @@
             document.getElementById('thisWeekBtn').classList.toggle('active', week === 'this');
             document.getElementById('nextWeekBtn').classList.toggle('active', week === 'next');
             saveState();
+
+            const planningVisible = document.getElementById('planningInterface').classList.contains('show');
+            if (planningVisible) {
+                document.getElementById('headerTitle').textContent = selectedWeek === 'this' ? 'This Week' : 'Next Week';
+                generateWeek();
+            }
         }
 
         function resetWeek() {
@@ -1015,15 +1051,15 @@
             for (let i = 0; i < 7; i++) {
                 const date = getDateForIndex(i, selectedWeek);
                 const dayKey = getDayKeyFromDate(date, selectedWeek);
+
                 mealData[dayKey] = { lunch: '', dinner: '', dinnerSide: '' };
 
                 if (weekendPlanEnabled && weekendPlanEnabled[dayKey] !== undefined) {
                     delete weekendPlanEnabled[dayKey];
                 }
-            }
-
-            if (lockedDays && lockedDays[dayKey] !== undefined) {
-                delete lockedDays[dayKey];
+                if (lockedDays && lockedDays[dayKey] !== undefined) {
+                    delete lockedDays[dayKey];
+                }
             }
 
             weekendPlanByWeek[selectedWeek] = false;
@@ -1089,12 +1125,18 @@
             const card = document.createElement('div');
             card.dataset.dayKey = dayKey;
             const data = mealData[dayKey];
-            const hasMeals = data.lunch || data.dinner;
-            card.className = `day-card ${isWeekend ? 'weekend' : ''} ${hasMeals ? 'has-meals' : ''} ${(isWeekend && !isWeekendEnabled()) ? 'optional' : ''}`;
-
             const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+
+            const hasMeals = data.lunch || data.dinner;
             const locked = !!lockedDays[dayKey];
-            card.className = `day-card ${isWeekend ? 'weekend' : ''} ${hasMeals ? 'has-meals' : ''} ${(isWeekend && !isWeekendEnabled()) ? 'optional' : ''} ${locked ? 'locked' : ''}`;
+
+            const classes = ['day-card'];
+            if (isWeekend) classes.push('weekend');
+            if (hasMeals) classes.push('has-meals');
+            if (isWeekend && !isWeekendEnabled()) classes.push('optional');
+            if (locked) classes.push('locked');
+            card.className = classes.join(' ');
 
             const headerRight = `
   <button class="lock-btn"
@@ -1185,52 +1227,67 @@
             return `${start.toLocaleDateString('en-US', opt)} – ${end.toLocaleDateString('en-US', opt)}`;
         }
 
+        function optionsHtml(main, extra, selected) {
+            const mainHtml = main.map(m => `<option value="${m}" ${selected === m ? 'selected' : ''}>${m}</option>`).join('');
+            const extraHtml = extra.length
+                ? `<optgroup label="Other / Custom">${extra.map(m => `<option value="${m}" ${selected === m ? 'selected' : ''}>${m}</option>`).join('')}</optgroup>`
+                : '';
+            return mainHtml + extraHtml;
+        }
+
         function createMeals(dayKey, isWeekend) {
             const data = mealData[dayKey];
-            const dinnerList = (isWeekend && isWeekendEnabled()) ? weekendOptions : dinnerOptions;
+
+            const lunchMain = lunchOptions, lunchExtra = additionalLunchOptions;
+            const dinnerMain = (isWeekend && isWeekendEnabled()) ? weekendOptions : dinnerOptions;
+            const dinnerExtra = (isWeekend && isWeekendEnabled()) ? additionalWeekendOptions : additionalDinnerOptions;
+            const sideMain = sideDishOptions, sideExtra = additionalSideDishOptions;
+
+            const allSides = [...sideMain, ...sideExtra];
+            const allLunch = [...lunchMain, ...lunchExtra];
+            const allDinner = [...dinnerMain, ...dinnerExtra];
+
             return `
-                <div class="meal-section">
-                    <div class="meal-label">Lunch</div>
-                    <div class="meal-selector">
-                        <select class="meal-select" onchange="handleMealChange('${dayKey}', 'lunch', this)">
-                            <option value="">Select lunch...</option>
-                            ${lunchOptions.map(meal =>
-                `<option value="${meal}" ${data.lunch === meal ? 'selected' : ''}>${meal}</option>`
-            ).join('')}
-                        </select>
-                        <input type="text" class="custom-input" placeholder="Enter custom lunch..." 
-                               onchange="updateMeal('${dayKey}', 'lunch', this.value)" 
-                               style="display: ${data.lunch && !lunchOptions.includes(data.lunch) ? 'block' : 'none'}" 
-                               value="${data.lunch && !lunchOptions.includes(data.lunch) ? data.lunch : ''}">
-                    </div>
-                </div>
-                <div class="meal-section">
-                    <div class="meal-label">Dinner</div>
-                    <div class="meal-selector">
-                        <select class="meal-select" onchange="handleMealChange('${dayKey}', 'dinner', this)">
-                            <option value="">Select dinner...</option>
-                             ${dinnerList.map(meal => `<option value="${meal}" ${data.dinner === meal ? 'selected' : ''}>${meal}</option>`).join('')}
-                        </select>
-                        <input type="text" class="custom-input" placeholder="Enter custom dinner..." 
-                               onchange="updateMeal('${dayKey}', 'dinner', this.value)" 
-                               style="display: ${data.dinner && !dinnerList.includes(data.dinner) ? 'block' : 'none'}" 
-                               value="${data.dinner && !dinnerList.includes(data.dinner) ? data.dinner : ''}">
-                    </div>
-                    <div style="margin-top: 12px;">
-                        <div class="meal-label">Side Dish</div>
-                        <select class="meal-select" onchange="handleMealChange('${dayKey}', 'dinnerSide', this)">
-                            <option value="">Select side...</option>
-                            ${sideDishOptions.map(side =>
-                `<option value="${side}" ${data.dinnerSide === side ? 'selected' : ''}>${side}</option>`
-            ).join('')}
-                        </select>
-                        <input type="text" class="custom-input" placeholder="Enter custom side..." 
-                               onchange="updateMeal('${dayKey}', 'dinnerSide', this.value)" 
-                               style="display: ${data.dinnerSide && !sideDishOptions.includes(data.dinnerSide) ? 'block' : 'none'}" 
-                               value="${data.dinnerSide && !sideDishOptions.includes(data.dinnerSide) ? data.dinnerSide : ''}">
-                    </div>
-                </div>
-            `;
+    <div class="meal-section">
+      <div class="meal-label">Lunch</div>
+      <div class="meal-selector">
+        <select class="meal-select" onchange="handleMealChange('${dayKey}', 'lunch', this)">
+          <option value="">Select lunch...</option>
+          ${optionsHtml(lunchMain, lunchExtra, data.lunch)}
+        </select>
+        <input type="text" class="custom-input" placeholder="Enter custom lunch..."
+               onchange="updateMeal('${dayKey}', 'lunch', this.value)"
+               style="display: ${data.lunch && !allLunch.includes(data.lunch) ? 'block' : 'none'}"
+               value="${data.lunch && !allLunch.includes(data.lunch) ? data.lunch : ''}">
+      </div>
+    </div>
+
+    <div class="meal-section">
+      <div class="meal-label">Dinner</div>
+      <div class="meal-selector">
+        <select class="meal-select" onchange="handleMealChange('${dayKey}', 'dinner', this)">
+          <option value="">Select dinner...</option>
+          ${optionsHtml(dinnerMain, dinnerExtra, data.dinner)}
+        </select>
+        <input type="text" class="custom-input" placeholder="Enter custom dinner..."
+               onchange="updateMeal('${dayKey}', 'dinner', this.value)"
+               style="display: ${data.dinner && !allDinner.includes(data.dinner) ? 'block' : 'none'}"
+               value="${data.dinner && !allDinner.includes(data.dinner) ? data.dinner : ''}">
+      </div>
+
+      <div style="margin-top: 12px;">
+        <div class="meal-label">Side Dish</div>
+        <select class="meal-select" onchange="handleMealChange('${dayKey}', 'dinnerSide', this)">
+          <option value="">Select side...</option>
+          ${optionsHtml(sideMain, sideExtra, data.dinnerSide)}
+        </select>
+        <input type="text" class="custom-input" placeholder="Enter custom side..."
+               onchange="updateMeal('${dayKey}', 'dinnerSide', this.value)"
+               style="display: ${data.dinnerSide && data.dinnerSide !== 'Nothing' && !allSides.includes(data.dinnerSide) ? 'block' : 'none'}"
+               value="${data.dinnerSide && !allSides.includes(data.dinnerSide) ? data.dinnerSide : ''}">
+      </div>
+    </div>
+  `;
         }
 
         function handleMealChange(dayKey, mealType, selectElement) {
@@ -1241,10 +1298,17 @@
                 customInput.style.display = 'block';
                 customInput.focus();
                 selectElement.value = '';
-            } else {
-                customInput.style.display = 'none';
-                updateMeal(dayKey, mealType, value);
+                return;
             }
+
+            if (mealType === 'dinnerSide' && value === 'Nothing') {
+                customInput.style.display = 'none';
+                updateMeal(dayKey, mealType, 'Nothing');
+                return;
+            }
+
+            customInput.style.display = 'none';
+            updateMeal(dayKey, mealType, value);
         }
 
         function toggleDay(header) {
@@ -1284,33 +1348,36 @@
 
         function shuffleWeek() {
             const container = document.getElementById('daysContainer');
-            container.classList.add('shuffle-animation');
 
             const weekKeys = weekKeysForSelectedWeek();
-            const baseLunches = lunchOptions.filter(m => m !== 'Custom...');
-            const baseSides = sideDishOptions.filter(s => s !== 'Custom...');
+            if (!weekKeys.length) {
+                alert('Nothing to shuffle: all eligible days are locked or hidden.');
+                return;
+            }
+            container.classList.add('shuffle-animation');
 
-            // Build per-day pools so Sat/Sun use weekendOptions when enabled
+            const baseLunches = lunchOptions;      // niente "Custom..."
+            const baseSides = sideDishOptions;   // niente "Nothing"/"Custom..."
+
+            // pool per-day: weekend usa weekendOptions se abilitato
             const perDay = weekKeys.map(k => {
                 const [, y, m, d] = k.split('-').map((v, i) => i ? Number(v) : v);
                 const date = new Date(y, m, d);
                 const isWknd = isWeekendDate(date);
-                const dinnerPool = (isWknd && isWeekendEnabled())
-                    ? weekendOptions.filter(m => m !== 'Custom...')
-                    : dinnerOptions.filter(m => m !== 'Custom...');
+                const dinnerPool = (isWknd && isWeekendEnabled()) ? weekendOptions : dinnerOptions;
                 return { k, dinnerPool };
             });
 
-            // Shuffle by column but draw from each day’s pool
             const lunches = [...baseLunches];
             const sides = [...baseSides];
-            shuffleArray(lunches); shuffleArray(sides);
+            shuffleArray(lunches);
+            shuffleArray(sides);
 
             perDay.forEach(({ k, dinnerPool }, i) => {
                 const dinners = [...dinnerPool];
                 shuffleArray(dinners);
                 mealData[k].lunch = lunches[i % lunches.length];
-                mealData[k].dinner = dinners[0]; // top after shuffle
+                mealData[k].dinner = dinners[0];
                 mealData[k].dinnerSide = sides[i % sides.length];
             });
 
@@ -1330,7 +1397,7 @@
                 const [, y, m, day] = dayKey.split('-').map(Number);
                 const d = new Date(y, m, day);
                 const weekendOk = !isWeekendDate(d) || isWeekendEnabled();
-                return weekendOk && !isDayLocked(dayKey); // <-- NEW
+                return weekendOk && !isDayLocked(dayKey);
             });
         }
 
@@ -1360,7 +1427,9 @@
                 if (data.lunch) shareText += `  Lunch: ${data.lunch}\n`;
                 if (data.dinner) {
                     shareText += `  Dinner: ${data.dinner}`;
-                    if (data.dinnerSide) shareText += ` with ${data.dinnerSide}`;
+                    if (data.dinnerSide && data.dinnerSide !== 'Nothing') {
+                        shareText += ` with ${data.dinnerSide}`;
+                    }
                     shareText += '\n';
                 }
                 if (!data.lunch && !data.dinner) shareText += `  No meals planned\n`;
@@ -1388,37 +1457,24 @@
             weekKeys.forEach(dayKey => {
                 const data = mealData[dayKey] || {};
 
-                // Process lunch
-                if (data.lunch && data.lunch !== '' && data.lunch !== 'Custom...') {
-                    if (mealIngredients[data.lunch]) {
-                        mealIngredients[data.lunch].forEach(ingredient => {
-                            ingredients.set(ingredient, (ingredients.get(ingredient) || 0) + 1);
-                        });
-                    }
-                }
-
-                // Process dinner
-                if (data.dinner && data.dinner !== '' && data.dinner !== 'Custom...') {
-                    if (mealIngredients[data.dinner]) {
-                        mealIngredients[data.dinner].forEach(ingredient => {
-                            ingredients.set(ingredient, (ingredients.get(ingredient) || 0) + 1);
-                        });
-                    }
-                }
-
-                // Process dinner side
-                if (data.dinnerSide && data.dinnerSide !== '' && data.dinnerSide !== 'Custom...') {
-                    if (mealIngredients[data.dinnerSide]) {
-                        mealIngredients[data.dinnerSide].forEach(ingredient => {
-                            ingredients.set(ingredient, (ingredients.get(ingredient) || 0) + 1);
-                        });
-                    }
-                }
+                addMealIngredients(ingredients, data.lunch);
+                addMealIngredients(ingredients, data.dinner);
+                addMealIngredients(ingredients, data.dinnerSide);
             });
 
             return Array.from(ingredients.entries())
                 .sort((a, b) => a[0].localeCompare(b[0]))
                 .map(([ingredient, count]) => count > 1 ? `${ingredient} (×${count})` : ingredient);
+        }
+
+        function addMealIngredients(ingredientsMap, name) {
+            if (!name || NO_INGREDIENT_ITEMS.has(name)) return;
+            const list = mealIngredients[name];
+            if (Array.isArray(list) && list.length) {
+                list.forEach(ingredient => {
+                    ingredientsMap.set(ingredient, (ingredientsMap.get(ingredient) || 0) + 1);
+                });
+            }
         }
 
         function showGroceryList() {
@@ -1580,7 +1636,7 @@
             WEEKEND_WEEK: 'mealPlanner.weekendPlanByWeek',
             WEEK: 'mealPlanner.selectedWeek',
             THEME: 'mealPlanner.theme',
-            LOCKS: 'mealPlanner.lockedDays' // <-- NEW
+            LOCKS: 'mealPlanner.lockedDays'
         };
 
         // --- Local storage helpers ---
@@ -1589,7 +1645,7 @@
             localStorage.setItem(LS_KEYS.WEEKENDS, JSON.stringify(weekendPlanEnabled));
             localStorage.setItem(LS_KEYS.WEEKEND_WEEK, JSON.stringify(weekendPlanByWeek));
             localStorage.setItem(LS_KEYS.WEEK, selectedWeek);
-            localStorage.setItem(LS_KEYS.LOCKS, JSON.stringify(lockedDays)); // NEW
+            localStorage.setItem(LS_KEYS.LOCKS, JSON.stringify(lockedDays));
         }
 
         function loadState() {
@@ -1598,12 +1654,12 @@
                 const savedWeekends = JSON.parse(localStorage.getItem(LS_KEYS.WEEKENDS) || '{}');
                 const savedWeekendWeek = JSON.parse(localStorage.getItem(LS_KEYS.WEEKEND_WEEK) || '{}');
                 const savedWeek = localStorage.getItem(LS_KEYS.WEEK);
-                const savedLocks = JSON.parse(localStorage.getItem(LS_KEYS.LOCKS) || '{}'); // NEW
+                const savedLocks = JSON.parse(localStorage.getItem(LS_KEYS.LOCKS) || '{}');
                 if (savedWeek === 'this' || savedWeek === 'next') selectedWeek = savedWeek;
                 mealData = savedMeals;
                 weekendPlanEnabled = savedWeekends;
                 weekendPlanByWeek = { this: !!savedWeekendWeek.this, next: !!savedWeekendWeek.next };
-                lockedDays = savedLocks; // NEW
+                lockedDays = savedLocks;
             } catch { /* ignore */ }
         }
 
