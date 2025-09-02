@@ -498,10 +498,21 @@
             font-weight: 500;
         }
 
-        .tab-btn.shuffle { color: var(--accent-warning); }
-        .tab-btn.grocery { color: var(--accent-success); }
-        .tab-btn.share { color: var(--accent-primary); }
-        .tab-btn.clear { color: var(--accent-danger); }
+        .tab-btn.shuffle {
+            color: var(--accent-warning);
+        }
+
+        .tab-btn.grocery {
+            color: var(--accent-success);
+        }
+
+        .tab-btn.share {
+            color: var(--accent-primary);
+        }
+
+        .tab-btn.clear {
+            color: var(--accent-danger);
+        }
 
         /* iOS Modal */
         .ios-modal {
@@ -654,14 +665,19 @@
         .search-input,
         .picker-option,
         input.meal-input {
-        -webkit-user-select: text;
-        user-select: text;
+            -webkit-user-select: text;
+            user-select: text;
         }
 
         /* Animations */
         @keyframes shuffle-spin {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         .shuffling {
@@ -760,11 +776,13 @@
         }
 
         /* Utility */
-        input, textarea, button {
+        input,
+        textarea,
+        button {
             -webkit-appearance: none;
             appearance: none;
         }
-        
+
         .no-scroll {
             overflow: hidden;
             position: fixed;
@@ -983,7 +1001,7 @@
         // Theme
         function setTheme() {
             const saved = localStorage.getItem('theme');
-            const dark = saved ? saved === 'dark' : 
+            const dark = saved ? saved === 'dark' :
                 window.matchMedia('(prefers-color-scheme: dark)').matches;
             document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
             document.getElementById('themeBtn').textContent = dark ? '☀️' : '🌙';
@@ -999,28 +1017,24 @@
 
         // Week
         function selectWeek(w) {
+            if (week !== w) lastOpen = null;     // reset if switching
             week = w;
             document.getElementById('thisWeek').classList.toggle('active', w === 'this');
             document.getElementById('nextWeek').classList.toggle('active', w === 'next');
-            updateWeekend();
-            save();
-            render();
+            updateWeekend(); save(); render();
         }
 
-        // Weekend
         function toggleWeekend() {
             weekendOn[week] = !weekendOn[week];
+            if (!weekendOn[week] && lastOpen && getIndex(lastOpen) >= 5) lastOpen = null; // was Sat/Sun
             updateWeekend();
             if (!weekendOn[week]) {
                 for (let i = 5; i <= 6; i++) {
                     const k = getKey(i);
-                    delete data[k];
-                    delete locked[k];
-                    delete modes[k];
+                    delete data[k]; delete locked[k]; delete modes[k];
                 }
             }
-            save();
-            render();
+            save(); render();
         }
 
         function updateWeekend() {
@@ -1031,16 +1045,10 @@
         function render() {
             const list = document.getElementById('daysList');
             const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-              const toReopen = lastOpen && document.getElementById(`day-${lastOpen}`);
-                if (toReopen) {
-                    toReopen.classList.add('expanded');
-                } else if (!lastOpen) {
-                    setTimeout(() => toggleDay(getKey(0)), 100);
-                }
-            
+
             list.innerHTML = days.map((name, i) => {
                 if (i >= 5 && !weekendOn[week]) return '';
-                
+
                 const k = getKey(i);
                 const d = data[k] || { lunch: '', dinner: '', side: '' };
                 const isWeekend = i >= 5;
@@ -1048,15 +1056,17 @@
                 const mode = modes[k] || 'regular';
                 const hasMeals = d.lunch || d.dinner;
                 const date = getDate(i);
-                
+
                 let badges = '';
                 if (isLocked) badges += '<span class="lock-icon">🔒</span>';
                 if (mode === 'quick') badges += '<span class="day-badge badge-quick">Quick</span>';
                 if (mode === 'delivery') badges += '<span class="day-badge badge-delivery">Delivery</span>';
-                
+
                 return `
                     <div class="day-cell ${isWeekend ? 'weekend' : ''} ${hasMeals ? 'has-meals' : ''}" id="day-${k}">
                         <div class="day-header"
+                        role="button"
+                        aria-expanded="false"
                         tabindex="0"
                         onclick="toggleDay('${k}')"
                         onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDay('${k}')}">
@@ -1064,7 +1074,7 @@
                                 <div class="day-indicator"></div>
                                 <div class="day-info">
                                     <div class="day-name">${name}</div>
-                                    <div class="day-date">${date.toLocaleDateString('en', {month: 'short', day: 'numeric'})}</div>
+                                    <div class="day-date">${date.toLocaleDateString('en', { month: 'short', day: 'numeric' })}</div>
                                 </div>
                             </div>
                             <div class="day-right">
@@ -1078,8 +1088,12 @@
                     </div>
                 `;
             }).join('');
-            
-            if (!data[getKey(0)]) {
+
+            const cell = lastOpen && document.getElementById(`day-${lastOpen}`);
+            if (cell) {
+                cell.classList.add('expanded');
+                cell.querySelector('.day-header')?.setAttribute('aria-expanded', 'true');
+            } else {
                 setTimeout(() => toggleDay(getKey(0)), 100);
             }
         }
@@ -1088,12 +1102,12 @@
             const d = data[k] || { lunch: '', dinner: '', side: '' };
             const mode = modes[k] || 'regular';
             const isLocked = locked[k];
-            
+
             const dinnerOpts = mode === 'quick' ? meals.dinner.quick :
-                             mode === 'delivery' ? meals.dinner.delivery :
-                             isWeekend ? meals.dinner.weekend :
-                             meals.dinner.regular;
-            
+                mode === 'delivery' ? meals.dinner.delivery :
+                    isWeekend ? meals.dinner.weekend :
+                        meals.dinner.regular;
+
             return `
                 <div class="meal-group">
                     <div class="meal-label">Lunch</div>
@@ -1101,7 +1115,7 @@
                         <input type="text" class="meal-input" value="${d.lunch}"
                             placeholder="Tap to select..." readonly
                             onclick="openPicker('${k}', 'lunch')">
-                        <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}', 'lunch')">🎲</button>
+                        <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}', 'lunch', this)">🎲</button>
                     </div>
                 </div>
                 
@@ -1121,7 +1135,7 @@
                         <input type="text" class="meal-input" value="${d.dinner}"
                             placeholder="Tap to select..." readonly
                             onclick="openPicker('${k}', 'dinner')">
-                        <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}', 'dinner')">🎲</button>
+                        <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}', 'dinner', this)">🎲</button>
                     </div>
                     
                     ${mode !== 'delivery' ? `
@@ -1131,7 +1145,7 @@
                                 <input type="text" class="meal-input" value="${d.side}"
                                     placeholder="Tap to select..." readonly
                                     onclick="openPicker('${k}', 'side')">
-                                <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}', 'side')">🎲</button>
+                                <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}', 'side', this)">🎲</button>
                             </div>
                         </div>
                     ` : ''}
@@ -1146,6 +1160,12 @@
             `;
         }
 
+        document.getElementById('pickerOptions').addEventListener('click', (e) => {
+            const opt = e.target.closest('.picker-option');
+            if (!opt) return;
+            selectMeal(opt.dataset.value);
+        });
+
         // Picker
         function openPicker(k, type) {
             currentPicker = { key: k, type: type };
@@ -1153,10 +1173,10 @@
             const title = document.getElementById('pickerTitle');
             const options = document.getElementById('pickerOptions');
             const search = document.getElementById('pickerSearch');
-            
+
             title.textContent = `Select ${type.charAt(0).toUpperCase() + type.slice(1)}`;
             search.value = '';
-            
+
             let items = [];
             if (type === 'lunch') {
                 items = meals.lunch;
@@ -1164,31 +1184,30 @@
                 const mode = modes[k] || 'regular';
                 const isWeekend = getIndex(k) >= 5;
                 items = mode === 'quick' ? meals.dinner.quick :
-                       mode === 'delivery' ? meals.dinner.delivery :
-                       isWeekend ? meals.dinner.weekend :
-                       meals.dinner.regular;
+                    mode === 'delivery' ? meals.dinner.delivery :
+                        isWeekend ? meals.dinner.weekend :
+                            meals.dinner.regular;
                 if (!isWeekend && mode === 'regular') {
                     items = [...items, ...meals.dinner.other];
                 }
             } else {
                 items = ['None', ...meals.side];
             }
-            
+
             const current = (data[k] || {})[type];
-            options.innerHTML = items.map(item => 
-                `<div class="picker-option ${item === current ? 'selected' : ''}"
-                    onclick="selectMeal('${item}')">${item}</div>`
+            options.innerHTML = items.map(item =>
+                `<div class="picker-option ${item === current ? 'selected' : ''}" data-value="${item}">${item}</div>`
             ).join('');
-            
+
             picker.classList.add('show');
             document.body.classList.add('no-scroll');
             setTimeout(() => document.getElementById('pickerSearch').focus(), 0);
         }
 
         document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && document.getElementById('mealPicker').classList.contains('show')) {
-            closePicker();
-        }
+            if (e.key === 'Escape' && document.getElementById('mealPicker').classList.contains('show')) {
+                closePicker();
+            }
         });
 
         function closePicker() {
@@ -1205,37 +1224,59 @@
             });
         }
 
+        function addSwipeToDismiss(panel, onDismiss) {
+            if (!panel) return;
+            let startY = null, deltaY = 0;
+            panel.addEventListener('touchstart', e => { startY = e.touches[0].clientY; deltaY = 0; }, { passive: true });
+            panel.addEventListener('touchmove', e => {
+                if (startY === null) return;
+                deltaY = e.touches[0].clientY - startY;
+                if (deltaY > 0) panel.style.transform = `translateY(${Math.min(deltaY, 140)}px)`;
+            }, { passive: true });
+            panel.addEventListener('touchend', () => {
+                if (deltaY > 90) onDismiss();
+                panel.style.transform = '';
+                startY = null; deltaY = 0;
+            });
+        }
+
         function selectMeal(value) {
             if (!currentPicker) return;
             const { key, type } = currentPicker;
-            
+
             if (!data[key]) data[key] = { lunch: '', dinner: '', side: '' };
             data[key][type] = value === 'None' ? '' : value;
-            
+
             if (type === 'dinner' && value.includes('Delivery')) {
                 data[key].side = '';
             }
-            
+
             save();
             render();
             closePicker();
         }
 
         // Day actions
-let lastOpen = null;
+        let lastOpen = null;
 
-function toggleDay(k) {
-  const cell = document.getElementById(`day-${k}`);
-  const opening = !cell.classList.contains('expanded');
-  document.querySelectorAll('.day-cell.expanded').forEach(c => c.classList.remove('expanded'));
-  if (opening) {
-    cell.classList.add('expanded');
-    lastOpen = k;
-    if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
-  } else {
-    lastOpen = null;
-  }
-}
+        function toggleDay(k) {
+            const cell = document.getElementById(`day-${k}`);
+            const opening = !cell.classList.contains('expanded');
+
+            document.querySelectorAll('.day-cell.expanded').forEach(c => {
+                c.classList.remove('expanded');
+                c.querySelector('.day-header')?.setAttribute('aria-expanded', 'false');
+            });
+
+            if (opening) {
+                cell.classList.add('expanded');
+                cell.querySelector('.day-header')?.setAttribute('aria-expanded', 'true');
+                lastOpen = k;
+                if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
+            } else {
+                lastOpen = null;
+            }
+        }
 
         function toggleLock(k) {
             locked[k] = !locked[k];
@@ -1246,28 +1287,26 @@ function toggleDay(k) {
         function setMode(k, mode) {
             modes[k] = mode;
             if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
-            
+
             // Clear invalid selections
             const validDinner = mode === 'quick' ? meals.dinner.quick :
-                              mode === 'delivery' ? meals.dinner.delivery :
-                              meals.dinner.regular;
+                mode === 'delivery' ? meals.dinner.delivery :
+                    meals.dinner.regular;
             if (data[k].dinner && !validDinner.includes(data[k].dinner)) {
                 data[k].dinner = '';
             }
             if (mode === 'delivery') data[k].side = '';
-            
+
             save();
             render();
         }
 
-        function shuffleMeal(k, type) {
+        function shuffleMeal(k, type, btn) {
             if (locked[k]) return;
-            
-            const btn = event.target;
-            btn.classList.add('shuffling');
-            
             if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
-            
+
+            btn?.classList.add('shuffling');
+
             let pool = [];
             if (type === 'lunch') {
                 pool = meals.lunch;
@@ -1275,42 +1314,41 @@ function toggleDay(k) {
                 const mode = modes[k] || 'regular';
                 const isWeekend = getIndex(k) >= 5;
                 pool = mode === 'quick' ? meals.dinner.quick :
-                      mode === 'delivery' ? meals.dinner.delivery :
-                      isWeekend ? meals.dinner.weekend :
-                      meals.dinner.regular;
+                    mode === 'delivery' ? meals.dinner.delivery :
+                        isWeekend ? meals.dinner.weekend :
+                            meals.dinner.regular;
             } else {
                 pool = meals.side;
             }
-            
+
             data[k][type] = pool[Math.floor(Math.random() * pool.length)];
-            
+
             setTimeout(() => {
-                btn.classList.remove('shuffling');
-                save();
-                render();
+                btn?.classList.remove('shuffling');
+                save(); render();
             }, 500);
         }
 
         function shuffleDay(k) {
             if (locked[k]) return;
-            
+
             if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
-            
+
             const mode = modes[k] || 'regular';
             const isWeekend = getIndex(k) >= 5;
-            
+
             data[k].lunch = meals.lunch[Math.floor(Math.random() * meals.lunch.length)];
-            
+
             const dinnerPool = mode === 'quick' ? meals.dinner.quick :
-                              mode === 'delivery' ? meals.dinner.delivery :
-                              isWeekend ? meals.dinner.weekend :
-                              meals.dinner.regular;
+                mode === 'delivery' ? meals.dinner.delivery :
+                    isWeekend ? meals.dinner.weekend :
+                        meals.dinner.regular;
             data[k].dinner = dinnerPool[Math.floor(Math.random() * dinnerPool.length)];
-            
+
             if (mode !== 'delivery') {
                 data[k].side = meals.side[Math.floor(Math.random() * meals.side.length)];
             }
-            
+
             save();
             render();
         }
@@ -1346,7 +1384,7 @@ function toggleDay(k) {
         function showGrocery() {
             const list = document.getElementById('groceryList');
             const items = {};
-            
+
             Object.values(data).forEach(d => {
                 ['lunch', 'dinner', 'side'].forEach(type => {
                     const meal = d[type];
@@ -1357,7 +1395,7 @@ function toggleDay(k) {
                     }
                 });
             });
-            
+
             if (Object.keys(items).length === 0) {
                 list.innerHTML = '<div class="empty-state"><div class="empty-icon">🛒</div><p>No meals planned yet</p></div>';
             } else {
@@ -1368,7 +1406,7 @@ function toggleDay(k) {
                     'Vegetables': ['Pomodori', 'Zucchine', 'Melanzane', 'Carote', 'Patate'],
                     'Other': []
                 };
-                
+
                 const organized = {};
                 Object.entries(items).forEach(([ing, count]) => {
                     let added = false;
@@ -1385,7 +1423,7 @@ function toggleDay(k) {
                         organized.Other.push({ name: ing, count });
                     }
                 });
-                
+
                 list.innerHTML = Object.entries(organized).map(([cat, items]) => `
                     <div class="grocery-section">
                         <div class="grocery-title">${cat}</div>
@@ -1398,45 +1436,45 @@ function toggleDay(k) {
                     </div>
                 `).join('');
             }
-            
+
             showModal('groceryModal');
         }
 
-function shareGrocery() {
-  const rows = Array.from(document.querySelectorAll('.grocery-item'));
-  const items = rows
-    .filter(r => !r.querySelector('.grocery-check').checked)
-    .map(r => r.querySelector('span').textContent);
+        function shareGrocery() {
+            const rows = Array.from(document.querySelectorAll('.grocery-item'));
+            const items = rows
+                .filter(r => !r.querySelector('.grocery-check').checked)
+                .map(r => r.querySelector('span').textContent);
 
-  if (!items.length) return;
+            if (!items.length) return;
 
-  shareContent = '🛒 Grocery List\n\n' + items.map(t => `☐ ${t}`).join('\n');
-  closeModal('groceryModal');
-  setTimeout(() => {
-    document.getElementById('shareTitle').textContent = 'Grocery List';
-    document.getElementById('shareText').textContent = shareContent;
-    showModal('shareModal');
-  }, 300);
-}
+            shareContent = '🛒 Grocery List\n\n' + items.map(t => `☐ ${t}`).join('\n');
+            closeModal('groceryModal');
+            setTimeout(() => {
+                document.getElementById('shareTitle').textContent = 'Grocery List';
+                document.getElementById('shareText').textContent = shareContent;
+                showModal('shareModal');
+            }, 300);
+        }
 
         function weekRange() {
-  const start = getWeekStart();
-  const end = new Date(start);
-  end.setDate(start.getDate() + 6);
-  const fmt = { month: 'short', day: 'numeric' };
-  return `${start.toLocaleDateString('en', fmt)} - ${end.toLocaleDateString('en', fmt)}`;
-}
+            const start = getWeekStart();
+            const end = new Date(start);
+            end.setDate(start.getDate() + 6);
+            const fmt = { month: 'short', day: 'numeric' };
+            return `${start.toLocaleDateString('en', fmt)} - ${end.toLocaleDateString('en', fmt)}`;
+        }
 
         // Share
-function sharePlan() {
-  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
-  shareContent = `📅 Meal Plan - ${week === 'this' ? 'This' : 'Next'} Week\n${weekRange()}\n\n`;
-            
+        function sharePlan() {
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            shareContent = `📅 Meal Plan - ${week === 'this' ? 'This' : 'Next'} Week\n${weekRange()}\n\n`;
+
             days.forEach((day, i) => {
                 if (i >= 5 && !weekendOn[week]) return;
                 const k = getKey(i);
                 const d = data[k] || {};
-                
+
                 shareContent += `${day}\n`;
                 if (d.lunch) shareContent += `  Lunch: ${d.lunch}\n`;
                 if (d.dinner) {
@@ -1447,24 +1485,21 @@ function sharePlan() {
                 if (!d.lunch && !d.dinner) shareContent += `  No meals\n`;
                 shareContent += '\n';
             });
-            
+
             document.getElementById('shareTitle').textContent = 'Meal Plan';
             document.getElementById('shareText').textContent = shareContent;
             showModal('shareModal');
         }
 
-function copyText(btn) {
-  navigator.clipboard.writeText(shareContent).then(() => {
-    const original = btn.textContent;
-    btn.textContent = 'Copied! ✓';
-    btn.style.background = 'var(--accent-success)';
-    setTimeout(() => {
-      btn.textContent = original;
-      btn.style.background = '';
-      closeModal('shareModal');
-    }, 1000);
-  });
-}
+        function copyText(btn) {
+            navigator.clipboard.writeText(shareContent).then(() => {
+                navigator.vibrate?.(8);
+                const original = btn.textContent;
+                btn.textContent = 'Copied! ✓';
+                btn.style.background = 'var(--accent-success)';
+                setTimeout(() => { btn.textContent = original; btn.style.background = ''; closeModal('shareModal'); }, 1000);
+            });
+        }
 
         // Modals
         function showModal(id) {
@@ -1531,7 +1566,7 @@ function copyText(btn) {
                 weekendOn = JSON.parse(localStorage.getItem('mealWeekend') || '{}');
                 locked = JSON.parse(localStorage.getItem('mealLocked') || '{}');
                 modes = JSON.parse(localStorage.getItem('mealModes') || '{}');
-            } catch {}
+            } catch { }
         }
 
         // Start
