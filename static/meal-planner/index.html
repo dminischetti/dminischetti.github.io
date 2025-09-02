@@ -15,44 +15,44 @@
 
         :root {
             /* Light mode colors */
-            --bg-primary: #f2f2f7;
+            --bg-primary: #f8f9fa;
             --bg-secondary: white;
-            --bg-tertiary: #f9f9f9;
-            --text-primary: #1c1c1e;
-            --text-secondary: #8e8e93;
-            --text-tertiary: #c7c7cc;
-            --border-color: #e5e5e7;
-            --border-secondary: #d1d1d6;
-            --accent-primary: #007aff;
-            --accent-success: #34c759;
-            --accent-warning: #ff9500;
-            --accent-danger: #ff3b30;
-            --modal-backdrop: rgba(0, 0, 0, 0.4);
-            --shadow-light: rgba(0, 0, 0, 0.1);
-            --shadow-medium: rgba(0, 0, 0, 0.15);
-            --toggle-bg: #e5e5e7;
+            --bg-tertiary: #f3f4f6;
+            --text-primary: #111827;
+            --text-secondary: #6b7280;
+            --text-tertiary: #9ca3af;
+            --border-color: #e5e7eb;
+            --border-secondary: #d1d5db;
+            --accent-primary: #3b82f6;
+            --accent-success: #10b981;
+            --accent-warning: #f59e0b;
+            --accent-danger: #ef4444;
+            --accent-purple: #8b5cf6;
+            --modal-backdrop: rgba(0, 0, 0, 0.3);
+            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --toggle-bg: #e5e7eb;
             --input-bg: white;
         }
 
         [data-theme="dark"] {
-            /* Dark mode colors */
-            --bg-primary: #000000;
-            --bg-secondary: #1c1c1e;
-            --bg-tertiary: #2c2c2e;
-            --text-primary: #ffffff;
-            --text-secondary: #8e8e93;
-            --text-tertiary: #48484a;
-            --border-color: #38383a;
-            --border-secondary: #48484a;
-            --accent-primary: #0a84ff;
-            --accent-success: #30d158;
-            --accent-warning: #ff9f0a;
-            --accent-danger: #ff453a;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-tertiary: #64748b;
+            --border-color: #334155;
+            --border-secondary: #475569;
+            --accent-primary: #60a5fa;
+            --accent-success: #34d399;
+            --accent-warning: #fbbf24;
+            --accent-danger: #f87171;
+            --accent-purple: #a78bfa;
             --modal-backdrop: rgba(0, 0, 0, 0.7);
-            --shadow-light: rgba(0, 0, 0, 0.3);
-            --shadow-medium: rgba(0, 0, 0, 0.5);
-            --toggle-bg: #38383a;
-            --input-bg: #2c2c2e;
+            --toggle-bg: #475569;
+            --input-bg: #334155;
         }
 
         body {
@@ -72,15 +72,10 @@
             transition: all 0.3s ease;
         }
 
-        /* Desktop styles */
         @media (min-width: 768px) {
             .container {
                 max-width: 768px;
-                box-shadow: 0 0 30px var(--shadow-light);
-            }
-
-            .quick-actions {
-                max-width: 768px !important;
+                box-shadow: var(--shadow-lg);
             }
         }
 
@@ -88,45 +83,52 @@
             .container {
                 max-width: 900px;
             }
-
-            .quick-actions {
-                max-width: 900px !important;
-            }
         }
 
-        .week-selection {
-            padding: 60px 20px 30px;
-            text-align: center;
+        /* Header */
+        .header {
+            background: var(--bg-secondary);
+            padding: 16px 20px;
             border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .week-selection h1 {
-            font-size: 28px;
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .header-title {
+            font-size: 24px;
             font-weight: 700;
             color: var(--text-primary);
-            margin-bottom: 24px;
+        }
+
+        .header-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .week-selector {
             display: flex;
             background: var(--toggle-bg);
-            border-radius: 12px;
-            padding: 4px;
-            margin-bottom: 20px;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
+            border-radius: 8px;
+            padding: 2px;
         }
 
         .week-option {
-            flex: 1;
-            padding: 12px 16px;
+            padding: 6px 12px;
             border: none;
             background: transparent;
             color: var(--text-secondary);
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
-            border-radius: 8px;
+            border-radius: 6px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
@@ -134,89 +136,72 @@
         .week-option.active {
             background: var(--bg-secondary);
             color: var(--text-primary);
-            box-shadow: 0 2px 4px var(--shadow-light);
-        }
-
-        .week-option:active {
-            transform: scale(0.98);
-        }
-
-        .start-planning-btn {
-            background: var(--accent-primary);
-            color: white;
-            border: none;
-            padding: 16px 32px;
-            border-radius: 12px;
-            font-size: 17px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .start-planning-btn:hover {
-            opacity: 0.9;
-        }
-
-        .start-planning-btn:active {
-            transform: scale(0.98);
-        }
-
-        .planning-interface {
-            display: none;
-        }
-
-        .planning-interface.show {
-            display: block;
-        }
-
-        .header {
-            background: var(--bg-secondary);
-            padding: 20px;
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .back-btn {
-            background: none;
-            border: none;
-            color: var(--accent-primary);
-            font-size: 17px;
-            cursor: pointer;
-            padding: 8px;
-            transition: opacity 0.2s ease;
-        }
-
-        .back-btn:active {
-            opacity: 0.3;
-        }
-
-        .header-title {
-            font-size: 17px;
-            font-weight: 600;
-            color: var(--text-primary);
+            box-shadow: var(--shadow-sm);
         }
 
         .theme-toggle {
             background: none;
             border: none;
-            color: var(--accent-primary);
+            color: var(--text-secondary);
             font-size: 20px;
             cursor: pointer;
             padding: 8px;
-            transition: opacity 0.2s ease;
+            border-radius: 8px;
+            transition: all 0.2s ease;
         }
 
-        .theme-toggle:active {
-            opacity: 0.3;
+        .theme-toggle:hover {
+            background: var(--bg-tertiary);
         }
 
+        /* Weekend Toggle */
+        .weekend-toggle-bar {
+            background: var(--bg-tertiary);
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .weekend-toggle-label {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        .toggle-switch {
+            width: 44px;
+            height: 24px;
+            background: var(--toggle-bg);
+            border-radius: 12px;
+            position: relative;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .toggle-switch.active {
+            background: var(--accent-success);
+        }
+
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .toggle-switch.active::after {
+            transform: translateX(20px);
+        }
+
+        /* Days Container */
         .days-container {
-            padding: 0;
             padding-bottom: 100px;
         }
 
@@ -225,12 +210,12 @@
             transition: all 0.3s ease;
         }
 
-        .day-card.optional {
-            opacity: 0.5;
+        .day-card.weekend {
+            background: var(--bg-tertiary);
         }
 
         .day-header {
-            padding: 18px 20px;
+            padding: 16px 20px;
             cursor: pointer;
             transition: background-color 0.2s ease;
             display: flex;
@@ -242,23 +227,19 @@
             background: var(--bg-tertiary);
         }
 
-        .day-header:active {
-            background: var(--bg-tertiary);
-        }
-
-        .day-header:focus {
-            outline: 2px solid var(--accent-primary);
-            outline-offset: 2px;
-        }
-
-
         .day-info {
             display: flex;
             align-items: center;
             gap: 12px;
         }
 
-        .day-indicator {
+        .day-status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .status-indicator {
             width: 8px;
             height: 8px;
             border-radius: 50%;
@@ -267,28 +248,55 @@
             transition: opacity 0.3s ease;
         }
 
-        .day-card.has-meals .day-indicator {
+        .day-card.has-meals .status-indicator {
             opacity: 1;
         }
 
-        .weekend .day-indicator {
-            background: var(--accent-warning);
-        }
-
-        .weekend.optional .day-indicator {
-            opacity: 0 !important;
+        .day-title {
+            flex: 1;
         }
 
         .day-name {
-            font-size: 17px;
+            font-size: 16px;
             font-weight: 600;
             color: var(--text-primary);
         }
 
         .day-date {
-            font-size: 15px;
+            font-size: 14px;
             color: var(--text-secondary);
-            margin-left: 8px;
+        }
+
+        .day-badges {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-right: 12px;
+        }
+
+        .badge {
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .badge.quick {
+            background: var(--accent-warning);
+            color: white;
+        }
+
+        .badge.delivery {
+            background: var(--accent-purple);
+            color: white;
+        }
+
+        .lock-indicator {
+            font-size: 16px;
+            margin-right: 8px;
+            color: var(--text-tertiary);
         }
 
         .chevron {
@@ -301,15 +309,20 @@
             transform: rotate(180deg);
         }
 
+        /* Meals Content */
         .meals-content {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.3s ease;
+            background: var(--bg-secondary);
+        }
+
+        .day-card.weekend .meals-content {
             background: var(--bg-tertiary);
         }
 
         .day-card.expanded .meals-content {
-            max-height: 600px;
+            max-height: 800px;
         }
 
         .meal-section {
@@ -321,60 +334,11 @@
             border-top: none;
         }
 
-        .weekend-toggle-section {
-            padding: 20px;
-            background: var(--bg-tertiary);
-            text-align: center;
-        }
-
-        .weekend-toggle-label {
-            font-size: 14px;
-            color: var(--text-secondary);
-            margin-bottom: 12px;
-        }
-
-        .plan-toggle {
-            display: inline-flex;
+        .meal-header {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            gap: 12px;
-            padding: 8px 16px;
-            background: var(--toggle-bg);
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .plan-toggle:hover {
-            opacity: 0.8;
-        }
-
-        .toggle-switch {
-            width: 51px;
-            height: 31px;
-            background: var(--text-tertiary);
-            border-radius: 16px;
-            position: relative;
-            transition: background-color 0.3s ease;
-        }
-
-        .toggle-switch.active {
-            background: var(--accent-success);
-        }
-
-        .toggle-switch::after {
-            content: '';
-            position: absolute;
-            width: 27px;
-            height: 27px;
-            background: white;
-            border-radius: 50%;
-            top: 2px;
-            left: 2px;
-            transition: transform 0.3s ease;
-        }
-
-        .toggle-switch.active::after {
-            transform: translateX(20px);
+            margin-bottom: 12px;
         }
 
         .meal-label {
@@ -383,74 +347,227 @@
             color: var(--text-secondary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin-bottom: 8px;
         }
 
-        .meal-selector {
+        .meal-input-wrapper {
             position: relative;
         }
 
-        .meal-select {
+        .meal-input {
             width: 100%;
-            padding: 12px 16px;
+            padding: 12px 48px 12px 16px;
             border: 1px solid var(--border-secondary);
             border-radius: 10px;
             background: var(--input-bg);
             font-size: 16px;
             color: var(--text-primary);
             cursor: pointer;
-            appearance: none;
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-            background-position: right 12px center;
-            background-repeat: no-repeat;
-            background-size: 16px;
-            padding-right: 40px;
             transition: all 0.2s ease;
         }
 
-        .meal-select:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        .shuffle-btn {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 6px;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 16px;
         }
 
-        .custom-input {
-            width: 100%;
-            padding: 12px 16px;
+        .shuffle-btn:hover {
+            background: var(--accent-warning);
+            color: white;
+        }
+
+        .shuffle-btn:active {
+            transform: translateY(-50%) scale(0.9);
+        }
+
+        .meal-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .meal-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
             border: 1px solid var(--border-secondary);
             border-radius: 10px;
-            background: var(--input-bg);
-            font-size: 16px;
-            color: var(--text-primary);
-            margin-top: 8px;
+            margin-top: 4px;
+            max-height: 300px;
+            overflow-y: auto;
+            z-index: 50;
+            box-shadow: var(--shadow-lg);
             display: none;
         }
 
-        .custom-input:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(0, 122, 255, 0.1);
+        .meal-dropdown.show {
+            display: block;
         }
 
+        .dropdown-search {
+            position: sticky;
+            top: 0;
+            padding: 8px;
+            background: var(--bg-secondary);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 8px 12px;
+            border: 1px solid var(--border-secondary);
+            border-radius: 6px;
+            background: var(--input-bg);
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+        }
+
+        .dropdown-options {
+            padding: 4px;
+        }
+
+        .dropdown-option {
+            padding: 10px 12px;
+            cursor: pointer;
+            border-radius: 6px;
+            transition: background-color 0.2s ease;
+            font-size: 15px;
+        }
+
+        .dropdown-option:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .dropdown-option.selected {
+            background: var(--accent-primary);
+            color: white;
+        }
+
+        .dropdown-group {
+            padding: 8px 12px 4px;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Dinner Mode Selector */
+        .dinner-mode-selector {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid var(--border-secondary);
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .mode-btn:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .mode-btn.active {
+            background: var(--accent-primary);
+            color: white;
+            border-color: var(--accent-primary);
+        }
+
+        .mode-btn.active.quick {
+            background: var(--accent-warning);
+            border-color: var(--accent-warning);
+        }
+
+        .mode-btn.active.delivery {
+            background: var(--accent-purple);
+            border-color: var(--accent-purple);
+        }
+
+        /* Day Actions */
+        .day-actions {
+            padding: 12px 20px;
+            background: var(--bg-tertiary);
+            border-top: 1px solid var(--border-color);
+            display: flex;
+            gap: 8px;
+        }
+
+        .day-action-btn {
+            flex: 1;
+            padding: 8px 12px;
+            border: 1px solid var(--border-secondary);
+            background: var(--bg-secondary);
+            border-radius: 8px;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .day-action-btn:hover {
+            background: var(--bg-tertiary);
+        }
+
+        .day-action-btn.lock-btn {
+            background: var(--bg-secondary);
+        }
+
+        .day-action-btn.lock-btn.locked {
+            background: var(--accent-danger);
+            color: white;
+            border-color: var(--accent-danger);
+        }
+
+        /* Quick Actions */
         .quick-actions {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            display: none;
+            display: flex;
             gap: 12px;
             z-index: 1000;
             width: calc(100% - 40px);
-            max-width: 335px;
+            max-width: 400px;
             background: var(--bg-secondary);
             padding: 12px;
             border-radius: 16px;
-            box-shadow: 0 4px 20px var(--shadow-medium);
-            justify-content: space-around;
-        }
-
-        .quick-actions.show {
-            display: flex;
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-color);
         }
 
         .quick-btn {
@@ -463,7 +580,6 @@
             font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
-            text-align: center;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -478,7 +594,7 @@
             background: var(--accent-warning);
         }
 
-        .quick-btn.share-plan {
+        .quick-btn.share {
             background: var(--accent-primary);
         }
 
@@ -491,14 +607,14 @@
         }
 
         .quick-btn:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
+            transform: scale(1.05);
         }
 
         .quick-btn:active {
             transform: scale(0.95);
         }
 
+        /* Modals */
         .modal {
             position: fixed;
             top: 0;
@@ -507,9 +623,10 @@
             bottom: 0;
             background: var(--modal-backdrop);
             display: none;
-            align-items: flex-end;
+            align-items: center;
             justify-content: center;
             z-index: 2000;
+            padding: 20px;
         }
 
         .modal.show {
@@ -518,53 +635,46 @@
 
         .modal-content {
             background: var(--bg-secondary);
-            border-radius: 20px 20px 0 0;
-            padding: 30px 20px 40px;
+            border-radius: 16px;
+            padding: 24px;
             width: 100%;
             max-width: 500px;
-            max-height: 70vh;
+            max-height: 80vh;
             overflow-y: auto;
-            transform: translateY(100%);
-            transition: transform 0.3s ease;
-        }
-
-        @media (min-width: 768px) {
-            .modal-content {
-                border-radius: 20px;
-                margin: 20px;
-            }
+            transform: scale(0.9);
+            opacity: 0;
+            transition: all 0.3s ease;
         }
 
         .modal.show .modal-content {
-            transform: translateY(0);
+            transform: scale(1);
+            opacity: 1;
         }
 
         .modal-header {
-            text-align: center;
-            margin-bottom: 24px;
-            position: relative;
+            margin-bottom: 20px;
         }
 
-        .modal-handle {
-            width: 36px;
-            height: 4px;
-            background: var(--border-secondary);
-            border-radius: 2px;
-            margin: 0 auto 20px;
-        }
-
-        .modal h3 {
+        .modal-title {
             font-size: 20px;
             font-weight: 600;
             color: var(--text-primary);
         }
 
+        .modal-body {
+            margin-bottom: 20px;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 12px;
+        }
+
         .modal-btn {
-            width: 100%;
-            padding: 16px;
-            margin: 8px 0;
+            flex: 1;
+            padding: 12px;
             border: none;
-            border-radius: 12px;
+            border-radius: 10px;
             font-size: 16px;
             font-weight: 500;
             cursor: pointer;
@@ -585,19 +695,32 @@
             opacity: 0.9;
         }
 
-        .modal-btn:active {
-            transform: scale(0.98);
+        /* Grocery List */
+        .grocery-categories {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
         }
 
-        .grocery-list {
-            max-height: 400px;
-            overflow-y: auto;
+        .grocery-category {
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        .category-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
 
         .grocery-item {
             display: flex;
             align-items: center;
-            padding: 12px 0;
+            padding: 8px 0;
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -611,6 +734,20 @@
             accent-color: var(--accent-primary);
         }
 
+        /* Share Content */
+        .share-content {
+            background: var(--bg-tertiary);
+            border-radius: 10px;
+            padding: 16px;
+            font-family: monospace;
+            font-size: 14px;
+            line-height: 1.6;
+            white-space: pre-wrap;
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        /* Empty State */
         .empty-state {
             text-align: center;
             padding: 40px 20px;
@@ -618,157 +755,12 @@
         }
 
         .empty-state-icon {
-            font-size: 40px;
+            font-size: 48px;
             margin-bottom: 12px;
-            opacity: 0.6;
+            opacity: 0.5;
         }
 
-        .share-content {
-            background: var(--bg-tertiary);
-            border-radius: 12px;
-            padding: 20px;
-            margin: 16px 0;
-            font-family: 'SF Mono', Monaco, monospace;
-            font-size: 14px;
-            line-height: 1.5;
-            white-space: pre-wrap;
-            max-height: 400px;
-            overflow-y: auto;
-            border: 1px solid var(--border-color);
-        }
-
-        .slide-in {
-            animation: slideIn 0.3s ease-out;
-        }
-
-        /* lock button in day header */
-        .lock-btn {
-            background: none;
-            border: 0;
-            padding: 6px;
-            margin-right: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            line-height: 1;
-            color: var(--text-secondary);
-        }
-
-        .lock-btn[aria-pressed="true"] {
-            color: var(--accent-danger);
-        }
-
-        .day-card.locked .day-name::after {
-            content: " · locked";
-            color: var(--text-tertiary);
-            font-weight: 500;
-            font-size: 12px;
-        }
-
-        /* mini shuffle button inside selects */
-        .shuffle-chip {
-            position: absolute;
-            right: 8px;
-            top: 8px;
-            border: none;
-            border-radius: 8px;
-            background: var(--toggle-bg);
-            color: var(--text-primary);
-            padding: 6px 8px;
-            cursor: pointer;
-            font-size: 14px;
-            line-height: 1;
-        }
-
-        .shuffle-chip:active {
-            transform: scale(0.95);
-        }
-
-        /* room for the chip */
-        .meal-select {
-            padding-right: 64px;
-        }
-
-        /* quick dinner toggle */
-        .quick-flag {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin: 8px 0 6px;
-            color: var(--text-secondary);
-            font-size: 14px;
-        }
-
-        .quick-flag input {
-            transform: scale(1.1);
-            accent-color: var(--accent-success);
-        }
-
-        /* pill badge shown in day header when quick dinner is on */
-        .quick-badge {
-            display: inline-block;
-            margin-right: 8px;
-            padding: 2px 8px;
-            border-radius: 9999px;
-            background: var(--accent-success);
-            color: #fff;
-            font-size: 12px;
-            font-weight: 700;
-            line-height: 1.4;
-        }
-
-        /* dinner-type chips (regular/quick/delivery) */
-        .mode-chips {
-            display: flex;
-            gap: 6px;
-            margin: 8px 0 10px;
-        }
-
-        .mode-chip {
-            border: 1px solid var(--border-secondary);
-            background: var(--toggle-bg);
-            color: var(--text-primary);
-            border-radius: 9999px;
-            padding: 6px 10px;
-            font-size: 13px;
-            cursor: pointer;
-            transition: all 0.15s ease;
-        }
-
-        .mode-chip[aria-pressed="true"] {
-            background: var(--accent-primary);
-            color: #fff;
-            border-color: var(--accent-primary);
-        }
-
-        .mode-chip:active {
-            transform: scale(0.97);
-        }
-
-        /* if your CSS doesn't support composes, duplicate: */
-        .mode-badge {
-            display: inline-block;
-            margin-right: 8px;
-            padding: 2px 8px;
-            border-radius: 9999px;
-            background: var(--accent-success);
-            color: #fff;
-            font-size: 12px;
-            font-weight: 700;
-            line-height: 1.4;
-        }
-
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
+        /* Animations */
         .shuffle-animation {
             animation: shuffle 0.6s ease-in-out;
         }
@@ -792,471 +784,353 @@
                 transform: scale(1.01) rotate(0.5deg);
             }
         }
+
+        .slide-in {
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Utility */
+        .hidden {
+            display: none !important;
+        }
     </style>
 </head>
 
 <body>
     <div class="container">
-        <!-- Week Selection Screen -->
-        <div class="week-selection" id="weekSelection">
-            <h1>Meal Planner</h1>
-            <div class="week-selector">
-                <button class="week-option" id="thisWeekBtn" onclick="selectWeek('this')">This Week</button>
-                <button class="week-option active" id="nextWeekBtn" onclick="selectWeek('next')">Next Week</button>
+        <!-- Header -->
+        <div class="header">
+            <div class="header-top">
+                <h1 class="header-title">Meal Planner</h1>
+                <div class="header-controls">
+                    <div class="week-selector">
+                        <button class="week-option" id="thisWeekBtn" onclick="selectWeek('this')">This Week</button>
+                        <button class="week-option active" id="nextWeekBtn" onclick="selectWeek('next')">Next
+                            Week</button>
+                    </div>
+                    <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">🌙</button>
+                </div>
             </div>
-            <button class="start-planning-btn" onclick="startPlanning()">Start Planning</button>
         </div>
 
-        <!-- Planning Interface -->
-        <div class="planning-interface" id="planningInterface">
-            <div class="header">
-                <button class="back-btn" onclick="backToWeekSelection()">‹ Back</button>
-                <span class="header-title" id="headerTitle">Next Week</span>
-                <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">🌙</button>
-            </div>
+        <!-- Weekend Toggle -->
+        <div class="weekend-toggle-bar">
+            <span class="weekend-toggle-label">Include weekend meals (Saturday & Sunday)</span>
+            <div class="toggle-switch" id="weekendToggle" onclick="toggleWeekendPlanning()"></div>
+        </div>
 
-            <div class="days-container" id="daysContainer">
-                <!-- Days will be generated by JavaScript -->
-            </div>
+        <!-- Days Container -->
+        <div class="days-container" id="daysContainer">
+            <!-- Days will be generated by JavaScript -->
         </div>
     </div>
 
     <!-- Quick Action Buttons -->
-    <div class="quick-actions" id="quickActions">
+    <div class="quick-actions">
         <button class="quick-btn shuffle" onclick="shuffleWeek()">
             <span class="quick-btn-icon">🔀</span>
             <span>Shuffle</span>
         </button>
-        <button class="quick-btn reset" onclick="resetWeek()">
-            <span class="quick-btn-icon">🧹</span>
-            <span>Reset</span>
-        </button>
         <button class="quick-btn grocery" onclick="showGroceryList()">
             <span class="quick-btn-icon">🛒</span>
-            <span>Grocery List</span>
+            <span>Grocery</span>
         </button>
-        <button class="quick-btn share-plan" onclick="shareWeek()">
-            <span class="quick-btn-icon">📋</span>
-            <span>Share Plan</span>
+        <button class="quick-btn share" onclick="shareWeek()">
+            <span class="quick-btn-icon">📤</span>
+            <span>Share</span>
+        </button>
+        <button class="quick-btn reset" onclick="resetWeek()">
+            <span class="quick-btn-icon">🗑️</span>
+            <span>Clear</span>
         </button>
     </div>
 
-    <!-- Modals -->
+    <!-- Grocery Modal -->
     <div class="modal" id="groceryModal">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-handle"></div>
-                <h3>Grocery List</h3>
+                <h3 class="modal-title">Grocery List</h3>
             </div>
-            <div class="grocery-list" id="groceryList">
-                <div class="empty-state">
-                    <div class="empty-state-icon">📝</div>
-                    <p>Add meals to generate your grocery list</p>
-                </div>
+            <div class="modal-body" id="groceryList">
+                <!-- Grocery items will be generated here -->
             </div>
-            <button class="modal-btn primary" onclick="shareGroceryList()">Share List</button>
-            <button class="modal-btn secondary" onclick="closeModal('groceryModal')">Done</button>
+            <div class="modal-footer">
+                <button class="modal-btn primary" onclick="shareGroceryList()">Share List</button>
+                <button class="modal-btn secondary" onclick="closeModal('groceryModal')">Close</button>
+            </div>
         </div>
     </div>
 
+    <!-- Share Modal -->
     <div class="modal" id="shareModal">
         <div class="modal-content">
             <div class="modal-header">
-                <div class="modal-handle"></div>
-                <h3 id="shareModalTitle">Share Meal Plan</h3>
+                <h3 class="modal-title" id="shareModalTitle">Share Meal Plan</h3>
             </div>
-            <div class="share-content" id="shareContent"></div>
-            <button class="modal-btn primary" onclick="copyToClipboard(this)">Copy to Clipboard</button>
-            <button class="modal-btn secondary" onclick="closeModal('shareModal')">Cancel</button>
+            <div class="modal-body">
+                <div class="share-content" id="shareContent"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn primary" onclick="copyToClipboard(this)">Copy to Clipboard</button>
+                <button class="modal-btn secondary" onclick="closeModal('shareModal')">Close</button>
+            </div>
         </div>
     </div>
 
     <script>
-        // Meal options
-        const lunchOptions = [
-            "Ravioli burro e salvia",
-            "Spaghetti al limone",
-            "Pasta e ceci",
-            "Pasta col tonno",
-            "Pasta sugo tonno",
-            "Piadine prosciutto provolone",
-            "Uova fritte",
-            "Pasta al pesto",
-            "Pasta coi pomodorini",
-            "Lenticchie",
-            "Spaghetti aglio e olio",
-            "Carbonara",
-            "Frittata di pasta",
-            "Pasta e fagioli",
-        ];
-
-        const additionalLunchOptions = [
-            "Custom..."
-        ];
-
-        const dinnerOptions = [
-            "Salmone col riso",
-            "Frittata di zucchine",
-            "Polpette",
-            "Pollo al limone",
-            "Merluzzo",
-            "Hamburger",
-            "Cotolette",
-            "Salsicce",
-            "Minestrone",
-            "Pollo al forno",
-            "Scaloppine al limone",
-            "Caprese",
-        ];
-
-        const quickDinnerOptions = [
-            "Cordon bleu",
-            "Würstel",
-            "Dumplings",
-            "Fish sticks",
-            "Pollo allo spiedo",
-        ];
-
-        const additionalDinnerOptions = [
-            "Pizza Delivery",
-            "Greco Delivery",
-            "Chinese Delivery",
-            "Vietnamese Delivery",
-            "Ramen Delivery",
-            "Colacena",
-            "Custom..."
-        ];
-
-        // Delivery-only subset from extras
-        const deliveryOptions = additionalDinnerOptions.filter(o => /Delivery/i.test(o));
-
-        const sideDishOptions = [
-            "Purè di patate",
-            "Broccoli al vapore",
-            "Insalata di pomodori",
-            "Tater tots",
-            "Barbabietole",
-            "Insalata di mais",
-            "Patate lesse",
-            "Carote al forno",
-            "Carote a insalata",
-            "Zucchine trifolate",
-            "Insalata di cetrioli",
-            "Insalata mista",
-        ];
-
-        const additionalSideDishOptions = [
-            "Nothing",
-            "Custom..."
-        ];
-
-        const weekendOptions = [
-            "Pasta al forno",
-            "Parmigiana di melanzane",
-            "Zucchine ripiene",
-            "Lasagna",
-            "Spezzatino con patate",
-            "Tortellini con la panna",
-            "Tortellini col sugo",
-            "Pasta col ragù",
-            "Polpettone",
-            "Scrimpelle mbuss",
-            "Polenta col sugo",
-            "Cannelloni",
-            "Bistecca",
-        ];
-
-        const additionalWeekendOptions = [
-            "Custom..."
-        ];
-
-        // Ingredient mapping for grocery list
-        const mealIngredients = {
-            // Lunch options
-            "Ravioli burro e salvia": ["Ravioli", "Burro", "Salvia", "Parmigiano reggiano"],
-            "Spaghetti al limone": ["Spaghetti", "Limone", "Burro", "Parmigiano reggiano"],
-            "Pasta e ceci": ["Pasta", "Ceci (ceci)", "Cipolla", "Rosmarino", "Aglio", "Concentrato di pomodoro"],
-            "Pasta col tonno": ["Pasta", "Tonno (in scatola)", "Salsa di pomodoro", "Cipolla", "Aglio"],
-            "Pasta sugo tonno": ["Pasta", "Tonno (in scatola)", "Salsa di pomodoro", "Cipolla", "Aglio"],
-            "Piadine prosciutto provolone": ["Piadina", "Prosciutto", "Provolone"],
-            "Uova fritte": ["Uova", "Olio d'oliva"],
-            "Pasta al pesto": ["Pasta", "Pesto", "Pomodorini"],
-            "Pasta coi pomodorini": ["Pasta", "Pomodorini", "Aglio", "Basilico", "Olio d'oliva"],
-            "Lenticchie": ["Lenticchie", "Carote", "Sedano", "Cipolla", "Concentrato di pomodoro"],
-            "Spaghetti aglio e olio": ["Spaghetti", "Aglio", "Peperoncino", "Prezzemolo", "Olio d'oliva"],
-            "Carbonara": ["Spaghetti", "Uova", "Pancetta/Guanciale", "Pecorino Romano", "Pepe nero"],
-            "Frittata di pasta": ["Pasta avanzata", "Uova", "Formaggio"],
-            "Pasta e fagioli": ["Pasta", "Fagioli cannellini", "Pancetta", "Rosmarino", "Aglio"],
-            "Custom...": [],
-
-            // Dinner options
-            "Fish sticks": ["Fish sticks", "Olio per friggere"],
-            "Salmone col riso": ["Filetto di salmone", "Riso", "Salsa di soia"],
-            "Frittata di zucchine": ["Uova", "Zucchine", "Parmigiano reggiano", "Cipolla"],
-            "Polpette": ["Carne macinata", "Pangrattato", "Uova", "Aglio", "Prezzemolo", "Salsa di pomodoro"],
-            "Pollo allo spiedo": ["Pollo intero"],
-            "Pollo al limone": ["Petto di pollo", "Limone", "Farina", "Burro", "Vino bianco"],
-            "Merluzzo": ["Filetto di merluzzo", "Olio d'oliva", "Limone", "Prezzemolo"],
-            "Pizza Delivery": [],
-            "Greco Delivery": [],
-            "Chinese Delivery": [],
-            "Vietnamese Delivery": [],
-            "Ramen Delivery": [],
-            "Hamburger": ["Pane per hamburger", "Carne per hamburger", "Formaggio", "Lattuga", "Pomodoro", "Salse"],
-            "Cordon bleu": ["Cotoletta di pollo", "Prosciutto", "Formaggio svizzero", "Pangrattato"],
-            "Würstel": ["Würstel"],
-            "Cotolette": ["Cotolette di vitello/maiale", "Pangrattato", "Uova"],
-            "Salsicce": ["Salsicce", "Olio per cucinare"],
-            "Dumplings": ["Dumplings"],
-            "Minestrone": ["Verdure miste", "Pasta/Riso", "Fagioli", "Brodo vegetale"],
-            "Pollo al forno": ["Pezzi di pollo", "Patate", "Rosmarino", "Aglio", "Olio d'oliva"],
-            "Scaloppine al limone": ["Scaloppine di vitello/pollo", "Limone", "Farina", "Burro"],
-            "Caprese": ["Mozzarella", "Pomodori", "Basilico", "Olio d'oliva"],
-            "Colacena": ["Latte", "Cereali"],
-            "Custom...": [],
-
-            // Side dishes
-            "Purè di patate": ["Patate", "Burro", "Latte", "Sale"],
-            "Broccoli al vapore": ["Broccoli", "Burro", "Sale"],
-            "Insalata di pomodori": ["Pomodori", "Cipolla", "Basilico", "Olio d'oliva", "Aceto"],
-            "Tater tots": ["Tater tots", "Olio per friggere"],
-            "Barbabietole": ["Barbabietole", "Olio d'oliva", "Aceto"],
-            "Insalata di mais": ["Mais (in scatola)", "Cipolla rossa", "Peperoni", "Cilantro", "Lime"],
-            "Patate lesse": ["Patate", "Sale"],
-            "Carote al forno": ["Carote", "Olio d'oliva", "Miele/Sciroppo d'acero", "Timo"],
-            "Carote a insalata": ["Carote", "Limone", "Olio d'oliva", "Prezzemolo"],
-            "Zucchine trifolate": ["Zucchine", "Aglio", "Olio d'oliva", "Prezzemolo"],
-            "Insalata di cetrioli": ["Cetrioli", "Yogurt/Panna acida", "Ananas", "Dill"],
-            "Insalata mista": ["Lattuga mista", "Pomodorini", "Cetriolo", "Carote", "Vinaigrette"],
-            "Custom...": [],
-
-            // Weekend options
-            "Pasta al forno": ["Pasta", "Sugo di pomodoro", "Mozzarella", "Besciamella", "Parmigiano reggiano"],
-            "Parmigiana di melanzane": ["Melanzane", "Sugo di pomodoro", "Mozzarella", "Parmigiano reggiano", "Basilico"],
-            "Zucchine ripiene": ["Zucchine", "Carne macinata", "Pane raffermo", "Uova", "Parmigiano reggiano"],
-            "Lasagna": ["Pasta per lasagna", "Ragù", "Besciamella", "Parmigiano reggiano"],
-            "Spezzatino con patate": ["Carne per spezzatino", "Patate", "Cipolla", "Carote", "Vino rosso"],
-            "Tortellini con la panna": ["Tortellini", "Panna da cucina", "Prosciutto cotto"],
-            "Tortellini col sugo": ["Tortellini", "Sugo di pomodoro", "Parmigiano reggiano"],
-            "Pasta col ragù": ["Pasta", "Ragù"],
-            "Polpettone": ["Carne macinata", "Uova", "Pancetta", "Parmigiano reggiano", "Pane raffermo"],
-            "Scrimpelle mbuss": ["Uova", "Farina", "Latte", "Brodo di carne"],
-            "Polenta col sugo": ["Farina di mais per polenta", "Sugo di pomodoro con salsicce"],
-            "Cannelloni": ["Pasta per cannelloni", "Ricotta", "Spinaci", "Sugo di pomodoro", "Besciamella"],
-            "Bistecca": ["Bistecca", "Sale", "Pepe"],
-            "Custom...": []
+        // Meal options data
+        const mealOptions = {
+            lunch: {
+                main: [
+                    "Ravioli burro e salvia",
+                    "Spaghetti al limone",
+                    "Pasta e ceci",
+                    "Pasta col tonno",
+                    "Pasta sugo tonno",
+                    "Piadine prosciutto provolone",
+                    "Uova fritte",
+                    "Pasta al pesto",
+                    "Pasta coi pomodorini",
+                    "Lenticchie",
+                    "Spaghetti aglio e olio",
+                    "Carbonara",
+                    "Frittata di pasta",
+                    "Pasta e fagioli"
+                ]
+            },
+            dinner: {
+                regular: [
+                    "Salmone col riso",
+                    "Frittata di zucchine",
+                    "Polpette",
+                    "Pollo al limone",
+                    "Merluzzo",
+                    "Hamburger",
+                    "Cotolette",
+                    "Salsicce",
+                    "Minestrone",
+                    "Pollo al forno",
+                    "Scaloppine al limone",
+                    "Caprese"
+                ],
+                quick: [
+                    "Cordon bleu",
+                    "Würstel",
+                    "Dumplings",
+                    "Fish sticks",
+                    "Pollo allo spiedo"
+                ],
+                delivery: [
+                    "Pizza Delivery",
+                    "Greco Delivery",
+                    "Chinese Delivery",
+                    "Vietnamese Delivery",
+                    "Ramen Delivery"
+                ],
+                weekend: [
+                    "Pasta al forno",
+                    "Parmigiana di melanzane",
+                    "Zucchine ripiene",
+                    "Lasagna",
+                    "Spezzatino con patate",
+                    "Tortellini con la panna",
+                    "Tortellini col sugo",
+                    "Pasta col ragù",
+                    "Polpettone",
+                    "Scrimpelle mbuss",
+                    "Polenta col sugo",
+                    "Cannelloni",
+                    "Bistecca"
+                ],
+                other: [
+                    "Colacena"
+                ]
+            },
+            side: {
+                main: [
+                    "Purè di patate",
+                    "Broccoli al vapore",
+                    "Insalata di pomodori",
+                    "Tater tots",
+                    "Barbabietole",
+                    "Insalata di mais",
+                    "Patate lesse",
+                    "Carote al forno",
+                    "Carote a insalata",
+                    "Zucchine trifolate",
+                    "Insalata di cetrioli",
+                    "Insalata mista"
+                ]
+            }
         };
 
-        function combinedLunches() { return [...lunchOptions, ...additionalLunchOptions]; }
-        function combinedDinners(isWeekend) {
-            return (isWeekend && isWeekendEnabled())
-                ? [...weekendOptions, ...additionalWeekendOptions]
-                : [...dinnerOptions, ...additionalDinnerOptions];
-        }
-        function combinedSides() { return [...sideDishOptions, ...additionalSideDishOptions]; }
+        // Ingredient mapping
+        const mealIngredients = {
+            // Lunch
+            "Ravioli burro e salvia": ["Ravioli", "Burro", "Salvia", "Parmigiano"],
+            "Spaghetti al limone": ["Spaghetti", "Limone", "Burro", "Parmigiano"],
+            "Pasta e ceci": ["Pasta", "Ceci", "Cipolla", "Rosmarino", "Aglio"],
+            "Pasta col tonno": ["Pasta", "Tonno", "Salsa pomodoro", "Cipolla"],
+            "Pasta sugo tonno": ["Pasta", "Tonno", "Salsa pomodoro", "Cipolla"],
+            "Piadine prosciutto provolone": ["Piadina", "Prosciutto", "Provolone"],
+            "Uova fritte": ["Uova", "Olio"],
+            "Pasta al pesto": ["Pasta", "Pesto", "Pomodorini"],
+            "Pasta coi pomodorini": ["Pasta", "Pomodorini", "Aglio", "Basilico"],
+            "Lenticchie": ["Lenticchie", "Carote", "Sedano", "Cipolla"],
+            "Spaghetti aglio e olio": ["Spaghetti", "Aglio", "Peperoncino", "Prezzemolo"],
+            "Carbonara": ["Spaghetti", "Uova", "Pancetta", "Pecorino"],
+            "Frittata di pasta": ["Pasta avanzata", "Uova", "Formaggio"],
+            "Pasta e fagioli": ["Pasta", "Fagioli", "Pancetta", "Rosmarino"],
 
-        const NO_INGREDIENT_ITEMS = new Set([
-            ...additionalLunchOptions,
-            ...additionalDinnerOptions,
-            ...additionalSideDishOptions,
-            ...additionalWeekendOptions,
-            "Nothing"
-        ]);
+            // Regular Dinner
+            "Salmone col riso": ["Salmone", "Riso", "Salsa soia"],
+            "Frittata di zucchine": ["Uova", "Zucchine", "Parmigiano", "Cipolla"],
+            "Polpette": ["Carne macinata", "Pangrattato", "Uova", "Aglio", "Prezzemolo"],
+            "Pollo al limone": ["Petto di pollo", "Limone", "Farina", "Burro"],
+            "Merluzzo": ["Merluzzo", "Olio", "Limone", "Prezzemolo"],
+            "Hamburger": ["Pane hamburger", "Carne hamburger", "Formaggio", "Lattuga", "Pomodoro"],
+            "Cotolette": ["Cotolette", "Pangrattato", "Uova"],
+            "Salsicce": ["Salsicce", "Olio"],
+            "Minestrone": ["Verdure miste", "Pasta", "Fagioli", "Brodo"],
+            "Pollo al forno": ["Pollo", "Patate", "Rosmarino", "Aglio"],
+            "Scaloppine al limone": ["Scaloppine", "Limone", "Farina", "Burro"],
+            "Caprese": ["Mozzarella", "Pomodori", "Basilico", "Olio"],
 
-        // Data structure to store meals
+            // Quick Dinner
+            "Cordon bleu": ["Cordon bleu", "Olio"],
+            "Würstel": ["Würstel"],
+            "Dumplings": ["Dumplings"],
+            "Fish sticks": ["Fish sticks", "Olio"],
+            "Pollo allo spiedo": ["Pollo intero"],
+
+            // Weekend
+            "Pasta al forno": ["Pasta", "Sugo", "Mozzarella", "Besciamella", "Parmigiano"],
+            "Parmigiana di melanzane": ["Melanzane", "Sugo", "Mozzarella", "Parmigiano"],
+            "Zucchine ripiene": ["Zucchine", "Carne macinata", "Pane", "Uova", "Parmigiano"],
+            "Lasagna": ["Pasta lasagna", "Ragù", "Besciamella", "Parmigiano"],
+            "Spezzatino con patate": ["Carne spezzatino", "Patate", "Cipolla", "Carote", "Vino"],
+            "Tortellini con la panna": ["Tortellini", "Panna", "Prosciutto"],
+            "Tortellini col sugo": ["Tortellini", "Sugo", "Parmigiano"],
+            "Pasta col ragù": ["Pasta", "Ragù"],
+            "Polpettone": ["Carne macinata", "Uova", "Pancetta", "Parmigiano", "Pane"],
+            "Scrimpelle mbuss": ["Uova", "Farina", "Latte", "Brodo"],
+            "Polenta col sugo": ["Polenta", "Sugo con salsicce"],
+            "Cannelloni": ["Cannelloni", "Ricotta", "Spinaci", "Sugo", "Besciamella"],
+            "Bistecca": ["Bistecca", "Sale", "Pepe"],
+
+            // Sides
+            "Purè di patate": ["Patate", "Burro", "Latte"],
+            "Broccoli al vapore": ["Broccoli", "Burro"],
+            "Insalata di pomodori": ["Pomodori", "Cipolla", "Basilico", "Olio"],
+            "Tater tots": ["Tater tots", "Olio"],
+            "Barbabietole": ["Barbabietole", "Olio", "Aceto"],
+            "Insalata di mais": ["Mais", "Cipolla", "Peperoni"],
+            "Patate lesse": ["Patate"],
+            "Carote al forno": ["Carote", "Olio", "Miele"],
+            "Carote a insalata": ["Carote", "Limone", "Olio"],
+            "Zucchine trifolate": ["Zucchine", "Aglio", "Olio", "Prezzemolo"],
+            "Insalata di cetrioli": ["Cetrioli", "Yogurt", "Aneto"],
+            "Insalata mista": ["Lattuga", "Pomodorini", "Cetriolo", "Carote"],
+
+            // Other
+            "Colacena": ["Latte", "Cereali"]
+        };
+
+        // State management
         let mealData = {};
-        let selectedWeek = 'next'; // Default to next week
-        let weekendPlanEnabled = {};
+        let selectedWeek = 'next';
+        let weekendEnabled = false;
+        let lockedDays = {};
+        let dinnerModes = {};
         let currentShareContent = '';
-        let weekendPlanByWeek = { this: false, next: false }; // single toggle per week
-        let lockedDays = {}; // { [dayKey]: true }
 
-        function isWeekendEnabled() {
-            return !!weekendPlanByWeek[selectedWeek];
-        }
+        // LocalStorage keys
+        const LS_KEYS = {
+            MEALS: 'mealPlanner.meals',
+            WEEK: 'mealPlanner.week',
+            WEEKEND: 'mealPlanner.weekend',
+            LOCKED: 'mealPlanner.locked',
+            MODES: 'mealPlanner.modes',
+            THEME: 'mealPlanner.theme'
+        };
 
-        function toggleWeekendPlanningForWeek() {
-            const turningOn = !isWeekendEnabled();
-            weekendPlanByWeek[selectedWeek] = turningOn;
-
-            if (!turningOn) {
-                const sat = getDateForIndex(5, selectedWeek);
-                const sun = getDateForIndex(6, selectedWeek);
-                [sat, sun].forEach(d => {
-                    const k = getDayKeyFromDate(d, selectedWeek);
-                    if (mealData[k]) {
-                        mealData[k].lunch = '';
-                        mealData[k].dinner = '';
-                        mealData[k].dinnerSide = '';
-                    }
-                    if (lockedDays && lockedDays[k]) delete lockedDays[k]; // pulizia lock weekend
-                });
-            } else {
-                // turning ON: clear dinners that aren't in weekendOptions
-                const sat = getDateForIndex(5, selectedWeek);
-                const sun = getDateForIndex(6, selectedWeek);
-                [sat, sun].forEach(d => {
-                    const k = getDayKeyFromDate(d, selectedWeek);
-                    if (mealData[k]?.dinner && !weekendOptions.includes(mealData[k].dinner)) {
-                        mealData[k].dinner = '';
-                    }
-                });
-            }
-
-            saveState();
+        // Initialize app
+        function init() {
+            loadState();
+            initTheme();
             generateWeek();
+            updateWeekendToggle();
         }
 
         // Theme management
         function initTheme() {
-            const savedTheme = localStorage.getItem(LS_KEYS.THEME);
-            const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            const theme = savedTheme || systemTheme;
+            const saved = localStorage.getItem(LS_KEYS.THEME);
+            const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+            const theme = saved || system;
 
             document.documentElement.setAttribute('data-theme', theme);
-            updateThemeToggle(theme);
+            updateThemeIcon(theme);
         }
 
         function toggleTheme() {
-            const currentTheme = document.documentElement.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
 
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem(LS_KEYS.THEME, newTheme);
-            updateThemeToggle(newTheme);
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem(LS_KEYS.THEME, next);
+            updateThemeIcon(next);
         }
 
-        function updateThemeToggle(theme) {
-            const toggle = document.getElementById('themeToggle');
-            toggle.textContent = theme === 'dark' ? '☀️' : '🌙';
+        function updateThemeIcon(theme) {
+            document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀️' : '🌙';
         }
 
+        // Week selection
         function selectWeek(week) {
             selectedWeek = week;
             document.getElementById('thisWeekBtn').classList.toggle('active', week === 'this');
             document.getElementById('nextWeekBtn').classList.toggle('active', week === 'next');
             saveState();
-
-            const planningVisible = document.getElementById('planningInterface').classList.contains('show');
-            if (planningVisible) {
-                document.getElementById('headerTitle').textContent = selectedWeek === 'this' ? 'This Week' : 'Next Week';
-                generateWeek();
-            }
-        }
-
-        function resetWeek() {
-            if (!confirm('Are you sure?')) return;
-
-            for (let i = 0; i < 7; i++) {
-                const date = getDateForIndex(i, selectedWeek);
-                const dayKey = getDayKeyFromDate(date, selectedWeek);
-
-                mealData[dayKey] = { lunch: '', dinner: '', dinnerSide: '' };
-
-                if (weekendPlanEnabled && weekendPlanEnabled[dayKey] !== undefined) {
-                    delete weekendPlanEnabled[dayKey];
-                }
-                if (lockedDays && lockedDays[dayKey] !== undefined) {
-                    delete lockedDays[dayKey];
-                }
-
-                if (dinnerModeByDay && dinnerModeByDay[dayKey] !== undefined) {
-                    delete dinnerModeByDay[dayKey];
-                }
-            }
-
-            weekendPlanByWeek[selectedWeek] = false;
-
-            currentShareContent = '';
-            try { closeModal('shareModal'); } catch { }
-            try { closeModal('groceryModal'); } catch { }
-
-            saveState();
-            generateWeek();
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function getDinnerMode(dayKey) {
-            return dinnerModeByDay[dayKey] || 'regular';
-        }
-
-        function setDinnerMode(dayKey, mode) {
-            dinnerModeByDay[dayKey] = mode;
-
-            // If current dinner isn't valid in new mode, clear it
-            const allowed = new Set(getDinnerPoolForDay(dayKey));
-            const current = mealData[dayKey]?.dinner;
-            if (current && !allowed.has(current)) {
-                mealData[dayKey].dinner = '';
-            }
-
-            saveState();
-
-            // Re-render this card's meals + update header badge
-            const card = [...document.querySelectorAll('.day-card')]
-                .find(c => c.dataset.dayKey === dayKey);
-            if (card) {
-                const date = getDateFromDayKey(dayKey);
-                card.querySelector('.meals-content').innerHTML = createMeals(dayKey, isWeekendDate(date));
-
-                const header = card.querySelector('.day-header');
-                const chevron = header.querySelector('.chevron');
-                let badge = header.querySelector('.mode-badge');
-                const modeNow = getDinnerMode(dayKey);
-
-                if (modeNow === 'regular') {
-                    if (badge) badge.remove();
-                } else {
-                    const text = modeNow === 'quick' ? '⚡ Quick' : '🚚 Delivery';
-                    if (!badge) {
-                        badge = document.createElement('span');
-                        badge.className = 'mode-badge';
-                        header.insertBefore(badge, chevron);
-                    }
-                    badge.textContent = text;
-                    badge.title = text;
-                }
-            } else {
-                generateWeek();
-            }
-        }
-
-        function getDinnerPoolForDay(dayKey) {
-            const date = getDateFromDayKey(dayKey);
-            const weekend = isWeekendDate(date) && isWeekendEnabled();
-            const mode = getDinnerMode(dayKey);
-
-            if (mode === 'quick') return [...quickDinnerOptions];
-            if (mode === 'delivery') return [...deliveryOptions];
-
-            // regular mode
-            return weekend ? [...weekendOptions] : [...dinnerOptions];
-        }
-
-        function getPoolsForDay(dayKey) {
-            return {
-                lunch: [...lunchOptions],
-                side: [...sideDishOptions], // no "Nothing"/"Custom..." in shuffle pool
-                dinner: getDinnerPoolForDay(dayKey)
-            };
-        }
-
-
-        function startPlanning() {
-            document.getElementById('weekSelection').style.display = 'none';
-            document.getElementById('planningInterface').classList.add('show');
-            document.getElementById('quickActions').classList.add('show');
-            document.getElementById('headerTitle').textContent = selectedWeek === 'this' ? 'This Week' : 'Next Week';
             generateWeek();
         }
 
+        // Weekend toggle
+        function toggleWeekendPlanning() {
+            weekendEnabled = !weekendEnabled;
+            updateWeekendToggle();
 
-        function backToWeekSelection() {
-            document.getElementById('weekSelection').style.display = 'block';
-            document.getElementById('planningInterface').classList.remove('show');
-            document.getElementById('quickActions').classList.remove('show');
+            if (!weekendEnabled) {
+                // Clear weekend meals when disabled
+                for (let i = 5; i <= 6; i++) {
+                    const key = getDayKey(i);
+                    delete mealData[key];
+                    delete lockedDays[key];
+                    delete dinnerModes[key];
+                }
+            }
+
+            saveState();
+            generateWeek();
         }
 
+        function updateWeekendToggle() {
+            const toggle = document.getElementById('weekendToggle');
+            toggle.classList.toggle('active', weekendEnabled);
+        }
+
+        // Generate week view
         function generateWeek() {
             const container = document.getElementById('daysContainer');
             container.innerHTML = '';
@@ -1264,477 +1138,543 @@
             const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
             days.forEach((name, index) => {
-                if (index === 5) { // before Saturday
-                    container.appendChild(createWeekendToggleSection());
+                if (index >= 5 && !weekendEnabled) return;
+
+                const key = getDayKey(index);
+                const date = getDateForIndex(index);
+                const isWeekend = index >= 5;
+
+                if (!mealData[key]) {
+                    mealData[key] = { lunch: '', dinner: '', side: '' };
                 }
 
-                const date = getDateForIndex(index, selectedWeek);
-                const isWknd = isWeekendDate(date);
-
-                // Skip rendering Sat/Sun when weekend planning is OFF
-                if (isWknd && !isWeekendEnabled()) return;
-
-                const dayKey = getDayKeyFromDate(date, selectedWeek);
-                if (!mealData[dayKey]) mealData[dayKey] = { lunch: '', dinner: '', dinnerSide: '' };
-                if (weekendPlanEnabled[dayKey] === undefined) weekendPlanEnabled[dayKey] = false; // legacy no-op
-
-                const card = createDayCard(name, date, isWknd, dayKey);
+                const card = createDayCard(name, date, key, isWeekend);
                 container.appendChild(card);
             });
 
+            // Auto-expand first day
             setTimeout(() => {
-                const firstCard = document.querySelector('.day-card');
-                if (firstCard) firstCard.classList.add('expanded');
+                const first = container.querySelector('.day-card');
+                if (first) expandDay(first);
             }, 100);
 
             saveState();
         }
 
-        function createDayCard(dayName, date, isWeekend, dayKey) {
+        function createDayCard(name, date, key, isWeekend) {
+            const data = mealData[key];
+            const locked = lockedDays[key];
+            const mode = dinnerModes[key] || 'regular';
+            const hasMeals = data.lunch || data.dinner;
+
             const card = document.createElement('div');
-            card.dataset.dayKey = dayKey;
-            const data = mealData[dayKey];
+            card.className = 'day-card' + (isWeekend ? ' weekend' : '') + (hasMeals ? ' has-meals' : '');
+            card.dataset.key = key;
+
             const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
-            const hasMeals = data.lunch || data.dinner;
-            const locked = !!lockedDays[dayKey];
+            // Build badges
+            let badges = '';
+            if (mode === 'quick') badges += '<span class="badge quick">Quick</span>';
+            if (mode === 'delivery') badges += '<span class="badge delivery">Delivery</span>';
 
-            const classes = ['day-card'];
-            if (isWeekend) classes.push('weekend');
-            if (hasMeals) classes.push('has-meals');
-            if (isWeekend && !isWeekendEnabled()) classes.push('optional');
-            if (locked) classes.push('locked');
-            card.className = classes.join(' ');
-
-            const mode = getDinnerMode(dayKey);
-            const modeBadge = (mode === 'regular') ? '' :
-                `<span class="mode-badge" title="${mode === 'quick' ? '⚡ Quick' : '🚚 Delivery'}">
-     ${mode === 'quick' ? '⚡ Quick' : '🚚 Delivery'}
-   </span>`;
-
-            const headerRight = `
-  <button class="lock-btn"
-          aria-label="Lock day from shuffle"
-          aria-pressed="${locked ? 'true' : 'false'}"
-          onclick="toggleLock(event, '${dayKey}')">${locked ? '🔒' : '🔓'}</button>
-  ${modeBadge}
-  <span class="chevron">▼</span>
-`;
-
-            if (isWeekend) {
-                card.innerHTML = `
-    <div class="day-header" onclick="toggleDay(this)">
-      <div class="day-info">
-        <div class="day-indicator"></div>
-        <div>
-          <span class="day-name">${dayName}</span>
-          <span class="day-date">${dateStr}</span>
-        </div>
-      </div>
-      ${headerRight}
-    </div>
-    <div class="meals-content">
-      ${isWeekendEnabled()
-                        ? createMeals(dayKey, true)
-                        : `
-          <div class="weekend-toggle-section">
-            <div class="weekend-toggle-label">Weekend planning is off. Use “Plan meals for weekend” above to enable.</div>
-          </div>
-        `
-                    }
-    </div>
-  `;
-            } else {
-                card.innerHTML = `
-                    <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-info">
-                            <div class="day-indicator"></div>
-                            <div>
-                                <span class="day-name">${dayName}</span>
-                                <span class="day-date">${dateStr}</span>
-                            </div>
+            card.innerHTML = `
+                <div class="day-header" role="button" aria-expanded="false" tabindex="0"
+                    onclick="toggleDay('${key}')"
+                    onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); toggleDay('${key}');}">
+                    <div class="day-info">
+                        <div class="day-status">
+                            <div class="status-indicator"></div>
                         </div>
-                        ${headerRight}
+                        <div class="day-title">
+                            <div class="day-name">${name}</div>
+                            <div class="day-date">${dateStr}</div>
+                        </div>
                     </div>
-                    <div class="meals-content">
-                        ${createMeals(dayKey, false)}
+                    <div class="day-badges">
+                        ${locked ? '<span class="lock-indicator">🔒</span>' : ''}
+                        ${badges}
+                        <span class="chevron">▼</span>
                     </div>
-                `;
-            }
-            // after setting card.innerHTML...
-            const header = card.querySelector('.day-header');
-            header.setAttribute('role', 'button');
-            header.setAttribute('tabindex', '0');
-            header.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleDay(header); }
-            });
-            const updateAria = () => header.setAttribute('aria-expanded', card.classList.contains('expanded') ? 'true' : 'false');
-            // prevent header toggle when clicking lock
-            card.querySelector('.lock-btn').addEventListener('click', e => e.stopPropagation());
-            card.addEventListener('transitionend', updateAria);
-            setTimeout(updateAria, 0);
+                </div>
+                <div class="meals-content">
+                    ${createMealsContent(key, isWeekend)}
+                </div>
+            `;
 
             return card;
         }
 
-        function isDayLocked(dayKey) { return !!lockedDays[dayKey]; }
+        function createMealsContent(key, isWeekend) {
+            const data = mealData[key];
+            const mode = dinnerModes[key] || 'regular';
+            const locked = lockedDays[key];
 
-        function toggleLock(e, dayKey) {
-            e?.stopPropagation?.();
-            lockedDays[dayKey] = !lockedDays[dayKey];
-            saveState();
-            // refresh just this card UI
-            const card = [...document.querySelectorAll('.day-card')].find(c => c.dataset.dayKey === dayKey);
-            if (card) {
-                card.classList.toggle('locked', lockedDays[dayKey]);
-                const btn = card.querySelector('.lock-btn');
-                btn.setAttribute('aria-pressed', lockedDays[dayKey] ? 'true' : 'false');
-                btn.textContent = lockedDays[dayKey] ? '🔒' : '🔓';
-            }
-        }
-
-
-        function formatWeekRange(which = selectedWeek) {
-            const start = getStartOfWeek(new Date(), which);
-            const end = new Date(start); end.setDate(start.getDate() + 6);
-            const opt = { month: 'short', day: 'numeric' };
-            return `${start.toLocaleDateString('en-US', opt)} – ${end.toLocaleDateString('en-US', opt)}`;
-        }
-
-        function optionsHtml(main, extra, selected) {
-            const mainHtml = main.map(m => `<option value="${m}" ${selected === m ? 'selected' : ''}>${m}</option>`).join('');
-            const extraHtml = extra.length
-                ? `<optgroup label="Other / Custom">${extra.map(m => `<option value="${m}" ${selected === m ? 'selected' : ''}>${m}</option>`).join('')}</optgroup>`
-                : '';
-            return mainHtml + extraHtml;
-        }
-
-        function createMeals(dayKey, isWeekend) {
-            const data = mealData[dayKey];
-            const mode = getDinnerMode(dayKey);
-
-            // Dinner pools based on mode
-            let dinnerMain, dinnerExtra;
-            const customOpt = additionalDinnerOptions.includes("Custom...") ? ["Custom..."] : [];
-
+            // Get dinner options based on mode and weekend
+            let dinnerOpts = [];
             if (mode === 'quick') {
-                dinnerMain = quickDinnerOptions;
-                dinnerExtra = customOpt; // allow custom only
+                dinnerOpts = mealOptions.dinner.quick;
             } else if (mode === 'delivery') {
-                dinnerMain = deliveryOptions;
-                dinnerExtra = customOpt; // allow custom only
-            } else if (isWeekend && isWeekendEnabled()) {
-                dinnerMain = weekendOptions;
-                dinnerExtra = additionalWeekendOptions;
+                dinnerOpts = mealOptions.dinner.delivery;
+            } else if (isWeekend) {
+                dinnerOpts = mealOptions.dinner.weekend;
             } else {
-                dinnerMain = dinnerOptions;
-                dinnerExtra = additionalDinnerOptions;
+                dinnerOpts = mealOptions.dinner.regular;
             }
 
-            const lunchMain = lunchOptions, lunchExtra = additionalLunchOptions;
-            const sideMain = sideDishOptions, sideExtra = additionalSideDishOptions;
-
-            const allSides = [...sideMain, ...sideExtra];
-            const allLunch = [...lunchMain, ...lunchExtra];
-            const allDinner = [...dinnerMain, ...dinnerExtra];
+            const showSide = mode !== 'delivery';
 
             return `
-    <div class="meal-section">
-      <div class="meal-label">Lunch</div>
-      <div class="meal-selector">
-        <select class="meal-select" data-meal="lunch"
-                onchange="handleMealChange('${dayKey}', 'lunch', this)">
-          <option value="">Select lunch...</option>
-          ${optionsHtml(lunchMain, lunchExtra, data.lunch)}
-        </select>
-        <button type="button" class="shuffle-chip" aria-label="Shuffle lunch"
-                onclick="shuffleMeal('${dayKey}', 'lunch')">🎲</button>
-        <input type="text" class="custom-input" placeholder="Enter custom lunch..."
-               onchange="updateMeal('${dayKey}', 'lunch', this.value)"
-               style="display: ${data.lunch && !allLunch.includes(data.lunch) ? 'block' : 'none'}"
-               value="${data.lunch && !allLunch.includes(data.lunch) ? data.lunch : ''}">
-      </div>
-    </div>
-
-    <div class="meal-section">
-      <div class="meal-label">Dinner</div>
-
-      <div class="mode-chips" role="group" aria-label="Dinner type">
-        <button type="button" class="mode-chip" aria-pressed="${mode === 'regular'}"
-                onclick="setDinnerMode('${dayKey}','regular')">🎲</button>
-        <button type="button" class="mode-chip" aria-pressed="${mode === 'quick'}"
-                onclick="setDinnerMode('${dayKey}','quick')">⚡</button>
-        <button type="button" class="mode-chip" aria-pressed="${mode === 'delivery'}"
-                onclick="setDinnerMode('${dayKey}','delivery')">🚚</button>
-      </div>
-
-      <div class="meal-selector">
-        <select class="meal-select" data-meal="dinner"
-                onchange="handleMealChange('${dayKey}', 'dinner', this)">
-          <option value="">Select dinner...</option>
-          ${optionsHtml(dinnerMain, dinnerExtra, data.dinner)}
-        </select>
-        <button type="button" class="shuffle-chip" aria-label="Shuffle dinner"
-                onclick="shuffleMeal('${dayKey}', 'dinner')">🎲</button>
-        <input type="text" class="custom-input" placeholder="Enter custom dinner..."
-               onchange="updateMeal('${dayKey}', 'dinner', this.value)"
-               style="display: ${data.dinner && !allDinner.includes(data.dinner) ? 'block' : 'none'}"
-               value="${data.dinner && !allDinner.includes(data.dinner) ? data.dinner : ''}">
-      </div>
-
-      <div style="margin-top: 12px;">
-        <div class="meal-label">Side Dish</div>
-        <div class="meal-selector">
-          <select class="meal-select" data-meal="dinnerSide"
-                  onchange="handleMealChange('${dayKey}', 'dinnerSide', this)">
-            <option value="">Select side...</option>
-            ${optionsHtml(sideMain, sideExtra, data.dinnerSide)}
-          </select>
-          <button type="button" class="shuffle-chip" aria-label="Shuffle side"
-                  onclick="shuffleMeal('${dayKey}', 'dinnerSide')">🎲</button>
-          <input type="text" class="custom-input" placeholder="Enter custom side..."
-                 onchange="updateMeal('${dayKey}', 'dinnerSide', this.value)"
-                 style="display: ${data.dinnerSide && data.dinnerSide !== 'Nothing' && !allSides.includes(data.dinnerSide) ? 'block' : 'none'}"
-                 value="${data.dinnerSide && !allSides.includes(data.dinnerSide) ? data.dinnerSide : ''}">
-        </div>
-      </div>
-    </div>
-  `;
+                <div class="meal-section">
+                    <div class="meal-header">
+                        <div class="meal-label">Lunch</div>
+                    </div>
+                    <div class="meal-input-wrapper">
+                        <input type="text" 
+                            class="meal-input" 
+                            value="${data.lunch}"
+                            placeholder="Select lunch..."
+                            onclick="showDropdown('${key}', 'lunch')"
+                            onkeyup="filterDropdown('${key}', 'lunch', this.value)"
+                            onblur="commitFreeText('${key}','lunch', this.value)"
+                            data-meal="lunch">
+                        <button class="shuffle-btn" onclick="shuffleMeal('${key}', 'lunch')" title="Shuffle lunch">
+                            🎲
+                        </button>
+                        <div class="meal-dropdown" id="dropdown-${key}-lunch">
+                            <div class="dropdown-search">
+                                <input type="text" class="search-input" 
+                                    placeholder="Search meals..."
+                                    onkeyup="filterDropdown('${key}', 'lunch', this.value)">
+                            </div>
+                            <div class="dropdown-options" id="options-${key}-lunch">
+                                ${createDropdownOptions(mealOptions.lunch.main, data.lunch, key, 'lunch')}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="meal-section">
+                    <div class="meal-header">
+                        <div class="meal-label">Dinner</div>
+                    </div>
+                    ${!isWeekend ? `
+                        <div class="dinner-mode-selector">
+                            <button class="mode-btn ${mode === 'regular' ? 'active' : ''}" 
+                                onclick="setDinnerMode('${key}', 'regular')">
+                                <span>🍽️</span> Regular
+                            </button>
+                            <button class="mode-btn ${mode === 'quick' ? 'active quick' : ''}" 
+                                onclick="setDinnerMode('${key}', 'quick')">
+                                <span>⚡</span> Quick
+                            </button>
+                            <button class="mode-btn ${mode === 'delivery' ? 'active delivery' : ''}" 
+                                onclick="setDinnerMode('${key}', 'delivery')">
+                                <span>🚚</span> Delivery
+                            </button>
+                        </div>
+                    ` : ''}
+                    <div class="meal-input-wrapper">
+                        <input type="text" 
+                            class="meal-input" 
+                            value="${data.dinner}"
+                            placeholder="Select dinner..."
+                            onclick="showDropdown('${key}', 'dinner')"
+                            onkeyup="filterDropdown('${key}', 'dinner', this.value)"
+                            onblur="commitFreeText('${key}','dinner', this.value)"
+                            data-meal="dinner">
+                        <button class="shuffle-btn" onclick="shuffleMeal('${key}', 'dinner')" title="Shuffle dinner">
+                            🎲
+                        </button>
+                        <div class="meal-dropdown" id="dropdown-${key}-dinner">
+                            <div class="dropdown-search">
+                                <input type="text" class="search-input" 
+                                    placeholder="Search meals..."
+                                    onkeyup="filterDropdown('${key}', 'dinner', this.value)">
+                            </div>
+                            <div class="dropdown-options" id="options-${key}-dinner">
+                                ${createDropdownOptions(dinnerOpts, data.dinner, key, 'dinner')}
+                                ${mode === 'regular' && !isWeekend ?
+                    `<div class="dropdown-group">Other</div>
+                                     ${createDropdownOptions(mealOptions.dinner.other, data.dinner, key, 'dinner')}` : ''}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    ${showSide ? `
+                        <div style="margin-top: 16px;">
+                            <div class="meal-header">
+                                <div class="meal-label">Side Dish</div>
+                            </div>
+                            <div class="meal-input-wrapper">
+                                <input type="text" 
+                                    class="meal-input" 
+                                    value="${data.side}"
+                                    placeholder="Select side..."
+                                    onclick="showDropdown('${key}', 'side')"
+                                    onkeyup="filterDropdown('${key}', 'side', this.value)"
+                                     onblur="commitFreeText('${key}','side', this.value)"
+                                    data-meal="side">
+                                <button class="shuffle-btn" onclick="shuffleMeal('${key}', 'side')" title="Shuffle side">
+                                    🎲
+                                </button>
+                                <div class="meal-dropdown" id="dropdown-${key}-side">
+                                    <div class="dropdown-search">
+                                        <input type="text" class="search-input" 
+                                            placeholder="Search sides..."
+                                            onkeyup="filterDropdown('${key}', 'side', this.value)">
+                                    </div>
+                                    <div class="dropdown-options" id="options-${key}-side">
+                                        ${createDropdownOptions(mealOptions.side.main, data.side, key, 'side')}
+                                        <div class="dropdown-group">Other</div>
+                                        <div class="dropdown-option" onclick="selectMeal('${key}', 'side', 'None')">None</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+                </div>
+                
+                <div class="day-actions">
+                    <button class="day-action-btn ${locked ? 'lock-btn locked' : 'lock-btn'}" 
+                        onclick="toggleLock('${key}')">
+                        ${locked ? '🔒 Locked' : '🔓 Unlocked'}
+                    </button>
+                    <button class="day-action-btn" onclick="shuffleDay('${key}')">
+                        🎲 Shuffle Day
+                    </button>
+                    <button class="day-action-btn" onclick="clearDay('${key}')">
+                        🗑️ Clear Day
+                    </button>
+                </div>
+            `;
         }
 
-        function handleMealChange(dayKey, mealType, selectElement) {
-            const value = selectElement.value;
-            const customInput = selectElement.parentNode.querySelector('.custom-input');
+        function commitFreeText(key, meal, value) {
+            const trimmed = (value || '').trim();
+            mealData[key][meal] = (meal === 'side' && trimmed.toLowerCase() === 'none') ? '' : trimmed;
 
-            if (value === 'Custom...') {
-                customInput.style.display = 'block';
-                customInput.focus();
-                selectElement.value = '';
-                return;
-            }
-
-            if (mealType === 'dinnerSide' && value === 'Nothing') {
-                customInput.style.display = 'none';
-                updateMeal(dayKey, mealType, 'Nothing');
-                return;
-            }
-
-            // NEW: if dinner is a delivery, clear side (set to Nothing)
-            if (mealType === 'dinner' && /Delivery/i.test(value)) {
-                const card = selectElement.closest('.day-card');
-                const sideSel = card?.querySelector('select[data-meal="dinnerSide"]');
-                if (sideSel) {
-                    sideSel.value = 'Nothing';
-                    updateMeal(dayKey, 'dinnerSide', 'Nothing');
-                    const sideCustom = sideSel.parentNode.querySelector('.custom-input');
-                    if (sideCustom) sideCustom.style.display = 'none';
+            // If delivery mode (or dinner text contains "Delivery"), side must be empty
+            if (meal === 'dinner') {
+                const mode = dinnerModes[key] || 'regular';
+                if (mode === 'delivery' || /delivery/i.test(trimmed)) {
+                    mealData[key].side = '';
+                    const card = document.querySelector(`[data-key="${key}"]`);
+                    const sideInput = card?.querySelector('[data-meal="side"]');
+                    if (sideInput) sideInput.value = '';
                 }
             }
 
-            customInput.style.display = 'none';
-            updateMeal(dayKey, mealType, value);
+            updateDayStatus(key);
+            saveState();
         }
 
-        function toggleDay(header) {
-            const card = header.closest('.day-card');
-            const expanded = card.classList.toggle('expanded');
+        function createDropdownOptions(options, selected, key, meal) {
+            return options.map(opt =>
+                `<div class="dropdown-option ${opt === selected ? 'selected' : ''}"
+         onclick="selectMeal('${key}','${meal}','${opt.replace(/'/g, "\\'")}')">
+       ${opt}
+     </div>`
+            ).join('');
+        }
+
+        // Dropdown management
+        function showDropdown(key, meal) {
+            // Close all other dropdowns
+            document.querySelectorAll('.meal-dropdown').forEach(d => d.classList.remove('show'));
+
+            const dropdown = document.getElementById(`dropdown-${key}-${meal}`);
+            dropdown.classList.add('show');
+
+            // Focus search input
+            const search = dropdown.querySelector('.search-input');
+            setTimeout(() => search.focus(), 50);
+        }
+
+        function filterDropdown(key, meal, query) {
+            const options = document.querySelectorAll(`#options-${key}-${meal} .dropdown-option`);
+            const lowerQuery = query.toLowerCase();
+
+            options.forEach(opt => {
+                const text = opt.textContent.toLowerCase();
+                opt.style.display = text.includes(lowerQuery) ? 'block' : 'none';
+            });
+        }
+
+        function selectMeal(key, meal, value) {
+            mealData[key][meal] = value === 'None' ? '' : value;
+
+            // Update input
+            const card = document.querySelector(`[data-key="${key}"]`);
+            const input = card.querySelector(`[data-meal="${meal}"]`);
+            input.value = value === 'None' ? '' : value;
+
+            // Hide dropdown
+            document.getElementById(`dropdown-${key}-${meal}`).classList.remove('show');
+
+            // Clear side if delivery selected
+            if (meal === 'dinner' && value.includes('Delivery')) {
+                mealData[key].side = '';
+            }
+
+            updateDayStatus(key);
+            saveState();
+        }
+
+        // Click outside to close dropdowns
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.meal-input-wrapper')) {
+                document.querySelectorAll('.meal-dropdown').forEach(d => d.classList.remove('show'));
+            }
+        });
+
+        // Day management
+        function toggleDay(key) {
+            const card = document.querySelector(`[data-key="${key}"]`);
+            const header = card.querySelector('.day-header');
+            const expanded = !card.classList.contains('expanded');
+
+            document.querySelectorAll('.day-card.expanded').forEach(c => { if (c !== card) c.classList.remove('expanded'); });
+            card.classList.toggle('expanded', expanded);
             header.setAttribute('aria-expanded', expanded ? 'true' : 'false');
         }
 
-        function updateMeal(dayKey, mealType, value) {
-            mealData[dayKey][mealType] = value;
-            saveState();
-            updateDayIndicator(dayKey);
+        function expandDay(card) {
+            card.classList.add('expanded');
         }
 
-        function updateDayIndicator(dayKey) {
-            const data = mealData[dayKey];
+        function updateDayStatus(key) {
+            const card = document.querySelector(`[data-key="${key}"]`);
+            const data = mealData[key];
             const hasMeals = data.lunch || data.dinner;
 
-            setTimeout(() => {
-                const cards = document.querySelectorAll('.day-card');
-                cards.forEach(card => {
-                    const cardDayKey = extractDayKeyFromCard(card);
-                    if (cardDayKey === dayKey) {
-                        if (hasMeals) {
-                            card.classList.add('has-meals');
-                        } else {
-                            card.classList.remove('has-meals');
-                        }
-                    }
-                });
-            }, 50);
+            card.classList.toggle('has-meals', hasMeals);
         }
 
-        function extractDayKeyFromCard(card) {
-            return card.dataset.dayKey;
+        function toggleLock(key) {
+            lockedDays[key] = !lockedDays[key];
+            saveState();
+            generateWeek();
         }
 
+        function setDinnerMode(key, mode) {
+            dinnerModes[key] = mode;
+
+            // Clear dinner if not compatible with new mode
+            const data = mealData[key];
+            const validOptions = mode === 'quick' ? mealOptions.dinner.quick :
+                mode === 'delivery' ? mealOptions.dinner.delivery :
+                    mealOptions.dinner.regular;
+
+            if (data.dinner && !validOptions.includes(data.dinner)) {
+                mealData[key].dinner = '';
+            }
+
+            // Clear side for delivery
+            if (mode === 'delivery') {
+                mealData[key].side = '';
+            }
+
+            saveState();
+            generateWeek();
+        }
+
+        function shuffleDay(key) {
+            if (lockedDays[key]) return;
+
+            const isWeekend = getDayIndex(key) >= 5;
+            const mode = dinnerModes[key] || 'regular';
+
+            // Shuffle lunch
+            const lunches = [...mealOptions.lunch.main];
+            mealData[key].lunch = lunches[Math.floor(Math.random() * lunches.length)];
+
+            // Shuffle dinner
+            let dinners = [];
+            if (mode === 'quick') {
+                dinners = mealOptions.dinner.quick;
+            } else if (mode === 'delivery') {
+                dinners = mealOptions.dinner.delivery;
+            } else if (isWeekend) {
+                dinners = mealOptions.dinner.weekend;
+            } else {
+                dinners = mealOptions.dinner.regular;
+            }
+            mealData[key].dinner = dinners[Math.floor(Math.random() * dinners.length)];
+
+            // Shuffle side (if not delivery)
+            if (mode !== 'delivery') {
+                const sides = [...mealOptions.side.main];
+                mealData[key].side = sides[Math.floor(Math.random() * sides.length)];
+            }
+
+            saveState();
+            generateWeek();
+        }
+
+        function clearDay(key) {
+            mealData[key] = { lunch: '', dinner: '', side: '' };
+            saveState();
+            generateWeek();
+        }
+
+        // Week operations
         function shuffleWeek() {
             const container = document.getElementById('daysContainer');
-
-            const weekKeys = weekKeysForSelectedWeek();
-            if (!weekKeys.length) {
-                alert('Nothing to shuffle: all eligible days are locked or hidden.');
-                return;
-            }
             container.classList.add('shuffle-animation');
 
-            const baseLunches = lunchOptions;      // niente "Custom..."
-            const baseSides = sideDishOptions;   // niente "Nothing"/"Custom..."
+            for (let i = 0; i < 7; i++) {
+                if (i >= 5 && !weekendEnabled) continue;     // skip weekend if hidden
+                const key = getDayKey(i);
+                if (!lockedDays[key]) shuffleDay(key);
+            }
 
-            const perDay = weekKeys.map(k => ({ k, dinnerPool: getDinnerPoolForDay(k) }));
+            setTimeout(() => container.classList.remove('shuffle-animation'), 600);
+        }
 
-            const lunches = [...baseLunches];
-            const sides = [...baseSides];
-            shuffleArray(lunches);
-            shuffleArray(sides);
+        function resetWeek() {
+            if (!confirm('Clear all meals for this week?')) return;
 
-            perDay.forEach(({ k, dinnerPool }, i) => {
-                const dinners = [...dinnerPool];
-                shuffleArray(dinners);
-
-                const mode = getDinnerMode(k); // ← NEW
-                mealData[k].lunch = lunches[i % lunches.length];
-                mealData[k].dinner = dinners[0];
-                mealData[k].dinnerSide = (mode === 'delivery') ? 'Nothing' : sides[i % sides.length]; // ← NEW
+            Object.keys(mealData).forEach(key => {
+                mealData[key] = { lunch: '', dinner: '', side: '' };
+                delete lockedDays[key];
+                delete dinnerModes[key];
             });
 
             saveState();
-
-            setTimeout(() => {
-                container.classList.remove('shuffle-animation');
-                generateWeek();
-            }, 600);
+            generateWeek();
         }
 
-        function weekKeysForSelectedWeek() {
-            return [...Array(7).keys()].map(i => {
-                const d = getDateForIndex(i, selectedWeek);
-                return getDayKeyFromDate(d, selectedWeek);
-            }).filter(dayKey => {
-                const [, y, m, day] = dayKey.split('-').map(Number);
-                const d = new Date(y, m, day);
-                const weekendOk = !isWeekendDate(d) || isWeekendEnabled();
-                return weekendOk && !isDayLocked(dayKey);
-            });
-        }
-
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
-        }
-
-        function shareWeek() {
-            const weekTitle = selectedWeek === 'this' ? 'This Week' : 'Next Week';
-            let shareText = `📅 Meal Plan - ${weekTitle} (${formatWeekRange()})\n\n`;
-
-            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-            days.forEach((day, index) => {
-                const date = getDateForIndex(index, selectedWeek);
-                const dayKey = getDayKeyFromDate(date, selectedWeek);
-                const data = mealData[dayKey] || { lunch: '', dinner: '', dinnerSide: '' };
-
-                if (isWeekendDate(date) && !isWeekendEnabled()) return;
-
-                const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-                shareText += `${day} (${dateStr})\n`;
-
-                if (data.lunch) shareText += `  Lunch: ${data.lunch}\n`;
-                if (data.dinner) {
-                    shareText += `  Dinner: ${data.dinner}`;
-                    if (data.dinnerSide && data.dinnerSide !== 'Nothing') {
-                        shareText += ` with ${data.dinnerSide}`;
-                    }
-                    shareText += '\n';
-                }
-                if (!data.lunch && !data.dinner) shareText += `  No meals planned\n`;
-                shareText += '\n';
-            });
-
-            currentShareContent = shareText.trim();
-            document.getElementById('shareContent').textContent = currentShareContent;
-            document.getElementById('shareModalTitle').textContent = 'Share Meal Plan';
-            showModal('shareModal');
-        }
-
+        // Grocery list
         function generateGroceryList() {
             const ingredients = new Map();
 
-            const weekKeys = [...Array(7).keys()].map(i => {
-                const d = getDateForIndex(i, selectedWeek);
-                return getDayKeyFromDate(d, selectedWeek);
-            }).filter(dayKey => {
-                const [, y, m, day] = dayKey.split('-').map(Number);
-                const d = new Date(y, m, day);
-                return !isWeekendDate(d) || isWeekendEnabled();
-            });
-
-            weekKeys.forEach(dayKey => {
-                const data = mealData[dayKey] || {};
-
-                addMealIngredients(ingredients, data.lunch);
-                addMealIngredients(ingredients, data.dinner);
-                addMealIngredients(ingredients, data.dinnerSide);
-            });
-
-            return Array.from(ingredients.entries())
-                .sort((a, b) => a[0].localeCompare(b[0]))
-                .map(([ingredient, count]) => count > 1 ? `${ingredient} (×${count})` : ingredient);
-        }
-
-        function addMealIngredients(ingredientsMap, name) {
-            if (!name || NO_INGREDIENT_ITEMS.has(name)) return;
-            const list = mealIngredients[name];
-            if (Array.isArray(list) && list.length) {
-                list.forEach(ingredient => {
-                    ingredientsMap.set(ingredient, (ingredientsMap.get(ingredient) || 0) + 1);
+            Object.entries(mealData).forEach(([key, data]) => {
+                ['lunch', 'dinner', 'side'].forEach(type => {
+                    const meal = data[type];
+                    if (meal && meal !== 'None' && mealIngredients[meal]) {
+                        mealIngredients[meal].forEach(ing => {
+                            ingredients.set(ing, (ingredients.get(ing) || 0) + 1);
+                        });
+                    }
                 });
-            }
+            });
+
+            // Organize by category
+            const categories = {
+                'Proteins': ['Pollo', 'Carne', 'Salmone', 'Merluzzo', 'Pancetta', 'Prosciutto', 'Salsicce', 'Würstel', 'Fish sticks', 'Uova', 'Tonno'],
+                'Dairy': ['Mozzarella', 'Parmigiano', 'Provolone', 'Formaggio', 'Ricotta', 'Burro', 'Latte', 'Panna', 'Yogurt'],
+                'Carbs': ['Pasta', 'Spaghetti', 'Ravioli', 'Tortellini', 'Lasagna', 'Cannelloni', 'Riso', 'Pane', 'Polenta', 'Farina'],
+                'Vegetables': ['Pomodori', 'Zucchine', 'Melanzane', 'Carote', 'Patate', 'Broccoli', 'Spinaci', 'Cipolla', 'Aglio'],
+                'Other': []
+            };
+
+            const organized = {};
+
+            ingredients.forEach((count, ing) => {
+                let added = false;
+                for (const [cat, items] of Object.entries(categories)) {
+                    if (items.some(item => ing.toLowerCase().includes(item.toLowerCase()))) {
+                        if (!organized[cat]) organized[cat] = [];
+                        organized[cat].push({ name: ing, count });
+                        added = true;
+                        break;
+                    }
+                }
+                if (!added) {
+                    if (!organized['Other']) organized['Other'] = [];
+                    organized['Other'].push({ name: ing, count });
+                }
+            });
+
+            return organized;
         }
 
         function showGroceryList() {
-            const groceryList = generateGroceryList();
-            const listContainer = document.getElementById('groceryList');
+            const list = generateGroceryList();
+            const container = document.getElementById('groceryList');
 
-            if (groceryList.length === 0) {
-                listContainer.innerHTML = `
+            if (Object.keys(list).length === 0) {
+                container.innerHTML = `
                     <div class="empty-state">
-                        <div class="empty-state-icon">📝</div>
+                        <div class="empty-state-icon">🛒</div>
                         <p>Add meals to generate your grocery list</p>
                     </div>
                 `;
             } else {
-                listContainer.innerHTML = groceryList.map(item => `
-                    <div class="grocery-item">
-                        <input type="checkbox" class="grocery-checkbox">
-                        <span>${item}</span>
+                container.innerHTML = `
+                    <div class="grocery-categories">
+                        ${Object.entries(list).map(([cat, items]) => `
+                            <div class="grocery-category">
+                                <div class="category-title">${cat}</div>
+                                ${items.map(item => `
+                                    <div class="grocery-item">
+                                        <input type="checkbox" class="grocery-checkbox">
+                                        <span>${item.name} ${item.count > 1 ? `(×${item.count})` : ''}</span>
+                                    </div>
+                                `).join('')}
+                            </div>
+                        `).join('')}
                     </div>
-                `).join('');
+                `;
             }
 
             showModal('groceryModal');
         }
 
-        function shareGroceryList() {
-            const groceryList = generateGroceryList();
+        // Share functionality
+        function shareWeek() {
+            const weekTitle = selectedWeek === 'this' ? 'This Week' : 'Next Week';
+            const range = formatWeekRange();
+            let text = `📅 Meal Plan - ${weekTitle}\n${range}\n\n`;
 
-            if (groceryList.length === 0) {
-                alert('No items in your grocery list to share!');
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+            days.forEach((day, i) => {
+                if (i >= 5 && !weekendEnabled) return;
+
+                const key = getDayKey(i);
+                const data = mealData[key];
+                const date = getDateForIndex(i);
+                const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+
+                text += `${day} (${dateStr})\n`;
+                if (data.lunch) text += `  Lunch: ${data.lunch}\n`;
+                if (data.dinner) {
+                    text += `  Dinner: ${data.dinner}`;
+                    if (data.side) text += ` with ${data.side}`;
+                    text += '\n';
+                }
+                if (!data.lunch && !data.dinner) text += `  No meals planned\n`;
+                text += '\n';
+            });
+
+            currentShareContent = text.trim();
+            document.getElementById('shareContent').textContent = currentShareContent;
+            document.getElementById('shareModalTitle').textContent = 'Share Meal Plan';
+            showModal('shareModal');
+        }
+
+        function shareGroceryList() {
+            const list = generateGroceryList();
+            if (Object.keys(list).length === 0) {
+                alert('No items in grocery list!');
                 return;
             }
 
-            const weekTitle = selectedWeek === 'this' ? 'This Week' : 'Next Week';
-            let shareText = `🛒 Grocery List - ${weekTitle}\n\n`;
+            let text = `🛒 Grocery List\n${formatWeekRange()}\n\n`;
 
-            groceryList.forEach(item => {
-                shareText += `☐ ${item}\n`;
+            Object.entries(list).forEach(([cat, items]) => {
+                text += `${cat}:\n`;
+                items.forEach(item => {
+                    text += `☐ ${item.name}`;
+                    if (item.count > 1) text += ` (×${item.count})`;
+                    text += '\n';
+                });
+                text += '\n';
             });
 
-            currentShareContent = shareText.trim();
+            currentShareContent = text.trim();
             closeModal('groceryModal');
             setTimeout(() => {
                 document.getElementById('shareContent').textContent = currentShareContent;
@@ -1743,267 +1683,119 @@
             }, 300);
         }
 
-        function copyToClipboard(btnEl) {
+        function copyToClipboard(btn) {
             navigator.clipboard.writeText(currentShareContent).then(() => {
-                const original = btnEl.textContent;
-                btnEl.textContent = 'Copied!';
-                btnEl.style.background = 'var(--accent-success)';
+                const original = btn.textContent;
+                btn.textContent = 'Copied! ✓';
+                btn.style.background = 'var(--accent-success)';
                 setTimeout(() => {
-                    btnEl.textContent = original;
-                    btnEl.style.background = 'var(--accent-primary)';
+                    btn.textContent = original;
+                    btn.style.background = '';
                     closeModal('shareModal');
-                }, 900);
-            }).catch(() => {
-                const ta = document.createElement('textarea');
-                ta.value = currentShareContent;
-                document.body.appendChild(ta);
-                ta.select();
-                document.execCommand('copy');
-                document.body.removeChild(ta);
-                closeModal('shareModal');
+                }, 1000);
             });
         }
 
-        function showModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.add('show');
+        // Modal management
+        function showModal(id) {
+            document.getElementById(id).classList.add('show');
         }
 
-        function closeModal(modalId) {
-            const modal = document.getElementById(modalId);
-            modal.classList.remove('show');
+        function closeModal(id) {
+            document.getElementById(id).classList.remove('show');
         }
 
-        // Close modals when clicking outside
-        document.addEventListener('click', function (e) {
+        // Click outside modal to close
+        document.addEventListener('click', (e) => {
             if (e.target.classList.contains('modal')) {
                 e.target.classList.remove('show');
             }
         });
 
-        // Touch handling for modal dismissal
-        let startY = 0;
-        document.addEventListener('touchstart', function (e) {
-            if (e.target.closest('.modal-content')) {
-                startY = e.touches[0].clientY;
+        // Utility functions
+        function getDayKey(index) {
+            const date = getDateForIndex(index);
+            return `${selectedWeek}-${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+        }
+
+        function getDayIndex(key) {
+            const parts = key.split('-');
+            const date = new Date(parts[1], parts[2], parts[3]);
+            const start = getStartOfWeek();
+            const diff = Math.floor((date - start) / (1000 * 60 * 60 * 24));
+            return diff;
+        }
+
+        function getStartOfWeek() {
+            const now = new Date();
+            const day = now.getDay();
+            const diff = now.getDate() - day + (day === 0 ? -6 : 1);
+            const start = new Date(now.setDate(diff));
+            start.setHours(0, 0, 0, 0);
+
+            if (selectedWeek === 'next') {
+                start.setDate(start.getDate() + 7);
             }
-        });
 
-        document.addEventListener('touchmove', function (e) {
-            if (e.target.closest('.modal-content')) {
-                const currentY = e.touches[0].clientY;
-                const deltaY = currentY - startY;
-
-                if (deltaY > 50) {
-                    const modal = e.target.closest('.modal');
-                    if (modal) {
-                        modal.classList.remove('show');
-                    }
-                }
-            }
-        });
-
-        // Initialize theme on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            loadState();
-            initTheme();
-
-            // Always start on NEXT week
-            selectedWeek = 'next';
-            document.getElementById('thisWeekBtn').classList.remove('active');
-            document.getElementById('nextWeekBtn').classList.add('active');
-
-            // Jump straight into the planner UI
-            startPlanning();
-        });
-
-        // Listen for system theme changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            if (!localStorage.getItem(LS_KEYS.THEME)) {
-                document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-                updateThemeToggle(e.matches ? 'dark' : 'light');
-            }
-        });
-
-        // --- Week/date helpers ---
-        function getStartOfWeek(baseDate = new Date(), which = selectedWeek) {
-            const d = new Date(baseDate);
-            const dow = d.getDay(); // 0=Sun, 1=Mon...
-            const deltaToMon = dow === 0 ? -6 : (1 - dow);
-            d.setHours(0, 0, 0, 0);
-            d.setDate(d.getDate() + deltaToMon + (which === 'next' ? 7 : 0));
-            return d;
+            return start;
         }
 
-        function getDateForIndex(index, which = selectedWeek) {
-            const start = getStartOfWeek(new Date(), which);
-            const d = new Date(start);
-            d.setDate(start.getDate() + index);
-            return d;
+        function getDateForIndex(index) {
+            const start = getStartOfWeek();
+            const date = new Date(start);
+            date.setDate(start.getDate() + index);
+            return date;
         }
 
-        function getDayKeyFromDate(date, which = selectedWeek) {
-            return `${which}-${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+        function formatWeekRange() {
+            const start = getStartOfWeek();
+            const end = new Date(start);
+            end.setDate(start.getDate() + 6);
+
+            const options = { month: 'short', day: 'numeric' };
+            return `${start.toLocaleDateString('en-US', options)} - ${end.toLocaleDateString('en-US', options)}`;
         }
 
-        function isWeekendDate(date) {
-            const day = date.getDay();
-            return day === 6 || day === 0; // Sat/Sun
-        }
-
-        // --- Local storage helpers ---
-        // --- Local storage keys ---
-        // --- Local storage helpers ---
-        // Replace busyDinnerDays with per-day dinner mode: 'regular' | 'quick' | 'delivery'
-        let dinnerModeByDay = {}; // { [dayKey]: 'regular' | 'quick' | 'delivery' }
-
-        const LS_KEYS = {
-            MEALS: 'mealPlanner.mealData',
-            WEEKENDS: 'mealPlanner.weekendPlan',
-            WEEKEND_WEEK: 'mealPlanner.weekendPlanByWeek',
-            WEEK: 'mealPlanner.selectedWeek',
-            THEME: 'mealPlanner.theme',
-            LOCKS: 'mealPlanner.lockedDays',
-            DINNER_MODE: 'mealPlanner.dinnerMode'
-        };
-
-        // --- Local storage helpers ---
+        // State persistence
         function saveState() {
             localStorage.setItem(LS_KEYS.MEALS, JSON.stringify(mealData));
-            localStorage.setItem(LS_KEYS.WEEKENDS, JSON.stringify(weekendPlanEnabled));
-            localStorage.setItem(LS_KEYS.WEEKEND_WEEK, JSON.stringify(weekendPlanByWeek));
             localStorage.setItem(LS_KEYS.WEEK, selectedWeek);
-            localStorage.setItem(LS_KEYS.LOCKS, JSON.stringify(lockedDays));
-            localStorage.setItem(LS_KEYS.DINNER_MODE, JSON.stringify(dinnerModeByDay));
+            localStorage.setItem(LS_KEYS.WEEKEND, weekendEnabled);
+            localStorage.setItem(LS_KEYS.LOCKED, JSON.stringify(lockedDays));
+            localStorage.setItem(LS_KEYS.MODES, JSON.stringify(dinnerModes));
         }
 
         function loadState() {
             try {
-                const savedMeals = JSON.parse(localStorage.getItem(LS_KEYS.MEALS) || '{}');
-                const savedWeekends = JSON.parse(localStorage.getItem(LS_KEYS.WEEKENDS) || '{}');
-                const savedWeekendWeek = JSON.parse(localStorage.getItem(LS_KEYS.WEEKEND_WEEK) || '{}');
-                const savedLocks = JSON.parse(localStorage.getItem(LS_KEYS.LOCKS) || '{}');
-                const savedMode = JSON.parse(localStorage.getItem(LS_KEYS.DINNER_MODE) || '{}');
-                // (keep your "always next week" logic)
-                mealData = savedMeals;
-                weekendPlanEnabled = savedWeekends;
-                weekendPlanByWeek = { this: !!savedWeekendWeek.this, next: !!savedWeekendWeek.next };
-                lockedDays = savedLocks;
-                dinnerModeByDay = savedMode;
-            } catch { /* ignore */ }
-        }
+                const meals = localStorage.getItem(LS_KEYS.MEALS);
+                if (meals) mealData = JSON.parse(meals);
 
-        function getDateFromDayKey(dayKey) {
-            const [, y, m, d] = dayKey.split('-').map((v, i) => i ? Number(v) : v);
-            return new Date(y, m, d);
-        }
+                const week = localStorage.getItem(LS_KEYS.WEEK);
+                if (week) selectedWeek = week;
 
-        function getDinnerPoolForDay(dayKey) {
-            const date = getDateFromDayKey(dayKey);
-            const weekend = isWeekendDate(date) && isWeekendEnabled();
-            const mode = getDinnerMode(dayKey);
+                const weekend = localStorage.getItem(LS_KEYS.WEEKEND);
+                if (weekend) weekendEnabled = weekend === 'true';
 
-            if (mode === 'quick') return [...quickDinnerOptions];
-            if (mode === 'delivery') return [...deliveryOptions];
-            return weekend ? [...weekendOptions] : [...dinnerOptions];
-        }
+                const locked = localStorage.getItem(LS_KEYS.LOCKED);
+                if (locked) lockedDays = JSON.parse(locked);
 
-        function getPoolsForDay(dayKey) {
-            return {
-                lunch: [...lunchOptions],
-                side: [...sideDishOptions], // no "Nothing"/"Custom..." in shuffle pool
-                dinner: getDinnerPoolForDay(dayKey)
-            };
-        }
-
-        function shuffleMeal(dayKey, mealType) {
-            const pools = getPoolsForDay(dayKey);
-            const list = mealType === 'dinnerSide' ? pools.side : pools[mealType];
-            if (!list || !list.length) return;
-
-            const choice = list[Math.floor(Math.random() * list.length)];
-            updateMeal(dayKey, mealType, choice);
-
-            // reflect in UI + hide custom box if shown
-            const card = [...document.querySelectorAll('.day-card')].find(c => c.dataset.dayKey === dayKey);
-            if (card) {
-                const sel = card.querySelector(`select[data-meal="${mealType}"]`);
-                if (sel) {
-                    sel.value = choice;
-                    const custom = sel.parentNode.querySelector('.custom-input');
-                    if (custom) custom.style.display = 'none';
-                }
-            }
-
-            // if dinner became a Delivery, clear side
-            if (mealType === 'dinner' && /Delivery/i.test(choice)) {
-                updateMeal(dayKey, 'dinnerSide', 'Nothing');
-                const card = [...document.querySelectorAll('.day-card')].find(c => c.dataset.dayKey === dayKey);
-                const sideSel = card?.querySelector('select[data-meal="dinnerSide"]');
-                if (sideSel) sideSel.value = 'Nothing';
+                const modes = localStorage.getItem(LS_KEYS.MODES);
+                if (modes) dinnerModes = JSON.parse(modes);
+            } catch (e) {
+                console.error('Error loading state:', e);
             }
         }
 
-        function createWeekendToggleSection() {
-            const wrap = document.createElement('div');
-            wrap.className = 'weekend-toggle-section';
-            const enabled = isWeekendEnabled();
-            wrap.innerHTML = `
-    <div class="weekend-toggle-label">
-      Weekend planning is <strong>${enabled ? 'on' : 'off'}</strong> and applies to Saturday & Sunday
-    </div>
-    <div class="plan-toggle" role="button" tabindex="0" aria-pressed="${enabled ? 'true' : 'false'}" onclick="toggleWeekendPlanningForWeek()">
-      <span>Plan meals for weekend</span>
-      <div class="toggle-switch ${enabled ? 'active' : ''}"></div>
-    </div>
-  `;
-            const btn = wrap.querySelector('.plan-toggle');
-            btn.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleWeekendPlanningForWeek(); }
-            });
-            return wrap;
-        }
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', init);
 
-        function toggleBusyDinner(dayKey, isBusy) {
-            busyDinnerDays[dayKey] = isBusy;
-
-            // If turning ON and current dinner no longer valid, clear it
-            if (isBusy) {
-                const allowed = new Set(getDinnerPoolForDay(dayKey));
-                const current = mealData[dayKey]?.dinner;
-                if (current && !allowed.has(current)) mealData[dayKey].dinner = '';
+        // Listen for theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem(LS_KEYS.THEME)) {
+                document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
+                updateThemeIcon(e.matches ? 'dark' : 'light');
             }
-
-            saveState();
-
-            // Re-render just this card's meals
-            const card = [...document.querySelectorAll('.day-card')]
-                .find(c => c.dataset.dayKey === dayKey);
-            if (card) {
-                const isWknd = card.classList.contains('weekend');
-                const date = getDateFromDayKey(dayKey);
-                card.querySelector('.meals-content').innerHTML =
-                    createMeals(dayKey, isWeekendDate(date));
-
-                // ⬇️ NEW: update header badge in-place
-                const header = card.querySelector('.day-header');
-                const chevron = header.querySelector('.chevron');
-                let badge = header.querySelector('.quick-badge');
-
-                if (isBusy && !badge) {
-                    badge = document.createElement('span');
-                    badge.className = 'quick-badge';
-                    badge.title = 'Quick dinner';
-                    badge.textContent = 'Quick';
-                    header.insertBefore(badge, chevron);
-                } else if (!isBusy && badge) {
-                    badge.remove();
-                }
-            } else {
-                generateWeek();
-            }
-        }
-
+        });
     </script>
 </body>
 
