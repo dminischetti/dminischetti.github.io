@@ -1063,7 +1063,8 @@
             WEEKEND: 'mealPlanner.weekend',
             LOCKED: 'mealPlanner.locked',
             MODES: 'mealPlanner.modes',
-            THEME: 'mealPlanner.theme'
+            THEME: 'mealPlanner.theme',
+            WEEKEND_BY_WEEK: 'mealPlanner.weekendByWeek'
         };
 
         // Initialize app
@@ -1106,29 +1107,27 @@
             generateWeek();
         }
 
-        // Weekend toggle
-        function toggleWeekendPlanning() {
-            weekendEnabled = !weekendEnabled;
-            updateWeekendToggle();
+let weekendEnabledByWeek = { this: false, next: false };
 
-            if (!weekendEnabled) {
-                // Clear weekend meals when disabled
-                for (let i = 5; i <= 6; i++) {
-                    const key = getDayKey(i);
-                    delete mealData[key];
-                    delete lockedDays[key];
-                    delete dinnerModes[key];
-                }
-            }
+function toggleWeekendPlanning() {
+  const nextVal = !weekendEnabledByWeek[selectedWeek];
+  weekendEnabledByWeek[selectedWeek] = nextVal;
+  weekendEnabled = nextVal; // keep your existing flag for current render
+  updateWeekendToggle();
 
-            saveState();
-            generateWeek();
-        }
+  if (!nextVal) {
+    for (let i = 5; i <= 6; i++) {
+      const key = getDayKey(i);
+      delete mealData[key]; delete lockedDays[key]; delete dinnerModes[key];
+    }
+  }
+  saveState(); generateWeek();
+}
 
-        function updateWeekendToggle() {
-            const toggle = document.getElementById('weekendToggle');
-            toggle.classList.toggle('active', weekendEnabled);
-        }
+function updateWeekendToggle() {
+  weekendEnabled = !!weekendEnabledByWeek[selectedWeek];
+  document.getElementById('weekendToggle').classList.toggle('active', weekendEnabled);
+}
 
         // Generate week view
         function generateWeek() {
@@ -1369,14 +1368,14 @@
             saveState();
         }
 
-        function createDropdownOptions(options, selected, key, meal) {
-            return options.map(opt =>
-                `<div class="dropdown-option ${opt === selected ? 'selected' : ''}"
-         onclick="selectMeal('${key}','${meal}','${opt.replace(/'/g, "\\'")}')">
-       ${opt}
-     </div>`
-            ).join('');
-        }
+function createDropdownOptions(options, selected, key, meal) {
+  return options.map(opt =>
+    `<div class="dropdown-option ${opt === selected ? 'selected' : ''}"
+         data-key="${key}" data-meal="${meal}" data-value="${opt.replace(/"/g, '&quot;')}">
+      ${opt}
+    </div>`
+  ).join('');
+}
 
         // Dropdown management
         function showDropdown(key, meal) {
@@ -1422,11 +1421,14 @@
         }
 
         // Click outside to close dropdowns
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.meal-input-wrapper')) {
-                document.querySelectorAll('.meal-dropdown').forEach(d => d.classList.remove('show'));
-            }
-        });
+function createDropdownOptions(options, selected, key, meal) {
+  return options.map(opt =>
+    `<div class="dropdown-option ${opt === selected ? 'selected' : ''}"
+         data-key="${key}" data-meal="${meal}" data-value="${opt.replace(/"/g, '&quot;')}">
+      ${opt}
+    </div>`
+  ).join('');
+}
 
         // Day management
         function toggleDay(key) {
@@ -1439,9 +1441,11 @@
             header.setAttribute('aria-expanded', expanded ? 'true' : 'false');
         }
 
-        function expandDay(card) {
-            card.classList.add('expanded');
-        }
+function expandDay(card) {
+  card.classList.add('expanded');
+  const header = card.querySelector('.day-header');
+  header?.setAttribute('aria-expanded', 'true');
+}
 
         function updateDayStatus(key) {
             const card = document.querySelector(`[data-key="${key}"]`);
@@ -1532,18 +1536,18 @@
             setTimeout(() => container.classList.remove('shuffle-animation'), 600);
         }
 
-        function resetWeek() {
-            if (!confirm('Clear all meals for this week?')) return;
+function resetWeek() {
+  if (!confirm('Clear all meals for this week?')) return;
 
-            Object.keys(mealData).forEach(key => {
-                mealData[key] = { lunch: '', dinner: '', side: '' };
-                delete lockedDays[key];
-                delete dinnerModes[key];
-            });
-
-            saveState();
-            generateWeek();
-        }
+  for (let i = 0; i < 7; i++) {
+    const key = getDayKey(i);
+    mealData[key] = { lunch: '', dinner: '', side: '' };
+    delete lockedDays[key];
+    delete dinnerModes[key];
+  }
+  saveState();
+  generateWeek();
+}
 
         // Grocery list
         function generateGroceryList() {
@@ -1763,6 +1767,7 @@
             localStorage.setItem(LS_KEYS.WEEKEND, weekendEnabled);
             localStorage.setItem(LS_KEYS.LOCKED, JSON.stringify(lockedDays));
             localStorage.setItem(LS_KEYS.MODES, JSON.stringify(dinnerModes));
+            localStorage.setItem(LS_KEYS.WEEKEND_BY_WEEK, JSON.stringify(weekendEnabledByWeek));
         }
 
         function loadState() {
@@ -1781,6 +1786,10 @@
 
                 const modes = localStorage.getItem(LS_KEYS.MODES);
                 if (modes) dinnerModes = JSON.parse(modes);
+
+                const per = localStorage.getItem(LS_KEYS.WEEKEND_BY_WEEK);
+                if (per) weekendEnabledByWeek = JSON.parse(per);
+                weekendEnabled = !!weekendEnabledByWeek[selectedWeek];
             } catch (e) {
                 console.error('Error loading state:', e);
             }
