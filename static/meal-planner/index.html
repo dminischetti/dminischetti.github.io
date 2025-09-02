@@ -238,12 +238,170 @@ input,textarea,button{-webkit-appearance:none;appearance:none}
 /* =========================
    CONFIG: Costanti editabili
    ========================= */
-const meals={lunch:["Ravioli burro e salvia","Spaghetti al limone","Pasta e ceci","Pasta col tonno","Pasta sugo tonno","Piadine prosciutto provolone","Uova fritte","Pasta al pesto","Pasta coi pomodorini","Lenticchie","Spaghetti aglio e olio","Carbonara","Frittata di pasta","Pasta e fagioli"],dinner:{regular:["Salmone col riso","Frittata di zucchine","Polpette","Pollo al limone","Merluzzo","Hamburger","Cotolette","Salsicce","Minestrone","Pollo al forno","Scaloppine al limone","Caprese"],quick:["Cordon bleu","Würstel","Dumplings","Fish sticks","Pollo allo spiedo"],delivery:["Pizza Delivery","Greco Delivery","Chinese Delivery","Vietnamese Delivery","Ramen Delivery"],weekend:["Pasta al forno","Parmigiana di melanzane","Zucchine ripiene","Lasagna","Spezzatino con patate","Tortellini con la panna","Tortellini col sugo","Pasta col ragù","Polpettone","Scrimpelle mbuss","Polenta col sugo","Cannelloni","Bistecca"],other:["Colacena"]},side:["Purè di patate","Broccoli al vapore","Insalata di pomodori","Tater tots","Barbabietole","Insalata di mais","Patate lesse","Carote al forno","Carote a insalata","Zucchine trifolate","Insalata di cetrioli","Insalata mista"]};
+const meals = {
+  lunch: [
+    "Ravioli burro e salvia",
+    "Spaghetti al limone",
+    "Pasta e ceci",
+    "Pasta col tonno",
+    "Pasta sugo tonno",
+    "Piadine prosciutto provolone",
+    "Uova fritte",
+    "Pasta al pesto",
+    "Pasta coi pomodorini",
+    "Lenticchie",
+    "Spaghetti aglio e olio",
+    "Carbonara",
+    "Frittata di pasta",
+    "Pasta e fagioli"
+  ],
+  dinner: {
+    regular: [
+      "Salmone col riso",
+      "Frittata di zucchine",
+      "Polpette",
+      "Pollo al limone",
+      "Merluzzo",
+      "Hamburger",
+      "Cotolette",
+      "Salsicce",
+      "Minestrone",
+      "Pollo al forno",
+      "Scaloppine al limone",
+      "Caprese"
+    ],
+    quick: [
+      "Cordon bleu",
+      "Würstel",
+      "Dumplings",
+      "Fish sticks",
+      "Pollo allo spiedo"
+    ],
+    delivery: [
+      "Pizza Delivery",
+      "Greco Delivery",
+      "Chinese Delivery",
+      "Vietnamese Delivery",
+      "Ramen Delivery"
+    ],
+    weekend: [
+      "Pasta al forno",
+      "Parmigiana di melanzane",
+      "Zucchine ripiene",
+      "Lasagna",
+      "Spezzatino con patate",
+      "Tortellini con la panna",
+      "Tortellini col sugo",
+      "Pasta col ragù",
+      "Polpettone",
+      "Scrimpelle mbuss",
+      "Polenta col sugo",
+      "Cannelloni",
+      "Bistecca"
+    ],
+    other: [
+      "Colacena"
+    ]
+  },
+  side: [
+    "Purè di patate",
+    "Broccoli al vapore",
+    "Insalata di pomodori",
+    "Tater tots",
+    "Barbabietole",
+    "Insalata di mais",
+    "Patate lesse",
+    "Carote al forno",
+    "Carote a insalata",
+    "Zucchine trifolate",
+    "Insalata di cetrioli",
+    "Insalata"
+  ]
+};
 
-const ingredients={/* … identico alla versione precedente … */
-"Ravioli burro e salvia":["Ravioli","Burro","Salvia","Parmigiano"],"Spaghetti al limone":["Spaghetti","Limone","Burro","Parmigiano"],"Pasta e ceci":["Pasta","Ceci","Cipolla","Rosmarino"],"Pasta col tonno":["Pasta","Tonno","Salsa pomodoro"],"Pasta sugo tonno":["Pasta","Tonno","Salsa pomodoro"],"Piadine prosciutto provolone":["Piadina","Prosciutto","Provolone"],"Uova fritte":["Uova","Olio"],"Pasta al pesto":["Pasta","Pesto","Pomodorini"],"Pasta coi pomodorini":["Pasta","Pomodorini","Aglio","Basilico"],"Lenticchie":["Lenticchie","Carote","Sedano","Cipolla"],"Spaghetti aglio e olio":["Spaghetti","Aglio","Peperoncino"],"Carbonara":["Spaghetti","Uova","Pancetta","Pecorino"],"Frittata di pasta":["Pasta avanzata","Uova","Formaggio"],"Pasta e fagioli":["Pasta","Fagioli","Pancetta"],"Salmone col riso":["Salmone","Riso"],"Frittata di zucchine":["Uova","Zucchine","Parmigiano"],"Polpette":["Carne macinata","Pangrattato","Uova"],"Pollo al limone":["Petto di pollo","Limone","Farina"],"Merluzzo":["Merluzzo","Olio","Limone"],"Hamburger":["Pane hamburger","Carne","Formaggio","Lattuga"],"Cotolette":["Cotolette","Pangrattato","Uova"],"Salsicce":["Salsicce"],"Minestrone":["Verdure miste","Pasta","Fagioli"],"Pollo al forno":["Pollo","Patate","Rosmarino"],"Scaloppine al limone":["Scaloppine","Limone","Farina"],"Caprese":["Mozzarella","Pomodori","Basilico"],"Cordon bleu":["Cordon bleu"],"Würstel":["Würstel"],"Dumplings":["Dumplings"],"Fish sticks":["Fish sticks"],"Pollo allo spiedo":["Pollo intero"],"Pasta al forno":["Pasta","Sugo","Mozzarella","Besciamella"],"Parmigiana di melanzane":["Melanzane","Sugo","Mozzarella"],"Zucchine ripiene":["Zucchine","Carne macinata","Pane"],"Lasagna":["Pasta lasagna","Ragù","Besciamella"],"Spezzatino con patate":["Carne","Patate","Cipolla","Carote"],"Tortellini con la panna":["Tortellini","Panna"],"Tortellini col sugo":["Tortellini","Sugo"],"Pasta col ragù":["Pasta","Ragù"],"Polpettone":["Carne macinata","Uova","Pancetta"],"Scrimpelle mbuss":["Uova","Farina","Latte","Brodo"],"Polenta col sugo":["Polenta","Sugo con salsicce"],"Cannelloni":["Cannelloni","Ricotta","Spinaci"],"Bistecca":["Bistecca"],"Purè di patate":["Patate","Burro","Latte"],"Broccoli al vapore":["Broccoli"],"Insalata di pomodori":["Pomodori","Cipolla","Basilico"],"Tater tots":["Tater tots"],"Barbabietole":["Barbabietole"],"Insalata di mais":["Mais"],"Patate lesse":["Patate"],"Carote al forno":["Carote"],"Carote a insalata":["Carote","Limone"],"Zucchine trifolate":["Zucchine","Aglio"],"Insalata di cetrioli":["Cetrioli","Yogurt"],"Insalata mista":["Lattuga","Pomodorini","Cetriolo"],"Colacena":["Latte","Cereali"]};
+const ingredients = {
+  "Ravioli burro e salvia": ["Ravioli", "Salvia"],
+  "Spaghetti al limone": ["Spaghetti", "Limoni"],
+  "Pasta e ceci": ["Tubetti", "Ceci"],
+  "Pasta col tonno": ["Spaghetti", "Tonno"],
+  "Pasta sugo tonno": ["Pasta", "Tonno", "Salsa di pomodoro"],
+  "Piadine prosciutto provolone": ["Piadine", "Prosciutto", "Provolone"],
+  "Uova fritte": ["Uova"],
+  "Pasta al pesto": ["Pasta", "Pesto"],
+  "Pasta coi pomodorini": ["Pasta", "Pomodorini"],
+  "Lenticchie": ["Lenticchie", "Crostini"],
+  "Spaghetti aglio e olio": ["Spaghetti"],
+  "Carbonara": ["Spaghetti", "Uova", "Bacon"],
+  "Frittata di pasta": ["Uova"],
+  "Pasta e fagioli": ["Pasta", "Fagioli"],
 
-const cats={'Proteins':['Pollo','Carne','Salmone','Merluzzo','Pancetta','Prosciutto'],'Dairy':['Mozzarella','Parmigiano','Provolone','Formaggio','Ricotta','Burro','Latte'],'Carbs':['Pasta','Spaghetti','Ravioli','Tortellini','Riso','Pane'],'Vegetables':['Pomodori','Zucchine','Melanzane','Carote','Patate'],'Other':[]};
+  "Salmone col riso": ["Salmone", "Riso"],
+  "Frittata di zucchine": ["Uova", "Zucchine"],
+  "Polpette": ["Carne macinata", "Uova", "Pane", "Pangrattato"],
+  "Pollo al limone": ["Petto di pollo", "Limoni"],
+  "Merluzzo": ["Merluzzo"],
+  "Hamburger": ["Buns", "Hamburgers", "Sottilette", "Insalata", "Pomodori"],
+  "Cotolette": ["Cotolette", "Pangrattato", "Uova"],
+  "Salsicce": ["Salsicce"],
+  "Minestrone": ["Minestrone", "Pasta", "Fagioli"],
+  "Pollo al forno": ["Cosce di Pollo"],
+  "Scaloppine al limone": ["Scaloppine", "Limoni"],
+  "Caprese": ["Mozzarelle", "Pomodori"],
+
+  "Cordon bleu": ["Cordon bleu"],
+  "Würstel": ["Würstel"],
+  "Dumplings": ["Dumplings"],
+  "Fish sticks": ["Fish sticks"],
+  "Pollo allo spiedo": ["Pollo intero"],
+
+  "Pasta al forno": ["Pasta", "Sugo", "Mozzarella"],
+  "Parmigiana di melanzane": ["Melanzane", "Sugo", "Mozzarella"],
+  "Zucchine ripiene": ["Zucchine", "Carne macinata", "Pane"],
+  "Lasagna": ["Pasta lasagna", "Ragù"],
+  "Spezzatino con patate": ["Carne", "Patate", "Cipolla", "Carote"],
+  "Tortellini con la panna": ["Tortellini", "Panna"],
+  "Tortellini col sugo": ["Tortellini", "Sugo"],
+  "Pasta col ragù": ["Pasta", "Ragù"],
+  "Polpettone": ["Carne macinata", "Uova", "Pancetta", "Pane"],
+  "Scrimpelle mbuss": ["Uova", "Farina", "Latte", "Brodo"],
+  "Polenta col sugo": ["Polenta", "Sugo con salsicce"],
+  "Cannelloni": ["Cannelloni", "Ricotta", "Spinaci"],
+  "Bistecca": ["Bistecca"],
+
+  "Purè di patate": ["Patate"],
+  "Broccoli al vapore": ["Broccoli"],
+  "Insalata di pomodori": ["Pomodori"],
+  "Tater tots": ["Tater tots"],
+  "Barbabietole": ["Barbabietole"],
+  "Insalata di mais": ["Mais"],
+  "Patate lesse": ["Patate"],
+  "Carote al forno": ["Carote"],
+  "Carote a insalata": ["Carote"],
+  "Zucchine trifolate": ["Zucchine"],
+  "Insalata di cetrioli": ["Cetrioli"],
+  "Insalata": ["Insalata"],
+};
+
+const stores = {
+  Aldi: [
+    "Pollo",
+    "Carne",
+    "Salmone",
+    "Merluzzo",
+    "Pancetta",
+    "Prosciutto"
+  ],
+  Wegmans: [
+    "Mozzarella",
+    "Parmigiano",
+    "Provolone",
+    "Formaggio",
+    "Ricotta",
+    "Burro",
+    "Latte"
+  ],
+  Other: []
+};
 
 /* =========================
    Stato & runtime
@@ -593,13 +751,13 @@ function showGrocery(){
     const organized={};
     Object.entries(items).forEach(([ing,count])=>{
       let added=false;
-      for(const [cat,keys] of Object.entries(cats)){
-        if(keys.some(k=>ing.toLowerCase().includes(k.toLowerCase()))){ (organized[cat]??=[]).push({name:ing,count}); added=true; break; }
+      for(const [store,keys] of Object.entries(stores)){
+        if(keys.some(k=>ing.toLowerCase().includes(k.toLowerCase()))){ (organized[store]??=[]).push({name:ing,count}); added=true; break; }
       }
       if(!added) (organized.Other??=[]).push({name:ing,count});
     });
-    list.innerHTML = Object.entries(organized).map(([cat,arr])=>`
-      <div class="grocery-section"><div class="grocery-title">${cat}</div>
+    list.innerHTML = Object.entries(organized).map(([store,arr])=>`
+      <div class="grocery-section"><div class="grocery-title">${store}</div>
       ${arr.map(item=>`<div class="grocery-item"><input type="checkbox" class="grocery-check"><span>${item.name} ${item.count>1?`(×${item.count})`:''}</span></div>`).join('')}</div>`).join('');
   }
   showModal('groceryModal');
