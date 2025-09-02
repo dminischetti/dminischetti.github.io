@@ -650,6 +650,14 @@
             opacity: 0.5;
         }
 
+        .share-text,
+        .search-input,
+        .picker-option,
+        input.meal-input {
+        -webkit-user-select: text;
+        user-select: text;
+        }
+
         /* Animations */
         @keyframes shuffle-spin {
             from { transform: rotate(0deg); }
@@ -853,7 +861,7 @@
                 <div class="share-text" id="shareText"></div>
             </div>
             <div class="modal-actions">
-                <button class="modal-btn primary" onclick="copyText()">Copy</button>
+                <button class="modal-btn primary" onclick="copyText(this)">Copy</button>
                 <button class="modal-btn secondary" onclick="closeModal('shareModal')">Done</button>
             </div>
         </div>
@@ -968,6 +976,7 @@
         function init() {
             load();
             render();
+            updateWeekend();
             setTheme();
         }
 
@@ -1022,6 +1031,12 @@
         function render() {
             const list = document.getElementById('daysList');
             const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+              const toReopen = lastOpen && document.getElementById(`day-${lastOpen}`);
+                if (toReopen) {
+                    toReopen.classList.add('expanded');
+                } else if (!lastOpen) {
+                    setTimeout(() => toggleDay(getKey(0)), 100);
+                }
             
             list.innerHTML = days.map((name, i) => {
                 if (i >= 5 && !weekendOn[week]) return '';
@@ -1041,7 +1056,10 @@
                 
                 return `
                     <div class="day-cell ${isWeekend ? 'weekend' : ''} ${hasMeals ? 'has-meals' : ''}" id="day-${k}">
-                        <div class="day-header" onclick="toggleDay('${k}')">
+                        <div class="day-header"
+                        tabindex="0"
+                        onclick="toggleDay('${k}')"
+                        onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDay('${k}')}">
                             <div class="day-left">
                                 <div class="day-indicator"></div>
                                 <div class="day-info">
@@ -1164,7 +1182,14 @@
             
             picker.classList.add('show');
             document.body.classList.add('no-scroll');
+            setTimeout(() => document.getElementById('pickerSearch').focus(), 0);
         }
+
+        document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && document.getElementById('mealPicker').classList.contains('show')) {
+            closePicker();
+        }
+        });
 
         function closePicker() {
             document.getElementById('mealPicker').classList.remove('show');
@@ -1197,17 +1222,20 @@
         }
 
         // Day actions
-        function toggleDay(k) {
-            const cell = document.getElementById(`day-${k}`);
-            const wasExpanded = cell.classList.contains('expanded');
-            
-            document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('expanded'));
-            
-            if (!wasExpanded) {
-                cell.classList.add('expanded');
-                if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
-            }
-        }
+let lastOpen = null;
+
+function toggleDay(k) {
+  const cell = document.getElementById(`day-${k}`);
+  const opening = !cell.classList.contains('expanded');
+  document.querySelectorAll('.day-cell.expanded').forEach(c => c.classList.remove('expanded'));
+  if (opening) {
+    cell.classList.add('expanded');
+    lastOpen = k;
+    if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
+  } else {
+    lastOpen = null;
+  }
+}
 
         function toggleLock(k) {
             locked[k] = !locked[k];
@@ -1374,27 +1402,35 @@
             showModal('groceryModal');
         }
 
-        function shareGrocery() {
-            const items = document.querySelectorAll('.grocery-item span');
-            if (items.length === 0) return;
-            
-            shareContent = '🛒 Grocery List\n\n';
-            items.forEach(item => {
-                shareContent += `☐ ${item.textContent}\n`;
-            });
-            
-            closeModal('groceryModal');
-            setTimeout(() => {
-                document.getElementById('shareTitle').textContent = 'Grocery List';
-                document.getElementById('shareText').textContent = shareContent;
-                showModal('shareModal');
-            }, 300);
-        }
+function shareGrocery() {
+  const rows = Array.from(document.querySelectorAll('.grocery-item'));
+  const items = rows
+    .filter(r => !r.querySelector('.grocery-check').checked)
+    .map(r => r.querySelector('span').textContent);
+
+  if (!items.length) return;
+
+  shareContent = '🛒 Grocery List\n\n' + items.map(t => `☐ ${t}`).join('\n');
+  closeModal('groceryModal');
+  setTimeout(() => {
+    document.getElementById('shareTitle').textContent = 'Grocery List';
+    document.getElementById('shareText').textContent = shareContent;
+    showModal('shareModal');
+  }, 300);
+}
+
+        function weekRange() {
+  const start = getWeekStart();
+  const end = new Date(start);
+  end.setDate(start.getDate() + 6);
+  const fmt = { month: 'short', day: 'numeric' };
+  return `${start.toLocaleDateString('en', fmt)} - ${end.toLocaleDateString('en', fmt)}`;
+}
 
         // Share
-        function sharePlan() {
-            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-            shareContent = `📅 Meal Plan - ${week === 'this' ? 'This' : 'Next'} Week\n\n`;
+function sharePlan() {
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  shareContent = `📅 Meal Plan - ${week === 'this' ? 'This' : 'Next'} Week\n${weekRange()}\n\n`;
             
             days.forEach((day, i) => {
                 if (i >= 5 && !weekendOn[week]) return;
@@ -1417,18 +1453,18 @@
             showModal('shareModal');
         }
 
-        function copyText() {
-            navigator.clipboard.writeText(shareContent).then(() => {
-                const btn = event.target;
-                btn.textContent = 'Copied! ✓';
-                btn.style.background = 'var(--accent-success)';
-                setTimeout(() => {
-                    btn.textContent = 'Copy';
-                    btn.style.background = '';
-                    closeModal('shareModal');
-                }, 1000);
-            });
-        }
+function copyText(btn) {
+  navigator.clipboard.writeText(shareContent).then(() => {
+    const original = btn.textContent;
+    btn.textContent = 'Copied! ✓';
+    btn.style.background = 'var(--accent-success)';
+    setTimeout(() => {
+      btn.textContent = original;
+      btn.style.background = '';
+      closeModal('shareModal');
+    }, 1000);
+  });
+}
 
         // Modals
         function showModal(id) {
