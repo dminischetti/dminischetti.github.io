@@ -905,6 +905,16 @@
         let selectedWeek = 'next'; // Default to next week
         let weekendPlanEnabled = {};
         let currentShareContent = '';
+        let weekendPlanByWeek = { this: false, next: false }; // single toggle per week
+
+        function isWeekendEnabled() {
+            return !!weekendPlanByWeek[selectedWeek];
+        }
+        function toggleWeekendPlanningForWeek() {
+            weekendPlanByWeek[selectedWeek] = !isWeekendEnabled();
+            saveState();
+            generateWeek();
+        }
 
         // Theme management
         function initTheme() {
@@ -959,21 +969,20 @@
             const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
             days.forEach((name, index) => {
+                if (index === 5) { // before Saturday
+                    container.appendChild(createWeekendToggleSection());
+                }
+
                 const date = getDateForIndex(index, selectedWeek);
                 const dayKey = getDayKeyFromDate(date, selectedWeek);
 
-                if (!mealData[dayKey]) {
-                    mealData[dayKey] = { lunch: '', dinner: '', dinnerSide: '' };
-                }
-                if (weekendPlanEnabled[dayKey] === undefined) {
-                    weekendPlanEnabled[dayKey] = false;
-                }
+                if (!mealData[dayKey]) mealData[dayKey] = { lunch: '', dinner: '', dinnerSide: '' };
+                if (weekendPlanEnabled[dayKey] === undefined) weekendPlanEnabled[dayKey] = false; // legacy no-op
 
                 const card = createDayCard(name, date, isWeekendDate(date), dayKey);
                 container.appendChild(card);
             });
 
-            // Auto-expand first day
             setTimeout(() => {
                 const firstCard = document.querySelector('.day-card');
                 if (firstCard) firstCard.classList.add('expanded');
@@ -982,40 +991,38 @@
             saveState();
         }
 
-
         function createDayCard(dayName, date, isWeekend, dayKey) {
             const card = document.createElement('div');
             const data = mealData[dayKey];
             const isPlanEnabled = weekendPlanEnabled[dayKey];
             const hasMeals = data.lunch || data.dinner;
-
-            card.className = `day-card ${isWeekend ? 'weekend' : ''} ${hasMeals ? 'has-meals' : ''} ${isWeekend && !isPlanEnabled ? 'optional' : ''}`;
+            card.className = `day-card ${isWeekend ? 'weekend' : ''} ${hasMeals ? 'has-meals' : ''} ${(isWeekend && !isWeekendEnabled()) ? 'optional' : ''}`;
 
             const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
 
             if (isWeekend) {
                 card.innerHTML = `
-                    <div class="day-header" onclick="toggleDay(this)">
-                        <div class="day-info">
-                            <div class="day-indicator"></div>
-                            <div>
-                                <span class="day-name">${dayName}</span>
-                                <span class="day-date">${dateStr}</span>
-                            </div>
-                        </div>
-                        <span class="chevron">▼</span>
-                    </div>
-                    <div class="meals-content">
-                        <div class="weekend-toggle-section">
-                            <div class="weekend-toggle-label">Weekend planning is optional</div>
-                            <div class="plan-toggle" onclick="toggleWeekendPlanning('${dayKey}')">
-                                <span>Plan meals for ${dayName}</span>
-                                <div class="toggle-switch ${isPlanEnabled ? 'active' : ''}" id="toggle-${dayKey}"></div>
-                            </div>
-                        </div>
-                        ${isPlanEnabled ? createMeals(dayKey) : ''}
-                    </div>
-                `;
+    <div class="day-header" onclick="toggleDay(this)">
+      <div class="day-info">
+        <div class="day-indicator"></div>
+        <div>
+          <span class="day-name">${dayName}</span>
+          <span class="day-date">${dateStr}</span>
+        </div>
+      </div>
+      <span class="chevron">▼</span>
+    </div>
+    <div class="meals-content">
+      ${isWeekendEnabled()
+                        ? createMeals(dayKey)
+                        : `
+          <div class="weekend-toggle-section">
+            <div class="weekend-toggle-label">Weekend planning is off. Use “Plan meals for weekend” above to enable.</div>
+          </div>
+        `
+                    }
+    </div>
+  `;
             } else {
                 card.innerHTML = `
                     <div class="day-header" onclick="toggleDay(this)">
@@ -1198,7 +1205,7 @@
             }).filter(dayKey => {
                 const [, y, m, day] = dayKey.split('-').map(Number);
                 const d = new Date(y, m, day);
-                return !isWeekendDate(d) || weekendPlanEnabled[dayKey];
+                return !isWeekendDate(d) || isWeekendEnabled();
             });
         }
 
@@ -1220,8 +1227,7 @@
                 const dayKey = getDayKeyFromDate(date, selectedWeek);
                 const data = mealData[dayKey] || { lunch: '', dinner: '', dinnerSide: '' };
 
-                // salta il weekend se non abilitato
-                if (isWeekendDate(date) && !weekendPlanEnabled[dayKey]) return;
+                if (isWeekendDate(date) && !isWeekendEnabled()) return;
 
                 const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
                 shareText += `${day} (${dateStr})\n`;
@@ -1251,7 +1257,7 @@
             }).filter(dayKey => {
                 const [, y, m, day] = dayKey.split('-').map(Number);
                 const d = new Date(y, m, day);
-                return !isWeekendDate(d) || weekendPlanEnabled[dayKey];
+                return !isWeekendDate(d) || isWeekendEnabled();
             });
 
             weekKeys.forEach(dayKey => {
@@ -1442,30 +1448,50 @@
         }
 
         // --- Local storage helpers ---
-        const LS_KEYS = {
-            MEALS: 'mealPlanner.mealData',
-            WEEKENDS: 'mealPlanner.weekendPlan',
-            WEEK: 'mealPlanner.selectedWeek',
-            THEME: 'theme'
-        };
-
         function saveState() {
             localStorage.setItem(LS_KEYS.MEALS, JSON.stringify(mealData));
-            localStorage.setItem(LS_KEYS.WEEKENDS, JSON.stringify(weekendPlanEnabled));
+            localStorage.setItem(LS_KEYS.WEEKENDS, JSON.stringify(weekendPlanEnabled)); // legacy
+            localStorage.setItem(LS_KEYS.WEEKEND_WEEK, JSON.stringify(weekendPlanByWeek)); // NEW
             localStorage.setItem(LS_KEYS.WEEK, selectedWeek);
         }
 
         function loadState() {
             try {
                 const savedMeals = JSON.parse(localStorage.getItem(LS_KEYS.MEALS) || '{}');
-                const savedWeekends = JSON.parse(localStorage.getItem(LS_KEYS.WEEKENDS) || '{}');
+                const savedWeekends = JSON.parse(localStorage.getItem(LS_KEYS.WEEKENDS) || '{}'); // legacy
+                const savedWeekendWeek = JSON.parse(localStorage.getItem(LS_KEYS.WEEKEND_WEEK) || '{}'); // NEW
                 const savedWeek = localStorage.getItem(LS_KEYS.WEEK);
                 if (savedWeek === 'this' || savedWeek === 'next') selectedWeek = savedWeek;
                 mealData = savedMeals;
                 weekendPlanEnabled = savedWeekends;
+                weekendPlanByWeek = { this: !!savedWeekendWeek.this, next: !!savedWeekendWeek.next };
             } catch { /* ignore */ }
         }
 
+        function saveState() {
+            localStorage.setItem(LS_KEYS.MEALS, JSON.stringify(mealData));
+            localStorage.setItem(LS_KEYS.WEEKENDS, JSON.stringify(weekendPlanEnabled));
+            localStorage.setItem(LS_KEYS.WEEKEND_WEEK, JSON.stringify(weekendPlanByWeek));
+            localStorage.setItem(LS_KEYS.WEEK, selectedWeek);
+        }
+
+        function createWeekendToggleSection() {
+            const wrap = document.createElement('div');
+            wrap.className = 'weekend-toggle-section';
+            wrap.innerHTML = `
+    <div class="weekend-toggle-label">Weekend planning applies to Saturday & Sunday</div>
+    <div class="plan-toggle" role="button" tabindex="0" aria-pressed="${isWeekendEnabled() ? 'true' : 'false'}" onclick="toggleWeekendPlanningForWeek()">
+      <span>Plan meals for weekend</span>
+      <div class="toggle-switch ${isWeekendEnabled() ? 'active' : ''}"></div>
+    </div>
+  `;
+            // keyboard support
+            const btn = wrap.querySelector('.plan-toggle');
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleWeekendPlanningForWeek(); }
+            });
+            return wrap;
+        }
     </script>
 </body>
 
