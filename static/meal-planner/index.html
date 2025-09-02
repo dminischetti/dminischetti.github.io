@@ -1,1113 +1,645 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <meta name="color-scheme" content="light dark">
-    <title>Weekly Meal Planner</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: transparent;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            user-select: none;
-        }
-
-        :root {
-            --bg-primary: #f2f2f7;
-            --bg-secondary: white;
-            --bg-tertiary: #f2f2f7;
-            --text-primary: #000000;
-            --text-secondary: #3c3c43;
-            --text-tertiary: #c7c7cc;
-            --border-color: #c6c6c8;
-            --border-secondary: #e5e5ea;
-            --accent-primary: #007aff;
-            --accent-success: #34c759;
-            --accent-warning: #ff9500;
-            --accent-danger: #ff3b30;
-            --accent-purple: #af52de;
-            --modal-backdrop: rgba(0, 0, 0, 0.4);
-            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
-            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
-            --toggle-bg: #e5e5ea;
-            --input-bg: white;
-            --safe-area-top: env(safe-area-inset-top);
-            --safe-area-bottom: env(safe-area-inset-bottom);
-        }
-
-        [data-theme="dark"] {
-            --bg-primary: #000000;
-            --bg-secondary: #1c1c1e;
-            --bg-tertiary: #2c2c2e;
-            --text-primary: #ffffff;
-            --text-secondary: #ebebf5;
-            --text-tertiary: #636366;
-            --border-color: #38383a;
-            --border-secondary: #48484a;
-            --accent-primary: #0a84ff;
-            --accent-success: #30d158;
-            --accent-warning: #ff9f0a;
-            --accent-danger: #ff453a;
-            --accent-purple: #bf5af2;
-            --modal-backdrop: rgba(0, 0, 0, 0.8);
-            --toggle-bg: #38383a;
-            --input-bg: #2c2c2e;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', sans-serif;
-            background: var(--bg-primary);
-            min-height: 100vh;
-            color: var(--text-primary);
-            -webkit-font-smoothing: antialiased;
-            overscroll-behavior: none;
-        }
-
-        .container {
-            max-width: 100%;
-            background: var(--bg-primary);
-            min-height: 100vh;
-            padding-bottom: calc(90px + var(--safe-area-bottom));
-        }
-
-        .header {
-            background: var(--bg-secondary);
-            padding-top: var(--safe-area-top);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 0.5px solid var(--border-color);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-        }
-
-        .header-content { padding: 12px 16px; }
-        .header-top { display: flex; justify-content: space-between; align-items: center; }
-        .header-title { font-size: 20px; font-weight: 600; letter-spacing: -0.5px; }
-        .header-actions { display: flex; gap: 8px; align-items: center; }
-
-        .week-toggle {
-            display: flex;
-            background: var(--toggle-bg);
-            border-radius: 9px;
-            padding: 2px;
-            height: 32px;
-        }
-        .week-btn {
-            padding: 0 12px; border: none; background: transparent;
-            color: var(--text-secondary); font-size: 13px; font-weight: 600;
-            border-radius: 7px; transition: all 0.2s;
-        }
-        .week-btn.active { background: var(--bg-secondary); color: var(--text-primary); box-shadow: var(--shadow-sm); }
-        .theme-btn { width: 32px; height: 32px; border: none; background: transparent; font-size: 20px; display: flex; align-items: center; justify-content: center; border-radius: 16px; }
-
-        .weekend-bar {
-            background: var(--bg-secondary);
-            padding: 12px 16px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 0.5px solid var(--border-color);
-        }
-        .weekend-label { font-size: 15px; color: var(--text-primary); }
-
-        .ios-switch {
-            width: 51px; height: 31px; background: var(--toggle-bg);
-            border-radius: 16px; position: relative; transition: background 0.3s;
-        }
-        .ios-switch.active { background: var(--accent-success); }
-        .ios-switch::after {
-            content: ''; position: absolute; width: 27px; height: 27px; background: white;
-            border-radius: 14px; top: 2px; left: 2px; transition: transform 0.3s;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
-        }
-        .ios-switch.active::after { transform: translateX(20px); }
-
-        .days-list { background: var(--bg-primary); }
-        .day-cell { background: var(--bg-secondary); margin-bottom: 0.5px; transition: all 0.3s; }
-        .day-cell.weekend { background: var(--bg-tertiary); }
-
-        .day-header {
-            padding: 12px 16px; display: flex; align-items: center; justify-content: space-between; min-height: 52px; position: relative;
-        }
-        .day-header::after { content: ''; position: absolute; bottom: 0; left: 16px; right: 0; height: 0.5px; background: var(--border-secondary); }
-        .day-cell.expanded .day-header::after { opacity: 0; }
-
-        .day-left { display: flex; align-items: center; gap: 12px; flex: 1; }
-        .day-indicator { width: 8px; height: 8px; border-radius: 4px; background: var(--accent-success); opacity: 0; transition: opacity 0.3s; }
-        .day-cell.has-meals .day-indicator { opacity: 1; }
-
-        .day-info { flex: 1; }
-        .day-name { font-size: 17px; font-weight: 400; color: var(--text-primary); }
-        .day-date { font-size: 13px; color: var(--text-tertiary); margin-top: 2px; }
-
-        .day-right { display: flex; align-items: center; gap: 8px; }
-        .day-badge { padding: 2px 6px; border-radius: 10px; font-size: 11px; font-weight: 600; text-transform: uppercase; }
-        .badge-quick { background: var(--accent-warning); color: white; }
-        .badge-delivery { background: var(--accent-purple); color: white; }
-        .lock-icon { font-size: 14px; color: var(--text-tertiary); }
-        .chevron { font-size: 14px; color: var(--text-tertiary); transition: transform 0.3s; margin-left: 4px; }
-        .day-cell.expanded .chevron { transform: rotate(180deg); }
-
-        .meals-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: var(--bg-secondary); }
-        .day-cell.expanded .meals-content { max-height: 1000px; }
-
-        .meal-group { padding: 16px; border-bottom: 0.5px solid var(--border-secondary); }
-        .meal-group:last-child { border-bottom: none; }
-        .meal-label { font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
-
-        .meal-field { position: relative; margin-bottom: 12px; }
-        .meal-input {
-            width: 100%; height: 44px; padding: 0 44px 0 16px;
-            border: 1px solid var(--border-secondary); border-radius: 10px;
-            background: var(--input-bg); font-size: 16px; color: var(--text-primary);
-            -webkit-appearance: none; appearance: none;
-        }
-        .meal-input:focus { outline: none; border-color: var(--accent-primary); }
-
-        .shuffle-btn {
-            position: absolute; right: 6px; top: 6px; width: 32px; height: 32px;
-            border: none; border-radius: 8px; background: var(--bg-tertiary);
-            display: flex; align-items: center; justify-content: center; font-size: 16px;
-        }
-        .shuffle-btn:active { background: var(--accent-warning); transform: scale(0.95); }
-
-        .mode-pills { display: flex; gap: 8px; margin-bottom: 12px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
-        .mode-pill {
-            flex: 1; min-width: 80px; height: 36px; border: 1px solid var(--border-secondary);
-            background: var(--bg-tertiary); border-radius: 18px; font-size: 14px; font-weight: 600;
-            display: flex; align-items: center; justify-content: center; gap: 4px; transition: all 0.2s;
-        }
-        .mode-pill.active { background: var(--accent-primary); color: white; border-color: var(--accent-primary); }
-        .mode-pill.active.quick { background: var(--accent-warning); border-color: var(--accent-warning); }
-        .mode-pill.active.delivery { background: var(--accent-purple); border-color: var(--accent-purple); }
-
-        .day-actions { padding: 12px 16px; background: var(--bg-tertiary); display: flex; gap: 8px; }
-        .action-btn {
-            flex: 1; height: 36px; border: 1px solid var(--border-secondary);
-            background: var(--bg-secondary); border-radius: 10px; font-size: 13px; font-weight: 600;
-            display: flex; align-items: center; justify-content: center; gap: 4px;
-        }
-        .action-btn:active { background: var(--bg-tertiary); transform: scale(0.98); }
-        .action-btn.locked { background: var(--accent-danger); color: white; border-color: var(--accent-danger); }
-
-        .tab-bar {
-            position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-secondary);
-            padding-bottom: var(--safe-area-bottom); border-top: 0.5px solid var(--border-color);
-            backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); z-index: 1000;
-        }
-        .tab-bar-content { display: flex; padding: 8px 0; }
-        .tab-btn { flex: 1; padding: 8px; border: none; background: transparent; display: flex; flex-direction: column; align-items: center; gap: 4px; }
-        .tab-btn:active { opacity: 0.6; }
-        .tab-icon { font-size: 24px; }
-        .tab-label { font-size: 10px; font-weight: 500; }
-        .tab-btn.shuffle { color: var(--accent-warning); }
-        .tab-btn.grocery { color: var(--accent-success); }
-        .tab-btn.share { color: var(--accent-primary); }
-        .tab-btn.clear { color: var(--accent-danger); }
-
-        .ios-modal { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--modal-backdrop); display: none; z-index: 2000; }
-        .ios-modal.show { display: block; }
-        .ios-modal-content {
-            position: absolute; bottom: 0; left: 0; right: 0; background: var(--bg-secondary);
-            border-radius: 12px 12px 0 0; max-height: 90vh; transform: translateY(100%); transition: transform 0.3s ease;
-        }
-        .ios-modal.show .ios-modal-content { transform: translateY(0); }
-        .modal-handle { width: 36px; height: 5px; background: var(--border-color); border-radius: 3px; margin: 8px auto; }
-        .modal-header { padding: 8px 16px 16px; border-bottom: 0.5px solid var(--border-secondary); }
-        .modal-title { font-size: 20px; font-weight: 600; text-align: center; }
-        .modal-body {
-            padding: 16px; max-height: 60vh; overflow-y: auto; -webkit-overflow-scrolling: touch;
-            padding-bottom: calc(16px + var(--safe-area-bottom));
-        }
-        .modal-actions { padding: 12px 16px; padding-bottom: calc(12px + var(--safe-area-bottom)); display: flex; gap: 12px; border-top: 0.5px solid var(--border-secondary); }
-        .modal-btn { flex: 1; height: 50px; border: none; border-radius: 12px; font-size: 17px; font-weight: 600; }
-        .modal-btn.primary { background: var(--accent-primary); color: white; }
-        .modal-btn.secondary { background: var(--bg-tertiary); color: var(--text-primary); }
-        .modal-btn:active { opacity: 0.8; }
-
-        .grocery-section { margin-bottom: 24px; }
-        .grocery-title { font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; }
-        .grocery-item { display: flex; align-items: center; padding: 10px 0; border-bottom: 0.5px solid var(--border-secondary); }
-        .grocery-item:last-child { border-bottom: none; }
-        .grocery-check { width: 22px; height: 22px; margin-right: 12px; accent-color: var(--accent-primary); }
-
-        .share-text { background: var(--bg-tertiary); border-radius: 10px; padding: 12px; font-family: 'SF Mono', monospace; font-size: 13px; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
-
-        .empty-state { text-align: center; padding: 48px 24px; color: var(--text-tertiary); }
-        .empty-icon { font-size: 48px; margin-bottom: 12px; opacity: 0.5; }
-
-        .share-text, .search-input, .picker-option, input.meal-input { -webkit-user-select: text; user-select: text; }
-
-        @keyframes shuffle-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .shuffling { animation: shuffle-spin 0.5s ease; }
-
-        .meal-picker {
-            position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-secondary);
-            border-radius: 12px 12px 0 0; max-height: 50vh; transform: translateY(100%); transition: transform 0.3s;
-            z-index: 3000; display: none;
-        }
-        .meal-picker.show { display: block; transform: translateY(0); }
-        .picker-header { padding: 16px; border-bottom: 0.5px solid var(--border-secondary); display: flex; justify-content: space-between; align-items: center; }
-        .picker-title { font-size: 17px; font-weight: 600; }
-        .picker-done { color: var(--accent-primary); font-size: 17px; font-weight: 600; }
-        .picker-options { max-height: 300px; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: var(--safe-area-bottom); }
-        .picker-option { padding: 14px 16px; border-bottom: 0.5px solid var(--border-secondary); font-size: 17px; }
-        .picker-option:active { background: var(--bg-tertiary); }
-        .picker-option.selected { color: var(--accent-primary); }
-        .picker-option.selected::after { content: '✓'; float: right; color: var(--accent-primary); }
-        .picker-group { padding: 8px 16px; font-size: 13px; font-weight: 600; color: var(--text-tertiary); text-transform: uppercase; letter-spacing: 0.5px; background: var(--bg-tertiary); }
-
-        input, textarea, button { -webkit-appearance: none; appearance: none; }
-
-        .no-scroll { overflow: hidden; position: fixed; width: 100%; }
-
-        :focus-visible { outline: 2px solid var(--accent-primary); outline-offset: 2px; }
-        @media (prefers-reduced-motion: reduce) {
-            * { animation: none !important; transition: none !important; }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="color-scheme" content="light dark">
+<title>Weekly Meal Planner</title>
+<style>
+/* --- base (come versione precedente patchata) --- */
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+:root{
+  --bg-primary:#f2f2f7;--bg-secondary:#fff;--bg-tertiary:#f2f2f7;
+  --text-primary:#000;--text-secondary:#3c3c43;--text-tertiary:#c7c7cc;
+  --border-color:#c6c6c8;--border-secondary:#e5e5ea;
+  --accent-primary:#007aff;--accent-success:#34c759;--accent-warning:#ff9500;--accent-danger:#ff3b30;--accent-purple:#af52de;
+  --modal-backdrop:rgba(0,0,0,.4);--shadow-sm:0 1px 3px rgba(0,0,0,.12);--shadow-md:0 4px 6px rgba(0,0,0,.15);
+  --toggle-bg:#e5e5ea;--input-bg:#fff;--safe-area-top:env(safe-area-inset-top);--safe-area-bottom:env(safe-area-inset-bottom);
+  --active-bg:#f7faff; /* HIGHLIGHT giorno attivo (chiaro) */
+}
+[data-theme="dark"]{
+  --bg-primary:#000;--bg-secondary:#1c1c1e;--bg-tertiary:#2c2c2e;
+  --text-primary:#fff;--text-secondary:#ebebf5;--text-tertiary:#636366;
+  --border-color:#38383a;--border-secondary:#48484a;
+  --accent-primary:#0a84ff;--accent-success:#30d158;--accent-warning:#ff9f0a;--accent-danger:#ff453a;--accent-purple:#bf5af2;
+  --modal-backdrop:rgba(0,0,0,.8);--toggle-bg:#38383a;--input-bg:#2c2c2e;
+  --active-bg:#1f2733; /* HIGHLIGHT giorno attivo (scuro) */
+}
+body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue',sans-serif;background:var(--bg-primary);min-height:100vh;color:var(--text-primary);-webkit-font-smoothing:antialiased;overscroll-behavior:none}
+.container{max-width:100%;background:var(--bg-primary);min-height:100vh;padding-bottom:calc(90px + var(--safe-area-bottom))}
+.header{background:var(--bg-secondary);padding-top:var(--safe-area-top);position:sticky;top:0;z-index:100;border-bottom:.5px solid var(--border-color);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.header-content{padding:12px 16px}.header-top{display:flex;justify-content:space-between;align-items:center}
+.header-title{font-size:20px;font-weight:600;letter-spacing:-.5px}.header-actions{display:flex;gap:8px;align-items:center}
+.week-toggle{display:flex;background:var(--toggle-bg);border-radius:9px;padding:2px;height:32px}
+.week-btn{padding:0 12px;border:none;background:transparent;color:var(--text-secondary);font-size:13px;font-weight:600;border-radius:7px;transition:.2s}
+.week-btn.active{background:var(--bg-secondary);color:var(--text-primary);box-shadow:var(--shadow-sm)}
+.theme-btn{width:32px;height:32px;border:none;background:transparent;font-size:20px;display:flex;align-items:center;justify-content:center;border-radius:16px}
+.days-list{background:var(--bg-primary)}
+.day-cell{background:var(--bg-secondary);margin-bottom:.5px;transition:background .2s}
+.day-cell.weekend{background:var(--bg-tertiary)}
+.day-cell.active-edit{background:var(--active-bg);position:relative}
+.day-cell.active-edit::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent-primary);border-radius:0 2px 2px 0;opacity:.9}
+.day-header{padding:12px 16px;display:flex;align-items:center;justify-content:space-between;min-height:52px;position:relative}
+.day-header::after{content:"";position:absolute;bottom:0;left:16px;right:0;height:.5px;background:var(--border-secondary)}
+.day-cell.expanded .day-header::after{opacity:0}
+.day-left{display:flex;align-items:center;gap:12px;flex:1}
+.day-indicator{width:8px;height:8px;border-radius:4px;background:var(--accent-success);opacity:0;transition:opacity .3s}
+.day-cell.has-meals .day-indicator{opacity:1}
+.day-info{flex:1}.day-name{font-size:17px;font-weight:400;color:var(--text-primary)}.day-date{font-size:13px;color:var(--text-tertiary);margin-top:2px}
+.day-right{display:flex;align-items:center;gap:8px}.day-badge{padding:2px 6px;border-radius:10px;font-size:11px;font-weight:600;text-transform:uppercase}
+.badge-quick{background:var(--accent-warning);color:#fff}.badge-delivery{background:var(--accent-purple);color:#fff}
+.lock-icon{font-size:14px;color:var(--text-tertiary)}.chevron{font-size:14px;color:var(--text-tertiary);transition:transform .3s;margin-left:4px}
+.day-cell.expanded .chevron{transform:rotate(180deg)}
+.meals-content{max-height:0;overflow:hidden;transition:max-height .3s ease;background:var(--bg-secondary)}
+.day-cell.expanded .meals-content{max-height:1000px}
+.meal-group{padding:16px;border-bottom:.5px solid var(--border-secondary)}.meal-group:last-child{border-bottom:none}
+.meal-label{font-size:13px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.meal-field{position:relative;margin-bottom:12px}
+.meal-input{width:100%;height:44px;padding:0 44px 0 16px;border:1px solid var(--border-secondary);border-radius:10px;background:var(--input-bg);font-size:16px;color:var(--text-primary);-webkit-appearance:none;appearance:none}
+.meal-input:focus{outline:none;border-color:var(--accent-primary)}
+.shuffle-btn{position:absolute;right:6px;top:6px;width:32px;height:32px;border:none;border-radius:8px;background:var(--bg-tertiary);display:flex;align-items:center;justify-content:center;font-size:16px}
+.shuffle-btn:active{background:var(--accent-warning);transform:scale(.95)}
+.mode-pills{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.mode-pill{flex:1;min-width:80px;height:36px;border:1px solid var(--border-secondary);background:var(--bg-tertiary);border-radius:18px;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:4px;transition:.2s}
+.mode-pill.active{background:var(--accent-primary);color:#fff;border-color:var(--accent-primary)}
+.mode-pill.active.quick{background:var(--accent-warning);border-color:var(--accent-warning)}
+.mode-pill.active.delivery{background:var(--accent-purple);border-color:var(--accent-purple)}
+.day-actions{padding:12px 16px;background:var(--bg-tertiary);display:flex;gap:8px}
+.action-btn{flex:1;height:36px;border:1px solid var(--border-secondary);background:var(--bg-secondary);border-radius:10px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:4px}
+.action-btn:active{background:var(--bg-tertiary);transform:scale(.98)}
+.action-btn.locked{background:var(--accent-danger);color:#fff;border-color:var(--accent-danger)}
+.tab-bar{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);padding-bottom:var(--safe-area-bottom);border-top:.5px solid var(--border-color);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:1000}
+.tab-bar-content{display:flex;padding:8px 0}
+.tab-btn{flex:1;padding:8px;border:none;background:transparent;display:flex;flex-direction:column;align-items:center;gap:4px}
+.tab-btn:active{opacity:.6}.tab-icon{font-size:24px}.tab-label{font-size:10px;font-weight:500}
+.tab-btn.shuffle{color:var(--accent-warning)}.tab-btn.grocery{color:var(--accent-success)}.tab-btn.share{color:var(--accent-primary)}.tab-btn.clear{color:var(--accent-danger)}
+.ios-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:var(--modal-backdrop);display:none;z-index:2000}
+.ios-modal.show{display:block}
+.ios-modal-content{position:absolute;bottom:0;left:0;right:0;background:var(--bg-secondary);border-radius:12px 12px 0 0;max-height:90vh;transform:translateY(100%);transition:transform .3s ease}
+.ios-modal.show .ios-modal-content{transform:translateY(0)}
+.modal-handle{width:36px;height:5px;background:var(--border-color);border-radius:3px;margin:8px auto}
+.modal-header{padding:8px 16px 16px;border-bottom:.5px solid var(--border-secondary)}
+.modal-title{font-size:20px;font-weight:600;text-align:center}
+.modal-body{padding:16px;max-height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(16px + var(--safe-area-bottom))}
+.modal-actions{padding:12px 16px;padding-bottom:calc(12px + var(--safe-area-bottom));display:flex;gap:12px;border-top:.5px solid var(--border-secondary)}
+.modal-btn{flex:1;height:50px;border:none;border-radius:12px;font-size:17px;font-weight:600}
+.modal-btn.primary{background:var(--accent-primary);color:#fff}.modal-btn.secondary{background:var(--bg-tertiary);color:var(--text-primary)}
+.modal-btn:active{opacity:.8}
+.grocery-section{margin-bottom:24px}.grocery-title{font-size:13px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+.grocery-item{display:flex;align-items:center;padding:10px 0;border-bottom:.5px solid var(--border-secondary)}
+.grocery-item:last-child{border-bottom:none}.grocery-check{width:22px;height:22px;margin-right:12px;accent-color:var(--accent-primary)}
+.share-text{background:var(--bg-tertiary);border-radius:10px;padding:12px;font-family:'SF Mono',monospace;font-size:13px;line-height:1.5;white-space:pre-wrap;word-break:break-word}
+.empty-state{text-align:center;padding:48px 24px;color:var(--text-tertiary)}.empty-icon{font-size:48px;margin-bottom:12px;opacity:.5}
+.share-text,.search-input,.picker-option,input.meal-input{-webkit-user-select:text;user-select:text}
+@keyframes shuffle-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}.shuffling{animation:shuffle-spin .5s ease}
+.meal-picker{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-radius:12px 12px 0 0;max-height:60vh;transform:translateY(100%);transition:transform .3s;z-index:3000;display:none}
+.meal-picker.show{display:block;transform:translateY(0)}
+.picker-header{padding:16px;border-bottom:.5px solid var(--border-secondary);display:flex;justify-content:space-between;align-items:center}
+.picker-title{font-size:17px;font-weight:600}.picker-done{color:var(--accent-primary);font-size:17px;font-weight:600}
+.picker-search{display:flex;gap:8px;padding:10px 16px;border-bottom:.5px solid var(--border-secondary);background:var(--bg-secondary)}
+.picker-search input{flex:1;height:40px;border:1px solid var(--border-secondary);border-radius:10px;padding:0 12px;background:var(--input-bg);color:var(--text-primary)}
+.picker-search button{height:40px;padding:0 14px;border:none;border-radius:10px;background:var(--accent-primary);color:#fff;font-weight:600}
+.picker-search button:disabled{opacity:.5}
+.picker-options{max-height:300px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:var(--safe-area-bottom)}
+.picker-option{padding:14px 16px;border-bottom:.5px solid var(--border-secondary);font-size:17px}
+.picker-option:active{background:var(--bg-tertiary)}
+.picker-option.selected{color:var(--accent-primary)}
+.picker-option.selected::after{content:'✓';float:right;color:var(--accent-primary)}
+input,textarea,button{-webkit-appearance:none;appearance:none}
+.no-scroll{overflow:hidden;position:fixed;width:100%}
+:focus-visible{outline:2px solid var(--accent-primary);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
 </head>
-
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="header-content">
-                <div class="header-top">
-                    <h1 class="header-title">Meal Planner</h1>
-                    <div class="header-actions">
-                        <div class="week-toggle" role="tablist" aria-label="Week selector">
-                            <button class="week-btn" id="thisWeek" onclick="selectWeek('this')" role="tab" aria-selected="false">This</button>
-                            <button class="week-btn active" id="nextWeek" onclick="selectWeek('next')" role="tab" aria-selected="true">Next</button>
-                        </div>
-                        <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme">🌙</button>
-                    </div>
-                </div>
+  <div class="container">
+    <!-- Header -->
+    <div class="header">
+      <div class="header-content">
+        <div class="header-top">
+          <h1 class="header-title">Meal Planner</h1>
+          <div class="header-actions">
+            <div class="week-toggle" role="tablist" aria-label="Week selector">
+              <button class="week-btn" id="thisWeek" onclick="selectWeek('this')" role="tab" aria-selected="false">This</button>
+              <button class="week-btn active" id="nextWeek" onclick="selectWeek('next')" role="tab" aria-selected="true">Next</button>
             </div>
+            <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" aria-label="Toggle theme">🌙</button>
+          </div>
         </div>
-
-        <div class="weekend-bar">
-            <span class="weekend-label" id="weekendLabel">Include weekend meals</span>
-            <div class="ios-switch" id="weekendSwitch" role="switch" aria-checked="false" aria-labelledby="weekendLabel" tabindex="0" onclick="toggleWeekend()"></div>
-        </div>
-
-        <div class="days-list" id="daysList"></div>
+      </div>
     </div>
 
-    <div class="tab-bar">
-        <div class="tab-bar-content">
-            <button class="tab-btn shuffle" onclick="shuffleAll()">
-                <span class="tab-icon">🔀</span>
-                <span class="tab-label">Shuffle</span>
-            </button>
-            <button class="tab-btn grocery" onclick="showGrocery()">
-                <span class="tab-icon">🛒</span>
-                <span class="tab-label">Grocery</span>
-            </button>
-            <button class="tab-btn share" onclick="sharePlan()">
-                <span class="tab-icon">📤</span>
-                <span class="tab-label">Share</span>
-            </button>
-            <button class="tab-btn clear" onclick="clearAll()">
-                <span class="tab-icon">🗑️</span>
-                <span class="tab-label">Clear</span>
-            </button>
+    <!-- Days -->
+    <div class="days-list" id="daysList"></div>
+
+    <!-- Weekend toggle spostato in fondo -->
+    <div class="weekend-bar" style="background:var(--bg-secondary);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-top:.5px solid var(--border-color)">
+      <span class="weekend-label" id="weekendLabel">Include weekend meals</span>
+      <div class="ios-switch" id="weekendSwitch" role="switch" aria-checked="false" aria-labelledby="weekendLabel" tabindex="0" onclick="toggleWeekend()"></div>
+    </div>
+  </div>
+
+  <!-- Bottom Tab Bar -->
+  <div class="tab-bar">
+    <div class="tab-bar-content">
+      <button class="tab-btn shuffle" onclick="shuffleAll()">
+        <span class="tab-icon">🔀</span><span class="tab-label">Shuffle</span>
+      </button>
+      <button class="tab-btn grocery" onclick="showGrocery()">
+        <span class="tab-icon">🛒</span><span class="tab-label">Grocery</span>
+      </button>
+      <button class="tab-btn share" onclick="sharePlan()">
+        <span class="tab-icon">📤</span><span class="tab-label">Send</span>
+      </button>
+      <button class="tab-btn clear" onclick="clearAll()">
+        <span class="tab-icon">🗑️</span><span class="tab-label">Clear</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Meal Picker -->
+  <div class="meal-picker" id="mealPicker" role="dialog" aria-modal="true" aria-labelledby="pickerTitle">
+    <div class="picker-header">
+      <span class="picker-title" id="pickerTitle">Select Meal</span>
+      <button class="picker-done" onclick="closePicker()">Done</button>
+    </div>
+    <!-- nuovo: input per custom + filtro -->
+    <div class="picker-search">
+      <input id="pickerSearch" type="text" placeholder="Type to add or filter… (Enter to use)">
+      <button id="pickerUseBtn" disabled>Use</button>
+    </div>
+    <div class="picker-options" id="pickerOptions"></div>
+  </div>
+
+  <!-- Grocery Modal -->
+  <div class="ios-modal" id="groceryModal">
+    <div class="ios-modal-content">
+      <div class="modal-handle"></div>
+      <div class="modal-header"><h2 class="modal-title">Grocery List</h2></div>
+      <div class="modal-body" id="groceryList"></div>
+      <div class="modal-actions">
+        <button class="modal-btn primary" onclick="sendGrocery()">Send List</button>
+        <button class="modal-btn secondary" onclick="closeModal('groceryModal')">Done</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Send Modal -->
+  <div class="ios-modal" id="shareModal">
+    <div class="ios-modal-content">
+      <div class="modal-handle"></div>
+      <div class="modal-header"><h2 class="modal-title" id="shareTitle">Send Meal Plan</h2></div>
+      <div class="modal-body"><div class="share-text" id="shareText"></div></div>
+      <div class="modal-actions">
+        <button class="modal-btn primary" onclick="copyText(this)">Copy</button>
+        <button class="modal-btn secondary" onclick="closeModal('shareModal')">Done</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+/* --- dati & mapping (invariati) --- */
+const meals={lunch:["Ravioli burro e salvia","Spaghetti al limone","Pasta e ceci","Pasta col tonno","Pasta sugo tonno","Piadine prosciutto provolone","Uova fritte","Pasta al pesto","Pasta coi pomodorini","Lenticchie","Spaghetti aglio e olio","Carbonara","Frittata di pasta","Pasta e fagioli"],dinner:{regular:["Salmone col riso","Frittata di zucchine","Polpette","Pollo al limone","Merluzzo","Hamburger","Cotolette","Salsicce","Minestrone","Pollo al forno","Scaloppine al limone","Caprese"],quick:["Cordon bleu","Würstel","Dumplings","Fish sticks","Pollo allo spiedo"],delivery:["Pizza Delivery","Greco Delivery","Chinese Delivery","Vietnamese Delivery","Ramen Delivery"],weekend:["Pasta al forno","Parmigiana di melanzane","Zucchine ripiene","Lasagna","Spezzatino con patate","Tortellini con la panna","Tortellini col sugo","Pasta col ragù","Polpettone","Scrimpelle mbuss","Polenta col sugo","Cannelloni","Bistecca"],other:["Colacena"]},side:["Purè di patate","Broccoli al vapore","Insalata di pomodori","Tater tots","Barbabietole","Insalata di mais","Patate lesse","Carote al forno","Carote a insalata","Zucchine trifolate","Insalata di cetrioli","Insalata mista"]};
+const ingredients={/* … identico alla versione precedente … */ 
+"Ravioli burro e salvia":["Ravioli","Burro","Salvia","Parmigiano"],"Spaghetti al limone":["Spaghetti","Limone","Burro","Parmigiano"],"Pasta e ceci":["Pasta","Ceci","Cipolla","Rosmarino"],"Pasta col tonno":["Pasta","Tonno","Salsa pomodoro"],"Pasta sugo tonno":["Pasta","Tonno","Salsa pomodoro"],"Piadine prosciutto provolone":["Piadina","Prosciutto","Provolone"],"Uova fritte":["Uova","Olio"],"Pasta al pesto":["Pasta","Pesto","Pomodorini"],"Pasta coi pomodorini":["Pasta","Pomodorini","Aglio","Basilico"],"Lenticchie":["Lenticchie","Carote","Sedano","Cipolla"],"Spaghetti aglio e olio":["Spaghetti","Aglio","Peperoncino"],"Carbonara":["Spaghetti","Uova","Pancetta","Pecorino"],"Frittata di pasta":["Pasta avanzata","Uova","Formaggio"],"Pasta e fagioli":["Pasta","Fagioli","Pancetta"],"Salmone col riso":["Salmone","Riso"],"Frittata di zucchine":["Uova","Zucchine","Parmigiano"],"Polpette":["Carne macinata","Pangrattato","Uova"],"Pollo al limone":["Petto di pollo","Limone","Farina"],"Merluzzo":["Merluzzo","Olio","Limone"],"Hamburger":["Pane hamburger","Carne","Formaggio","Lattuga"],"Cotolette":["Cotolette","Pangrattato","Uova"],"Salsicce":["Salsicce"],"Minestrone":["Verdure miste","Pasta","Fagioli"],"Pollo al forno":["Pollo","Patate","Rosmarino"],"Scaloppine al limone":["Scaloppine","Limone","Farina"],"Caprese":["Mozzarella","Pomodori","Basilico"],"Cordon bleu":["Cordon bleu"],"Würstel":["Würstel"],"Dumplings":["Dumplings"],"Fish sticks":["Fish sticks"],"Pollo allo spiedo":["Pollo intero"],"Pasta al forno":["Pasta","Sugo","Mozzarella","Besciamella"],"Parmigiana di melanzane":["Melanzane","Sugo","Mozzarella"],"Zucchine ripiene":["Zucchine","Carne macinata","Pane"],"Lasagna":["Pasta lasagna","Ragù","Besciamella"],"Spezzatino con patate":["Carne","Patate","Cipolla","Carote"],"Tortellini con la panna":["Tortellini","Panna"],"Tortellini col sugo":["Tortellini","Sugo"],"Pasta col ragù":["Pasta","Ragù"],"Polpettone":["Carne macinata","Uova","Pancetta"],"Scrimpelle mbuss":["Uova","Farina","Latte","Brodo"],"Polenta col sugo":["Polenta","Sugo con salsicce"],"Cannelloni":["Cannelloni","Ricotta","Spinaci"],"Bistecca":["Bistecca"],"Purè di patate":["Patate","Burro","Latte"],"Broccoli al vapore":["Broccoli"],"Insalata di pomodori":["Pomodori","Cipolla","Basilico"],"Tater tots":["Tater tots"],"Barbabietole":["Barbabietole"],"Insalata di mais":["Mais"],"Patate lesse":["Patate"],"Carote al forno":["Carote"],"Carote a insalata":["Carote","Limone"],"Zucchine trifolate":["Zucchine","Aglio"],"Insalata di cetrioli":["Cetrioli","Yogurt"],"Insalata mista":["Lattuga","Pomodorini","Cetriolo"],"Colacena":["Latte","Cereali"]};
+
+let data={},week='next',weekendOn={},locked={},modes={},currentPicker=null,shareContent='',lastOpen=null,untrapPicker=null;
+let pickerAllItems=[]; // per filtro
+
+function init(){
+  load(); syncWeekToggle(); render(); updateWeekend(); setTheme();
+  addSwipeToDismiss(document.getElementById('mealPicker'), closePicker);
+  addSwipeToDismiss(document.querySelector('#groceryModal .ios-modal-content'),()=>closeModal('groceryModal'));
+  addSwipeToDismiss(document.querySelector('#shareModal .ios-modal-content'),()=>closeModal('shareModal'));
+  // picker events
+  document.getElementById('pickerUseBtn').addEventListener('click', useCustomFromInput);
+  const search = document.getElementById('pickerSearch');
+  search.addEventListener('input', onPickerSearch);
+  search.addEventListener('keydown', e=>{
+    if(e.key==='Enter'){ e.preventDefault(); useCustomFromInput(); }
+  });
+}
+
+function syncWeekToggle(){
+  document.getElementById('thisWeek').classList.toggle('active', week==='this');
+  document.getElementById('nextWeek').classList.toggle('active', week==='next');
+  document.getElementById('thisWeek').setAttribute('aria-selected', String(week==='this'));
+  document.getElementById('nextWeek').setAttribute('aria-selected', String(week==='next'));
+}
+
+function setTheme(){
+  const saved=localStorage.getItem('theme');
+  const dark=saved?saved==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches;
+  document.documentElement.setAttribute('data-theme', dark?'dark':'light');
+  document.getElementById('themeBtn').textContent=dark?'☀️':'🌙';
+}
+function toggleTheme(){
+  const cur=document.documentElement.getAttribute('data-theme');
+  const nxt=cur==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',nxt);
+  localStorage.setItem('theme',nxt);
+  document.getElementById('themeBtn').textContent=nxt==='dark'?'☀️':'🌙';
+}
+
+function selectWeek(w){
+  if(week!==w) lastOpen=null;
+  week=w; syncWeekToggle(); updateWeekend(); save(); render();
+}
+
+function toggleWeekend(){
+  weekendOn[week]=!weekendOn[week];
+  if(!weekendOn[week] && lastOpen && getIndex(lastOpen)>=5) lastOpen=null;
+  updateWeekend();
+  if(!weekendOn[week]){
+    for(let i=5;i<=6;i++){ const k=getKey(i); delete data[k]; delete locked[k]; delete modes[k];}
+  }
+  save(); render();
+}
+function updateWeekend(){
+  const el=document.getElementById('weekendSwitch'); const on=!!weekendOn[week];
+  el.classList.toggle('active',on); el.setAttribute('aria-checked', String(on));
+}
+document.getElementById('weekendSwitch').addEventListener('keydown',e=>{
+  if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleWeekend(); }
+},{passive:true});
+
+function render(){
+  const list=document.getElementById('daysList');
+  const days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  const start=getWeekStart();
+
+  list.innerHTML = days.map((name,i)=>{
+    if(i>=5 && !weekendOn[week]) return '';
+    const k=getKey(i,start);
+    const d=data[k]||{lunch:'',dinner:'',side:''};
+    const isWeekend=i>=5; const isLocked=locked[k]; const mode=modes[k]||'regular';
+    const hasMeals=d.lunch||d.dinner; const date=getDate(i,start);
+    let badges=''; if(isLocked) badges+='<span class="lock-icon" aria-hidden="true">🔒</span>';
+    if(mode==='quick') badges+='<span class="day-badge badge-quick">Quick</span>';
+    if(mode==='delivery') badges+='<span class="day-badge badge-delivery">Delivery</span>';
+
+    const labelId=`day-${k}-label`, panelId=`panel-${k}`;
+    const activeClass = (lastOpen===k) ? 'active-edit' : '';
+    return `
+      <div class="day-cell ${isWeekend?'weekend':''} ${hasMeals?'has-meals':''} ${activeClass}" id="day-${k}">
+        <div class="day-header" role="button" aria-expanded="false" aria-controls="${panelId}" tabindex="0"
+             onclick="toggleDay('${k}')"
+             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDay('${k}')}">
+          <div class="day-left">
+            <div class="day-indicator" aria-hidden="true"></div>
+            <div class="day-info">
+              <div class="day-name" id="${labelId}">${name}</div>
+              <div class="day-date">${date.toLocaleDateString('en',{month:'short',day:'numeric'})}</div>
+            </div>
+          </div>
+          <div class="day-right">${badges}<span class="chevron" aria-hidden="true">▼</span></div>
         </div>
+        <div class="meals-content" id="${panelId}" role="region" aria-labelledby="${labelId}">
+          ${renderMeals(k,isWeekend)}
+        </div>
+      </div>`;
+  }).join('');
+
+  const cell = lastOpen && document.getElementById(`day-${lastOpen}`);
+  if(cell){
+    cell.classList.add('expanded','active-edit');
+    cell.querySelector('.day-header')?.setAttribute('aria-expanded','true');
+  }else{
+    setTimeout(()=>toggleDay(getKey(0,start)),100);
+  }
+}
+
+function renderMeals(k,isWeekend){
+  const d=data[k]||{lunch:'',dinner:'',side:''};
+  const mode=modes[k]||'regular'; const isLocked=locked[k];
+  return `
+    <div class="meal-group">
+      <div class="meal-label">Lunch</div>
+      <div class="meal-field">
+        <input type="text" class="meal-input" value="${d.lunch}" placeholder="Tap to select..." readonly onclick="openPicker('${k}','lunch')">
+        <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}','lunch',this)">🎲</button>
+      </div>
     </div>
 
-    <div class="meal-picker" id="mealPicker" role="dialog" aria-modal="true" aria-labelledby="pickerTitle">
-        <div class="picker-header">
-            <span class="picker-title" id="pickerTitle">Select Meal</span>
-            <button class="picker-done" onclick="closePicker()">Done</button>
-        </div>
-        <div class="picker-options" id="pickerOptions"></div>
+    <div class="meal-group">
+      <div class="meal-label">Dinner</div>
+      ${!isWeekend?`
+        <div class="mode-pills">
+          <button class="mode-pill ${mode==='regular'?'active':''}" onclick="setMode('${k}','regular')">🍽️ Regular</button>
+          <button class="mode-pill ${mode==='quick'?'active quick':''}" onclick="setMode('${k}','quick')">⚡ Quick</button>
+          <button class="mode-pill ${mode==='delivery'?'active delivery':''}" onclick="setMode('${k}','delivery')">🚚 Delivery</button>
+        </div>`:''}
+      <div class="meal-field">
+        <input type="text" class="meal-input" value="${d.dinner}" placeholder="Tap to select..." readonly onclick="openPicker('${k}','dinner')">
+        <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}','dinner',this)">🎲</button>
+      </div>
+
+      ${mode!=='delivery'?`
+        <div style="margin-top:12px;">
+          <div class="meal-label">Side Dish</div>
+          <div class="meal-field">
+            <input type="text" class="meal-input" value="${d.side}" placeholder="Tap to select..." readonly onclick="openPicker('${k}','side')">
+            <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}','side',this)">🎲</button>
+          </div>
+        </div>`:`<div aria-hidden="true" aria-disabled="true"></div>`}
     </div>
 
-    <div class="ios-modal" id="groceryModal">
-        <div class="ios-modal-content">
-            <div class="modal-handle"></div>
-            <div class="modal-header">
-                <h2 class="modal-title">Grocery List</h2>
-            </div>
-            <div class="modal-body" id="groceryList"></div>
-            <div class="modal-actions">
-                <button class="modal-btn primary" onclick="shareGrocery()">Share List</button>
-                <button class="modal-btn secondary" onclick="closeModal('groceryModal')">Done</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="ios-modal" id="shareModal">
-        <div class="ios-modal-content">
-            <div class="modal-handle"></div>
-            <div class="modal-header">
-                <h2 class="modal-title" id="shareTitle">Share Meal Plan</h2>
-            </div>
-            <div class="modal-body">
-                <div class="share-text" id="shareText"></div>
-            </div>
-            <div class="modal-actions">
-                <button class="modal-btn primary" onclick="copyText(this)">Copy</button>
-                <button class="modal-btn secondary" onclick="closeModal('shareModal')">Done</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        const meals = {
-            lunch: [
-                "Ravioli burro e salvia", "Spaghetti al limone", "Pasta e ceci",
-                "Pasta col tonno", "Pasta sugo tonno", "Piadine prosciutto provolone",
-                "Uova fritte", "Pasta al pesto", "Pasta coi pomodorini",
-                "Lenticchie", "Spaghetti aglio e olio", "Carbonara",
-                "Frittata di pasta", "Pasta e fagioli"
-            ],
-            dinner: {
-                regular: [
-                    "Salmone col riso", "Frittata di zucchine", "Polpette",
-                    "Pollo al limone", "Merluzzo", "Hamburger", "Cotolette",
-                    "Salsicce", "Minestrone", "Pollo al forno",
-                    "Scaloppine al limone", "Caprese"
-                ],
-                quick: ["Cordon bleu", "Würstel", "Dumplings", "Fish sticks", "Pollo allo spiedo"],
-                delivery: ["Pizza Delivery", "Greco Delivery", "Chinese Delivery", "Vietnamese Delivery", "Ramen Delivery"],
-                weekend: [
-                    "Pasta al forno", "Parmigiana di melanzane", "Zucchine ripiene",
-                    "Lasagna", "Spezzatino con patate", "Tortellini con la panna",
-                    "Tortellini col sugo", "Pasta col ragù", "Polpettone",
-                    "Scrimpelle mbuss", "Polenta col sugo", "Cannelloni", "Bistecca"
-                ],
-                other: ["Colacena"]
-            },
-            side: [
-                "Purè di patate", "Broccoli al vapore", "Insalata di pomodori",
-                "Tater tots", "Barbabietole", "Insalata di mais", "Patate lesse",
-                "Carote al forno", "Carote a insalata", "Zucchine trifolate",
-                "Insalata di cetrioli", "Insalata mista"
-            ]
-        };
-
-        const ingredients = {
-            "Ravioli burro e salvia": ["Ravioli", "Burro", "Salvia", "Parmigiano"],
-            "Spaghetti al limone": ["Spaghetti", "Limone", "Burro", "Parmigiano"],
-            "Pasta e ceci": ["Pasta", "Ceci", "Cipolla", "Rosmarino"],
-            "Pasta col tonno": ["Pasta", "Tonno", "Salsa pomodoro"],
-            "Pasta sugo tonno": ["Pasta", "Tonno", "Salsa pomodoro"],
-            "Piadine prosciutto provolone": ["Piadina", "Prosciutto", "Provolone"],
-            "Uova fritte": ["Uova", "Olio"],
-            "Pasta al pesto": ["Pasta", "Pesto", "Pomodorini"],
-            "Pasta coi pomodorini": ["Pasta", "Pomodorini", "Aglio", "Basilico"],
-            "Lenticchie": ["Lenticchie", "Carote", "Sedano", "Cipolla"],
-            "Spaghetti aglio e olio": ["Spaghetti", "Aglio", "Peperoncino"],
-            "Carbonara": ["Spaghetti", "Uova", "Pancetta", "Pecorino"],
-            "Frittata di pasta": ["Pasta avanzata", "Uova", "Formaggio"],
-            "Pasta e fagioli": ["Pasta", "Fagioli", "Pancetta"],
-            "Salmone col riso": ["Salmone", "Riso"],
-            "Frittata di zucchine": ["Uova", "Zucchine", "Parmigiano"],
-            "Polpette": ["Carne macinata", "Pangrattato", "Uova"],
-            "Pollo al limone": ["Petto di pollo", "Limone", "Farina"],
-            "Merluzzo": ["Merluzzo", "Olio", "Limone"],
-            "Hamburger": ["Pane hamburger", "Carne", "Formaggio", "Lattuga"],
-            "Cotolette": ["Cotolette", "Pangrattato", "Uova"],
-            "Salsicce": ["Salsicce"],
-            "Minestrone": ["Verdure miste", "Pasta", "Fagioli"],
-            "Pollo al forno": ["Pollo", "Patate", "Rosmarino"],
-            "Scaloppine al limone": ["Scaloppine", "Limone", "Farina"],
-            "Caprese": ["Mozzarella", "Pomodori", "Basilico"],
-            "Cordon bleu": ["Cordon bleu"],
-            "Würstel": ["Würstel"],
-            "Dumplings": ["Dumplings"],
-            "Fish sticks": ["Fish sticks"],
-            "Pollo allo spiedo": ["Pollo intero"],
-            "Pasta al forno": ["Pasta", "Sugo", "Mozzarella", "Besciamella"],
-            "Parmigiana di melanzane": ["Melanzane", "Sugo", "Mozzarella"],
-            "Zucchine ripiene": ["Zucchine", "Carne macinata", "Pane"],
-            "Lasagna": ["Pasta lasagna", "Ragù", "Besciamella"],
-            "Spezzatino con patate": ["Carne", "Patate", "Cipolla", "Carote"],
-            "Tortellini con la panna": ["Tortellini", "Panna"],
-            "Tortellini col sugo": ["Tortellini", "Sugo"],
-            "Pasta col ragù": ["Pasta", "Ragù"],
-            "Polpettone": ["Carne macinata", "Uova", "Pancetta"],
-            "Scrimpelle mbuss": ["Uova", "Farina", "Latte", "Brodo"],
-            "Polenta col sugo": ["Polenta", "Sugo con salsicce"],
-            "Cannelloni": ["Cannelloni", "Ricotta", "Spinaci"],
-            "Bistecca": ["Bistecca"],
-            "Purè di patate": ["Patate", "Burro", "Latte"],
-            "Broccoli al vapore": ["Broccoli"],
-            "Insalata di pomodori": ["Pomodori", "Cipolla", "Basilico"],
-            "Tater tots": ["Tater tots"],
-            "Barbabietole": ["Barbabietole"],
-            "Insalata di mais": ["Mais"],
-            "Patate lesse": ["Patate"],
-            "Carote al forno": ["Carote"],
-            "Carote a insalata": ["Carote", "Limone"],
-            "Zucchine trifolate": ["Zucchine", "Aglio"],
-            "Insalata di cetrioli": ["Cetrioli", "Yogurt"],
-            "Insalata mista": ["Lattuga", "Pomodorini", "Cetriolo"],
-            "Colacena": ["Latte", "Cereali"]
-        };
-
-        let data = {};
-        let week = 'next';
-        let weekendOn = {};
-        let locked = {};
-        let modes = {};
-        let currentPicker = null;
-        let shareContent = '';
-        let lastOpen = null;
-        let untrapPicker = null;
-
-        function init() {
-            load();
-            syncWeekToggle();
-            render();
-            updateWeekend();
-            setTheme();
-            addSwipeToDismiss(document.getElementById('mealPicker'), closePicker);
-            addSwipeToDismiss(document.querySelector('#groceryModal .ios-modal-content'), () => closeModal('groceryModal'));
-            addSwipeToDismiss(document.querySelector('#shareModal .ios-modal-content'), () => closeModal('shareModal'));
-        }
-
-        function syncWeekToggle() {
-            document.getElementById('thisWeek').classList.toggle('active', week === 'this');
-            document.getElementById('nextWeek').classList.toggle('active', week === 'next');
-            document.getElementById('thisWeek').setAttribute('aria-selected', String(week === 'this'));
-            document.getElementById('nextWeek').setAttribute('aria-selected', String(week === 'next'));
-        }
-
-        function setTheme() {
-            const saved = localStorage.getItem('theme');
-            const dark = saved ? saved === 'dark' :
-                window.matchMedia('(prefers-color-scheme: dark)').matches;
-            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
-            document.getElementById('themeBtn').textContent = dark ? '☀️' : '🌙';
-        }
-
-        function toggleTheme() {
-            const current = document.documentElement.getAttribute('data-theme');
-            const next = current === 'dark' ? 'light' : 'dark';
-            document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem('theme', next);
-            document.getElementById('themeBtn').textContent = next === 'dark' ? '☀️' : '🌙';
-        }
-
-        function selectWeek(w) {
-            if (week !== w) lastOpen = null;
-            week = w;
-            document.getElementById('thisWeek').classList.toggle('active', w === 'this');
-            document.getElementById('nextWeek').classList.toggle('active', w === 'next');
-            document.getElementById('thisWeek').setAttribute('aria-selected', String(w === 'this'));
-            document.getElementById('nextWeek').setAttribute('aria-selected', String(w === 'next'));
-            updateWeekend(); save(); render();
-        }
-
-        function toggleWeekend() {
-            weekendOn[week] = !weekendOn[week];
-            if (!weekendOn[week] && lastOpen && getIndex(lastOpen) >= 5) lastOpen = null;
-            updateWeekend();
-            if (!weekendOn[week]) {
-                for (let i = 5; i <= 6; i++) {
-                    const k = getKey(i);
-                    delete data[k]; delete locked[k]; delete modes[k];
-                }
-            }
-            save(); render();
-        }
-
-        function updateWeekend() {
-            const el = document.getElementById('weekendSwitch');
-            const on = !!weekendOn[week];
-            el.classList.toggle('active', on);
-            el.setAttribute('aria-checked', String(on));
-        }
-
-        document.getElementById('weekendSwitch').addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleWeekend(); }
-        }, { passive: true });
-
-        function render() {
-            const list = document.getElementById('daysList');
-            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-            const start = getWeekStart();
-
-            list.innerHTML = days.map((name, i) => {
-                if (i >= 5 && !weekendOn[week]) return '';
-                const k = getKey(i, start);
-                const d = data[k] || { lunch: '', dinner: '', side: '' };
-                const isWeekend = i >= 5;
-                const isLocked = locked[k];
-                const mode = modes[k] || 'regular';
-                const hasMeals = d.lunch || d.dinner;
-                const date = getDate(i, start);
-
-                let badges = '';
-                if (isLocked) badges += '<span class="lock-icon" aria-hidden="true">🔒</span>';
-                if (mode === 'quick') badges += '<span class="day-badge badge-quick">Quick</span>';
-                if (mode === 'delivery') badges += '<span class="day-badge badge-delivery">Delivery</span>';
-
-                const labelId = `day-${k}-label`;
-                const panelId = `panel-${k}`;
-
-                return `
-                    <div class="day-cell ${isWeekend ? 'weekend' : ''} ${hasMeals ? 'has-meals' : ''}" id="day-${k}">
-                        <div class="day-header"
-                             role="button"
-                             aria-expanded="false"
-                             aria-controls="${panelId}"
-                             tabindex="0"
-                             onclick="toggleDay('${k}')"
-                             onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDay('${k}')}">
-                            <div class="day-left">
-                                <div class="day-indicator" aria-hidden="true"></div>
-                                <div class="day-info">
-                                    <div class="day-name" id="${labelId}">${name}</div>
-                                    <div class="day-date">${date.toLocaleDateString('en', { month: 'short', day: 'numeric' })}</div>
-                                </div>
-                            </div>
-                            <div class="day-right">
-                                ${badges}
-                                <span class="chevron" aria-hidden="true">▼</span>
-                            </div>
-                        </div>
-                        <div class="meals-content" id="${panelId}" role="region" aria-labelledby="${labelId}">
-                            ${renderMeals(k, isWeekend)}
-                        </div>
-                    </div>
-                `;
-            }).join('');
-
-            const cell = lastOpen && document.getElementById(`day-${lastOpen}`);
-            if (cell) {
-                cell.classList.add('expanded');
-                cell.querySelector('.day-header')?.setAttribute('aria-expanded', 'true');
-            } else {
-                setTimeout(() => toggleDay(getKey(0, start)), 100);
-            }
-        }
-
-        function renderMeals(k, isWeekend) {
-            const d = data[k] || { lunch: '', dinner: '', side: '' };
-            const mode = modes[k] || 'regular';
-            const isLocked = locked[k];
-
-            return `
-                <div class="meal-group">
-                    <div class="meal-label">Lunch</div>
-                    <div class="meal-field">
-                        <input type="text" class="meal-input" value="${d.lunch}"
-                            placeholder="Tap to select..." readonly
-                            onclick="openPicker('${k}', 'lunch')">
-                        <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}', 'lunch', this)">🎲</button>
-                    </div>
-                </div>
-
-                <div class="meal-group">
-                    <div class="meal-label">Dinner</div>
-                    ${!isWeekend ? `
-                        <div class="mode-pills">
-                            <button class="mode-pill ${mode === 'regular' ? 'active' : ''}"
-                                onclick="setMode('${k}', 'regular')">🍽️ Regular</button>
-                            <button class="mode-pill ${mode === 'quick' ? 'active quick' : ''}"
-                                onclick="setMode('${k}', 'quick')">⚡ Quick</button>
-                            <button class="mode-pill ${mode === 'delivery' ? 'active delivery' : ''}"
-                                onclick="setMode('${k}', 'delivery')">🚚 Delivery</button>
-                        </div>
-                    ` : ''}
-                    <div class="meal-field">
-                        <input type="text" class="meal-input" value="${d.dinner}"
-                            placeholder="Tap to select..." readonly
-                            onclick="openPicker('${k}', 'dinner')">
-                        <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}', 'dinner', this)">🎲</button>
-                    </div>
-
-                    ${mode !== 'delivery' ? `
-                        <div style="margin-top: 12px;">
-                            <div class="meal-label">Side Dish</div>
-                            <div class="meal-field">
-                                <input type="text" class="meal-input" value="${d.side}"
-                                    placeholder="Tap to select..." readonly
-                                    onclick="openPicker('${k}', 'side')">
-                                <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}', 'side', this)">🎲</button>
-                            </div>
-                        </div>
-                    ` : `<div aria-hidden="true" aria-disabled="true"></div>`}
-                </div>
-
-                <div class="day-actions">
-                    <button class="action-btn ${isLocked ? 'locked' : ''}"
-                        onclick="toggleLock('${k}')">${isLocked ? '🔒 Locked' : '🔓 Lock'}</button>
-                    <button class="action-btn" onclick="shuffleDay('${k}')">🎲 Shuffle</button>
-                    <button class="action-btn" onclick="clearDay('${k}')">🗑️ Clear</button>
-                </div>
-            `;
-        }
-
-        document.getElementById('pickerOptions').addEventListener('click', (e) => {
-            const opt = e.target.closest('.picker-option');
-            if (!opt) return;
-            selectMeal(opt.dataset.value);
-        });
-
-        document.getElementById('pickerOptions').addEventListener('keydown', (e) => {
-            const opts = Array.from(e.currentTarget.querySelectorAll('.picker-option'));
-            const i = opts.indexOf(document.activeElement);
-            if (e.key === 'ArrowDown') { (opts[i + 1] || opts[0])?.focus(); e.preventDefault(); }
-            if (e.key === 'ArrowUp') { (opts[i - 1] || opts.at(-1))?.focus(); e.preventDefault(); }
-            if (e.key === 'Enter' || e.key === ' ') {
-                const v = document.activeElement?.dataset.value; if (v) selectMeal(v);
-            }
-        });
-
-        function trapFocus(container) {
-            const FOCUSABLE = 'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])';
-            const nodes = () => Array.from(container.querySelectorAll(FOCUSABLE)).filter(el => !el.disabled && el.offsetParent !== null);
-            function onKey(e) {
-                if (e.key !== 'Tab') return;
-                const list = nodes(); if (!list.length) return;
-                const first = list[0], last = list[list.length - 1];
-                if (e.shiftKey && document.activeElement === first) { last.focus(); e.preventDefault(); }
-                else if (!e.shiftKey && document.activeElement === last) { first.focus(); e.preventDefault(); }
-            }
-            container.addEventListener('keydown', onKey);
-            return () => container.removeEventListener('keydown', onKey);
-        }
-
-        function openPicker(k, type) {
-            currentPicker = { key: k, type: type };
-            const picker = document.getElementById('mealPicker');
-            const title = document.getElementById('pickerTitle');
-            const options = document.getElementById('pickerOptions');
-
-            title.textContent = `Select ${type.charAt(0).toUpperCase() + type.slice(1)}`;
-
-            let items = [];
-            if (type === 'lunch') {
-                items = meals.lunch;
-            } else if (type === 'dinner') {
-                const mode = modes[k] || 'regular';
-                const isWeekend = getIndex(k) >= 5;
-                items = mode === 'quick' ? meals.dinner.quick
-                    : mode === 'delivery' ? meals.dinner.delivery
-                        : isWeekend ? meals.dinner.weekend
-                            : meals.dinner.regular;
-                if (!isWeekend && mode === 'regular') {
-                    items = [...items, ...meals.dinner.other];
-                }
-            } else {
-                items = ['None', ...meals.side];
-            }
-
-            const current = (data[k] || {})[type];
-            options.innerHTML = items.map(item =>
-                `<div class="picker-option ${item === current ? 'selected' : ''}" data-value="${item}" tabindex="0">${item}</div>`
-            ).join('');
-
-            picker.classList.add('show');
-            document.body.classList.add('no-scroll');
-            untrapPicker = trapFocus(picker);
-            picker.querySelector('.picker-done')?.focus();
-
-            const selected = options.querySelector('.picker-option.selected');
-            if (selected) options.scrollTop = selected.offsetTop - 100;
-        }
-
-        document.addEventListener('keydown', (e) => {
-            if (e.key !== 'Escape') return;
-            const picker = document.getElementById('mealPicker');
-            const grocery = document.getElementById('groceryModal');
-            const share = document.getElementById('shareModal');
-            if (picker.classList.contains('show')) closePicker();
-            else if (grocery.classList.contains('show')) closeModal('groceryModal');
-            else if (share.classList.contains('show')) closeModal('shareModal');
-        });
-
-        function trySystemShare(title, text) {
-            if (navigator.share) {
-                navigator.share({ title, text }).catch(() => {
-                    document.getElementById('shareTitle').textContent = title;
-                    document.getElementById('shareText').textContent = text;
-                    showModal('shareModal');
-                });
-                return true;
-            }
-            return false;
-        }
-
-        function closePicker() {
-            document.getElementById('mealPicker').classList.remove('show');
-            document.body.classList.remove('no-scroll');
-            untrapPicker?.(); untrapPicker = null;
-            currentPicker = null;
-        }
-
-        function addSwipeToDismiss(panel, onDismiss) {
-            if (!panel) return;
-            let startY = null, deltaY = 0;
-            panel.addEventListener('touchstart', e => { startY = e.touches[0].clientY; deltaY = 0; }, { passive: true });
-            panel.addEventListener('touchmove', e => {
-                if (startY === null) return;
-                deltaY = e.touches[0].clientY - startY;
-                if (deltaY > 0) panel.style.transform = `translateY(${Math.min(deltaY, 140)}px)`;
-            }, { passive: true });
-            panel.addEventListener('touchend', () => {
-                if (deltaY > 90) onDismiss();
-                panel.style.transform = '';
-                startY = null; deltaY = 0;
-            }, { passive: true });
-        }
-
-        function selectMeal(value) {
-            if (!currentPicker) return;
-            const { key, type } = currentPicker;
-
-            if (!data[key]) data[key] = { lunch: '', dinner: '', side: '' };
-            data[key][type] = value === 'None' ? '' : value;
-
-            if (type === 'dinner' && value.includes('Delivery')) {
-                data[key].side = '';
-            }
-
-            save();
-            render();
-            closePicker();
-        }
-
-        function toggleDay(k) {
-            const cell = document.getElementById(`day-${k}`);
-            const opening = !cell.classList.contains('expanded');
-
-            document.querySelectorAll('.day-cell.expanded').forEach(c => {
-                c.classList.remove('expanded');
-                c.querySelector('.day-header')?.setAttribute('aria-expanded', 'false');
-            });
-
-            if (opening) {
-                cell.classList.add('expanded');
-                cell.querySelector('.day-header')?.setAttribute('aria-expanded', 'true');
-                lastOpen = k;
-                if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
-            } else {
-                lastOpen = null;
-            }
-            save();
-        }
-
-        function toggleLock(k) {
-            locked[k] = !locked[k];
-            save();
-            render();
-        }
-
-        function setMode(k, mode) {
-            modes[k] = mode;
-            if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
-
-            const isWeekend = getIndex(k) >= 5;
-            const validDinner = mode === 'quick' ? meals.dinner.quick
-                : mode === 'delivery' ? meals.dinner.delivery
-                    : isWeekend ? meals.dinner.weekend
-                        : meals.dinner.regular;
-
-            if (data[k].dinner && !validDinner.includes(data[k].dinner)) {
-                data[k].dinner = '';
-            }
-            if (mode === 'delivery') data[k].side = '';
-
-            save();
-            render();
-        }
-
-        function pickDifferent(pool, prev) {
-            if (!pool.length) return '';
-            if (pool.length === 1) return pool[0];
-            let choice; let tries = 0;
-            do { choice = pool[Math.floor(Math.random() * pool.length)]; tries++; } while (choice === prev && tries < 6);
-            return choice;
-        }
-
-        function shuffleMeal(k, type, btn) {
-            if (locked[k]) return;
-            if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
-
-            btn?.classList.add('shuffling');
-
-            let pool = [];
-            if (type === 'lunch') {
-                pool = meals.lunch;
-            } else if (type === 'dinner') {
-                const mode = modes[k] || 'regular';
-                const isWeekend = getIndex(k) >= 5;
-                pool = mode === 'quick' ? meals.dinner.quick :
-                    mode === 'delivery' ? meals.dinner.delivery :
-                        isWeekend ? meals.dinner.weekend :
-                            meals.dinner.regular;
-            } else {
-                pool = meals.side;
-            }
-
-            const i = getIndex(k);
-            const prevKey = getKey(i - 1);
-            const prev = data[prevKey] || {};
-            const prevVal = prev[type];
-
-            data[k][type] = pickDifferent(pool, prevVal);
-
-            setTimeout(() => {
-                btn?.classList.remove('shuffling');
-                save(); render();
-            }, 500);
-        }
-
-        function shuffleDay(k) {
-            if (locked[k]) return;
-
-            if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
-
-            const i = getIndex(k);
-            const prevKey = getKey(i - 1);
-            const prev = data[prevKey] || {};
-            const mode = modes[k] || 'regular';
-            const isWeekend = i >= 5;
-
-            data[k].lunch = pickDifferent(meals.lunch, prev.lunch);
-
-            const dinnerPool = mode === 'quick' ? meals.dinner.quick :
-                mode === 'delivery' ? meals.dinner.delivery :
-                    isWeekend ? meals.dinner.weekend :
-                        meals.dinner.regular;
-            data[k].dinner = pickDifferent(dinnerPool, prev.dinner);
-
-            if (mode !== 'delivery') {
-                data[k].side = pickDifferent(meals.side, prev.side);
-            }
-
-            save();
-            render();
-        }
-
-        function clearDay(k) {
-            data[k] = { lunch: '', dinner: '', side: '' };
-            save();
-            render();
-        }
-
-        function shuffleAll() {
-            for (let i = 0; i < 7; i++) {
-                if (i >= 5 && !weekendOn[week]) continue;
-                const k = getKey(i);
-                if (!locked[k]) shuffleDay(k);
-            }
-        }
-
-        function clearAll() {
-            if (!confirm('Clear all meals?')) return;
-            for (let i = 0; i < 7; i++) {
-                const k = getKey(i);
-                data[k] = { lunch: '', dinner: '', side: '' };
-                delete locked[k];
-                delete modes[k];
-            }
-            lastOpen = null;
-            save();
-            render();
-        }
-
-        function showGrocery() {
-            const list = document.getElementById('groceryList');
-            const items = {};
-
-            Object.values(data).forEach(d => {
-                ['lunch', 'dinner', 'side'].forEach(type => {
-                    const meal = d[type];
-                    if (meal && ingredients[meal]) {
-                        ingredients[meal].forEach(ing => {
-                            items[ing] = (items[ing] || 0) + 1;
-                        });
-                    }
-                });
-            });
-
-            if (Object.keys(items).length === 0) {
-                list.innerHTML = '<div class="empty-state"><div class="empty-icon">🛒</div><p>No meals planned yet</p></div>';
-            } else {
-                const cats = {
-                    'Proteins': ['Pollo', 'Carne', 'Salmone', 'Merluzzo', 'Pancetta', 'Prosciutto'],
-                    'Dairy': ['Mozzarella', 'Parmigiano', 'Provolone', 'Formaggio', 'Ricotta', 'Burro', 'Latte'],
-                    'Carbs': ['Pasta', 'Spaghetti', 'Ravioli', 'Tortellini', 'Riso', 'Pane'],
-                    'Vegetables': ['Pomodori', 'Zucchine', 'Melanzane', 'Carote', 'Patate'],
-                    'Other': []
-                };
-
-                const organized = {};
-                Object.entries(items).forEach(([ing, count]) => {
-                    let added = false;
-                    for (const [cat, keywords] of Object.entries(cats)) {
-                        if (keywords.some(k => ing.toLowerCase().includes(k.toLowerCase()))) {
-                            if (!organized[cat]) organized[cat] = [];
-                            organized[cat].push({ name: ing, count });
-                            added = true;
-                            break;
-                        }
-                    }
-                    if (!added) {
-                        if (!organized.Other) organized.Other = [];
-                        organized.Other.push({ name: ing, count });
-                    }
-                });
-
-                list.innerHTML = Object.entries(organized).map(([cat, items]) => `
-                    <div class="grocery-section">
-                        <div class="grocery-title">${cat}</div>
-                        ${items.map(item => `
-                            <div class="grocery-item">
-                                <input type="checkbox" class="grocery-check">
-                                <span>${item.name} ${item.count > 1 ? `(×${item.count})` : ''}</span>
-                            </div>
-                        `).join('')}
-                    </div>
-                `).join('');
-            }
-
-            showModal('groceryModal');
-        }
-
-        function shareGrocery() {
-            const rows = Array.from(document.querySelectorAll('.grocery-item'));
-            const items = rows
-                .filter(r => !r.querySelector('.grocery-check').checked)
-                .map(r => r.querySelector('span').textContent);
-
-            if (!items.length) return;
-
-            shareContent = '🛒 Grocery List\n\n' + items.map(t => `☐ ${t}`).join('\n');
-            closeModal('groceryModal');
-            if (!trySystemShare('Grocery List', shareContent)) {
-                document.getElementById('shareTitle').textContent = 'Grocery List';
-                document.getElementById('shareText').textContent = shareContent;
-                showModal('shareModal');
-            }
-        }
-
-        function weekRange() {
-            const start = getWeekStart();
-            const end = new Date(start);
-            end.setDate(start.getDate() + 6);
-            const fmt = { month: 'short', day: 'numeric' };
-            return `${start.toLocaleDateString('en', fmt)} - ${end.toLocaleDateString('en', fmt)}`;
-        }
-
-        function sharePlan() {
-            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-            shareContent = `📅 Meal Plan - ${week === 'this' ? 'This' : 'Next'} Week\n${weekRange()}\n\n`;
-
-            days.forEach((day, i) => {
-                if (i >= 5 && !weekendOn[week]) return;
-                const k = getKey(i);
-                const d = data[k] || {};
-                shareContent += `${day}\n`;
-                if (d.lunch) shareContent += `  Lunch: ${d.lunch}\n`;
-                if (d.dinner) {
-                    shareContent += `  Dinner: ${d.dinner}`;
-                    if (d.side) shareContent += ` with ${d.side}`;
-                    shareContent += '\n';
-                }
-                if (!d.lunch && !d.dinner) shareContent += `  No meals\n`;
-                shareContent += '\n';
-            });
-
-            if (!trySystemShare('Meal Plan', shareContent)) {
-                document.getElementById('shareTitle').textContent = 'Meal Plan';
-                document.getElementById('shareText').textContent = shareContent;
-                showModal('shareModal');
-            }
-        }
-
-        function copyText(btn) {
-            navigator.clipboard.writeText(shareContent).then(() => {
-                navigator.vibrate?.(8);
-                const original = btn.textContent;
-                btn.textContent = 'Copied! ✓';
-                btn.style.background = 'var(--accent-success)';
-                setTimeout(() => { btn.textContent = original; btn.style.background = ''; closeModal('shareModal'); }, 1000);
-            });
-        }
-
-        function showModal(id) {
-            document.getElementById(id).classList.add('show');
-            document.body.classList.add('no-scroll');
-        }
-
-        function closeModal(id) {
-            document.getElementById(id).classList.remove('show');
-            document.body.classList.remove('no-scroll');
-        }
-
-        document.addEventListener('click', e => {
-            if (e.target.classList.contains('ios-modal')) {
-                e.target.classList.remove('show');
-                document.body.classList.remove('no-scroll');
-            }
-        });
-
-        function getKey(index, startRef) {
-            const date = getDate(index, startRef);
-            return `${week}-${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-        }
-
-        function getIndex(key) {
-            const parts = key.split('-');
-            const date = new Date(parts[1], parts[2], parts[3]);
-            const start = getWeekStart();
-            return Math.floor((date - start) / 86400000);
-        }
-
-        function getDate(index, startRef) {
-            const start = startRef || getWeekStart();
-            const date = new Date(start);
-            date.setDate(start.getDate() + index);
-            return date;
-        }
-
-        function getWeekStart() {
-            const now = new Date();
-            const mondayIndex = (now.getDay() + 6) % 7;
-            const start = new Date(now);
-            start.setDate(now.getDate() - mondayIndex + (week === 'next' ? 7 : 0));
-            start.setHours(0, 0, 0, 0);
-            return start;
-        }
-
-        function save() {
-            localStorage.setItem('mealData', JSON.stringify(data));
-            localStorage.setItem('mealWeek', week);
-            localStorage.setItem('mealWeekend', JSON.stringify(weekendOn));
-            localStorage.setItem('mealLocked', JSON.stringify(locked));
-            localStorage.setItem('mealModes', JSON.stringify(modes));
-            localStorage.setItem('mealLastOpen', lastOpen || '');
-        }
-
-        function load() {
-            try {
-                data = JSON.parse(localStorage.getItem('mealData') || '{}');
-                week = localStorage.getItem('mealWeek') || 'next';
-                weekendOn = JSON.parse(localStorage.getItem('mealWeekend') || '{}');
-                locked = JSON.parse(localStorage.getItem('mealLocked') || '{}');
-                modes = JSON.parse(localStorage.getItem('mealModes') || '{}');
-                lastOpen = localStorage.getItem('mealLastOpen') || null;
-            } catch { }
-        }
-
-        document.addEventListener('touchmove', () => {}, { passive: true });
-
-        init();
-    </script>
+    <div class="day-actions">
+      <button class="action-btn ${isLocked?'locked':''}" onclick="toggleLock('${k}')">${isLocked?'🔒 Locked':'🔓 Lock'}</button>
+      <button class="action-btn" onclick="shuffleDay('${k}')">🎲 Shuffle</button>
+      <button class="action-btn" onclick="clearDay('${k}')">🗑️ Clear</button>
+    </div>`;
+}
+
+/* Picker: click opzioni + tastiera */
+document.getElementById('pickerOptions').addEventListener('click',e=>{
+  const opt=e.target.closest('.picker-option'); if(!opt) return; selectMeal(opt.dataset.value);
+});
+document.getElementById('pickerOptions').addEventListener('keydown',e=>{
+  const opts=Array.from(e.currentTarget.querySelectorAll('.picker-option'));
+  const i=opts.indexOf(document.activeElement);
+  if(e.key==='ArrowDown'){(opts[i+1]||opts[0])?.focus();e.preventDefault();}
+  if(e.key==='ArrowUp'){(opts[i-1]||opts.at(-1))?.focus();e.preventDefault();}
+  if(e.key==='Enter'||e.key===' '){const v=document.activeElement?.dataset.value; if(v) selectMeal(v);}
+});
+
+function trapFocus(container){
+  const F='button,[href],input,select,textarea,[tabindex]:not([tabindex="-1"])';
+  const nodes=()=>Array.from(container.querySelectorAll(F)).filter(el=>!el.disabled&&el.offsetParent!==null);
+  function onKey(e){
+    if(e.key!=='Tab')return; const list=nodes(); if(!list.length)return;
+    const first=list[0], last=list[list.length-1];
+    if(e.shiftKey && document.activeElement===first){last.focus();e.preventDefault();}
+    else if(!e.shiftKey && document.activeElement===last){first.focus();e.preventDefault();}
+  }
+  container.addEventListener('keydown',onKey); return()=>container.removeEventListener('keydown',onKey);
+}
+
+function openPicker(k,type){
+  currentPicker={key:k,type:type};
+  const picker=document.getElementById('mealPicker');
+  const title=document.getElementById('pickerTitle');
+  const options=document.getElementById('pickerOptions');
+  const search=document.getElementById('pickerSearch');
+  const useBtn=document.getElementById('pickerUseBtn');
+
+  title.textContent=`Select ${type.charAt(0).toUpperCase()+type.slice(1)}`;
+
+  // pool base + None per tutti i tipi
+  let items=[];
+  if(type==='lunch'){ items=meals.lunch; }
+  else if(type==='dinner'){
+    const mode=modes[k]||'regular'; const isWeekend=getIndex(k)>=5;
+    items = mode==='quick'?meals.dinner.quick
+          : mode==='delivery'?meals.dinner.delivery
+          : isWeekend?meals.dinner.weekend
+          : meals.dinner.regular;
+    if(!isWeekend && mode==='regular'){ items=[...items, ...meals.dinner.other]; }
+  } else { items=meals.side; }
+  items = ['None', ...items];
+
+  pickerAllItems = items.slice(); // salva per filtro
+  const current=(data[k]||{})[type];
+  renderPickerOptions(pickerAllItems, current);
+
+  picker.classList.add('show'); document.body.classList.add('no-scroll');
+  untrapPicker=trapFocus(picker);
+  document.querySelector('.picker-done')?.focus();
+
+  // reset barra ricerca
+  search.value=''; useBtn.disabled=true;
+
+  const selected = options.querySelector('.picker-option.selected');
+  if(selected) options.scrollTop = selected.offsetTop - 100;
+}
+
+function renderPickerOptions(items, current){
+  const options=document.getElementById('pickerOptions');
+  options.innerHTML = items.map(item=>`<div class="picker-option ${item===current?'selected':''}" data-value="${item}" tabindex="0">${item}</div>`).join('');
+}
+
+function onPickerSearch(e){
+  const q=e.target.value.trim().toLowerCase();
+  const useBtn=document.getElementById('pickerUseBtn');
+  const current=(data[currentPicker?.key]||{})[currentPicker?.type||'']||'';
+  const filtered = pickerAllItems.filter(x=>x.toLowerCase().includes(q));
+  renderPickerOptions(filtered.length?filtered:pickerAllItems, current);
+  useBtn.disabled = q.length===0;
+}
+
+function useCustomFromInput(){
+  const input=document.getElementById('pickerSearch');
+  const txt=input.value.trim();
+  if(!txt || !currentPicker) return;
+  // salva come valore libero
+  if(!data[currentPicker.key]) data[currentPicker.key]={lunch:'',dinner:'',side:''};
+  data[currentPicker.key][currentPicker.type]= (txt.toLowerCase()==='none') ? '' : txt;
+  if(currentPicker.type==='dinner' && /delivery/i.test(txt)) { data[currentPicker.key].side=''; }
+  save(); render(); closePicker();
+}
+
+function closePicker(){
+  document.getElementById('mealPicker').classList.remove('show');
+  document.body.classList.remove('no-scroll');
+  untrapPicker?.(); untrapPicker=null; currentPicker=null;
+}
+
+function trySystemShare(title,text){
+  if(navigator.share){
+    navigator.share({title,text}).catch(()=>{
+      document.getElementById('shareTitle').textContent=title;
+      document.getElementById('shareText').textContent=text;
+      showModal('shareModal');
+    });
+    return true;
+  }
+  return false;
+}
+
+/* Giorni */
+function toggleDay(k){
+  document.querySelectorAll('.day-cell.expanded').forEach(c=>{
+    c.classList.remove('expanded','active-edit');
+    c.querySelector('.day-header')?.setAttribute('aria-expanded','false');
+  });
+  const cell=document.getElementById(`day-${k}`);
+  const opening=!cell.classList.contains('expanded');
+  if(opening){
+    cell.classList.add('expanded','active-edit');
+    cell.querySelector('.day-header')?.setAttribute('aria-expanded','true');
+    lastOpen=k; if(!data[k]) data[k]={lunch:'',dinner:'',side:''};
+  }else{ lastOpen=null; }
+  save();
+}
+
+/* Lock & Mode */
+function toggleLock(k){ locked[k]=!locked[k]; save(); render(); }
+function setMode(k,mode){
+  modes[k]=mode; if(!data[k]) data[k]={lunch:'',dinner:'',side:''};
+  const isWeekend=getIndex(k)>=5;
+  const validDinner= mode==='quick'?meals.dinner.quick
+                    : mode==='delivery'?meals.dinner.delivery
+                    : isWeekend?meals.dinner.weekend
+                    : meals.dinner.regular;
+  if(data[k].dinner && !validDinner.includes(data[k].dinner)) data[k].dinner='';
+  if(mode==='delivery') data[k].side='';
+  save(); render();
+}
+
+/* Shuffle con anti-doppioni */
+function pickDifferent(pool,prev){ if(!pool.length) return ''; if(pool.length===1) return pool[0];
+  let choice,tries=0; do{ choice=pool[Math.floor(Math.random()*pool.length)]; tries++; } while(choice===prev && tries<6);
+  return choice;
+}
+function shuffleMeal(k,type,btn){
+  if(locked[k])return; if(!data[k]) data[k]={lunch:'',dinner:'',side:''};
+  btn?.classList.add('shuffling');
+  let pool=[];
+  if(type==='lunch') pool=meals.lunch;
+  else if(type==='dinner'){
+    const mode=modes[k]||'regular'; const isWeekend=getIndex(k)>=5;
+    pool = mode==='quick'?meals.dinner.quick : mode==='delivery'?meals.dinner.delivery : isWeekend?meals.dinner.weekend : meals.dinner.regular;
+  } else pool=meals.side;
+
+  const i=getIndex(k), prevKey=getKey(i-1), prev=data[prevKey]||{}, prevVal=prev[type];
+  data[k][type]=pickDifferent(pool,prevVal);
+
+  setTimeout(()=>{btn?.classList.remove('shuffling'); save(); render();},500);
+}
+function shuffleDay(k){
+  if(locked[k])return; if(!data[k]) data[k]={lunch:'',dinner:'',side:''};
+  const i=getIndex(k), prevKey=getKey(i-1), prev=data[prevKey]||{}, mode=modes[k]||'regular', isWeekend=i>=5;
+  data[k].lunch=pickDifferent(meals.lunch,prev.lunch);
+  const dinnerPool = mode==='quick'?meals.dinner.quick : mode==='delivery'?meals.dinner.delivery : isWeekend?meals.dinner.weekend : meals.dinner.regular;
+  data[k].dinner=pickDifferent(dinnerPool,prev.dinner);
+  if(mode!=='delivery') data[k].side=pickDifferent(meals.side,prev.side);
+  save(); render();
+}
+function clearDay(k){ data[k]={lunch:'',dinner:'',side:''}; save(); render(); }
+
+/* Week actions */
+function shuffleAll(){ for(let i=0;i<7;i++){ if(i>=5 && !weekendOn[week]) continue; const k=getKey(i); if(!locked[k]) shuffleDay(k); } }
+function clearAll(){
+  if(!confirm('Clear all meals?')) return;
+  for(let i=0;i<7;i++){ const k=getKey(i); data[k]={lunch:'',dinner:'',side:''}; delete locked[k]; delete modes[k]; }
+  lastOpen=null; save(); render();
+}
+
+/* Grocery */
+function showGrocery(){
+  const list=document.getElementById('groceryList'); const items={};
+  Object.values(data).forEach(d=>['lunch','dinner','side'].forEach(t=>{
+    const meal=d[t]; if(meal && ingredients[meal]) ingredients[meal].forEach(ing=>{ items[ing]=(items[ing]||0)+1; });
+  }));
+  if(Object.keys(items).length===0){ list.innerHTML='<div class="empty-state"><div class="empty-icon">🛒</div><p>No meals planned yet</p></div>'; }
+  else{
+    const cats={'Proteins':['Pollo','Carne','Salmone','Merluzzo','Pancetta','Prosciutto'],'Dairy':['Mozzarella','Parmigiano','Provolone','Formaggio','Ricotta','Burro','Latte'],'Carbs':['Pasta','Spaghetti','Ravioli','Tortellini','Riso','Pane'],'Vegetables':['Pomodori','Zucchine','Melanzane','Carote','Patate'],'Other':[]};
+    const organized={};
+    Object.entries(items).forEach(([ing,count])=>{
+      let added=false;
+      for(const [cat,keys] of Object.entries(cats)){
+        if(keys.some(k=>ing.toLowerCase().includes(k.toLowerCase()))){ (organized[cat]??=[]).push({name:ing,count}); added=true; break; }
+      }
+      if(!added) (organized.Other??=[]).push({name:ing,count});
+    });
+    list.innerHTML = Object.entries(organized).map(([cat,arr])=>`
+      <div class="grocery-section"><div class="grocery-title">${cat}</div>
+      ${arr.map(item=>`<div class="grocery-item"><input type="checkbox" class="grocery-check"><span>${item.name} ${item.count>1?`(×${item.count})`:''}</span></div>`).join('')}</div>`).join('');
+  }
+  showModal('groceryModal');
+}
+function sendGrocery(){
+  const rows=[...document.querySelectorAll('.grocery-item')];
+  const items=rows.filter(r=>!r.querySelector('.grocery-check').checked).map(r=>r.querySelector('span').textContent);
+  if(!items.length) return;
+  shareContent='🛒 Grocery List\n\n'+items.map(t=>'☐ '+t).join('\n');
+  closeModal('groceryModal');
+  if(!trySystemShare('Grocery List',shareContent)){
+    document.getElementById('shareTitle').textContent='Send Grocery List';
+    document.getElementById('shareText').textContent=shareContent;
+    showModal('shareModal');
+  }
+}
+
+/* Send plan */
+function weekRange(){
+  const start=getWeekStart(), end=new Date(start); end.setDate(start.getDate()+6);
+  const fmt={month:'short',day:'numeric'}; return `${start.toLocaleDateString('en',fmt)} - ${end.toLocaleDateString('en',fmt)}`;
+}
+function sharePlan(){
+  const days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
+  shareContent=`📅 Meal Plan - ${week==='this'?'This':'Next'} Week\n${weekRange()}\n\n`;
+  days.forEach((day,i)=>{
+    if(i>=5 && !weekendOn[week]) return;
+    const k=getKey(i), d=data[k]||{};
+    shareContent+=`${day}\n`;
+    if(d.lunch) shareContent+=`  Lunch: ${d.lunch}\n`;
+    if(d.dinner){ shareContent+=`  Dinner: ${d.dinner}`; if(d.side) shareContent+=' with '+d.side; shareContent+='\n'; }
+    if(!d.lunch && !d.dinner) shareContent+=`  No meals\n`;
+    shareContent+='\n';
+  });
+  if(!trySystemShare('Send Meal Plan',shareContent)){
+    document.getElementById('shareTitle').textContent='Send Meal Plan';
+    document.getElementById('shareText').textContent=shareContent;
+    showModal('shareModal');
+  }
+}
+function copyText(btn){
+  navigator.clipboard.writeText(shareContent).then(()=>{
+    navigator.vibrate?.(8); const orig=btn.textContent; btn.textContent='Copied! ✓'; btn.style.background='var(--accent-success)';
+    setTimeout(()=>{ btn.textContent=orig; btn.style.background=''; closeModal('shareModal'); },1000);
+  });
+}
+
+/* Modali & util */
+function showModal(id){ document.getElementById(id).classList.add('show'); document.body.classList.add('no-scroll'); }
+function closeModal(id){ document.getElementById(id).classList.remove('show'); document.body.classList.remove('no-scroll'); }
+document.addEventListener('click',e=>{ if(e.target.classList.contains('ios-modal')){ e.target.classList.remove('show'); document.body.classList.remove('no-scroll'); }});
+document.addEventListener('keydown',e=>{
+  if(e.key!=='Escape') return;
+  const picker=document.getElementById('mealPicker'), grocery=document.getElementById('groceryModal'), share=document.getElementById('shareModal');
+  if(picker.classList.contains('show')) closePicker();
+  else if(grocery.classList.contains('show')) closeModal('groceryModal');
+  else if(share.classList.contains('show')) closeModal('shareModal');
+});
+
+function getKey(index,startRef){ const date=getDate(index,startRef); return `${week}-${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`; }
+function getIndex(key){ const p=key.split('-'); const date=new Date(p[1],p[2],p[3]); const start=getWeekStart(); return Math.floor((date-start)/86400000); }
+function getDate(index,startRef){ const start=startRef||getWeekStart(); const d=new Date(start); d.setDate(start.getDate()+index); return d; }
+function getWeekStart(){ const now=new Date(); const mondayIndex=(now.getDay()+6)%7; const start=new Date(now); start.setDate(now.getDate()-mondayIndex+(week==='next'?7:0)); start.setHours(0,0,0,0); return start; }
+
+function save(){
+  localStorage.setItem('mealData',JSON.stringify(data));
+  localStorage.setItem('mealWeek',week);
+  localStorage.setItem('mealWeekend',JSON.stringify(weekendOn));
+  localStorage.setItem('mealLocked',JSON.stringify(locked));
+  localStorage.setItem('mealModes',JSON.stringify(modes));
+  localStorage.setItem('mealLastOpen',lastOpen||'');
+}
+function load(){
+  try{
+    data=JSON.parse(localStorage.getItem('mealData')||'{}');
+    week=localStorage.getItem('mealWeek')||'next';
+    weekendOn=JSON.parse(localStorage.getItem('mealWeekend')||'{}');
+    locked=JSON.parse(localStorage.getItem('mealLocked')||'{}');
+    modes=JSON.parse(localStorage.getItem('mealModes')||'{}');
+    lastOpen=localStorage.getItem('mealLastOpen')||null;
+  }catch{}
+}
+
+function addSwipeToDismiss(panel,onDismiss){
+  if(!panel) return;
+  let startY=null,deltaY=0;
+  panel.addEventListener('touchstart',e=>{startY=e.touches[0].clientY;deltaY=0;},{passive:true});
+  panel.addEventListener('touchmove',e=>{ if(startY===null)return; deltaY=e.touches[0].clientY-startY; if(deltaY>0) panel.style.transform=`translateY(${Math.min(deltaY,140)}px)`; },{passive:true});
+  panel.addEventListener('touchend',()=>{ if(deltaY>90) onDismiss(); panel.style.transform=''; startY=null; deltaY=0; },{passive:true});
+}
+
+document.addEventListener('touchmove',()=>{}, {passive:true});
+init();
+</script>
 </body>
 </html>
