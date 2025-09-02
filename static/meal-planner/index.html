@@ -716,6 +716,52 @@
             line-height: 1.4;
         }
 
+        /* dinner-type chips (regular/quick/delivery) */
+        .mode-chips {
+            display: flex;
+            gap: 6px;
+            margin: 8px 0 10px;
+        }
+
+        .mode-chip {
+            border: 1px solid var(--border-secondary);
+            background: var(--toggle-bg);
+            color: var(--text-primary);
+            border-radius: 9999px;
+            padding: 6px 10px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .mode-chip[aria-pressed="true"] {
+            background: var(--accent-primary);
+            color: #fff;
+            border-color: var(--accent-primary);
+        }
+
+        .mode-chip:active {
+            transform: scale(0.97);
+        }
+
+        /* reuse the existing quick-badge look for header badge */
+        .mode-badge {
+            composes: quick-badge;
+        }
+
+        /* if your CSS doesn't support composes, duplicate: */
+        .mode-badge {
+            display: inline-block;
+            margin-right: 8px;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            background: var(--accent-success);
+            color: #fff;
+            font-size: 12px;
+            font-weight: 700;
+            line-height: 1.4;
+        }
+
         @keyframes slideIn {
             from {
                 opacity: 0;
@@ -1122,6 +1168,10 @@
                 if (busyDinnerDays && busyDinnerDays[dayKey] !== undefined) {
                     delete busyDinnerDays[dayKey];
                 }
+
+                if (dinnerModeByDay && dinnerModeByDay[dayKey] !== undefined) {
+                    delete dinnerModeByDay[dayKey];
+                }
             }
 
             weekendPlanByWeek[selectedWeek] = false;
@@ -1134,6 +1184,72 @@
             generateWeek();
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
+
+        function getDinnerMode(dayKey) {
+            return dinnerModeByDay[dayKey] || 'regular';
+        }
+
+        function setDinnerMode(dayKey, mode) {
+            dinnerModeByDay[dayKey] = mode;
+
+            // If current dinner isn't valid in new mode, clear it
+            const allowed = new Set(getDinnerPoolForDay(dayKey));
+            const current = mealData[dayKey]?.dinner;
+            if (current && !allowed.has(current)) {
+                mealData[dayKey].dinner = '';
+            }
+
+            saveState();
+
+            // Re-render this card's meals + update header badge
+            const card = [...document.querySelectorAll('.day-card')]
+                .find(c => c.dataset.dayKey === dayKey);
+            if (card) {
+                const date = getDateFromDayKey(dayKey);
+                card.querySelector('.meals-content').innerHTML = createMeals(dayKey, isWeekendDate(date));
+
+                const header = card.querySelector('.day-header');
+                const chevron = header.querySelector('.chevron');
+                let badge = header.querySelector('.mode-badge');
+                const modeNow = getDinnerMode(dayKey);
+
+                if (modeNow === 'regular') {
+                    if (badge) badge.remove();
+                } else {
+                    const text = modeNow === 'quick' ? '⚡ Quick' : '🚚 Delivery';
+                    if (!badge) {
+                        badge = document.createElement('span');
+                        badge.className = 'mode-badge';
+                        header.insertBefore(badge, chevron);
+                    }
+                    badge.textContent = text;
+                    badge.title = text;
+                }
+            } else {
+                generateWeek();
+            }
+        }
+
+        function getDinnerPoolForDay(dayKey) {
+            const date = getDateFromDayKey(dayKey);
+            const weekend = isWeekendDate(date) && isWeekendEnabled();
+            const mode = getDinnerMode(dayKey);
+
+            if (mode === 'quick') return [...quickDinnerOptions];
+            if (mode === 'delivery') return [...deliveryOptions];
+
+            // regular mode
+            return weekend ? [...weekendOptions] : [...dinnerOptions];
+        }
+
+        function getPoolsForDay(dayKey) {
+            return {
+                lunch: [...lunchOptions],
+                side: [...sideDishOptions], // no "Nothing"/"Custom..." in shuffle pool
+                dinner: getDinnerPoolForDay(dayKey)
+            };
+        }
+
 
         function startPlanning() {
             document.getElementById('weekSelection').style.display = 'none';
@@ -1191,7 +1307,6 @@
 
             const hasMeals = data.lunch || data.dinner;
             const locked = !!lockedDays[dayKey];
-            const busy = !!busyDinnerDays[dayKey];     // ⬅️ NEW
 
             const classes = ['day-card'];
             if (isWeekend) classes.push('weekend');
@@ -1200,14 +1315,20 @@
             if (locked) classes.push('locked');
             card.className = classes.join(' ');
 
+            const mode = getDinnerMode(dayKey);
+            const modeBadge = (mode === 'regular') ? '' :
+                `<span class="mode-badge" title="${mode === 'quick' ? '⚡ Quick' : '🚚 Delivery'}">
+     ${mode === 'quick' ? '⚡ Quick' : '🚚 Delivery'}
+   </span>`;
+
             const headerRight = `
-    <button class="lock-btn"
-            aria-label="Lock day from shuffle"
-            aria-pressed="${locked ? 'true' : 'false'}"
-            onclick="toggleLock(event, '${dayKey}')">${locked ? '🔒' : '🔓'}</button>
-    ${busy ? '<span class="quick-badge" title="Quick dinner">Quick</span>' : ''}   <!-- ⬅️ NEW -->
-    <span class="chevron">▼</span>
-  `;
+  <button class="lock-btn"
+          aria-label="Lock day from shuffle"
+          aria-pressed="${locked ? 'true' : 'false'}"
+          onclick="toggleLock(event, '${dayKey}')">${locked ? '🔒' : '🔓'}</button>
+  ${modeBadge}
+  <span class="chevron">▼</span>
+`;
 
             if (isWeekend) {
                 card.innerHTML = `
@@ -1299,15 +1420,18 @@
 
         function createMeals(dayKey, isWeekend) {
             const data = mealData[dayKey];
-            const busy = !!busyDinnerDays[dayKey];
+            const mode = getDinnerMode(dayKey);
 
-            // Build dinner pools for the SELECT
+            // Dinner pools based on mode
             let dinnerMain, dinnerExtra;
-            if (busy) {
+            const customOpt = additionalDinnerOptions.includes("Custom...") ? ["Custom..."] : [];
+
+            if (mode === 'quick') {
                 dinnerMain = quickDinnerOptions;
-                // Delivery options go in the extra group; keep Custom...
-                const customOpt = additionalDinnerOptions.includes("Custom...") ? ["Custom..."] : [];
-                dinnerExtra = [...deliveryOptions, ...customOpt];
+                dinnerExtra = customOpt; // allow custom only
+            } else if (mode === 'delivery') {
+                dinnerMain = deliveryOptions;
+                dinnerExtra = customOpt; // allow custom only
             } else if (isWeekend && isWeekendEnabled()) {
                 dinnerMain = weekendOptions;
                 dinnerExtra = additionalWeekendOptions;
@@ -1344,11 +1468,13 @@
     <div class="meal-section">
       <div class="meal-label">Dinner</div>
 
-      <div class="quick-flag">
-        <input id="qd-${dayKey}" type="checkbox"
-               ${busy ? 'checked' : ''}
-               onchange="toggleBusyDinner('${dayKey}', this.checked)">
-        <label for="qd-${dayKey}">Quick dinner mode (use quick or delivery)</label>
+      <div class="mode-chips" role="group" aria-label="Dinner type">
+        <button type="button" class="mode-chip" aria-pressed="${mode === 'regular'}"
+                onclick="setDinnerMode('${dayKey}','regular')">🎲</button>
+        <button type="button" class="mode-chip" aria-pressed="${mode === 'quick'}"
+                onclick="setDinnerMode('${dayKey}','quick')">⚡</button>
+        <button type="button" class="mode-chip" aria-pressed="${mode === 'delivery'}"
+                onclick="setDinnerMode('${dayKey}','delivery')">🚚</button>
       </div>
 
       <div class="meal-selector">
@@ -1400,6 +1526,18 @@
                 customInput.style.display = 'none';
                 updateMeal(dayKey, mealType, 'Nothing');
                 return;
+            }
+
+            // NEW: if dinner is a delivery, clear side (set to Nothing)
+            if (mealType === 'dinner' && /Delivery/i.test(value)) {
+                const card = selectElement.closest('.day-card');
+                const sideSel = card?.querySelector('select[data-meal="dinnerSide"]');
+                if (sideSel) {
+                    sideSel.value = 'Nothing';
+                    updateMeal(dayKey, 'dinnerSide', 'Nothing');
+                    const sideCustom = sideSel.parentNode.querySelector('.custom-input');
+                    if (sideCustom) sideCustom.style.display = 'none';
+                }
             }
 
             customInput.style.display = 'none';
@@ -1454,16 +1592,7 @@
             const baseLunches = lunchOptions;      // niente "Custom..."
             const baseSides = sideDishOptions;   // niente "Nothing"/"Custom..."
 
-            const perDay = weekKeys.map(k => {
-                const [, y, m, d] = k.split('-').map((v, i) => i ? Number(v) : v);
-                const date = new Date(y, m, d);
-                const isWknd = isWeekendDate(date);
-                const busy = !!busyDinnerDays[k];
-                const dinnerPool = busy
-                    ? [...quickDinnerOptions, ...deliveryOptions]
-                    : ((isWknd && isWeekendEnabled()) ? weekendOptions : dinnerOptions);
-                return { k, dinnerPool };
-            });
+            const perDay = weekKeys.map(k => ({ k, dinnerPool: getDinnerPoolForDay(k) }));
 
             const lunches = [...baseLunches];
             const sides = [...baseSides];
@@ -1731,7 +1860,9 @@
 
         // --- Local storage helpers ---
         // --- Local storage keys ---
-        let busyDinnerDays = {}; // { [dayKey]: true }
+        // --- Local storage helpers ---
+        // Replace busyDinnerDays with per-day dinner mode: 'regular' | 'quick' | 'delivery'
+        let dinnerModeByDay = {}; // { [dayKey]: 'regular' | 'quick' | 'delivery' }
 
         const LS_KEYS = {
             MEALS: 'mealPlanner.mealData',
@@ -1740,7 +1871,7 @@
             WEEK: 'mealPlanner.selectedWeek',
             THEME: 'mealPlanner.theme',
             LOCKS: 'mealPlanner.lockedDays',
-            BUSY: 'mealPlanner.busyDinner'         // ⬅️ NEW
+            DINNER_MODE: 'mealPlanner.dinnerMode' // NEW
         };
 
         // --- Local storage helpers ---
@@ -1750,7 +1881,8 @@
             localStorage.setItem(LS_KEYS.WEEKEND_WEEK, JSON.stringify(weekendPlanByWeek));
             localStorage.setItem(LS_KEYS.WEEK, selectedWeek);
             localStorage.setItem(LS_KEYS.LOCKS, JSON.stringify(lockedDays));
-            localStorage.setItem(LS_KEYS.BUSY, JSON.stringify(busyDinnerDays)); // ⬅️ NEW
+            localStorage.setItem(LS_KEYS.BUSY, JSON.stringify(busyDinnerDays));
+            localStorage.setItem(LS_KEYS.DINNER_MODE, JSON.stringify(dinnerModeByDay));
         }
 
         function loadState() {
@@ -1759,13 +1891,15 @@
                 const savedWeekends = JSON.parse(localStorage.getItem(LS_KEYS.WEEKENDS) || '{}');
                 const savedWeekendWeek = JSON.parse(localStorage.getItem(LS_KEYS.WEEKEND_WEEK) || '{}');
                 const savedLocks = JSON.parse(localStorage.getItem(LS_KEYS.LOCKS) || '{}');
-                const savedBusy = JSON.parse(localStorage.getItem(LS_KEYS.BUSY) || '{}');     // ⬅️ NEW
+                const savedBusy = JSON.parse(localStorage.getItem(LS_KEYS.BUSY) || '{}');
+                const savedMode = JSON.parse(localStorage.getItem(LS_KEYS.DINNER_MODE) || '{}');
                 // (keep your "always next week" logic)
                 mealData = savedMeals;
                 weekendPlanEnabled = savedWeekends;
                 weekendPlanByWeek = { this: !!savedWeekendWeek.this, next: !!savedWeekendWeek.next };
                 lockedDays = savedLocks;
-                busyDinnerDays = savedBusy;                                                   // ⬅️ NEW
+                busyDinnerDays = savedBusy;
+                dinnerModeByDay = savedMode;
             } catch { /* ignore */ }
         }
 
@@ -1794,15 +1928,19 @@
             const pools = getPoolsForDay(dayKey);
             const list = mealType === 'dinnerSide' ? pools.side : pools[mealType];
             if (!list || !list.length) return;
+
             const choice = list[Math.floor(Math.random() * list.length)];
             updateMeal(dayKey, mealType, choice);
 
-            // reflect in UI
-            const card = [...document.querySelectorAll('.day-card')]
-                .find(c => c.dataset.dayKey === dayKey);
+            // reflect in UI + hide custom box if shown
+            const card = [...document.querySelectorAll('.day-card')].find(c => c.dataset.dayKey === dayKey);
             if (card) {
                 const sel = card.querySelector(`select[data-meal="${mealType}"]`);
-                if (sel) sel.value = choice;
+                if (sel) {
+                    sel.value = choice;
+                    const custom = sel.parentNode.querySelector('.custom-input');
+                    if (custom) custom.style.display = 'none';
+                }
             }
         }
 
