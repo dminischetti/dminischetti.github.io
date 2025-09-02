@@ -486,6 +486,10 @@
             background: var(--accent-success);
         }
 
+        .quick-btn.reset {
+            background: var(--accent-danger);
+        }
+
         .quick-btn:hover {
             opacity: 0.9;
             transform: scale(1.02);
@@ -982,21 +986,27 @@
         }
 
         function resetWeek() {
-            const weekTitle = selectedWeek === 'this' ? 'questa settimana' : 'la prossima settimana';
-            if (!confirm(`Vuoi davvero cancellare tutte le selezioni per ${weekTitle}?`)) return;
+            if (!confirm('Are you sure?')) return;
 
-            // Azzera i 7 giorni (lun→dom) indipendentemente dal toggle weekend
             for (let i = 0; i < 7; i++) {
                 const date = getDateForIndex(i, selectedWeek);
                 const dayKey = getDayKeyFromDate(date, selectedWeek);
-                if (!mealData[dayKey]) mealData[dayKey] = { lunch: '', dinner: '', dinnerSide: '' };
-                mealData[dayKey].lunch = '';
-                mealData[dayKey].dinner = '';
-                mealData[dayKey].dinnerSide = '';
+                mealData[dayKey] = { lunch: '', dinner: '', dinnerSide: '' };
+
+                if (weekendPlanEnabled && weekendPlanEnabled[dayKey] !== undefined) {
+                    delete weekendPlanEnabled[dayKey];
+                }
             }
 
+            weekendPlanByWeek[selectedWeek] = false;
+
+            currentShareContent = '';
+            try { closeModal('shareModal'); } catch { }
+            try { closeModal('groceryModal'); } catch { }
+
             saveState();
-            generateWeek(); // rigenera UI e indicatori
+            generateWeek();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
         function startPlanning() {
