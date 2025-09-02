@@ -744,11 +744,6 @@
             transform: scale(0.97);
         }
 
-        /* reuse the existing quick-badge look for header badge */
-        .mode-badge {
-            composes: quick-badge;
-        }
-
         /* if your CSS doesn't support composes, duplicate: */
         .mode-badge {
             display: inline-block;
@@ -1163,10 +1158,6 @@
                 }
                 if (lockedDays && lockedDays[dayKey] !== undefined) {
                     delete lockedDays[dayKey];
-                }
-
-                if (busyDinnerDays && busyDinnerDays[dayKey] !== undefined) {
-                    delete busyDinnerDays[dayKey];
                 }
 
                 if (dinnerModeByDay && dinnerModeByDay[dayKey] !== undefined) {
@@ -1602,9 +1593,11 @@
             perDay.forEach(({ k, dinnerPool }, i) => {
                 const dinners = [...dinnerPool];
                 shuffleArray(dinners);
+
+                const mode = getDinnerMode(k); // ← NEW
                 mealData[k].lunch = lunches[i % lunches.length];
                 mealData[k].dinner = dinners[0];
-                mealData[k].dinnerSide = sides[i % sides.length];
+                mealData[k].dinnerSide = (mode === 'delivery') ? 'Nothing' : sides[i % sides.length]; // ← NEW
             });
 
             saveState();
@@ -1871,7 +1864,7 @@
             WEEK: 'mealPlanner.selectedWeek',
             THEME: 'mealPlanner.theme',
             LOCKS: 'mealPlanner.lockedDays',
-            DINNER_MODE: 'mealPlanner.dinnerMode' // NEW
+            DINNER_MODE: 'mealPlanner.dinnerMode'
         };
 
         // --- Local storage helpers ---
@@ -1881,7 +1874,6 @@
             localStorage.setItem(LS_KEYS.WEEKEND_WEEK, JSON.stringify(weekendPlanByWeek));
             localStorage.setItem(LS_KEYS.WEEK, selectedWeek);
             localStorage.setItem(LS_KEYS.LOCKS, JSON.stringify(lockedDays));
-            localStorage.setItem(LS_KEYS.BUSY, JSON.stringify(busyDinnerDays));
             localStorage.setItem(LS_KEYS.DINNER_MODE, JSON.stringify(dinnerModeByDay));
         }
 
@@ -1891,14 +1883,12 @@
                 const savedWeekends = JSON.parse(localStorage.getItem(LS_KEYS.WEEKENDS) || '{}');
                 const savedWeekendWeek = JSON.parse(localStorage.getItem(LS_KEYS.WEEKEND_WEEK) || '{}');
                 const savedLocks = JSON.parse(localStorage.getItem(LS_KEYS.LOCKS) || '{}');
-                const savedBusy = JSON.parse(localStorage.getItem(LS_KEYS.BUSY) || '{}');
                 const savedMode = JSON.parse(localStorage.getItem(LS_KEYS.DINNER_MODE) || '{}');
                 // (keep your "always next week" logic)
                 mealData = savedMeals;
                 weekendPlanEnabled = savedWeekends;
                 weekendPlanByWeek = { this: !!savedWeekendWeek.this, next: !!savedWeekendWeek.next };
                 lockedDays = savedLocks;
-                busyDinnerDays = savedBusy;
                 dinnerModeByDay = savedMode;
             } catch { /* ignore */ }
         }
@@ -1911,15 +1901,17 @@
         function getDinnerPoolForDay(dayKey) {
             const date = getDateFromDayKey(dayKey);
             const weekend = isWeekendDate(date) && isWeekendEnabled();
-            const busy = !!busyDinnerDays[dayKey];
-            if (busy) return [...quickDinnerOptions, ...deliveryOptions];
+            const mode = getDinnerMode(dayKey);
+
+            if (mode === 'quick') return [...quickDinnerOptions];
+            if (mode === 'delivery') return [...deliveryOptions];
             return weekend ? [...weekendOptions] : [...dinnerOptions];
         }
 
         function getPoolsForDay(dayKey) {
             return {
                 lunch: [...lunchOptions],
-                side: [...sideDishOptions], // (no "Nothing"/"Custom..." in shuffle pool)
+                side: [...sideDishOptions], // no "Nothing"/"Custom..." in shuffle pool
                 dinner: getDinnerPoolForDay(dayKey)
             };
         }
@@ -1942,6 +1934,34 @@
                     if (custom) custom.style.display = 'none';
                 }
             }
+
+            // if dinner became a Delivery, clear side
+            if (mealType === 'dinner' && /Delivery/i.test(choice)) {
+                updateMeal(dayKey, 'dinnerSide', 'Nothing');
+                const card = [...document.querySelectorAll('.day-card')].find(c => c.dataset.dayKey === dayKey);
+                const sideSel = card?.querySelector('select[data-meal="dinnerSide"]');
+                if (sideSel) sideSel.value = 'Nothing';
+            }
+        }
+
+        function createWeekendToggleSection() {
+            const wrap = document.createElement('div');
+            wrap.className = 'weekend-toggle-section';
+            const enabled = isWeekendEnabled();
+            wrap.innerHTML = `
+    <div class="weekend-toggle-label">
+      Weekend planning is <strong>${enabled ? 'on' : 'off'}</strong> and applies to Saturday & Sunday
+    </div>
+    <div class="plan-toggle" role="button" tabindex="0" aria-pressed="${enabled ? 'true' : 'false'}" onclick="toggleWeekendPlanningForWeek()">
+      <span>Plan meals for weekend</span>
+      <div class="toggle-switch ${enabled ? 'active' : ''}"></div>
+    </div>
+  `;
+            const btn = wrap.querySelector('.plan-toggle');
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleWeekendPlanningForWeek(); }
+            });
+            return wrap;
         }
 
         function toggleBusyDinner(dayKey, isBusy) {
@@ -1984,25 +2004,6 @@
             }
         }
 
-        function createWeekendToggleSection() {
-            const wrap = document.createElement('div');
-            wrap.className = 'weekend-toggle-section';
-            const enabled = isWeekendEnabled();
-            wrap.innerHTML = `
-    <div class="weekend-toggle-label">
-      Weekend planning is <strong>${enabled ? 'on' : 'off'}</strong> and applies to Saturday & Sunday
-    </div>
-    <div class="plan-toggle" role="button" tabindex="0" aria-pressed="${enabled ? 'true' : 'false'}" onclick="toggleWeekendPlanningForWeek()">
-      <span>Plan meals for weekend</span>
-      <div class="toggle-switch ${enabled ? 'active' : ''}"></div>
-    </div>
-  `;
-            const btn = wrap.querySelector('.plan-toggle');
-            btn.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleWeekendPlanningForWeek(); }
-            });
-            return wrap;
-        }
     </script>
 </body>
 
