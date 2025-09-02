@@ -993,8 +993,8 @@
 
         function createDayCard(dayName, date, isWeekend, dayKey) {
             const card = document.createElement('div');
+            card.dataset.dayKey = dayKey;
             const data = mealData[dayKey];
-            const isPlanEnabled = weekendPlanEnabled[dayKey];
             const hasMeals = data.lunch || data.dinner;
             card.className = `day-card ${isWeekend ? 'weekend' : ''} ${hasMeals ? 'has-meals' : ''} ${(isWeekend && !isWeekendEnabled()) ? 'optional' : ''}`;
 
@@ -1110,12 +1110,6 @@
             `;
         }
 
-        function toggleWeekendPlanning(dayKey) {
-            weekendPlanEnabled[dayKey] = !weekendPlanEnabled[dayKey];
-            saveState();
-            generateWeek();
-        }
-
         function handleMealChange(dayKey, mealType, selectElement) {
             const value = selectElement.value;
             const customInput = selectElement.parentNode.querySelector('.custom-input');
@@ -1162,9 +1156,7 @@
         }
 
         function extractDayKeyFromCard(card) {
-            const index = Array.from(card.parentNode.children).indexOf(card);
-            const date = getDateForIndex(index, selectedWeek);
-            return getDayKeyFromDate(date, selectedWeek);
+            return card.dataset.dayKey;
         }
 
         function shuffleWeek() {
@@ -1448,10 +1440,20 @@
         }
 
         // --- Local storage helpers ---
+        // --- Local storage keys ---
+        const LS_KEYS = {
+            MEALS: 'mealPlanner.mealData',
+            WEEKENDS: 'mealPlanner.weekendPlan',           // legacy per-day (kept for compatibility)
+            WEEKEND_WEEK: 'mealPlanner.weekendPlanByWeek', // NEW per-week toggle
+            WEEK: 'mealPlanner.selectedWeek',
+            THEME: 'theme'
+        };
+
+        // --- Local storage helpers ---
         function saveState() {
             localStorage.setItem(LS_KEYS.MEALS, JSON.stringify(mealData));
             localStorage.setItem(LS_KEYS.WEEKENDS, JSON.stringify(weekendPlanEnabled)); // legacy
-            localStorage.setItem(LS_KEYS.WEEKEND_WEEK, JSON.stringify(weekendPlanByWeek)); // NEW
+            localStorage.setItem(LS_KEYS.WEEKEND_WEEK, JSON.stringify(weekendPlanByWeek)); // new
             localStorage.setItem(LS_KEYS.WEEK, selectedWeek);
         }
 
@@ -1459,20 +1461,13 @@
             try {
                 const savedMeals = JSON.parse(localStorage.getItem(LS_KEYS.MEALS) || '{}');
                 const savedWeekends = JSON.parse(localStorage.getItem(LS_KEYS.WEEKENDS) || '{}'); // legacy
-                const savedWeekendWeek = JSON.parse(localStorage.getItem(LS_KEYS.WEEKEND_WEEK) || '{}'); // NEW
+                const savedWeekendWeek = JSON.parse(localStorage.getItem(LS_KEYS.WEEKEND_WEEK) || '{}'); // new
                 const savedWeek = localStorage.getItem(LS_KEYS.WEEK);
                 if (savedWeek === 'this' || savedWeek === 'next') selectedWeek = savedWeek;
                 mealData = savedMeals;
                 weekendPlanEnabled = savedWeekends;
                 weekendPlanByWeek = { this: !!savedWeekendWeek.this, next: !!savedWeekendWeek.next };
             } catch { /* ignore */ }
-        }
-
-        function saveState() {
-            localStorage.setItem(LS_KEYS.MEALS, JSON.stringify(mealData));
-            localStorage.setItem(LS_KEYS.WEEKENDS, JSON.stringify(weekendPlanEnabled));
-            localStorage.setItem(LS_KEYS.WEEKEND_WEEK, JSON.stringify(weekendPlanByWeek));
-            localStorage.setItem(LS_KEYS.WEEK, selectedWeek);
         }
 
         function createWeekendToggleSection() {
