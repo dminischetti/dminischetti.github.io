@@ -9,7 +9,7 @@
 <meta name="color-scheme" content="light dark">
 <title>Weekly Meal Planner</title>
 <style>
-/* --- base (come versione precedente patchata) --- */
+/* --- base --- */
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 :root{
   --bg-primary:#f2f2f7;--bg-secondary:#fff;--bg-tertiary:#f2f2f7;
@@ -18,7 +18,7 @@
   --accent-primary:#007aff;--accent-success:#34c759;--accent-warning:#ff9500;--accent-danger:#ff3b30;--accent-purple:#af52de;
   --modal-backdrop:rgba(0,0,0,.4);--shadow-sm:0 1px 3px rgba(0,0,0,.12);--shadow-md:0 4px 6px rgba(0,0,0,.15);
   --toggle-bg:#e5e5ea;--input-bg:#fff;--safe-area-top:env(safe-area-inset-top);--safe-area-bottom:env(safe-area-inset-bottom);
-  --active-bg:#f7faff; /* HIGHLIGHT giorno attivo (chiaro) */
+  --active-bg:#f7faff; /* highlight giorno attivo (chiaro) */
 }
 [data-theme="dark"]{
   --bg-primary:#000;--bg-secondary:#1c1c1e;--bg-tertiary:#2c2c2e;
@@ -26,10 +26,12 @@
   --border-color:#38383a;--border-secondary:#48484a;
   --accent-primary:#0a84ff;--accent-success:#30d158;--accent-warning:#ff9f0a;--accent-danger:#ff453a;--accent-purple:#bf5af2;
   --modal-backdrop:rgba(0,0,0,.8);--toggle-bg:#38383a;--input-bg:#2c2c2e;
-  --active-bg:#1f2733; /* HIGHLIGHT giorno attivo (scuro) */
+  --active-bg:#1f2733; /* highlight giorno attivo (scuro) */
 }
 body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue',sans-serif;background:var(--bg-primary);min-height:100vh;color:var(--text-primary);-webkit-font-smoothing:antialiased;overscroll-behavior:none}
 .container{max-width:100%;background:var(--bg-primary);min-height:100vh;padding-bottom:calc(90px + var(--safe-area-bottom))}
+
+/* Header */
 .header{background:var(--bg-secondary);padding-top:var(--safe-area-top);position:sticky;top:0;z-index:100;border-bottom:.5px solid var(--border-color);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
 .header-content{padding:12px 16px}.header-top{display:flex;justify-content:space-between;align-items:center}
 .header-title{font-size:20px;font-weight:600;letter-spacing:-.5px}.header-actions{display:flex;gap:8px;align-items:center}
@@ -37,6 +39,16 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .week-btn{padding:0 12px;border:none;background:transparent;color:var(--text-secondary);font-size:13px;font-weight:600;border-radius:7px;transition:.2s}
 .week-btn.active{background:var(--bg-secondary);color:var(--text-primary);box-shadow:var(--shadow-sm)}
 .theme-btn{width:32px;height:32px;border:none;background:transparent;font-size:20px;display:flex;align-items:center;justify-content:center;border-radius:16px}
+
+/* Weekend toggle (ripristinato) */
+.weekend-bar{background:var(--bg-secondary);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-top:.5px solid var(--border-color)}
+.weekend-label{font-size:15px;color:var(--text-primary)}
+.ios-switch{width:51px;height:31px;background:var(--toggle-bg);border-radius:16px;position:relative;transition:background .3s}
+.ios-switch.active{background:var(--accent-success)}
+.ios-switch::after{content:'';position:absolute;width:27px;height:27px;background:#fff;border-radius:14px;top:2px;left:2px;transition:transform .3s;box-shadow:0 3px 8px rgba(0,0,0,.15)}
+.ios-switch.active::after{transform:translateX(20px)}
+
+/* Days list */
 .days-list{background:var(--bg-primary)}
 .day-cell{background:var(--bg-secondary);margin-bottom:.5px;transition:background .2s}
 .day-cell.weekend{background:var(--bg-tertiary)}
@@ -53,6 +65,8 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .badge-quick{background:var(--accent-warning);color:#fff}.badge-delivery{background:var(--accent-purple);color:#fff}
 .lock-icon{font-size:14px;color:var(--text-tertiary)}.chevron{font-size:14px;color:var(--text-tertiary);transition:transform .3s;margin-left:4px}
 .day-cell.expanded .chevron{transform:rotate(180deg)}
+
+/* Meals content */
 .meals-content{max-height:0;overflow:hidden;transition:max-height .3s ease;background:var(--bg-secondary)}
 .day-cell.expanded .meals-content{max-height:1000px}
 .meal-group{padding:16px;border-bottom:.5px solid var(--border-secondary)}.meal-group:last-child{border-bottom:none}
@@ -67,15 +81,21 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .mode-pill.active{background:var(--accent-primary);color:#fff;border-color:var(--accent-primary)}
 .mode-pill.active.quick{background:var(--accent-warning);border-color:var(--accent-warning)}
 .mode-pill.active.delivery{background:var(--accent-purple);border-color:var(--accent-purple)}
+
+/* Day actions */
 .day-actions{padding:12px 16px;background:var(--bg-tertiary);display:flex;gap:8px}
 .action-btn{flex:1;height:36px;border:1px solid var(--border-secondary);background:var(--bg-secondary);border-radius:10px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:4px}
 .action-btn:active{background:var(--bg-tertiary);transform:scale(.98)}
 .action-btn.locked{background:var(--accent-danger);color:#fff;border-color:var(--accent-danger)}
+
+/* Bottom tab bar */
 .tab-bar{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);padding-bottom:var(--safe-area-bottom);border-top:.5px solid var(--border-color);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:1000}
 .tab-bar-content{display:flex;padding:8px 0}
 .tab-btn{flex:1;padding:8px;border:none;background:transparent;display:flex;flex-direction:column;align-items:center;gap:4px}
 .tab-btn:active{opacity:.6}.tab-icon{font-size:24px}.tab-label{font-size:10px;font-weight:500}
 .tab-btn.shuffle{color:var(--accent-warning)}.tab-btn.grocery{color:var(--accent-success)}.tab-btn.share{color:var(--accent-primary)}.tab-btn.clear{color:var(--accent-danger)}
+
+/* Modal */
 .ios-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:var(--modal-backdrop);display:none;z-index:2000}
 .ios-modal.show{display:block}
 .ios-modal-content{position:absolute;bottom:0;left:0;right:0;background:var(--bg-secondary);border-radius:12px 12px 0 0;max-height:90vh;transform:translateY(100%);transition:transform .3s ease}
@@ -88,26 +108,38 @@ body{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display'
 .modal-btn{flex:1;height:50px;border:none;border-radius:12px;font-size:17px;font-weight:600}
 .modal-btn.primary{background:var(--accent-primary);color:#fff}.modal-btn.secondary{background:var(--bg-tertiary);color:var(--text-primary)}
 .modal-btn:active{opacity:.8}
-.grocery-section{margin-bottom:24px}.grocery-title{font-size:13px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
+
+/* Grocery */
+.grocery-section{margin-bottom:24px}
+.grocery-title{font-size:13px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
 .grocery-item{display:flex;align-items:center;padding:10px 0;border-bottom:.5px solid var(--border-secondary)}
-.grocery-item:last-child{border-bottom:none}.grocery-check{width:22px;height:22px;margin-right:12px;accent-color:var(--accent-primary)}
+.grocery-item:last-child{border-bottom:none}
+.grocery-check{width:22px;height:22px;margin-right:12px;accent-color:var(--accent-primary)}
+
+/* Send modal text */
 .share-text{background:var(--bg-tertiary);border-radius:10px;padding:12px;font-family:'SF Mono',monospace;font-size:13px;line-height:1.5;white-space:pre-wrap;word-break:break-word}
-.empty-state{text-align:center;padding:48px 24px;color:var(--text-tertiary)}.empty-icon{font-size:48px;margin-bottom:12px;opacity:.5}
-.share-text,.search-input,.picker-option,input.meal-input{-webkit-user-select:text;user-select:text}
-@keyframes shuffle-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}.shuffling{animation:shuffle-spin .5s ease}
+
+/* Picker */
 .meal-picker{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-radius:12px 12px 0 0;max-height:60vh;transform:translateY(100%);transition:transform .3s;z-index:3000;display:none}
 .meal-picker.show{display:block;transform:translateY(0)}
 .picker-header{padding:16px;border-bottom:.5px solid var(--border-secondary);display:flex;justify-content:space-between;align-items:center}
-.picker-title{font-size:17px;font-weight:600}.picker-done{color:var(--accent-primary);font-size:17px;font-weight:600}
-.picker-search{display:flex;gap:8px;padding:10px 16px;border-bottom:.5px solid var(--border-secondary);background:var(--bg-secondary)}
-.picker-search input{flex:1;height:40px;border:1px solid var(--border-secondary);border-radius:10px;padding:0 12px;background:var(--input-bg);color:var(--text-primary)}
-.picker-search button{height:40px;padding:0 14px;border:none;border-radius:10px;background:var(--accent-primary);color:#fff;font-weight:600}
-.picker-search button:disabled{opacity:.5}
+.picker-title{font-size:17px;font-weight:600}
+.picker-done{color:var(--accent-primary);font-size:17px;font-weight:600}
+.picker-custom{display:none;gap:8px;padding:10px 16px;border-bottom:.5px solid var(--border-secondary);background:var(--bg-secondary)}
+.picker-custom.show{display:flex}
+.picker-custom input{flex:1;height:40px;border:1px solid var(--border-secondary);border-radius:10px;padding:0 12px;background:var(--input-bg);color:var(--text-primary)}
+.picker-custom button{height:40px;padding:0 14px;border:none;border-radius:10px;background:var(--accent-primary);color:#fff;font-weight:600}
+.picker-custom button:disabled{opacity:.5}
 .picker-options{max-height:300px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:var(--safe-area-bottom)}
 .picker-option{padding:14px 16px;border-bottom:.5px solid var(--border-secondary);font-size:17px}
 .picker-option:active{background:var(--bg-tertiary)}
 .picker-option.selected{color:var(--accent-primary)}
 .picker-option.selected::after{content:'✓';float:right;color:var(--accent-primary)}
+.picker-option.special{color:var(--accent-primary);font-weight:600}
+
+/* Utility */
+.share-text,.picker-option,input.meal-input,.picker-custom input{-webkit-user-select:text;user-select:text}
+@keyframes shuffle-spin{from{transform:rotate(0)}to{transform:rotate(360deg)}}.shuffling{animation:shuffle-spin .5s ease}
 input,textarea,button{-webkit-appearance:none;appearance:none}
 .no-scroll{overflow:hidden;position:fixed;width:100%}
 :focus-visible{outline:2px solid var(--accent-primary);outline-offset:2px}
@@ -135,8 +167,8 @@ input,textarea,button{-webkit-appearance:none;appearance:none}
     <!-- Days -->
     <div class="days-list" id="daysList"></div>
 
-    <!-- Weekend toggle spostato in fondo -->
-    <div class="weekend-bar" style="background:var(--bg-secondary);padding:12px 16px;display:flex;justify-content:space-between;align-items:center;border-top:.5px solid var(--border-color)">
+    <!-- Weekend toggle in fondo -->
+    <div class="weekend-bar">
       <span class="weekend-label" id="weekendLabel">Include weekend meals</span>
       <div class="ios-switch" id="weekendSwitch" role="switch" aria-checked="false" aria-labelledby="weekendLabel" tabindex="0" onclick="toggleWeekend()"></div>
     </div>
@@ -166,11 +198,13 @@ input,textarea,button{-webkit-appearance:none;appearance:none}
       <span class="picker-title" id="pickerTitle">Select Meal</span>
       <button class="picker-done" onclick="closePicker()">Done</button>
     </div>
-    <!-- nuovo: input per custom + filtro -->
-    <div class="picker-search">
-      <input id="pickerSearch" type="text" placeholder="Type to add or filter… (Enter to use)">
+
+    <!-- appare SOLO se tocchi “Add custom…” -->
+    <div class="picker-custom" id="pickerCustomRow">
+      <input id="pickerCustomInput" type="text" placeholder="Type custom meal… (Enter to use)">
       <button id="pickerUseBtn" disabled>Use</button>
     </div>
+
     <div class="picker-options" id="pickerOptions"></div>
   </div>
 
@@ -201,26 +235,33 @@ input,textarea,button{-webkit-appearance:none;appearance:none}
   </div>
 
 <script>
-/* --- dati & mapping (invariati) --- */
+/* =========================
+   CONFIG: Costanti editabili
+   ========================= */
 const meals={lunch:["Ravioli burro e salvia","Spaghetti al limone","Pasta e ceci","Pasta col tonno","Pasta sugo tonno","Piadine prosciutto provolone","Uova fritte","Pasta al pesto","Pasta coi pomodorini","Lenticchie","Spaghetti aglio e olio","Carbonara","Frittata di pasta","Pasta e fagioli"],dinner:{regular:["Salmone col riso","Frittata di zucchine","Polpette","Pollo al limone","Merluzzo","Hamburger","Cotolette","Salsicce","Minestrone","Pollo al forno","Scaloppine al limone","Caprese"],quick:["Cordon bleu","Würstel","Dumplings","Fish sticks","Pollo allo spiedo"],delivery:["Pizza Delivery","Greco Delivery","Chinese Delivery","Vietnamese Delivery","Ramen Delivery"],weekend:["Pasta al forno","Parmigiana di melanzane","Zucchine ripiene","Lasagna","Spezzatino con patate","Tortellini con la panna","Tortellini col sugo","Pasta col ragù","Polpettone","Scrimpelle mbuss","Polenta col sugo","Cannelloni","Bistecca"],other:["Colacena"]},side:["Purè di patate","Broccoli al vapore","Insalata di pomodori","Tater tots","Barbabietole","Insalata di mais","Patate lesse","Carote al forno","Carote a insalata","Zucchine trifolate","Insalata di cetrioli","Insalata mista"]};
-const ingredients={/* … identico alla versione precedente … */ 
+
+const ingredients={/* … identico alla versione precedente … */
 "Ravioli burro e salvia":["Ravioli","Burro","Salvia","Parmigiano"],"Spaghetti al limone":["Spaghetti","Limone","Burro","Parmigiano"],"Pasta e ceci":["Pasta","Ceci","Cipolla","Rosmarino"],"Pasta col tonno":["Pasta","Tonno","Salsa pomodoro"],"Pasta sugo tonno":["Pasta","Tonno","Salsa pomodoro"],"Piadine prosciutto provolone":["Piadina","Prosciutto","Provolone"],"Uova fritte":["Uova","Olio"],"Pasta al pesto":["Pasta","Pesto","Pomodorini"],"Pasta coi pomodorini":["Pasta","Pomodorini","Aglio","Basilico"],"Lenticchie":["Lenticchie","Carote","Sedano","Cipolla"],"Spaghetti aglio e olio":["Spaghetti","Aglio","Peperoncino"],"Carbonara":["Spaghetti","Uova","Pancetta","Pecorino"],"Frittata di pasta":["Pasta avanzata","Uova","Formaggio"],"Pasta e fagioli":["Pasta","Fagioli","Pancetta"],"Salmone col riso":["Salmone","Riso"],"Frittata di zucchine":["Uova","Zucchine","Parmigiano"],"Polpette":["Carne macinata","Pangrattato","Uova"],"Pollo al limone":["Petto di pollo","Limone","Farina"],"Merluzzo":["Merluzzo","Olio","Limone"],"Hamburger":["Pane hamburger","Carne","Formaggio","Lattuga"],"Cotolette":["Cotolette","Pangrattato","Uova"],"Salsicce":["Salsicce"],"Minestrone":["Verdure miste","Pasta","Fagioli"],"Pollo al forno":["Pollo","Patate","Rosmarino"],"Scaloppine al limone":["Scaloppine","Limone","Farina"],"Caprese":["Mozzarella","Pomodori","Basilico"],"Cordon bleu":["Cordon bleu"],"Würstel":["Würstel"],"Dumplings":["Dumplings"],"Fish sticks":["Fish sticks"],"Pollo allo spiedo":["Pollo intero"],"Pasta al forno":["Pasta","Sugo","Mozzarella","Besciamella"],"Parmigiana di melanzane":["Melanzane","Sugo","Mozzarella"],"Zucchine ripiene":["Zucchine","Carne macinata","Pane"],"Lasagna":["Pasta lasagna","Ragù","Besciamella"],"Spezzatino con patate":["Carne","Patate","Cipolla","Carote"],"Tortellini con la panna":["Tortellini","Panna"],"Tortellini col sugo":["Tortellini","Sugo"],"Pasta col ragù":["Pasta","Ragù"],"Polpettone":["Carne macinata","Uova","Pancetta"],"Scrimpelle mbuss":["Uova","Farina","Latte","Brodo"],"Polenta col sugo":["Polenta","Sugo con salsicce"],"Cannelloni":["Cannelloni","Ricotta","Spinaci"],"Bistecca":["Bistecca"],"Purè di patate":["Patate","Burro","Latte"],"Broccoli al vapore":["Broccoli"],"Insalata di pomodori":["Pomodori","Cipolla","Basilico"],"Tater tots":["Tater tots"],"Barbabietole":["Barbabietole"],"Insalata di mais":["Mais"],"Patate lesse":["Patate"],"Carote al forno":["Carote"],"Carote a insalata":["Carote","Limone"],"Zucchine trifolate":["Zucchine","Aglio"],"Insalata di cetrioli":["Cetrioli","Yogurt"],"Insalata mista":["Lattuga","Pomodorini","Cetriolo"],"Colacena":["Latte","Cereali"]};
 
+const cats={'Proteins':['Pollo','Carne','Salmone','Merluzzo','Pancetta','Prosciutto'],'Dairy':['Mozzarella','Parmigiano','Provolone','Formaggio','Ricotta','Burro','Latte'],'Carbs':['Pasta','Spaghetti','Ravioli','Tortellini','Riso','Pane'],'Vegetables':['Pomodori','Zucchine','Melanzane','Carote','Patate'],'Other':[]};
+
+/* =========================
+   Stato & runtime
+   ========================= */
 let data={},week='next',weekendOn={},locked={},modes={},currentPicker=null,shareContent='',lastOpen=null,untrapPicker=null;
-let pickerAllItems=[]; // per filtro
 
 function init(){
   load(); syncWeekToggle(); render(); updateWeekend(); setTheme();
   addSwipeToDismiss(document.getElementById('mealPicker'), closePicker);
   addSwipeToDismiss(document.querySelector('#groceryModal .ios-modal-content'),()=>closeModal('groceryModal'));
   addSwipeToDismiss(document.querySelector('#shareModal .ios-modal-content'),()=>closeModal('shareModal'));
-  // picker events
-  document.getElementById('pickerUseBtn').addEventListener('click', useCustomFromInput);
-  const search = document.getElementById('pickerSearch');
-  search.addEventListener('input', onPickerSearch);
-  search.addEventListener('keydown', e=>{
-    if(e.key==='Enter'){ e.preventDefault(); useCustomFromInput(); }
-  });
+
+  // custom input handlers (mostra tastiera solo su richiesta)
+  const useBtn=document.getElementById('pickerUseBtn');
+  const input=document.getElementById('pickerCustomInput');
+  useBtn.addEventListener('click', useCustomFromInput);
+  input.addEventListener('input', e=>{ useBtn.disabled = e.target.value.trim().length===0; });
+  input.addEventListener('keydown', e=>{ if(e.key==='Enter'){ e.preventDefault(); useCustomFromInput(); } });
 }
 
 function syncWeekToggle(){
@@ -266,6 +307,7 @@ document.getElementById('weekendSwitch').addEventListener('keydown',e=>{
   if(e.key==='Enter'||e.key===' '){ e.preventDefault(); toggleWeekend(); }
 },{passive:true});
 
+/* Render */
 function render(){
   const list=document.getElementById('daysList');
   const days=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
@@ -354,16 +396,19 @@ function renderMeals(k,isWeekend){
     </div>`;
 }
 
-/* Picker: click opzioni + tastiera */
+/* Picker: lista + “Add custom…” */
 document.getElementById('pickerOptions').addEventListener('click',e=>{
-  const opt=e.target.closest('.picker-option'); if(!opt) return; selectMeal(opt.dataset.value);
+  const opt=e.target.closest('.picker-option'); if(!opt) return;
+  const val=opt.dataset.value;
+  if(val==='__custom__'){ showCustomInput(); return; }
+  selectMeal(val);
 });
 document.getElementById('pickerOptions').addEventListener('keydown',e=>{
   const opts=Array.from(e.currentTarget.querySelectorAll('.picker-option'));
   const i=opts.indexOf(document.activeElement);
   if(e.key==='ArrowDown'){(opts[i+1]||opts[0])?.focus();e.preventDefault();}
   if(e.key==='ArrowUp'){(opts[i-1]||opts.at(-1))?.focus();e.preventDefault();}
-  if(e.key==='Enter'||e.key===' '){const v=document.activeElement?.dataset.value; if(v) selectMeal(v);}
+  if(e.key==='Enter'||e.key===' '){const v=document.activeElement?.dataset.value; if(v){ if(v==='__custom__') showCustomInput(); else selectMeal(v); }}
 });
 
 function trapFocus(container){
@@ -383,34 +428,33 @@ function openPicker(k,type){
   const picker=document.getElementById('mealPicker');
   const title=document.getElementById('pickerTitle');
   const options=document.getElementById('pickerOptions');
-  const search=document.getElementById('pickerSearch');
-  const useBtn=document.getElementById('pickerUseBtn');
 
   title.textContent=`Select ${type.charAt(0).toUpperCase()+type.slice(1)}`;
 
-  // pool base + None per tutti i tipi
+  // pool base; “None” va in fondo
   let items=[];
-  if(type==='lunch'){ items=meals.lunch; }
+  if(type==='lunch'){ items=meals.lunch.slice(); }
   else if(type==='dinner'){
     const mode=modes[k]||'regular'; const isWeekend=getIndex(k)>=5;
-    items = mode==='quick'?meals.dinner.quick
-          : mode==='delivery'?meals.dinner.delivery
-          : isWeekend?meals.dinner.weekend
-          : meals.dinner.regular;
-    if(!isWeekend && mode==='regular'){ items=[...items, ...meals.dinner.other]; }
-  } else { items=meals.side; }
-  items = ['None', ...items];
+    items = mode==='quick'?meals.dinner.quick.slice()
+          : mode==='delivery'?meals.dinner.delivery.slice()
+          : isWeekend?meals.dinner.weekend.slice()
+          : meals.dinner.regular.slice();
+    if(!isWeekend && mode==='regular'){ items.push(...meals.dinner.other); }
+  } else { items=meals.side.slice(); }
+  items.push('None'); // ultimo
 
-  pickerAllItems = items.slice(); // salva per filtro
   const current=(data[k]||{})[type];
-  renderPickerOptions(pickerAllItems, current);
+  renderPickerOptions(items, current);
+
+  // reset custom row (nascosta finché non tocchi “Add custom…”)
+  const row=document.getElementById('pickerCustomRow');
+  row.classList.remove('show');
+  document.getElementById('pickerCustomInput').value='';
+  document.getElementById('pickerUseBtn').disabled=true;
 
   picker.classList.add('show'); document.body.classList.add('no-scroll');
   untrapPicker=trapFocus(picker);
-  document.querySelector('.picker-done')?.focus();
-
-  // reset barra ricerca
-  search.value=''; useBtn.disabled=true;
 
   const selected = options.querySelector('.picker-option.selected');
   if(selected) options.scrollTop = selected.offsetTop - 100;
@@ -418,26 +462,36 @@ function openPicker(k,type){
 
 function renderPickerOptions(items, current){
   const options=document.getElementById('pickerOptions');
-  options.innerHTML = items.map(item=>`<div class="picker-option ${item===current?'selected':''}" data-value="${item}" tabindex="0">${item}</div>`).join('');
+  const addCustom = `<div class="picker-option special" data-value="__custom__" tabindex="0">➕ Add custom…</div>`;
+  const list = items.map(item=>`<div class="picker-option ${item===current?'selected':''}" data-value="${item}" tabindex="0">${item}</div>`).join('');
+  options.innerHTML = addCustom + list;
 }
 
-function onPickerSearch(e){
-  const q=e.target.value.trim().toLowerCase();
-  const useBtn=document.getElementById('pickerUseBtn');
-  const current=(data[currentPicker?.key]||{})[currentPicker?.type||'']||'';
-  const filtered = pickerAllItems.filter(x=>x.toLowerCase().includes(q));
-  renderPickerOptions(filtered.length?filtered:pickerAllItems, current);
-  useBtn.disabled = q.length===0;
+function showCustomInput(){
+  const row=document.getElementById('pickerCustomRow');
+  row.classList.add('show');
+  setTimeout(()=>document.getElementById('pickerCustomInput').focus(),0);
 }
 
 function useCustomFromInput(){
-  const input=document.getElementById('pickerSearch');
+  const input=document.getElementById('pickerCustomInput');
   const txt=input.value.trim();
   if(!txt || !currentPicker) return;
-  // salva come valore libero
   if(!data[currentPicker.key]) data[currentPicker.key]={lunch:'',dinner:'',side:''};
   data[currentPicker.key][currentPicker.type]= (txt.toLowerCase()==='none') ? '' : txt;
   if(currentPicker.type==='dinner' && /delivery/i.test(txt)) { data[currentPicker.key].side=''; }
+  save(); render(); closePicker();
+}
+
+function selectMeal(value){
+  if(!currentPicker) return;
+  const {key,type}=currentPicker;
+  if(!data[key]) data[key]={lunch:'',dinner:'',side:''};
+  if(value==='None'){ data[key][type]=''; }
+  else{
+    data[key][type]=value;
+    if(type==='dinner' && /delivery/i.test(value)) data[key].side='';
+  }
   save(); render(); closePicker();
 }
 
@@ -489,7 +543,7 @@ function setMode(k,mode){
   save(); render();
 }
 
-/* Shuffle con anti-doppioni */
+/* Shuffle con anti-doppioni leggeri */
 function pickDifferent(pool,prev){ if(!pool.length) return ''; if(pool.length===1) return pool[0];
   let choice,tries=0; do{ choice=pool[Math.floor(Math.random()*pool.length)]; tries++; } while(choice===prev && tries<6);
   return choice;
@@ -536,7 +590,6 @@ function showGrocery(){
   }));
   if(Object.keys(items).length===0){ list.innerHTML='<div class="empty-state"><div class="empty-icon">🛒</div><p>No meals planned yet</p></div>'; }
   else{
-    const cats={'Proteins':['Pollo','Carne','Salmone','Merluzzo','Pancetta','Prosciutto'],'Dairy':['Mozzarella','Parmigiano','Provolone','Formaggio','Ricotta','Burro','Latte'],'Carbs':['Pasta','Spaghetti','Ravioli','Tortellini','Riso','Pane'],'Vegetables':['Pomodori','Zucchine','Melanzane','Carote','Patate'],'Other':[]};
     const organized={};
     Object.entries(items).forEach(([ing,count])=>{
       let added=false;
@@ -605,12 +658,21 @@ document.addEventListener('keydown',e=>{
   else if(grocery.classList.contains('show')) closeModal('groceryModal');
   else if(share.classList.contains('show')) closeModal('shareModal');
 });
+function addSwipeToDismiss(panel,onDismiss){
+  if(!panel) return;
+  let startY=null,deltaY=0;
+  panel.addEventListener('touchstart',e=>{startY=e.touches[0].clientY;deltaY=0;},{passive:true});
+  panel.addEventListener('touchmove',e=>{ if(startY===null)return; deltaY=e.touches[0].clientY-startY; if(deltaY>0) panel.style.transform=`translateY(${Math.min(deltaY,140)}px)`; },{passive:true});
+  panel.addEventListener('touchend',()=>{ if(deltaY>90) onDismiss(); panel.style.transform=''; startY=null; deltaY=0; },{passive:true});
+}
 
+/* Date utils */
 function getKey(index,startRef){ const date=getDate(index,startRef); return `${week}-${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`; }
 function getIndex(key){ const p=key.split('-'); const date=new Date(p[1],p[2],p[3]); const start=getWeekStart(); return Math.floor((date-start)/86400000); }
 function getDate(index,startRef){ const start=startRef||getWeekStart(); const d=new Date(start); d.setDate(start.getDate()+index); return d; }
 function getWeekStart(){ const now=new Date(); const mondayIndex=(now.getDay()+6)%7; const start=new Date(now); start.setDate(now.getDate()-mondayIndex+(week==='next'?7:0)); start.setHours(0,0,0,0); return start; }
 
+/* Storage */
 function save(){
   localStorage.setItem('mealData',JSON.stringify(data));
   localStorage.setItem('mealWeek',week);
@@ -628,14 +690,6 @@ function load(){
     modes=JSON.parse(localStorage.getItem('mealModes')||'{}');
     lastOpen=localStorage.getItem('mealLastOpen')||null;
   }catch{}
-}
-
-function addSwipeToDismiss(panel,onDismiss){
-  if(!panel) return;
-  let startY=null,deltaY=0;
-  panel.addEventListener('touchstart',e=>{startY=e.touches[0].clientY;deltaY=0;},{passive:true});
-  panel.addEventListener('touchmove',e=>{ if(startY===null)return; deltaY=e.touches[0].clientY-startY; if(deltaY>0) panel.style.transform=`translateY(${Math.min(deltaY,140)}px)`; },{passive:true});
-  panel.addEventListener('touchend',()=>{ if(deltaY>90) onDismiss(); panel.style.transform=''; startY=null; deltaY=0; },{passive:true});
 }
 
 document.addEventListener('touchmove',()=>{}, {passive:true});
