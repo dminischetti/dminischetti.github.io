@@ -275,6 +275,10 @@
             background: var(--accent-warning);
         }
 
+        .weekend.optional .day-indicator {
+            opacity: 0 !important;
+        }
+
         .day-name {
             font-size: 17px;
             font-weight: 600;
@@ -910,8 +914,26 @@
         function isWeekendEnabled() {
             return !!weekendPlanByWeek[selectedWeek];
         }
+
         function toggleWeekendPlanningForWeek() {
-            weekendPlanByWeek[selectedWeek] = !isWeekendEnabled();
+            const turningOn = !isWeekendEnabled();
+            weekendPlanByWeek[selectedWeek] = turningOn;
+
+            // OPTIONAL: clear meals for Sat/Sun when turning off
+            if (!turningOn) {
+                // get Sat/Sun dates for the selected week
+                const sat = getDateForIndex(5, selectedWeek);
+                const sun = getDateForIndex(6, selectedWeek);
+                [sat, sun].forEach(d => {
+                    const k = getDayKeyFromDate(d, selectedWeek);
+                    if (mealData[k]) {
+                        mealData[k].lunch = '';
+                        mealData[k].dinner = '';
+                        mealData[k].dinnerSide = '';
+                    }
+                });
+            }
+
             saveState();
             generateWeek();
         }
@@ -1473,14 +1495,16 @@
         function createWeekendToggleSection() {
             const wrap = document.createElement('div');
             wrap.className = 'weekend-toggle-section';
+            const enabled = isWeekendEnabled();
             wrap.innerHTML = `
-    <div class="weekend-toggle-label">Weekend planning applies to Saturday & Sunday</div>
-    <div class="plan-toggle" role="button" tabindex="0" aria-pressed="${isWeekendEnabled() ? 'true' : 'false'}" onclick="toggleWeekendPlanningForWeek()">
+    <div class="weekend-toggle-label">
+      Weekend planning is <strong>${enabled ? 'on' : 'off'}</strong> and applies to Saturday & Sunday
+    </div>
+    <div class="plan-toggle" role="button" tabindex="0" aria-pressed="${enabled ? 'true' : 'false'}" onclick="toggleWeekendPlanningForWeek()">
       <span>Plan meals for weekend</span>
-      <div class="toggle-switch ${isWeekendEnabled() ? 'active' : ''}"></div>
+      <div class="toggle-switch ${enabled ? 'active' : ''}"></div>
     </div>
   `;
-            // keyboard support
             const btn = wrap.querySelector('.plan-toggle');
             btn.addEventListener('keydown', (e) => {
                 if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleWeekendPlanningForWeek(); }
