@@ -1585,14 +1585,18 @@
         });
 
         // Initialize theme on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            loadState();
-            initTheme();
-            // Reflect saved week selection UI
-            document.getElementById('thisWeekBtn').classList.toggle('active', selectedWeek === 'this');
-            document.getElementById('nextWeekBtn').classList.toggle('active', selectedWeek === 'next');
-        });
+document.addEventListener('DOMContentLoaded', () => {
+  loadState();
+  initTheme();
 
+  // Always start on NEXT week
+  selectedWeek = 'next';
+  document.getElementById('thisWeekBtn').classList.remove('active');
+  document.getElementById('nextWeekBtn').classList.add('active');
+
+  // Jump straight into the planner UI
+  startPlanning();
+});
 
         // Listen for system theme changes
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
@@ -1653,9 +1657,9 @@
                 const savedMeals = JSON.parse(localStorage.getItem(LS_KEYS.MEALS) || '{}');
                 const savedWeekends = JSON.parse(localStorage.getItem(LS_KEYS.WEEKENDS) || '{}');
                 const savedWeekendWeek = JSON.parse(localStorage.getItem(LS_KEYS.WEEKEND_WEEK) || '{}');
-                const savedWeek = localStorage.getItem(LS_KEYS.WEEK);
+                // const savedWeek = localStorage.getItem(LS_KEYS.WEEK);
                 const savedLocks = JSON.parse(localStorage.getItem(LS_KEYS.LOCKS) || '{}');
-                if (savedWeek === 'this' || savedWeek === 'next') selectedWeek = savedWeek;
+                // if (savedWeek === 'this' || savedWeek === 'next') selectedWeek = savedWeek;
                 mealData = savedMeals;
                 weekendPlanEnabled = savedWeekends;
                 weekendPlanByWeek = { this: !!savedWeekendWeek.this, next: !!savedWeekendWeek.next };
