@@ -812,7 +812,8 @@
         <!-- Weekend Toggle -->
         <div class="weekend-bar">
             <span class="weekend-label">Include weekend meals</span>
-            <div class="ios-switch" id="weekendSwitch" onclick="toggleWeekend()"></div>
+            <div class="ios-switch" id="weekendSwitch" role="switch" aria-checked="false" tabindex="0"
+                onclick="toggleWeekend()"></div>
         </div>
 
         <!-- Days List -->
@@ -993,9 +994,18 @@
         // Initialize
         function init() {
             load();
+            syncWeekToggle();
             render();
             updateWeekend();
             setTheme();
+            addSwipeToDismiss(document.getElementById('mealPicker'), closePicker);
+            addSwipeToDismiss(document.querySelector('#groceryModal .ios-modal-content'), () => closeModal('groceryModal'));
+            addSwipeToDismiss(document.querySelector('#shareModal .ios-modal-content'), () => closeModal('shareModal'));
+        }
+
+        function syncWeekToggle() {
+            document.getElementById('thisWeek').classList.toggle('active', week === 'this');
+            document.getElementById('nextWeek').classList.toggle('active', week === 'next');
         }
 
         // Theme
@@ -1038,8 +1048,15 @@
         }
 
         function updateWeekend() {
-            document.getElementById('weekendSwitch').classList.toggle('active', weekendOn[week]);
+            const el = document.getElementById('weekendSwitch');
+            const on = !!weekendOn[week];
+            el.classList.toggle('active', on);
+            el.setAttribute('aria-checked', String(on));
         }
+
+        document.getElementById('weekendSwitch').addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggleWeekend(); }
+        });
 
         // Render
         function render() {
@@ -1102,11 +1119,6 @@
             const d = data[k] || { lunch: '', dinner: '', side: '' };
             const mode = modes[k] || 'regular';
             const isLocked = locked[k];
-
-            const dinnerOpts = mode === 'quick' ? meals.dinner.quick :
-                mode === 'delivery' ? meals.dinner.delivery :
-                    isWeekend ? meals.dinner.weekend :
-                        meals.dinner.regular;
 
             return `
                 <div class="meal-group">
@@ -1205,10 +1217,27 @@
         }
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && document.getElementById('mealPicker').classList.contains('show')) {
-                closePicker();
-            }
+            if (e.key !== 'Escape') return;
+            const picker = document.getElementById('mealPicker');
+            const grocery = document.getElementById('groceryModal');
+            const share = document.getElementById('shareModal');
+            if (picker.classList.contains('show')) closePicker();
+            else if (grocery.classList.contains('show')) closeModal('groceryModal');
+            else if (share.classList.contains('show')) closeModal('shareModal');
         });
+
+        function trySystemShare(title, text) {
+            if (navigator.share) {
+                navigator.share({ title, text }).catch(() => {
+                    // fallback to modal if user cancels or share fails
+                    document.getElementById('shareTitle').textContent = title;
+                    document.getElementById('shareText').textContent = text;
+                    showModal('shareModal');
+                });
+                return true;
+            }
+            return false;
+        }
 
         function closePicker() {
             document.getElementById('mealPicker').classList.remove('show');
@@ -1450,11 +1479,11 @@
 
             shareContent = '🛒 Grocery List\n\n' + items.map(t => `☐ ${t}`).join('\n');
             closeModal('groceryModal');
-            setTimeout(() => {
+            if (!trySystemShare('Grocery List', shareContent)) {
                 document.getElementById('shareTitle').textContent = 'Grocery List';
                 document.getElementById('shareText').textContent = shareContent;
                 showModal('shareModal');
-            }, 300);
+            }
         }
 
         function weekRange() {
@@ -1489,6 +1518,12 @@
             document.getElementById('shareTitle').textContent = 'Meal Plan';
             document.getElementById('shareText').textContent = shareContent;
             showModal('shareModal');
+
+            if (!trySystemShare('Meal Plan', shareContent)) {
+                document.getElementById('shareTitle').textContent = 'Meal Plan';
+                document.getElementById('shareText').textContent = shareContent;
+                showModal('shareModal');
+            }
         }
 
         function copyText(btn) {
@@ -1542,11 +1577,10 @@
 
         function getWeekStart() {
             const now = new Date();
-            const day = now.getDay();
-            const diff = now.getDate() - day + (day === 0 ? -6 : 1);
-            const start = new Date(now.setDate(diff));
+            const mondayIndex = (now.getDay() + 6) % 7; // Mon=0..Sun=6
+            const start = new Date(now);
+            start.setDate(now.getDate() - mondayIndex + (week === 'next' ? 7 : 0));
             start.setHours(0, 0, 0, 0);
-            if (week === 'next') start.setDate(start.getDate() + 7);
             return start;
         }
 
