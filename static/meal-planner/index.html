@@ -1036,7 +1036,7 @@
     </div>
     <div class="meals-content">
       ${isWeekendEnabled()
-                        ? createMeals(dayKey)
+                        ? createMeals(dayKey, true)
                         : `
           <div class="weekend-toggle-section">
             <div class="weekend-toggle-label">Weekend planning is off. Use “Plan meals for weekend” above to enable.</div>
@@ -1058,7 +1058,7 @@
                         <span class="chevron">▼</span>
                     </div>
                     <div class="meals-content">
-                        ${createMeals(dayKey)}
+                        ${createMeals(dayKey, false)}
                     </div>
                 `;
             }
@@ -1083,8 +1083,9 @@
             return `${start.toLocaleDateString('en-US', opt)} – ${end.toLocaleDateString('en-US', opt)}`;
         }
 
-        function createMeals(dayKey) {
+        function createMeals(dayKey, isWeekend) {
             const data = mealData[dayKey];
+            const dinnerList = (isWeekend && isWeekendEnabled()) ? weekendOptions : dinnerOptions;
             return `
                 <div class="meal-section">
                     <div class="meal-label">Lunch</div>
@@ -1106,9 +1107,7 @@
                     <div class="meal-selector">
                         <select class="meal-select" onchange="handleMealChange('${dayKey}', 'dinner', this)">
                             <option value="">Select dinner...</option>
-                            ${dinnerOptions.map(meal =>
-                `<option value="${meal}" ${data.dinner === meal ? 'selected' : ''}>${meal}</option>`
-            ).join('')}
+                             ${dinnerList.map(meal => `<option value="${meal}" ${data.dinner === meal ? 'selected' : ''}>${meal}</option>`).join('')}
                         </select>
                         <input type="text" class="custom-input" placeholder="Enter custom dinner..." 
                                onchange="updateMeal('${dayKey}', 'dinner', this.value)" 
@@ -1186,20 +1185,31 @@
             container.classList.add('shuffle-animation');
 
             const weekKeys = weekKeysForSelectedWeek();
-            const availableLunches = lunchOptions.filter(m => m !== 'Custom...');
-            const availableDinners = dinnerOptions.filter(m => m !== 'Custom...');
-            const availableSides = sideDishOptions.filter(s => s !== 'Custom...');
+            const baseLunches = lunchOptions.filter(m => m !== 'Custom...');
+            const baseSides = sideDishOptions.filter(s => s !== 'Custom...');
 
-            const lunches = weekKeys.map(() => rand(availableLunches));
-            const dinners = weekKeys.map(() => rand(availableDinners));
-            const sides = weekKeys.map(() => rand(availableSides));
+            // Build per-day pools so Sat/Sun use weekendOptions when enabled
+            const perDay = weekKeys.map(k => {
+                const [, y, m, d] = k.split('-').map((v, i) => i ? Number(v) : v);
+                const date = new Date(y, m, d);
+                const isWknd = isWeekendDate(date);
+                const dinnerPool = (isWknd && isWeekendEnabled())
+                    ? weekendOptions.filter(m => m !== 'Custom...')
+                    : dinnerOptions.filter(m => m !== 'Custom...');
+                return { k, dinnerPool };
+            });
 
-            shuffleArray(lunches); shuffleArray(dinners); shuffleArray(sides);
+            // Shuffle by column but draw from each day’s pool
+            const lunches = [...baseLunches];
+            const sides = [...baseSides];
+            shuffleArray(lunches); shuffleArray(sides);
 
-            weekKeys.forEach((k, i) => {
-                mealData[k].lunch = lunches[i];
-                mealData[k].dinner = dinners[i];
-                mealData[k].dinnerSide = sides[i];
+            perDay.forEach(({ k, dinnerPool }, i) => {
+                const dinners = [...dinnerPool];
+                shuffleArray(dinners);
+                mealData[k].lunch = lunches[i % lunches.length];
+                mealData[k].dinner = dinners[0]; // top after shuffle
+                mealData[k].dinnerSide = sides[i % sides.length];
             });
 
             saveState();
