@@ -703,6 +703,10 @@
 
     <!-- Quick Action Buttons -->
     <div class="quick-actions" id="quickActions">
+        <button class="quick-btn reset" onclick="resetWeek()">
+            <span class="quick-btn-icon">🧹</span>
+            <span>Reset</span>
+        </button>
         <button class="quick-btn shuffle" onclick="shuffleWeek()">
             <span class="quick-btn-icon">🔀</span>
             <span>Shuffle</span>
@@ -975,6 +979,24 @@
             document.getElementById('thisWeekBtn').classList.toggle('active', week === 'this');
             document.getElementById('nextWeekBtn').classList.toggle('active', week === 'next');
             saveState();
+        }
+
+        function resetWeek() {
+            const weekTitle = selectedWeek === 'this' ? 'questa settimana' : 'la prossima settimana';
+            if (!confirm(`Vuoi davvero cancellare tutte le selezioni per ${weekTitle}?`)) return;
+
+            // Azzera i 7 giorni (lun→dom) indipendentemente dal toggle weekend
+            for (let i = 0; i < 7; i++) {
+                const date = getDateForIndex(i, selectedWeek);
+                const dayKey = getDayKeyFromDate(date, selectedWeek);
+                if (!mealData[dayKey]) mealData[dayKey] = { lunch: '', dinner: '', dinnerSide: '' };
+                mealData[dayKey].lunch = '';
+                mealData[dayKey].dinner = '';
+                mealData[dayKey].dinnerSide = '';
+            }
+
+            saveState();
+            generateWeek(); // rigenera UI e indicatori
         }
 
         function startPlanning() {
