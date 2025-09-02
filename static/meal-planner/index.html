@@ -1169,6 +1169,26 @@
 
             title.textContent = `Select ${type.charAt(0).toUpperCase() + type.slice(1)}`;
 
+            // Build the options list (previously removed accidentally)
+            let items = [];
+            if (type === 'lunch') {
+                items = meals.lunch;
+            } else if (type === 'dinner') {
+                const mode = modes[k] || 'regular';
+                const isWeekend = getIndex(k) >= 5;
+                items = mode === 'quick' ? meals.dinner.quick
+                    : mode === 'delivery' ? meals.dinner.delivery
+                        : isWeekend ? meals.dinner.weekend
+                            : meals.dinner.regular;
+                // include "other" only for weekdays in regular mode
+                if (!isWeekend && mode === 'regular') {
+                    items = [...items, ...meals.dinner.other];
+                }
+            } else {
+                // side
+                items = ['None', ...meals.side];
+            }
+
             const current = (data[k] || {})[type];
             options.innerHTML = items.map(item =>
                 `<div class="picker-option ${item === current ? 'selected' : ''}" data-value="${item}">${item}</div>`
@@ -1177,11 +1197,9 @@
             picker.classList.add('show');
             document.body.classList.add('no-scroll');
 
-            // Nice UX: scroll the currently selected item into view
+            // Scroll the selected option into view
             const selected = options.querySelector('.picker-option.selected');
-            if (selected) {
-                options.scrollTop = selected.offsetTop - 100;
-            }
+            if (selected) options.scrollTop = selected.offsetTop - 100;
         }
 
         document.addEventListener('keydown', (e) => {
