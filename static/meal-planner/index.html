@@ -3,7 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Weekly Meal Planner</title>
     <style>
         * {
@@ -11,301 +13,297 @@
             padding: 0;
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            user-select: none;
         }
 
         :root {
-            /* Light mode colors */
-            --bg-primary: #f8f9fa;
+            /* iOS-optimized colors */
+            --bg-primary: #f2f2f7;
             --bg-secondary: white;
-            --bg-tertiary: #f3f4f6;
-            --text-primary: #111827;
-            --text-secondary: #6b7280;
-            --text-tertiary: #9ca3af;
-            --border-color: #e5e7eb;
-            --border-secondary: #d1d5db;
-            --accent-primary: #3b82f6;
-            --accent-success: #10b981;
-            --accent-warning: #f59e0b;
-            --accent-danger: #ef4444;
-            --accent-purple: #8b5cf6;
-            --modal-backdrop: rgba(0, 0, 0, 0.3);
-            --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-            --toggle-bg: #e5e7eb;
+            --bg-tertiary: #f2f2f7;
+            --text-primary: #000000;
+            --text-secondary: #3c3c43;
+            --text-tertiary: #c7c7cc;
+            --border-color: #c6c6c8;
+            --border-secondary: #e5e5ea;
+            --accent-primary: #007aff;
+            --accent-success: #34c759;
+            --accent-warning: #ff9500;
+            --accent-danger: #ff3b30;
+            --accent-purple: #af52de;
+            --modal-backdrop: rgba(0, 0, 0, 0.4);
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.12);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.15);
+            --toggle-bg: #e5e5ea;
             --input-bg: white;
+            --safe-area-top: env(safe-area-inset-top);
+            --safe-area-bottom: env(safe-area-inset-bottom);
         }
 
         [data-theme="dark"] {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-tertiary: #334155;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --text-tertiary: #64748b;
-            --border-color: #334155;
-            --border-secondary: #475569;
-            --accent-primary: #60a5fa;
-            --accent-success: #34d399;
-            --accent-warning: #fbbf24;
-            --accent-danger: #f87171;
-            --accent-purple: #a78bfa;
-            --modal-backdrop: rgba(0, 0, 0, 0.7);
-            --toggle-bg: #475569;
-            --input-bg: #334155;
+            --bg-primary: #000000;
+            --bg-secondary: #1c1c1e;
+            --bg-tertiary: #2c2c2e;
+            --text-primary: #ffffff;
+            --text-secondary: #ebebf5;
+            --text-tertiary: #636366;
+            --border-color: #38383a;
+            --border-secondary: #48484a;
+            --accent-primary: #0a84ff;
+            --accent-success: #30d158;
+            --accent-warning: #ff9f0a;
+            --accent-danger: #ff453a;
+            --accent-purple: #bf5af2;
+            --modal-backdrop: rgba(0, 0, 0, 0.8);
+            --toggle-bg: #38383a;
+            --input-bg: #2c2c2e;
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'SF Pro Display', 'Helvetica Neue', sans-serif;
             background: var(--bg-primary);
             min-height: 100vh;
             color: var(--text-primary);
-            transition: background-color 0.3s ease, color 0.3s ease;
+            -webkit-font-smoothing: antialiased;
+            overscroll-behavior: none;
         }
 
         .container {
             max-width: 100%;
-            margin: 0 auto;
-            background: var(--bg-secondary);
+            background: var(--bg-primary);
             min-height: 100vh;
-            position: relative;
-            transition: all 0.3s ease;
+            padding-bottom: calc(90px + var(--safe-area-bottom));
         }
 
-        @media (min-width: 768px) {
-            .container {
-                max-width: 768px;
-                box-shadow: var(--shadow-lg);
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .container {
-                max-width: 900px;
-            }
-        }
-
-        /* Header */
+        /* Header - iOS style */
         .header {
             background: var(--bg-secondary);
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border-color);
+            padding-top: var(--safe-area-top);
             position: sticky;
             top: 0;
             z-index: 100;
+            border-bottom: 0.5px solid var(--border-color);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+
+        .header-content {
+            padding: 12px 16px;
         }
 
         .header-top {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
         }
 
         .header-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: var(--text-primary);
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
         }
 
-        .header-controls {
+        .header-actions {
             display: flex;
-            align-items: center;
             gap: 8px;
+            align-items: center;
         }
 
-        .week-selector {
+        .week-toggle {
             display: flex;
             background: var(--toggle-bg);
-            border-radius: 8px;
+            border-radius: 9px;
             padding: 2px;
+            height: 32px;
         }
 
-        .week-option {
-            padding: 6px 12px;
+        .week-btn {
+            padding: 0 12px;
             border: none;
             background: transparent;
             color: var(--text-secondary);
-            font-size: 14px;
-            font-weight: 500;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 7px;
+            transition: all 0.2s;
         }
 
-        .week-option.active {
+        .week-btn.active {
             background: var(--bg-secondary);
             color: var(--text-primary);
             box-shadow: var(--shadow-sm);
         }
 
-        .theme-toggle {
-            background: none;
+        .theme-btn {
+            width: 32px;
+            height: 32px;
             border: none;
-            color: var(--text-secondary);
+            background: transparent;
             font-size: 20px;
-            cursor: pointer;
-            padding: 8px;
-            border-radius: 8px;
-            transition: all 0.2s ease;
-        }
-
-        .theme-toggle:hover {
-            background: var(--bg-tertiary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 16px;
         }
 
         /* Weekend Toggle */
-        .weekend-toggle-bar {
-            background: var(--bg-tertiary);
-            padding: 12px 20px;
+        .weekend-bar {
+            background: var(--bg-secondary);
+            padding: 12px 16px;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            border-bottom: 1px solid var(--border-color);
+            align-items: center;
+            border-bottom: 0.5px solid var(--border-color);
         }
 
-        .weekend-toggle-label {
-            font-size: 14px;
-            color: var(--text-secondary);
+        .weekend-label {
+            font-size: 15px;
+            color: var(--text-primary);
         }
 
-        .toggle-switch {
-            width: 44px;
-            height: 24px;
+        .ios-switch {
+            width: 51px;
+            height: 31px;
             background: var(--toggle-bg);
-            border-radius: 12px;
+            border-radius: 16px;
             position: relative;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background 0.3s;
         }
 
-        .toggle-switch.active {
+        .ios-switch.active {
             background: var(--accent-success);
         }
 
-        .toggle-switch::after {
+        .ios-switch::after {
             content: '';
             position: absolute;
-            width: 20px;
-            height: 20px;
+            width: 27px;
+            height: 27px;
             background: white;
-            border-radius: 50%;
+            border-radius: 14px;
             top: 2px;
             left: 2px;
-            transition: transform 0.3s ease;
-            box-shadow: var(--shadow-sm);
+            transition: transform 0.3s;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
         }
 
-        .toggle-switch.active::after {
+        .ios-switch.active::after {
             transform: translateX(20px);
         }
 
-        /* Days Container */
-        .days-container {
-            padding-bottom: 100px;
+        /* Days List */
+        .days-list {
+            background: var(--bg-primary);
         }
 
-        .day-card {
-            border-bottom: 1px solid var(--border-color);
-            transition: all 0.3s ease;
+        .day-cell {
+            background: var(--bg-secondary);
+            margin-bottom: 0.5px;
+            transition: all 0.3s;
         }
 
-        .day-card.weekend {
+        .day-cell.weekend {
             background: var(--bg-tertiary);
         }
 
         .day-header {
-            padding: 16px 20px;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
+            padding: 12px 16px;
             display: flex;
-            justify-content: space-between;
             align-items: center;
+            justify-content: space-between;
+            min-height: 52px;
+            position: relative;
         }
 
-        .day-header:hover {
-            background: var(--bg-tertiary);
+        .day-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 16px;
+            right: 0;
+            height: 0.5px;
+            background: var(--border-secondary);
         }
 
-        .day-info {
+        .day-cell.expanded .day-header::after {
+            opacity: 0;
+        }
+
+        .day-left {
             display: flex;
             align-items: center;
             gap: 12px;
+            flex: 1;
         }
 
-        .day-status {
+        .day-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 4px;
+            background: var(--accent-success);
+            opacity: 0;
+            transition: opacity 0.3s;
+        }
+
+        .day-cell.has-meals .day-indicator {
+            opacity: 1;
+        }
+
+        .day-info {
+            flex: 1;
+        }
+
+        .day-name {
+            font-size: 17px;
+            font-weight: 400;
+            color: var(--text-primary);
+        }
+
+        .day-date {
+            font-size: 13px;
+            color: var(--text-tertiary);
+            margin-top: 2px;
+        }
+
+        .day-right {
             display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .status-indicator {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--accent-success);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .day-card.has-meals .status-indicator {
-            opacity: 1;
-        }
-
-        .day-title {
-            flex: 1;
-        }
-
-        .day-name {
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .day-date {
-            font-size: 14px;
-            color: var(--text-secondary);
-        }
-
-        .day-badges {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin-right: 12px;
-        }
-
-        .badge {
-            padding: 2px 8px;
-            border-radius: 12px;
+        .day-badge {
+            padding: 2px 6px;
+            border-radius: 10px;
             font-size: 11px;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
         }
 
-        .badge.quick {
+        .badge-quick {
             background: var(--accent-warning);
             color: white;
         }
 
-        .badge.delivery {
+        .badge-delivery {
             background: var(--accent-purple);
             color: white;
         }
 
-        .lock-indicator {
-            font-size: 16px;
-            margin-right: 8px;
+        .lock-icon {
+            font-size: 14px;
             color: var(--text-tertiary);
         }
 
         .chevron {
-            color: var(--text-tertiary);
             font-size: 14px;
-            transition: transform 0.3s ease;
+            color: var(--text-tertiary);
+            transition: transform 0.3s;
+            margin-left: 4px;
         }
 
-        .day-card.expanded .chevron {
+        .day-cell.expanded .chevron {
             transform: rotate(180deg);
         }
 
@@ -317,305 +315,196 @@
             background: var(--bg-secondary);
         }
 
-        .day-card.weekend .meals-content {
-            background: var(--bg-tertiary);
+        .day-cell.expanded .meals-content {
+            max-height: 1000px;
         }
 
-        .day-card.expanded .meals-content {
-            max-height: 800px;
+        .meal-group {
+            padding: 16px;
+            border-bottom: 0.5px solid var(--border-secondary);
         }
 
-        .meal-section {
-            padding: 20px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .meal-section:first-child {
-            border-top: none;
-        }
-
-        .meal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
+        .meal-group:last-child {
+            border-bottom: none;
         }
 
         .meal-label {
             font-size: 13px;
             font-weight: 600;
-            color: var(--text-secondary);
+            color: var(--text-tertiary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-bottom: 8px;
         }
 
-        .meal-input-wrapper {
+        /* Input Fields - iOS optimized */
+        .meal-field {
             position: relative;
+            margin-bottom: 12px;
         }
 
         .meal-input {
             width: 100%;
-            padding: 12px 48px 12px 16px;
+            height: 44px;
+            padding: 0 44px 0 16px;
             border: 1px solid var(--border-secondary);
             border-radius: 10px;
             background: var(--input-bg);
             font-size: 16px;
             color: var(--text-primary);
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .shuffle-btn {
-            position: absolute;
-            right: 8px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 32px;
-            height: 32px;
-            border: none;
-            border-radius: 6px;
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            font-size: 16px;
-        }
-
-        .shuffle-btn:hover {
-            background: var(--accent-warning);
-            color: white;
-        }
-
-        .shuffle-btn:active {
-            transform: translateY(-50%) scale(0.9);
+            -webkit-appearance: none;
+            appearance: none;
         }
 
         .meal-input:focus {
             outline: none;
             border-color: var(--accent-primary);
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
         }
 
-        .meal-dropdown {
+        .shuffle-btn {
             position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: var(--bg-secondary);
-            border: 1px solid var(--border-secondary);
-            border-radius: 10px;
-            margin-top: 4px;
-            max-height: 300px;
-            overflow-y: auto;
-            z-index: 50;
-            box-shadow: var(--shadow-lg);
-            display: none;
-        }
-
-        .meal-dropdown.show {
-            display: block;
-        }
-
-        .dropdown-search {
-            position: sticky;
-            top: 0;
-            padding: 8px;
-            background: var(--bg-secondary);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .search-input {
-            width: 100%;
-            padding: 8px 12px;
-            border: 1px solid var(--border-secondary);
-            border-radius: 6px;
-            background: var(--input-bg);
-            font-size: 14px;
-            color: var(--text-primary);
-        }
-
-        .search-input:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-        }
-
-        .dropdown-options {
-            padding: 4px;
-        }
-
-        .dropdown-option {
-            padding: 10px 12px;
-            cursor: pointer;
-            border-radius: 6px;
-            transition: background-color 0.2s ease;
-            font-size: 15px;
-        }
-
-        .dropdown-option:hover {
-            background: var(--bg-tertiary);
-        }
-
-        .dropdown-option.selected {
-            background: var(--accent-primary);
-            color: white;
-        }
-
-        .dropdown-group {
-            padding: 8px 12px 4px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--text-tertiary);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        /* Dinner Mode Selector */
-        .dinner-mode-selector {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 12px;
-        }
-
-        .mode-btn {
-            flex: 1;
-            padding: 8px 12px;
-            border: 1px solid var(--border-secondary);
-            background: var(--bg-secondary);
+            right: 6px;
+            top: 6px;
+            width: 32px;
+            height: 32px;
+            border: none;
             border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            background: var(--bg-tertiary);
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            font-size: 16px;
         }
 
-        .mode-btn:hover {
+        .shuffle-btn:active {
+            background: var(--accent-warning);
+            transform: scale(0.95);
+        }
+
+        /* Dinner Mode Pills */
+        .mode-pills {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 12px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .mode-pill {
+            flex: 1;
+            min-width: 80px;
+            height: 36px;
+            border: 1px solid var(--border-secondary);
             background: var(--bg-tertiary);
+            border-radius: 18px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            transition: all 0.2s;
         }
 
-        .mode-btn.active {
+        .mode-pill.active {
             background: var(--accent-primary);
             color: white;
             border-color: var(--accent-primary);
         }
 
-        .mode-btn.active.quick {
+        .mode-pill.active.quick {
             background: var(--accent-warning);
             border-color: var(--accent-warning);
         }
 
-        .mode-btn.active.delivery {
+        .mode-pill.active.delivery {
             background: var(--accent-purple);
             border-color: var(--accent-purple);
         }
 
         /* Day Actions */
         .day-actions {
-            padding: 12px 20px;
+            padding: 12px 16px;
             background: var(--bg-tertiary);
-            border-top: 1px solid var(--border-color);
             display: flex;
             gap: 8px;
         }
 
-        .day-action-btn {
+        .action-btn {
             flex: 1;
-            padding: 8px 12px;
+            height: 36px;
             border: 1px solid var(--border-secondary);
             background: var(--bg-secondary);
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            border-radius: 10px;
+            font-size: 13px;
+            font-weight: 600;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 4px;
         }
 
-        .day-action-btn:hover {
+        .action-btn:active {
             background: var(--bg-tertiary);
+            transform: scale(0.98);
         }
 
-        .day-action-btn.lock-btn {
-            background: var(--bg-secondary);
-        }
-
-        .day-action-btn.lock-btn.locked {
+        .action-btn.locked {
             background: var(--accent-danger);
             color: white;
             border-color: var(--accent-danger);
         }
 
-        /* Quick Actions */
-        .quick-actions {
+        /* Bottom Tab Bar */
+        .tab-bar {
             position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 12px;
-            z-index: 1000;
-            width: calc(100% - 40px);
-            max-width: 400px;
+            bottom: 0;
+            left: 0;
+            right: 0;
             background: var(--bg-secondary);
-            padding: 12px;
-            border-radius: 16px;
-            box-shadow: var(--shadow-lg);
-            border: 1px solid var(--border-color);
+            padding-bottom: var(--safe-area-bottom);
+            border-top: 0.5px solid var(--border-color);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
         }
 
-        .quick-btn {
+        .tab-bar-content {
+            display: flex;
+            padding: 8px 0;
+        }
+
+        .tab-btn {
             flex: 1;
-            padding: 12px 8px;
-            border-radius: 12px;
+            padding: 8px;
             border: none;
-            color: white;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            background: transparent;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 4px;
         }
 
-        .quick-btn-icon {
-            font-size: 20px;
+        .tab-btn:active {
+            opacity: 0.6;
         }
 
-        .quick-btn.shuffle {
-            background: var(--accent-warning);
+        .tab-icon {
+            font-size: 24px;
         }
 
-        .quick-btn.share {
-            background: var(--accent-primary);
+        .tab-label {
+            font-size: 10px;
+            font-weight: 500;
         }
 
-        .quick-btn.grocery {
-            background: var(--accent-success);
-        }
+        .tab-btn.shuffle { color: var(--accent-warning); }
+        .tab-btn.grocery { color: var(--accent-success); }
+        .tab-btn.share { color: var(--accent-primary); }
+        .tab-btn.clear { color: var(--accent-danger); }
 
-        .quick-btn.reset {
-            background: var(--accent-danger);
-        }
-
-        .quick-btn:hover {
-            transform: scale(1.05);
-        }
-
-        .quick-btn:active {
-            transform: scale(0.95);
-        }
-
-        /* Modals */
-        .modal {
+        /* iOS Modal */
+        .ios-modal {
             position: fixed;
             top: 0;
             left: 0;
@@ -623,62 +512,71 @@
             bottom: 0;
             background: var(--modal-backdrop);
             display: none;
-            align-items: center;
-            justify-content: center;
             z-index: 2000;
-            padding: 20px;
         }
 
-        .modal.show {
-            display: flex;
+        .ios-modal.show {
+            display: block;
         }
 
-        .modal-content {
+        .ios-modal-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
             background: var(--bg-secondary);
-            border-radius: 16px;
-            padding: 24px;
-            width: 100%;
-            max-width: 500px;
-            max-height: 80vh;
-            overflow-y: auto;
-            transform: scale(0.9);
-            opacity: 0;
-            transition: all 0.3s ease;
+            border-radius: 12px 12px 0 0;
+            max-height: 90vh;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
         }
 
-        .modal.show .modal-content {
-            transform: scale(1);
-            opacity: 1;
+        .ios-modal.show .ios-modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-handle {
+            width: 36px;
+            height: 5px;
+            background: var(--border-color);
+            border-radius: 3px;
+            margin: 8px auto;
         }
 
         .modal-header {
-            margin-bottom: 20px;
+            padding: 8px 16px 16px;
+            border-bottom: 0.5px solid var(--border-secondary);
         }
 
         .modal-title {
             font-size: 20px;
             font-weight: 600;
-            color: var(--text-primary);
+            text-align: center;
         }
 
         .modal-body {
-            margin-bottom: 20px;
+            padding: 16px;
+            max-height: 60vh;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: calc(16px + var(--safe-area-bottom));
         }
 
-        .modal-footer {
+        .modal-actions {
+            padding: 12px 16px;
+            padding-bottom: calc(12px + var(--safe-area-bottom));
             display: flex;
             gap: 12px;
+            border-top: 0.5px solid var(--border-secondary);
         }
 
         .modal-btn {
             flex: 1;
-            padding: 12px;
+            height: 50px;
             border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
+            border-radius: 12px;
+            font-size: 17px;
+            font-weight: 600;
         }
 
         .modal-btn.primary {
@@ -687,123 +585,182 @@
         }
 
         .modal-btn.secondary {
-            background: var(--toggle-bg);
+            background: var(--bg-tertiary);
             color: var(--text-primary);
         }
 
-        .modal-btn:hover {
-            opacity: 0.9;
+        .modal-btn:active {
+            opacity: 0.8;
         }
 
         /* Grocery List */
-        .grocery-categories {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
+        .grocery-section {
+            margin-bottom: 24px;
         }
 
-        .grocery-category {
-            background: var(--bg-tertiary);
-            border-radius: 10px;
-            padding: 12px;
-        }
-
-        .category-title {
-            font-size: 14px;
+        .grocery-title {
+            font-size: 13px;
             font-weight: 600;
-            color: var(--text-secondary);
-            margin-bottom: 8px;
+            color: var(--text-tertiary);
             text-transform: uppercase;
             letter-spacing: 0.5px;
+            margin-bottom: 8px;
         }
 
         .grocery-item {
             display: flex;
             align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid var(--border-color);
+            padding: 10px 0;
+            border-bottom: 0.5px solid var(--border-secondary);
         }
 
         .grocery-item:last-child {
             border-bottom: none;
         }
 
-        .grocery-checkbox {
+        .grocery-check {
+            width: 22px;
+            height: 22px;
             margin-right: 12px;
-            transform: scale(1.2);
             accent-color: var(--accent-primary);
         }
 
         /* Share Content */
-        .share-content {
+        .share-text {
             background: var(--bg-tertiary);
             border-radius: 10px;
-            padding: 16px;
-            font-family: monospace;
-            font-size: 14px;
-            line-height: 1.6;
+            padding: 12px;
+            font-family: 'SF Mono', monospace;
+            font-size: 13px;
+            line-height: 1.5;
             white-space: pre-wrap;
-            max-height: 400px;
-            overflow-y: auto;
+            word-break: break-word;
         }
 
         /* Empty State */
         .empty-state {
             text-align: center;
-            padding: 40px 20px;
-            color: var(--text-secondary);
+            padding: 48px 24px;
+            color: var(--text-tertiary);
         }
 
-        .empty-state-icon {
+        .empty-icon {
             font-size: 48px;
             margin-bottom: 12px;
             opacity: 0.5;
         }
 
         /* Animations */
-        .shuffle-animation {
-            animation: shuffle 0.6s ease-in-out;
+        @keyframes shuffle-spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
-        @keyframes shuffle {
-
-            0%,
-            100% {
-                transform: scale(1);
-            }
-
-            25% {
-                transform: scale(1.02) rotate(1deg);
-            }
-
-            50% {
-                transform: scale(0.98) rotate(-1deg);
-            }
-
-            75% {
-                transform: scale(1.01) rotate(0.5deg);
-            }
+        .shuffling {
+            animation: shuffle-spin 0.5s ease;
         }
 
-        .slide-in {
-            animation: slideIn 0.3s ease-out;
+        /* Dropdown for meals - iOS style */
+        .meal-picker {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: var(--bg-secondary);
+            border-radius: 12px 12px 0 0;
+            max-height: 50vh;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+            z-index: 3000;
+            display: none;
         }
 
-        @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
+        .meal-picker.show {
+            display: block;
+            transform: translateY(0);
+        }
 
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .picker-header {
+            padding: 16px;
+            border-bottom: 0.5px solid var(--border-secondary);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .picker-title {
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .picker-done {
+            color: var(--accent-primary);
+            font-size: 17px;
+            font-weight: 600;
+        }
+
+        .picker-search {
+            padding: 12px 16px;
+            border-bottom: 0.5px solid var(--border-secondary);
+        }
+
+        .search-input {
+            width: 100%;
+            height: 36px;
+            padding: 0 12px;
+            background: var(--bg-tertiary);
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .picker-options {
+            max-height: 300px;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: var(--safe-area-bottom);
+        }
+
+        .picker-option {
+            padding: 14px 16px;
+            border-bottom: 0.5px solid var(--border-secondary);
+            font-size: 17px;
+        }
+
+        .picker-option:active {
+            background: var(--bg-tertiary);
+        }
+
+        .picker-option.selected {
+            color: var(--accent-primary);
+        }
+
+        .picker-option.selected::after {
+            content: '✓';
+            float: right;
+            color: var(--accent-primary);
+        }
+
+        .picker-group {
+            padding: 8px 16px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: var(--bg-tertiary);
         }
 
         /* Utility */
-        .hidden {
-            display: none !important;
+        input, textarea, button {
+            -webkit-appearance: none;
+            appearance: none;
+        }
+        
+        .no-scroll {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
         }
     </style>
 </head>
@@ -812,999 +769,737 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div class="header-top">
-                <h1 class="header-title">Meal Planner</h1>
-                <div class="header-controls">
-                    <div class="week-selector">
-                        <button class="week-option" id="thisWeekBtn" onclick="selectWeek('this')">This Week</button>
-                        <button class="week-option active" id="nextWeekBtn" onclick="selectWeek('next')">Next
-                            Week</button>
+            <div class="header-content">
+                <div class="header-top">
+                    <h1 class="header-title">Meal Planner</h1>
+                    <div class="header-actions">
+                        <div class="week-toggle">
+                            <button class="week-btn" id="thisWeek" onclick="selectWeek('this')">This</button>
+                            <button class="week-btn active" id="nextWeek" onclick="selectWeek('next')">Next</button>
+                        </div>
+                        <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
                     </div>
-                    <button class="theme-toggle" onclick="toggleTheme()" id="themeToggle">🌙</button>
                 </div>
             </div>
         </div>
 
         <!-- Weekend Toggle -->
-        <div class="weekend-toggle-bar">
-            <span class="weekend-toggle-label">Include weekend meals (Saturday & Sunday)</span>
-            <div class="toggle-switch" id="weekendToggle" onclick="toggleWeekendPlanning()"></div>
+        <div class="weekend-bar">
+            <span class="weekend-label">Include weekend meals</span>
+            <div class="ios-switch" id="weekendSwitch" onclick="toggleWeekend()"></div>
         </div>
 
-        <!-- Days Container -->
-        <div class="days-container" id="daysContainer">
-            <!-- Days will be generated by JavaScript -->
+        <!-- Days List -->
+        <div class="days-list" id="daysList"></div>
+    </div>
+
+    <!-- Bottom Tab Bar -->
+    <div class="tab-bar">
+        <div class="tab-bar-content">
+            <button class="tab-btn shuffle" onclick="shuffleAll()">
+                <span class="tab-icon">🔀</span>
+                <span class="tab-label">Shuffle</span>
+            </button>
+            <button class="tab-btn grocery" onclick="showGrocery()">
+                <span class="tab-icon">🛒</span>
+                <span class="tab-label">Grocery</span>
+            </button>
+            <button class="tab-btn share" onclick="sharePlan()">
+                <span class="tab-icon">📤</span>
+                <span class="tab-label">Share</span>
+            </button>
+            <button class="tab-btn clear" onclick="clearAll()">
+                <span class="tab-icon">🗑️</span>
+                <span class="tab-label">Clear</span>
+            </button>
         </div>
     </div>
 
-    <!-- Quick Action Buttons -->
-    <div class="quick-actions">
-        <button class="quick-btn shuffle" onclick="shuffleWeek()">
-            <span class="quick-btn-icon">🔀</span>
-            <span>Shuffle</span>
-        </button>
-        <button class="quick-btn grocery" onclick="showGroceryList()">
-            <span class="quick-btn-icon">🛒</span>
-            <span>Grocery</span>
-        </button>
-        <button class="quick-btn share" onclick="shareWeek()">
-            <span class="quick-btn-icon">📤</span>
-            <span>Share</span>
-        </button>
-        <button class="quick-btn reset" onclick="resetWeek()">
-            <span class="quick-btn-icon">🗑️</span>
-            <span>Clear</span>
-        </button>
+    <!-- Meal Picker -->
+    <div class="meal-picker" id="mealPicker">
+        <div class="picker-header">
+            <span class="picker-title" id="pickerTitle">Select Meal</span>
+            <button class="picker-done" onclick="closePicker()">Done</button>
+        </div>
+        <div class="picker-search">
+            <input type="text" class="search-input" placeholder="Search..." id="pickerSearch" oninput="filterPicker()">
+        </div>
+        <div class="picker-options" id="pickerOptions"></div>
     </div>
 
     <!-- Grocery Modal -->
-    <div class="modal" id="groceryModal">
-        <div class="modal-content">
+    <div class="ios-modal" id="groceryModal">
+        <div class="ios-modal-content">
+            <div class="modal-handle"></div>
             <div class="modal-header">
-                <h3 class="modal-title">Grocery List</h3>
+                <h2 class="modal-title">Grocery List</h2>
             </div>
-            <div class="modal-body" id="groceryList">
-                <!-- Grocery items will be generated here -->
-            </div>
-            <div class="modal-footer">
-                <button class="modal-btn primary" onclick="shareGroceryList()">Share List</button>
-                <button class="modal-btn secondary" onclick="closeModal('groceryModal')">Close</button>
+            <div class="modal-body" id="groceryList"></div>
+            <div class="modal-actions">
+                <button class="modal-btn primary" onclick="shareGrocery()">Share List</button>
+                <button class="modal-btn secondary" onclick="closeModal('groceryModal')">Done</button>
             </div>
         </div>
     </div>
 
     <!-- Share Modal -->
-    <div class="modal" id="shareModal">
-        <div class="modal-content">
+    <div class="ios-modal" id="shareModal">
+        <div class="ios-modal-content">
+            <div class="modal-handle"></div>
             <div class="modal-header">
-                <h3 class="modal-title" id="shareModalTitle">Share Meal Plan</h3>
+                <h2 class="modal-title" id="shareTitle">Share Meal Plan</h2>
             </div>
             <div class="modal-body">
-                <div class="share-content" id="shareContent"></div>
+                <div class="share-text" id="shareText"></div>
             </div>
-            <div class="modal-footer">
-                <button class="modal-btn primary" onclick="copyToClipboard(this)">Copy to Clipboard</button>
-                <button class="modal-btn secondary" onclick="closeModal('shareModal')">Close</button>
+            <div class="modal-actions">
+                <button class="modal-btn primary" onclick="copyText()">Copy</button>
+                <button class="modal-btn secondary" onclick="closeModal('shareModal')">Done</button>
             </div>
         </div>
     </div>
 
     <script>
-        // Meal options data
-        const mealOptions = {
-            lunch: {
-                main: [
-                    "Ravioli burro e salvia",
-                    "Spaghetti al limone",
-                    "Pasta e ceci",
-                    "Pasta col tonno",
-                    "Pasta sugo tonno",
-                    "Piadine prosciutto provolone",
-                    "Uova fritte",
-                    "Pasta al pesto",
-                    "Pasta coi pomodorini",
-                    "Lenticchie",
-                    "Spaghetti aglio e olio",
-                    "Carbonara",
-                    "Frittata di pasta",
-                    "Pasta e fagioli"
-                ]
-            },
+        // Meal data
+        const meals = {
+            lunch: [
+                "Ravioli burro e salvia", "Spaghetti al limone", "Pasta e ceci",
+                "Pasta col tonno", "Pasta sugo tonno", "Piadine prosciutto provolone",
+                "Uova fritte", "Pasta al pesto", "Pasta coi pomodorini",
+                "Lenticchie", "Spaghetti aglio e olio", "Carbonara",
+                "Frittata di pasta", "Pasta e fagioli"
+            ],
             dinner: {
                 regular: [
-                    "Salmone col riso",
-                    "Frittata di zucchine",
-                    "Polpette",
-                    "Pollo al limone",
-                    "Merluzzo",
-                    "Hamburger",
-                    "Cotolette",
-                    "Salsicce",
-                    "Minestrone",
-                    "Pollo al forno",
-                    "Scaloppine al limone",
-                    "Caprese"
+                    "Salmone col riso", "Frittata di zucchine", "Polpette",
+                    "Pollo al limone", "Merluzzo", "Hamburger", "Cotolette",
+                    "Salsicce", "Minestrone", "Pollo al forno",
+                    "Scaloppine al limone", "Caprese"
                 ],
-                quick: [
-                    "Cordon bleu",
-                    "Würstel",
-                    "Dumplings",
-                    "Fish sticks",
-                    "Pollo allo spiedo"
-                ],
-                delivery: [
-                    "Pizza Delivery",
-                    "Greco Delivery",
-                    "Chinese Delivery",
-                    "Vietnamese Delivery",
-                    "Ramen Delivery"
-                ],
+                quick: ["Cordon bleu", "Würstel", "Dumplings", "Fish sticks", "Pollo allo spiedo"],
+                delivery: ["Pizza Delivery", "Greco Delivery", "Chinese Delivery", "Vietnamese Delivery", "Ramen Delivery"],
                 weekend: [
-                    "Pasta al forno",
-                    "Parmigiana di melanzane",
-                    "Zucchine ripiene",
-                    "Lasagna",
-                    "Spezzatino con patate",
-                    "Tortellini con la panna",
-                    "Tortellini col sugo",
-                    "Pasta col ragù",
-                    "Polpettone",
-                    "Scrimpelle mbuss",
-                    "Polenta col sugo",
-                    "Cannelloni",
-                    "Bistecca"
+                    "Pasta al forno", "Parmigiana di melanzane", "Zucchine ripiene",
+                    "Lasagna", "Spezzatino con patate", "Tortellini con la panna",
+                    "Tortellini col sugo", "Pasta col ragù", "Polpettone",
+                    "Scrimpelle mbuss", "Polenta col sugo", "Cannelloni", "Bistecca"
                 ],
-                other: [
-                    "Colacena"
-                ]
+                other: ["Colacena"]
             },
-            side: {
-                main: [
-                    "Purè di patate",
-                    "Broccoli al vapore",
-                    "Insalata di pomodori",
-                    "Tater tots",
-                    "Barbabietole",
-                    "Insalata di mais",
-                    "Patate lesse",
-                    "Carote al forno",
-                    "Carote a insalata",
-                    "Zucchine trifolate",
-                    "Insalata di cetrioli",
-                    "Insalata mista"
-                ]
-            }
+            side: [
+                "Purè di patate", "Broccoli al vapore", "Insalata di pomodori",
+                "Tater tots", "Barbabietole", "Insalata di mais", "Patate lesse",
+                "Carote al forno", "Carote a insalata", "Zucchine trifolate",
+                "Insalata di cetrioli", "Insalata mista"
+            ]
         };
 
-        // Ingredient mapping
-        const mealIngredients = {
-            // Lunch
+        // Ingredients map
+        const ingredients = {
             "Ravioli burro e salvia": ["Ravioli", "Burro", "Salvia", "Parmigiano"],
             "Spaghetti al limone": ["Spaghetti", "Limone", "Burro", "Parmigiano"],
-            "Pasta e ceci": ["Pasta", "Ceci", "Cipolla", "Rosmarino", "Aglio"],
-            "Pasta col tonno": ["Pasta", "Tonno", "Salsa pomodoro", "Cipolla"],
-            "Pasta sugo tonno": ["Pasta", "Tonno", "Salsa pomodoro", "Cipolla"],
+            "Pasta e ceci": ["Pasta", "Ceci", "Cipolla", "Rosmarino"],
+            "Pasta col tonno": ["Pasta", "Tonno", "Salsa pomodoro"],
+            "Pasta sugo tonno": ["Pasta", "Tonno", "Salsa pomodoro"],
             "Piadine prosciutto provolone": ["Piadina", "Prosciutto", "Provolone"],
             "Uova fritte": ["Uova", "Olio"],
             "Pasta al pesto": ["Pasta", "Pesto", "Pomodorini"],
             "Pasta coi pomodorini": ["Pasta", "Pomodorini", "Aglio", "Basilico"],
             "Lenticchie": ["Lenticchie", "Carote", "Sedano", "Cipolla"],
-            "Spaghetti aglio e olio": ["Spaghetti", "Aglio", "Peperoncino", "Prezzemolo"],
+            "Spaghetti aglio e olio": ["Spaghetti", "Aglio", "Peperoncino"],
             "Carbonara": ["Spaghetti", "Uova", "Pancetta", "Pecorino"],
             "Frittata di pasta": ["Pasta avanzata", "Uova", "Formaggio"],
-            "Pasta e fagioli": ["Pasta", "Fagioli", "Pancetta", "Rosmarino"],
-
-            // Regular Dinner
-            "Salmone col riso": ["Salmone", "Riso", "Salsa soia"],
-            "Frittata di zucchine": ["Uova", "Zucchine", "Parmigiano", "Cipolla"],
-            "Polpette": ["Carne macinata", "Pangrattato", "Uova", "Aglio", "Prezzemolo"],
-            "Pollo al limone": ["Petto di pollo", "Limone", "Farina", "Burro"],
-            "Merluzzo": ["Merluzzo", "Olio", "Limone", "Prezzemolo"],
-            "Hamburger": ["Pane hamburger", "Carne hamburger", "Formaggio", "Lattuga", "Pomodoro"],
+            "Pasta e fagioli": ["Pasta", "Fagioli", "Pancetta"],
+            "Salmone col riso": ["Salmone", "Riso"],
+            "Frittata di zucchine": ["Uova", "Zucchine", "Parmigiano"],
+            "Polpette": ["Carne macinata", "Pangrattato", "Uova"],
+            "Pollo al limone": ["Petto di pollo", "Limone", "Farina"],
+            "Merluzzo": ["Merluzzo", "Olio", "Limone"],
+            "Hamburger": ["Pane hamburger", "Carne", "Formaggio", "Lattuga"],
             "Cotolette": ["Cotolette", "Pangrattato", "Uova"],
-            "Salsicce": ["Salsicce", "Olio"],
-            "Minestrone": ["Verdure miste", "Pasta", "Fagioli", "Brodo"],
-            "Pollo al forno": ["Pollo", "Patate", "Rosmarino", "Aglio"],
-            "Scaloppine al limone": ["Scaloppine", "Limone", "Farina", "Burro"],
-            "Caprese": ["Mozzarella", "Pomodori", "Basilico", "Olio"],
-
-            // Quick Dinner
-            "Cordon bleu": ["Cordon bleu", "Olio"],
+            "Salsicce": ["Salsicce"],
+            "Minestrone": ["Verdure miste", "Pasta", "Fagioli"],
+            "Pollo al forno": ["Pollo", "Patate", "Rosmarino"],
+            "Scaloppine al limone": ["Scaloppine", "Limone", "Farina"],
+            "Caprese": ["Mozzarella", "Pomodori", "Basilico"],
+            "Cordon bleu": ["Cordon bleu"],
             "Würstel": ["Würstel"],
             "Dumplings": ["Dumplings"],
-            "Fish sticks": ["Fish sticks", "Olio"],
+            "Fish sticks": ["Fish sticks"],
             "Pollo allo spiedo": ["Pollo intero"],
-
-            // Weekend
-            "Pasta al forno": ["Pasta", "Sugo", "Mozzarella", "Besciamella", "Parmigiano"],
-            "Parmigiana di melanzane": ["Melanzane", "Sugo", "Mozzarella", "Parmigiano"],
-            "Zucchine ripiene": ["Zucchine", "Carne macinata", "Pane", "Uova", "Parmigiano"],
-            "Lasagna": ["Pasta lasagna", "Ragù", "Besciamella", "Parmigiano"],
-            "Spezzatino con patate": ["Carne spezzatino", "Patate", "Cipolla", "Carote", "Vino"],
-            "Tortellini con la panna": ["Tortellini", "Panna", "Prosciutto"],
-            "Tortellini col sugo": ["Tortellini", "Sugo", "Parmigiano"],
+            "Pasta al forno": ["Pasta", "Sugo", "Mozzarella", "Besciamella"],
+            "Parmigiana di melanzane": ["Melanzane", "Sugo", "Mozzarella"],
+            "Zucchine ripiene": ["Zucchine", "Carne macinata", "Pane"],
+            "Lasagna": ["Pasta lasagna", "Ragù", "Besciamella"],
+            "Spezzatino con patate": ["Carne", "Patate", "Cipolla", "Carote"],
+            "Tortellini con la panna": ["Tortellini", "Panna"],
+            "Tortellini col sugo": ["Tortellini", "Sugo"],
             "Pasta col ragù": ["Pasta", "Ragù"],
-            "Polpettone": ["Carne macinata", "Uova", "Pancetta", "Parmigiano", "Pane"],
+            "Polpettone": ["Carne macinata", "Uova", "Pancetta"],
             "Scrimpelle mbuss": ["Uova", "Farina", "Latte", "Brodo"],
             "Polenta col sugo": ["Polenta", "Sugo con salsicce"],
-            "Cannelloni": ["Cannelloni", "Ricotta", "Spinaci", "Sugo", "Besciamella"],
-            "Bistecca": ["Bistecca", "Sale", "Pepe"],
-
-            // Sides
+            "Cannelloni": ["Cannelloni", "Ricotta", "Spinaci"],
+            "Bistecca": ["Bistecca"],
             "Purè di patate": ["Patate", "Burro", "Latte"],
-            "Broccoli al vapore": ["Broccoli", "Burro"],
-            "Insalata di pomodori": ["Pomodori", "Cipolla", "Basilico", "Olio"],
-            "Tater tots": ["Tater tots", "Olio"],
-            "Barbabietole": ["Barbabietole", "Olio", "Aceto"],
-            "Insalata di mais": ["Mais", "Cipolla", "Peperoni"],
+            "Broccoli al vapore": ["Broccoli"],
+            "Insalata di pomodori": ["Pomodori", "Cipolla", "Basilico"],
+            "Tater tots": ["Tater tots"],
+            "Barbabietole": ["Barbabietole"],
+            "Insalata di mais": ["Mais"],
             "Patate lesse": ["Patate"],
-            "Carote al forno": ["Carote", "Olio", "Miele"],
-            "Carote a insalata": ["Carote", "Limone", "Olio"],
-            "Zucchine trifolate": ["Zucchine", "Aglio", "Olio", "Prezzemolo"],
-            "Insalata di cetrioli": ["Cetrioli", "Yogurt", "Aneto"],
-            "Insalata mista": ["Lattuga", "Pomodorini", "Cetriolo", "Carote"],
-
-            // Other
+            "Carote al forno": ["Carote"],
+            "Carote a insalata": ["Carote", "Limone"],
+            "Zucchine trifolate": ["Zucchine", "Aglio"],
+            "Insalata di cetrioli": ["Cetrioli", "Yogurt"],
+            "Insalata mista": ["Lattuga", "Pomodorini", "Cetriolo"],
             "Colacena": ["Latte", "Cereali"]
         };
 
-        // State management
-        let mealData = {};
-        let selectedWeek = 'next';
-        let weekendEnabled = false;
-        let lockedDays = {};
-        let dinnerModes = {};
-        let currentShareContent = '';
+        // State
+        let data = {};
+        let week = 'next';
+        let weekendOn = {};
+        let locked = {};
+        let modes = {};
+        let currentPicker = null;
+        let shareContent = '';
 
-        // LocalStorage keys
-        const LS_KEYS = {
-            MEALS: 'mealPlanner.meals',
-            WEEK: 'mealPlanner.week',
-            WEEKEND: 'mealPlanner.weekend',
-            LOCKED: 'mealPlanner.locked',
-            MODES: 'mealPlanner.modes',
-            THEME: 'mealPlanner.theme',
-            WEEKEND_BY_WEEK: 'mealPlanner.weekendByWeek'
-        };
-
-        // Initialize app
+        // Initialize
         function init() {
-            loadState();
-            initTheme();
-            generateWeek();
-            updateWeekendToggle();
+            load();
+            render();
+            setTheme();
         }
 
-        // Theme management
-        function initTheme() {
-            const saved = localStorage.getItem(LS_KEYS.THEME);
-            const system = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-            const theme = saved || system;
-
-            document.documentElement.setAttribute('data-theme', theme);
-            updateThemeIcon(theme);
+        // Theme
+        function setTheme() {
+            const saved = localStorage.getItem('theme');
+            const dark = saved ? saved === 'dark' : 
+                window.matchMedia('(prefers-color-scheme: dark)').matches;
+            document.documentElement.setAttribute('data-theme', dark ? 'dark' : 'light');
+            document.getElementById('themeBtn').textContent = dark ? '☀️' : '🌙';
         }
 
         function toggleTheme() {
             const current = document.documentElement.getAttribute('data-theme');
             const next = current === 'dark' ? 'light' : 'dark';
-
             document.documentElement.setAttribute('data-theme', next);
-            localStorage.setItem(LS_KEYS.THEME, next);
-            updateThemeIcon(next);
+            localStorage.setItem('theme', next);
+            document.getElementById('themeBtn').textContent = next === 'dark' ? '☀️' : '🌙';
         }
 
-        function updateThemeIcon(theme) {
-            document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀️' : '🌙';
+        // Week
+        function selectWeek(w) {
+            week = w;
+            document.getElementById('thisWeek').classList.toggle('active', w === 'this');
+            document.getElementById('nextWeek').classList.toggle('active', w === 'next');
+            updateWeekend();
+            save();
+            render();
         }
 
-        // Week selection
-        function selectWeek(week) {
-            selectedWeek = week;
-            document.getElementById('thisWeekBtn').classList.toggle('active', week === 'this');
-            document.getElementById('nextWeekBtn').classList.toggle('active', week === 'next');
-            saveState();
-            generateWeek();
-        }
-
-let weekendEnabledByWeek = { this: false, next: false };
-
-function toggleWeekendPlanning() {
-  const nextVal = !weekendEnabledByWeek[selectedWeek];
-  weekendEnabledByWeek[selectedWeek] = nextVal;
-  weekendEnabled = nextVal; // keep your existing flag for current render
-  updateWeekendToggle();
-
-  if (!nextVal) {
-    for (let i = 5; i <= 6; i++) {
-      const key = getDayKey(i);
-      delete mealData[key]; delete lockedDays[key]; delete dinnerModes[key];
-    }
-  }
-  saveState(); generateWeek();
-}
-
-function updateWeekendToggle() {
-  weekendEnabled = !!weekendEnabledByWeek[selectedWeek];
-  document.getElementById('weekendToggle').classList.toggle('active', weekendEnabled);
-}
-
-        // Generate week view
-        function generateWeek() {
-            const container = document.getElementById('daysContainer');
-            container.innerHTML = '';
-
-            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-            days.forEach((name, index) => {
-                if (index >= 5 && !weekendEnabled) return;
-
-                const key = getDayKey(index);
-                const date = getDateForIndex(index);
-                const isWeekend = index >= 5;
-
-                if (!mealData[key]) {
-                    mealData[key] = { lunch: '', dinner: '', side: '' };
+        // Weekend
+        function toggleWeekend() {
+            weekendOn[week] = !weekendOn[week];
+            updateWeekend();
+            if (!weekendOn[week]) {
+                for (let i = 5; i <= 6; i++) {
+                    const k = getKey(i);
+                    delete data[k];
+                    delete locked[k];
+                    delete modes[k];
                 }
-
-                const card = createDayCard(name, date, key, isWeekend);
-                container.appendChild(card);
-            });
-
-            // Auto-expand first day
-            setTimeout(() => {
-                const first = container.querySelector('.day-card');
-                if (first) expandDay(first);
-            }, 100);
-
-            saveState();
-        }
-
-        function createDayCard(name, date, key, isWeekend) {
-            const data = mealData[key];
-            const locked = lockedDays[key];
-            const mode = dinnerModes[key] || 'regular';
-            const hasMeals = data.lunch || data.dinner;
-
-            const card = document.createElement('div');
-            card.className = 'day-card' + (isWeekend ? ' weekend' : '') + (hasMeals ? ' has-meals' : '');
-            card.dataset.key = key;
-
-            const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-
-            // Build badges
-            let badges = '';
-            if (mode === 'quick') badges += '<span class="badge quick">Quick</span>';
-            if (mode === 'delivery') badges += '<span class="badge delivery">Delivery</span>';
-
-            card.innerHTML = `
-                <div class="day-header" role="button" aria-expanded="false" tabindex="0"
-                    onclick="toggleDay('${key}')"
-                    onkeydown="if(event.key==='Enter'||event.key===' ') {event.preventDefault(); toggleDay('${key}');}">
-                    <div class="day-info">
-                        <div class="day-status">
-                            <div class="status-indicator"></div>
-                        </div>
-                        <div class="day-title">
-                            <div class="day-name">${name}</div>
-                            <div class="day-date">${dateStr}</div>
-                        </div>
-                    </div>
-                    <div class="day-badges">
-                        ${locked ? '<span class="lock-indicator">🔒</span>' : ''}
-                        ${badges}
-                        <span class="chevron">▼</span>
-                    </div>
-                </div>
-                <div class="meals-content">
-                    ${createMealsContent(key, isWeekend)}
-                </div>
-            `;
-
-            return card;
-        }
-
-        function createMealsContent(key, isWeekend) {
-            const data = mealData[key];
-            const mode = dinnerModes[key] || 'regular';
-            const locked = lockedDays[key];
-
-            // Get dinner options based on mode and weekend
-            let dinnerOpts = [];
-            if (mode === 'quick') {
-                dinnerOpts = mealOptions.dinner.quick;
-            } else if (mode === 'delivery') {
-                dinnerOpts = mealOptions.dinner.delivery;
-            } else if (isWeekend) {
-                dinnerOpts = mealOptions.dinner.weekend;
-            } else {
-                dinnerOpts = mealOptions.dinner.regular;
             }
+            save();
+            render();
+        }
 
-            const showSide = mode !== 'delivery';
+        function updateWeekend() {
+            document.getElementById('weekendSwitch').classList.toggle('active', weekendOn[week]);
+        }
 
-            return `
-                <div class="meal-section">
-                    <div class="meal-header">
-                        <div class="meal-label">Lunch</div>
-                    </div>
-                    <div class="meal-input-wrapper">
-                        <input type="text" 
-                            class="meal-input" 
-                            value="${data.lunch}"
-                            placeholder="Select lunch..."
-                            onclick="showDropdown('${key}', 'lunch')"
-                            onkeyup="filterDropdown('${key}', 'lunch', this.value)"
-                            onblur="commitFreeText('${key}','lunch', this.value)"
-                            data-meal="lunch">
-                        <button class="shuffle-btn" onclick="shuffleMeal('${key}', 'lunch')" title="Shuffle lunch">
-                            🎲
-                        </button>
-                        <div class="meal-dropdown" id="dropdown-${key}-lunch">
-                            <div class="dropdown-search">
-                                <input type="text" class="search-input" 
-                                    placeholder="Search meals..."
-                                    onkeyup="filterDropdown('${key}', 'lunch', this.value)">
+        // Render
+        function render() {
+            const list = document.getElementById('daysList');
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            
+            list.innerHTML = days.map((name, i) => {
+                if (i >= 5 && !weekendOn[week]) return '';
+                
+                const k = getKey(i);
+                const d = data[k] || { lunch: '', dinner: '', side: '' };
+                const isWeekend = i >= 5;
+                const isLocked = locked[k];
+                const mode = modes[k] || 'regular';
+                const hasMeals = d.lunch || d.dinner;
+                const date = getDate(i);
+                
+                let badges = '';
+                if (isLocked) badges += '<span class="lock-icon">🔒</span>';
+                if (mode === 'quick') badges += '<span class="day-badge badge-quick">Quick</span>';
+                if (mode === 'delivery') badges += '<span class="day-badge badge-delivery">Delivery</span>';
+                
+                return `
+                    <div class="day-cell ${isWeekend ? 'weekend' : ''} ${hasMeals ? 'has-meals' : ''}" id="day-${k}">
+                        <div class="day-header" onclick="toggleDay('${k}')">
+                            <div class="day-left">
+                                <div class="day-indicator"></div>
+                                <div class="day-info">
+                                    <div class="day-name">${name}</div>
+                                    <div class="day-date">${date.toLocaleDateString('en', {month: 'short', day: 'numeric'})}</div>
+                                </div>
                             </div>
-                            <div class="dropdown-options" id="options-${key}-lunch">
-                                ${createDropdownOptions(mealOptions.lunch.main, data.lunch, key, 'lunch')}
+                            <div class="day-right">
+                                ${badges}
+                                <span class="chevron">▼</span>
                             </div>
                         </div>
+                        <div class="meals-content">
+                            ${renderMeals(k, isWeekend)}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+            
+            if (!data[getKey(0)]) {
+                setTimeout(() => toggleDay(getKey(0)), 100);
+            }
+        }
+
+        function renderMeals(k, isWeekend) {
+            const d = data[k] || { lunch: '', dinner: '', side: '' };
+            const mode = modes[k] || 'regular';
+            const isLocked = locked[k];
+            
+            const dinnerOpts = mode === 'quick' ? meals.dinner.quick :
+                             mode === 'delivery' ? meals.dinner.delivery :
+                             isWeekend ? meals.dinner.weekend :
+                             meals.dinner.regular;
+            
+            return `
+                <div class="meal-group">
+                    <div class="meal-label">Lunch</div>
+                    <div class="meal-field">
+                        <input type="text" class="meal-input" value="${d.lunch}"
+                            placeholder="Tap to select..." readonly
+                            onclick="openPicker('${k}', 'lunch')">
+                        <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}', 'lunch')">🎲</button>
                     </div>
                 </div>
                 
-                <div class="meal-section">
-                    <div class="meal-header">
-                        <div class="meal-label">Dinner</div>
-                    </div>
+                <div class="meal-group">
+                    <div class="meal-label">Dinner</div>
                     ${!isWeekend ? `
-                        <div class="dinner-mode-selector">
-                            <button class="mode-btn ${mode === 'regular' ? 'active' : ''}" 
-                                onclick="setDinnerMode('${key}', 'regular')">
-                                <span>🍽️</span> Regular
-                            </button>
-                            <button class="mode-btn ${mode === 'quick' ? 'active quick' : ''}" 
-                                onclick="setDinnerMode('${key}', 'quick')">
-                                <span>⚡</span> Quick
-                            </button>
-                            <button class="mode-btn ${mode === 'delivery' ? 'active delivery' : ''}" 
-                                onclick="setDinnerMode('${key}', 'delivery')">
-                                <span>🚚</span> Delivery
-                            </button>
+                        <div class="mode-pills">
+                            <button class="mode-pill ${mode === 'regular' ? 'active' : ''}"
+                                onclick="setMode('${k}', 'regular')">🍽️ Regular</button>
+                            <button class="mode-pill ${mode === 'quick' ? 'active quick' : ''}"
+                                onclick="setMode('${k}', 'quick')">⚡ Quick</button>
+                            <button class="mode-pill ${mode === 'delivery' ? 'active delivery' : ''}"
+                                onclick="setMode('${k}', 'delivery')">🚚 Delivery</button>
                         </div>
                     ` : ''}
-                    <div class="meal-input-wrapper">
-                        <input type="text" 
-                            class="meal-input" 
-                            value="${data.dinner}"
-                            placeholder="Select dinner..."
-                            onclick="showDropdown('${key}', 'dinner')"
-                            onkeyup="filterDropdown('${key}', 'dinner', this.value)"
-                            onblur="commitFreeText('${key}','dinner', this.value)"
-                            data-meal="dinner">
-                        <button class="shuffle-btn" onclick="shuffleMeal('${key}', 'dinner')" title="Shuffle dinner">
-                            🎲
-                        </button>
-                        <div class="meal-dropdown" id="dropdown-${key}-dinner">
-                            <div class="dropdown-search">
-                                <input type="text" class="search-input" 
-                                    placeholder="Search meals..."
-                                    onkeyup="filterDropdown('${key}', 'dinner', this.value)">
-                            </div>
-                            <div class="dropdown-options" id="options-${key}-dinner">
-                                ${createDropdownOptions(dinnerOpts, data.dinner, key, 'dinner')}
-                                ${mode === 'regular' && !isWeekend ?
-                    `<div class="dropdown-group">Other</div>
-                                     ${createDropdownOptions(mealOptions.dinner.other, data.dinner, key, 'dinner')}` : ''}
-                            </div>
-                        </div>
+                    <div class="meal-field">
+                        <input type="text" class="meal-input" value="${d.dinner}"
+                            placeholder="Tap to select..." readonly
+                            onclick="openPicker('${k}', 'dinner')">
+                        <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}', 'dinner')">🎲</button>
                     </div>
                     
-                    ${showSide ? `
-                        <div style="margin-top: 16px;">
-                            <div class="meal-header">
-                                <div class="meal-label">Side Dish</div>
-                            </div>
-                            <div class="meal-input-wrapper">
-                                <input type="text" 
-                                    class="meal-input" 
-                                    value="${data.side}"
-                                    placeholder="Select side..."
-                                    onclick="showDropdown('${key}', 'side')"
-                                    onkeyup="filterDropdown('${key}', 'side', this.value)"
-                                     onblur="commitFreeText('${key}','side', this.value)"
-                                    data-meal="side">
-                                <button class="shuffle-btn" onclick="shuffleMeal('${key}', 'side')" title="Shuffle side">
-                                    🎲
-                                </button>
-                                <div class="meal-dropdown" id="dropdown-${key}-side">
-                                    <div class="dropdown-search">
-                                        <input type="text" class="search-input" 
-                                            placeholder="Search sides..."
-                                            onkeyup="filterDropdown('${key}', 'side', this.value)">
-                                    </div>
-                                    <div class="dropdown-options" id="options-${key}-side">
-                                        ${createDropdownOptions(mealOptions.side.main, data.side, key, 'side')}
-                                        <div class="dropdown-group">Other</div>
-                                        <div class="dropdown-option" onclick="selectMeal('${key}', 'side', 'None')">None</div>
-                                    </div>
-                                </div>
+                    ${mode !== 'delivery' ? `
+                        <div style="margin-top: 12px;">
+                            <div class="meal-label">Side Dish</div>
+                            <div class="meal-field">
+                                <input type="text" class="meal-input" value="${d.side}"
+                                    placeholder="Tap to select..." readonly
+                                    onclick="openPicker('${k}', 'side')">
+                                <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}', 'side')">🎲</button>
                             </div>
                         </div>
                     ` : ''}
                 </div>
                 
                 <div class="day-actions">
-                    <button class="day-action-btn ${locked ? 'lock-btn locked' : 'lock-btn'}" 
-                        onclick="toggleLock('${key}')">
-                        ${locked ? '🔒 Locked' : '🔓 Unlocked'}
-                    </button>
-                    <button class="day-action-btn" onclick="shuffleDay('${key}')">
-                        🎲 Shuffle Day
-                    </button>
-                    <button class="day-action-btn" onclick="clearDay('${key}')">
-                        🗑️ Clear Day
-                    </button>
+                    <button class="action-btn ${isLocked ? 'locked' : ''}"
+                        onclick="toggleLock('${k}')">${isLocked ? '🔒 Locked' : '🔓 Lock'}</button>
+                    <button class="action-btn" onclick="shuffleDay('${k}')">🎲 Shuffle</button>
+                    <button class="action-btn" onclick="clearDay('${k}')">🗑️ Clear</button>
                 </div>
             `;
         }
 
-        function commitFreeText(key, meal, value) {
-            const trimmed = (value || '').trim();
-            mealData[key][meal] = (meal === 'side' && trimmed.toLowerCase() === 'none') ? '' : trimmed;
-
-            // If delivery mode (or dinner text contains "Delivery"), side must be empty
-            if (meal === 'dinner') {
-                const mode = dinnerModes[key] || 'regular';
-                if (mode === 'delivery' || /delivery/i.test(trimmed)) {
-                    mealData[key].side = '';
-                    const card = document.querySelector(`[data-key="${key}"]`);
-                    const sideInput = card?.querySelector('[data-meal="side"]');
-                    if (sideInput) sideInput.value = '';
+        // Picker
+        function openPicker(k, type) {
+            currentPicker = { key: k, type: type };
+            const picker = document.getElementById('mealPicker');
+            const title = document.getElementById('pickerTitle');
+            const options = document.getElementById('pickerOptions');
+            const search = document.getElementById('pickerSearch');
+            
+            title.textContent = `Select ${type.charAt(0).toUpperCase() + type.slice(1)}`;
+            search.value = '';
+            
+            let items = [];
+            if (type === 'lunch') {
+                items = meals.lunch;
+            } else if (type === 'dinner') {
+                const mode = modes[k] || 'regular';
+                const isWeekend = getIndex(k) >= 5;
+                items = mode === 'quick' ? meals.dinner.quick :
+                       mode === 'delivery' ? meals.dinner.delivery :
+                       isWeekend ? meals.dinner.weekend :
+                       meals.dinner.regular;
+                if (!isWeekend && mode === 'regular') {
+                    items = [...items, ...meals.dinner.other];
                 }
+            } else {
+                items = ['None', ...meals.side];
             }
-
-            updateDayStatus(key);
-            saveState();
+            
+            const current = (data[k] || {})[type];
+            options.innerHTML = items.map(item => 
+                `<div class="picker-option ${item === current ? 'selected' : ''}"
+                    onclick="selectMeal('${item}')">${item}</div>`
+            ).join('');
+            
+            picker.classList.add('show');
+            document.body.classList.add('no-scroll');
         }
 
-function createDropdownOptions(options, selected, key, meal) {
-  return options.map(opt =>
-    `<div class="dropdown-option ${opt === selected ? 'selected' : ''}"
-         data-key="${key}" data-meal="${meal}" data-value="${opt.replace(/"/g, '&quot;')}">
-      ${opt}
-    </div>`
-  ).join('');
-}
-
-        // Dropdown management
-        function showDropdown(key, meal) {
-            // Close all other dropdowns
-            document.querySelectorAll('.meal-dropdown').forEach(d => d.classList.remove('show'));
-
-            const dropdown = document.getElementById(`dropdown-${key}-${meal}`);
-            dropdown.classList.add('show');
-
-            // Focus search input
-            const search = dropdown.querySelector('.search-input');
-            setTimeout(() => search.focus(), 50);
+        function closePicker() {
+            document.getElementById('mealPicker').classList.remove('show');
+            document.body.classList.remove('no-scroll');
+            currentPicker = null;
         }
 
-        function filterDropdown(key, meal, query) {
-            const options = document.querySelectorAll(`#options-${key}-${meal} .dropdown-option`);
-            const lowerQuery = query.toLowerCase();
-
+        function filterPicker() {
+            const query = document.getElementById('pickerSearch').value.toLowerCase();
+            const options = document.querySelectorAll('.picker-option');
             options.forEach(opt => {
-                const text = opt.textContent.toLowerCase();
-                opt.style.display = text.includes(lowerQuery) ? 'block' : 'none';
+                opt.style.display = opt.textContent.toLowerCase().includes(query) ? 'block' : 'none';
             });
         }
 
-        function selectMeal(key, meal, value) {
-            mealData[key][meal] = value === 'None' ? '' : value;
-
-            // Update input
-            const card = document.querySelector(`[data-key="${key}"]`);
-            const input = card.querySelector(`[data-meal="${meal}"]`);
-            input.value = value === 'None' ? '' : value;
-
-            // Hide dropdown
-            document.getElementById(`dropdown-${key}-${meal}`).classList.remove('show');
-
-            // Clear side if delivery selected
-            if (meal === 'dinner' && value.includes('Delivery')) {
-                mealData[key].side = '';
+        function selectMeal(value) {
+            if (!currentPicker) return;
+            const { key, type } = currentPicker;
+            
+            if (!data[key]) data[key] = { lunch: '', dinner: '', side: '' };
+            data[key][type] = value === 'None' ? '' : value;
+            
+            if (type === 'dinner' && value.includes('Delivery')) {
+                data[key].side = '';
             }
-
-            updateDayStatus(key);
-            saveState();
+            
+            save();
+            render();
+            closePicker();
         }
 
-        // Click outside to close dropdowns
-function createDropdownOptions(options, selected, key, meal) {
-  return options.map(opt =>
-    `<div class="dropdown-option ${opt === selected ? 'selected' : ''}"
-         data-key="${key}" data-meal="${meal}" data-value="${opt.replace(/"/g, '&quot;')}">
-      ${opt}
-    </div>`
-  ).join('');
-}
-
-        // Day management
-        function toggleDay(key) {
-            const card = document.querySelector(`[data-key="${key}"]`);
-            const header = card.querySelector('.day-header');
-            const expanded = !card.classList.contains('expanded');
-
-            document.querySelectorAll('.day-card.expanded').forEach(c => { if (c !== card) c.classList.remove('expanded'); });
-            card.classList.toggle('expanded', expanded);
-            header.setAttribute('aria-expanded', expanded ? 'true' : 'false');
-        }
-
-function expandDay(card) {
-  card.classList.add('expanded');
-  const header = card.querySelector('.day-header');
-  header?.setAttribute('aria-expanded', 'true');
-}
-
-        function updateDayStatus(key) {
-            const card = document.querySelector(`[data-key="${key}"]`);
-            const data = mealData[key];
-            const hasMeals = data.lunch || data.dinner;
-
-            card.classList.toggle('has-meals', hasMeals);
-        }
-
-        function toggleLock(key) {
-            lockedDays[key] = !lockedDays[key];
-            saveState();
-            generateWeek();
-        }
-
-        function setDinnerMode(key, mode) {
-            dinnerModes[key] = mode;
-
-            // Clear dinner if not compatible with new mode
-            const data = mealData[key];
-            const validOptions = mode === 'quick' ? mealOptions.dinner.quick :
-                mode === 'delivery' ? mealOptions.dinner.delivery :
-                    mealOptions.dinner.regular;
-
-            if (data.dinner && !validOptions.includes(data.dinner)) {
-                mealData[key].dinner = '';
+        // Day actions
+        function toggleDay(k) {
+            const cell = document.getElementById(`day-${k}`);
+            const wasExpanded = cell.classList.contains('expanded');
+            
+            document.querySelectorAll('.day-cell').forEach(c => c.classList.remove('expanded'));
+            
+            if (!wasExpanded) {
+                cell.classList.add('expanded');
+                if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
             }
-
-            // Clear side for delivery
-            if (mode === 'delivery') {
-                mealData[key].side = '';
-            }
-
-            saveState();
-            generateWeek();
         }
 
-        function shuffleDay(key) {
-            if (lockedDays[key]) return;
+        function toggleLock(k) {
+            locked[k] = !locked[k];
+            save();
+            render();
+        }
 
-            const isWeekend = getDayIndex(key) >= 5;
-            const mode = dinnerModes[key] || 'regular';
+        function setMode(k, mode) {
+            modes[k] = mode;
+            if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
+            
+            // Clear invalid selections
+            const validDinner = mode === 'quick' ? meals.dinner.quick :
+                              mode === 'delivery' ? meals.dinner.delivery :
+                              meals.dinner.regular;
+            if (data[k].dinner && !validDinner.includes(data[k].dinner)) {
+                data[k].dinner = '';
+            }
+            if (mode === 'delivery') data[k].side = '';
+            
+            save();
+            render();
+        }
 
-            // Shuffle lunch
-            const lunches = [...mealOptions.lunch.main];
-            mealData[key].lunch = lunches[Math.floor(Math.random() * lunches.length)];
-
-            // Shuffle dinner
-            let dinners = [];
-            if (mode === 'quick') {
-                dinners = mealOptions.dinner.quick;
-            } else if (mode === 'delivery') {
-                dinners = mealOptions.dinner.delivery;
-            } else if (isWeekend) {
-                dinners = mealOptions.dinner.weekend;
+        function shuffleMeal(k, type) {
+            if (locked[k]) return;
+            
+            const btn = event.target;
+            btn.classList.add('shuffling');
+            
+            if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
+            
+            let pool = [];
+            if (type === 'lunch') {
+                pool = meals.lunch;
+            } else if (type === 'dinner') {
+                const mode = modes[k] || 'regular';
+                const isWeekend = getIndex(k) >= 5;
+                pool = mode === 'quick' ? meals.dinner.quick :
+                      mode === 'delivery' ? meals.dinner.delivery :
+                      isWeekend ? meals.dinner.weekend :
+                      meals.dinner.regular;
             } else {
-                dinners = mealOptions.dinner.regular;
+                pool = meals.side;
             }
-            mealData[key].dinner = dinners[Math.floor(Math.random() * dinners.length)];
+            
+            data[k][type] = pool[Math.floor(Math.random() * pool.length)];
+            
+            setTimeout(() => {
+                btn.classList.remove('shuffling');
+                save();
+                render();
+            }, 500);
+        }
 
-            // Shuffle side (if not delivery)
+        function shuffleDay(k) {
+            if (locked[k]) return;
+            
+            if (!data[k]) data[k] = { lunch: '', dinner: '', side: '' };
+            
+            const mode = modes[k] || 'regular';
+            const isWeekend = getIndex(k) >= 5;
+            
+            data[k].lunch = meals.lunch[Math.floor(Math.random() * meals.lunch.length)];
+            
+            const dinnerPool = mode === 'quick' ? meals.dinner.quick :
+                              mode === 'delivery' ? meals.dinner.delivery :
+                              isWeekend ? meals.dinner.weekend :
+                              meals.dinner.regular;
+            data[k].dinner = dinnerPool[Math.floor(Math.random() * dinnerPool.length)];
+            
             if (mode !== 'delivery') {
-                const sides = [...mealOptions.side.main];
-                mealData[key].side = sides[Math.floor(Math.random() * sides.length)];
+                data[k].side = meals.side[Math.floor(Math.random() * meals.side.length)];
             }
-
-            saveState();
-            generateWeek();
+            
+            save();
+            render();
         }
 
-        function clearDay(key) {
-            mealData[key] = { lunch: '', dinner: '', side: '' };
-            saveState();
-            generateWeek();
+        function clearDay(k) {
+            data[k] = { lunch: '', dinner: '', side: '' };
+            save();
+            render();
         }
 
-        // Week operations
-        function shuffleWeek() {
-            const container = document.getElementById('daysContainer');
-            container.classList.add('shuffle-animation');
-
+        // Week actions
+        function shuffleAll() {
             for (let i = 0; i < 7; i++) {
-                if (i >= 5 && !weekendEnabled) continue;     // skip weekend if hidden
-                const key = getDayKey(i);
-                if (!lockedDays[key]) shuffleDay(key);
+                if (i >= 5 && !weekendOn[week]) continue;
+                const k = getKey(i);
+                if (!locked[k]) shuffleDay(k);
             }
-
-            setTimeout(() => container.classList.remove('shuffle-animation'), 600);
         }
 
-function resetWeek() {
-  if (!confirm('Clear all meals for this week?')) return;
+        function clearAll() {
+            if (!confirm('Clear all meals?')) return;
+            for (let i = 0; i < 7; i++) {
+                const k = getKey(i);
+                data[k] = { lunch: '', dinner: '', side: '' };
+                delete locked[k];
+                delete modes[k];
+            }
+            save();
+            render();
+        }
 
-  for (let i = 0; i < 7; i++) {
-    const key = getDayKey(i);
-    mealData[key] = { lunch: '', dinner: '', side: '' };
-    delete lockedDays[key];
-    delete dinnerModes[key];
-  }
-  saveState();
-  generateWeek();
-}
-
-        // Grocery list
-        function generateGroceryList() {
-            const ingredients = new Map();
-
-            Object.entries(mealData).forEach(([key, data]) => {
+        // Grocery
+        function showGrocery() {
+            const list = document.getElementById('groceryList');
+            const items = {};
+            
+            Object.values(data).forEach(d => {
                 ['lunch', 'dinner', 'side'].forEach(type => {
-                    const meal = data[type];
-                    if (meal && meal !== 'None' && mealIngredients[meal]) {
-                        mealIngredients[meal].forEach(ing => {
-                            ingredients.set(ing, (ingredients.get(ing) || 0) + 1);
+                    const meal = d[type];
+                    if (meal && ingredients[meal]) {
+                        ingredients[meal].forEach(ing => {
+                            items[ing] = (items[ing] || 0) + 1;
                         });
                     }
                 });
             });
-
-            // Organize by category
-            const categories = {
-                'Proteins': ['Pollo', 'Carne', 'Salmone', 'Merluzzo', 'Pancetta', 'Prosciutto', 'Salsicce', 'Würstel', 'Fish sticks', 'Uova', 'Tonno'],
-                'Dairy': ['Mozzarella', 'Parmigiano', 'Provolone', 'Formaggio', 'Ricotta', 'Burro', 'Latte', 'Panna', 'Yogurt'],
-                'Carbs': ['Pasta', 'Spaghetti', 'Ravioli', 'Tortellini', 'Lasagna', 'Cannelloni', 'Riso', 'Pane', 'Polenta', 'Farina'],
-                'Vegetables': ['Pomodori', 'Zucchine', 'Melanzane', 'Carote', 'Patate', 'Broccoli', 'Spinaci', 'Cipolla', 'Aglio'],
-                'Other': []
-            };
-
-            const organized = {};
-
-            ingredients.forEach((count, ing) => {
-                let added = false;
-                for (const [cat, items] of Object.entries(categories)) {
-                    if (items.some(item => ing.toLowerCase().includes(item.toLowerCase()))) {
-                        if (!organized[cat]) organized[cat] = [];
-                        organized[cat].push({ name: ing, count });
-                        added = true;
-                        break;
-                    }
-                }
-                if (!added) {
-                    if (!organized['Other']) organized['Other'] = [];
-                    organized['Other'].push({ name: ing, count });
-                }
-            });
-
-            return organized;
-        }
-
-        function showGroceryList() {
-            const list = generateGroceryList();
-            const container = document.getElementById('groceryList');
-
-            if (Object.keys(list).length === 0) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <div class="empty-state-icon">🛒</div>
-                        <p>Add meals to generate your grocery list</p>
-                    </div>
-                `;
+            
+            if (Object.keys(items).length === 0) {
+                list.innerHTML = '<div class="empty-state"><div class="empty-icon">🛒</div><p>No meals planned yet</p></div>';
             } else {
-                container.innerHTML = `
-                    <div class="grocery-categories">
-                        ${Object.entries(list).map(([cat, items]) => `
-                            <div class="grocery-category">
-                                <div class="category-title">${cat}</div>
-                                ${items.map(item => `
-                                    <div class="grocery-item">
-                                        <input type="checkbox" class="grocery-checkbox">
-                                        <span>${item.name} ${item.count > 1 ? `(×${item.count})` : ''}</span>
-                                    </div>
-                                `).join('')}
+                const cats = {
+                    'Proteins': ['Pollo', 'Carne', 'Salmone', 'Merluzzo', 'Pancetta', 'Prosciutto'],
+                    'Dairy': ['Mozzarella', 'Parmigiano', 'Provolone', 'Formaggio', 'Ricotta', 'Burro', 'Latte'],
+                    'Carbs': ['Pasta', 'Spaghetti', 'Ravioli', 'Tortellini', 'Riso', 'Pane'],
+                    'Vegetables': ['Pomodori', 'Zucchine', 'Melanzane', 'Carote', 'Patate'],
+                    'Other': []
+                };
+                
+                const organized = {};
+                Object.entries(items).forEach(([ing, count]) => {
+                    let added = false;
+                    for (const [cat, keywords] of Object.entries(cats)) {
+                        if (keywords.some(k => ing.toLowerCase().includes(k.toLowerCase()))) {
+                            if (!organized[cat]) organized[cat] = [];
+                            organized[cat].push({ name: ing, count });
+                            added = true;
+                            break;
+                        }
+                    }
+                    if (!added) {
+                        if (!organized.Other) organized.Other = [];
+                        organized.Other.push({ name: ing, count });
+                    }
+                });
+                
+                list.innerHTML = Object.entries(organized).map(([cat, items]) => `
+                    <div class="grocery-section">
+                        <div class="grocery-title">${cat}</div>
+                        ${items.map(item => `
+                            <div class="grocery-item">
+                                <input type="checkbox" class="grocery-check">
+                                <span>${item.name} ${item.count > 1 ? `(×${item.count})` : ''}</span>
                             </div>
                         `).join('')}
                     </div>
-                `;
+                `).join('');
             }
-
+            
             showModal('groceryModal');
         }
 
-        // Share functionality
-        function shareWeek() {
-            const weekTitle = selectedWeek === 'this' ? 'This Week' : 'Next Week';
-            const range = formatWeekRange();
-            let text = `📅 Meal Plan - ${weekTitle}\n${range}\n\n`;
-
-            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
-            days.forEach((day, i) => {
-                if (i >= 5 && !weekendEnabled) return;
-
-                const key = getDayKey(i);
-                const data = mealData[key];
-                const date = getDateForIndex(i);
-                const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-
-                text += `${day} (${dateStr})\n`;
-                if (data.lunch) text += `  Lunch: ${data.lunch}\n`;
-                if (data.dinner) {
-                    text += `  Dinner: ${data.dinner}`;
-                    if (data.side) text += ` with ${data.side}`;
-                    text += '\n';
-                }
-                if (!data.lunch && !data.dinner) text += `  No meals planned\n`;
-                text += '\n';
+        function shareGrocery() {
+            const items = document.querySelectorAll('.grocery-item span');
+            if (items.length === 0) return;
+            
+            shareContent = '🛒 Grocery List\n\n';
+            items.forEach(item => {
+                shareContent += `☐ ${item.textContent}\n`;
             });
-
-            currentShareContent = text.trim();
-            document.getElementById('shareContent').textContent = currentShareContent;
-            document.getElementById('shareModalTitle').textContent = 'Share Meal Plan';
-            showModal('shareModal');
-        }
-
-        function shareGroceryList() {
-            const list = generateGroceryList();
-            if (Object.keys(list).length === 0) {
-                alert('No items in grocery list!');
-                return;
-            }
-
-            let text = `🛒 Grocery List\n${formatWeekRange()}\n\n`;
-
-            Object.entries(list).forEach(([cat, items]) => {
-                text += `${cat}:\n`;
-                items.forEach(item => {
-                    text += `☐ ${item.name}`;
-                    if (item.count > 1) text += ` (×${item.count})`;
-                    text += '\n';
-                });
-                text += '\n';
-            });
-
-            currentShareContent = text.trim();
+            
             closeModal('groceryModal');
             setTimeout(() => {
-                document.getElementById('shareContent').textContent = currentShareContent;
-                document.getElementById('shareModalTitle').textContent = 'Share Grocery List';
+                document.getElementById('shareTitle').textContent = 'Grocery List';
+                document.getElementById('shareText').textContent = shareContent;
                 showModal('shareModal');
             }, 300);
         }
 
-        function copyToClipboard(btn) {
-            navigator.clipboard.writeText(currentShareContent).then(() => {
-                const original = btn.textContent;
+        // Share
+        function sharePlan() {
+            const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+            shareContent = `📅 Meal Plan - ${week === 'this' ? 'This' : 'Next'} Week\n\n`;
+            
+            days.forEach((day, i) => {
+                if (i >= 5 && !weekendOn[week]) return;
+                const k = getKey(i);
+                const d = data[k] || {};
+                
+                shareContent += `${day}\n`;
+                if (d.lunch) shareContent += `  Lunch: ${d.lunch}\n`;
+                if (d.dinner) {
+                    shareContent += `  Dinner: ${d.dinner}`;
+                    if (d.side) shareContent += ` with ${d.side}`;
+                    shareContent += '\n';
+                }
+                if (!d.lunch && !d.dinner) shareContent += `  No meals\n`;
+                shareContent += '\n';
+            });
+            
+            document.getElementById('shareTitle').textContent = 'Meal Plan';
+            document.getElementById('shareText').textContent = shareContent;
+            showModal('shareModal');
+        }
+
+        function copyText() {
+            navigator.clipboard.writeText(shareContent).then(() => {
+                const btn = event.target;
                 btn.textContent = 'Copied! ✓';
                 btn.style.background = 'var(--accent-success)';
                 setTimeout(() => {
-                    btn.textContent = original;
+                    btn.textContent = 'Copy';
                     btn.style.background = '';
                     closeModal('shareModal');
                 }, 1000);
             });
         }
 
-        // Modal management
+        // Modals
         function showModal(id) {
             document.getElementById(id).classList.add('show');
+            document.body.classList.add('no-scroll');
         }
 
         function closeModal(id) {
             document.getElementById(id).classList.remove('show');
+            document.body.classList.remove('no-scroll');
         }
 
-        // Click outside modal to close
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('modal')) {
+        // Touch to close modals
+        document.addEventListener('click', e => {
+            if (e.target.classList.contains('ios-modal')) {
                 e.target.classList.remove('show');
+                document.body.classList.remove('no-scroll');
             }
         });
 
-        // Utility functions
-        function getDayKey(index) {
-            const date = getDateForIndex(index);
-            return `${selectedWeek}-${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
+        // Utilities
+        function getKey(index) {
+            const date = getDate(index);
+            return `${week}-${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
         }
 
-        function getDayIndex(key) {
+        function getIndex(key) {
             const parts = key.split('-');
             const date = new Date(parts[1], parts[2], parts[3]);
-            const start = getStartOfWeek();
-            const diff = Math.floor((date - start) / (1000 * 60 * 60 * 24));
-            return diff;
+            const start = getWeekStart();
+            return Math.floor((date - start) / 86400000);
         }
 
-        function getStartOfWeek() {
-            const now = new Date();
-            const day = now.getDay();
-            const diff = now.getDate() - day + (day === 0 ? -6 : 1);
-            const start = new Date(now.setDate(diff));
-            start.setHours(0, 0, 0, 0);
-
-            if (selectedWeek === 'next') {
-                start.setDate(start.getDate() + 7);
-            }
-
-            return start;
-        }
-
-        function getDateForIndex(index) {
-            const start = getStartOfWeek();
+        function getDate(index) {
+            const start = getWeekStart();
             const date = new Date(start);
             date.setDate(start.getDate() + index);
             return date;
         }
 
-        function formatWeekRange() {
-            const start = getStartOfWeek();
-            const end = new Date(start);
-            end.setDate(start.getDate() + 6);
-
-            const options = { month: 'short', day: 'numeric' };
-            return `${start.toLocaleDateString('en-US', options)} - ${end.toLocaleDateString('en-US', options)}`;
+        function getWeekStart() {
+            const now = new Date();
+            const day = now.getDay();
+            const diff = now.getDate() - day + (day === 0 ? -6 : 1);
+            const start = new Date(now.setDate(diff));
+            start.setHours(0, 0, 0, 0);
+            if (week === 'next') start.setDate(start.getDate() + 7);
+            return start;
         }
 
-        // State persistence
-        function saveState() {
-            localStorage.setItem(LS_KEYS.MEALS, JSON.stringify(mealData));
-            localStorage.setItem(LS_KEYS.WEEK, selectedWeek);
-            localStorage.setItem(LS_KEYS.WEEKEND, weekendEnabled);
-            localStorage.setItem(LS_KEYS.LOCKED, JSON.stringify(lockedDays));
-            localStorage.setItem(LS_KEYS.MODES, JSON.stringify(dinnerModes));
-            localStorage.setItem(LS_KEYS.WEEKEND_BY_WEEK, JSON.stringify(weekendEnabledByWeek));
+        // Storage
+        function save() {
+            localStorage.setItem('mealData', JSON.stringify(data));
+            localStorage.setItem('mealWeek', week);
+            localStorage.setItem('mealWeekend', JSON.stringify(weekendOn));
+            localStorage.setItem('mealLocked', JSON.stringify(locked));
+            localStorage.setItem('mealModes', JSON.stringify(modes));
         }
 
-        function loadState() {
+        function load() {
             try {
-                const meals = localStorage.getItem(LS_KEYS.MEALS);
-                if (meals) mealData = JSON.parse(meals);
-
-                const week = localStorage.getItem(LS_KEYS.WEEK);
-                if (week) selectedWeek = week;
-
-                const weekend = localStorage.getItem(LS_KEYS.WEEKEND);
-                if (weekend) weekendEnabled = weekend === 'true';
-
-                const locked = localStorage.getItem(LS_KEYS.LOCKED);
-                if (locked) lockedDays = JSON.parse(locked);
-
-                const modes = localStorage.getItem(LS_KEYS.MODES);
-                if (modes) dinnerModes = JSON.parse(modes);
-
-                const per = localStorage.getItem(LS_KEYS.WEEKEND_BY_WEEK);
-                if (per) weekendEnabledByWeek = JSON.parse(per);
-                weekendEnabled = !!weekendEnabledByWeek[selectedWeek];
-            } catch (e) {
-                console.error('Error loading state:', e);
-            }
+                data = JSON.parse(localStorage.getItem('mealData') || '{}');
+                week = localStorage.getItem('mealWeek') || 'next';
+                weekendOn = JSON.parse(localStorage.getItem('mealWeekend') || '{}');
+                locked = JSON.parse(localStorage.getItem('mealLocked') || '{}');
+                modes = JSON.parse(localStorage.getItem('mealModes') || '{}');
+            } catch {}
         }
 
-        // Initialize on load
-        document.addEventListener('DOMContentLoaded', init);
-
-        // Listen for theme changes
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-            if (!localStorage.getItem(LS_KEYS.THEME)) {
-                document.documentElement.setAttribute('data-theme', e.matches ? 'dark' : 'light');
-                updateThemeIcon(e.matches ? 'dark' : 'light');
-            }
-        });
+        // Start
+        init();
     </script>
 </body>
 
