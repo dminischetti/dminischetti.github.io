@@ -919,9 +919,7 @@
             const turningOn = !isWeekendEnabled();
             weekendPlanByWeek[selectedWeek] = turningOn;
 
-            // OPTIONAL: clear meals for Sat/Sun when turning off
             if (!turningOn) {
-                // get Sat/Sun dates for the selected week
                 const sat = getDateForIndex(5, selectedWeek);
                 const sun = getDateForIndex(6, selectedWeek);
                 [sat, sun].forEach(d => {
@@ -930,6 +928,16 @@
                         mealData[k].lunch = '';
                         mealData[k].dinner = '';
                         mealData[k].dinnerSide = '';
+                    }
+                });
+            } else {
+                // turning ON: clear dinners that aren't in weekendOptions
+                const sat = getDateForIndex(5, selectedWeek);
+                const sun = getDateForIndex(6, selectedWeek);
+                [sat, sun].forEach(d => {
+                    const k = getDayKeyFromDate(d, selectedWeek);
+                    if (mealData[k]?.dinner && !weekendOptions.includes(mealData[k].dinner)) {
+                        mealData[k].dinner = '';
                     }
                 });
             }
@@ -1111,8 +1119,8 @@
                         </select>
                         <input type="text" class="custom-input" placeholder="Enter custom dinner..." 
                                onchange="updateMeal('${dayKey}', 'dinner', this.value)" 
-                               style="display: ${data.dinner && !dinnerOptions.includes(data.dinner) ? 'block' : 'none'}" 
-                               value="${data.dinner && !dinnerOptions.includes(data.dinner) ? data.dinner : ''}">
+                               style="display: ${data.dinner && !dinnerList.includes(data.dinner) ? 'block' : 'none'}" 
+                               value="${data.dinner && !dinnerList.includes(data.dinner) ? data.dinner : ''}">
                     </div>
                     <div style="margin-top: 12px;">
                         <div class="meal-label">Side Dish</div>
