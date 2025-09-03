@@ -17,39 +17,47 @@
   --bg-primary:#f2f2f7;--bg-secondary:#ffffff;--bg-tertiary:#ffffff;
   --text-primary:#1d1d1f;--text-secondary:#86868b;--text-tertiary:#c7c7cc;
   --border-color:#c7c7cc;--border-secondary:#f2f2f7;
-  
+
   /* iOS Semantic Colors */
   --blue:#007aff;--blue-light:#cce7ff;--blue-bg:#f0f8ff;
   --orange:#ff9500;--orange-light:#ffe0b3;--orange-bg:#fff8e1;
   --purple:#af52de;--purple-light:#e6ccff;--purple-bg:#faf0ff;
   --green:#34c759;--red:#ff3b30;--gray:#8e8e93;
-  
+
   /* System Elements */
   --separator:#c6c6c8;--fill-quaternary:rgba(118,118,128,.08);
   --grouped-bg:#f2f2f7;--grouped-secondary:#ffffff;
-  
+
   /* Elevation */
   --shadow-1:0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
   --shadow-2:0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
   --shadow-3:0 10px 20px rgba(0,0,0,.19), 0 6px 6px rgba(0,0,0,.23);
-  
+
   --safe-area-top:env(safe-area-inset-top);
   --safe-area-bottom:env(safe-area-inset-bottom);
+
+  /* Compact scales */
+  --compact-font: .92;      /* global font scale when compact */
+  --compact-pad:  .8;       /* global spacing scale when compact */
+  --row-height:   50px;     /* base row height (normal) */
+  --row-height-c: 38px;     /* row height (compact) */
+  --btn-height:   50px;
+  --btn-height-c: 38px;
 }
 
 [data-theme="dark"]{
   --bg-primary:#000000;--bg-secondary:#1c1c1e;--bg-tertiary:#2c2c2e;
   --text-primary:#f2f2f7;--text-secondary:#98989d;--text-tertiary:#48484a;
   --border-color:#48484a;--border-secondary:#3a3a3c;
-  
+
   --blue:#0a84ff;--blue-light:#002d52;--blue-bg:#001a33;
   --orange:#ff9f0a;--orange-light:#4d3800;--orange-bg:#2d2000;
   --purple:#bf5af2;--purple-light:#4d0052;--purple-bg:#2d0033;
   --green:#30d158;--red:#ff453a;--gray:#8e8e93;
-  
+
   --separator:#38383a;--fill-quaternary:rgba(118,118,128,.16);
   --grouped-bg:#000000;--grouped-secondary:#1c1c1e;
-  
+
   --shadow-1:0 1px 3px rgba(0,0,0,.5), 0 1px 2px rgba(0,0,0,.6);
   --shadow-2:0 3px 6px rgba(0,0,0,.6), 0 3px 6px rgba(0,0,0,.7);
   --shadow-3:0 10px 20px rgba(0,0,0,.8), 0 6px 6px rgba(0,0,0,.7);
@@ -83,13 +91,11 @@ body{
   border-bottom:0.33px solid var(--separator);
   backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
 }
-
 .nav-content{padding:8px 20px 12px}
 .nav-title{
   font-size:34px;font-weight:700;line-height:1.12;letter-spacing:-.5px;
   color:var(--text-primary);margin-bottom:8px
 }
-
 .nav-controls{display:flex;align-items:center;justify-content:space-between}
 .week-selector{display:flex;background:var(--fill-quaternary);border-radius:10px;padding:2px}
 .week-option{
@@ -98,11 +104,7 @@ body{
   border-radius:8px;transition:all .2s cubic-bezier(.25,.46,.45,.94);
   min-width:60px
 }
-.week-option.active{
-  background:var(--bg-secondary);color:var(--text-primary);
-  box-shadow:0 1px 3px rgba(0,0,0,.12);font-weight:600
-}
-
+.week-option.active{background:var(--bg-secondary);color:var(--text-primary);box-shadow:0 1px 3px rgba(0,0,0,.12);font-weight:600}
 .theme-toggle{
   width:36px;height:36px;border:none;background:var(--fill-quaternary);
   border-radius:18px;display:flex;align-items:center;justify-content:center;
@@ -111,406 +113,194 @@ body{
 .theme-toggle:active{transform:scale(.95)}
 
 /* Week View */
-.week-container{
-  background:var(--bg-primary);
-  padding:0 20px 120px;
-}
-
-.week-header{
-  padding:20px 0 16px;
-  display:flex;align-items:center;justify-content:space-between;
-}
+.week-container{background:var(--bg-primary);padding:0 20px 120px;}
+.week-header{padding:20px 0 16px;display:flex;align-items:center;justify-content:space-between;}
 .week-title{font-size:22px;font-weight:700;color:var(--text-primary)}
 .week-range{font-size:15px;color:var(--text-secondary);font-weight:500}
 
 /* Day Cards */
 .days-grid{display:flex;flex-direction:column;gap:12px}
 .day-card{
-  background:var(--bg-secondary);
-  border-radius:16px;
-  box-shadow:var(--shadow-1);
-  overflow:hidden;
-  transition:all .3s cubic-bezier(.25,.46,.45,.94);
-  border:0.33px solid var(--separator);
+  background:var(--bg-secondary);border-radius:16px;box-shadow:var(--shadow-1);
+  overflow:hidden;transition:all .3s cubic-bezier(.25,.46,.45,.94);border:0.33px solid var(--separator);
 }
 .day-card:active{transform:scale(.98);box-shadow:var(--shadow-2)}
 .day-card.weekend{background:var(--fill-quaternary)}
-
 .day-header{
-  padding:16px 20px 12px;
-  border-bottom:0.33px solid var(--separator);
+  padding:16px 20px 12px;border-bottom:0.33px solid var(--separator);
   background:linear-gradient(135deg, var(--bg-secondary) 0%, rgba(0,0,0,.01) 100%);
 }
 .day-header-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:8px}
 .day-name{font-size:20px;font-weight:600;color:var(--text-primary);line-height:1.2}
 .day-date{font-size:13px;color:var(--text-secondary);font-weight:500;margin-top:2px}
-
 .day-status{display:flex;align-items:center;gap:8px}
-.status-indicator{
-  width:8px;height:8px;border-radius:4px;
-  background:var(--green);opacity:0;
-  transition:opacity .3s cubic-bezier(.25,.46,.45,.94)
-}
+.status-indicator{width:8px;height:8px;border-radius:4px;background:var(--green);opacity:0;transition:opacity .3s cubic-bezier(.25,.46,.45,.94)}
 .day-card.has-meals .status-indicator{opacity:1}
-.status-badge{
-  padding:4px 8px;border-radius:8px;
-  font-size:11px;font-weight:600;
-  text-transform:uppercase;letter-spacing:.05em
-}
+.status-badge{padding:4px 8px;border-radius:8px;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.05em}
 .badge-quick{background:var(--orange-light);color:var(--orange)}
 .badge-delivery{background:var(--purple-light);color:var(--purple)}
 .badge-locked{background:var(--red);color:white;font-size:10px}
-
 .day-meals{padding:16px 20px}
 .meal-preview{display:flex;flex-direction:column;gap:8px}
 .meal-item{display:flex;align-items:center;gap:12px}
-.meal-icon{
-  width:24px;height:24px;border-radius:6px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:12px;flex-shrink:0
-}
+.meal-icon{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
 .meal-icon.lunch{background:var(--orange-bg);color:var(--orange)}
 .meal-icon.dinner{background:var(--blue-bg);color:var(--blue)}
 .meal-icon.side{background:var(--purple-bg);color:var(--purple)}
-
 .meal-text{flex:1}
 .meal-name{font-size:15px;color:var(--text-primary);line-height:1.33}
 .meal-empty{font-size:15px;color:var(--text-secondary);font-style:italic}
-
-.chevron-right{
-  color:var(--text-tertiary);font-size:14px;
-  transform:translateX(0);
-  transition:transform .2s cubic-bezier(.25,.46,.45,.94)
-}
+.chevron-right{color:var(--text-tertiary);font-size:14px;transform:translateX(0);transition:transform .2s cubic-bezier(.25,.46,.45,.94)}
 .day-card:active .chevron-right{transform:translateX(4px)}
 
 /* Weekend Toggle */
-.settings-section{
-  background:var(--bg-secondary);
-  margin:20px 20px 0;border-radius:16px;
-  border:0.33px solid var(--separator);
-  overflow:hidden
-}
-.setting-item{
-  padding:16px 20px;
-  display:flex;align-items:center;justify-content:space-between;
-  background:var(--bg-secondary)
-}
+.settings-section{background:var(--bg-secondary);margin:20px 20px 0;border-radius:16px;border:0.33px solid var(--separator);overflow:hidden}
+.setting-item{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;background:var(--bg-secondary)}
 .setting-label{font-size:17px;color:var(--text-primary);font-weight:400}
-.ios-switch{
-  width:51px;height:31px;background:var(--separator);
-  border-radius:16px;position:relative;
-  transition:background .25s cubic-bezier(.25,.46,.45,.94);
-  box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)
-}
+.ios-switch{width:51px;height:31px;background:var(--separator);border-radius:16px;position:relative;transition:background .25s cubic-bezier(.25,.46,.45,.94);box-shadow:inset 0 0 0 1px rgba(0,0,0,.04)}
 .ios-switch.active{background:var(--green)}
-.ios-switch::after{
-  content:'';position:absolute;width:27px;height:27px;
-  background:#ffffff;border-radius:14px;top:2px;left:2px;
-  transition:transform .25s cubic-bezier(.25,.46,.45,.94);
-  box-shadow:0 3px 8px rgba(0,0,0,.15), 0 3px 1px rgba(0,0,0,.06)
-}
+.ios-switch::after{content:'';position:absolute;width:27px;height:27px;background:#ffffff;border-radius:14px;top:2px;left:2px;transition:transform .25s cubic-bezier(.25,.46,.45,.94);box-shadow:0 3px 8px rgba(0,0,0,.15), 0 3px 1px rgba(0,0,0,.06)}
 .ios-switch.active::after{transform:translateX(20px)}
 
 /* Day Editor Modal */
-.day-editor{
-  position:fixed;inset:0;z-index:2000;
-  background:var(--bg-primary);
-  display:none;flex-direction:column;
-  transform:translateX(100%);
-  transition:transform .35s cubic-bezier(.32,.72,0,1)
-}
+.day-editor{position:fixed;inset:0;z-index:2000;background:var(--bg-primary);display:none;flex-direction:column;transform:translateX(100%);transition:transform .35s cubic-bezier(.32,.72,0,1)}
 .day-editor.show{display:flex;transform:translateX(0)}
+/* —— Compact mode switches typography and paddings INSIDE editor & picker —— */
+.day-editor.compact, .picker-compact{
+  font-size:calc(16px * var(--compact-font));
+}
+.day-editor.compact .editor-nav-content{padding:6px 14px}
+.day-editor.compact .nav-button{padding:6px 8px;font-size:15px;min-width:52px;border-radius:8px}
+.day-editor.compact .editor-title h2{font-size:16px}
+.day-editor.compact .editor-title p{font-size:12px}
+.day-editor.compact .editor-content{padding:12px}
 
-.editor-nav{
-  background:var(--bg-secondary);
-  padding-top:var(--safe-area-top);
-  padding-bottom:12px;
-  border-bottom:0.33px solid var(--separator);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)
-}
-.editor-nav-content{
-  padding:8px 20px;
-  display:flex;align-items:center;justify-content:space-between
-}
-.nav-button{
-  padding:8px 12px;border:none;background:transparent;
-  font-size:17px;font-weight:600;border-radius:10px;
-  transition:all .2s cubic-bezier(.25,.46,.45,.94);
-  min-width:60px;text-align:center
-}
+/* Editor Nav */
+.editor-nav{background:var(--bg-secondary);padding-top:var(--safe-area-top);padding-bottom:12px;border-bottom:0.33px solid var(--separator);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px)}
+.editor-nav-content{padding:8px 20px;display:flex;align-items:center;justify-content:space-between}
+.nav-button{padding:8px 12px;border:none;background:transparent;font-size:17px;font-weight:600;border-radius:10px;transition:all .2s cubic-bezier(.25,.46,.45,.94);min-width:60px;text-align:center}
 .nav-button.close{color:var(--blue)}
 .nav-button.done{background:var(--blue);color:white}
 .nav-button:active{transform:scale(.95)}
-
 .editor-title{text-align:center;flex:1;margin:0 16px}
 .editor-title h2{font-size:20px;font-weight:600;color:var(--text-primary)}
 .editor-title p{font-size:13px;color:var(--text-secondary);margin-top:1px;font-weight:500}
 
-.editor-content{
-  flex:1;overflow-y:auto;
-  padding:20px;-webkit-overflow-scrolling:touch
-}
+.editor-content{flex:1;overflow-y:auto;padding:20px;-webkit-overflow-scrolling:touch}
 
 /* Meal Cards in Editor */
-.meal-card{
-  background:var(--bg-secondary);
-  border-radius:16px;margin-bottom:16px;
-  border:0.33px solid var(--separator);
-  overflow:hidden;box-shadow:var(--shadow-1)
-}
+.meal-card{background:var(--bg-secondary);border-radius:16px;margin-bottom:16px;border:0.33px solid var(--separator);overflow:hidden;box-shadow:var(--shadow-1)}
+.day-editor.compact .meal-card{border-radius:12px;margin-bottom:10px;box-shadow:none}
 
-.meal-card-header{
-  padding:16px 20px 12px;
-  border-bottom:0.33px solid var(--separator);
-  display:flex;align-items:center;justify-content:space-between
-}
+.meal-card-header{padding:16px 20px 12px;border-bottom:0.33px solid var(--separator);display:flex;align-items:center;justify-content:space-between}
+.day-editor.compact .meal-card-header{padding:10px 14px 8px}
 .meal-type-info{display:flex;align-items:center;gap:12px}
-.meal-type-icon{
-  width:28px;height:28px;border-radius:8px;
-  display:flex;align-items:center;justify-content:center;
-  font-size:14px;font-weight:600
-}
+.meal-type-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600}
+.day-editor.compact .meal-type-icon{width:22px;height:22px;font-size:12px;border-radius:6px}
 .meal-type-title{font-size:17px;font-weight:600;color:var(--text-primary)}
+.day-editor.compact .meal-type-title{font-size:15px}
 
 .lunch-card .meal-type-icon{background:var(--orange);color:white}
 .lunch-card .meal-card-header{background:linear-gradient(135deg, var(--orange-bg) 0%, var(--bg-secondary) 100%)}
-
 .dinner-card .meal-type-icon{background:var(--blue);color:white}
 .dinner-card .meal-card-header{background:linear-gradient(135deg, var(--blue-bg) 0%, var(--bg-secondary) 100%)}
-
 .side-card .meal-type-icon{background:var(--purple);color:white}
 .side-card .meal-card-header{background:linear-gradient(135deg, var(--purple-bg) 0%, var(--bg-secondary) 100%)}
 
 /* Mode Selector */
-.mode-selector{
-  padding:0 20px 16px;
-  display:flex;gap:8px
-}
-.mode-button{
-  flex:1;padding:8px 12px;border:1.5px solid var(--separator);
-  background:var(--bg-secondary);border-radius:12px;
-  font-size:13px;font-weight:600;color:var(--text-secondary);
-  transition:all .2s cubic-bezier(.25,.46,.45,.94);
-  display:flex;align-items:center;justify-content:center;gap:4px
-}
-.mode-button.active{
-  border-color:var(--blue);background:var(--blue);color:white
-}
-.mode-button.quick.active{
-  border-color:var(--orange);background:var(--orange)
-}
-.mode-button.delivery.active{
-  border-color:var(--purple);background:var(--purple)
-}
+.mode-selector{padding:0 20px 16px;display:flex;gap:8px}
+.day-editor.compact .mode-selector{padding:0 14px 10px;gap:6px}
+.mode-button{flex:1;padding:8px 12px;border:1.5px solid var(--separator);background:var(--bg-secondary);border-radius:12px;font-size:13px;font-weight:600;color:var(--text-secondary);transition:all .2s cubic-bezier(.25,.46,.45,.94);display:flex;align-items:center;justify-content:center;gap:4px;min-height:38px}
+.day-editor.compact .mode-button{padding:6px 8px;border-radius:10px;font-size:12px;min-height:32px}
+.mode-button.active{border-color:var(--blue);background:var(--blue);color:white}
+.mode-button.quick.active{border-color:var(--orange);background:var(--orange)}
+.mode-button.delivery.active{border-color:var(--purple);background:var(--purple)}
 
 /* Input Fields */
 .input-section{padding:16px 20px}
+.day-editor.compact .input-section{padding:10px 14px}
 .input-field{
-  width:100%;height:50px;
-  padding:0 50px 0 16px;
-  border:1.5px solid var(--separator);
+  width:100%;height:var(--row-height);
+  padding:0 50px 0 12px;border:1.5px solid var(--separator);
   border-radius:12px;background:var(--bg-secondary);
-  font-size:17px;color:var(--text-primary);
-  font-weight:400;transition:all .2s cubic-bezier(.25,.46,.45,.94);
-  position:relative
+  font-size:17px;color:var(--text-primary);font-weight:400;transition:all .2s cubic-bezier(.25,.46,.45,.94);position:relative
 }
-.input-field:focus{
-  outline:none;border-color:var(--blue);
-  box-shadow:0 0 0 4px rgba(0,122,255,.08)
-}
+.day-editor.compact .input-field{height:var(--row-height-c);font-size:15px;border-radius:10px}
+.input-field:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 4px rgba(0,122,255,.08)}
 .input-field::placeholder{color:var(--text-secondary)}
-
 .input-container{position:relative}
-.shuffle-button{
-  position:absolute;right:8px;top:8px;
-  width:34px;height:34px;border:none;
-  border-radius:8px;background:var(--fill-quaternary);
-  display:flex;align-items:center;justify-content:center;
-  font-size:16px;color:var(--text-secondary);
-  transition:all .2s cubic-bezier(.25,.46,.45,.94)
-}
-.shuffle-button:active{
-  transform:scale(.9);background:var(--blue);color:white
-}
+.shuffle-button{position:absolute;right:6px;top:6px;width:34px;height:34px;border:none;border-radius:8px;background:var(--fill-quaternary);display:flex;align-items:center;justify-content:center;font-size:16px;color:var(--text-secondary);transition:all .2s cubic-bezier(.25,.46,.45,.94)}
+.day-editor.compact .shuffle-button{right:4px;top:4px;width:28px;height:28px;font-size:14px}
+.shuffle-button:active{transform:scale(.9);background:var(--blue);color:white}
 
 /* Day Actions */
-.day-actions{
-  padding:16px 20px 20px;
-  display:grid;grid-template-columns:1fr 1fr;
-  gap:12px
-}
+.day-actions{padding:16px 20px 20px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.day-editor.compact .day-actions{padding:10px 14px 14px;gap:8px}
 .action-button{
-  height:50px;border:1.5px solid var(--separator);
-  background:var(--bg-secondary);border-radius:12px;
-  font-size:15px;font-weight:600;color:var(--text-primary);
-  display:flex;align-items:center;justify-content:center;gap:8px;
-  transition:all .2s cubic-bezier(.25,.46,.45,.94)
+  height:var(--btn-height);border:1.5px solid var(--separator);
+  background:var(--bg-secondary);border-radius:12px;font-size:15px;font-weight:600;color:var(--text-primary);
+  display:flex;align-items:center;justify-content:center;gap:8px;transition:all .2s cubic-bezier(.25,.46,.45,.94)
 }
+.day-editor.compact .action-button{height:var(--btn-height-c);font-size:13px;border-radius:10px}
 .action-button:active{transform:scale(.95)}
-.action-button.danger{
-  background:var(--red);color:white;border-color:var(--red)
-}
-.action-button.locked{
-  background:var(--red);color:white;border-color:var(--red)
-}
+.action-button.danger{background:var(--red);color:white;border-color:var(--red)}
+.action-button.locked{background:var(--red);color:white;border-color:var(--red)}
 
-/* Meal Picker */
-.picker-backdrop{
-  position:fixed;inset:0;z-index:3000;
-  background:rgba(0,0,0,.4);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  display:none;opacity:0;
-  transition:opacity .3s cubic-bezier(.25,.46,.45,.94)
-}
+/* Meal Picker (bottom sheet) */
+.picker-backdrop{position:fixed;inset:0;z-index:3000;background:rgba(0,0,0,.4);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);display:none;opacity:0;transition:opacity .3s cubic-bezier(.25,.46,.45,.94)}
 .picker-backdrop.show{display:flex;opacity:1}
-
 .meal-picker{
-  position:fixed;bottom:0;left:0;right:0;
-  background:var(--bg-secondary);
-  border-radius:16px 16px 0 0;
-  max-height:70vh;z-index:3001;
-  transform:translateY(100%);
-  transition:transform .4s cubic-bezier(.32,.72,0,1);
-  box-shadow:var(--shadow-3)
+  position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);
+  border-radius:16px 16px 0 0;max-height:70vh;z-index:3001;transform:translateY(100%);
+  transition:transform .4s cubic-bezier(.32,.72,0,1);box-shadow:var(--shadow-3)
 }
 .meal-picker.show{transform:translateY(0)}
-
-.picker-header{
-  padding:12px 20px 16px;
-  border-bottom:0.33px solid var(--separator);
-  text-align:center;position:relative
-}
-.picker-handle{
-  width:36px;height:5px;background:var(--text-tertiary);
-  border-radius:3px;margin:0 auto 12px;opacity:.5
-}
-.picker-title{
-  font-size:20px;font-weight:600;color:var(--text-primary)
-}
-.picker-done{
-  position:absolute;right:20px;top:16px;
-  background:var(--blue);color:white;
-  padding:8px 16px;border:none;border-radius:20px;
-  font-size:15px;font-weight:600;
-  transition:all .2s cubic-bezier(.25,.46,.45,.94)
-}
+.picker-header{padding:12px 20px 12px;border-bottom:0.33px solid var(--separator);text-align:center;position:relative}
+.picker-handle{width:36px;height:5px;background:var(--text-tertiary);border-radius:3px;margin:0 auto 10px;opacity:.5}
+.picker-title{font-size:18px;font-weight:600;color:var(--text-primary)}
+.picker-done{position:absolute;right:14px;top:12px;background:var(--blue);color:white;padding:6px 14px;border:none;border-radius:18px;font-size:14px;font-weight:600;transition:all .2s cubic-bezier(.25,.46,.45,.94)}
 .picker-done:active{transform:scale(.95)}
-
-.picker-options{
-  max-height:400px;overflow-y:auto;
-  -webkit-overflow-scrolling:touch;
-  padding-bottom:var(--safe-area-bottom)
-}
+.picker-options{max-height:400px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:var(--safe-area-bottom)}
 .picker-option{
-  padding:16px 20px;border-bottom:0.33px solid var(--separator);
-  font-size:17px;color:var(--text-primary);
-  background:var(--bg-secondary);
-  transition:background .2s cubic-bezier(.25,.46,.45,.94);
-  display:flex;align-items:center;justify-content:space-between
+  padding:12px 16px;border-bottom:0.33px solid var(--separator);
+  font-size:16px;color:var(--text-primary);background:var(--bg-secondary);
+  transition:background .2s cubic-bezier(.25,.46,.45,.94);display:flex;align-items:center;justify-content:space-between;min-height:40px
 }
 .picker-option:active{background:var(--fill-quaternary)}
-.picker-option.selected{
-  background:var(--blue-bg);color:var(--blue);font-weight:600
-}
-.picker-option.special{
-  color:var(--blue);font-weight:600;
-  background:linear-gradient(135deg, var(--blue-bg) 0%, var(--bg-secondary) 100%)
-}
+.picker-option.selected{background:var(--blue-bg);color:var(--blue);font-weight:600}
+.picker-option.special{color:var(--blue);font-weight:600;background:linear-gradient(135deg, var(--blue-bg) 0%, var(--bg-secondary) 100%)}
 
 /* Tab Bar */
-.tab-bar{
-  position:fixed;bottom:0;left:0;right:0;
-  background:var(--bg-secondary);
-  border-top:0.33px solid var(--separator);
-  padding-bottom:var(--safe-area-bottom);
-  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  z-index:1000
-}
-.tab-content{
-  display:flex;padding:8px 0 4px
-}
-.tab-item{
-  flex:1;padding:8px 4px;border:none;background:transparent;
-  display:flex;flex-direction:column;align-items:center;gap:4px;
-  transition:all .2s cubic-bezier(.25,.46,.45,.94)
-}
+.tab-bar{position:fixed;bottom:0;left:0;right:0;background:var(--bg-secondary);border-top:0.33px solid var(--separator);padding-bottom:var(--safe-area-bottom);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);z-index:1000}
+.tab-content{display:flex;padding:8px 0 4px}
+.tab-item{flex:1;padding:8px 4px;border:none;background:transparent;display:flex;flex-direction:column;align-items:center;gap:4px;transition:all .2s cubic-bezier(.25,.46,.45,.94)}
 .tab-item:active{transform:scale(.9)}
 .tab-icon{font-size:22px;line-height:1}
 .tab-label{font-size:10px;font-weight:500;color:var(--text-secondary);line-height:1}
-
 .tab-item.shuffle{color:var(--orange)}
 .tab-item.grocery{color:var(--green)}
 .tab-item.share{color:var(--blue)}
 .tab-item.clear{color:var(--red)}
 
-/* Modals */
-.modal{
-  position:fixed;inset:0;z-index:4000;
-  background:rgba(0,0,0,.4);backdrop-filter:blur(20px);
-  display:none;align-items:flex-end;
-  transition:opacity .3s cubic-bezier(.25,.46,.45,.94)
-}
+/* Generic Modals */
+.modal{position:fixed;inset:0;z-index:4000;background:rgba(0,0,0,.4);backdrop-filter:blur(20px);display:none;align-items:flex-end;transition:opacity .3s cubic-bezier(.25,.46,.45,.94)}
 .modal.show{display:flex}
-.modal-content{
-  width:100%;max-height:80vh;
-  background:var(--bg-secondary);
-  border-radius:16px 16px 0 0;
-  display:flex;flex-direction:column;
-  box-shadow:var(--shadow-3)
-}
-.modal-header{
-  padding:12px 20px 16px;
-  border-bottom:0.33px solid var(--separator);
-  text-align:center
-}
-.modal-handle{
-  width:36px;height:5px;background:var(--text-tertiary);
-  border-radius:3px;margin:0 auto 12px;opacity:.5
-}
-.modal-title{
-  font-size:20px;font-weight:600;color:var(--text-primary)
-}
-.modal-body{
-  flex:1;overflow-y:auto;padding:20px;
-  -webkit-overflow-scrolling:touch
-}
-.modal-actions{
-  padding:16px 20px;display:flex;gap:12px;
-  border-top:0.33px solid var(--separator)
-}
-.modal-button{
-  flex:1;height:50px;border:none;border-radius:12px;
-  font-size:17px;font-weight:600;
-  transition:all .2s cubic-bezier(.25,.46,.45,.94)
-}
+.modal-content{width:100%;max-height:80vh;background:var(--bg-secondary);border-radius:16px 16px 0 0;display:flex;flex-direction:column;box-shadow:var(--shadow-3)}
+.modal-header{padding:10px 16px;border-bottom:0.33px solid var(--separator);text-align:center}
+.modal-handle{width:36px;height:5px;background:var(--text-tertiary);border-radius:3px;margin:0 auto 10px;opacity:.5}
+.modal-title{font-size:18px;font-weight:600;color:var(--text-primary)}
+.modal-body{flex:1;overflow-y:auto;padding:14px;-webkit-overflow-scrolling:touch}
+.modal-actions{padding:12px 14px;display:flex;gap:10px;border-top:0.33px solid var(--separator)}
+.modal-button{flex:1;height:44px;border:none;border-radius:12px;font-size:16px;font-weight:600;transition:all .2s cubic-bezier(.25,.46,.45,.94)}
 .modal-button.primary{background:var(--blue);color:white}
-.modal-button.secondary{
-  background:var(--fill-quaternary);color:var(--text-primary);
-  border:1.5px solid var(--separator)
-}
+.modal-button.secondary{background:var(--fill-quaternary);color:var(--text-primary);border:1.5px solid var(--separator)}
 .modal-button:active{transform:scale(.95)}
 
 /* Animations */
-@keyframes slideInRight{
-  from{transform:translateX(100%)}
-  to{transform:translateX(0)}
-}
-@keyframes slideOutRight{
-  from{transform:translateX(0)}
-  to{transform:translateX(100%)}
-}
-@keyframes fadeIn{
-  from{opacity:0}
-  to{opacity:1}
-}
-@keyframes bounce{
-  0%,20%,53%,80%,100%{transform:scale3d(1,1,1)}
-  40%,43%{transform:scale3d(1.1,1.1,1.1)}
-  70%{transform:scale3d(1.05,1.05,1.05)}
-  90%{transform:scale3d(1.02,1.02,1.02)}
-}
-
+@keyframes slideInRight{from{transform:translateX(100%)}to{transform:translateX(0)}}
+@keyframes slideOutRight{from{transform:translateX(0)}to{transform:translateX(100%)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes bounce{0%,20%,53%,80%,100%{transform:scale3d(1,1,1)}40%,43%{transform:scale3d(1.1,1.1,1.1)}70%{transform:scale3d(1.05,1.05,1.05)}90%{transform:scale3d(1.02,1.02,1.02)}}
 .animate-slide-in{animation:slideInRight .35s cubic-bezier(.32,.72,0,1)}
 .animate-slide-out{animation:slideOutRight .35s cubic-bezier(.32,.72,0,1)}
 .animate-fade-in{animation:fadeIn .3s cubic-bezier(.25,.46,.45,.94)}
@@ -523,36 +313,20 @@ body{
 }
 
 /* Accessibility */
-@media (prefers-reduced-motion: reduce){
-  *{animation:none!important;transition:none!important}
-}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
 @media (prefers-contrast: high){
-  :root{
-    --separator:#000000;
-    --border-color:#000000
-  }
-  [data-theme="dark"]{
-    --separator:#ffffff;
-    --border-color:#ffffff
-  }
+  :root{--separator:#000000;--border-color:#000000}
+  [data-theme="dark"]{--separator:#ffffff;--border-color:#ffffff}
 }
 
 /* Focus states for accessibility */
-button:focus-visible{
-  outline:2px solid var(--blue);
-  outline-offset:2px
-}
+button:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
 
 /* Touch feedback */
-.touch-feedback{
-  transition:all .15s cubic-bezier(.25,.46,.45,.94)
-}
-.touch-feedback:active{
-  transform:scale(.96);
-  opacity:.8
-}
+.touch-feedback{transition:all .15s cubic-bezier(.25,.46,.45,.94)}
+.touch-feedback:active{transform:scale(.96);opacity:.8}
 
-/* Utility classes */
+/* Utility */
 .no-scroll{overflow:hidden;position:fixed;width:100%}
 .text-selectable{-webkit-user-select:text;user-select:text}
 .haptic{will-change:transform}
@@ -579,11 +353,11 @@ button:focus-visible{
       <div class="week-title">Plan Your Week</div>
       <div class="week-range" id="weekRange">Sep 2 - Sep 8</div>
     </div>
-    
+
     <div class="days-grid" id="daysGrid">
       <!-- Days will be rendered here -->
     </div>
-    
+
     <!-- Settings -->
     <section class="settings-section">
       <div class="setting-item">
@@ -605,7 +379,7 @@ button:focus-visible{
         <button class="nav-button done" onclick="closeDayEditor()">Done</button>
       </div>
     </nav>
-    
+
     <div class="editor-content" id="editorContent">
       <!-- Editor content will be populated dynamically -->
     </div>
@@ -670,7 +444,7 @@ button:focus-visible{
         <h3 class="modal-title">Share Meal Plan</h3>
       </div>
       <div class="modal-body">
-        <div class="text-selectable" id="shareText" style="font-family:ui-monospace,monospace;font-size:14px;line-height:1.5;padding:16px;background:var(--fill-quaternary);border-radius:12px"></div>
+        <div class="text-selectable" id="shareText" style="font-family:ui-monospace,monospace;font-size:14px;line-height:1.5;padding:12px;background:var(--fill-quaternary);border-radius:12px"></div>
       </div>
       <div class="modal-actions">
         <button class="modal-button secondary" onclick="closeModal('shareModal')">Close</button>
@@ -792,27 +566,17 @@ function setupEventListeners() {
   // Swipe gestures for day editor
   let startX = 0;
   const dayEditor = document.getElementById('dayEditor');
-  
-  dayEditor.addEventListener('touchstart', e => {
-    startX = e.touches[0].clientX;
-  }, { passive: true });
-  
+
+  dayEditor.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
   dayEditor.addEventListener('touchmove', e => {
     const currentX = e.touches[0].clientX;
     const diffX = currentX - startX;
-    if (diffX > 50) {
-      dayEditor.style.transform = `translateX(${Math.min(diffX - 50, 100)}px)`;
-    }
+    if (diffX > 50) { dayEditor.style.transform = `translateX(${Math.min(diffX - 50, 100)}px)`; }
   }, { passive: true });
-  
   dayEditor.addEventListener('touchend', e => {
     const currentX = e.changedTouches[0].clientX;
     const diffX = currentX - startX;
-    if (diffX > 100) {
-      closeDayEditor();
-    } else {
-      dayEditor.style.transform = '';
-    }
+    if (diffX > 100) { closeDayEditor(); } else { dayEditor.style.transform = ''; }
   }, { passive: true });
 
   // Keyboard shortcuts
@@ -823,6 +587,9 @@ function setupEventListeners() {
       else closeAllModals();
     }
   });
+
+  // Re-evaluate compact density on resize/orientation change
+  window.addEventListener('resize', applyEditorDensity);
 }
 
 function updateWeekSelector() {
@@ -835,18 +602,18 @@ function updateWeekRange() {
   const end = new Date(start);
   end.setDate(start.getDate() + 6);
   const format = { month: 'short', day: 'numeric' };
-  document.getElementById('weekRange').textContent = 
+  document.getElementById('weekRange').textContent =
     `${start.toLocaleDateString('en', format)} - ${end.toLocaleDateString('en', format)}`;
 }
 
 function renderDays() {
   const container = document.getElementById('daysGrid');
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
   const start = getWeekStart();
 
   container.innerHTML = days.map((dayName, index) => {
     if (index >= 5 && !weekendEnabled[week]) return '';
-    
+
     const dayKey = getDayKey(index, start);
     const dayData = data[dayKey] || { lunch: '', dinner: '', side: '' };
     const isWeekend = index >= 5;
@@ -867,23 +634,17 @@ function renderDays() {
         mealItems.push(`
           <div class="meal-item">
             <div class="meal-icon lunch">L</div>
-            <div class="meal-text">
-              <div class="meal-name">${dayData.lunch}</div>
-            </div>
+            <div class="meal-text"><div class="meal-name">${dayData.lunch}</div></div>
           </div>
         `);
       }
       if (dayData.dinner) {
         let dinnerText = dayData.dinner;
-        if (dayData.side && mode !== 'delivery') {
-          dinnerText += ` with ${dayData.side}`;
-        }
+        if (dayData.side && mode !== 'delivery') { dinnerText += \` with ${dayData.side}\`; }
         mealItems.push(`
           <div class="meal-item">
             <div class="meal-icon dinner">D</div>
-            <div class="meal-text">
-              <div class="meal-name">${dinnerText}</div>
-            </div>
+            <div class="meal-text"><div class="meal-name">${dinnerText}</div></div>
           </div>
         `);
       }
@@ -891,9 +652,7 @@ function renderDays() {
     } else {
       mealsPreview = `
         <div class="meal-item">
-          <div class="meal-text">
-            <div class="meal-empty">Tap to plan meals</div>
-          </div>
+          <div class="meal-text"><div class="meal-empty">Tap to plan meals</div></div>
         </div>
       `;
     }
@@ -913,11 +672,7 @@ function renderDays() {
             </div>
           </div>
         </div>
-        <div class="day-meals">
-          <div class="meal-preview">
-            ${mealsPreview}
-          </div>
-        </div>
+        <div class="day-meals"><div class="meal-preview">${mealsPreview}</div></div>
       </div>
     `;
   }).join('');
@@ -926,23 +681,35 @@ function renderDays() {
 function openDayEditor(dayKey) {
   currentEditingDay = dayKey;
   const editor = document.getElementById('dayEditor');
-  const content = document.getElementById('editorContent');
-  
+
   // Set header info
   const dayIndex = getDayIndex(dayKey);
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
   const date = getDateForIndex(dayIndex);
-  
+
   document.getElementById('editorDayName').textContent = days[dayIndex];
   document.getElementById('editorDayDate').textContent = date.toLocaleDateString('en', { month: 'short', day: 'numeric' });
-  
+
   renderDayEditor(dayKey);
-  
+
+  // Apply compact density if small viewport
+  applyEditorDensity();
+
   editor.classList.add('show', 'animate-slide-in');
   document.body.classList.add('no-scroll');
-  
-  // Haptic feedback
+
   if (navigator.vibrate) navigator.vibrate(10);
+}
+
+function applyEditorDensity() {
+  const editor = document.getElementById('dayEditor');
+  // Heuristic threshold; tweak as you like
+  const compact = window.innerHeight < 770;
+  editor.classList.toggle('compact', compact);
+
+  // Also compact the picker
+  const picker = document.getElementById('mealPicker');
+  if (compact) picker.classList.add('picker-compact'); else picker.classList.remove('picker-compact');
 }
 
 function closeDayEditor() {
@@ -951,7 +718,6 @@ function closeDayEditor() {
   document.body.classList.remove('no-scroll');
   currentEditingDay = null;
   renderDays(); // Update main view
-  
   if (navigator.vibrate) navigator.vibrate(5);
 }
 
@@ -1026,15 +792,9 @@ function renderDayEditor(dayKey) {
       <button class="action-button ${isLocked ? 'locked' : ''}" onclick="toggleDayLock('${dayKey}')">
         ${isLocked ? '🔒 Locked' : '🔓 Lock Day'}
       </button>
-      <button class="action-button" onclick="shuffleEntireDay('${dayKey}')">
-        ↻ Shuffle All
-      </button>
-      <button class="action-button danger" onclick="clearDay('${dayKey}')">
-        ⌫ Clear Day
-      </button>
-      <button class="action-button" onclick="closeDayEditor()">
-        ✓ Done
-      </button>
+      <button class="action-button" onclick="shuffleEntireDay('${dayKey}')">↻ Shuffle All</button>
+      <button class="action-button danger" onclick="clearDay('${dayKey}')">⌫ Clear Day</button>
+      <button class="action-button" onclick="closeDayEditor()">✓ Done</button>
     </div>
   `;
 }
@@ -1044,92 +804,83 @@ function openPicker(dayKey, mealType) {
   const picker = document.getElementById('mealPicker');
   const backdrop = document.getElementById('pickerBackdrop');
   const title = document.getElementById('pickerTitle');
-  const options = document.getElementById('pickerOptions');
-  
+
   title.textContent = `Select ${mealType.charAt(0).toUpperCase() + mealType.slice(1)}`;
-  
+
   let mealOptions = [];
   if (mealType === 'lunch') {
     mealOptions = meals.lunch.slice();
   } else if (mealType === 'dinner') {
     const mode = dinnerModes[dayKey] || 'regular';
     const isWeekend = getDayIndex(dayKey) >= 5;
-    
+
     if (mode === 'quick') mealOptions = meals.dinner.quick.slice();
     else if (mode === 'delivery') mealOptions = meals.dinner.delivery.slice();
     else if (isWeekend) mealOptions = meals.dinner.weekend.slice();
     else mealOptions = meals.dinner.regular.slice();
-    
-    if (!isWeekend && mode === 'regular') {
-      mealOptions.push(...meals.dinner.other);
-    }
+
+    if (!isWeekend && mode === 'regular') mealOptions.push(...meals.dinner.other);
   } else if (mealType === 'side') {
     mealOptions = meals.side.slice();
   }
-  
+
   mealOptions.push('None');
-  
+
   const currentValue = (data[dayKey] || {})[mealType];
   renderPickerOptions(mealOptions, currentValue);
-  
+
   backdrop.classList.add('show');
   picker.classList.add('show');
-  
+
+  // Keep compact parity with editor if active
+  applyEditorDensity();
+
   if (navigator.vibrate) navigator.vibrate(5);
 }
 
 function renderPickerOptions(options, currentValue) {
   const container = document.getElementById('pickerOptions');
-  
+
   const customOption = `
-    <div class="picker-option special" onclick="addCustomMeal()">
-      ➕ Add Custom Meal...
-    </div>
+    <div class="picker-option special" onclick="addCustomMeal()">➕ Add Custom Meal...</div>
   `;
-  
+
   const optionsList = options.map(option => `
-    <div class="picker-option ${option === currentValue ? 'selected' : ''}" onclick="selectMeal('${option}')">
+    <div class="picker-option ${option === currentValue ? 'selected' : ''}" onclick="selectMeal('${option.replace(/'/g,"\\'")}')">
       ${option}
       ${option === currentValue ? '<span style="color: var(--blue);">✓</span>' : ''}
     </div>
   `).join('');
-  
+
   container.innerHTML = customOption + optionsList;
 }
 
 function selectMeal(mealName) {
   if (!currentPicker) return;
-  
+
   const { dayKey, mealType } = currentPicker;
   if (!data[dayKey]) data[dayKey] = { lunch: '', dinner: '', side: '' };
-  
+
   if (mealName === 'None') {
     data[dayKey][mealType] = '';
   } else {
     data[dayKey][mealType] = mealName;
-    if (mealType === 'dinner' && mealName.includes('Delivery')) {
-      data[dayKey].side = '';
-    }
+    if (mealType === 'dinner' && mealName.includes('Delivery')) data[dayKey].side = '';
   }
-  
+
   saveData();
-  if (currentEditingDay === dayKey) {
-    renderDayEditor(dayKey);
-  }
+  if (currentEditingDay === dayKey) renderDayEditor(dayKey);
   closePicker();
 }
 
 function addCustomMeal() {
   const mealName = prompt('Enter custom meal name:');
-  if (mealName && mealName.trim()) {
-    selectMeal(mealName.trim());
-  }
+  if (mealName && mealName.trim()) selectMeal(mealName.trim());
 }
 
 function closePicker() {
   const picker = document.getElementById('mealPicker');
   const backdrop = document.getElementById('pickerBackdrop');
-  
   picker.classList.remove('show');
   backdrop.classList.remove('show');
   currentPicker = null;
@@ -1138,25 +889,20 @@ function closePicker() {
 function setDinnerMode(dayKey, mode) {
   dinnerModes[dayKey] = mode;
   if (!data[dayKey]) data[dayKey] = { lunch: '', dinner: '', side: '' };
-  
-  // Clear incompatible selections
+
   const isWeekend = getDayIndex(dayKey) >= 5;
   const validOptions = mode === 'quick' ? meals.dinner.quick
                      : mode === 'delivery' ? meals.dinner.delivery
                      : isWeekend ? meals.dinner.weekend
                      : meals.dinner.regular;
-  
+
   if (data[dayKey].dinner && !validOptions.includes(data[dayKey].dinner)) {
     data[dayKey].dinner = '';
   }
-  
-  if (mode === 'delivery') {
-    data[dayKey].side = '';
-  }
-  
+  if (mode === 'delivery') data[dayKey].side = '';
+
   saveData();
   renderDayEditor(dayKey);
-  
   if (navigator.vibrate) navigator.vibrate(5);
 }
 
@@ -1169,18 +915,17 @@ function toggleDayLock(dayKey) {
 
 function shuffleMeal(dayKey, mealType, button) {
   if (lockedDays[dayKey]) return;
-  
+
   if (!data[dayKey]) data[dayKey] = { lunch: '', dinner: '', side: '' };
-  
+
   button?.classList.add('animate-bounce');
-  
+
   let options = [];
   if (mealType === 'lunch') {
     options = meals.lunch;
   } else if (mealType === 'dinner') {
     const mode = dinnerModes[dayKey] || 'regular';
     const isWeekend = getDayIndex(dayKey) >= 5;
-    
     options = mode === 'quick' ? meals.dinner.quick
             : mode === 'delivery' ? meals.dinner.delivery
             : isWeekend ? meals.dinner.weekend
@@ -1188,62 +933,56 @@ function shuffleMeal(dayKey, mealType, button) {
   } else if (mealType === 'side') {
     options = meals.side;
   }
-  
+
   if (options.length > 0) {
     const randomMeal = options[Math.floor(Math.random() * options.length)];
     data[dayKey][mealType] = randomMeal;
   }
-  
+
   setTimeout(() => {
     button?.classList.remove('animate-bounce');
     saveData();
     renderDayEditor(dayKey);
   }, 600);
-  
+
   if (navigator.vibrate) navigator.vibrate([10, 5, 10]);
 }
 
 function shuffleEntireDay(dayKey) {
   if (lockedDays[dayKey]) return;
-  
+
   if (!data[dayKey]) data[dayKey] = { lunch: '', dinner: '', side: '' };
-  
+
   const mode = dinnerModes[dayKey] || 'regular';
   const isWeekend = getDayIndex(dayKey) >= 5;
-  
-  // Shuffle lunch
+
   if (meals.lunch.length > 0) {
     data[dayKey].lunch = meals.lunch[Math.floor(Math.random() * meals.lunch.length)];
   }
-  
-  // Shuffle dinner
+
   let dinnerOptions = mode === 'quick' ? meals.dinner.quick
                     : mode === 'delivery' ? meals.dinner.delivery
                     : isWeekend ? meals.dinner.weekend
                     : meals.dinner.regular;
-  
   if (dinnerOptions.length > 0) {
     data[dayKey].dinner = dinnerOptions[Math.floor(Math.random() * dinnerOptions.length)];
   }
-  
-  // Shuffle side dish (if applicable)
+
   if (mode !== 'delivery' && meals.side.length > 0) {
     data[dayKey].side = meals.side[Math.floor(Math.random() * meals.side.length)];
   }
-  
+
   saveData();
   renderDayEditor(dayKey);
-  
+
   if (navigator.vibrate) navigator.vibrate([15, 10, 15]);
 }
 
 function clearDay(dayKey) {
   if (!confirm('Clear all meals for this day?')) return;
-  
   data[dayKey] = { lunch: '', dinner: '', side: '' };
   saveData();
   renderDayEditor(dayKey);
-  
   if (navigator.vibrate) navigator.vibrate(20);
 }
 
@@ -1261,9 +1000,8 @@ function selectWeek(selectedWeek) {
 function toggleWeekend() {
   weekendEnabled[week] = !weekendEnabled[week];
   updateWeekendToggle();
-  
+
   if (!weekendEnabled[week]) {
-    // Clear weekend data
     for (let i = 5; i <= 6; i++) {
       const dayKey = getDayKey(i);
       delete data[dayKey];
@@ -1271,10 +1009,9 @@ function toggleWeekend() {
       delete dinnerModes[dayKey];
     }
   }
-  
+
   saveData();
   renderDays();
-  
   if (navigator.vibrate) navigator.vibrate(10);
 }
 
@@ -1289,7 +1026,7 @@ function setTheme() {
   const saved = localStorage.getItem('theme');
   const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
   const isDark = saved ? saved === 'dark' : prefersDark;
-  
+
   document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
   document.getElementById('themeToggle').textContent = isDark ? '◑' : '◐';
 }
@@ -1297,29 +1034,25 @@ function setTheme() {
 function toggleTheme() {
   const current = document.documentElement.getAttribute('data-theme');
   const next = current === 'dark' ? 'light' : 'dark';
-  
+
   document.documentElement.setAttribute('data-theme', next);
   localStorage.setItem('theme', next);
   document.getElementById('themeToggle').textContent = next === 'dark' ? '◑' : '◐';
-  
+
   if (navigator.vibrate) navigator.vibrate(5);
 }
 
 // Tab Bar Actions
 function shuffleAll() {
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
   let shuffledCount = 0;
-  
+
   days.forEach((_, index) => {
     if (index >= 5 && !weekendEnabled[week]) return;
-    
     const dayKey = getDayKey(index);
-    if (!lockedDays[dayKey]) {
-      shuffleEntireDay(dayKey);
-      shuffledCount++;
-    }
+    if (!lockedDays[dayKey]) { shuffleEntireDay(dayKey); shuffledCount++; }
   });
-  
+
   if (shuffledCount > 0) {
     renderDays();
     if (navigator.vibrate) navigator.vibrate([20, 10, 20, 10, 20]);
@@ -1329,10 +1062,10 @@ function shuffleAll() {
 function showGrocery() {
   const modal = document.getElementById('groceryModal');
   const list = document.getElementById('groceryList');
-  
+
   const allIngredients = {};
   Object.values(data).forEach(dayData => {
-    ['lunch', 'dinner', 'side'].forEach(mealType => {
+    ['lunch','dinner','side'].forEach(mealType => {
       const meal = dayData[mealType];
       if (meal && ingredients[meal]) {
         ingredients[meal].forEach(ingredient => {
@@ -1341,29 +1074,28 @@ function showGrocery() {
       }
     });
   });
-  
+
   if (Object.keys(allIngredients).length === 0) {
-    list.innerHTML = '<div style="text-align:center;padding:40px;color:var(--text-secondary)">No meals planned yet</div>';
+    list.innerHTML = '<div style="text-align:center;padding:24px;color:var(--text-secondary)">No meals planned yet</div>';
   } else {
     const sortedIngredients = Object.entries(allIngredients)
-      .sort(([a], [b]) => a.localeCompare(b))
+      .sort(([a],[b]) => a.localeCompare(b))
       .map(([ingredient, count]) => `
-        <div style="padding:12px 0;border-bottom:0.33px solid var(--separator);display:flex;justify-content:space-between;">
-          <span style="font-size:17px;color:var(--text-primary)">${ingredient}</span>
-          ${count > 1 ? `<span style="font-size:13px;color:var(--text-secondary);font-weight:600">×${count}</span>` : ''}
+        <div style="padding:10px 0;border-bottom:0.33px solid var(--separator);display:flex;justify-content:space-between;">
+          <span style="font-size:16px;color:var(--text-primary)">${ingredient}</span>
+          ${count > 1 ? `<span style="font-size:12px;color:var(--text-secondary);font-weight:600">×${count}</span>` : ''}
         </div>
       `).join('');
-    
     list.innerHTML = sortedIngredients;
   }
-  
+
   modal.classList.add('show');
 }
 
 function shareGrocery() {
   const allIngredients = {};
   Object.values(data).forEach(dayData => {
-    ['lunch', 'dinner', 'side'].forEach(mealType => {
+    ['lunch','dinner','side'].forEach(mealType => {
       const meal = dayData[mealType];
       if (meal && ingredients[meal]) {
         ingredients[meal].forEach(ingredient => {
@@ -1372,43 +1104,37 @@ function shareGrocery() {
       }
     });
   });
-  
-  const groceryText = '🛒 Shopping List\n\n' + 
+
+  const groceryText = '🛒 Shopping List\n\n' +
     Object.entries(allIngredients)
-      .sort(([a], [b]) => a.localeCompare(b))
+      .sort(([a],[b]) => a.localeCompare(b))
       .map(([ingredient, count]) => `☐ ${ingredient}${count > 1 ? ` (×${count})` : ''}`)
       .join('\n');
-  
+
   if (navigator.share) {
-    navigator.share({
-      title: 'Shopping List',
-      text: groceryText
-    }).catch(() => {
-      copyToClipboard(groceryText);
-    });
+    navigator.share({ title: 'Shopping List', text: groceryText }).catch(() => { copyToClipboard(groceryText); });
   } else {
     copyToClipboard(groceryText);
   }
-  
   closeModal('groceryModal');
 }
 
 function sharePlan() {
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+  const days = ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
   const start = getWeekStart();
   const end = new Date(start);
   end.setDate(start.getDate() + 6);
-  
+
   let planText = `📅 Meal Plan - ${week === 'this' ? 'This' : 'Next'} Week\n`;
   planText += `${start.toLocaleDateString('en', { month: 'short', day: 'numeric' })} - ${end.toLocaleDateString('en', { month: 'short', day: 'numeric' })}\n\n`;
-  
+
   days.forEach((dayName, index) => {
     if (index >= 5 && !weekendEnabled[week]) return;
-    
+
     const dayKey = getDayKey(index, start);
     const dayData = data[dayKey] || {};
     const mode = dinnerModes[dayKey] || 'regular';
-    
+
     planText += `${dayName}\n`;
     if (dayData.lunch) planText += `  Lunch: ${dayData.lunch}\n`;
     if (dayData.dinner) {
@@ -1419,21 +1145,20 @@ function sharePlan() {
     if (!dayData.lunch && !dayData.dinner) planText += '  No meals planned\n';
     planText += '\n';
   });
-  
+
   const shareText = document.getElementById('shareText');
   shareText.textContent = planText;
-  
+
   document.getElementById('shareModal').classList.add('show');
 }
 
 function copyText(button) {
   const text = document.getElementById('shareText').textContent;
   copyToClipboard(text);
-  
+
   const original = button.textContent;
   button.textContent = 'Copied!';
   button.style.background = 'var(--green)';
-  
   setTimeout(() => {
     button.textContent = original;
     button.style.background = '';
@@ -1442,9 +1167,8 @@ function copyText(button) {
 }
 
 function copyToClipboard(text) {
-  if (navigator.clipboard) {
-    navigator.clipboard.writeText(text);
-  } else {
+  if (navigator.clipboard) navigator.clipboard.writeText(text);
+  else {
     const textarea = document.createElement('textarea');
     textarea.value = text;
     document.body.appendChild(textarea);
@@ -1452,66 +1176,45 @@ function copyToClipboard(text) {
     document.execCommand('copy');
     document.body.removeChild(textarea);
   }
-  
   if (navigator.vibrate) navigator.vibrate(10);
 }
 
 function clearAll() {
   if (!confirm('Clear all meal plans?')) return;
-  
-  data = {};
-  lockedDays = {};
-  dinnerModes = {};
-  
-  saveData();
-  renderDays();
-  
-  if (currentEditingDay) {
-    closeDayEditor();
-  }
-  
+  data = {}; lockedDays = {}; dinnerModes = {};
+  saveData(); renderDays();
+  if (currentEditingDay) closeDayEditor();
   if (navigator.vibrate) navigator.vibrate(30);
 }
 
-function closeModal(modalId) {
-  document.getElementById(modalId).classList.remove('show');
-}
-
-function closeAllModals() {
-  document.querySelectorAll('.modal').forEach(modal => {
-    modal.classList.remove('show');
-  });
-}
+function closeModal(modalId) { document.getElementById(modalId).classList.remove('show'); }
+function closeAllModals() { document.querySelectorAll('.modal').forEach(m => m.classList.remove('show')); }
 
 // Utility Functions
 function getDayKey(index, startDate = null) {
   const date = getDateForIndex(index, startDate);
   return `${week}-${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
 }
-
 function getDayIndex(dayKey) {
   const parts = dayKey.split('-');
   const date = new Date(parseInt(parts[1]), parseInt(parts[2]), parseInt(parts[3]));
   const start = getWeekStart();
   return Math.floor((date - start) / (1000 * 60 * 60 * 24));
 }
-
 function getDateForIndex(index, startDate = null) {
   const start = startDate || getWeekStart();
   const date = new Date(start);
   date.setDate(start.getDate() + index);
   return date;
 }
-
 function getWeekStart() {
   const now = new Date();
-  const dayOfWeek = (now.getDay() + 6) % 7; // Make Monday = 0
+  const dayOfWeek = (now.getDay() + 6) % 7; // Monday = 0
   const start = new Date(now);
   start.setDate(now.getDate() - dayOfWeek + (week === 'next' ? 7 : 0));
   start.setHours(0, 0, 0, 0);
   return start;
 }
-
 function saveData() {
   localStorage.setItem('mealPlanData', JSON.stringify(data));
   localStorage.setItem('mealPlanWeek', week);
@@ -1519,17 +1222,14 @@ function saveData() {
   localStorage.setItem('mealPlanLocked', JSON.stringify(lockedDays));
   localStorage.setItem('mealPlanModes', JSON.stringify(dinnerModes));
 }
-
 function loadData() {
-  try {
+  try{
     data = JSON.parse(localStorage.getItem('mealPlanData') || '{}');
     week = localStorage.getItem('mealPlanWeek') || 'next';
     weekendEnabled = JSON.parse(localStorage.getItem('mealPlanWeekend') || '{}');
     lockedDays = JSON.parse(localStorage.getItem('mealPlanLocked') || '{}');
     dinnerModes = JSON.parse(localStorage.getItem('mealPlanModes') || '{}');
-  } catch (e) {
-    console.error('Error loading data:', e);
-  }
+  }catch(e){ console.error('Error loading data:', e); }
 }
 
 // Initialize app when DOM is loaded
@@ -1537,4 +1237,3 @@ document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
 </html>
-
