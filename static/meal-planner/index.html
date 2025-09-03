@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
-      content="width=device-width, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="color-scheme" content="light dark">
@@ -13,56 +13,58 @@
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
 :root{
   --bg-primary:#f2f2f7;--bg-secondary:#fff;--bg-tertiary:#f2f2f7;
-  --text-primary:#000;--text-secondary:#3c3c43;--text-tertiary:#c7c7cc;
+  --text-primary:#000;--text-secondary:#3c3c43;--text-tertiary:#8e8e93;
   --border-color:#c6c6c8;--border-secondary:#e5e5ea;
   --accent-primary:#007aff;--accent-success:#34c759;--accent-warning:#ff9500;--accent-danger:#ff3b30;--accent-purple:#af52de;
-  --modal-backdrop:rgba(0,0,0,.4);--shadow-sm:0 1px 3px rgba(0,0,0,.12);--shadow-md:0 4px 6px rgba(0,0,0,.15);
+  --modal-backdrop:rgba(0,0,0,.40);--shadow-sm:0 1px 3px rgba(0,0,0,.12);--shadow-md:0 4px 10px rgba(0,0,0,.18);
   --toggle-bg:#e5e5ea;--input-bg:#fff;--safe-area-top:env(safe-area-inset-top);--safe-area-bottom:env(safe-area-inset-bottom);
   --active-bg:#f7faff;
 
-  /* Elevation & picker palette (light) */
+  /* Elevation & picker palette (light) — MOLTO più distinta */
   --elev-1: 0 6px 18px rgba(0,0,0,.10);
-  --elev-2: 0 10px 28px rgba(0,0,0,.16);
+  --elev-2: 0 16px 40px rgba(0,0,0,.24);
   --surface-1:#ffffff;
   --surface-2:#f7f8fb;
   --divider-strong:#c0c4cf;
   --focus-ring: 2px solid rgba(0,122,255,.55);
 
-  /* Picker-specific */
-  --picker-bg:#ffffff;
-  --picker-handle:#c8cbd4;
+  /* Picker specific (light) */
+  --picker-scrim: rgba(0,0,0,.30);
+  --picker-bg:#ffffff;          /* foglio chiaro, ma con ombra forte */
+  --picker-header:#f3f5fb;      /* barra superiore distinta */
   --picker-option-bg:#ffffff;
-  --picker-option-hover:#f3f6ff;
-  --picker-option-border:#e3e5ec;
-  --picker-selected-bg:#e8f0ff;
+  --picker-option-hover:#eef3ff;
+  --picker-option-border:#e1e4ec;
+  --picker-selected-bg:#e2ecff;
   --picker-selected-text:#0a3d91;
-  --picker-custom-bg:#f7f8fb;
+  --picker-custom-bg:#f3f5fb;
 }
 [data-theme="dark"]{
   --bg-primary:#000;--bg-secondary:#1c1c1e;--bg-tertiary:#2c2c2e;
-  --text-primary:#fff;--text-secondary:#ebebf5;--text-tertiary:#636366;
+  --text-primary:#fff;--text-secondary:#ebebf5;--text-tertiary:#999aa3;
   --border-color:#38383a;--border-secondary:#48484a;
   --accent-primary:#0a84ff;--accent-success:#30d158;--accent-warning:#ff9f0a;--accent-danger:#ff453a;--accent-purple:#bf5af2;
-  --modal-backdrop:rgba(0,0,0,.8);--toggle-bg:#38383a;--input-bg:#2c2c2e;
+  --modal-backdrop:rgba(0,0,0,.75);--toggle-bg:#38383a;--input-bg:#2c2c2e;
   --active-bg:#1f2733;
 
-  /* Elevation & picker palette (dark) */
+  /* Elevation & picker palette (dark) — più scuro del resto */
   --elev-1: 0 10px 26px rgba(0,0,0,.55);
-  --elev-2: 0 14px 36px rgba(0,0,0,.70);
+  --elev-2: 0 26px 60px rgba(0,0,0,.85);
   --surface-1:#1c1c1e;
   --surface-2:#141416;
   --divider-strong:#4c4f57;
   --focus-ring: 2px solid rgba(10,132,255,.55);
 
-  /* Picker-specific */
-  --picker-bg:#1f1f22;
-  --picker-handle:#3b3d43;
-  --picker-option-bg:#1f1f22;
-  --picker-option-hover:#232736;
-  --picker-option-border:#33363d;
-  --picker-selected-bg:#0f2238;
+  /* Picker specific (dark) */
+  --picker-scrim: rgba(0,0,0,.55);
+  --picker-bg:#0f1116;          /* foglio nettamente staccato */
+  --picker-header:#0b0d12;
+  --picker-option-bg:#0f1116;
+  --picker-option-hover:#161a23;
+  --picker-option-border:#2a2e38;
+  --picker-selected-bg:#0a2a55;
   --picker-selected-text:#d6e6ff;
-  --picker-custom-bg:#17181b;
+  --picker-custom-bg:#0c0f15;
 }
 body{
   font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue',sans-serif;
@@ -135,60 +137,64 @@ body{
 .tab-btn:active{opacity:.6}.tab-icon{font-size:24px}.tab-label{font-size:10px;font-weight:500}
 .tab-btn.shuffle{color:var(--accent-warning)}.tab-btn.grocery{color:var(--accent-success)}.tab-btn.share{color:var(--accent-primary)}.tab-btn.clear{color:var(--accent-danger)}
 
-/* Modal */
-.ios-modal{position:fixed;top:0;left:0;right:0;bottom:0;background:var(--modal-backdrop);display:none;z-index:2000}
-.ios-modal.show{display:block}
-.ios-modal-content{position:absolute;bottom:0;left:0;right:0;background:var(--surface-1);border-radius:12px 12px 0 0;max-height:90vh;transform:translateY(100%);transition:transform .3s ease;box-shadow:var(--elev-2)}
-.ios-modal.show .ios-modal-content{transform:translateY(0)}
-.modal-handle{width:36px;height:5px;background:var(--border-color);border-radius:3px;margin:8px auto}
-.modal-header{padding:8px 16px 16px;border-bottom:.5px solid var(--border-secondary)}
-.modal-title{font-size:20px;font-weight:600;text-align:center}
-.modal-body{padding:16px;max-height:60vh;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:calc(16px + var(--safe-area-bottom))}
-.modal-actions{padding:12px 16px;padding-bottom:calc(12px + var(--safe-area-bottom));display:flex;gap:12px;border-top:.5px solid var(--border-secondary)}
-.modal-btn{flex:1;height:50px;border:none;border-radius:12px;font-size:17px;font-weight:600}
-.modal-btn.primary{background:var(--accent-primary);color:#fff}.modal-btn.secondary{background:var(--bg-tertiary);color:var(--text-primary)}
-.modal-btn:active{opacity:.8}
+/* ---------- Picker: foglio sopraelevato + scrim ---------- */
 
-/* Grocery */
-.grocery-section{margin-bottom:24px}
-.grocery-title{font-size:13px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
-.grocery-item{display:flex;align-items:center;padding:10px 0;border-bottom:.5px solid var(--border-secondary)}
-.grocery-item:last-child{border-bottom:none}
-.grocery-check{width:22px;height:22px;margin-right:12px;accent-color:var(--accent-primary)}
+/* Scrim dietro al picker (cattura tap e aumenta profondità) */
+.picker-scrim{
+  position:fixed;inset:0;z-index:2999;display:none;
+  background: var(--picker-scrim);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.picker-scrim.show{display:block}
 
-/* Send modal text */
-.share-text{background:var(--bg-tertiary);border-radius:10px;padding:12px;font-family:'SF Mono',monospace;font-size:13px;line-height:1.5;white-space:pre-wrap;word-break:break-word}
-
-/* Picker */
 .meal-picker{
   position:fixed;bottom:0;left:0;right:0;background:var(--picker-bg);
-  border-radius:12px 12px 0 0;max-height:60vh;transform:translateY(100%);
-  transition:transform .3s;z-index:3000;display:none;box-shadow:var(--elev-2)
+  border-radius:14px 14px 0 0;max-height:65vh;transform:translateY(100%);
+  transition:transform .28s ease;z-index:3000;display:none;
+  box-shadow: var(--elev-2);
+  border-top: 1px solid rgba(255,255,255,.06);
 }
 .meal-picker.show{display:block;transform:translateY(0)}
-.picker-header{padding:16px;border-bottom:1px solid var(--picker-option-border);display:flex;justify-content:space-between;align-items:center;background:var(--picker-bg)}
-.picker-title{font-size:17px;font-weight:600}
-.picker-done{color:var(--accent-primary);font-size:17px;font-weight:600}
-.picker-custom{display:none;gap:8px;padding:10px 16px;border-top:1px solid var(--picker-option-border);border-bottom:1px solid var(--picker-option-border);background:var(--picker-custom-bg)}
+.picker-header{
+  padding:14px 16px;border-bottom:1px solid var(--picker-option-border);
+  display:flex;justify-content:space-between;align-items:center;
+  background: var(--picker-header);
+}
+.picker-title{font-size:17px;font-weight:700}
+.picker-done{
+  color:var(--accent-primary);font-size:17px;font-weight:800;
+  background: transparent;border:1.5px solid var(--accent-primary);
+  padding:4px 10px;border-radius:8px;
+}
+.picker-done:active{opacity:.85}
+
+.picker-custom{
+  display:none;gap:8px;padding:10px 16px;border-top:1px solid var(--picker-option-border);
+  border-bottom:1px solid var(--picker-option-border);background:var(--picker-custom-bg)
+}
 .picker-custom.show{display:flex}
 .picker-custom input{flex:1;height:40px;border:1px solid var(--picker-option-border);border-radius:10px;padding:0 12px;background:var(--input-bg);color:var(--text-primary)}
-.picker-custom button{height:40px;padding:0 14px;border:none;border-radius:10px;background:var(--accent-primary);color:#fff;font-weight:600}
+.picker-custom button{height:40px;padding:0 14px;border:none;border-radius:10px;background:var(--accent-primary);color:#fff;font-weight:700}
 .picker-custom button:disabled{opacity:.5}
-.picker-options{max-height:300px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:var(--safe-area-bottom);background:var(--picker-bg)}
-.picker-option{padding:14px 16px;border-bottom:1px solid var(--picker-option-border);font-size:17px;background:var(--picker-option-bg);line-height:1.2}
+
+.picker-options{max-height:340px;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:var(--safe-area-bottom);background:var(--picker-bg)}
+.picker-option{
+  padding:16px;border-bottom:1px solid var(--picker-option-border);font-size:17px;background:var(--picker-option-bg);line-height:1.25
+}
 .picker-option:hover,.picker-option:focus{background:var(--picker-option-hover)}
 .picker-option.selected{
   background:var(--picker-selected-bg);
   color:var(--picker-selected-text);
-  font-weight:700;
-  border-left:3px solid var(--accent-primary);
+  font-weight:800;
+  border-left:4px solid var(--accent-primary);
 }
-.picker-option.selected::after{content:'✓';float:right;color:var(--accent-primary)}
+.picker-option.selected::after{content:'✓';float:right;color:var(--accent-primary);font-weight:900}
 .picker-option.special{
   background:var(--picker-custom-bg);
   border-top:1px solid var(--picker-option-border);
   border-bottom:1px solid var(--picker-option-border);
-  font-weight:700;
+  font-weight:800;
 }
 
 /* Utility */
@@ -246,6 +252,9 @@ input,textarea,button{-webkit-appearance:none;appearance:none}
     </div>
   </div>
 
+  <!-- SCRIM per il picker -->
+  <div class="picker-scrim" id="pickerScrim"></div>
+
   <!-- Meal Picker -->
   <div class="meal-picker" id="mealPicker" role="dialog" aria-modal="true" aria-labelledby="pickerTitle">
     <div class="picker-header">
@@ -294,134 +303,77 @@ input,textarea,button{-webkit-appearance:none;appearance:none}
    ========================= */
 const meals = {
   lunch: [
-    "Ravioli burro e salvia",
-    "Spaghetti al limone",
-    "Pasta e ceci",
-    "Pasta col tonno",
-    "Pasta sugo tonno",
-    "Piadine prosciutto provolone",
-    "Uova fritte",
-    "Pasta al pesto",
-    "Pasta coi pomodorini",
-    "Lenticchie",
-    "Spaghetti aglio e olio",
-    "Carbonara",
-    "Frittata di pasta",
-    "Pasta e fagioli"
+    "Ravioli burro e salvia","Spaghetti al limone","Pasta e ceci","Pasta col tonno",
+    "Pasta sugo tonno","Piadine prosciutto provolone","Uova fritte","Pasta al pesto",
+    "Pasta coi pomodorini","Lenticchie","Spaghetti aglio e olio","Carbonara",
+    "Frittata di pasta","Pasta e fagioli"
   ],
   dinner: {
     regular: [
-      "Salmone col riso",
-      "Frittata di zucchine",
-      "Polpette",
-      "Pollo al limone",
-      "Merluzzo",
-      "Hamburger",
-      "Cotolette",
-      "Salsicce",
-      "Minestrone",
-      "Pollo al forno",
-      "Scaloppine al limone",
-      "Caprese"
+      "Salmone col riso","Frittata di zucchine","Polpette","Pollo al limone","Merluzzo",
+      "Hamburger","Cotolette","Salsicce","Minestrone","Pollo al forno","Scaloppine al limone","Caprese"
     ],
-    quick: [
-      "Cordon bleu",
-      "Würstel",
-      "Dumplings",
-      "Fish sticks",
-      "Pollo allo spiedo"
-    ],
-    delivery: [
-      "Pizza Delivery",
-      "Greco Delivery",
-      "Chinese Delivery",
-      "Vietnamese Delivery",
-      "Ramen Delivery"
-    ],
+    quick: ["Cordon bleu","Würstel","Dumplings","Fish sticks","Pollo allo spiedo"],
+    delivery: ["Pizza Delivery","Greco Delivery","Chinese Delivery","Vietnamese Delivery","Ramen Delivery"],
     weekend: [
-      "Pasta al forno",
-      "Parmigiana di melanzane",
-      "Zucchine ripiene",
-      "Lasagna",
-      "Spezzatino con patate",
-      "Tortellini con la panna",
-      "Tortellini col sugo",
-      "Pasta col ragù",
-      "Polpettone",
-      "Scrimpelle mbuss",
-      "Polenta col sugo",
-      "Cannelloni",
-      "Bistecca"
+      "Pasta al forno","Parmigiana di melanzane","Zucchine ripiene","Lasagna","Spezzatino con patate",
+      "Tortellini con la panna","Tortellini col sugo","Pasta col ragù","Polpettone","Scrimpelle mbuss",
+      "Polenta col sugo","Cannelloni","Bistecca"
     ],
-    other: [
-      "Colacena"
-    ]
+    other: ["Colacena"]
   },
   side: [
-    "Purè di patate",
-    "Broccoli al vapore",
-    "Insalata di pomodori",
-    "Tater tots",
-    "Barbabietole",
-    "Insalata di mais",
-    "Patate lesse",
-    "Carote al forno",
-    "Carote a insalata",
-    "Zucchine trifolate",
-    "Insalata di cetrioli",
-    "Insalata"
+    "Purè di patate","Broccoli al vapore","Insalata di pomodori","Tater tots","Barbabietole",
+    "Insalata di mais","Patate lesse","Carote al forno","Carote a insalata","Zucchine trifolate",
+    "Insalata di cetrioli","Insalata"
   ]
 };
 
 const ingredients = {
-  "Ravioli burro e salvia": ["Ravioli", "Sage"],
-  "Spaghetti al limone": ["Spaghetti", "Lemons"],
-  "Pasta e ceci": ["Ditalini", "Chickpeas"],
-  "Pasta col tonno": ["Spaghetti", "Tuna"],
-  "Pasta sugo tonno": ["Pasta", "Tuna", "Tomato sauce"],
-  "Piadine prosciutto provolone": ["Flatbreads", "Prosciutto", "Provolone cheese"],
+  "Ravioli burro e salvia": ["Ravioli","Sage"],
+  "Spaghetti al limone": ["Spaghetti","Lemons"],
+  "Pasta e ceci": ["Ditalini","Chickpeas"],
+  "Pasta col tonno": ["Spaghetti","Tuna"],
+  "Pasta sugo tonno": ["Pasta","Tuna","Tomato sauce"],
+  "Piadine prosciutto provolone": ["Flatbreads","Prosciutto","Provolone cheese"],
   "Uova fritte": ["Eggs"],
-  "Pasta al pesto": ["Pasta", "Pesto"],
-  "Pasta coi pomodorini": ["Pasta", "Cherry tomatoes"],
-  "Lenticchie": ["Lentils", "Croutons"],
+  "Pasta al pesto": ["Pasta","Pesto"],
+  "Pasta coi pomodorini": ["Pasta","Cherry tomatoes"],
+  "Lenticchie": ["Lentils","Croutons"],
   "Spaghetti aglio e olio": ["Spaghetti"],
-  "Carbonara": ["Spaghetti", "Eggs", "Bacon"],
+  "Carbonara": ["Spaghetti","Eggs","Bacon"],
   "Frittata di pasta": ["Eggs"],
-  "Pasta e fagioli": ["Pasta", "Beans"],
-
-  "Salmone col riso": ["Salmon", "Rice"],
-  "Frittata di zucchine": ["Eggs", "Zucchini"],
-  "Polpette": ["Ground beef", "Eggs", "Bread", "Breadcrumbs"],
-  "Pollo al limone": ["Chicken breast", "Lemons"],
+  "Pasta e fagioli": ["Pasta","Beans"],
+  "Salmone col riso": ["Salmon","Rice"],
+  "Frittata di zucchine": ["Eggs","Zucchini"],
+  "Polpette": ["Ground beef","Eggs","Bread","Breadcrumbs"],
+  "Pollo al limone": ["Chicken breast","Lemons"],
   "Merluzzo": ["Cod"],
-  "Hamburger": ["Buns", "Hamburger buns", "American cheese slices", "Lettuce", "Tomatoes"],
-  "Cotolette": ["Breaded cutlets", "Breadcrumbs", "Eggs"],
+  "Hamburger": ["Buns","Hamburger buns","American cheese slices","Lettuce","Tomatoes"],
+  "Cotolette": ["Breaded cutlets","Breadcrumbs","Eggs"],
   "Salsicce": ["Sausages"],
-  "Minestrone": ["Vegetable soup mix", "Pasta", "Beans"],
+  "Minestrone": ["Vegetable soup mix","Pasta","Beans"],
   "Pollo al forno": ["Chicken thighs"],
-  "Scaloppine al limone": ["Veal cutlets", "Lemons"],
-  "Caprese": ["Fresh mozzarella", "Tomatoes"],
-
+  "Scaloppine al limone": ["Veal cutlets","Lemons"],
+  "Caprese": ["Fresh mozzarella","Tomatoes"],
   "Cordon bleu": ["Cordon bleu"],
   "Würstel": ["Hot dogs"],
   "Dumplings": ["Dumplings"],
   "Fish sticks": ["Fish sticks"],
   "Pollo allo spiedo": ["Whole chicken"],
-
-  "Pasta al forno": ["Pasta", "Tomato sauce", "Shredded mozzarella"],
-  "Parmigiana di melanzane": ["Eggplant", "Tomato sauce", "Shredded mozzarella"],
-  "Zucchine ripiene": ["Zucchini", "Ground beef", "Bread"],
-  "Lasagna": ["Lasagna noodles", "Meat sauce"],
-  "Spezzatino con patate": ["Beef", "Potatoes", "Onion", "Carrots"],
-  "Tortellini con la panna": ["Tortellini", "Cream"],
-  "Tortellini col sugo": ["Tortellini", "Tomato sauce"],
-  "Pasta col ragù": ["Pasta", "Meat sauce"],
-  "Polpettone": ["Ground beef", "Eggs", "Bacon", "Bread"],
-  "Scrimpelle mbuss": ["Eggs", "Flour", "Milk", "Broth"],
-  "Polenta col sugo": ["Polenta", "Tomato sauce", "Sausages"],
-  "Cannelloni": ["Cannelloni", "Ricotta", "Spinach"],
+  "Pasta al forno": ["Pasta","Tomato sauce","Shredded mozzarella"],
+  "Parmigiana di melanzane": ["Eggplant","Tomato sauce","Shredded mozzarella"],
+  "Zucchine ripiene": ["Zucchini","Ground beef","Bread"],
+  "Lasagna": ["Lasagna noodles","Meat sauce"],
+  "Spezzatino con patate": ["Beef","Potatoes","Onion","Carrots"],
+  "Tortellini con la panna": ["Tortellini","Cream"],
+  "Tortellini col sugo": ["Tortellini","Tomato sauce"],
+  "Pasta col ragù": ["Pasta","Meat sauce"],
+  "Polpettone": ["Ground beef","Eggs","Bacon","Bread"],
+  "Scrimpelle mbuss": ["Eggs","Flour","Milk","Broth"],
+  "Polenta col sugo": ["Polenta","Tomato sauce","Sausages"],
+  "Cannelloni": ["Cannelloni","Ricotta","Spinach"],
   "Bistecca": ["Steak"],
-
   "Purè di patate": ["Potatoes"],
   "Broccoli al vapore": ["Broccoli"],
   "Insalata di pomodori": ["Tomatoes"],
@@ -438,63 +390,16 @@ const ingredients = {
 
 const stores = {
   Aldi: [
-    "Bacon",
-    "Beets",
-    "Cannelloni",
-    "Carrots",
-    "Chicken thighs",
-    "Breaded cutlets",
-    "Croutons",
-    "Dumplings",
-    "Beans",
-    "Fish sticks",
-    "Lemons",
-    "Corn",
-    "Shredded mozzarella",
-    "Potatoes",
-    "Chicken breast",
-    "Flatbreads",
-    "Tomatoes",
-    "Cherry tomatoes",
-    "Provolone cheese",
-    "Prosciutto",
-    "Ravioli",
-    "Sausages",
-    "American cheese slices",
-    "Spinach",
-    "Tater tots",
-    "Tortellini",
-    "Eggs",
-    "Hot dogs",
-    "Zucchini",
-    "Ground beef",
-    "Ricotta",
-    "Milk",
-    "Pesto sauce"
+    "Bacon","Beets","Cannelloni","Carrots","Chicken thighs","Breaded cutlets","Croutons","Dumplings",
+    "Beans","Fish sticks","Lemons","Corn","Shredded mozzarella","Potatoes","Chicken breast","Flatbreads",
+    "Tomatoes","Cherry tomatoes","Provolone cheese","Prosciutto","Ravioli","Sausages","American cheese slices",
+    "Spinach","Tater tots","Tortellini","Eggs","Hot dogs","Zucchini","Ground beef","Ricotta","Milk","Pesto sauce"
   ],
   Wegmans: [
-    "Steak",
-    "Broccoli",
-    "Cucumbers",
-    "Onion",
-    "Hamburger buns",
-    "Butter",
-    "Lettuce",
-    "Lentils",
-    "Eggplant",
-    "Cod",
-    "Whole chicken",
-    "Sage",
-    "Salmon",
-    "Bread",
-    "Tomato sauce"
+    "Steak","Broccoli","Cucumbers","Onion","Hamburger buns","Butter","Lettuce","Lentils","Eggplant",
+    "Cod","Whole chicken","Sage","Salmon","Bread","Tomato sauce"
   ],
-  Amazon: [
-    "Pasta",
-    "Tuna",
-    "Breadcrumbs",
-    "Rice"
-  ],
+  Amazon: ["Pasta","Tuna","Breadcrumbs","Rice"],
   Other: []
 };
 
@@ -508,6 +413,9 @@ function init(){
   addSwipeToDismiss(document.getElementById('mealPicker'), closePicker);
   addSwipeToDismiss(document.querySelector('#groceryModal .ios-modal-content'),()=>closeModal('groceryModal'));
   addSwipeToDismiss(document.querySelector('#shareModal .ios-modal-content'),()=>closeModal('shareModal'));
+
+  // scrim: tap per chiudere
+  document.getElementById('pickerScrim').addEventListener('click', closePicker);
 
   // custom input handlers (mostra tastiera solo su richiesta)
   const useBtn=document.getElementById('pickerUseBtn');
@@ -579,7 +487,7 @@ function render(){
     const labelId=`day-${k}-label`, panelId=`panel-${k}`;
     const activeClass = (lastOpen===k) ? 'active-edit' : '';
     return `
-      <div class="day-cell ${isWeekend?'weekend':''} ${hasMeals?'has-meals':''} ${activeClass}" id="day-${k}">
+      <div class="day-cell ${isWeekend?'weekend':''} ${has-meals?'has-meals':''} ${activeClass}" id="day-${k}">
         <div class="day-header" role="button" aria-expanded="false" aria-controls="${panelId}" tabindex="0"
              onclick="toggleDay('${k}')"
              onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();toggleDay('${k}')}">
@@ -681,6 +589,7 @@ function trapFocus(container){
 function openPicker(k,type){
   currentPicker={key:k,type:type};
   const picker=document.getElementById('mealPicker');
+  const scrim=document.getElementById('pickerScrim');
   const title=document.getElementById('pickerTitle');
   const options=document.getElementById('pickerOptions');
 
@@ -708,11 +617,12 @@ function openPicker(k,type){
   document.getElementById('pickerCustomInput').value='';
   document.getElementById('pickerUseBtn').disabled=true;
 
+  scrim.classList.add('show');
   picker.classList.add('show'); document.body.classList.add('no-scroll');
   untrapPicker=trapFocus(picker);
 
   const selected = options.querySelector('.picker-option.selected');
-  if(selected) options.scrollTop = selected.offsetTop - 100;
+  if(selected) options.scrollTop = Math.max(0, selected.offsetTop - 120);
 }
 
 function renderPickerOptions(items, current){
@@ -752,6 +662,7 @@ function selectMeal(value){
 
 function closePicker(){
   document.getElementById('mealPicker').classList.remove('show');
+  document.getElementById('pickerScrim').classList.remove('show');
   document.body.classList.remove('no-scroll');
   untrapPicker?.(); untrapPicker=null; currentPicker=null;
 }
