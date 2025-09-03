@@ -20,6 +20,17 @@
   --toggle-bg:#e8e4dc;--input-bg:#ffffff;--safe-area-top:env(safe-area-inset-top);--safe-area-bottom:env(safe-area-inset-bottom);
   --active-bg:#f0f7f6;
 
+  /* Meal-specific colors */
+  --lunch-bg:#fef7e6;
+  --lunch-border:#f2e4b8;
+  --lunch-accent:#d4a017;
+  --dinner-bg:#e8f4f3;
+  --dinner-border:#b8ddd9;
+  --dinner-accent:#1e5f5b;
+  --side-bg:#f8f4ff;
+  --side-border:#ddd0f0;
+  --side-accent:#7c3aed;
+
   /* Elevation & picker palette (light) */
   --elev-1: 0 8px 24px rgba(30,95,91,.08), 0 2px 6px rgba(30,95,91,.04);
   --elev-2: 0 20px 50px rgba(30,95,91,.16), 0 6px 16px rgba(30,95,91,.08);
@@ -30,14 +41,14 @@
 
   /* Picker specific (light) */
   --picker-scrim: rgba(30,95,91,.25);
-  --picker-bg:#ffffff;
-  --picker-header:#f8f7f5;
-  --picker-option-bg:#ffffff;
-  --picker-option-hover:#f0f7f6;
-  --picker-option-border:#e0dcd2;
-  --picker-selected-bg:#e6f2f1;
-  --picker-selected-text:#0f3f3c;
-  --picker-custom-bg:#f8f7f5;
+  --picker-bg:#2a2832;
+  --picker-header:#252129;
+  --picker-option-bg:#2a2832;
+  --picker-option-hover:#34313f;
+  --picker-option-border:#3d3a48;
+  --picker-selected-bg:#4a9b96;
+  --picker-selected-text:#ffffff;
+  --picker-custom-bg:#252129;
 }
 [data-theme="dark"]{
   --bg-primary:#1a1816;--bg-secondary:#262320;--bg-tertiary:#322e29;
@@ -46,6 +57,17 @@
   --accent-primary:#4a9b96;--accent-success:#5d9c6f;--accent-warning:#e89548;--accent-danger:#f56565;--accent-purple:#a78bfa;
   --modal-backdrop:rgba(0,0,0,.6);--toggle-bg:#454138;--input-bg:#322e29;
   --active-bg:#2a3c3a;
+
+  /* Meal-specific colors (dark) */
+  --lunch-bg:#2d2618;
+  --lunch-border:#4a401a;
+  --lunch-accent:#e89548;
+  --dinner-bg:#1a2d2b;
+  --dinner-border:#2a4643;
+  --dinner-accent:#4a9b96;
+  --side-bg:#221a2d;
+  --side-border:#3d2a4a;
+  --side-accent:#a78bfa;
 
   /* Elevation & picker palette (dark) */
   --elev-1: 0 12px 32px rgba(0,0,0,.4), 0 4px 8px rgba(0,0,0,.2);
@@ -57,14 +79,14 @@
 
   /* Picker specific (dark) */
   --picker-scrim: rgba(0,0,0,.5);
-  --picker-bg:#1f1c19;
-  --picker-header:#181614;
-  --picker-option-bg:#1f1c19;
-  --picker-option-hover:#2a3c3a;
-  --picker-option-border:#3a362f;
-  --picker-selected-bg:#1e3a38;
-  --picker-selected-text:#b8e8e5;
-  --picker-custom-bg:#181614;
+  --picker-bg:#1a1820;
+  --picker-header:#151318;
+  --picker-option-bg:#1a1820;
+  --picker-option-hover:#252029;
+  --picker-option-border:#2f2d35;
+  --picker-selected-bg:#4a9b96;
+  --picker-selected-text:#ffffff;
+  --picker-custom-bg:#151318;
 }
 body{
   font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','SF Pro Display','Helvetica Neue',sans-serif;
@@ -91,42 +113,140 @@ body{
 .ios-switch.active::after{transform:translateX(20px)}
 
 /* Days list */
-.days-list{background:var(--bg-primary)}
-.day-cell{background:var(--surface-1);margin-bottom:.5px;transition:background .2s}
+.days-list{background:var(--bg-primary);padding:0 8px}
+.day-cell{background:var(--surface-1);margin-bottom:8px;border-radius:16px;transition:all .2s;border:1px solid var(--border-secondary)}
 .day-cell.weekend{background:var(--surface-2)}
-.day-cell.active-edit{background:var(--active-bg);position:relative;box-shadow:var(--elev-1)}
-.day-cell.active-edit::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent-primary);border-radius:0 2px 2px 0;opacity:1}
-.day-header{padding:12px 16px;display:flex;align-items:center;justify-content:space-between;min-height:52px;position:relative}
-.day-header::after{content:"";position:absolute;bottom:0;left:16px;right:0;height:.5px;background:var(--divider-strong);opacity:.4}
-.day-cell.expanded .day-header::after{opacity:0}
-.day-left{display:flex;align-items:center;gap:12px;flex:1}
-.day-indicator{width:8px;height:8px;border-radius:4px;background:var(--accent-success);opacity:0;transition:opacity .3s}
+.day-cell.active-edit{background:var(--active-bg);box-shadow:var(--elev-1);border-color:var(--accent-primary)}
+.day-header{padding:16px 20px;display:flex;align-items:center;justify-content:space-between;min-height:60px;position:relative}
+.day-left{display:flex;align-items:center;gap:16px;flex:1}
+.day-indicator{width:10px;height:10px;border-radius:5px;background:var(--accent-success);opacity:0;transition:opacity .3s}
 .day-cell.has-meals .day-indicator{opacity:1}
-.day-info{flex:1}.day-name{font-size:17px;font-weight:500;color:var(--text-primary)}.day-date{font-size:13px;color:var(--text-tertiary);margin-top:2px}
-.day-right{display:flex;align-items:center;gap:8px}.day-badge{padding:3px 8px;border-radius:12px;font-size:11px;font-weight:700;text-transform:uppercase;color:#fff;box-shadow:0 2px 4px rgba(0,0,0,.12)}
+.day-info{flex:1}.day-name{font-size:18px;font-weight:600;color:var(--text-primary)}.day-date{font-size:14px;color:var(--text-tertiary);margin-top:2px}
+.day-right{display:flex;align-items:center;gap:12px}.day-badge{padding:4px 10px;border-radius:16px;font-size:11px;font-weight:700;text-transform:uppercase;color:#fff;box-shadow:0 2px 4px rgba(0,0,0,.12)}
 .badge-quick{background:var(--accent-warning)}.badge-delivery{background:var(--accent-purple)}
-.lock-icon{font-size:14px;color:var(--text-tertiary)}.chevron{font-size:14px;color:var(--text-tertiary);transition:transform .3s;margin-left:4px}
+.lock-icon{font-size:16px;color:var(--text-tertiary)}.chevron{font-size:16px;color:var(--text-tertiary);transition:transform .3s}
 .day-cell.expanded .chevron{transform:rotate(180deg)}
 
-/* Meals content */
-.meals-content{max-height:0;overflow:hidden;transition:max-height .3s ease;background:var(--surface-1);box-shadow: inset 0 1px 0 var(--border-secondary)}
-.day-cell.expanded .meals-content{max-height:1000px}
-.meal-group{padding:16px;border-bottom:.5px solid var(--border-secondary)}.meal-group:last-child{border-bottom:none}
-.meal-label{font-size:13px;font-weight:700;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.8px;margin-bottom:8px}
-.meal-field{position:relative;margin-bottom:12px}
-.meal-input{width:100%;height:44px;padding:0 44px 0 16px;border:1px solid var(--border-secondary);border-radius:10px;background:var(--input-bg);font-size:16px;color:var(--text-primary);-webkit-appearance:none;appearance:none}
-.meal-input:focus{outline:none;border-color:var(--accent-primary);box-shadow:var(--focus-ring)}
-.shuffle-btn{position:absolute;right:6px;top:6px;width:32px;height:32px;border:none;border-radius:8px;background:var(--surface-2);display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid var(--border-secondary);color:var(--text-secondary)}
-.shuffle-btn:active{background:var(--accent-warning);transform:scale(.98);color:#fff}
-.mode-pills{display:flex;gap:8px;margin-bottom:12px;overflow-x:auto;-webkit-overflow-scrolling:touch}
-.mode-pill{flex:1;min-width:80px;height:36px;border:1px solid var(--border-secondary);background:var(--bg-tertiary);border-radius:18px;font-size:14px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:4px;transition:.2s;color:var(--text-secondary)}
-.mode-pill.active{background:var(--accent-primary);color:#fff;border-color:var(--accent-primary)}
+/* Meals content with card-based layout */
+.meals-content{max-height:0;overflow:hidden;transition:max-height .3s ease;padding:0 20px}
+.day-cell.expanded .meals-content{max-height:1000px;padding-bottom:20px}
+
+/* Lunch card */
+.lunch-card{
+  background:var(--lunch-bg);
+  border:2px solid var(--lunch-border);
+  border-radius:16px;
+  padding:16px;
+  margin-bottom:16px;
+  position:relative;
+}
+.lunch-card::before{
+  content:"🥗";
+  position:absolute;
+  top:12px;
+  right:16px;
+  font-size:24px;
+  opacity:.7;
+}
+.meal-card-header{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  margin-bottom:12px;
+}
+.meal-card-title{
+  font-size:16px;
+  font-weight:700;
+  color:var(--lunch-accent);
+  text-transform:uppercase;
+  letter-spacing:.8px;
+}
+.meal-field{position:relative}
+.meal-input{width:100%;height:48px;padding:0 48px 0 16px;border:1px solid var(--lunch-border);border-radius:12px;background:rgba(255,255,255,.8);font-size:16px;color:var(--text-primary);-webkit-appearance:none;appearance:none;font-weight:500}
+.meal-input:focus{outline:none;border-color:var(--lunch-accent);box-shadow:0 0 0 3px rgba(212,160,23,.2)}
+.shuffle-btn{position:absolute;right:8px;top:8px;width:32px;height:32px;border:none;border-radius:8px;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;font-size:16px;border:1px solid var(--lunch-border);color:var(--lunch-accent)}
+.lunch-card .shuffle-btn:active{background:var(--lunch-accent);color:#fff;transform:scale(.95)}
+
+/* Dinner section with grouped layout */
+.dinner-section{
+  background:var(--dinner-bg);
+  border:2px solid var(--dinner-border);
+  border-radius:16px;
+  padding:0;
+  position:relative;
+  overflow:hidden;
+}
+.dinner-section::before{
+  content:"🍽️";
+  position:absolute;
+  top:16px;
+  right:20px;
+  font-size:24px;
+  opacity:.7;
+  z-index:1;
+}
+
+.dinner-header{
+  padding:16px 20px 12px;
+  background:linear-gradient(135deg, var(--dinner-bg) 0%, rgba(30,95,91,.05) 100%);
+}
+.dinner-title{
+  font-size:16px;
+  font-weight:700;
+  color:var(--dinner-accent);
+  text-transform:uppercase;
+  letter-spacing:.8px;
+  margin-bottom:12px;
+}
+
+.mode-pills{display:flex;gap:8px;margin-bottom:0;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.mode-pill{flex:1;min-width:80px;height:32px;border:1.5px solid var(--dinner-border);background:rgba(255,255,255,.6);border-radius:16px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:4px;transition:.2s;color:var(--dinner-accent)}
+.mode-pill.active{background:var(--dinner-accent);color:#fff;border-color:var(--dinner-accent)}
 .mode-pill.active.quick{background:var(--accent-warning);border-color:var(--accent-warning)}
 .mode-pill.active.delivery{background:var(--accent-purple);border-color:var(--accent-purple)}
 
+.dinner-main{padding:16px 20px}
+.dinner-main .meal-input{border-color:var(--dinner-border);background:rgba(255,255,255,.8)}
+.dinner-main .meal-input:focus{border-color:var(--dinner-accent);box-shadow:0 0 0 3px rgba(30,95,91,.2)}
+.dinner-main .shuffle-btn{border-color:var(--dinner-border);color:var(--dinner-accent)}
+.dinner-main .shuffle-btn:active{background:var(--dinner-accent);color:#fff}
+
+/* Side dish - visually connected to dinner */
+.side-dish{
+  background:var(--side-bg);
+  border-top:2px dashed var(--side-border);
+  padding:16px 20px;
+  position:relative;
+}
+.side-dish::before{
+  content:"🥕";
+  position:absolute;
+  top:12px;
+  right:20px;
+  font-size:20px;
+  opacity:.7;
+}
+.side-dish.hidden{display:none}
+.side-label{
+  font-size:14px;
+  font-weight:700;
+  color:var(--side-accent);
+  text-transform:uppercase;
+  letter-spacing:.6px;
+  margin-bottom:8px;
+  display:flex;
+  align-items:center;
+  gap:8px;
+}
+.side-label::before{content:"↳";color:var(--side-accent);font-weight:400}
+.side-dish .meal-input{border-color:var(--side-border);background:rgba(255,255,255,.8)}
+.side-dish .meal-input:focus{border-color:var(--side-accent);box-shadow:0 0 0 3px rgba(124,58,237,.2)}
+.side-dish .shuffle-btn{border-color:var(--side-border);color:var(--side-accent)}
+.side-dish .shuffle-btn:active{background:var(--side-accent);color:#fff}
+
 /* Day actions */
-.day-actions{padding:12px 16px;background:var(--surface-2);display:flex;gap:8px;border-top:.5px solid var(--divider-strong)}
-.action-btn{flex:1;height:36px;border:1px solid var(--border-secondary);background:var(--surface-1);border-radius:10px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:4px;color:var(--text-secondary)}
+.day-actions{padding:16px 20px 0;display:flex;gap:8px}
+.action-btn{flex:1;height:40px;border:1.5px solid var(--border-secondary);background:var(--surface-1);border-radius:12px;font-size:13px;font-weight:600;display:flex;align-items:center;justify-content:center;gap:6px;color:var(--text-secondary);transition:.2s}
 .action-btn:active{background:var(--bg-tertiary);transform:scale(.98)}
 .action-btn.locked{background:var(--accent-danger);color:#fff;border-color:var(--accent-danger)}
 
@@ -161,7 +281,7 @@ body{
   display:flex;justify-content:space-between;align-items:center;
   background: var(--picker-header);
 }
-.picker-title{font-size:18px;font-weight:700;color:var(--text-primary)}
+.picker-title{font-size:18px;font-weight:700;color:#f7f5f1}
 .picker-done{
   color:var(--accent-primary);font-size:17px;font-weight:700;
   background: transparent;border:1.5px solid var(--accent-primary);
@@ -625,7 +745,6 @@ function render(){
     cell.classList.add('expanded','active-edit');
     cell.querySelector('.day-header')?.setAttribute('aria-expanded','true');
   } else {
-    // Nessun auto-open: tutti possono restare chiusi
     document.querySelectorAll('.day-header[aria-expanded="true"]')
       .forEach(h => h.setAttribute('aria-expanded','false'));
   }
@@ -634,36 +753,47 @@ function render(){
 function renderMeals(k,isWeekend){
   const d=data[k]||{lunch:'',dinner:'',side:''};
   const mode=modes[k]||'regular'; const isLocked=locked[k];
+  const showSideDish = mode!=='delivery';
+  
   return `
-    <div class="meal-group">
-      <div class="meal-label">Lunch</div>
+    <!-- Lunch Card -->
+    <div class="lunch-card">
+      <div class="meal-card-header">
+        <div class="meal-card-title">Lunch</div>
+      </div>
       <div class="meal-field">
-        <input type="text" class="meal-input" value="${d.lunch}" placeholder="Tap to select..." readonly onclick="openPicker('${k}','lunch')">
+        <input type="text" class="meal-input" value="${d.lunch}" placeholder="Tap to select lunch..." readonly onclick="openPicker('${k}','lunch')">
         <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}','lunch',this)">🎲</button>
       </div>
     </div>
 
-    <div class="meal-group">
-      <div class="meal-label">Dinner</div>
-      ${!isWeekend?`
-        <div class="mode-pills">
-          <button class="mode-pill ${mode==='regular'?'active':''}" onclick="setMode('${k}','regular')">🍽️ Regular</button>
-          <button class="mode-pill ${mode==='quick'?'active quick':''}" onclick="setMode('${k}','quick')">⚡ Quick</button>
-          <button class="mode-pill ${mode==='delivery'?'active delivery':''}" onclick="setMode('${k}','delivery')">🚚 Delivery</button>
-        </div>`:''}
-      <div class="meal-field">
-        <input type="text" class="meal-input" value="${d.dinner}" placeholder="Tap to select..." readonly onclick="openPicker('${k}','dinner')">
-        <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}','dinner',this)">🎲</button>
+    <!-- Dinner Section -->
+    <div class="dinner-section">
+      <div class="dinner-header">
+        <div class="dinner-title">Dinner</div>
+        ${!isWeekend?`
+          <div class="mode-pills">
+            <button class="mode-pill ${mode==='regular'?'active':''}" onclick="setMode('${k}','regular')">🍽️ Regular</button>
+            <button class="mode-pill ${mode==='quick'?'active quick':''}" onclick="setMode('${k}','quick')">⚡ Quick</button>
+            <button class="mode-pill ${mode==='delivery'?'active delivery':''}" onclick="setMode('${k}','delivery')">🚚 Delivery</button>
+          </div>`:''}
+      </div>
+      
+      <div class="dinner-main">
+        <div class="meal-field">
+          <input type="text" class="meal-input" value="${d.dinner}" placeholder="Tap to select dinner..." readonly onclick="openPicker('${k}','dinner')">
+          <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}','dinner',this)">🎲</button>
+        </div>
       </div>
 
-      ${mode!=='delivery'?`
-        <div style="margin-top:12px;">
-          <div class="meal-label">Side Dish</div>
+      ${showSideDish?`
+        <div class="side-dish">
+          <div class="side-label">Side Dish</div>
           <div class="meal-field">
-            <input type="text" class="meal-input" value="${d.side}" placeholder="Tap to select..." readonly onclick="openPicker('${k}','side')">
+            <input type="text" class="meal-input" value="${d.side}" placeholder="Tap to select side..." readonly onclick="openPicker('${k}','side')">
             <button class="shuffle-btn" onclick="event.stopPropagation(); shuffleMeal('${k}','side',this)">🎲</button>
           </div>
-        </div>`:`<div aria-hidden="true" aria-disabled="true"></div>`}
+        </div>`:''}
     </div>
 
     <div class="day-actions">
@@ -938,8 +1068,8 @@ document.addEventListener('keydown',e=>{
   if(e.key!=='Escape') return;
   const picker=document.getElementById('mealPicker'), grocery=document.getElementById('groceryModal'), share=document.getElementById('shareModal');
   if(picker.classList.contains('show')) closePicker();
-  else if(grocery.classList.contains('show')) closeModal('groceryModal');
-  else if(share.classList.contains('show')) closeModal('shareModal');
+  else if(grocery.classList.contains('show') && e.target.classList.contains('ios-modal')) closeModal('groceryModal');
+  else if(share.classList.contains('show') && e.target.classList.contains('ios-modal')) closeModal('shareModal');
 });
 function addSwipeToDismiss(panel,onDismiss){
   if(!panel) return;
