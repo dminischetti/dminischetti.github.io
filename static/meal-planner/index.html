@@ -5,1656 +5,1533 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="color-scheme" content="light dark">
-<title>Weekly Meal Planner</title>
+<meta name="theme-color" content="#1a1a2e">
+<title>✨ Weekly Meal Planner</title>
 <style>
-/* Reset and base styles */
-*,
-*::before,
-*::after {
+/* ===== Revolutionary Design System ===== */
+:root {
+  /* Colors - Dynamic Gradient Palette */
+  --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --primary-solid: #667eea;
+  --secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  --accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  --success: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+  --warning: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+  --danger: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+  
+  /* Surfaces - Glassmorphism */
+  --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  --bg-secondary: rgba(255, 255, 255, 0.05);
+  --bg-card: rgba(255, 255, 255, 0.08);
+  --bg-sheet: rgba(255, 255, 255, 0.12);
+  --bg-overlay: rgba(0, 0, 0, 0.7);
+  
+  /* Text */
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --text-inverse: #1a1a2e;
+  
+  /* Spacing & Layout */
+  --safe-top: env(safe-area-inset-top);
+  --safe-bottom: env(safe-area-inset-bottom);
+  --radius-sm: 12px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-xl: 32px;
+  
+  /* Shadows & Effects */
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.2);
+  --shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.3);
+  --glass-border: rgba(255, 255, 255, 0.2);
+  --blur: blur(20px);
+  
+  /* Animation */
+  --transition-fast: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --spring: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ===== Base Styles ===== */
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-/* Prevent tap highlighting and text selection on interactive elements */
-button, .clickable {
   -webkit-tap-highlight-color: transparent;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  user-select: none;
 }
 
-/* CSS Custom Properties */
-:root {
-  /* Colors - Light Theme */
-  --color-bg-primary: #f2f2f7;
-  --color-bg-secondary: #ffffff;
-  --color-bg-tertiary: #ffffff;
-  --color-text-primary: #1d1d1f;
-  --color-text-secondary: #86868b;
-  --color-text-tertiary: #c7c7cc;
-  --color-border: #c7c7cc;
-  --color-border-secondary: #f2f2f7;
-  --color-separator: #c6c6c8;
-  
-  /* Semantic colors */
-  --color-blue: #007aff;
-  --color-blue-light: #cce7ff;
-  --color-blue-bg: #f0f8ff;
-  --color-orange: #ff9500;
-  --color-orange-light: #ffe0b3;
-  --color-orange-bg: #fff8e1;
-  --color-purple: #af52de;
-  --color-purple-light: #e6ccff;
-  --color-purple-bg: #faf0ff;
-  --color-green: #34c759;
-  --color-red: #ff3b30;
-  --color-gray: #8e8e93;
-  
-  /* Elevation shadows */
-  --shadow-small: 0 1px 3px rgba(0,0,0,.12), 0 1px 2px rgba(0,0,0,.24);
-  --shadow-medium: 0 3px 6px rgba(0,0,0,.16), 0 3px 6px rgba(0,0,0,.23);
-  --shadow-large: 0 10px 20px rgba(0,0,0,.19), 0 6px 6px rgba(0,0,0,.23);
-  
-  /* Safe areas */
-  --safe-area-top: env(safe-area-inset-top);
-  --safe-area-bottom: env(safe-area-inset-bottom);
-  
-  /* Layout constants */
-  --spacing-xs: 4px;
-  --spacing-sm: 8px;
-  --spacing-md: 12px;
-  --spacing-lg: 16px;
-  --spacing-xl: 20px;
-  --spacing-2xl: 24px;
-  
-  --border-radius-sm: 8px;
-  --border-radius-md: 12px;
-  --border-radius-lg: 16px;
-  --border-radius-xl: 20px;
-  
-  --font-size-xs: 11px;
-  --font-size-sm: 13px;
-  --font-size-base: 15px;
-  --font-size-lg: 17px;
-  --font-size-xl: 20px;
-  --font-size-2xl: 22px;
-  --font-size-3xl: 28px;
-  --font-size-4xl: 34px;
-  
-  --line-height-tight: 1.2;
-  --line-height-normal: 1.33;
-  --line-height-relaxed: 1.41;
-  
-  /* Component sizes */
-  --input-height: 50px;
-  --input-height-compact: 38px;
-  --button-height: 50px;
-  --button-height-compact: 38px;
-  
-  /* Animation easing */
-  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-in-out-quart: cubic-bezier(0.77, 0, 0.175, 1);
-  --ease-spring: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+html, body {
+  height: 100%;
+  overflow-x: hidden;
 }
 
-/* Dark theme */
-[data-theme="dark"] {
-  --color-bg-primary: #000000;
-  --color-bg-secondary: #1c1c1e;
-  --color-bg-tertiary: #2c2c2e;
-  --color-text-primary: #f2f2f7;
-  --color-text-secondary: #98989d;
-  --color-text-tertiary: #48484a;
-  --color-border: #48484a;
-  --color-border-secondary: #3a3a3c;
-  --color-separator: #38383a;
-  
-  --color-blue: #0a84ff;
-  --color-blue-light: #002d52;
-  --color-blue-bg: #001a33;
-  --color-orange: #ff9f0a;
-  --color-orange-light: #4d3800;
-  --color-orange-bg: #2d2000;
-  --color-purple: #bf5af2;
-  --color-purple-light: #4d0052;
-  --color-purple-bg: #2d0033;
-  
-  --shadow-small: 0 1px 3px rgba(0,0,0,.5), 0 1px 2px rgba(0,0,0,.6);
-  --shadow-medium: 0 3px 6px rgba(0,0,0,.6), 0 3px 6px rgba(0,0,0,.7);
-  --shadow-large: 0 10px 20px rgba(0,0,0,.8), 0 6px 6px rgba(0,0,0,.7);
-}
-
-/* Typography */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', system-ui, sans-serif;
-  background-color: var(--color-bg-primary);
-  min-height: 100vh;
-  color: var(--color-text-primary);
-  font-size: var(--font-size-lg);
-  line-height: var(--line-height-relaxed);
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', Helvetica, Arial, sans-serif;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   overscroll-behavior: none;
 }
 
-/* Utility classes */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
+/* ===== Typography ===== */
+.title-xl { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
+.title-lg { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; }
+.title-md { font-size: 1.25rem; font-weight: 600; }
+.title-sm { font-size: 1rem; font-weight: 600; }
+.body-lg { font-size: 1rem; font-weight: 400; }
+.body-md { font-size: 0.875rem; font-weight: 400; }
+.body-sm { font-size: 0.75rem; font-weight: 500; }
+.caption { font-size: 0.625rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
+
+/* ===== Glass Components ===== */
+.glass {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
 }
 
-.no-scroll {
-  overflow: hidden;
-  position: fixed;
-  width: 100%;
+.glass-sheet {
+  background: var(--bg-sheet);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
 }
 
-/* Navigation */
-.nav-header {
-  background-color: var(--color-bg-secondary);
-  padding-top: var(--safe-area-top);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  border-bottom: 0.33px solid var(--color-separator);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-}
-
-.nav-content {
-  padding: var(--spacing-sm) var(--spacing-xl) var(--spacing-md);
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
-
-.nav-title {
-  font-size: var(--font-size-4xl);
-  font-weight: 700;
-  line-height: var(--line-height-tight);
-  letter-spacing: -0.5px;
-  color: var(--color-text-primary);
-}
-
-.nav-controls {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* Week selector */
-.week-selector {
-  display: flex;
-  background-color: rgba(118, 118, 128, 0.08);
-  border-radius: 10px;
-  padding: 2px;
-}
-
-.week-option {
-  padding: 6px var(--spacing-lg);
-  border: none;
-  background: transparent;
-  color: var(--color-text-secondary);
-  font-size: var(--font-size-base);
-  font-weight: 500;
-  border-radius: var(--border-radius-sm);
-  transition: all 0.2s var(--ease-spring);
-  min-width: 60px;
-  cursor: pointer;
-}
-
-.week-option:hover {
-  background-color: var(--color-bg-secondary);
-}
-
-.week-option.active {
-  background-color: var(--color-bg-secondary);
-  color: var(--color-text-primary);
-  box-shadow: var(--shadow-small);
-  font-weight: 600;
-}
-
-/* Theme toggle */
-.theme-toggle {
-  width: 36px;
-  height: 36px;
-  border: none;
-  background-color: rgba(118, 118, 128, 0.08);
-  border-radius: 18px;
-  display: flex;
+/* ===== Button System ===== */
+.btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-size: 18px;
-  transition: all 0.2s var(--ease-spring);
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 0.875rem;
+  text-decoration: none;
   cursor: pointer;
-}
-
-.theme-toggle:hover {
-  background-color: rgba(118, 118, 128, 0.12);
-}
-
-.theme-toggle:active {
-  transform: scale(0.95);
-}
-
-/* Week container */
-.week-container {
-  background-color: var(--color-bg-primary);
-  padding: 0 var(--spacing-xl) 120px;
-}
-
-.week-header {
-  padding: var(--spacing-xl) 0 var(--spacing-lg);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.week-title {
-  font-size: var(--font-size-2xl);
-  font-weight: 700;
-  color: var(--color-text-primary);
-}
-
-.week-range {
-  font-size: var(--font-size-base);
-  color: var(--color-text-secondary);
-  font-weight: 500;
-}
-
-/* Day cards */
-.days-grid {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-}
-
-.day-card {
-  background-color: var(--color-bg-secondary);
-  border-radius: var(--border-radius-lg);
-  box-shadow: var(--shadow-small);
-  overflow: hidden;
-  transition: all 0.3s var(--ease-spring);
-  border: 0.33px solid var(--color-separator);
-  cursor: pointer;
-}
-
-.day-card:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-medium);
-}
-
-.day-card:active {
-  transform: scale(0.98);
-}
-
-.day-card.weekend {
-  background-color: rgba(118, 118, 128, 0.08);
-}
-
-.day-header {
-  padding: var(--spacing-lg) var(--spacing-xl) var(--spacing-md);
-  border-bottom: 0.33px solid var(--color-separator);
-  background: linear-gradient(135deg, var(--color-bg-secondary) 0%, transparent 100%);
-}
-
-.day-header-top {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  margin-bottom: var(--spacing-sm);
-}
-
-.day-name {
-  font-size: var(--font-size-xl);
-  font-weight: 600;
-  color: var(--color-text-primary);
-  line-height: var(--line-height-tight);
-}
-
-.day-date {
-  font-size: var(--font-size-sm);
-  color: var(--color-text-secondary);
-  font-weight: 500;
-  margin-top: 2px;
-}
-
-.day-status {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-sm);
-}
-
-.status-indicator {
-  width: 8px;
-  height: 8px;
-  border-radius: 4px;
-  background-color: var(--color-green);
-  opacity: 0;
-  transition: opacity 0.3s var(--ease-spring);
-}
-
-.day-card.has-meals .status-indicator {
-  opacity: 1;
-}
-
-.status-badge {
-  padding: 4px var(--spacing-sm);
-  border-radius: var(--border-radius-sm);
-  font-size: var(--font-size-xs);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-}
-
-.badge-quick {
-  background-color: var(--color-orange-light);
-  color: var(--color-orange);
-}
-
-.badge-delivery {
-  background-color: var(--color-purple-light);
-  color: var(--color-purple);
-}
-
-.badge-locked {
-  background-color: var(--color-red);
-  color: white;
-  font-size: 10px;
-}
-
-/* Meal preview */
-.day-meals {
-  padding: var(--spacing-lg) var(--spacing-xl);
-}
-
-.meal-preview {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
-
-.meal-item {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-md);
-}
-
-.meal-icon {
-  width: 24px;
-  height: 24px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: var(--font-size-sm);
-  flex-shrink: 0;
-  font-weight: 600;
-}
-
-.meal-icon.lunch {
-  background-color: var(--color-orange-bg);
-  color: var(--color-orange);
-}
-
-.meal-icon.dinner {
-  background-color: var(--color-blue-bg);
-  color: var(--color-blue);
-}
-
-.meal-icon.side {
-  background-color: var(--color-purple-bg);
-  color: var(--color-purple);
-}
-
-.meal-text {
-  flex: 1;
-}
-
-.meal-name {
-  font-size: var(--font-size-base);
-  color: var(--color-text-primary);
-  line-height: var(--line-height-normal);
-}
-
-.meal-empty {
-  font-size: var(--font-size-base);
-  color: var(--color-text-secondary);
-  font-style: italic;
-}
-
-.chevron-right {
-  color: var(--color-text-tertiary);
-  font-size: 14px;
-  transform: translateX(0);
-  transition: transform 0.2s var(--ease-spring);
-}
-
-.day-card:hover .chevron-right {
-  transform: translateX(4px);
-}
-
-/* Settings section */
-.settings-section {
-  background-color: var(--color-bg-secondary);
-  margin: var(--spacing-xl) var(--spacing-xl) 0;
-  border-radius: var(--border-radius-lg);
-  border: 0.33px solid var(--color-separator);
-  overflow: hidden;
-}
-
-.setting-item {
-  padding: var(--spacing-lg) var(--spacing-xl);
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  background-color: var(--color-bg-secondary);
-}
-
-.setting-label {
-  font-size: var(--font-size-lg);
-  color: var(--color-text-primary);
-  font-weight: 400;
-}
-
-/* iOS-style switch */
-.ios-switch {
-  width: 51px;
-  height: 31px;
-  background-color: var(--color-separator);
-  border-radius: 16px;
+  transition: all var(--transition-fast);
   position: relative;
-  transition: background-color 0.25s var(--ease-spring);
-  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.04);
-  cursor: pointer;
+  overflow: hidden;
 }
 
-.ios-switch.active {
-  background-color: var(--color-green);
-}
-
-.ios-switch::after {
+.btn::before {
   content: '';
   position: absolute;
-  width: 27px;
-  height: 27px;
-  background-color: #ffffff;
-  border-radius: 14px;
-  top: 2px;
-  left: 2px;
-  transition: transform 0.25s var(--ease-spring);
-  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15), 0 3px 1px rgba(0, 0, 0, 0.06);
-}
-
-.ios-switch.active::after {
-  transform: translateX(20px);
-}
-
-/* Modals base styles */
-.modal-backdrop {
-  position: fixed;
   inset: 0;
-  z-index: 2000;
-  background-color: rgba(0, 0, 0, 0.4);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  display: none;
-  opacity: 0;
-  transition: opacity 0.3s var(--ease-spring);
+  background: rgba(255, 255, 255, 0.1);
+  transform: translateX(-100%);
+  transition: transform var(--transition-smooth);
 }
 
-.modal-backdrop.show {
-  display: flex;
-  opacity: 1;
+.btn:active::before {
+  transform: translateX(0);
 }
 
-.modal-content {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: var(--color-bg-secondary);
-  border-radius: var(--border-radius-lg) var(--border-radius-lg) 0 0;
-  max-height: 80vh;
-  z-index: 2001;
-  transform: translateY(100%);
-  transition: transform 0.4s var(--ease-out-expo);
-  box-shadow: var(--shadow-large);
-  display: flex;
-  flex-direction: column;
+.btn-primary {
+  background: var(--primary);
+  color: white;
+  box-shadow: var(--shadow-md);
 }
 
-.modal-backdrop.show .modal-content {
+.btn-secondary {
+  background: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--glass-border);
+  backdrop-filter: var(--blur);
+}
+
+.btn-accent {
+  background: var(--accent);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-success {
+  background: var(--success);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: white;
+  box-shadow: var(--shadow-md);
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.btn:active {
   transform: translateY(0);
 }
 
-/* Tab bar */
-.tab-bar {
+/* ===== Layout ===== */
+.app {
+  min-height: 100vh;
+  padding-bottom: calc(80px + var(--safe-bottom));
+  position: relative;
+}
+
+/* ===== Header ===== */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: calc(1rem + var(--safe-top)) 1rem 1rem;
+  background: var(--bg-card);
+  border-bottom: 1px solid var(--glass-border);
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.header-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.header-title {
+  background: var(--primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 1.5rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.header-subtitle {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ===== Toggle Switch ===== */
+.toggle {
+  position: relative;
+  width: 60px;
+  height: 32px;
+  background: var(--bg-secondary);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all var(--transition-smooth);
+  border: 1px solid var(--glass-border);
+}
+
+.toggle.active {
+  background: var(--accent);
+  box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+}
+
+.toggle-knob {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 28px;
+  height: 28px;
+  background: white;
+  border-radius: 50%;
+  transition: all var(--spring);
+  box-shadow: var(--shadow-sm);
+}
+
+.toggle.active .toggle-knob {
+  transform: translateX(28px);
+}
+
+/* ===== Main Content ===== */
+.main {
+  padding: 1rem;
+}
+
+/* ===== Day Cards ===== */
+.day-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.day-card {
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.day-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: var(--primary);
+  transform: scaleX(0);
+  transition: transform var(--transition-smooth);
+}
+
+.day-card:hover::before {
+  transform: scaleX(1);
+}
+
+.day-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.day-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.day-info h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.day-date {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* ===== Meal Fields ===== */
+.meal-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.meal-field {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+  min-height: 80px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.meal-field::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.05);
+  transform: translateY(100%);
+  transition: transform var(--transition-smooth);
+}
+
+.meal-field:hover::before {
+  transform: translateY(0);
+}
+
+.meal-field:active {
+  transform: scale(0.98);
+}
+
+.meal-label {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 0.5rem;
+}
+
+.meal-value {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.meal-placeholder {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.side-full {
+  grid-column: 1 / -1;
+}
+
+/* ===== Mode Selector ===== */
+.mode-selector {
+  display: flex;
+  gap: 0.5rem;
+  background: var(--bg-secondary);
+  padding: 0.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--glass-border);
+}
+
+.mode-btn {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  text-transform: capitalize;
+}
+
+.mode-btn.active {
+  background: var(--primary);
+  color: white;
+  box-shadow: var(--shadow-sm);
+  transform: scale(1.05);
+}
+
+/* ===== Bottom Navigation ===== */
+.bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
-  background-color: var(--color-bg-secondary);
-  border-top: 0.33px solid var(--color-separator);
-  padding-bottom: var(--safe-area-bottom);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  z-index: 1000;
+  z-index: 200;
+  background: var(--bg-sheet);
+  border-top: 1px solid var(--glass-border);
+  padding: 1rem;
+  padding-bottom: calc(1rem + var(--safe-bottom));
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
 }
 
-.tab-content {
-  display: flex;
-  padding: var(--spacing-sm) 0 var(--spacing-xs);
+.nav-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
 }
 
-.tab-item {
-  flex: 1;
-  padding: var(--spacing-sm) var(--spacing-xs);
-  border: none;
-  background: transparent;
+.nav-btn {
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  font-weight: 600;
+  font-size: 0.875rem;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  gap: var(--spacing-xs);
-  transition: all 0.2s var(--ease-spring);
+  justify-content: center;
+  gap: 0.5rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-btn .emoji {
+  font-size: 1.2rem;
+}
+
+/* ===== Sheets & Overlays ===== */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-overlay);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  z-index: 300;
+  opacity: 0;
+  visibility: hidden;
+  transition: all var(--transition-smooth);
+}
+
+.overlay.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.sheet {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 400;
+  background: var(--bg-sheet);
+  border: 1px solid var(--glass-border);
+  border-bottom: none;
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  backdrop-filter: var(--blur);
+  -webkit-backdrop-filter: var(--blur);
+  max-height: 80vh;
+  transform: translateY(100%);
+  transition: transform var(--spring);
+  box-shadow: var(--shadow-lg);
+}
+
+.sheet.show {
+  transform: translateY(0);
+}
+
+.sheet-header {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid var(--glass-border);
+  text-align: center;
+  position: relative;
+}
+
+.sheet-handle {
+  width: 40px;
+  height: 4px;
+  background: var(--text-muted);
+  border-radius: 2px;
+  margin: 0 auto 1rem;
+  opacity: 0.5;
+}
+
+.sheet-title {
+  font-size: 1.125rem;
+  font-weight: 700;
+}
+
+.sheet-body {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  max-height: calc(80vh - 140px);
+}
+
+.sheet-footer {
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--glass-border);
+  display: flex;
+  gap: 1rem;
+}
+
+/* ===== Meal Options ===== */
+.meal-options {
+  padding: 1rem 0;
+}
+
+.option-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.option-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.option-item.selected {
+  background: rgba(103, 126, 234, 0.2);
+  color: var(--primary-solid);
+}
+
+.option-item.selected::before {
+  content: '✓';
+  position: absolute;
+  right: 1.5rem;
+  color: var(--primary-solid);
+  font-weight: bold;
+}
+
+.custom-input {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-top: 1px solid var(--glass-border);
+  background: var(--bg-secondary);
+}
+
+.custom-input input {
+  flex: 1;
+  background: var(--bg-card);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  color: var(--text-primary);
+  font-size: 0.875rem;
+}
+
+.custom-input input::placeholder {
+  color: var(--text-muted);
+}
+
+.custom-input input:focus {
+  outline: none;
+  border-color: var(--primary-solid);
+  box-shadow: 0 0 0 2px rgba(103, 126, 234, 0.2);
+}
+
+/* ===== Grocery List ===== */
+.grocery-section {
+  margin-bottom: 1.5rem;
+}
+
+.grocery-section h4 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 0.75rem;
+  padding: 0 1.5rem;
+  color: var(--text-secondary);
+}
+
+.grocery-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.grocery-item input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--primary-solid);
+}
+
+.grocery-item label {
+  flex: 1;
+  font-size: 0.875rem;
   cursor: pointer;
 }
 
-.tab-item:active {
-  transform: scale(0.9);
+/* ===== Share Text ===== */
+.share-content {
+  padding: 1.5rem;
 }
 
-.tab-icon {
-  font-size: 22px;
-  line-height: 1;
+.share-text {
+  background: var(--bg-secondary);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  padding: 1rem;
+  font-family: ui-monospace, 'SF Mono', monospace;
+  font-size: 0.75rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  max-height: 300px;
+  overflow-y: auto;
+  color: var(--text-secondary);
 }
 
-.tab-label {
-  font-size: 10px;
-  font-weight: 500;
-  color: var(--color-text-secondary);
-  line-height: 1;
+/* ===== Loading States ===== */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 2rem;
+  color: var(--text-muted);
 }
 
-.tab-item.shuffle {
-  color: var(--color-orange);
+.loading::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid transparent;
+  border-top: 2px solid var(--primary-solid);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
 }
 
-.tab-item.grocery {
-  color: var(--color-green);
+@keyframes spin {
+  to { transform: rotate(360deg); }
 }
 
-.tab-item.share {
-  color: var(--color-blue);
+/* ===== Animations ===== */
+.fade-in {
+  animation: fadeIn 0.6s ease-out forwards;
 }
 
-.tab-item.clear {
-  color: var(--color-red);
-}
-
-/* Responsive design */
-@media (max-width: 375px) {
-  .nav-content,
-  .week-container {
-    padding-left: var(--spacing-lg);
-    padding-right: var(--spacing-lg);
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-@media (max-height: 700px) {
-  .modal-content {
-    max-height: 90vh;
+.slide-up {
+  animation: slideUp 0.4s ease-out forwards;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
   }
 }
 
-/* Accessibility improvements */
+/* ===== Responsive Design ===== */
+@media (max-width: 390px) {
+  .meal-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .nav-grid {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+  }
+  
+  .mode-selector {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
+/* ===== Accessibility ===== */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
 
-@media (prefers-contrast: high) {
-  :root {
-    --color-separator: #000000;
-    --color-border: #000000;
-  }
-  
-  [data-theme="dark"] {
-    --color-separator: #ffffff;
-    --color-border: #ffffff;
-  }
-}
-
-/* Focus states */
-button:focus-visible,
-.clickable:focus-visible {
-  outline: 2px solid var(--color-blue);
+/* ===== Focus Styles ===== */
+:focus-visible {
+  outline: 2px solid var(--primary-solid);
   outline-offset: 2px;
-}
-
-/* Loading and error states */
-.loading {
-  opacity: 0.6;
-  pointer-events: none;
-}
-
-.error {
-  border-color: var(--color-red);
-  background-color: rgba(255, 59, 48, 0.1);
 }
 </style>
 </head>
 <body>
-  <!-- Navigation Header -->
-  <header class="nav-header">
-    <div class="nav-content">
-      <h1 class="nav-title">Meals</h1>
-      <div class="nav-controls">
-        <div class="week-selector" role="tablist" aria-label="Week selector">
-          <button class="week-option" 
-                  id="thisWeek" 
-                  role="tab" 
-                  aria-selected="false"
-                  data-week="this">
-            This Week
-          </button>
-          <button class="week-option active" 
-                  id="nextWeek" 
-                  role="tab" 
-                  aria-selected="true"
-                  data-week="next">
-            Next Week
-          </button>
+
+<div id="app" class="app">
+  <!-- Header -->
+  <header class="header">
+    <div class="header-content">
+      <div class="header-left">
+        <h1 class="header-title">✨ Meal Planner</h1>
+        <div id="dateRange" class="header-subtitle"></div>
+      </div>
+      <div class="header-right">
+        <div id="weekendToggle" class="toggle" role="switch" aria-label="Include weekend" tabindex="0">
+          <div class="toggle-knob"></div>
         </div>
-        <button class="theme-toggle" 
-                id="themeToggle" 
-                aria-label="Toggle theme">
-          <span aria-hidden="true">◐</span>
-        </button>
+        <button id="clearBtn" class="btn btn-danger body-sm">Clear All</button>
       </div>
     </div>
   </header>
 
-  <!-- Week Container -->
-  <main class="week-container">
-    <div class="week-header">
-      <div class="week-title">Plan Your Week</div>
-      <div class="week-range" id="weekRange">Sep 2 - Sep 8</div>
-    </div>
-
-    <div class="days-grid" id="daysGrid" role="list" aria-label="Weekly meal plan">
-      <!-- Days will be rendered here -->
-    </div>
-
-    <!-- Settings -->
-    <section class="settings-section">
-      <div class="setting-item">
-        <label for="weekendToggle" class="setting-label">Include Weekend</label>
-        <button class="ios-switch" 
-                id="weekendToggle" 
-                role="switch" 
-                aria-checked="false"
-                aria-labelledby="setting-label">
-          <span class="sr-only">Toggle weekend planning</span>
-        </button>
-      </div>
-    </section>
+  <!-- Main Content -->
+  <main class="main">
+    <div id="dayGrid" class="day-grid" aria-live="polite"></div>
   </main>
 
-  <!-- Tab Bar -->
-  <nav class="tab-bar" role="tablist" aria-label="Main actions">
-    <div class="tab-content">
-      <button class="tab-item shuffle" id="shuffleAllBtn" role="tab">
-        <span class="tab-icon" aria-hidden="true">↻</span>
-        <span class="tab-label">Shuffle</span>
+  <!-- Bottom Navigation -->
+  <nav class="bottom-nav">
+    <div class="nav-grid">
+      <button id="shuffleBtn" class="nav-btn btn-primary">
+        <span class="emoji">🎲</span>
+        <span>Randomize</span>
       </button>
-      <button class="tab-item grocery" id="groceryBtn" role="tab">
-        <span class="tab-icon" aria-hidden="true">☰</span>
-        <span class="tab-label">List</span>
-      </button>
-      <button class="tab-item share" id="shareBtn" role="tab">
-        <span class="tab-icon" aria-hidden="true">↗</span>
-        <span class="tab-label">Share</span>
-      </button>
-      <button class="tab-item clear" id="clearBtn" role="tab">
-        <span class="tab-icon" aria-hidden="true">⌫</span>
-        <span class="tab-label">Clear</span>
+      <button id="groceryBtn" class="nav-btn btn-success">
+        <span class="emoji">🛒</span>
+        <span>Grocery List</span>
       </button>
     </div>
+    <button id="shareBtn" class="btn btn-accent" style="margin-top: 0.75rem; width: 100%;">
+      <span class="emoji">📤</span>
+      <span>Share Plan</span>
+    </button>
   </nav>
+</div>
 
-  <!-- Modals will be dynamically created -->
+<!-- Overlay -->
+<div id="overlay" class="overlay"></div>
+
+<!-- Meal Picker Sheet -->
+<div id="mealPicker" class="sheet" role="dialog" aria-modal="true">
+  <div class="sheet-header">
+    <div class="sheet-handle"></div>
+    <h2 id="pickerTitle" class="sheet-title">Choose Meal</h2>
+  </div>
+  <div id="customInputSection" class="custom-input" style="display: none;">
+    <input id="customInput" type="text" placeholder="Enter custom meal name...">
+    <button id="customUseBtn" class="btn btn-primary">Add</button>
+  </div>
+  <div class="sheet-body">
+    <div id="mealOptions" class="meal-options"></div>
+  </div>
+  <div class="sheet-footer">
+    <button id="pickerCloseBtn" class="btn btn-secondary" style="flex: 1;">Cancel</button>
+  </div>
+</div>
+
+<!-- Grocery Sheet -->
+<div id="grocerySheet" class="sheet" role="dialog" aria-modal="true">
+  <div class="sheet-header">
+    <div class="sheet-handle"></div>
+    <h2 class="sheet-title">🛒 Grocery List</h2>
+  </div>
+  <div class="sheet-body">
+    <div id="groceryContent"></div>
+  </div>
+  <div class="sheet-footer">
+    <button id="groceryCopyBtn" class="btn btn-primary" style="flex: 1;">Copy List</button>
+    <button id="groceryCloseBtn" class="btn btn-secondary" style="flex: 1;">Done</button>
+  </div>
+</div>
+
+<!-- Share Sheet -->
+<div id="shareSheet" class="sheet" role="dialog" aria-modal="true">
+  <div class="sheet-header">
+    <div class="sheet-handle"></div>
+    <h2 class="sheet-title">📤 Share Meal Plan</h2>
+  </div>
+  <div class="sheet-body">
+    <div class="share-content">
+      <div id="shareText" class="share-text"></div>
+    </div>
+  </div>
+  <div class="sheet-footer">
+    <button id="shareCopyBtn" class="btn btn-primary" style="flex: 1;">Copy Text</button>
+    <button id="shareCloseBtn" class="btn btn-secondary" style="flex: 1;">Done</button>
+  </div>
+</div>
 
 <script>
-/**
- * Weekly Meal Planner Application
- * Improved version with better practices, error handling, and accessibility
- */
+/* ========= Enhanced Configuration ========== */
+const MEALS = {
+  lunch: [
+    "🍝 Ravioli burro e salvia", "🍋 Spaghetti al limone", "🫘 Pasta e ceci", 
+    "🐟 Pasta col tonno", "🍅 Pasta sugo tonno", "🥪 Piadine prosciutto provolone",
+    "🍳 Uova fritte", "🌿 Pasta al pesto", "🍅 Pasta coi pomodorini", 
+    "🫘 Lenticchie", "🧄 Spaghetti aglio e olio", "🥓 Carbonara",
+    "🍳 Frittata di pasta", "🫘 Pasta e fagioli", "❌ None", "✏️ Custom…"
+  ],
+  dinner: {
+    regular: [
+      "🐟 Salmone col riso", "🥒 Frittata di zucchine", "🍖 Polpette", 
+      "🍋 Pollo al limone", "🐟 Merluzzo", "🍔 Hamburger", "🍗 Cotolette",
+      "🌭 Salsicce", "🥕 Minestrone", "🍗 Pollo al forno", 
+      "🍋 Scaloppine al limone", "🍅 Caprese", "❌ None", "✏️ Custom…"
+    ],
+    quick: [
+      "🍗 Cordon bleu", "🌭 Wurstel", "🥟 Dumplings", "🐟 Fish sticks", 
+      "🍗 Pollo allo spiedo", "❌ None", "✏️ Custom…"
+    ],
+    delivery: [
+      "🍕 Pizza Delivery", "🥙 Greco Delivery", "🥡 Chinese Delivery", 
+      "🍜 Vietnamese Delivery", "🍜 Ramen Delivery", "❌ None", "✏️ Custom…"
+    ],
+    weekend: [
+      "🍝 Pasta al forno", "🍆 Parmigiana di melanzane", "🥒 Zucchine ripiene",
+      "🍝 Lasagna", "🥩 Spezzatino con patate", "🍝 Tortellini con la panna",
+      "🍝 Tortellini col sugo", "🍝 Pasta col ragù", "🍖 Polpettone",
+      "🌽 Polenta col sugo", "🍝 Cannelloni", "🥩 Bistecca", "❌ None", "✏️ Custom…"
+    ]
+  },
+  side: [
+    "🥔 Purè di patate", "🥦 Broccoli al vapore", "🍅 Insalata di pomodori",
+    "🥔 Tater tots", "🫐 Barbabietole", "🌽 Insalata di mais", "🥔 Patate lesse",
+    "🥕 Carote al forno", "🥕 Carote a insalata", "🥒 Zucchine trifolate",
+    "🥒 Insalata di cetrioli", "🥗 Insalata", "❌ None", "✏️ Custom…"
+  ]
+};
 
-class MealPlannerApp {
+const INGREDIENTS = {
+  "🍝 Ravioli burro e salvia": ["ravioli", "sage", "butter"],
+  "🍋 Spaghetti al limone": ["spaghetti", "lemon", "olive oil"],
+  "🫘 Pasta e ceci": ["pasta", "chickpeas", "rosemary"],
+  "🐟 Pasta col tonno": ["spaghetti", "tuna", "capers"],
+  "🍅 Pasta sugo tonno": ["pasta", "tuna", "tomato sauce"],
+  "🥪 Piadine prosciutto provolone": ["flatbread", "prosciutto", "provolone"],
+  "🍳 Uova fritte": ["eggs", "olive oil"],
+  "🌿 Pasta al pesto": ["pasta", "pesto", "pine nuts"],
+  "🍅 Pasta coi pomodorini": ["pasta", "cherry tomatoes", "basil"],
+  "🫘 Lenticchie": ["lentils", "vegetables", "croutons"],
+  "🧄 Spaghetti aglio e olio": ["spaghetti", "garlic", "olive oil", "chili"],
+  "🥓 Carbonara": ["spaghetti", "eggs", "bacon", "parmesan"],
+  "🍳 Frittata di pasta": ["eggs", "leftover pasta", "cheese"],
+  "🫘 Pasta e fagioli": ["pasta", "beans", "vegetables"],
+  "🐟 Salmone col riso": ["salmon", "rice", "vegetables"],
+  "🥒 Frittata di zucchine": ["eggs", "zucchini", "cheese"],
+  "🍖 Polpette": ["ground beef", "breadcrumbs", "eggs", "tomato sauce"],
+  "🍋 Pollo al limone": ["chicken breast", "lemon", "herbs"],
+  "🐟 Merluzzo": ["cod", "vegetables", "olive oil"],
+  "🍔 Hamburger": ["burger buns", "ground beef", "cheese", "lettuce", "tomato"],
+  "🍗 Cotolette": ["cutlets", "breadcrumbs", "eggs"],
+  "🌭 Salsicce": ["sausages", "vegetables"],
+  "🥕 Minestrone": ["mixed vegetables", "pasta", "beans"],
+  "🍗 Pollo al forno": ["chicken thighs", "potatoes", "herbs"],
+  "🍋 Scaloppine al limone": ["veal cutlets", "lemon", "capers"],
+  "🍅 Caprese": ["mozzarella", "tomatoes", "basil"],
+  "🥔 Purè di patate": ["potatoes", "milk", "butter"],
+  "🥦 Broccoli al vapore": ["broccoli"],
+  "🍅 Insalata di pomodori": ["tomatoes", "olive oil", "basil"],
+  "🥔 Tater tots": ["frozen tater tots"],
+  "🫐 Barbabietole": ["beets"],
+  "🌽 Insalata di mais": ["corn", "vegetables"],
+  "🥔 Patate lesse": ["potatoes"],
+  "🥕 Carote al forno": ["carrots", "olive oil"],
+  "🥕 Carote a insalata": ["carrots"],
+  "🥒 Zucchine trifolate": ["zucchini", "garlic"],
+  "🥒 Insalata di cetrioli": ["cucumbers"],
+  "🥗 Insalata": ["mixed greens", "vegetables"]
+};
+
+const STORE_CATEGORIES = {
+  "🏪 Supermarket": ["pasta", "rice", "eggs", "milk", "bread", "vegetables", "meat", "cheese"],
+  "🥩 Butcher": ["ground beef", "chicken breast", "chicken thighs", "sausages", "bacon"],
+  "🐟 Fish Market": ["salmon", "cod", "tuna"],
+  "🥬 Fresh Produce": ["tomatoes", "basil", "zucchini", "carrots", "broccoli", "lettuce"],
+  "🏬 Specialty Store": ["pesto", "prosciutto", "provolone", "capers", "pine nuts"]
+};
+
+/* ========= Enhanced State Management ========= */
+class MealPlannerState {
   constructor() {
-    // Application configuration
-    this.config = {
-      meals: {
-        lunch: [
-          "Ravioli burro e salvia", "Spaghetti al limone", "Pasta e ceci", "Pasta col tonno",
-          "Pasta sugo tonno", "Piadine prosciutto provolone", "Uova fritte", "Pasta al pesto",
-          "Pasta coi pomodorini", "Lenticchie", "Spaghetti aglio e olio", "Carbonara",
-          "Frittata di pasta", "Pasta e fagioli"
-        ],
-        dinner: {
-          regular: [
-            "Salmone col riso", "Frittata di zucchine", "Polpette", "Pollo al limone", "Merluzzo",
-            "Hamburger", "Cotolette", "Salsicce", "Minestrone", "Pollo al forno", "Scaloppine al limone", "Caprese"
-          ],
-          quick: ["Cordon bleu", "Würstel", "Dumplings", "Fish sticks", "Pollo allo spiedo"],
-          delivery: ["Pizza Delivery", "Greco Delivery", "Chinese Delivery", "Vietnamese Delivery", "Ramen Delivery"],
-          weekend: [
-            "Pasta al forno", "Parmigiana di melanzane", "Zucchine ripiene", "Lasagna", "Spezzatino con patate",
-            "Tortellini con la panna", "Tortellini col sugo", "Pasta col ragù", "Polpettone", "Scrimpelle mbuss",
-            "Polenta col sugo", "Cannelloni", "Bistecca"
-          ],
-          other: ["Colacena"]
-        },
-        side: [
-          "Purè di patate", "Broccoli al vapore", "Insalata di pomodori", "Tater tots", "Barbabietole",
-          "Insalata di mais", "Patate lesse", "Carote al forno", "Carote a insalata", "Zucchine trifolate",
-          "Insalata di cetrioli", "Insalata"
-        ]
-      },
-      ingredients: {
-        "Ravioli burro e salvia": ["Ravioli", "Sage"],
-        "Spaghetti al limone": ["Spaghetti", "Lemons"],
-        "Pasta e ceci": ["Ditalini", "Chickpeas"],
-        // ... (truncated for brevity, would include all ingredients)
-      },
-      dayNames: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'],
-      storageKeys: {
-        data: 'mealPlanData',
-        week: 'mealPlanWeek',
-        weekend: 'mealPlanWeekend',
-        locked: 'mealPlanLocked',
-        modes: 'mealPlanModes',
-        theme: 'theme'
-      }
-    };
-
-    // Application state
-    this.state = {
-      data: {},
-      week: 'next',
-      weekendEnabled: {},
-      lockedDays: {},
-      dinnerModes: {},
-      currentEditingDay: null,
-      currentPicker: null
-    };
-
-    // DOM cache
-    this.elements = {};
-
-    // Event handlers bound to this instance
-    this.boundHandlers = {
-      selectWeek: this.selectWeek.bind(this),
-      toggleTheme: this.toggleTheme.bind(this),
-      toggleWeekend: this.toggleWeekend.bind(this),
-      shuffleAll: this.shuffleAll.bind(this),
-      showGrocery: this.showGrocery.bind(this),
-      sharePlan: this.sharePlan.bind(this),
-      clearAll: this.clearAll.bind(this),
-      handleKeydown: this.handleKeydown.bind(this),
-      handleResize: this.handleResize.bind(this)
-    };
-
+    this.weekendEnabled = true;
+    this.meals = {};
+    this.currentPicker = null;
     this.init();
   }
 
-  /**
-   * Initialize the application
-   */
-  async init() {
+  init() {
+    this.loadFromStorage();
+    this.generateWeekKeys();
+  }
+
+  generateWeekKeys() {
+    const today = new Date();
+    const monday = new Date(today);
+    const dayOfWeek = today.getDay();
+    const daysUntilMonday = dayOfWeek === 0 ? 1 : 8 - dayOfWeek;
+    monday.setDate(today.getDate() + daysUntilMonday);
+
+    this.weekStart = monday;
+    this.weekKeys = [];
+    
+    for (let i = 0; i < 7; i++) {
+      const date = new Date(monday);
+      date.setDate(monday.getDate() + i);
+      const key = `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`;
+      this.weekKeys.push(key);
+      
+      if (!this.meals[key]) {
+        this.meals[key] = {
+          lunch: "",
+          dinner: "",
+          side: "",
+          mode: "regular"
+        };
+      }
+    }
+  }
+
+  loadFromStorage() {
     try {
-      this.cacheElements();
-      this.loadData();
-      this.setupEventListeners();
-      this.updateUI();
-      this.setTheme();
-      
-      // Add loading state management
-      document.body.classList.remove('loading');
-      
-      console.log('Meal Planner initialized successfully');
-    } catch (error) {
-      this.handleError('Initialization failed', error);
-    }
-  }
-
-  /**
-   * Cache DOM elements for performance
-   */
-  cacheElements() {
-    const selectors = {
-      weekRange: '#weekRange',
-      daysGrid: '#daysGrid',
-      weekendToggle: '#weekendToggle',
-      themeToggle: '#themeToggle',
-      thisWeek: '#thisWeek',
-      nextWeek: '#nextWeek',
-      shuffleAllBtn: '#shuffleAllBtn',
-      groceryBtn: '#groceryBtn',
-      shareBtn: '#shareBtn',
-      clearBtn: '#clearBtn'
-    };
-
-    for (const [key, selector] of Object.entries(selectors)) {
-      this.elements[key] = document.querySelector(selector);
-      if (!this.elements[key]) {
-        throw new Error(`Required element not found: ${selector}`);
+      const saved = localStorage.getItem('mealPlannerState');
+      if (saved) {
+        const data = JSON.parse(saved);
+        this.weekendEnabled = data.weekendEnabled ?? true;
+        this.meals = data.meals ?? {};
       }
+    } catch (e) {
+      console.warn('Failed to load from storage:', e);
     }
   }
 
-  /**
-   * Set up all event listeners
-   */
-  setupEventListeners() {
-    // Week selector
-    this.elements.thisWeek.addEventListener('click', () => this.boundHandlers.selectWeek('this'));
-    this.elements.nextWeek.addEventListener('click', () => this.boundHandlers.selectWeek('next'));
-
-    // Theme toggle
-    this.elements.themeToggle.addEventListener('click', this.boundHandlers.toggleTheme);
-
-    // Weekend toggle
-    this.elements.weekendToggle.addEventListener('click', this.boundHandlers.toggleWeekend);
-
-    // Tab bar actions
-    this.elements.shuffleAllBtn.addEventListener('click', this.boundHandlers.shuffleAll);
-    this.elements.groceryBtn.addEventListener('click', this.boundHandlers.showGrocery);
-    this.elements.shareBtn.addEventListener('click', this.boundHandlers.sharePlan);
-    this.elements.clearBtn.addEventListener('click', this.boundHandlers.clearAll);
-
-    // Global event listeners
-    document.addEventListener('keydown', this.boundHandlers.handleKeydown);
-    window.addEventListener('resize', this.boundHandlers.handleResize);
-    
-    // Handle system theme changes
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
-      if (!localStorage.getItem(this.config.storageKeys.theme)) {
-        this.setTheme();
-      }
-    });
-
-    // Handle visibility changes for performance
-    document.addEventListener('visibilitychange', () => {
-      if (document.visibilityState === 'visible') {
-        this.updateWeekRange();
-      }
-    });
-  }
-
-  /**
-   * Handle keyboard shortcuts
-   */
-  handleKeydown(e) {
-    if (e.key === 'Escape') {
-      this.closeAllModals();
+  saveToStorage() {
+    try {
+      localStorage.setItem('mealPlannerState', JSON.stringify({
+        weekendEnabled: this.weekendEnabled,
+        meals: this.meals
+      }));
+    } catch (e) {
+      console.warn('Failed to save to storage:', e);
     }
   }
 
-  /**
-   * Handle window resize
-   */
-  handleResize() {
-    // Debounce resize handler
-    clearTimeout(this.resizeTimeout);
-    this.resizeTimeout = setTimeout(() => {
-      this.updateUI();
-    }, 150);
+  updateMeal(dayKey, mealType, value) {
+    this.meals[dayKey][mealType] = value;
+    this.saveToStorage();
   }
 
-  /**
-   * Update all UI elements
-   */
-  updateUI() {
-    this.updateWeekSelector();
-    this.updateWeekRange();
-    this.renderDays();
-    this.updateWeekendToggle();
-  }
-
-  /**
-   * Select week (this/next)
-   */
-  selectWeek(selectedWeek) {
-    if (this.state.week !== selectedWeek) {
-      this.state.week = selectedWeek;
-      this.updateUI();
-      this.saveData();
-      this.vibrate(5);
-    }
-  }
-
-  /**
-   * Update week selector UI
-   */
-  updateWeekSelector() {
-    const isThisWeek = this.state.week === 'this';
-    
-    this.elements.thisWeek.classList.toggle('active', isThisWeek);
-    this.elements.thisWeek.setAttribute('aria-selected', isThisWeek);
-    
-    this.elements.nextWeek.classList.toggle('active', !isThisWeek);
-    this.elements.nextWeek.setAttribute('aria-selected', !isThisWeek);
-  }
-
-  /**
-   * Update week range display
-   */
-  updateWeekRange() {
-    const start = this.getWeekStart();
-    const end = new Date(start);
-    end.setDate(start.getDate() + 6);
-    
-    const format = { month: 'short', day: 'numeric' };
-    const startStr = start.toLocaleDateString('en', format);
-    const endStr = end.toLocaleDateString('en', format);
-    
-    this.elements.weekRange.textContent = `${startStr} - ${endStr}`;
-  }
-
-  /**
-   * Render all day cards
-   */
-  renderDays() {
-    const container = this.elements.daysGrid;
-    const start = this.getWeekStart();
-    
-    const dayCards = this.config.dayNames.map((dayName, index) => {
-      if (index >= 5 && !this.state.weekendEnabled[this.state.week]) {
-        return '';
-      }
-      
-      return this.renderDayCard(dayName, index, start);
-    }).filter(card => card !== '').join('');
-    
-    container.innerHTML = dayCards;
-    
-    // Add event listeners to day cards
-    container.querySelectorAll('.day-card').forEach(card => {
-      const dayKey = card.dataset.dayKey;
-      card.addEventListener('click', () => this.openDayEditor(dayKey));
-      card.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          this.openDayEditor(dayKey);
-        }
-      });
-    });
-  }
-
-  /**
-   * Render individual day card
-   */
-  renderDayCard(dayName, index, start) {
-    const dayKey = this.getDayKey(index, start);
-    const dayData = this.state.data[dayKey] || { lunch: '', dinner: '', side: '' };
-    const isWeekend = index >= 5;
-    const isLocked = this.state.lockedDays[dayKey];
-    const mode = this.state.dinnerModes[dayKey] || 'regular';
-    const hasMeals = dayData.lunch || dayData.dinner;
-    const date = this.getDateForIndex(index, start);
-
-    let statusBadges = '';
-    if (isLocked) {
-      statusBadges += '<span class="status-badge badge-locked" aria-label="Day locked">🔒 Locked</span>';
-    }
-    if (mode === 'quick') {
-      statusBadges += '<span class="status-badge badge-quick" aria-label="Quick meals">⚡ Quick</span>';
-    }
+  updateMode(dayKey, mode) {
+    this.meals[dayKey].mode = mode;
     if (mode === 'delivery') {
-      statusBadges += '<span class="status-badge badge-delivery" aria-label="Delivery meals">🚚 Delivery</span>';
+      this.meals[dayKey].side = "";
     }
-
-    const mealsPreview = this.renderMealsPreview(dayData, mode, hasMeals);
-
-    return `
-      <div class="day-card ${isWeekend ? 'weekend' : ''} ${hasMeals ? 'has-meals' : ''}" 
-           data-day-key="${this.escapeHtml(dayKey)}"
-           role="listitem"
-           tabindex="0"
-           aria-label="${dayName}, ${date.toLocaleDateString('en', { month: 'long', day: 'numeric' })}">
-        <div class="day-header">
-          <div class="day-header-top">
-            <div>
-              <div class="day-name">${this.escapeHtml(dayName)}</div>
-              <div class="day-date">${this.escapeHtml(date.toLocaleDateString('en', { month: 'short', day: 'numeric' }))}</div>
-            </div>
-            <div class="day-status">
-              <div class="status-indicator" aria-hidden="true"></div>
-              ${statusBadges}
-              <div class="chevron-right" aria-hidden="true">›</div>
-            </div>
-          </div>
-        </div>
-        <div class="day-meals">
-          <div class="meal-preview">${mealsPreview}</div>
-        </div>
-      </div>
-    `;
+    this.saveToStorage();
   }
 
-  /**
-   * Render meals preview for day card
-   */
-  renderMealsPreview(dayData, mode, hasMeals) {
-    if (!hasMeals) {
-      return `
-        <div class="meal-item">
-          <div class="meal-text">
-            <div class="meal-empty">Tap to plan meals</div>
-          </div>
-        </div>
-      `;
-    }
-
-    const mealItems = [];
-    
-    if (dayData.lunch) {
-      mealItems.push(`
-        <div class="meal-item">
-          <div class="meal-icon lunch" aria-hidden="true">L</div>
-          <div class="meal-text">
-            <div class="meal-name">${this.escapeHtml(dayData.lunch)}</div>
-          </div>
-        </div>
-      `);
-    }
-    
-    if (dayData.dinner) {
-      let dinnerText = dayData.dinner;
-      if (dayData.side && mode !== 'delivery') {
-        dinnerText += ` with ${dayData.side}`;
-      }
-      
-      mealItems.push(`
-        <div class="meal-item">
-          <div class="meal-icon dinner" aria-hidden="true">D</div>
-          <div class="meal-text">
-            <div class="meal-name">${this.escapeHtml(dinnerText)}</div>
-          </div>
-        </div>
-      `);
-    }
-    
-    return mealItems.join('');
-  }
-
-  /**
-   * Open day editor modal
-   */
-  openDayEditor(dayKey) {
-    this.state.currentEditingDay = dayKey;
-    
-    try {
-      const dayIndex = this.getDayIndex(dayKey);
-      const dayName = this.config.dayNames[dayIndex];
-      const date = this.getDateForIndex(dayIndex);
-      
-      this.createDayEditorModal(dayKey, dayName, date);
-      this.vibrate(10);
-    } catch (error) {
-      this.handleError('Failed to open day editor', error);
-    }
-  }
-
-  /**
-   * Create day editor modal
-   */
-  createDayEditorModal(dayKey, dayName, date) {
-    // Remove existing modal if present
-    const existingModal = document.getElementById('dayEditor');
-    if (existingModal) {
-      existingModal.remove();
-    }
-
-    const modal = document.createElement('div');
-    modal.id = 'dayEditor';
-    modal.className = 'modal-backdrop';
-    modal.innerHTML = `
-      <div class="modal-content" role="dialog" aria-labelledby="editorTitle" aria-modal="true">
-        <div class="modal-header">
-          <div class="modal-handle" aria-hidden="true"></div>
-          <h2 id="editorTitle">${this.escapeHtml(dayName)} - ${this.escapeHtml(date.toLocaleDateString('en', { month: 'short', day: 'numeric' }))}</h2>
-          <button class="modal-close" aria-label="Close editor">Done</button>
-        </div>
-        <div class="modal-body">
-          ${this.renderDayEditorContent(dayKey)}
-        </div>
-      </div>
-    `;
-
-    document.body.appendChild(modal);
-    
-    // Set up event listeners
-    modal.querySelector('.modal-close').addEventListener('click', () => this.closeDayEditor());
-    modal.addEventListener('click', (e) => {
-      if (e.target === modal) {
-        this.closeDayEditor();
+  clearAll() {
+    this.weekKeys.forEach(key => {
+      if (this.meals[key]) {
+        this.meals[key] = {
+          lunch: "",
+          dinner: "",
+          side: "",
+          mode: this.meals[key].mode
+        };
       }
     });
-
-    // Show modal
-    setTimeout(() => {
-      modal.classList.add('show');
-    }, 10);
-
-    // Prevent body scroll
-    document.body.classList.add('no-scroll');
-    
-    // Focus management
-    modal.querySelector('.modal-close').focus();
+    this.saveToStorage();
   }
 
-  /**
-   * Render day editor content
-   */
-  renderDayEditorContent(dayKey) {
-    // Implementation would continue here...
-    // This is a simplified version for brevity
-    return '<div>Day editor content would be rendered here</div>';
-  }
+  randomizeMeals() {
+    this.weekKeys.forEach((key, index) => {
+      if (index >= 5 && !this.weekendEnabled) return;
 
-  /**
-   * Close day editor modal
-   */
-  closeDayEditor() {
-    const modal = document.getElementById('dayEditor');
-    if (modal) {
-      modal.classList.remove('show');
-      setTimeout(() => {
-        modal.remove();
-        document.body.classList.remove('no-scroll');
-      }, 400);
-    }
-    
-    this.state.currentEditingDay = null;
-    this.renderDays();
-    this.vibrate(5);
-  }
-
-  /**
-   * Toggle weekend planning
-   */
-  toggleWeekend() {
-    this.state.weekendEnabled[this.state.week] = !this.state.weekendEnabled[this.state.week];
-    
-    if (!this.state.weekendEnabled[this.state.week]) {
-      // Clear weekend data when disabled
-      for (let i = 5; i <= 6; i++) {
-        const dayKey = this.getDayKey(i);
-        delete this.state.data[dayKey];
-        delete this.state.lockedDays[dayKey];
-        delete this.state.dinnerModes[dayKey];
-      }
-    }
-    
-    this.updateUI();
-    this.saveData();
-    this.vibrate(10);
-  }
-
-  /**
-   * Update weekend toggle UI
-   */
-  updateWeekendToggle() {
-    const enabled = !!this.state.weekendEnabled[this.state.week];
-    this.elements.weekendToggle.classList.toggle('active', enabled);
-    this.elements.weekendToggle.setAttribute('aria-checked', enabled);
-  }
-
-  /**
-   * Toggle theme
-   */
-  toggleTheme() {
-    const current = document.documentElement.getAttribute('data-theme');
-    const next = current === 'dark' ? 'light' : 'dark';
-    
-    document.documentElement.setAttribute('data-theme', next);
-    localStorage.setItem(this.config.storageKeys.theme, next);
-    
-    const icon = this.elements.themeToggle.querySelector('[aria-hidden]');
-    icon.textContent = next === 'dark' ? '◑' : '◐';
-    
-    this.vibrate(5);
-  }
-
-  /**
-   * Set theme based on preference
-   */
-  setTheme() {
-    const saved = localStorage.getItem(this.config.storageKeys.theme);
-    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    const isDark = saved ? saved === 'dark' : prefersDark;
-
-    document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
-    
-    const icon = this.elements.themeToggle.querySelector('[aria-hidden]');
-    icon.textContent = isDark ? '◑' : '◐';
-  }
-
-  /**
-   * Shuffle all unlocked days
-   */
-  shuffleAll() {
-    let shuffledCount = 0;
-    
-    this.config.dayNames.forEach((_, index) => {
-      if (index >= 5 && !this.state.weekendEnabled[this.state.week]) return;
+      const dayMeals = this.meals[key];
+      const isWeekend = index >= 5;
       
-      const dayKey = this.getDayKey(index);
-      if (!this.state.lockedDays[dayKey]) {
-        this.shuffleEntireDay(dayKey);
-        shuffledCount++;
+      // Randomize lunch
+      const lunchOptions = MEALS.lunch.filter(m => !m.includes('None') && !m.includes('Custom'));
+      dayMeals.lunch = lunchOptions[Math.floor(Math.random() * lunchOptions.length)];
+      
+      // Randomize dinner based on mode
+      let dinnerOptions;
+      switch (dayMeals.mode) {
+        case 'quick':
+          dinnerOptions = MEALS.dinner.quick.filter(m => !m.includes('None') && !m.includes('Custom'));
+          break;
+        case 'delivery':
+          dinnerOptions = MEALS.dinner.delivery.filter(m => !m.includes('None') && !m.includes('Custom'));
+          break;
+        default:
+          dinnerOptions = isWeekend 
+            ? MEALS.dinner.weekend.filter(m => !m.includes('None') && !m.includes('Custom'))
+            : MEALS.dinner.regular.filter(m => !m.includes('None') && !m.includes('Custom'));
+      }
+      dayMeals.dinner = dinnerOptions[Math.floor(Math.random() * dinnerOptions.length)];
+      
+      // Randomize side (unless delivery)
+      if (dayMeals.mode !== 'delivery') {
+        const sideOptions = MEALS.side.filter(m => !m.includes('None') && !m.includes('Custom'));
+        dayMeals.side = sideOptions[Math.floor(Math.random() * sideOptions.length)];
       }
     });
-
-    if (shuffledCount > 0) {
-      this.renderDays();
-      this.saveData();
-      this.vibrate([20, 10, 20]);
-    }
-  }
-
-  /**
-   * Shuffle entire day meals
-   */
-  shuffleEntireDay(dayKey) {
-    if (!this.state.data[dayKey]) {
-      this.state.data[dayKey] = { lunch: '', dinner: '', side: '' };
-    }
-
-    const mode = this.state.dinnerModes[dayKey] || 'regular';
-    const isWeekend = this.getDayIndex(dayKey) >= 5;
-
-    // Shuffle lunch
-    if (this.config.meals.lunch.length > 0) {
-      this.state.data[dayKey].lunch = this.getRandomMeal(this.config.meals.lunch);
-    }
-
-    // Shuffle dinner
-    let dinnerOptions = this.getDinnerOptions(mode, isWeekend);
-    if (dinnerOptions.length > 0) {
-      this.state.data[dayKey].dinner = this.getRandomMeal(dinnerOptions);
-    }
-
-    // Shuffle side (if not delivery)
-    if (mode !== 'delivery' && this.config.meals.side.length > 0) {
-      this.state.data[dayKey].side = this.getRandomMeal(this.config.meals.side);
-    }
-  }
-
-  /**
-   * Get dinner options based on mode and weekend
-   */
-  getDinnerOptions(mode, isWeekend) {
-    if (mode === 'quick') return this.config.meals.dinner.quick;
-    if (mode === 'delivery') return this.config.meals.dinner.delivery;
-    if (isWeekend) return this.config.meals.dinner.weekend;
     
-    return [...this.config.meals.dinner.regular, ...this.config.meals.dinner.other];
+    this.saveToStorage();
   }
 
-  /**
-   * Get random meal from array
-   */
-  getRandomMeal(meals) {
-    return meals[Math.floor(Math.random() * meals.length)];
-  }
-
-  /**
-   * Show grocery list modal
-   */
-  showGrocery() {
-    const ingredients = this.calculateIngredients();
-    this.createGroceryModal(ingredients);
-  }
-
-  /**
-   * Calculate all ingredients needed
-   */
-  calculateIngredients() {
-    const allIngredients = {};
+  generateGroceryList() {
+    const ingredients = new Map();
     
-    Object.values(this.state.data).forEach(dayData => {
+    Object.values(this.meals).forEach(dayMeals => {
       ['lunch', 'dinner', 'side'].forEach(mealType => {
-        const meal = dayData[mealType];
-        if (meal && this.config.ingredients[meal]) {
-          this.config.ingredients[meal].forEach(ingredient => {
-            allIngredients[ingredient] = (allIngredients[ingredient] || 0) + 1;
+        const meal = dayMeals[mealType];
+        if (meal && INGREDIENTS[meal]) {
+          INGREDIENTS[meal].forEach(ingredient => {
+            const count = ingredients.get(ingredient) || 0;
+            ingredients.set(ingredient, count + 1);
           });
         }
       });
     });
-    
-    return allIngredients;
-  }
 
-  /**
-   * Create grocery list modal
-   */
-  createGroceryModal(ingredients) {
-    // Implementation would continue here...
-    console.log('Grocery modal would be created with ingredients:', ingredients);
-  }
+    const categorized = {};
+    Object.keys(STORE_CATEGORIES).forEach(category => {
+      categorized[category] = [];
+    });
 
-  /**
-   * Share meal plan
-   */
-  sharePlan() {
-    const planText = this.generatePlanText();
-    
-    if (navigator.share && navigator.canShare && navigator.canShare({ text: planText })) {
-      navigator.share({
-        title: 'Weekly Meal Plan',
-        text: planText
-      }).catch(error => {
-        console.log('Share failed:', error);
-        this.copyToClipboard(planText);
+    ingredients.forEach((count, ingredient) => {
+      let placed = false;
+      Object.entries(STORE_CATEGORIES).forEach(([category, items]) => {
+        if (items.includes(ingredient)) {
+          categorized[category].push({ name: ingredient, count });
+          placed = true;
+        }
       });
-    } else {
-      this.copyToClipboard(planText);
-    }
-  }
-
-  /**
-   * Generate plan text for sharing
-   */
-  generatePlanText() {
-    const start = this.getWeekStart();
-    const end = new Date(start);
-    end.setDate(start.getDate() + 6);
-
-    let planText = `📅 Meal Plan - ${this.state.week === 'this' ? 'This' : 'Next'} Week\n`;
-    planText += `${start.toLocaleDateString('en', { month: 'short', day: 'numeric' })} - ${end.toLocaleDateString('en', { month: 'short', day: 'numeric' })}\n\n`;
-
-    this.config.dayNames.forEach((dayName, index) => {
-      if (index >= 5 && !this.state.weekendEnabled[this.state.week]) return;
-
-      const dayKey = this.getDayKey(index, start);
-      const dayData = this.state.data[dayKey] || {};
-      const mode = this.state.dinnerModes[dayKey] || 'regular';
-
-      planText += `${dayName}\n`;
-      if (dayData.lunch) planText += `  Lunch: ${dayData.lunch}\n`;
-      if (dayData.dinner) {
-        planText += `  Dinner: ${dayData.dinner}`;
-        if (dayData.side && mode !== 'delivery') planText += ` with ${dayData.side}`;
-        planText += '\n';
-      }
-      if (!dayData.lunch && !dayData.dinner) planText += '  No meals planned\n';
-      planText += '\n';
-    });
-
-    return planText;
-  }
-
-  /**
-   * Copy text to clipboard
-   */
-  async copyToClipboard(text) {
-    try {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        await navigator.clipboard.writeText(text);
-      } else {
-        // Fallback for older browsers
-        const textarea = document.createElement('textarea');
-        textarea.value = text;
-        textarea.style.position = 'fixed';
-        textarea.style.opacity = '0';
-        document.body.appendChild(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textarea);
-      }
       
-      this.vibrate(10);
-      this.showToast('Copied to clipboard!');
-    } catch (error) {
-      this.handleError('Failed to copy to clipboard', error);
-    }
-  }
-
-  /**
-   * Clear all meal plans
-   */
-  clearAll() {
-    if (!confirm('Clear all meal plans? This action cannot be undone.')) return;
-    
-    this.state.data = {};
-    this.state.lockedDays = {};
-    this.state.dinnerModes = {};
-    
-    this.saveData();
-    this.renderDays();
-    this.vibrate(30);
-  }
-
-  /**
-   * Close all modals
-   */
-  closeAllModals() {
-    document.querySelectorAll('.modal-backdrop').forEach(modal => {
-      modal.classList.remove('show');
-      setTimeout(() => modal.remove(), 400);
-    });
-    
-    document.body.classList.remove('no-scroll');
-    this.state.currentEditingDay = null;
-    this.state.currentPicker = null;
-  }
-
-  /**
-   * Show toast notification
-   */
-  showToast(message) {
-    // Remove existing toast
-    const existingToast = document.querySelector('.toast');
-    if (existingToast) {
-      existingToast.remove();
-    }
-
-    const toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.textContent = message;
-    toast.style.cssText = `
-      position: fixed;
-      bottom: 100px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--color-text-primary);
-      color: var(--color-bg-primary);
-      padding: 12px 24px;
-      border-radius: 8px;
-      font-size: 14px;
-      font-weight: 500;
-      z-index: 10000;
-      opacity: 0;
-      transition: opacity 0.3s var(--ease-spring);
-    `;
-
-    document.body.appendChild(toast);
-
-    // Animate in
-    setTimeout(() => {
-      toast.style.opacity = '1';
-    }, 10);
-
-    // Remove after delay
-    setTimeout(() => {
-      toast.style.opacity = '0';
-      setTimeout(() => toast.remove(), 300);
-    }, 3000);
-  }
-
-  /**
-   * Vibrate device if supported
-   */
-  vibrate(pattern) {
-    if (navigator.vibrate) {
-      navigator.vibrate(pattern);
-    }
-  }
-
-  /**
-   * Handle errors gracefully
-   */
-  handleError(message, error) {
-    console.error(message, error);
-    
-    // Show user-friendly error message
-    this.showToast('Something went wrong. Please try again.');
-    
-    // In production, you might want to send errors to a logging service
-    // this.logError(message, error);
-  }
-
-  /**
-   * Utility: Get week start date
-   */
-  getWeekStart() {
-    const now = new Date();
-    const dayOfWeek = (now.getDay() + 6) % 7; // Monday = 0
-    const start = new Date(now);
-    start.setDate(now.getDate() - dayOfWeek + (this.state.week === 'next' ? 7 : 0));
-    start.setHours(0, 0, 0, 0);
-    return start;
-  }
-
-  /**
-   * Utility: Get day key for storage
-   */
-  getDayKey(index, startDate = null) {
-    const date = this.getDateForIndex(index, startDate);
-    return `${this.state.week}-${date.getFullYear()}-${date.getMonth()}-${date.getDate()}`;
-  }
-
-  /**
-   * Utility: Get day index from key
-   */
-  getDayIndex(dayKey) {
-    const parts = dayKey.split('-');
-    const date = new Date(parseInt(parts[1]), parseInt(parts[2]), parseInt(parts[3]));
-    const start = this.getWeekStart();
-    return Math.floor((date - start) / (1000 * 60 * 60 * 24));
-  }
-
-  /**
-   * Utility: Get date for day index
-   */
-  getDateForIndex(index, startDate = null) {
-    const start = startDate || this.getWeekStart();
-    const date = new Date(start);
-    date.setDate(start.getDate() + index);
-    return date;
-  }
-
-  /**
-   * Utility: Escape HTML to prevent XSS
-   */
-  escapeHtml(unsafe) {
-    return unsafe
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-  }
-
-  /**
-   * Save data to localStorage
-   */
-  saveData() {
-    try {
-      const dataToSave = {
-        [this.config.storageKeys.data]: this.state.data,
-        [this.config.storageKeys.week]: this.state.week,
-        [this.config.storageKeys.weekend]: this.state.weekendEnabled,
-        [this.config.storageKeys.locked]: this.state.lockedDays,
-        [this.config.storageKeys.modes]: this.state.dinnerModes
-      };
-
-      for (const [key, value] of Object.entries(dataToSave)) {
-        localStorage.setItem(key, JSON.stringify(value));
+      if (!placed) {
+        if (!categorized["🛒 Other"]) categorized["🛒 Other"] = [];
+        categorized["🛒 Other"].push({ name: ingredient, count });
       }
-    } catch (error) {
-      this.handleError('Failed to save data', error);
-    }
-  }
+    });
 
-  /**
-   * Load data from localStorage
-   */
-  loadData() {
-    try {
-      const defaults = {
-        data: {},
-        week: 'next',
-        weekendEnabled: {},
-        lockedDays: {},
-        dinnerModes: {}
-      };
+    // Remove empty categories
+    Object.keys(categorized).forEach(category => {
+      if (categorized[category].length === 0) {
+        delete categorized[category];
+      }
+    });
 
-      this.state.data = JSON.parse(localStorage.getItem(this.config.storageKeys.data) || '{}') || defaults.data;
-      this.state.week = localStorage.getItem(this.config.storageKeys.week) || defaults.week;
-      this.state.weekendEnabled = JSON.parse(localStorage.getItem(this.config.storageKeys.weekend) || '{}') || defaults.weekendEnabled;
-      this.state.lockedDays = JSON.parse(localStorage.getItem(this.config.storageKeys.locked) || '{}') || defaults.lockedDays;
-      this.state.dinnerModes = JSON.parse(localStorage.getItem(this.config.storageKeys.modes) || '{}') || defaults.dinnerModes;
-    } catch (error) {
-      this.handleError('Failed to load data, using defaults', error);
-      // Reset to defaults on error
-      this.state = {
-        data: {},
-        week: 'next',
-        weekendEnabled: {},
-        lockedDays: {},
-        dinnerModes: {},
-        currentEditingDay: null,
-        currentPicker: null
-      };
-    }
+    return categorized;
   }
 }
 
-// Initialize the app when DOM is ready
-document.addEventListener('DOMContentLoaded', () => {
-  // Add loading state
-  document.body.classList.add('loading');
-  
-  // Initialize app
-  window.mealPlannerApp = new MealPlannerApp();
-});
+/* ========= Enhanced UI Controller ========= */
+class MealPlannerUI {
+  constructor() {
+    this.state = new MealPlannerState();
+    this.initializeElements();
+    this.bindEvents();
+    this.render();
+  }
 
-// Handle unload to save data
-window.addEventListener('beforeunload', () => {
-  if (window.mealPlannerApp) {
-    window.mealPlannerApp.saveData();
+  initializeElements() {
+    this.elements = {
+      weekendToggle: document.getElementById('weekendToggle'),
+      clearBtn: document.getElementById('clearBtn'),
+      dayGrid: document.getElementById('dayGrid'),
+      dateRange: document.getElementById('dateRange'),
+      shuffleBtn: document.getElementById('shuffleBtn'),
+      groceryBtn: document.getElementById('groceryBtn'),
+      shareBtn: document.getElementById('shareBtn'),
+      overlay: document.getElementById('overlay'),
+      mealPicker: document.getElementById('mealPicker'),
+      pickerTitle: document.getElementById('pickerTitle'),
+      mealOptions: document.getElementById('mealOptions'),
+      customInputSection: document.getElementById('customInputSection'),
+      customInput: document.getElementById('customInput'),
+      customUseBtn: document.getElementById('customUseBtn'),
+      pickerCloseBtn: document.getElementById('pickerCloseBtn'),
+      grocerySheet: document.getElementById('grocerySheet'),
+      groceryContent: document.getElementById('groceryContent'),
+      groceryCopyBtn: document.getElementById('groceryCopyBtn'),
+      groceryCloseBtn: document.getElementById('groceryCloseBtn'),
+      shareSheet: document.getElementById('shareSheet'),
+      shareText: document.getElementById('shareText'),
+      shareCopyBtn: document.getElementById('shareCopyBtn'),
+      shareCloseBtn: document.getElementById('shareCloseBtn')
+    };
+  }
+
+  bindEvents() {
+    // Weekend toggle
+    this.elements.weekendToggle.addEventListener('click', () => {
+      this.state.weekendEnabled = !this.state.weekendEnabled;
+      this.state.saveToStorage();
+      this.render();
+    });
+
+    // Clear all
+    this.elements.clearBtn.addEventListener('click', () => {
+      if (confirm('🗑️ Clear all meals? This cannot be undone.')) {
+        this.state.clearAll();
+        this.render();
+      }
+    });
+
+    // Navigation buttons
+    this.elements.shuffleBtn.addEventListener('click', () => {
+      this.elements.shuffleBtn.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        this.elements.shuffleBtn.style.transform = '';
+        this.state.randomizeMeals();
+        this.render();
+      }, 150);
+    });
+
+    this.elements.groceryBtn.addEventListener('click', () => this.showGrocerySheet());
+    this.elements.shareBtn.addEventListener('click', () => this.showShareSheet());
+
+    // Overlay close
+    this.elements.overlay.addEventListener('click', () => this.closeAllSheets());
+
+    // Picker events
+    this.elements.customUseBtn.addEventListener('click', () => this.useCustomMeal());
+    this.elements.pickerCloseBtn.addEventListener('click', () => this.closeMealPicker());
+
+    // Grocery sheet events
+    this.elements.groceryCopyBtn.addEventListener('click', () => this.copyGroceryList());
+    this.elements.groceryCloseBtn.addEventListener('click', () => this.closeGrocerySheet());
+
+    // Share sheet events
+    this.elements.shareCopyBtn.addEventListener('click', () => this.copyShareText());
+    this.elements.shareCloseBtn.addEventListener('click', () => this.closeShareSheet());
+
+    // Custom input enter key
+    this.elements.customInput.addEventListener('keypress', (e) => {
+      if (e.key === 'Enter') {
+        this.useCustomMeal();
+      }
+    });
+
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        this.closeAllSheets();
+      }
+    });
+  }
+
+  render() {
+    this.renderHeader();
+    this.renderDayGrid();
+    this.renderWeekendToggle();
+  }
+
+  renderHeader() {
+    const endDate = new Date(this.state.weekStart);
+    endDate.setDate(this.state.weekStart.getDate() + 6);
+    
+    this.elements.dateRange.textContent = 
+      `${this.state.weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} – ${endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`;
+  }
+
+  renderWeekendToggle() {
+    this.elements.weekendToggle.classList.toggle('active', this.state.weekendEnabled);
+    this.elements.weekendToggle.setAttribute('aria-checked', this.state.weekendEnabled);
+  }
+
+  renderDayGrid() {
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    const dayEmojis = ['📅', '📅', '📅', '📅', '📅', '🎉', '🎉'];
+    
+    this.elements.dayGrid.innerHTML = '';
+
+    this.state.weekKeys.forEach((key, index) => {
+      if (index >= 5 && !this.state.weekendEnabled) return;
+
+      const dayMeals = this.state.meals[key];
+      const isWeekend = index >= 5;
+      const date = new Date(this.state.weekStart);
+      date.setDate(this.state.weekStart.getDate() + index);
+
+      const dayCard = document.createElement('div');
+      dayCard.className = 'day-card fade-in';
+      dayCard.style.animationDelay = `${index * 0.1}s`;
+      
+      dayCard.innerHTML = `
+        <div class="day-header">
+          <div class="day-info">
+            <h3>${dayEmojis[index]} ${days[index]}</h3>
+            <div class="day-date">${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</div>
+          </div>
+        </div>
+
+        <div class="meal-grid">
+          <div class="meal-field" data-day="${key}" data-meal="lunch">
+            <div class="meal-label">Lunch</div>
+            <div class="meal-value ${!dayMeals.lunch ? 'meal-placeholder' : ''}">
+              ${dayMeals.lunch || 'Tap to choose'}
+            </div>
+          </div>
+          
+          <div class="meal-field" data-day="${key}" data-meal="dinner">
+            <div class="meal-label">Dinner</div>
+            <div class="meal-value ${!dayMeals.dinner ? 'meal-placeholder' : ''}">
+              ${dayMeals.dinner || 'Tap to choose'}
+            </div>
+          </div>
+          
+          <div class="meal-field ${dayMeals.mode === 'delivery' ? 'side-full' : ''}" 
+               data-day="${key}" data-meal="side" 
+               ${dayMeals.mode === 'delivery' ? 'style="opacity:0.5;pointer-events:none"' : ''}>
+            <div class="meal-label">Side Dish</div>
+            <div class="meal-value ${!dayMeals.side && dayMeals.mode !== 'delivery' ? 'meal-placeholder' : ''}">
+              ${dayMeals.mode === 'delivery' ? 'Not needed for delivery' : (dayMeals.side || 'Tap to choose')}
+            </div>
+          </div>
+        </div>
+
+        <div class="mode-selector">
+          <button class="mode-btn ${dayMeals.mode === 'regular' ? 'active' : ''}" 
+                  data-day="${key}" data-mode="regular">Regular</button>
+          <button class="mode-btn ${dayMeals.mode === 'quick' ? 'active' : ''}" 
+                  data-day="${key}" data-mode="quick">Quick</button>
+          <button class="mode-btn ${dayMeals.mode === 'delivery' ? 'active' : ''}" 
+                  data-day="${key}" data-mode="delivery">Delivery</button>
+        </div>
+      `;
+
+      this.elements.dayGrid.appendChild(dayCard);
+    });
+
+    // Add event listeners to meal fields and mode buttons
+    this.elements.dayGrid.addEventListener('click', (e) => {
+      const mealField = e.target.closest('.meal-field');
+      const modeBtn = e.target.closest('.mode-btn');
+
+      if (mealField && !mealField.style.pointerEvents) {
+        const dayKey = mealField.dataset.day;
+        const mealType = mealField.dataset.meal;
+        this.showMealPicker(dayKey, mealType);
+      } else if (modeBtn) {
+        const dayKey = modeBtn.dataset.day;
+        const mode = modeBtn.dataset.mode;
+        this.state.updateMode(dayKey, mode);
+        this.render();
+      }
+    });
+  }
+
+  showMealPicker(dayKey, mealType) {
+    this.state.currentPicker = { dayKey, mealType };
+    const dayMeals = this.state.meals[dayKey];
+    const isWeekend = this.state.weekKeys.indexOf(dayKey) >= 5;
+
+    this.elements.pickerTitle.textContent = `Choose ${mealType.charAt(0).toUpperCase() + mealType.slice(1)}`;
+    
+    let options = [];
+    if (mealType === 'lunch') {
+      options = MEALS.lunch;
+    } else if (mealType === 'dinner') {
+      switch (dayMeals.mode) {
+        case 'quick': options = MEALS.dinner.quick; break;
+        case 'delivery': options = MEALS.dinner.delivery; break;
+        default: options = isWeekend ? MEALS.dinner.weekend : MEALS.dinner.regular;
+      }
+    } else {
+      options = MEALS.side;
+    }
+
+    this.renderMealOptions(options, dayMeals[mealType]);
+    this.showSheet(this.elements.mealPicker);
+  }
+
+  renderMealOptions(options, currentValue) {
+    this.elements.mealOptions.innerHTML = '';
+    this.elements.customInputSection.style.display = 'none';
+    this.elements.customInput.value = '';
+
+    options.forEach(option => {
+      const optionEl = document.createElement('div');
+      optionEl.className = `option-item ${option === currentValue ? 'selected' : ''}`;
+      optionEl.textContent = option;
+      
+      optionEl.addEventListener('click', () => {
+        if (option.includes('Custom…')) {
+          this.elements.customInputSection.style.display = 'flex';
+          this.elements.customInput.focus();
+        } else {
+          const value = option.includes('None') ? '' : option;
+          this.updateCurrentMeal(value);
+          this.closeMealPicker();
+        }
+      });
+
+      this.elements.mealOptions.appendChild(optionEl);
+    });
+  }
+
+  useCustomMeal() {
+    const customValue = this.elements.customInput.value.trim();
+    if (customValue) {
+      this.updateCurrentMeal(customValue);
+      this.closeMealPicker();
+    }
+  }
+
+  updateCurrentMeal(value) {
+    if (!this.state.currentPicker) return;
+    
+    const { dayKey, mealType } = this.state.currentPicker;
+    this.state.updateMeal(dayKey, mealType, value);
+    this.render();
+  }
+
+  showGrocerySheet() {
+    const groceryList = this.state.generateGroceryList();
+    this.renderGroceryList(groceryList);
+    this.showSheet(this.elements.grocerySheet);
+  }
+
+  renderGroceryList(groceryList) {
+    this.elements.groceryContent.innerHTML = '';
+
+    if (Object.keys(groceryList).length === 0) {
+      this.elements.groceryContent.innerHTML = `
+        <div class="loading">
+          <span>No ingredients found. Add some meals first! 🍽️</span>
+        </div>
+      `;
+      return;
+    }
+
+    Object.entries(groceryList).forEach(([category, items]) => {
+      const section = document.createElement('div');
+      section.className = 'grocery-section';
+      
+      const title = document.createElement('h4');
+      title.textContent = category;
+      section.appendChild(title);
+
+      items.forEach(item => {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'grocery-item';
+        itemEl.innerHTML = `
+          <input type="checkbox" id="item-${item.name}">
+          <label for="item-${item.name}">
+            ${item.name}${item.count > 1 ? ` ×${item.count}` : ''}
+          </label>
+        `;
+        section.appendChild(itemEl);
+      });
+
+      this.elements.groceryContent.appendChild(section);
+    });
+  }
+
+  showShareSheet() {
+    const shareText = this.generateShareText();
+    this.elements.shareText.textContent = shareText;
+    this.showSheet(this.elements.shareSheet);
+  }
+
+  generateShareText() {
+    const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+    let text = '✨ Weekly Meal Plan\n';
+    
+    const endDate = new Date(this.state.weekStart);
+    endDate.setDate(this.state.weekStart.getDate() + 6);
+    text += `${this.state.weekStart.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} – ${endDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}\n\n`;
+
+    this.state.weekKeys.forEach((key, index) => {
+      if (index >= 5 && !this.state.weekendEnabled) return;
+      
+      const dayMeals = this.state.meals[key];
+      text += `${days[index]}\n`;
+      
+      if (dayMeals.lunch) text += `  🥙 Lunch: ${dayMeals.lunch}\n`;
+      if (dayMeals.dinner) {
+        text += `  🍽️ Dinner: ${dayMeals.dinner}`;
+        if (dayMeals.side) text += ` with ${dayMeals.side}`;
+        text += '\n';
+      }
+      
+      if (!dayMeals.lunch && !dayMeals.dinner) {
+        text += '  (No meals planned)\n';
+      }
+      
+      text += '\n';
+    });
+
+    // Add grocery list
+    const groceryList = this.state.generateGroceryList();
+    if (Object.keys(groceryList).length > 0) {
+      text += '🛒 Grocery List\n\n';
+      Object.entries(groceryList).forEach(([category, items]) => {
+        text += `${category}\n`;
+        items.forEach(item => {
+          text += `• ${item.name}${item.count > 1 ? ` ×${item.count}` : ''}\n`;
+        });
+        text += '\n';
+      });
+    }
+
+    return text.trim();
+  }
+
+  async copyGroceryList() {
+    const groceryList = this.state.generateGroceryList();
+    let text = '🛒 Grocery List\n\n';
+    
+    Object.entries(groceryList).forEach(([category, items]) => {
+      text += `${category}\n`;
+      items.forEach(item => {
+        text += `• ${item.name}${item.count > 1 ? ` ×${item.count}` : ''}\n`;
+      });
+      text += '\n';
+    });
+
+    try {
+      await navigator.clipboard.writeText(text.trim());
+      this.elements.groceryCopyBtn.textContent = '✅ Copied!';
+      setTimeout(() => {
+        this.elements.groceryCopyBtn.innerHTML = '<span class="emoji">📋</span><span>Copy List</span>';
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  }
+
+  async copyShareText() {
+    try {
+      await navigator.clipboard.writeText(this.elements.shareText.textContent);
+      this.elements.shareCopyBtn.textContent = '✅ Copied!';
+      setTimeout(() => {
+        this.elements.shareCopyBtn.innerHTML = '<span class="emoji">📋</span><span>Copy Text</span>';
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy:', err);
+    }
+  }
+
+  showSheet(sheet) {
+    this.elements.overlay.classList.add('show');
+    sheet.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  }
+
+  hideSheet(sheet) {
+    this.elements.overlay.classList.remove('show');
+    sheet.classList.remove('show');
+    document.body.style.overflow = '';
+  }
+
+  closeMealPicker() {
+    this.hideSheet(this.elements.mealPicker);
+    this.state.currentPicker = null;
+  }
+
+  closeGrocerySheet() {
+    this.hideSheet(this.elements.grocerySheet);
+  }
+
+  closeShareSheet() {
+    this.hideSheet(this.elements.shareSheet);
+  }
+
+  closeAllSheets() {
+    this.closeMealPicker();
+    this.closeGrocerySheet();
+    this.closeShareSheet();
+  }
+}
+
+/* ========= Initialize Application ========= */
+document.addEventListener('DOMContentLoaded', () => {
+  window.mealPlanner = new MealPlannerUI();
+  
+  // Add some delightful touches
+  console.log('✨ Revolutionary Meal Planner loaded successfully!');
+  
+  // Simulate haptic feedback on supported devices
+  if ('vibrate' in navigator) {
+    document.addEventListener('click', (e) => {
+      if (e.target.closest('.btn, .meal-field, .mode-btn')) {
+        navigator.vibrate(10);
+      }
+    });
   }
 });
 </script>
+
 </body>
 </html>
