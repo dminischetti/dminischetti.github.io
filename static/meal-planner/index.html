@@ -5,55 +5,66 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="theme-color" content="#1a1a2e">
+<meta name="theme-color" content="#000000">
 <title>✨ Weekly Meal Planner</title>
 <style>
-/* ===== Revolutionary Design System ===== */
+/* ===== 2025 Revolutionary Design System ===== */
 :root {
-  /* Colors - Dynamic Gradient Palette */
+  /* Modern Glassmorphism Palette */
+  --bg-primary: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 50%, #0f0f23 100%);
+  --glass-ultra: rgba(255, 255, 255, 0.03);
+  --glass-light: rgba(255, 255, 255, 0.08);
+  --glass-medium: rgba(255, 255, 255, 0.12);
+  --glass-strong: rgba(255, 255, 255, 0.18);
+  --glass-border: rgba(255, 255, 255, 0.15);
+  --glass-glow: rgba(103, 126, 234, 0.15);
+  
+  /* Dynamic Color System */
   --primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --primary-solid: #667eea;
+  --primary-glow: rgba(103, 126, 234, 0.4);
   --secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
   --accent: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
   --success: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
   --warning: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
   --danger: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
   
-  /* Surfaces - Glassmorphism */
-  --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-  --bg-secondary: rgba(255, 255, 255, 0.05);
-  --bg-card: rgba(255, 255, 255, 0.08);
-  --bg-sheet: rgba(255, 255, 255, 0.12);
-  --bg-overlay: rgba(0, 0, 0, 0.7);
+  /* Advanced Typography */
+  --text-primary: rgba(255, 255, 255, 0.98);
+  --text-secondary: rgba(255, 255, 255, 0.78);
+  --text-tertiary: rgba(255, 255, 255, 0.58);
+  --text-muted: rgba(255, 255, 255, 0.38);
   
-  /* Text */
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.8);
-  --text-muted: rgba(255, 255, 255, 0.6);
-  --text-inverse: #1a1a2e;
-  
-  /* Spacing & Layout */
+  /* Layout & Spacing */
   --safe-top: env(safe-area-inset-top);
   --safe-bottom: env(safe-area-inset-bottom);
+  --radius-xs: 8px;
   --radius-sm: 12px;
   --radius-md: 16px;
-  --radius-lg: 24px;
-  --radius-xl: 32px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-2xl: 32px;
   
-  /* Shadows & Effects */
-  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-  --shadow-md: 0 8px 32px rgba(0, 0, 0, 0.2);
-  --shadow-lg: 0 16px 64px rgba(0, 0, 0, 0.3);
-  --glass-border: rgba(255, 255, 255, 0.2);
-  --blur: blur(20px);
+  /* Advanced Effects */
+  --blur-subtle: blur(8px);
+  --blur-medium: blur(16px);
+  --blur-strong: blur(24px);
+  --blur-extreme: blur(40px);
+  --shadow-soft: 0 4px 16px rgba(0, 0, 0, 0.15);
+  --shadow-medium: 0 8px 32px rgba(0, 0, 0, 0.25);
+  --shadow-strong: 0 16px 64px rgba(0, 0, 0, 0.4);
+  --shadow-glow: 0 0 24px var(--primary-glow);
   
-  /* Animation */
-  --transition-fast: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --transition-smooth: 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  --spring: 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  /* 2025 Motion System */
+  --spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --smooth: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  --swift: 0.2s;
+  --fluid: 0.4s;
+  --dramatic: 0.6s;
 }
 
-/* ===== Base Styles ===== */
+/* ===== Foundation ===== */
 * {
   margin: 0;
   padding: 0;
@@ -67,56 +78,108 @@ html, body {
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
   background: var(--bg-primary);
   color: var(--text-primary);
-  line-height: 1.5;
+  line-height: 1.4;
+  font-size: 14px;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
   overscroll-behavior: none;
+  font-feature-settings: "cv02", "cv03", "cv04", "cv11";
 }
 
-/* ===== Typography ===== */
-.title-xl { font-size: 2rem; font-weight: 800; letter-spacing: -0.02em; }
-.title-lg { font-size: 1.5rem; font-weight: 700; letter-spacing: -0.01em; }
-.title-md { font-size: 1.25rem; font-weight: 600; }
-.title-sm { font-size: 1rem; font-weight: 600; }
-.body-lg { font-size: 1rem; font-weight: 400; }
-.body-md { font-size: 0.875rem; font-weight: 400; }
-.body-sm { font-size: 0.75rem; font-weight: 500; }
-.caption { font-size: 0.625rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.5px; }
-
-/* ===== Glass Components ===== */
+/* ===== Advanced Glassmorphism Components ===== */
 .glass {
-  background: var(--bg-card);
+  background: var(--glass-light);
   border: 1px solid var(--glass-border);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur-medium);
+  -webkit-backdrop-filter: var(--blur-medium);
+  box-shadow: var(--shadow-soft);
 }
 
-.glass-sheet {
-  background: var(--bg-sheet);
+.glass-strong {
+  background: var(--glass-strong);
   border: 1px solid var(--glass-border);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur-strong);
+  -webkit-backdrop-filter: var(--blur-strong);
+  box-shadow: var(--shadow-medium);
 }
 
-/* ===== Button System ===== */
+.glass-glow {
+  background: var(--glass-glow);
+  border: 1px solid var(--primary-solid);
+  backdrop-filter: var(--blur-medium);
+  box-shadow: var(--shadow-glow);
+}
+
+/* ===== Modern Typography System ===== */
+.text-display {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  line-height: 1.1;
+}
+
+.text-title-xl {
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 1.2;
+}
+
+.text-title-lg {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.2px;
+  line-height: 1.2;
+}
+
+.text-title-md {
+  font-size: 17px;
+  font-weight: 600;
+  letter-spacing: -0.1px;
+}
+
+.text-body-lg {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.text-body-md {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.text-body-sm {
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.text-caption {
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* ===== Revolutionary Button System ===== */
 .btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 0.75rem 1.5rem;
+  gap: 8px;
+  padding: 12px 20px;
   border: none;
   border-radius: var(--radius-lg);
   font-weight: 600;
-  font-size: 0.875rem;
-  text-decoration: none;
+  font-size: 14px;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all var(--swift) var(--smooth);
   position: relative;
   overflow: hidden;
+  text-decoration: none;
+  user-select: none;
 }
 
 .btn::before {
@@ -125,161 +188,210 @@ body {
   inset: 0;
   background: rgba(255, 255, 255, 0.1);
   transform: translateX(-100%);
-  transition: transform var(--transition-smooth);
+  transition: transform var(--fluid) var(--smooth);
 }
 
 .btn:active::before {
   transform: translateX(0);
 }
 
+.btn:active {
+  transform: scale(0.98);
+}
+
 .btn-primary {
   background: var(--primary);
   color: white;
-  box-shadow: var(--shadow-md);
+  box-shadow: var(--shadow-glow);
 }
 
-.btn-secondary {
-  background: var(--bg-card);
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-glow), var(--shadow-medium);
+}
+
+.btn-glass {
+  background: var(--glass-medium);
   color: var(--text-primary);
   border: 1px solid var(--glass-border);
-  backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur-medium);
+  box-shadow: var(--shadow-soft);
 }
 
-.btn-accent {
-  background: var(--accent);
-  color: white;
-  box-shadow: var(--shadow-md);
+.btn-glass:hover {
+  background: var(--glass-strong);
+  transform: translateY(-1px);
 }
 
 .btn-success {
   background: var(--success);
   color: white;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 16px rgba(67, 233, 123, 0.3);
 }
 
 .btn-danger {
   background: var(--danger);
   color: white;
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 4px 16px rgba(255, 107, 107, 0.3);
 }
 
-.btn:hover {
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-lg);
+.btn-compact {
+  padding: 8px 12px;
+  font-size: 12px;
+  border-radius: var(--radius-md);
 }
 
-.btn:active {
-  transform: translateY(0);
+.btn-mini {
+  padding: 6px 8px;
+  font-size: 11px;
+  min-width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
 }
 
-/* ===== Layout ===== */
+/* ===== Layout Architecture ===== */
 .app {
   min-height: 100vh;
-  padding-bottom: calc(80px + var(--safe-bottom));
+  padding-bottom: calc(72px + var(--safe-bottom));
   position: relative;
 }
 
-/* ===== Header ===== */
+/* ===== Revolutionary Header ===== */
 .header {
   position: sticky;
   top: 0;
   z-index: 100;
-  padding: calc(1rem + var(--safe-top)) 1rem 1rem;
-  background: var(--bg-card);
+  padding: calc(12px + var(--safe-top)) 16px 12px;
+  background: var(--glass-strong);
   border-bottom: 1px solid var(--glass-border);
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
+  backdrop-filter: var(--blur-extreme);
+  -webkit-backdrop-filter: var(--blur-extreme);
+  box-shadow: var(--shadow-soft);
 }
 
 .header-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 16px;
 }
 
-.header-left {
+.header-brand {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 2px;
 }
 
 .header-title {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.3px;
   background: var(--primary);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.02em;
 }
 
 .header-subtitle {
   color: var(--text-secondary);
-  font-size: 0.875rem;
+  font-size: 11px;
   font-weight: 500;
 }
 
-.header-right {
+.header-controls {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 12px;
 }
 
-/* ===== Toggle Switch ===== */
-.toggle {
-  position: relative;
-  width: 60px;
-  height: 32px;
-  background: var(--bg-secondary);
-  border-radius: 16px;
+/* ===== Advanced Weekend Toggle ===== */
+.weekend-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: var(--radius-md);
+  background: var(--glass-light);
+  border: 1px solid var(--glass-border);
   cursor: pointer;
-  transition: all var(--transition-smooth);
+  transition: all var(--swift) var(--smooth);
+}
+
+.weekend-toggle:hover {
+  background: var(--glass-medium);
+  transform: translateY(-1px);
+}
+
+.weekend-toggle.active {
+  background: var(--glass-glow);
+  border-color: var(--primary-solid);
+  box-shadow: var(--shadow-glow);
+}
+
+.toggle-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.weekend-toggle.active .toggle-label {
+  color: var(--primary-solid);
+}
+
+.toggle-switch {
+  width: 36px;
+  height: 20px;
+  background: var(--glass-ultra);
+  border-radius: 10px;
+  position: relative;
+  transition: all var(--swift) var(--bounce);
   border: 1px solid var(--glass-border);
 }
 
-.toggle.active {
-  background: var(--accent);
-  box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+.weekend-toggle.active .toggle-switch {
+  background: var(--primary-solid);
+  box-shadow: 0 0 16px var(--primary-glow);
 }
 
 .toggle-knob {
   position: absolute;
-  top: 2px;
-  left: 2px;
-  width: 28px;
-  height: 28px;
+  top: 1px;
+  left: 1px;
+  width: 16px;
+  height: 16px;
   background: white;
   border-radius: 50%;
-  transition: all var(--spring);
-  box-shadow: var(--shadow-sm);
+  transition: all var(--bounce);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
-.toggle.active .toggle-knob {
-  transform: translateX(28px);
+.weekend-toggle.active .toggle-knob {
+  transform: translateX(16px);
 }
 
-/* ===== Main Content ===== */
+/* ===== Main Content with Bento Grid ===== */
 .main {
-  padding: 1rem;
+  padding: 16px;
 }
 
-/* ===== Day Cards ===== */
-.day-grid {
+.bento-grid {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 12px;
 }
 
+/* ===== Revolutionary Day Cards ===== */
 .day-card {
-  background: var(--bg-card);
+  background: var(--glass-light);
   border: 1px solid var(--glass-border);
-  border-radius: var(--radius-lg);
-  padding: 1.5rem;
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
-  box-shadow: var(--shadow-sm);
-  transition: all var(--transition-smooth);
+  border-radius: var(--radius-xl);
+  padding: 20px;
+  backdrop-filter: var(--blur-medium);
+  -webkit-backdrop-filter: var(--blur-medium);
+  box-shadow: var(--shadow-soft);
+  transition: all var(--fluid) var(--smooth);
   position: relative;
   overflow: hidden;
 }
@@ -293,7 +405,8 @@ body {
   height: 3px;
   background: var(--primary);
   transform: scaleX(0);
-  transition: transform var(--transition-smooth);
+  transition: transform var(--fluid) var(--smooth);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 
 .day-card:hover::before {
@@ -301,366 +414,599 @@ body {
 }
 
 .day-card:hover {
+  background: var(--glass-medium);
   transform: translateY(-4px);
-  box-shadow: var(--shadow-lg);
-  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow-strong);
+  border-color: rgba(255, 255, 255, 0.2);
 }
 
 .day-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 1.5rem;
+  margin-bottom: 16px;
 }
 
-.day-info h3 {
-  font-size: 1.25rem;
+.day-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.day-name {
+  font-size: 18px;
   font-weight: 700;
-  margin-bottom: 0.25rem;
+  letter-spacing: -0.2px;
+  color: var(--text-primary);
 }
 
 .day-date {
-  color: var(--text-secondary);
-  font-size: 0.875rem;
+  color: var(--text-tertiary);
+  font-size: 11px;
   font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
-/* ===== Meal Fields ===== */
-.meal-grid {
+.day-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.day-randomize {
+  background: var(--glass-light);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-sm);
+  padding: 6px;
+  cursor: pointer;
+  transition: all var(--swift) var(--bounce);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+}
+
+.day-randomize:hover {
+  background: var(--glass-medium);
+  transform: scale(1.1);
+  box-shadow: var(--shadow-soft);
+}
+
+.day-randomize:active {
+  transform: scale(0.95) rotate(90deg);
+}
+
+/* ===== Modal-First Meal Selection ===== */
+.meal-bento {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
 }
 
-.meal-field {
-  background: var(--bg-secondary);
+.meal-selector {
+  background: var(--glass-ultra);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
-  padding: 1rem;
+  padding: 12px;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all var(--swift) var(--smooth);
   position: relative;
-  overflow: hidden;
-  min-height: 80px;
+  min-height: 64px;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  text-align: center;
 }
 
-.meal-field::before {
+.meal-selector::after {
   content: '';
   position: absolute;
   inset: 0;
-  background: rgba(255, 255, 255, 0.05);
-  transform: translateY(100%);
-  transition: transform var(--transition-smooth);
+  background: var(--glass-glow);
+  opacity: 0;
+  transition: opacity var(--swift) var(--smooth);
+  border-radius: var(--radius-md);
 }
 
-.meal-field:hover::before {
-  transform: translateY(0);
+.meal-selector:hover::after {
+  opacity: 0.5;
 }
 
-.meal-field:active {
+.meal-selector:active {
   transform: scale(0.98);
 }
 
+.meal-selector.has-value {
+  background: var(--glass-glow);
+  border-color: var(--primary-solid);
+  box-shadow: 0 0 12px var(--primary-glow);
+}
+
 .meal-label {
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 9px;
+  font-weight: 700;
   color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.5px;
-  margin-bottom: 0.5rem;
+  letter-spacing: 0.4px;
+  margin-bottom: 4px;
 }
 
 .meal-value {
-  font-size: 0.875rem;
+  font-size: 11px;
   font-weight: 500;
   color: var(--text-primary);
-  line-height: 1.3;
+  line-height: 1.2;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  position: relative;
+  z-index: 1;
 }
 
 .meal-placeholder {
   color: var(--text-muted);
   font-style: italic;
+  font-size: 10px;
 }
 
-.side-full {
-  grid-column: 1 / -1;
+.meal-emoji {
+  font-size: 16px;
+  margin-bottom: 2px;
+  opacity: 0.8;
 }
 
-/* ===== Mode Selector ===== */
-.mode-selector {
+/* ===== Advanced Mode Selector ===== */
+.mode-bento {
   display: flex;
-  gap: 0.5rem;
-  background: var(--bg-secondary);
-  padding: 0.25rem;
+  gap: 4px;
+  background: var(--glass-ultra);
+  padding: 4px;
   border-radius: var(--radius-md);
   border: 1px solid var(--glass-border);
 }
 
 .mode-btn {
   flex: 1;
-  padding: 0.5rem 0.75rem;
+  padding: 6px 8px;
   border: none;
-  border-radius: var(--radius-sm);
-  font-size: 0.75rem;
-  font-weight: 600;
+  border-radius: calc(var(--radius-md) - 4px);
+  font-size: 9px;
+  font-weight: 700;
   background: transparent;
   color: var(--text-muted);
   cursor: pointer;
-  transition: all var(--transition-fast);
-  text-transform: capitalize;
+  transition: all var(--swift) var(--bounce);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  position: relative;
+}
+
+.mode-btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--primary);
+  opacity: 0;
+  transition: opacity var(--swift) var(--smooth);
+  border-radius: inherit;
+}
+
+.mode-btn.active::before {
+  opacity: 1;
 }
 
 .mode-btn.active {
-  background: var(--primary);
   color: white;
-  box-shadow: var(--shadow-sm);
-  transform: scale(1.05);
+  box-shadow: var(--shadow-soft);
+  transform: scale(1.02);
 }
 
-/* ===== Bottom Navigation ===== */
+.mode-btn span {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== Bottom Navigation Revolution ===== */
 .bottom-nav {
   position: fixed;
   bottom: 0;
   left: 0;
   right: 0;
   z-index: 200;
-  background: var(--bg-sheet);
+  background: var(--glass-strong);
   border-top: 1px solid var(--glass-border);
-  padding: 1rem;
-  padding-bottom: calc(1rem + var(--safe-bottom));
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
+  padding: 12px 16px calc(12px + var(--safe-bottom));
+  backdrop-filter: var(--blur-extreme);
+  -webkit-backdrop-filter: var(--blur-extreme);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
 }
 
 .nav-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.75rem;
+  gap: 12px;
 }
 
 .nav-btn {
-  padding: 1rem;
+  padding: 12px 16px;
   border-radius: var(--radius-lg);
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 13px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
+  gap: 6px;
+  height: 44px;
   position: relative;
   overflow: hidden;
 }
 
 .nav-btn .emoji {
-  font-size: 1.2rem;
+  font-size: 16px;
 }
 
-/* ===== Sheets & Overlays ===== */
-.overlay {
+.share-btn-full {
+  margin-top: 8px;
+  width: 100%;
+  height: 36px;
+  padding: 8px 16px;
+  font-size: 13px;
+}
+
+/* ===== Revolutionary Modal System ===== */
+.modal-overlay {
   position: fixed;
   inset: 0;
-  background: var(--bg-overlay);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  z-index: 300;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: var(--blur-medium);
+  -webkit-backdrop-filter: var(--blur-medium);
+  z-index: 1000;
   opacity: 0;
   visibility: hidden;
-  transition: all var(--transition-smooth);
+  transition: all var(--fluid) var(--smooth);
+  display: flex;
+  align-items: flex-end;
+  padding: 16px;
 }
 
-.overlay.show {
+.modal-overlay.show {
   opacity: 1;
   visibility: visible;
 }
 
-.sheet {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  z-index: 400;
-  background: var(--bg-sheet);
+.modal {
+  width: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--glass-strong);
   border: 1px solid var(--glass-border);
-  border-bottom: none;
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  backdrop-filter: var(--blur);
-  -webkit-backdrop-filter: var(--blur);
-  max-height: 80vh;
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+  backdrop-filter: var(--blur-extreme);
+  -webkit-backdrop-filter: var(--blur-extreme);
+  box-shadow: var(--shadow-strong);
   transform: translateY(100%);
-  transition: transform var(--spring);
-  box-shadow: var(--shadow-lg);
+  transition: transform var(--dramatic) var(--spring);
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
 }
 
-.sheet.show {
+.modal-overlay.show .modal {
   transform: translateY(0);
 }
 
-.sheet-header {
-  padding: 1rem 1.5rem;
+.modal-header {
+  padding: 20px 24px 16px;
   border-bottom: 1px solid var(--glass-border);
-  text-align: center;
   position: relative;
+  background: var(--glass-medium);
+  border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
 }
 
-.sheet-handle {
+.modal-handle {
   width: 40px;
   height: 4px;
   background: var(--text-muted);
   border-radius: 2px;
-  margin: 0 auto 1rem;
-  opacity: 0.5;
+  margin: 0 auto 12px;
+  opacity: 0.6;
 }
 
-.sheet-title {
-  font-size: 1.125rem;
+.modal-title {
+  font-size: 20px;
   font-weight: 700;
+  letter-spacing: -0.2px;
+  text-align: center;
+  color: var(--text-primary);
 }
 
-.sheet-body {
+.modal-subtitle {
+  font-size: 12px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-top: 4px;
+}
+
+.modal-body {
+  flex: 1;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  max-height: calc(80vh - 140px);
+  padding: 0;
 }
 
-.sheet-footer {
-  padding: 1rem 1.5rem;
+.modal-footer {
+  padding: 16px 24px 20px;
   border-top: 1px solid var(--glass-border);
   display: flex;
-  gap: 1rem;
+  gap: 12px;
+  background: var(--glass-medium);
 }
 
-/* ===== Meal Options ===== */
-.meal-options {
-  padding: 1rem 0;
+/* ===== Advanced Meal Selection Interface ===== */
+.meal-categories {
+  padding: 0;
 }
 
-.option-item {
+.meal-category {
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.category-header {
+  padding: 16px 24px;
+  background: var(--glass-ultra);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.meal-option {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 16px 24px;
   cursor: pointer;
-  transition: all var(--transition-fast);
+  transition: all var(--swift) var(--smooth);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
   position: relative;
 }
 
-.option-item:hover {
-  background: rgba(255, 255, 255, 0.05);
+.meal-option:last-child {
+  border-bottom: none;
 }
 
-.option-item.selected {
-  background: rgba(103, 126, 234, 0.2);
-  color: var(--primary-solid);
-}
-
-.option-item.selected::before {
-  content: '✓';
+.meal-option::before {
+  content: '';
   position: absolute;
-  right: 1.5rem;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--primary);
+  transform: scaleY(0);
+  transition: transform var(--swift) var(--smooth);
+}
+
+.meal-option:hover::before,
+.meal-option.selected::before {
+  transform: scaleY(1);
+}
+
+.meal-option:hover {
+  background: var(--glass-ultra);
+  transform: translateX(4px);
+}
+
+.meal-option.selected {
+  background: var(--glass-glow);
   color: var(--primary-solid);
-  font-weight: bold;
+  font-weight: 600;
+}
+
+.meal-option-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.meal-option-emoji {
+  font-size: 20px;
+}
+
+.meal-option-text {
+  font-size: 15px;
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.meal-option-check {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all var(--swift) var(--bounce);
+  font-size: 18px;
+  color: var(--primary-solid);
+}
+
+.meal-option.selected .meal-option-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ===== Custom Input Enhancement ===== */
+.custom-input-section {
+  padding: 16px 24px;
+  border-top: 1px solid var(--glass-border);
+  background: var(--glass-ultra);
+  display: none;
+}
+
+.custom-input-section.show {
+  display: block;
+  animation: slideDown var(--fluid) var(--smooth);
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.custom-input-form {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.custom-input-field {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.custom-input-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
 }
 
 .custom-input {
-  display: flex;
-  gap: 1rem;
-  padding: 1rem 1.5rem;
-  border-top: 1px solid var(--glass-border);
-  background: var(--bg-secondary);
-}
-
-.custom-input input {
-  flex: 1;
-  background: var(--bg-card);
+  background: var(--glass-light);
   border: 1px solid var(--glass-border);
   border-radius: var(--radius-md);
-  padding: 0.75rem 1rem;
+  padding: 12px 16px;
   color: var(--text-primary);
-  font-size: 0.875rem;
+  font-size: 15px;
+  font-weight: 500;
+  transition: all var(--swift) var(--smooth);
 }
 
-.custom-input input::placeholder {
-  color: var(--text-muted);
-}
-
-.custom-input input:focus {
+.custom-input:focus {
   outline: none;
   border-color: var(--primary-solid);
-  box-shadow: 0 0 0 2px rgba(103, 126, 234, 0.2);
+  box-shadow: 0 0 0 3px var(--primary-glow);
+  background: var(--glass-medium);
 }
 
-/* ===== Grocery List ===== */
-.grocery-section {
-  margin-bottom: 1.5rem;
+.custom-input::placeholder {
+  color: var(--text-muted);
+  font-style: italic;
 }
 
-.grocery-section h4 {
-  font-size: 1rem;
+/* ===== Enhanced List Components ===== */
+.list-section {
+  margin-bottom: 20px;
+}
+
+.list-section-header {
+  padding: 12px 24px;
+  background: var(--glass-ultra);
+  border-bottom: 1px solid var(--glass-border);
+}
+
+.list-section-title {
+  font-size: 13px;
   font-weight: 700;
-  margin-bottom: 0.75rem;
-  padding: 0 1.5rem;
   color: var(--text-secondary);
-}
-
-.grocery-item {
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding: 0.75rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  gap: 8px;
 }
 
-.grocery-item input[type="checkbox"] {
+.section-emoji {
+  font-size: 16px;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  transition: all var(--swift) var(--smooth);
+}
+
+.list-item:hover {
+  background: var(--glass-ultra);
+}
+
+.list-item:last-child {
+  border-bottom: none;
+}
+
+.list-checkbox {
   width: 20px;
   height: 20px;
   accent-color: var(--primary-solid);
-}
-
-.grocery-item label {
-  flex: 1;
-  font-size: 0.875rem;
   cursor: pointer;
+  border-radius: 4px;
 }
 
-/* ===== Share Text ===== */
+.list-label {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.list-count {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  background: var(--glass-ultra);
+  padding: 2px 6px;
+  border-radius: 6px;
+  min-width: 16px;
+  text-align: center;
+}
+
+/* ===== Share Content Enhancement ===== */
 .share-content {
-  padding: 1.5rem;
+  padding: 24px;
 }
 
-.share-text {
-  background: var(--bg-secondary);
+.share-preview {
+  background: var(--glass-ultra);
   border: 1px solid var(--glass-border);
-  border-radius: var(--radius-md);
-  padding: 1rem;
-  font-family: ui-monospace, 'SF Mono', monospace;
-  font-size: 0.75rem;
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  font-family: 'SF Mono', ui-monospace, monospace;
+  font-size: 12px;
   line-height: 1.5;
   white-space: pre-wrap;
-  max-height: 300px;
+  max-height: 320px;
   overflow-y: auto;
   color: var(--text-secondary);
+  -webkit-overflow-scrolling: touch;
 }
 
 /* ===== Loading States ===== */
-.loading {
+.loading-state {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.5rem;
-  padding: 2rem;
-  color: var(--text-muted);
+  gap: 16px;
+  padding: 40px 24px;
+  color: var(--text-tertiary);
 }
 
-.loading::before {
-  content: '';
-  width: 20px;
-  height: 20px;
-  border: 2px solid transparent;
+.loading-spinner {
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--glass-border);
   border-top: 2px solid var(--primary-solid);
   border-radius: 50%;
   animation: spin 1s linear infinite;
@@ -670,12 +1016,18 @@ body {
   to { transform: rotate(360deg); }
 }
 
-/* ===== Animations ===== */
-.fade-in {
-  animation: fadeIn 0.6s ease-out forwards;
+.loading-text {
+  font-size: 13px;
+  font-weight: 500;
+  text-align: center;
 }
 
-@keyframes fadeIn {
+/* ===== Advanced Animations ===== */
+.fade-in-up {
+  animation: fadeInUp var(--fluid) var(--smooth) forwards;
+}
+
+@keyframes fadeInUp {
   from {
     opacity: 0;
     transform: translateY(20px);
@@ -686,8 +1038,23 @@ body {
   }
 }
 
+.scale-in {
+  animation: scaleIn var(--swift) var(--bounce) forwards;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
 .slide-up {
-  animation: slideUp 0.4s ease-out forwards;
+  animation: slideUp var(--dramatic) var(--spring) forwards;
 }
 
 @keyframes slideUp {
@@ -703,22 +1070,34 @@ body {
 
 /* ===== Responsive Design ===== */
 @media (max-width: 390px) {
-  .meal-grid {
-    grid-template-columns: 1fr;
+  .meal-bento {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .meal-bento .meal-selector:nth-child(3) {
+    grid-column: 1 / -1;
   }
   
   .nav-grid {
     grid-template-columns: 1fr;
-    gap: 0.5rem;
+    gap: 8px;
   }
   
-  .mode-selector {
+  .header-controls {
     flex-direction: column;
-    gap: 0.25rem;
+    gap: 6px;
+  }
+
+  .modal {
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  }
+
+  .modal-header {
+    border-radius: var(--radius-xl) var(--radius-xl) 0 0;
   }
 }
 
-/* ===== Accessibility ===== */
+/* ===== Accessibility Enhancements ===== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -727,209 +1106,334 @@ body {
   }
 }
 
-/* ===== Focus Styles ===== */
+@media (prefers-color-scheme: light) {
+  :root {
+    --bg-primary: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 50%, #f1f5f9 100%);
+    --text-primary: rgba(0, 0, 0, 0.92);
+    --text-secondary: rgba(0, 0, 0, 0.72);
+    --text-tertiary: rgba(0, 0, 0, 0.52);
+    --text-muted: rgba(0, 0, 0, 0.32);
+  }
+}
+
 :focus-visible {
   outline: 2px solid var(--primary-solid);
   outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ===== Haptic Feedback Simulation ===== */
+.haptic-light {
+  animation: hapticLight 0.1s ease-out;
+}
+
+@keyframes hapticLight {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.98); }
+  100% { transform: scale(1); }
+}
+
+.haptic-medium {
+  animation: hapticMedium 0.15s ease-out;
+}
+
+@keyframes hapticMedium {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.96); }
+  100% { transform: scale(1); }
 }
 </style>
 </head>
 <body>
 
 <div id="app" class="app">
-  <!-- Header -->
+  <!-- Revolutionary Header -->
   <header class="header">
     <div class="header-content">
-      <div class="header-left">
-        <h1 class="header-title">✨ Meal Planner</h1>
+      <div class="header-brand">
+        <h1 class="header-title">Meal Planner</h1>
         <div id="dateRange" class="header-subtitle"></div>
       </div>
-      <div class="header-right">
-        <div id="weekendToggle" class="toggle" role="switch" aria-label="Include weekend" tabindex="0">
-          <div class="toggle-knob"></div>
+      <div class="header-controls">
+        <div id="weekendToggle" class="weekend-toggle" role="switch" aria-label="Include weekends" tabindex="0">
+          <span class="toggle-label">Weekends</span>
+          <div class="toggle-switch">
+            <div class="toggle-knob"></div>
+          </div>
         </div>
-        <button id="clearBtn" class="btn btn-danger body-sm">Clear All</button>
+        <button id="clearBtn" class="btn btn-danger btn-compact">Clear All</button>
       </div>
     </div>
   </header>
 
-  <!-- Main Content -->
+  <!-- Main Bento Grid -->
   <main class="main">
-    <div id="dayGrid" class="day-grid" aria-live="polite"></div>
+    <div id="bentoGrid" class="bento-grid" aria-live="polite"></div>
   </main>
 
-  <!-- Bottom Navigation -->
+  <!-- Revolutionary Bottom Navigation -->
   <nav class="bottom-nav">
     <div class="nav-grid">
+      <button id="groceryBtn" class="nav-btn btn-success">
+        <span class="emoji">🛒</span>
+        <span>Shopping</span>
+      </button>
       <button id="shuffleBtn" class="nav-btn btn-primary">
         <span class="emoji">🎲</span>
         <span>Randomize</span>
       </button>
-      <button id="groceryBtn" class="nav-btn btn-success">
-        <span class="emoji">🛒</span>
-        <span>Grocery List</span>
-      </button>
     </div>
-    <button id="shareBtn" class="btn btn-accent" style="margin-top: 0.75rem; width: 100%;">
+    <button id="shareBtn" class="btn btn-glass share-btn-full">
       <span class="emoji">📤</span>
-      <span>Share Plan</span>
+      <span>Weekly Summary</span>
     </button>
   </nav>
 </div>
 
-<!-- Overlay -->
-<div id="overlay" class="overlay"></div>
-
-<!-- Meal Picker Sheet -->
-<div id="mealPicker" class="sheet" role="dialog" aria-modal="true">
-  <div class="sheet-header">
-    <div class="sheet-handle"></div>
-    <h2 id="pickerTitle" class="sheet-title">Choose Meal</h2>
-  </div>
-  <div id="customInputSection" class="custom-input" style="display: none;">
-    <input id="customInput" type="text" placeholder="Enter custom meal name...">
-    <button id="customUseBtn" class="btn btn-primary">Add</button>
-  </div>
-  <div class="sheet-body">
-    <div id="mealOptions" class="meal-options"></div>
-  </div>
-  <div class="sheet-footer">
-    <button id="pickerCloseBtn" class="btn btn-secondary" style="flex: 1;">Cancel</button>
-  </div>
-</div>
-
-<!-- Grocery Sheet -->
-<div id="grocerySheet" class="sheet" role="dialog" aria-modal="true">
-  <div class="sheet-header">
-    <div class="sheet-handle"></div>
-    <h2 class="sheet-title">🛒 Grocery List</h2>
-  </div>
-  <div class="sheet-body">
-    <div id="groceryContent"></div>
-  </div>
-  <div class="sheet-footer">
-    <button id="groceryCopyBtn" class="btn btn-primary" style="flex: 1;">Copy List</button>
-    <button id="groceryCloseBtn" class="btn btn-secondary" style="flex: 1;">Done</button>
-  </div>
-</div>
-
-<!-- Share Sheet -->
-<div id="shareSheet" class="sheet" role="dialog" aria-modal="true">
-  <div class="sheet-header">
-    <div class="sheet-handle"></div>
-    <h2 class="sheet-title">📤 Share Meal Plan</h2>
-  </div>
-  <div class="sheet-body">
-    <div class="share-content">
-      <div id="shareText" class="share-text"></div>
+<!-- Revolutionary Modal System -->
+<div id="modalOverlay" class="modal-overlay">
+  
+  <!-- Meal Selection Modal -->
+  <div id="mealModal" class="modal" role="dialog" aria-modal="true" style="display: none;">
+    <div class="modal-header">
+      <div class="modal-handle"></div>
+      <h2 id="mealModalTitle" class="modal-title">Choose Meal</h2>
+      <div id="mealModalSubtitle" class="modal-subtitle">Select from curated options</div>
+    </div>
+    <div class="modal-body">
+      <div class="custom-input-section" id="customInputSection">
+        <div class="custom-input-form">
+          <div class="custom-input-field">
+            <label class="custom-input-label">Custom Meal</label>
+            <input id="customInput" type="text" class="custom-input" placeholder="Enter your custom meal...">
+          </div>
+          <button id="customUseBtn" class="btn btn-primary">Add</button>
+        </div>
+      </div>
+      <div id="mealCategories" class="meal-categories"></div>
+    </div>
+    <div class="modal-footer">
+      <button id="mealModalClose" class="btn btn-glass" style="flex: 1;">Cancel</button>
     </div>
   </div>
-  <div class="sheet-footer">
-    <button id="shareCopyBtn" class="btn btn-primary" style="flex: 1;">Copy Text</button>
-    <button id="shareCloseBtn" class="btn btn-secondary" style="flex: 1;">Done</button>
+
+  <!-- Shopping List Modal -->
+  <div id="shoppingModal" class="modal" role="dialog" aria-modal="true" style="display: none;">
+    <div class="modal-header">
+      <div class="modal-handle"></div>
+      <h2 class="modal-title">🛒 Shopping List</h2>
+      <div class="modal-subtitle">Organized by store sections</div>
+    </div>
+    <div class="modal-body">
+      <div id="shoppingContent"></div>
+    </div>
+    <div class="modal-footer">
+      <button id="shoppingShareBtn" class="btn btn-primary" style="flex: 1;">Share List</button>
+      <button id="shoppingCloseBtn" class="btn btn-glass" style="flex: 1;">Done</button>
+    </div>
   </div>
+
+  <!-- Weekly Summary Modal -->
+  <div id="summaryModal" class="modal" role="dialog" aria-modal="true" style="display: none;">
+    <div class="modal-header">
+      <div class="modal-handle"></div>
+      <h2 class="modal-title">📤 Weekly Summary</h2>
+      <div class="modal-subtitle">Meal plan & shopping list combined</div>
+    </div>
+    <div class="modal-body">
+      <div class="share-content">
+        <div id="summaryPreview" class="share-preview"></div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button id="summaryShareBtn" class="btn btn-primary" style="flex: 1;">Share Plan</button>
+      <button id="summaryCloseBtn" class="btn btn-glass" style="flex: 1;">Done</button>
+    </div>
+  </div>
+
 </div>
 
 <script>
-/* ========= Enhanced Configuration ========== */
+/* ========= Enhanced Meal Database ========== */
 const MEALS = {
-  lunch: [
-    "🍝 Ravioli burro e salvia", "🍋 Spaghetti al limone", "🫘 Pasta e ceci", 
-    "🐟 Pasta col tonno", "🍅 Pasta sugo tonno", "🥪 Piadine prosciutto provolone",
-    "🍳 Uova fritte", "🌿 Pasta al pesto", "🍅 Pasta coi pomodorini", 
-    "🫘 Lenticchie", "🧄 Spaghetti aglio e olio", "🥓 Carbonara",
-    "🍳 Frittata di pasta", "🫘 Pasta e fagioli", "❌ None", "✏️ Custom…"
-  ],
-  dinner: {
-    regular: [
-      "🐟 Salmone col riso", "🥒 Frittata di zucchine", "🍖 Polpette", 
-      "🍋 Pollo al limone", "🐟 Merluzzo", "🍔 Hamburger", "🍗 Cotolette",
-      "🌭 Salsicce", "🥕 Minestrone", "🍗 Pollo al forno", 
-      "🍋 Scaloppine al limone", "🍅 Caprese", "❌ None", "✏️ Custom…"
+  lunch: {
+    'Quick & Light': [
+      { emoji: '🍝', name: 'Ravioli burro e salvia' },
+      { emoji: '🍋', name: 'Spaghetti al limone' },
+      { emoji: '🍳', name: 'Uova fritte' },
+      { emoji: '🥪', name: 'Piadine prosciutto provolone' }
     ],
-    quick: [
-      "🍗 Cordon bleu", "🌭 Wurstel", "🥟 Dumplings", "🐟 Fish sticks", 
-      "🍗 Pollo allo spiedo", "❌ None", "✏️ Custom…"
+    'Pasta Classics': [
+      { emoji: '🫘', name: 'Pasta e ceci' },
+      { emoji: '🐟', name: 'Pasta col tonno' },
+      { emoji: '🍅', name: 'Pasta sugo tonno' },
+      { emoji: '🌿', name: 'Pasta al pesto' },
+      { emoji: '🍅', name: 'Pasta coi pomodorini' },
+      { emoji: '🧄', name: 'Spaghetti aglio e olio' },
+      { emoji: '🥓', name: 'Carbonara' }
     ],
-    delivery: [
-      "🍕 Pizza Delivery", "🥙 Greco Delivery", "🥡 Chinese Delivery", 
-      "🍜 Vietnamese Delivery", "🍜 Ramen Delivery", "❌ None", "✏️ Custom…"
+    'Hearty Options': [
+      { emoji: '🫘', name: 'Lenticchie' },
+      { emoji: '🍳', name: 'Frittata di pasta' },
+      { emoji: '🫘', name: 'Pasta e fagioli' }
     ],
-    weekend: [
-      "🍝 Pasta al forno", "🍆 Parmigiana di melanzane", "🥒 Zucchine ripiene",
-      "🍝 Lasagna", "🥩 Spezzatino con patate", "🍝 Tortellini con la panna",
-      "🍝 Tortellini col sugo", "🍝 Pasta col ragù", "🍖 Polpettone",
-      "🌽 Polenta col sugo", "🍝 Cannelloni", "🥩 Bistecca", "❌ None", "✏️ Custom…"
+    'Special': [
+      { emoji: '❌', name: 'None' },
+      { emoji: '✏️', name: 'Custom…' }
     ]
   },
-  side: [
-    "🥔 Purè di patate", "🥦 Broccoli al vapore", "🍅 Insalata di pomodori",
-    "🥔 Tater tots", "🫐 Barbabietole", "🌽 Insalata di mais", "🥔 Patate lesse",
-    "🥕 Carote al forno", "🥕 Carote a insalata", "🥒 Zucchine trifolate",
-    "🥒 Insalata di cetrioli", "🥗 Insalata", "❌ None", "✏️ Custom…"
-  ]
+  dinner: {
+    regular: {
+      'Seafood': [
+        { emoji: '🐟', name: 'Salmone col riso' },
+        { emoji: '🐟', name: 'Merluzzo' }
+      ],
+      'Meat & Poultry': [
+        { emoji: '🍖', name: 'Polpette' },
+        { emoji: '🍋', name: 'Pollo al limone' },
+        { emoji: '🍔', name: 'Hamburger' },
+        { emoji: '🍗', name: 'Cotolette' },
+        { emoji: '🌭', name: 'Salsicce' },
+        { emoji: '🍗', name: 'Pollo al forno' },
+        { emoji: '🍋', name: 'Scaloppine al limone' }
+      ],
+      'Vegetarian': [
+        { emoji: '🥒', name: 'Frittata di zucchine' },
+        { emoji: '🥕', name: 'Minestrone' },
+        { emoji: '🍅', name: 'Caprese' }
+      ],
+      'Special': [
+        { emoji: '❌', name: 'None' },
+        { emoji: '✏️', name: 'Custom…' }
+      ]
+    },
+    quick: {
+      'Ready in Minutes': [
+        { emoji: '🍗', name: 'Cordon bleu' },
+        { emoji: '🌭', name: 'Wurstel' },
+        { emoji: '🥟', name: 'Dumplings' },
+        { emoji: '🐟', name: 'Fish sticks' },
+        { emoji: '🍗', name: 'Pollo allo spiedo' }
+      ],
+      'Special': [
+        { emoji: '❌', name: 'None' },
+        { emoji: '✏️', name: 'Custom…' }
+      ]
+    },
+    delivery: {
+      'Popular Delivery': [
+        { emoji: '🍕', name: 'Pizza Delivery' },
+        { emoji: '🥙', name: 'Greco Delivery' },
+        { emoji: '🥡', name: 'Chinese Delivery' },
+        { emoji: '🍜', name: 'Vietnamese Delivery' },
+        { emoji: '🍜', name: 'Ramen Delivery' }
+      ],
+      'Special': [
+        { emoji: '❌', name: 'None' },
+        { emoji: '✏️', name: 'Custom…' }
+      ]
+    },
+    weekend: {
+      'Weekend Specials': [
+        { emoji: '🍝', name: 'Pasta al forno' },
+        { emoji: '🍆', name: 'Parmigiana di melanzane' },
+        { emoji: '🥒', name: 'Zucchine ripiene' },
+        { emoji: '🍝', name: 'Lasagna' },
+        { emoji: '🍝', name: 'Tortellini con la panna' },
+        { emoji: '🍝', name: 'Tortellini col sugo' },
+        { emoji: '🍝', name: 'Pasta col ragù' },
+        { emoji: '🍝', name: 'Cannelloni' }
+      ],
+      'Premium Options': [
+        { emoji: '🥩', name: 'Spezzatino con patate' },
+        { emoji: '🍖', name: 'Polpettone' },
+        { emoji: '🌽', name: 'Polenta col sugo' },
+        { emoji: '🥩', name: 'Bistecca' }
+      ],
+      'Special': [
+        { emoji: '❌', name: 'None' },
+        { emoji: '✏️', name: 'Custom…' }
+      ]
+    }
+  },
+  side: {
+    'Potato Dishes': [
+      { emoji: '🥔', name: 'Purè di patate' },
+      { emoji: '🥔', name: 'Tater tots' },
+      { emoji: '🥔', name: 'Patate lesse' }
+    ],
+    'Fresh Vegetables': [
+      { emoji: '🥦', name: 'Broccoli al vapore' },
+      { emoji: '🥕', name: 'Carote al forno' },
+      { emoji: '🥕', name: 'Carote a insalata' },
+      { emoji: '🥒', name: 'Zucchine trifolate' }
+    ],
+    'Salads': [
+      { emoji: '🍅', name: 'Insalata di pomodori' },
+      { emoji: '🌽', name: 'Insalata di mais' },
+      { emoji: '🥒', name: 'Insalata di cetrioli' },
+      { emoji: '🥗', name: 'Insalata' }
+    ],
+    'Others': [
+      { emoji: '🫐', name: 'Barbabietole' }
+    ],
+    'Special': [
+      { emoji: '❌', name: 'None' },
+      { emoji: '✏️', name: 'Custom…' }
+    ]
+  }
 };
 
 const INGREDIENTS = {
-  "🍝 Ravioli burro e salvia": ["ravioli", "sage", "butter"],
-  "🍋 Spaghetti al limone": ["spaghetti", "lemon", "olive oil"],
-  "🫘 Pasta e ceci": ["pasta", "chickpeas", "rosemary"],
-  "🐟 Pasta col tonno": ["spaghetti", "tuna", "capers"],
-  "🍅 Pasta sugo tonno": ["pasta", "tuna", "tomato sauce"],
-  "🥪 Piadine prosciutto provolone": ["flatbread", "prosciutto", "provolone"],
-  "🍳 Uova fritte": ["eggs", "olive oil"],
-  "🌿 Pasta al pesto": ["pasta", "pesto", "pine nuts"],
-  "🍅 Pasta coi pomodorini": ["pasta", "cherry tomatoes", "basil"],
-  "🫘 Lenticchie": ["lentils", "vegetables", "croutons"],
-  "🧄 Spaghetti aglio e olio": ["spaghetti", "garlic", "olive oil", "chili"],
-  "🥓 Carbonara": ["spaghetti", "eggs", "bacon", "parmesan"],
-  "🍳 Frittata di pasta": ["eggs", "leftover pasta", "cheese"],
-  "🫘 Pasta e fagioli": ["pasta", "beans", "vegetables"],
-  "🐟 Salmone col riso": ["salmon", "rice", "vegetables"],
-  "🥒 Frittata di zucchine": ["eggs", "zucchini", "cheese"],
-  "🍖 Polpette": ["ground beef", "breadcrumbs", "eggs", "tomato sauce"],
-  "🍋 Pollo al limone": ["chicken breast", "lemon", "herbs"],
-  "🐟 Merluzzo": ["cod", "vegetables", "olive oil"],
-  "🍔 Hamburger": ["burger buns", "ground beef", "cheese", "lettuce", "tomato"],
-  "🍗 Cotolette": ["cutlets", "breadcrumbs", "eggs"],
-  "🌭 Salsicce": ["sausages", "vegetables"],
-  "🥕 Minestrone": ["mixed vegetables", "pasta", "beans"],
-  "🍗 Pollo al forno": ["chicken thighs", "potatoes", "herbs"],
-  "🍋 Scaloppine al limone": ["veal cutlets", "lemon", "capers"],
-  "🍅 Caprese": ["mozzarella", "tomatoes", "basil"],
-  "🥔 Purè di patate": ["potatoes", "milk", "butter"],
-  "🥦 Broccoli al vapore": ["broccoli"],
-  "🍅 Insalata di pomodori": ["tomatoes", "olive oil", "basil"],
-  "🥔 Tater tots": ["frozen tater tots"],
-  "🫐 Barbabietole": ["beets"],
-  "🌽 Insalata di mais": ["corn", "vegetables"],
-  "🥔 Patate lesse": ["potatoes"],
-  "🥕 Carote al forno": ["carrots", "olive oil"],
-  "🥕 Carote a insalata": ["carrots"],
-  "🥒 Zucchine trifolate": ["zucchini", "garlic"],
-  "🥒 Insalata di cetrioli": ["cucumbers"],
-  "🥗 Insalata": ["mixed greens", "vegetables"]
+  "Ravioli burro e salvia": ["ravioli", "sage", "butter"],
+  "Spaghetti al limone": ["spaghetti", "lemon", "olive oil"],
+  "Pasta e ceci": ["pasta", "chickpeas", "rosemary"],
+  "Pasta col tonno": ["spaghetti", "tuna", "capers"],
+  "Pasta sugo tonno": ["pasta", "tuna", "tomato sauce"],
+  "Piadine prosciutto provolone": ["flatbread", "prosciutto", "provolone"],
+  "Uova fritte": ["eggs", "olive oil"],
+  "Pasta al pesto": ["pasta", "pesto", "pine nuts"],
+  "Pasta coi pomodorini": ["pasta", "cherry tomatoes", "basil"],
+  "Lenticchie": ["lentils", "vegetables", "croutons"],
+  "Spaghetti aglio e olio": ["spaghetti", "garlic", "olive oil", "chili"],
+  "Carbonara": ["spaghetti", "eggs", "bacon", "parmesan"],
+  "Frittata di pasta": ["eggs", "leftover pasta", "cheese"],
+  "Pasta e fagioli": ["pasta", "beans", "vegetables"],
+  "Salmone col riso": ["salmon", "rice", "vegetables"],
+  "Frittata di zucchine": ["eggs", "zucchini", "cheese"],
+  "Polpette": ["ground beef", "breadcrumbs", "eggs", "tomato sauce"],
+  "Pollo al limone": ["chicken breast", "lemon", "herbs"],
+  "Merluzzo": ["cod", "vegetables", "olive oil"],
+  "Hamburger": ["burger buns", "ground beef", "cheese", "lettuce", "tomato"],
+  "Cotolette": ["cutlets", "breadcrumbs", "eggs"],
+  "Salsicce": ["sausages", "vegetables"],
+  "Minestrone": ["mixed vegetables", "pasta", "beans"],
+  "Pollo al forno": ["chicken thighs", "potatoes", "herbs"],
+  "Scaloppine al limone": ["veal cutlets", "lemon", "capers"],
+  "Caprese": ["mozzarella", "tomatoes", "basil"]
 };
 
 const STORE_CATEGORIES = {
-  "🏪 Supermarket": ["pasta", "rice", "eggs", "milk", "bread", "vegetables", "meat", "cheese"],
-  "🥩 Butcher": ["ground beef", "chicken breast", "chicken thighs", "sausages", "bacon"],
-  "🐟 Fish Market": ["salmon", "cod", "tuna"],
-  "🥬 Fresh Produce": ["tomatoes", "basil", "zucchini", "carrots", "broccoli", "lettuce"],
-  "🏬 Specialty Store": ["pesto", "prosciutto", "provolone", "capers", "pine nuts"]
+  "🥩 Meat & Fish": ["ground beef", "chicken breast", "chicken thighs", "sausages", "bacon", "salmon", "cod", "tuna", "cutlets", "veal cutlets"],
+  "🥬 Fresh Produce": ["tomatoes", "basil", "zucchini", "carrots", "broccoli", "lettuce", "cherry tomatoes", "lemon", "garlic", "onions", "beets", "corn", "cucumbers", "mixed greens", "vegetables"],
+  "🧀 Dairy & Eggs": ["eggs", "milk", "butter", "cheese", "mozzarella", "parmesan", "provolone"],
+  "🍞 Pantry Essentials": ["pasta", "spaghetti", "rice", "breadcrumbs", "olive oil", "tomato sauce", "pesto", "capers", "pine nuts", "chickpeas", "lentils", "beans", "herbs", "rosemary", "chili"],
+  "🥖 Bakery": ["flatbread", "burger buns", "bread"],
+  "🍖 Deli": ["prosciutto"],
+  "❄️ Frozen": ["frozen tater tots", "ravioli"]
 };
 
-/* ========= Enhanced State Management ========= */
+/* ========= State Management ========= */
 class MealPlannerState {
   constructor() {
     this.weekendEnabled = true;
     this.meals = {};
-    this.currentPicker = null;
+    this.currentModal = null;
+    this.currentSelection = null;
     this.init();
   }
 
   init() {
-    this.loadFromStorage();
     this.generateWeekKeys();
   }
 
@@ -960,41 +1464,45 @@ class MealPlannerState {
     }
   }
 
-  loadFromStorage() {
-    try {
-      const saved = localStorage.getItem('mealPlannerState');
-      if (saved) {
-        const data = JSON.parse(saved);
-        this.weekendEnabled = data.weekendEnabled ?? true;
-        this.meals = data.meals ?? {};
-      }
-    } catch (e) {
-      console.warn('Failed to load from storage:', e);
-    }
-  }
-
-  saveToStorage() {
-    try {
-      localStorage.setItem('mealPlannerState', JSON.stringify({
-        weekendEnabled: this.weekendEnabled,
-        meals: this.meals
-      }));
-    } catch (e) {
-      console.warn('Failed to save to storage:', e);
-    }
-  }
-
   updateMeal(dayKey, mealType, value) {
     this.meals[dayKey][mealType] = value;
-    this.saveToStorage();
   }
 
   updateMode(dayKey, mode) {
-    this.meals[dayKey].mode = mode;
-    if (mode === 'delivery') {
-      this.meals[dayKey].side = "";
+    const dayMeals = this.meals[dayKey];
+    const isWeekend = this.weekKeys.indexOf(dayKey) >= 5;
+    
+    dayMeals.mode = mode;
+    
+    // Clear dinner if it's not available in the new mode
+    if (dayMeals.dinner) {
+      const currentMeal = dayMeals.dinner;
+      let isAvailable = false;
+      
+      let optionsToCheck = [];
+      switch (mode) {
+        case 'quick':
+          optionsToCheck = Object.values(MEALS.dinner.quick).flat();
+          break;
+        case 'delivery':
+          optionsToCheck = Object.values(MEALS.dinner.delivery).flat();
+          dayMeals.side = ""; // Clear side for delivery
+          break;
+        default:
+          optionsToCheck = Object.values(isWeekend ? MEALS.dinner.weekend : MEALS.dinner.regular).flat();
+      }
+      
+      isAvailable = optionsToCheck.some(meal => meal.name === currentMeal);
+      
+      if (!isAvailable) {
+        dayMeals.dinner = "";
+      }
     }
-    this.saveToStorage();
+    
+    // Always clear side for delivery mode
+    if (mode === 'delivery') {
+      dayMeals.side = "";
+    }
   }
 
   clearAll() {
@@ -1008,50 +1516,51 @@ class MealPlannerState {
         };
       }
     });
-    this.saveToStorage();
+  }
+
+  randomizeDay(dayKey) {
+    const dayMeals = this.meals[dayKey];
+    const index = this.weekKeys.indexOf(dayKey);
+    const isWeekend = index >= 5;
+    
+    // Get all options for each meal type
+    const lunchOptions = Object.values(MEALS.lunch).flat().filter(m => !['None', 'Custom…'].includes(m.name));
+    dayMeals.lunch = lunchOptions[Math.floor(Math.random() * lunchOptions.length)].name;
+    
+    let dinnerOptions = [];
+    switch (dayMeals.mode) {
+      case 'quick':
+        dinnerOptions = Object.values(MEALS.dinner.quick).flat().filter(m => !['None', 'Custom…'].includes(m.name));
+        break;
+      case 'delivery':
+        dinnerOptions = Object.values(MEALS.dinner.delivery).flat().filter(m => !['None', 'Custom…'].includes(m.name));
+        break;
+      default:
+        dinnerOptions = Object.values(isWeekend ? MEALS.dinner.weekend : MEALS.dinner.regular).flat().filter(m => !['None', 'Custom…'].includes(m.name));
+    }
+    dayMeals.dinner = dinnerOptions[Math.floor(Math.random() * dinnerOptions.length)].name;
+    
+    // Randomize side (unless delivery)
+    if (dayMeals.mode !== 'delivery') {
+      const sideOptions = Object.values(MEALS.side).flat().filter(m => !['None', 'Custom…'].includes(m.name));
+      dayMeals.side = sideOptions[Math.floor(Math.random() * sideOptions.length)].name;
+    }
   }
 
   randomizeMeals() {
     this.weekKeys.forEach((key, index) => {
       if (index >= 5 && !this.weekendEnabled) return;
-
-      const dayMeals = this.meals[key];
-      const isWeekend = index >= 5;
-      
-      // Randomize lunch
-      const lunchOptions = MEALS.lunch.filter(m => !m.includes('None') && !m.includes('Custom'));
-      dayMeals.lunch = lunchOptions[Math.floor(Math.random() * lunchOptions.length)];
-      
-      // Randomize dinner based on mode
-      let dinnerOptions;
-      switch (dayMeals.mode) {
-        case 'quick':
-          dinnerOptions = MEALS.dinner.quick.filter(m => !m.includes('None') && !m.includes('Custom'));
-          break;
-        case 'delivery':
-          dinnerOptions = MEALS.dinner.delivery.filter(m => !m.includes('None') && !m.includes('Custom'));
-          break;
-        default:
-          dinnerOptions = isWeekend 
-            ? MEALS.dinner.weekend.filter(m => !m.includes('None') && !m.includes('Custom'))
-            : MEALS.dinner.regular.filter(m => !m.includes('None') && !m.includes('Custom'));
-      }
-      dayMeals.dinner = dinnerOptions[Math.floor(Math.random() * dinnerOptions.length)];
-      
-      // Randomize side (unless delivery)
-      if (dayMeals.mode !== 'delivery') {
-        const sideOptions = MEALS.side.filter(m => !m.includes('None') && !m.includes('Custom'));
-        dayMeals.side = sideOptions[Math.floor(Math.random() * sideOptions.length)];
-      }
+      this.randomizeDay(key);
     });
-    
-    this.saveToStorage();
   }
 
   generateGroceryList() {
     const ingredients = new Map();
     
-    Object.values(this.meals).forEach(dayMeals => {
+    this.weekKeys.forEach((key, index) => {
+      if (index >= 5 && !this.weekendEnabled) return;
+      
+      const dayMeals = this.meals[key];
       ['lunch', 'dinner', 'side'].forEach(mealType => {
         const meal = dayMeals[mealType];
         if (meal && INGREDIENTS[meal]) {
@@ -1083,10 +1592,12 @@ class MealPlannerState {
       }
     });
 
-    // Remove empty categories
+    // Remove empty categories and sort items
     Object.keys(categorized).forEach(category => {
       if (categorized[category].length === 0) {
         delete categorized[category];
+      } else {
+        categorized[category].sort((a, b) => a.name.localeCompare(b.name));
       }
     });
 
@@ -1094,7 +1605,7 @@ class MealPlannerState {
   }
 }
 
-/* ========= Enhanced UI Controller ========= */
+/* ========= Revolutionary UI Controller ========= */
 class MealPlannerUI {
   constructor() {
     this.state = new MealPlannerState();
@@ -1105,43 +1616,56 @@ class MealPlannerUI {
 
   initializeElements() {
     this.elements = {
+      // Main elements
       weekendToggle: document.getElementById('weekendToggle'),
       clearBtn: document.getElementById('clearBtn'),
-      dayGrid: document.getElementById('dayGrid'),
+      bentoGrid: document.getElementById('bentoGrid'),
       dateRange: document.getElementById('dateRange'),
+      
+      // Navigation
       shuffleBtn: document.getElementById('shuffleBtn'),
       groceryBtn: document.getElementById('groceryBtn'),
       shareBtn: document.getElementById('shareBtn'),
-      overlay: document.getElementById('overlay'),
-      mealPicker: document.getElementById('mealPicker'),
-      pickerTitle: document.getElementById('pickerTitle'),
-      mealOptions: document.getElementById('mealOptions'),
+      
+      // Modal system
+      modalOverlay: document.getElementById('modalOverlay'),
+      
+      // Meal selection modal
+      mealModal: document.getElementById('mealModal'),
+      mealModalTitle: document.getElementById('mealModalTitle'),
+      mealModalSubtitle: document.getElementById('mealModalSubtitle'),
+      mealCategories: document.getElementById('mealCategories'),
       customInputSection: document.getElementById('customInputSection'),
       customInput: document.getElementById('customInput'),
       customUseBtn: document.getElementById('customUseBtn'),
-      pickerCloseBtn: document.getElementById('pickerCloseBtn'),
-      grocerySheet: document.getElementById('grocerySheet'),
-      groceryContent: document.getElementById('groceryContent'),
-      groceryCopyBtn: document.getElementById('groceryCopyBtn'),
-      groceryCloseBtn: document.getElementById('groceryCloseBtn'),
-      shareSheet: document.getElementById('shareSheet'),
-      shareText: document.getElementById('shareText'),
-      shareCopyBtn: document.getElementById('shareCopyBtn'),
-      shareCloseBtn: document.getElementById('shareCloseBtn')
+      mealModalClose: document.getElementById('mealModalClose'),
+      
+      // Shopping list modal
+      shoppingModal: document.getElementById('shoppingModal'),
+      shoppingContent: document.getElementById('shoppingContent'),
+      shoppingShareBtn: document.getElementById('shoppingShareBtn'),
+      shoppingCloseBtn: document.getElementById('shoppingCloseBtn'),
+      
+      // Summary modal
+      summaryModal: document.getElementById('summaryModal'),
+      summaryPreview: document.getElementById('summaryPreview'),
+      summaryShareBtn: document.getElementById('summaryShareBtn'),
+      summaryCloseBtn: document.getElementById('summaryCloseBtn')
     };
   }
 
   bindEvents() {
     // Weekend toggle
     this.elements.weekendToggle.addEventListener('click', () => {
+      this.triggerHaptic('light');
       this.state.weekendEnabled = !this.state.weekendEnabled;
-      this.state.saveToStorage();
       this.render();
     });
 
     // Clear all
     this.elements.clearBtn.addEventListener('click', () => {
       if (confirm('🗑️ Clear all meals? This cannot be undone.')) {
+        this.triggerHaptic('medium');
         this.state.clearAll();
         this.render();
       }
@@ -1149,31 +1673,43 @@ class MealPlannerUI {
 
     // Navigation buttons
     this.elements.shuffleBtn.addEventListener('click', () => {
-      this.elements.shuffleBtn.style.transform = 'scale(0.95)';
+      this.triggerHaptic('medium');
+      this.elements.shuffleBtn.classList.add('haptic-medium');
       setTimeout(() => {
-        this.elements.shuffleBtn.style.transform = '';
+        this.elements.shuffleBtn.classList.remove('haptic-medium');
         this.state.randomizeMeals();
         this.render();
       }, 150);
     });
 
-    this.elements.groceryBtn.addEventListener('click', () => this.showGrocerySheet());
-    this.elements.shareBtn.addEventListener('click', () => this.showShareSheet());
+    this.elements.groceryBtn.addEventListener('click', () => {
+      this.triggerHaptic('light');
+      this.showShoppingModal();
+    });
 
-    // Overlay close
-    this.elements.overlay.addEventListener('click', () => this.closeAllSheets());
+    this.elements.shareBtn.addEventListener('click', () => {
+      this.triggerHaptic('light');
+      this.showSummaryModal();
+    });
 
-    // Picker events
+    // Modal overlay
+    this.elements.modalOverlay.addEventListener('click', (e) => {
+      if (e.target === this.elements.modalOverlay) {
+        this.closeAllModals();
+      }
+    });
+
+    // Meal modal events
     this.elements.customUseBtn.addEventListener('click', () => this.useCustomMeal());
-    this.elements.pickerCloseBtn.addEventListener('click', () => this.closeMealPicker());
+    this.elements.mealModalClose.addEventListener('click', () => this.closeMealModal());
 
-    // Grocery sheet events
-    this.elements.groceryCopyBtn.addEventListener('click', () => this.copyGroceryList());
-    this.elements.groceryCloseBtn.addEventListener('click', () => this.closeGrocerySheet());
+    // Shopping modal events
+    this.elements.shoppingShareBtn.addEventListener('click', () => this.shareShoppingList());
+    this.elements.shoppingCloseBtn.addEventListener('click', () => this.closeShoppingModal());
 
-    // Share sheet events
-    this.elements.shareCopyBtn.addEventListener('click', () => this.copyShareText());
-    this.elements.shareCloseBtn.addEventListener('click', () => this.closeShareSheet());
+    // Summary modal events
+    this.elements.summaryShareBtn.addEventListener('click', () => this.shareSummary());
+    this.elements.summaryCloseBtn.addEventListener('click', () => this.closeSummaryModal());
 
     // Custom input enter key
     this.elements.customInput.addEventListener('keypress', (e) => {
@@ -1185,14 +1721,25 @@ class MealPlannerUI {
     // Keyboard shortcuts
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
-        this.closeAllSheets();
+        this.closeAllModals();
       }
     });
   }
 
+  triggerHaptic(intensity = 'light') {
+    if ('vibrate' in navigator) {
+      const patterns = {
+        light: 10,
+        medium: [10, 10, 10],
+        heavy: [20, 10, 20]
+      };
+      navigator.vibrate(patterns[intensity] || patterns.light);
+    }
+  }
+
   render() {
     this.renderHeader();
-    this.renderDayGrid();
+    this.renderBentoGrid();
     this.renderWeekendToggle();
   }
 
@@ -1209,166 +1756,241 @@ class MealPlannerUI {
     this.elements.weekendToggle.setAttribute('aria-checked', this.state.weekendEnabled);
   }
 
-  renderDayGrid() {
+  renderBentoGrid() {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     const dayEmojis = ['📅', '📅', '📅', '📅', '📅', '🎉', '🎉'];
     
-    this.elements.dayGrid.innerHTML = '';
+    this.elements.bentoGrid.innerHTML = '';
 
     this.state.weekKeys.forEach((key, index) => {
       if (index >= 5 && !this.state.weekendEnabled) return;
 
       const dayMeals = this.state.meals[key];
-      const isWeekend = index >= 5;
       const date = new Date(this.state.weekStart);
       date.setDate(this.state.weekStart.getDate() + index);
 
       const dayCard = document.createElement('div');
-      dayCard.className = 'day-card fade-in';
+      dayCard.className = 'day-card fade-in-up';
       dayCard.style.animationDelay = `${index * 0.1}s`;
       
       dayCard.innerHTML = `
         <div class="day-header">
           <div class="day-info">
-            <h3>${dayEmojis[index]} ${days[index]}</h3>
+            <h3 class="day-name">${dayEmojis[index]} ${days[index]}</h3>
             <div class="day-date">${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</div>
           </div>
+          <div class="day-actions">
+            <button class="day-randomize" data-day="${key}" title="Randomize this day">
+              🎲
+            </button>
+          </div>
         </div>
 
-        <div class="meal-grid">
-          <div class="meal-field" data-day="${key}" data-meal="lunch">
+        <div class="meal-bento">
+          <div class="meal-selector ${dayMeals.lunch ? 'has-value' : ''}" data-day="${key}" data-meal="lunch">
             <div class="meal-label">Lunch</div>
-            <div class="meal-value ${!dayMeals.lunch ? 'meal-placeholder' : ''}">
-              ${dayMeals.lunch || 'Tap to choose'}
-            </div>
+            ${dayMeals.lunch ? 
+              `<div class="meal-emoji">${this.getMealEmoji(dayMeals.lunch)}</div>
+               <div class="meal-value">${dayMeals.lunch}</div>` :
+              `<div class="meal-placeholder">Tap to choose</div>`
+            }
           </div>
           
-          <div class="meal-field" data-day="${key}" data-meal="dinner">
+          <div class="meal-selector ${dayMeals.dinner ? 'has-value' : ''}" data-day="${key}" data-meal="dinner">
             <div class="meal-label">Dinner</div>
-            <div class="meal-value ${!dayMeals.dinner ? 'meal-placeholder' : ''}">
-              ${dayMeals.dinner || 'Tap to choose'}
-            </div>
+            ${dayMeals.dinner ? 
+              `<div class="meal-emoji">${this.getMealEmoji(dayMeals.dinner)}</div>
+               <div class="meal-value">${dayMeals.dinner}</div>` :
+              `<div class="meal-placeholder">Tap to choose</div>`
+            }
           </div>
           
-          <div class="meal-field ${dayMeals.mode === 'delivery' ? 'side-full' : ''}" 
+          <div class="meal-selector ${dayMeals.side && dayMeals.mode !== 'delivery' ? 'has-value' : ''}" 
                data-day="${key}" data-meal="side" 
-               ${dayMeals.mode === 'delivery' ? 'style="opacity:0.5;pointer-events:none"' : ''}>
-            <div class="meal-label">Side Dish</div>
-            <div class="meal-value ${!dayMeals.side && dayMeals.mode !== 'delivery' ? 'meal-placeholder' : ''}">
-              ${dayMeals.mode === 'delivery' ? 'Not needed for delivery' : (dayMeals.side || 'Tap to choose')}
-            </div>
+               ${dayMeals.mode === 'delivery' ? 'style="opacity:0.4;pointer-events:none"' : ''}>
+            <div class="meal-label">Side</div>
+            ${dayMeals.mode === 'delivery' ? 
+              `<div class="meal-placeholder">Not needed</div>` :
+              (dayMeals.side ? 
+                `<div class="meal-emoji">${this.getMealEmoji(dayMeals.side)}</div>
+                 <div class="meal-value">${dayMeals.side}</div>` :
+                `<div class="meal-placeholder">Tap to choose</div>`
+              )
+            }
           </div>
         </div>
 
-        <div class="mode-selector">
+        <div class="mode-bento">
           <button class="mode-btn ${dayMeals.mode === 'regular' ? 'active' : ''}" 
-                  data-day="${key}" data-mode="regular">Regular</button>
+                  data-day="${key}" data-mode="regular">
+            <span>Regular</span>
+          </button>
           <button class="mode-btn ${dayMeals.mode === 'quick' ? 'active' : ''}" 
-                  data-day="${key}" data-mode="quick">Quick</button>
+                  data-day="${key}" data-mode="quick">
+            <span>Quick</span>
+          </button>
           <button class="mode-btn ${dayMeals.mode === 'delivery' ? 'active' : ''}" 
-                  data-day="${key}" data-mode="delivery">Delivery</button>
+                  data-day="${key}" data-mode="delivery">
+            <span>Delivery</span>
+          </button>
         </div>
       `;
 
-      this.elements.dayGrid.appendChild(dayCard);
+      this.elements.bentoGrid.appendChild(dayCard);
     });
 
-    // Add event listeners to meal fields and mode buttons
-    this.elements.dayGrid.addEventListener('click', (e) => {
-      const mealField = e.target.closest('.meal-field');
+    // Add event listeners
+    this.elements.bentoGrid.addEventListener('click', (e) => {
+      const mealSelector = e.target.closest('.meal-selector');
       const modeBtn = e.target.closest('.mode-btn');
+      const dayRandomize = e.target.closest('.day-randomize');
 
-      if (mealField && !mealField.style.pointerEvents) {
-        const dayKey = mealField.dataset.day;
-        const mealType = mealField.dataset.meal;
-        this.showMealPicker(dayKey, mealType);
+      if (mealSelector && !mealSelector.style.pointerEvents) {
+        this.triggerHaptic('light');
+        const dayKey = mealSelector.dataset.day;
+        const mealType = mealSelector.dataset.meal;
+        this.showMealModal(dayKey, mealType);
       } else if (modeBtn) {
+        this.triggerHaptic('light');
         const dayKey = modeBtn.dataset.day;
         const mode = modeBtn.dataset.mode;
         this.state.updateMode(dayKey, mode);
         this.render();
+      } else if (dayRandomize) {
+        this.triggerHaptic('medium');
+        const dayKey = dayRandomize.dataset.day;
+        dayRandomize.classList.add('haptic-medium');
+        setTimeout(() => {
+          dayRandomize.classList.remove('haptic-medium');
+          this.state.randomizeDay(dayKey);
+          this.render();
+        }, 200);
       }
     });
   }
 
-  showMealPicker(dayKey, mealType) {
-    this.state.currentPicker = { dayKey, mealType };
+  getMealEmoji(mealName) {
+    // Search through all meals to find the emoji
+    const allMeals = [
+      ...Object.values(MEALS.lunch).flat(),
+      ...Object.values(MEALS.dinner.regular).flat(),
+      ...Object.values(MEALS.dinner.quick).flat(),
+      ...Object.values(MEALS.dinner.delivery).flat(),
+      ...Object.values(MEALS.dinner.weekend).flat(),
+      ...Object.values(MEALS.side).flat()
+    ];
+    
+    const meal = allMeals.find(m => m.name === mealName);
+    return meal ? meal.emoji : '🍽️';
+  }
+
+  showMealModal(dayKey, mealType) {
+    this.state.currentSelection = { dayKey, mealType };
     const dayMeals = this.state.meals[dayKey];
     const isWeekend = this.state.weekKeys.indexOf(dayKey) >= 5;
 
-    this.elements.pickerTitle.textContent = `Choose ${mealType.charAt(0).toUpperCase() + mealType.slice(1)}`;
-    
-    let options = [];
+    // Set modal title
+    this.elements.mealModalTitle.textContent = `Choose ${mealType.charAt(0).toUpperCase() + mealType.slice(1)}`;
+    this.elements.mealModalSubtitle.textContent = 'Select from curated options or add custom';
+
+    // Get appropriate meal options
+    let mealOptions = {};
     if (mealType === 'lunch') {
-      options = MEALS.lunch;
+      mealOptions = MEALS.lunch;
     } else if (mealType === 'dinner') {
       switch (dayMeals.mode) {
-        case 'quick': options = MEALS.dinner.quick; break;
-        case 'delivery': options = MEALS.dinner.delivery; break;
-        default: options = isWeekend ? MEALS.dinner.weekend : MEALS.dinner.regular;
+        case 'quick':
+          mealOptions = MEALS.dinner.quick;
+          break;
+        case 'delivery':
+          mealOptions = MEALS.dinner.delivery;
+          break;
+        default:
+          mealOptions = isWeekend ? MEALS.dinner.weekend : MEALS.dinner.regular;
       }
     } else {
-      options = MEALS.side;
+      mealOptions = MEALS.side;
     }
 
-    this.renderMealOptions(options, dayMeals[mealType]);
-    this.showSheet(this.elements.mealPicker);
+    this.renderMealOptions(mealOptions, dayMeals[mealType]);
+    this.showModal('meal');
   }
 
-  renderMealOptions(options, currentValue) {
-    this.elements.mealOptions.innerHTML = '';
-    this.elements.customInputSection.style.display = 'none';
+  renderMealOptions(mealOptions, currentValue) {
+    this.elements.mealCategories.innerHTML = '';
+    this.elements.customInputSection.classList.remove('show');
     this.elements.customInput.value = '';
 
-    options.forEach(option => {
-      const optionEl = document.createElement('div');
-      optionEl.className = `option-item ${option === currentValue ? 'selected' : ''}`;
-      optionEl.textContent = option;
-      
-      optionEl.addEventListener('click', () => {
-        if (option.includes('Custom…')) {
-          this.elements.customInputSection.style.display = 'flex';
-          this.elements.customInput.focus();
-        } else {
-          const value = option.includes('None') ? '' : option;
-          this.updateCurrentMeal(value);
-          this.closeMealPicker();
-        }
+    Object.entries(mealOptions).forEach(([category, meals]) => {
+      const categoryDiv = document.createElement('div');
+      categoryDiv.className = 'meal-category';
+
+      const headerDiv = document.createElement('div');
+      headerDiv.className = 'category-header';
+      headerDiv.textContent = category;
+      categoryDiv.appendChild(headerDiv);
+
+      meals.forEach(meal => {
+        const optionDiv = document.createElement('div');
+        optionDiv.className = `meal-option ${meal.name === currentValue ? 'selected' : ''}`;
+        
+        optionDiv.innerHTML = `
+          <div class="meal-option-content">
+            <span class="meal-option-emoji">${meal.emoji}</span>
+            <span class="meal-option-text">${meal.name}</span>
+          </div>
+          <div class="meal-option-check">✓</div>
+        `;
+        
+        optionDiv.addEventListener('click', () => {
+          this.triggerHaptic('light');
+          if (meal.name === 'Custom…') {
+            this.elements.customInputSection.classList.add('show');
+            setTimeout(() => this.elements.customInput.focus(), 300);
+          } else {
+            const value = meal.name === 'None' ? '' : meal.name;
+            this.updateCurrentMeal(value);
+            this.closeMealModal();
+          }
+        });
+
+        categoryDiv.appendChild(optionDiv);
       });
 
-      this.elements.mealOptions.appendChild(optionEl);
+      this.elements.mealCategories.appendChild(categoryDiv);
     });
   }
 
   useCustomMeal() {
     const customValue = this.elements.customInput.value.trim();
     if (customValue) {
+      this.triggerHaptic('light');
       this.updateCurrentMeal(customValue);
-      this.closeMealPicker();
+      this.closeMealModal();
     }
   }
 
   updateCurrentMeal(value) {
-    if (!this.state.currentPicker) return;
+    if (!this.state.currentSelection) return;
     
-    const { dayKey, mealType } = this.state.currentPicker;
+    const { dayKey, mealType } = this.state.currentSelection;
     this.state.updateMeal(dayKey, mealType, value);
     this.render();
   }
 
-  showGrocerySheet() {
+  showShoppingModal() {
     const groceryList = this.state.generateGroceryList();
-    this.renderGroceryList(groceryList);
-    this.showSheet(this.elements.grocerySheet);
+    this.renderShoppingList(groceryList);
+    this.showModal('shopping');
   }
 
-  renderGroceryList(groceryList) {
-    this.elements.groceryContent.innerHTML = '';
+  renderShoppingList(groceryList) {
+    this.elements.shoppingContent.innerHTML = '';
 
     if (Object.keys(groceryList).length === 0) {
-      this.elements.groceryContent.innerHTML = `
-        <div class="loading">
-          <span>No ingredients found. Add some meals first! 🍽️</span>
+      this.elements.shoppingContent.innerHTML = `
+        <div class="loading-state">
+          <div class="loading-text">No ingredients found.<br>Add some meals first! 🍽️</div>
         </div>
       `;
       return;
@@ -1376,35 +1998,40 @@ class MealPlannerUI {
 
     Object.entries(groceryList).forEach(([category, items]) => {
       const section = document.createElement('div');
-      section.className = 'grocery-section';
+      section.className = 'list-section';
       
-      const title = document.createElement('h4');
-      title.textContent = category;
-      section.appendChild(title);
+      const header = document.createElement('div');
+      header.className = 'list-section-header';
+      header.innerHTML = `
+        <div class="list-section-title">
+          <span class="section-emoji">${category.split(' ')[0]}</span>
+          ${category}
+        </div>
+      `;
+      section.appendChild(header);
 
       items.forEach(item => {
-        const itemEl = document.createElement('div');
-        itemEl.className = 'grocery-item';
-        itemEl.innerHTML = `
-          <input type="checkbox" id="item-${item.name}">
-          <label for="item-${item.name}">
-            ${item.name}${item.count > 1 ? ` ×${item.count}` : ''}
-          </label>
+        const itemDiv = document.createElement('div');
+        itemDiv.className = 'list-item';
+        itemDiv.innerHTML = `
+          <input type="checkbox" class="list-checkbox" id="item-${item.name}">
+          <label class="list-label" for="item-${item.name}">${item.name}</label>
+          ${item.count > 1 ? `<span class="list-count">${item.count}</span>` : ''}
         `;
-        section.appendChild(itemEl);
+        section.appendChild(itemDiv);
       });
 
-      this.elements.groceryContent.appendChild(section);
+      this.elements.shoppingContent.appendChild(section);
     });
   }
 
-  showShareSheet() {
-    const shareText = this.generateShareText();
-    this.elements.shareText.textContent = shareText;
-    this.showSheet(this.elements.shareSheet);
+  showSummaryModal() {
+    const summaryText = this.generateSummaryText();
+    this.elements.summaryPreview.textContent = summaryText;
+    this.showModal('summary');
   }
 
-  generateShareText() {
+  generateSummaryText() {
     const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     let text = '✨ Weekly Meal Plan\n';
     
@@ -1435,7 +2062,7 @@ class MealPlannerUI {
     // Add grocery list
     const groceryList = this.state.generateGroceryList();
     if (Object.keys(groceryList).length > 0) {
-      text += '🛒 Grocery List\n\n';
+      text += '🛒 Shopping List\n\n';
       Object.entries(groceryList).forEach(([category, items]) => {
         text += `${category}\n`;
         items.forEach(item => {
@@ -1448,9 +2075,13 @@ class MealPlannerUI {
     return text.trim();
   }
 
-  async copyGroceryList() {
+  generateShoppingText() {
     const groceryList = this.state.generateGroceryList();
-    let text = '🛒 Grocery List\n\n';
+    let text = '🛒 Shopping List\n\n';
+    
+    if (Object.keys(groceryList).length === 0) {
+      return text + '(No ingredients needed)';
+    }
     
     Object.entries(groceryList).forEach(([category, items]) => {
       text += `${category}\n`;
@@ -1460,76 +2091,122 @@ class MealPlannerUI {
       text += '\n';
     });
 
+    return text.trim();
+  }
+
+  async shareShoppingList() {
+    const text = this.generateShoppingText();
+    await this.shareText(text, '🛒 Shopping List', this.elements.shoppingShareBtn, 'shopping');
+  }
+
+  async shareSummary() {
+    const text = this.generateSummaryText();
+    await this.shareText(text, '✨ Weekly Meal Plan', this.elements.summaryShareBtn, 'summary');
+  }
+
+  async shareText(text, title, button, type) {
+    this.triggerHaptic('light');
+    
+    if (navigator.share) {
+      try {
+        await navigator.share({ title, text });
+        if (type === 'shopping') this.closeShoppingModal();
+        if (type === 'summary') this.closeSummaryModal();
+        return;
+      } catch (err) {
+        if (err.name !== 'AbortError') {
+          console.error('Native share failed:', err);
+        }
+      }
+    }
+    
+    // Fallback to clipboard
     try {
-      await navigator.clipboard.writeText(text.trim());
-      this.elements.groceryCopyBtn.textContent = '✅ Copied!';
+      await navigator.clipboard.writeText(text);
+      button.innerHTML = '<span class="emoji">✅</span><span>Copied!</span>';
       setTimeout(() => {
-        this.elements.groceryCopyBtn.innerHTML = '<span class="emoji">📋</span><span>Copy List</span>';
+        const originalText = type === 'shopping' ? 'Share List' : 'Share Plan';
+        const originalEmoji = type === 'shopping' ? '📤' : '📤';
+        button.innerHTML = `<span class="emoji">${originalEmoji}</span><span>${originalText}</span>`;
       }, 2000);
     } catch (err) {
-      console.error('Failed to copy:', err);
+      console.error('Clipboard fallback failed:', err);
     }
   }
 
-  async copyShareText() {
-    try {
-      await navigator.clipboard.writeText(this.elements.shareText.textContent);
-      this.elements.shareCopyBtn.textContent = '✅ Copied!';
-      setTimeout(() => {
-        this.elements.shareCopyBtn.innerHTML = '<span class="emoji">📋</span><span>Copy Text</span>';
-      }, 2000);
-    } catch (err) {
-      console.error('Failed to copy:', err);
+  showModal(type) {
+    // Hide all modals first
+    this.elements.mealModal.style.display = 'none';
+    this.elements.shoppingModal.style.display = 'none';
+    this.elements.summaryModal.style.display = 'none';
+    
+    // Show the requested modal
+    switch (type) {
+      case 'meal':
+        this.elements.mealModal.style.display = 'flex';
+        break;
+      case 'shopping':
+        this.elements.shoppingModal.style.display = 'flex';
+        break;
+      case 'summary':
+        this.elements.summaryModal.style.display = 'flex';
+        break;
     }
-  }
-
-  showSheet(sheet) {
-    this.elements.overlay.classList.add('show');
-    sheet.classList.add('show');
+    
+    // Show overlay
+    this.elements.modalOverlay.classList.add('show');
     document.body.style.overflow = 'hidden';
+    this.state.currentModal = type;
   }
 
-  hideSheet(sheet) {
-    this.elements.overlay.classList.remove('show');
-    sheet.classList.remove('show');
+  hideModal() {
+    this.elements.modalOverlay.classList.remove('show');
     document.body.style.overflow = '';
+    
+    // Hide all modals after transition
+    setTimeout(() => {
+      this.elements.mealModal.style.display = 'none';
+      this.elements.shoppingModal.style.display = 'none';
+      this.elements.summaryModal.style.display = 'none';
+    }, 400);
+    
+    this.state.currentModal = null;
   }
 
-  closeMealPicker() {
-    this.hideSheet(this.elements.mealPicker);
-    this.state.currentPicker = null;
+  closeMealModal() {
+    this.hideModal();
+    this.state.currentSelection = null;
   }
 
-  closeGrocerySheet() {
-    this.hideSheet(this.elements.grocerySheet);
+  closeShoppingModal() {
+    this.hideModal();
   }
 
-  closeShareSheet() {
-    this.hideSheet(this.elements.shareSheet);
+  closeSummaryModal() {
+    this.hideModal();
   }
 
-  closeAllSheets() {
-    this.closeMealPicker();
-    this.closeGrocerySheet();
-    this.closeShareSheet();
+  closeAllModals() {
+    this.closeMealModal();
+    this.closeShoppingModal();
+    this.closeSummaryModal();
   }
 }
 
-/* ========= Initialize Application ========= */
+/* ========= Initialize Revolutionary App ========= */
 document.addEventListener('DOMContentLoaded', () => {
   window.mealPlanner = new MealPlannerUI();
   
-  // Add some delightful touches
-  console.log('✨ Revolutionary Meal Planner loaded successfully!');
-  
-  // Simulate haptic feedback on supported devices
-  if ('vibrate' in navigator) {
-    document.addEventListener('click', (e) => {
-      if (e.target.closest('.btn, .meal-field, .mode-btn')) {
-        navigator.vibrate(10);
+  // Add global haptic feedback
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('.btn, .meal-selector, .mode-btn, .day-randomize, .meal-option')) {
+      if ('vibrate' in navigator) {
+        navigator.vibrate(8);
       }
-    });
-  }
+    }
+  });
+
+  console.log('🚀 Revolutionary Meal Planner 2025 loaded successfully!');
 });
 </script>
 
