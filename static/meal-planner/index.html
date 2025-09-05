@@ -1290,20 +1290,6 @@
           subtitle: 'Manage your week',
           bodyHTML: `
             <div class="menu-grid">
-              <div class="menu-item" id="menuPrevWeek">
-                <div class="menu-item-icon">⬅️</div>
-                <div class="menu-item-content">
-                  <h4>Previous Week</h4>
-                  <p>Go back one week</p>
-                </div>
-              </div>
-              <div class="menu-item" id="menuNextWeek">
-                <div class="menu-item-icon">➡️</div>
-                <div class="menu-item-content">
-                  <h4>Next Week</h4>
-                  <p>Go forward one week</p>
-                </div>
-              </div>
               <div class="menu-item" id="menuTheme">
                 <div class="menu-item-icon">${this.state.theme === 'dark' ? '🌙' : '☀️'}</div>
                 <div class="menu-item-content">
@@ -1336,16 +1322,6 @@
           `,
           footer: [{ label: 'Close', onClick: () => this.closeModal() }]
         });
-        
-        document.getElementById('menuPrevWeek').onclick = () => {
-          this.navigateWeek('prev');
-          this.closeModal();
-        };
-        
-        document.getElementById('menuNextWeek').onclick = () => {
-          this.navigateWeek('next');
-          this.closeModal();
-        };
         
         document.getElementById('menuTheme').onclick = () => {
           this.toggleTheme();
