@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Meal Planner</title>
+  <title>Delicious Weeks</title>
   <style>
     :root {
       /* Dark Theme with Vibrant Accents */
@@ -27,7 +26,7 @@
       --accent-emerald: #10b981;
       --accent-amber: #f59e0b;
     }
-
+    
     :root[data-theme="light"] {
       /* Pastel Light Theme */
       --bg-gradient: linear-gradient(135deg, #fef3c7 0%, #fde8ff 50%, #e0f2fe 100%);
@@ -40,13 +39,13 @@
       --text-secondary: #475569;
       --text-tertiary: #64748b;
     }
-
+    
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
       user-select: none;
     }
-
+    
     body {
       margin: 0;
       min-height: 100vh;
@@ -55,7 +54,7 @@
       background-attachment: fixed;
       color: var(--text-primary);
     }
-
+    
     .header {
       display: flex;
       align-items: center;
@@ -68,11 +67,11 @@
       top: 0;
       z-index: 100;
     }
-
+    
     :root[data-theme="light"] .header {
       background: rgba(255, 255, 255, 0.85);
     }
-
+    
     .header-title {
       flex: 1;
       font-size: 28px;
@@ -83,7 +82,7 @@
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-
+    
     .btn-icon {
       width: 44px;
       height: 44px;
@@ -96,7 +95,7 @@
       place-items: center;
       font-size: 20px;
     }
-
+    
     .weekend-toggle {
       display: flex;
       align-items: center;
@@ -109,19 +108,19 @@
       font-size: 13px;
       font-weight: 600;
     }
-
+    
     .weekend-toggle.active {
       background: var(--accent-violet);
       border-color: var(--accent-violet);
       color: white;
     }
-
+    
     .container {
       padding: 16px;
       max-width: 600px;
       margin: 0 auto;
     }
-
+    
     .week-nav {
       display: flex;
       align-items: center;
@@ -133,12 +132,12 @@
       border-radius: 16px;
       border: 1px solid var(--border-subtle);
     }
-
+    
     .week-date {
       font-size: 18px;
       font-weight: 600;
     }
-
+    
     .day-card {
       margin-bottom: 12px;
       padding: 16px;
@@ -149,34 +148,34 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-
+    
     .day-card.incomplete {
       opacity: 0.7;
       border-style: dashed;
     }
-
+    
     .day-card:hover {
       transform: translateY(-2px);
       box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
     }
-
+    
     .day-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 12px;
     }
-
+    
     .day-title {
       font-size: 18px;
       font-weight: 600;
     }
-
+    
     .day-date {
       font-size: 14px;
       color: var(--text-secondary);
     }
-
+    
     .meal-item {
       display: flex;
       gap: 12px;
@@ -187,11 +186,11 @@
       border: 1px solid var(--border-subtle);
       cursor: pointer;
     }
-
+    
     .meal-item.empty {
       opacity: 0.5;
     }
-
+    
     .meal-icon {
       width: 40px;
       height: 40px;
@@ -200,30 +199,30 @@
       place-items: center;
       font-size: 20px;
     }
-
+    
     .meal-icon.lunch {
       background: linear-gradient(135deg, var(--accent-amber), var(--accent-amber));
     }
-
+    
     .meal-icon.dinner {
       background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
     }
-
+    
     .meal-content {
       flex: 1;
     }
-
+    
     .meal-title {
       font-weight: 600;
       margin: 0;
     }
-
+    
     .meal-description {
       font-size: 14px;
       color: var(--text-secondary);
       margin: 0;
     }
-
+    
     .busy-toggle {
       padding: 4px 12px;
       font-size: 11px;
@@ -234,13 +233,13 @@
       color: var(--text-secondary);
       cursor: pointer;
     }
-
+    
     .busy-toggle.active {
       background: var(--accent-purple);
       border-color: var(--accent-purple);
       color: white;
     }
-
+    
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -253,12 +252,12 @@
       transition: all 0.3s;
       z-index: 1000;
     }
-
+    
     .modal-overlay.show {
       opacity: 1;
       visibility: visible;
     }
-
+    
     .modal {
       width: 100%;
       max-width: 500px;
@@ -270,39 +269,39 @@
       max-height: 85vh;
       overflow: hidden;
     }
-
+    
     :root[data-theme="light"] .modal {
       background: rgba(255, 255, 255, 0.98);
     }
-
+    
     .modal-overlay.show .modal {
       transform: translateY(0);
     }
-
+    
     .modal-header {
       padding: 20px;
       text-align: center;
       border-bottom: 1px solid var(--border-subtle);
     }
-
+    
     .modal-title {
       font-size: 20px;
       font-weight: 600;
       margin: 0;
     }
-
+    
     .modal-subtitle {
       font-size: 14px;
       color: var(--text-secondary);
       margin: 4px 0 0;
     }
-
+    
     .modal-body {
       max-height: 50vh;
       overflow-y: auto;
       padding: 0;
     }
-
+    
     .modal-footer {
       display: flex;
       gap: 8px;
@@ -310,7 +309,7 @@
       background: var(--surface-glass);
       border-top: 1px solid var(--border-subtle);
     }
-
+    
     .tabs {
       display: flex;
       gap: 8px;
@@ -320,7 +319,7 @@
       background: inherit;
       z-index: 10;
     }
-
+    
     .tab {
       flex: 1;
       padding: 12px;
@@ -332,13 +331,13 @@
       border-radius: 12px;
       cursor: pointer;
     }
-
+    
     .tab.active {
       background: var(--accent-violet);
       border-color: var(--accent-violet);
       color: white;
     }
-
+    
     .controls {
       display: flex;
       gap: 8px;
@@ -346,14 +345,14 @@
       align-items: center;
       flex-wrap: wrap;
     }
-
+    
     .bento-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 8px;
       padding: 12px;
     }
-
+    
     .bento-item {
       position: relative;
       padding: 16px 8px;
@@ -365,18 +364,18 @@
       font-size: 13px;
       transition: all 0.2s;
     }
-
+    
     .bento-item:hover {
       background: var(--surface-hover);
       transform: scale(1.05);
     }
-
+    
     .bento-item.selected {
       background: rgba(139, 92, 246, 0.15);
       border-color: var(--accent-violet);
       box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2) inset;
     }
-
+    
     .bento-item.selected::before {
       content: '✓';
       position: absolute;
@@ -391,13 +390,13 @@
       place-items: center;
       font-size: 12px;
     }
-
+    
     .bento-emoji {
       font-size: 24px;
       display: block;
       margin-bottom: 4px;
     }
-
+    
     .btn {
       flex: 1;
       padding: 12px 16px;
@@ -408,25 +407,25 @@
       border-radius: 12px;
       cursor: pointer;
     }
-
+    
     .btn-primary {
       background: var(--accent-violet);
       border-color: var(--accent-violet);
       color: white;
     }
-
+    
     .btn-danger {
       background: var(--accent-pink);
       border-color: var(--accent-pink);
       color: white;
     }
-
+    
     .menu-grid {
       display: grid;
       gap: 8px;
       padding: 12px;
     }
-
+    
     .menu-item {
       display: flex;
       align-items: center;
@@ -437,32 +436,32 @@
       border-radius: 16px;
       cursor: pointer;
     }
-
+    
     .menu-item:hover {
       background: var(--surface-hover);
     }
-
+    
     .menu-item-icon {
       font-size: 24px;
     }
-
+    
     .menu-item-content h4 {
       margin: 0;
       font-weight: 600;
     }
-
+    
     .menu-item-content p {
       margin: 4px 0 0;
       font-size: 13px;
       color: var(--text-secondary);
     }
-
+    
     .action-buttons {
       display: flex;
       gap: 8px;
       padding: 0 12px 12px;
     }
-
+    
     .btn-action {
       flex: 1;
       padding: 8px;
@@ -474,11 +473,11 @@
       border-radius: 12px;
       cursor: pointer;
     }
-
+    
     .btn-action:hover {
       background: var(--surface-hover);
     }
-
+    
     .store-section {
       margin: 12px;
       padding: 16px;
@@ -486,12 +485,12 @@
       border: 1px solid var(--border-default);
       border-radius: 16px;
     }
-
+    
     .store-title {
       margin: 0 0 12px;
       font-weight: 600;
     }
-
+    
     .grocery-item {
       display: flex;
       align-items: center;
@@ -502,7 +501,7 @@
       border: 1px solid var(--border-subtle);
       border-radius: 12px;
     }
-
+    
     .checkbox {
       width: 24px;
       height: 24px;
@@ -513,27 +512,27 @@
       display: grid;
       place-items: center;
     }
-
+    
     .checkbox.checked {
       background: var(--accent-emerald);
       border-color: var(--accent-emerald);
     }
-
+    
     .checkbox.checked::after {
       content: '✓';
       color: white;
       font-weight: bold;
     }
-
+    
     .grocery-item-text {
       flex: 1;
     }
-
+    
     .grocery-item.checked .grocery-item-text {
       opacity: 0.5;
       text-decoration: line-through;
     }
-
+    
     .toast {
       position: fixed;
       left: 50%;
@@ -552,22 +551,22 @@
       transition: all 0.3s;
       z-index: 2000;
     }
-
+    
     :root[data-theme="light"] .toast {
       background: rgba(255, 255, 255, 0.95);
       color: var(--text-primary);
     }
-
+    
     .toast.show {
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) translateY(0);
     }
-
+    
     .input-group {
       padding: 0 12px 12px;
     }
-
+    
     .input-label {
       display: block;
       margin: 0 0 8px;
@@ -577,7 +576,7 @@
       letter-spacing: 0.5px;
       color: var(--text-tertiary);
     }
-
+    
     .input {
       width: 100%;
       padding: 12px;
@@ -587,12 +586,12 @@
       border: 1px solid var(--border-default);
       border-radius: 12px;
     }
-
+    
     .radio-group {
       display: flex;
       gap: 8px;
     }
-
+    
     .radio {
       padding: 8px 12px;
       font-size: 13px;
@@ -603,7 +602,7 @@
       border-radius: 12px;
       cursor: pointer;
     }
-
+    
     .radio.active {
       background: var(--accent-violet);
       border-color: var(--accent-violet);
@@ -611,14 +610,13 @@
     }
   </style>
 </head>
-
 <body>
   <header class="header">
     <button id="menuBtn" class="btn-icon">☰</button>
     <h1 class="header-title">Delicious Weeks</h1>
     <button id="weekendToggle" class="weekend-toggle active">📅 Weekends</button>
   </header>
-
+  
   <div class="container">
     <div class="week-nav">
       <button id="prevWeek" class="btn-icon">←</button>
@@ -627,7 +625,7 @@
     </div>
     <div id="daysList"></div>
   </div>
-
+  
   <div id="modalOverlay" class="modal-overlay">
     <div class="modal">
       <div class="modal-header">
@@ -638,16 +636,16 @@
       <div class="modal-footer" id="modalFooter"></div>
     </div>
   </div>
-
+  
   <div id="toast" class="toast"></div>
-
+  
   <script>
     // Configuration
     const CONFIG = {
       storageKey: 'mp_enhanced_v3',
       animations: { modal: 300, toast: 1500 }
     };
-
+    
     const MEAL_EMOJIS = {
       "Ravioli burro e salvia": "🥟",
       "Spaghetti al limone": "🍝",
@@ -713,12 +711,12 @@
       "None": "❌",
       "Custom": "✏️"
     };
-
+    
     const INGREDIENT_EMOJIS = {
       "Ravioli": "🥟", "Sage": "🌿", "Spaghetti": "🍝", "Lemons": "🍋",
       "Ditalini": "🍝", "Chickpeas": "🫘", "Tuna": "🐟", "Pasta": "🍝",
       "Tomato sauce": "🍅", "Flatbreads": "🫓", "Prosciutto": "🥩",
-      "Provolone cheese": "🧀", "Eggs": "🥚", "Pesto": "🌿",
+      "Provolone cheese": "🧀", "Eggs": "🥚", "Pesto": "🌿", 
       "Cherry tomatoes": "🍅", "Lentils": "🫘", "Croutons": "🍞",
       "Bacon": "🥓", "Beans": "🫘", "Salmon": "🍣", "Rice": "🍚",
       "Zucchini": "🥒", "Ground beef": "🥩", "Bread": "🍞", "Breadcrumbs": "🍞",
@@ -735,12 +733,12 @@
       "Broccoli": "🥦", "Tater tots": "🥔", "Beets": "🥬", "Corn": "🌽",
       "Cucumbers": "🥒", "Butter": "🧈", "Pesto sauce": "🌿"
     };
-
+    
     const MEAL_DATA = {
       lunch: [
-        "None", "Ravioli burro e salvia", "Spaghetti al limone", "Pasta e ceci",
-        "Pasta col tonno", "Pasta sugo tonno", "Piadine prosciutto provolone",
-        "Uova fritte", "Pasta al pesto", "Pasta coi pomodorini", "Lenticchie",
+        "None", "Ravioli burro e salvia", "Spaghetti al limone", "Pasta e ceci", 
+        "Pasta col tonno", "Pasta sugo tonno", "Piadine prosciutto provolone", 
+        "Uova fritte", "Pasta al pesto", "Pasta coi pomodorini", "Lenticchie", 
         "Spaghetti aglio e olio", "Carbonara", "Frittata di pasta", "Pasta e fagioli", "Custom"
       ],
       dinnerRegular: [
@@ -752,23 +750,23 @@
         "None", "Cordon bleu", "Würstel", "Dumplings", "Fish sticks", "Pollo allo spiedo", "Custom"
       ],
       delivery: [
-        "None", "Pizza Delivery", "Greco Delivery", "Chinese Delivery",
+        "None", "Pizza Delivery", "Greco Delivery", "Chinese Delivery", 
         "Vietnamese Delivery", "Ramen Delivery", "Custom"
       ],
       dinnerWeekend: [
-        "None", "Pasta al forno", "Parmigiana di melanzane", "Zucchine ripiene",
-        "Lasagna", "Spezzatino con patate", "Tortellini con la panna",
-        "Tortellini col sugo", "Pasta col ragù", "Polpettone", "Scrimpelle mbuss",
+        "None", "Pasta al forno", "Parmigiana di melanzane", "Zucchine ripiene", 
+        "Lasagna", "Spezzatino con patate", "Tortellini con la panna", 
+        "Tortellini col sugo", "Pasta col ragù", "Polpettone", "Scrimpelle mbuss", 
         "Polenta col sugo", "Cannelloni", "Bistecca", "Custom"
       ],
       side: [
-        "None", "Purè di patate", "Broccoli al vapore", "Insalata di pomodori",
-        "Tater tots", "Barbabietole", "Insalata di mais", "Patate lesse",
-        "Carote al forno", "Carote a insalata", "Zucchine trifolate",
+        "None", "Purè di patate", "Broccoli al vapore", "Insalata di pomodori", 
+        "Tater tots", "Barbabietole", "Insalata di mais", "Patate lesse", 
+        "Carote al forno", "Carote a insalata", "Zucchine trifolate", 
         "Insalata di cetrioli", "Insalata", "Custom"
       ]
     };
-
+    
     const INGREDIENTS = {
       "Ravioli burro e salvia": ["Ravioli", "Sage"],
       "Spaghetti al limone": ["Spaghetti", "Lemons"],
@@ -827,14 +825,14 @@
       "Insalata di cetrioli": ["Cucumbers"],
       "Insalata": ["Lettuce"]
     };
-
+    
     const STORES = {
       Aldi: ["Bacon", "Beets", "Cannelloni", "Carrots", "Chicken thighs", "Breaded cutlets", "Croutons", "Dumplings", "Beans", "Fish sticks", "Lemons", "Corn", "Shredded mozzarella", "Potatoes", "Chicken breast", "Flatbreads", "Tomatoes", "Cherry tomatoes", "Provolone cheese", "Prosciutto", "Ravioli", "Sausages", "American cheese slices", "Spinach", "Tater tots", "Tortellini", "Eggs", "Hot dogs", "Zucchini", "Ground beef", "Ricotta", "Milk", "Pesto sauce"],
       Wegmans: ["Steak", "Broccoli", "Cucumbers", "Onion", "Hamburger buns", "Butter", "Lettuce", "Lentils", "Eggplant", "Cod", "Whole chicken", "Sage", "Salmon", "Bread", "Tomato sauce"],
       Amazon: ["Pasta", "Tuna", "Breadcrumbs", "Rice"],
       Other: []
     };
-
+    
     // State Management
     class MealPlannerApp {
       constructor() {
@@ -843,11 +841,11 @@
         this.currentDayIndex = null;
         this.init();
       }
-
+      
       createInitialState() {
         const weekStart = this.getWeekStart(new Date());
         const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-
+        
         return {
           weekStart: weekStart.toISOString(),
           showWeekend: true,
@@ -867,33 +865,33 @@
           groceryExtras: []
         };
       }
-
+      
       getWeekStart(date) {
         const d = new Date(date);
         const day = d.getDay();
         const diff = d.getDate() - day + (day === 0 ? -6 : 1);
         return new Date(d.setDate(diff));
       }
-
+      
       formatWeekDate() {
         const start = new Date(this.state.weekStart);
         const end = new Date(start.getTime() + 6 * 86400000);
         const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         return `${monthNames[start.getMonth()]} ${start.getDate()} - ${end.getDate()}, ${start.getFullYear()}`;
       }
-
+      
       formatDate(date) {
         const d = new Date(date);
         const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
         return `${monthNames[d.getMonth()]} ${d.getDate()}`;
       }
-
+      
       init() {
         this.applyTheme();
         this.attachEventListeners();
         this.render();
       }
-
+      
       loadState() {
         try {
           const stored = localStorage.getItem(CONFIG.storageKey);
@@ -902,7 +900,7 @@
           return null;
         }
       }
-
+      
       saveState() {
         try {
           localStorage.setItem(CONFIG.storageKey, JSON.stringify(this.state));
@@ -910,17 +908,17 @@
           console.error('Failed to save state:', e);
         }
       }
-
+      
       applyTheme() {
         document.documentElement.setAttribute('data-theme', this.state.theme);
       }
-
+      
       toggleTheme() {
         this.state.theme = this.state.theme === 'light' ? 'dark' : 'light';
         this.applyTheme();
         this.saveState();
       }
-
+      
       navigateWeek(direction) {
         const current = new Date(this.state.weekStart);
         const days = direction === 'next' ? 7 : -7;
@@ -934,7 +932,7 @@
         this.saveState();
         this.render();
       }
-
+      
       attachEventListeners() {
         document.getElementById('menuBtn').onclick = () => this.openMenu();
         document.getElementById('weekendToggle').onclick = () => {
@@ -943,51 +941,51 @@
           this.saveState();
           this.render();
         };
-
+        
         document.getElementById('prevWeek').onclick = () => this.navigateWeek('prev');
         document.getElementById('nextWeek').onclick = () => this.navigateWeek('next');
-
+        
         const overlay = document.getElementById('modalOverlay');
         overlay.onclick = (e) => {
           if (e.target === overlay) this.closeModal();
         };
-
+        
         document.onkeydown = (e) => {
           if (e.key === 'Escape' && overlay.classList.contains('show')) {
             this.closeModal();
           }
         };
       }
-
+      
       render() {
         document.getElementById('weekDate').textContent = this.formatWeekDate();
         this.renderDays();
       }
-
+      
       renderDays() {
-        const days = this.state.days.filter(d =>
+        const days = this.state.days.filter(d => 
           this.state.showWeekend || (d.name !== 'Saturday' && d.name !== 'Sunday')
         );
-
+        
         const daysHtml = days.map((day, visualIndex) => {
           const realIndex = this.state.days.indexOf(day);
           const lunchMissing = !day.lunch;
           const dinnerMissing = !day.dinner;
           const sideMissing = day.dinnerType !== 'delivery' && !day.side;
           const incomplete = lunchMissing || dinnerMissing || sideMissing;
-
+          
           const lunchDisplay = day.lunch === 'Custom' ? (day.customLunch || 'Enter custom') : day.lunch;
           const dinnerDisplay = day.dinner === 'Custom' ? (day.customDinner || 'Enter custom') : day.dinner;
           const sideDisplay = day.side === 'Custom' ? (day.customSide || 'Enter custom') : day.side;
-
+          
           const lunchText = day.lunch === 'None' ? 'No lunch' : (lunchDisplay || 'Select lunch');
           const dinnerText = day.dinner === 'None' ? 'No dinner' : (dinnerDisplay || 'Select dinner');
-          const sideText = day.dinnerType === 'delivery' ? '' :
-            (day.side === 'None' ? 'No side' : (sideDisplay || 'Select side'));
-
+          const sideText = day.dinnerType === 'delivery' ? '' : 
+                         (day.side === 'None' ? 'No side' : (sideDisplay || 'Select side'));
+          
           const lunchEmoji = day.lunch ? (MEAL_EMOJIS[day.lunch] || '🍽️') : '🍽️';
           const dinnerEmoji = day.dinner ? (MEAL_EMOJIS[day.dinner] || '🍽️') : '🍽️';
-
+          
           return `
             <div class="day-card ${incomplete ? 'incomplete' : ''}" data-index="${realIndex}">
               <div class="day-header">
@@ -1022,11 +1020,11 @@
             </div>
           `;
         }).join('');
-
+        
         document.getElementById('daysList').innerHTML = daysHtml;
         this.attachDayListeners();
       }
-
+      
       attachDayListeners() {
         document.querySelectorAll('.meal-item').forEach(item => {
           item.onclick = (e) => {
@@ -1038,7 +1036,7 @@
             }
           };
         });
-
+        
         document.querySelectorAll('.busy-toggle').forEach(btn => {
           btn.onclick = (e) => {
             e.stopPropagation();
@@ -1056,13 +1054,13 @@
           };
         });
       }
-
+      
       openModal({ title, subtitle = '', bodyHTML = '', footer = [] }) {
         const overlay = document.getElementById('modalOverlay');
         document.getElementById('modalTitle').textContent = title || '';
         document.getElementById('modalSubtitle').textContent = subtitle || '';
         document.getElementById('modalBody').innerHTML = bodyHTML || '';
-
+        
         const modalFooter = document.getElementById('modalFooter');
         modalFooter.innerHTML = '';
         footer.forEach(btn => {
@@ -1072,14 +1070,14 @@
           button.onclick = btn.onClick;
           modalFooter.appendChild(button);
         });
-
+        
         overlay.classList.add('show');
       }
-
+      
       closeModal() {
         document.getElementById('modalOverlay').classList.remove('show');
       }
-
+      
       openMenu() {
         this.openModal({
           title: 'Quick Actions',
@@ -1132,32 +1130,32 @@
           `,
           footer: [{ label: 'Close', onClick: () => this.closeModal() }]
         });
-
+        
         document.getElementById('menuPrevWeek').onclick = () => {
           this.navigateWeek('prev');
           this.closeModal();
         };
-
+        
         document.getElementById('menuNextWeek').onclick = () => {
           this.navigateWeek('next');
           this.closeModal();
         };
-
+        
         document.getElementById('menuTheme').onclick = () => {
           this.toggleTheme();
           this.closeModal();
         };
-
+        
         document.getElementById('menuRandomize').onclick = () => {
           this.randomizeWeek();
           this.closeModal();
           this.showToast('Week randomized! 🎲');
         };
-
+        
         document.getElementById('menuShopping').onclick = () => {
           this.openGroceryList();
         };
-
+        
         document.getElementById('menuClear').onclick = () => {
           if (confirm('Clear all meals for this week?')) {
             this.state.days = this.state.days.map(day => ({
@@ -1178,11 +1176,11 @@
           }
         };
       }
-
+      
       openDayModal(index) {
         this.currentDayIndex = index;
         const day = this.state.days[index];
-
+        
         this.openModal({
           title: `${day.name}`,
           subtitle: this.formatDate(day.date),
@@ -1210,7 +1208,7 @@
             }
           ]
         });
-
+        
         document.querySelectorAll('.tab').forEach(tab => {
           tab.onclick = () => {
             this.currentTab = tab.dataset.tab;
@@ -1220,14 +1218,14 @@
             this.renderTabContent();
           };
         });
-
+        
         this.renderTabContent();
       }
-
+      
       renderTabContent() {
         const day = this.state.days[this.currentDayIndex];
         const content = document.getElementById('tabContent');
-
+        
         if (this.currentTab === 'lunch') {
           const selected = day.lunch;
           content.innerHTML = `
@@ -1243,30 +1241,30 @@
             ` : ''}
             ${this.renderBentoGrid('lunch', selected, MEAL_DATA.lunch)}
           `;
-
+          
           document.getElementById('randomizeLunch').onclick = () => {
             const options = MEAL_DATA.lunch.filter(m => m !== 'None' && m !== 'Custom');
             day.lunch = options[Math.floor(Math.random() * options.length)];
             this.renderTabContent();
           };
-
+          
           document.getElementById('clearLunch').onclick = () => {
             day.lunch = null;
             day.customLunch = null;
             this.renderTabContent();
           };
-
+          
           if (day.lunch === 'Custom') {
             document.getElementById('customLunchInput').oninput = (e) => {
               day.customLunch = e.target.value;
             };
           }
-
+          
           this.attachBentoListeners('lunch');
         } else {
           const isWeekend = day.name === 'Saturday' || day.name === 'Sunday';
           let dinnerOptions = MEAL_DATA.dinnerRegular;
-
+          
           if (day.busy && day.dinnerType === 'quick') {
             dinnerOptions = MEAL_DATA.dinnerQuick;
           } else if (day.busy && day.dinnerType === 'delivery') {
@@ -1274,7 +1272,7 @@
           } else if (!day.busy && isWeekend) {
             dinnerOptions = MEAL_DATA.dinnerWeekend;
           }
-
+          
           content.innerHTML = `
             <div class="controls">
               <button id="busyToggle" class="busy-toggle ${day.busy ? 'active' : ''}">
@@ -1322,7 +1320,7 @@
               </div>
             ` : ''}
           `;
-
+          
           document.getElementById('busyToggle').onclick = () => {
             day.busy = !day.busy;
             if (day.busy) {
@@ -1333,18 +1331,18 @@
             }
             this.renderTabContent();
           };
-
+          
           document.getElementById('randomizeDinner').onclick = () => {
             const options = dinnerOptions.filter(m => m !== 'None' && m !== 'Custom');
             day.dinner = options[Math.floor(Math.random() * options.length)];
-
+            
             if (day.dinnerType !== 'delivery') {
               const sideOptions = MEAL_DATA.side.filter(m => m !== 'None' && m !== 'Custom');
               day.side = sideOptions[Math.floor(Math.random() * sideOptions.length)];
             }
             this.renderTabContent();
           };
-
+          
           document.getElementById('clearDinner').onclick = () => {
             day.dinner = null;
             day.customDinner = null;
@@ -1352,19 +1350,19 @@
             day.customSide = null;
             this.renderTabContent();
           };
-
+          
           if (day.dinner === 'Custom') {
             document.getElementById('customDinnerInput').oninput = (e) => {
               day.customDinner = e.target.value;
             };
           }
-
+          
           if (day.side === 'Custom') {
             document.getElementById('customSideInput').oninput = (e) => {
               day.customSide = e.target.value;
             };
           }
-
+          
           document.querySelectorAll('.radio[data-type]').forEach(radio => {
             radio.onclick = () => {
               day.dinnerType = radio.dataset.type;
@@ -1375,14 +1373,14 @@
               this.renderTabContent();
             };
           });
-
+          
           this.attachBentoListeners('dinner', dinnerOptions);
           if (day.dinnerType !== 'delivery') {
             this.attachBentoListeners('side');
           }
         }
       }
-
+      
       renderBentoGrid(type, selected, options) {
         return `
           <div class="bento-grid" data-type="${type}">
@@ -1395,39 +1393,52 @@
           </div>
         `;
       }
-
+      
       attachBentoListeners(type) {
         const grid = document.querySelector(`.bento-grid[data-type="${type}"]`);
         if (!grid) return;
-
+        
         grid.querySelectorAll('.bento-item').forEach(item => {
           item.onclick = () => {
             const value = item.dataset.value;
             const day = this.state.days[this.currentDayIndex];
-
+            
             grid.querySelectorAll('.bento-item').forEach(i => i.classList.remove('selected'));
             item.classList.add('selected');
-
+            
             day[type] = value;
-
+            
             if (value === 'Custom') {
               this.renderTabContent();
             }
           };
         });
       }
-
+      
+      renderBentoGrid(type, selected, options) {
+        return `
+          <div class="bento-grid" data-type="${type}">
+            ${options.map(item => `
+              <div class="bento-item ${selected === item ? 'selected' : ''}" data-value="${item}">
+                <span class="bento-emoji">${MEAL_EMOJIS[item] || '🍽️'}</span>
+                <span>${item}</span>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+      
       randomizeWeek() {
         this.state.days = this.state.days.map(day => {
           if (!day.lunch) {
             const lunchOptions = MEAL_DATA.lunch.filter(m => m !== 'None' && m !== 'Custom');
             day.lunch = lunchOptions[Math.floor(Math.random() * lunchOptions.length)];
           }
-
+          
           if (!day.dinner) {
             let dinnerOptions;
             const isWeekend = day.name === 'Saturday' || day.name === 'Sunday';
-
+            
             if (day.busy && day.dinnerType === 'quick') {
               dinnerOptions = MEAL_DATA.dinnerQuick;
             } else if (day.busy && day.dinnerType === 'delivery') {
@@ -1437,27 +1448,27 @@
             } else {
               dinnerOptions = MEAL_DATA.dinnerRegular;
             }
-
+            
             dinnerOptions = dinnerOptions.filter(m => m !== 'None' && m !== 'Custom');
             day.dinner = dinnerOptions[Math.floor(Math.random() * dinnerOptions.length)];
           }
-
+          
           if (!day.side && day.dinnerType !== 'delivery') {
             const sideOptions = MEAL_DATA.side.filter(m => m !== 'None' && m !== 'Custom');
             day.side = sideOptions[Math.floor(Math.random() * sideOptions.length)];
           }
-
+          
           return day;
         });
-
+        
         this.saveState();
         this.render();
       }
-
+      
       openGroceryList() {
         const groceryData = this.computeGrocery();
         const stores = Object.keys(groceryData).sort();
-
+        
         const bodyHTML = stores.length ? stores.map(store => `
           <div class="store-section">
             <h3 class="store-title">${store}</h3>
@@ -1469,7 +1480,7 @@
             `).join('')}
           </div>
         `).join('') : '<div class="store-section"><p>No items to shop for</p></div>';
-
+        
         this.openModal({
           title: 'Shopping List',
           subtitle: 'Check off items as you shop',
@@ -1483,7 +1494,7 @@
             }
           ]
         });
-
+        
         document.querySelectorAll('.checkbox').forEach(checkbox => {
           checkbox.onclick = () => {
             checkbox.classList.toggle('checked');
@@ -1491,17 +1502,17 @@
           };
         });
       }
-
+      
       computeGrocery() {
         const grouped = {};
-
+        
         const addItem = (store, item) => {
           if (!grouped[store]) grouped[store] = [];
           if (!grouped[store].includes(item)) {
             grouped[store].push(item);
           }
         };
-
+        
         this.state.days.forEach(day => {
           const meals = [];
           if (day.lunch && day.lunch !== 'None' && day.lunch !== 'Custom') meals.push(day.lunch);
@@ -1509,7 +1520,7 @@
           if (day.side && day.side !== 'None' && day.side !== 'Custom' && day.dinnerType !== 'delivery') {
             meals.push(day.side);
           }
-
+          
           meals.forEach(meal => {
             const ingredients = INGREDIENTS[meal] || [];
             ingredients.forEach(ing => {
@@ -1518,17 +1529,17 @@
             });
           });
         });
-
+        
         return grouped;
       }
-
+      
       findStoreForItem(item) {
         for (const [store, items] of Object.entries(STORES)) {
           if (items.includes(item)) return store;
         }
         return 'Other';
       }
-
+      
       shareGroceryList(groceryData) {
         const lines = ['🛒 Shopping List\n'];
         Object.keys(groceryData).sort().forEach(store => {
@@ -1537,9 +1548,9 @@
             lines.push(`• ${INGREDIENT_EMOJIS[item] || ''} ${item}`);
           });
         });
-
+        
         const text = lines.join('\n');
-
+        
         if (navigator.share) {
           navigator.share({
             title: 'Shopping List',
@@ -1550,18 +1561,18 @@
           this.showToast('Copied to clipboard! 📋');
         }
       }
-
+      
       showToast(message) {
         const toast = document.getElementById('toast');
         toast.textContent = message;
         toast.classList.add('show');
-
+        
         setTimeout(() => {
           toast.classList.remove('show');
         }, CONFIG.animations.toast);
       }
     }
-
+    
     // Initialize app
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => {
@@ -1572,5 +1583,4 @@
     }
   </script>
 </body>
-
 </html>
