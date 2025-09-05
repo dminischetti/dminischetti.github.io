@@ -2,13 +2,13 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Tasty Planning</title>
+  <meta name="theme-color" content="#1a0f2e">
+  <title>Delicious Planning</title>
   <style>
     :root {
-      /* Dark Theme with Vibrant Accents */
       --bg-gradient: linear-gradient(135deg, #1a0f2e 0%, #2d1b69 50%, #0f172a 100%);
       --surface-glass: rgba(139, 92, 246, 0.03);
       --surface-hover: rgba(139, 92, 246, 0.08);
@@ -25,34 +25,75 @@
       --accent-cyan: #06b6d4;
       --accent-emerald: #10b981;
       --accent-amber: #f59e0b;
+      --accent-glow: rgba(139, 92, 246, 0.3);
+      --transition: all 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
     }
     
     :root[data-theme="light"] {
-      /* Pastel Light Theme */
       --bg-gradient: linear-gradient(135deg, #fef3c7 0%, #fde8ff 50%, #e0f2fe 100%);
       --surface-glass: rgba(255, 255, 255, 0.7);
       --surface-hover: rgba(168, 85, 247, 0.08);
-      --surface-card: rgba(255, 255, 255, 0.8);
+      --surface-card: rgba(255, 255, 255, 0.92);
       --border-subtle: rgba(168, 85, 247, 0.15);
-      --border-default: rgba(168, 85, 247, 0.2);
-      --text-primary: #1e293b;
-      --text-secondary: #475569;
+      --border-default: rgba(0, 0, 0, 0.12);
+      --text-primary: #0b1220;
+      --text-secondary: #24324a;
       --text-tertiary: #64748b;
     }
     
-    * {
-      box-sizing: border-box;
-      -webkit-tap-highlight-color: transparent;
-      user-select: none;
+    * { 
+      box-sizing: border-box; 
+      -webkit-tap-highlight-color: transparent; 
+      user-select: none; 
+    }
+    
+    input, textarea { 
+      -webkit-user-select: text; 
+      user-select: text; 
+    }
+    
+    @media (prefers-reduced-motion: reduce) { 
+      * { 
+        animation: none !important; 
+        transition: none !important; 
+      } 
     }
     
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', system-ui, sans-serif;
       background: var(--bg-gradient);
       background-attachment: fixed;
       color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    
+    body.modal-open { 
+      overflow: hidden; 
+    }
+    
+    /* Animated background particles */
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: 
+        radial-gradient(circle at 20% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(236, 72, 153, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+      animation: float 20s ease-in-out infinite;
+      pointer-events: none;
+    }
+    
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(-20px, -20px) rotate(1deg); }
+      66% { transform: translate(20px, -10px) rotate(-1deg); }
     }
     
     .header {
@@ -61,15 +102,16 @@
       gap: 12px;
       padding: 16px;
       background: rgba(15, 23, 42, 0.8);
-      backdrop-filter: blur(20px);
+      backdrop-filter: blur(20px) saturate(180%);
       border-bottom: 1px solid var(--border-subtle);
       position: sticky;
       top: 0;
       z-index: 100;
+      transition: var(--transition);
     }
     
-    :root[data-theme="light"] .header {
-      background: rgba(255, 255, 255, 0.85);
+    :root[data-theme="light"] .header { 
+      background: rgba(255, 255, 255, 0.85); 
     }
     
     .header-title {
@@ -77,10 +119,18 @@
       font-size: 28px;
       font-weight: 800;
       letter-spacing: -0.5px;
-      background: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-pink) 50%, var(--accent-cyan) 100%);
+      line-height: 1.1;
+      background: linear-gradient(135deg, var(--accent-violet), var(--accent-pink), var(--accent-cyan));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      background-size: 200% 200%;
+      animation: gradient 8s ease infinite;
+    }
+    
+    @keyframes gradient {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
     
     .btn-icon {
@@ -94,6 +144,31 @@
       display: grid;
       place-items: center;
       font-size: 20px;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn-icon::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 0;
+      height: 0;
+      border-radius: 50%;
+      background: var(--accent-glow);
+      transform: translate(-50%, -50%);
+      transition: width 0.6s, height 0.6s;
+    }
+    
+    .btn-icon:hover::before {
+      width: 100px;
+      height: 100px;
+    }
+    
+    .btn-icon:active { 
+      transform: scale(0.95); 
     }
     
     .weekend-toggle {
@@ -107,9 +182,16 @@
       cursor: pointer;
       font-size: 13px;
       font-weight: 600;
+      transition: var(--transition);
     }
     
-    .toggle-label {
+    .weekend-toggle:hover {
+      background: var(--surface-hover);
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+    
+    .toggle-label { 
       padding: 0 4px;
       color: var(--text-secondary);
     }
@@ -121,12 +203,13 @@
       background: var(--surface-glass);
       border: 1px solid var(--border-default);
       border-radius: 999px;
-      transition: all 0.3s;
+      transition: var(--transition);
     }
     
     .toggle-switch.active {
       background: var(--accent-violet);
       border-color: var(--accent-violet);
+      box-shadow: 0 0 12px var(--accent-glow);
     }
     
     .toggle-knob {
@@ -137,7 +220,7 @@
       height: 20px;
       background: white;
       border-radius: 50%;
-      transition: transform 0.3s;
+      transition: transform 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
       box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     }
     
@@ -152,21 +235,40 @@
     }
     
     .week-nav {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
       margin-bottom: 16px;
       padding: 16px;
       background: var(--surface-card);
       backdrop-filter: blur(10px);
-      border-radius: 16px;
+      border-radius: 20px;
       border: 1px solid var(--border-subtle);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .week-nav::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      background: linear-gradient(45deg, var(--accent-violet), var(--accent-pink), var(--accent-cyan));
+      border-radius: 20px;
+      opacity: 0;
+      z-index: -1;
+      transition: opacity 0.3s;
+    }
+    
+    .week-nav:hover::before {
+      opacity: 0.3;
     }
     
     .week-date {
       font-size: 20px;
-      font-weight: 600;
-      text-align: center;
+      font-weight: 700;
+      letter-spacing: -0.3px;
     }
     
     .day-card {
@@ -177,12 +279,36 @@
       border: 1px solid var(--border-default);
       border-radius: 20px;
       cursor: pointer;
-      transition: all 0.2s;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .day-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent-violet), var(--accent-pink));
+      transform: translateY(-100%);
+      transition: transform 0.3s;
+    }
+    
+    .day-card:hover::before {
+      transform: translateY(0);
     }
     
     .day-card.incomplete {
-      opacity: 0.7;
+      opacity: 0.85;
       border-style: dashed;
+      animation: pulse-border 3s ease-in-out infinite;
+    }
+    
+    @keyframes pulse-border {
+      0%, 100% { border-color: var(--border-default); }
+      50% { border-color: var(--accent-amber); }
     }
     
     .day-card:hover {
@@ -199,12 +325,32 @@
     
     .day-title {
       font-size: 18px;
-      font-weight: 600;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
     
     .day-date {
       font-size: 14px;
       color: var(--text-secondary);
+      margin-top: 2px;
+    }
+    
+    .chip {
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--accent-violet), var(--accent-purple));
+      color: white;
+      font-weight: 600;
+      box-shadow: 0 2px 8px var(--accent-glow);
+      animation: glow 2s ease-in-out infinite;
+    }
+    
+    @keyframes glow {
+      0%, 100% { box-shadow: 0 2px 8px var(--accent-glow); }
+      50% { box-shadow: 0 2px 16px var(--accent-glow); }
     }
     
     .meal-item {
@@ -216,10 +362,40 @@
       border-radius: 12px;
       border: 1px solid var(--border-subtle);
       cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .meal-item::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: 12px;
+      transform: translateY(-50%);
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-emerald);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    
+    .meal-item:not(.empty)::after {
+      opacity: 1;
+    }
+    
+    .meal-item:hover {
+      background: var(--surface-hover);
+      transform: translateX(4px);
+    }
+    
+    .meal-item:active {
+      transform: scale(0.98);
     }
     
     .meal-item.empty {
-      opacity: 0.5;
+      opacity: 0.6;
     }
     
     .meal-icon {
@@ -229,14 +405,21 @@
       display: grid;
       place-items: center;
       font-size: 20px;
+      transition: var(--transition);
     }
     
     .meal-icon.lunch {
-      background: linear-gradient(135deg, var(--accent-amber), var(--accent-amber));
+      background: linear-gradient(135deg, var(--accent-amber), #fbbf24);
+      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.3);
     }
     
     .meal-icon.dinner {
       background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+    }
+    
+    .meal-item:hover .meal-icon {
+      transform: rotate(10deg) scale(1.1);
     }
     
     .meal-content {
@@ -244,33 +427,41 @@
     }
     
     .meal-title {
-      font-weight: 600;
+      font-weight: 700;
       margin: 0;
+      font-size: 15px;
     }
     
     .meal-description {
       font-size: 14px;
       color: var(--text-secondary);
-      margin: 0;
+      margin: 2px 0 0;
     }
     
     .busy-toggle {
       padding: 4px 12px;
       font-size: 11px;
-      font-weight: 600;
+      font-weight: 700;
       background: var(--surface-glass);
       border: 1px solid var(--border-default);
       border-radius: 999px;
       color: var(--text-secondary);
       cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .busy-toggle:hover {
+      transform: scale(1.05);
     }
     
     .busy-toggle.active {
-      background: var(--accent-purple);
+      background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
       border-color: var(--accent-purple);
       color: white;
+      box-shadow: 0 2px 8px var(--accent-glow);
     }
     
+    /* Modal */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -280,7 +471,7 @@
       align-items: flex-end;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.3s;
+      transition: var(--transition);
       z-index: 1000;
     }
     
@@ -296,9 +487,11 @@
       background: rgba(15, 23, 42, 0.95);
       border-radius: 28px 28px 0 0;
       transform: translateY(100%);
-      transition: transform 0.3s;
+      transition: transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
       max-height: 85vh;
       overflow: hidden;
+      outline: none;
+      box-shadow: 0 -10px 40px rgba(139, 92, 246, 0.2);
     }
     
     :root[data-theme="light"] .modal {
@@ -313,11 +506,12 @@
       padding: 20px;
       text-align: center;
       border-bottom: 1px solid var(--border-subtle);
+      background: linear-gradient(180deg, transparent, var(--surface-glass));
     }
     
     .modal-title {
       font-size: 20px;
-      font-weight: 600;
+      font-weight: 700;
       margin: 0;
     }
     
@@ -328,7 +522,7 @@
     }
     
     .modal-body {
-      max-height: 50vh;
+      max-height: 62vh;
       overflow-y: auto;
       padding: 0;
     }
@@ -336,9 +530,12 @@
     .modal-footer {
       display: flex;
       gap: 8px;
-      padding: 16px;
+      padding: 12px;
       background: var(--surface-glass);
       border-top: 1px solid var(--border-subtle);
+      position: sticky;
+      bottom: 0;
+      padding-bottom: calc(12px + env(safe-area-inset-bottom));
     }
     
     .controls {
@@ -358,23 +555,33 @@
     
     .bento-item {
       position: relative;
-      padding: 16px 8px;
+      padding: 12px 6px;
       background: var(--surface-glass);
       border: 1px solid var(--border-default);
       border-radius: 16px;
       cursor: pointer;
       text-align: center;
-      font-size: 13px;
-      transition: all 0.2s;
+      font-size: 12.5px;
+      transition: var(--transition);
+      min-height: 72px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
     
     .bento-item:hover {
       background: var(--surface-hover);
       transform: scale(1.05);
+      box-shadow: 0 4px 12px var(--accent-glow);
+    }
+    
+    .bento-item:active {
+      transform: scale(0.98);
     }
     
     .bento-item.selected {
-      background: rgba(139, 92, 246, 0.15);
+      background: linear-gradient(135deg, rgba(139, 92, 246, 0.15), rgba(236, 72, 153, 0.1));
       border-color: var(--accent-violet);
       box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2) inset;
     }
@@ -382,45 +589,73 @@
     .bento-item.selected::before {
       content: '✓';
       position: absolute;
-      top: 8px;
-      right: 8px;
+      top: 6px;
+      right: 6px;
       width: 20px;
       height: 20px;
-      background: var(--accent-violet);
+      background: linear-gradient(135deg, var(--accent-violet), var(--accent-purple));
       color: white;
       border-radius: 50%;
       display: grid;
       place-items: center;
       font-size: 12px;
+      animation: checkIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    
+    @keyframes checkIn {
+      from {
+        transform: scale(0);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
     
     .bento-emoji {
       font-size: 24px;
       display: block;
       margin-bottom: 4px;
+      transition: transform 0.3s;
+    }
+    
+    .bento-item:hover .bento-emoji {
+      transform: scale(1.2);
     }
     
     .btn {
       flex: 1;
       padding: 12px 16px;
-      font-weight: 600;
+      font-weight: 700;
       background: var(--surface-glass);
       color: var(--text-primary);
       border: 1px solid var(--border-default);
       border-radius: 12px;
       cursor: pointer;
+      transition: var(--transition);
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+    
+    .btn:active {
+      transform: scale(0.98);
     }
     
     .btn-primary {
-      background: var(--accent-violet);
-      border-color: var(--accent-violet);
+      background: linear-gradient(135deg, var(--accent-violet), var(--accent-purple));
+      border: none;
       color: white;
+      box-shadow: 0 4px 12px var(--accent-glow);
     }
     
-    .btn-danger {
-      background: var(--accent-pink);
-      border-color: var(--accent-pink);
-      color: white;
+    .btn-primary:hover {
+      box-shadow: 0 6px 20px var(--accent-glow);
     }
     
     .menu-grid {
@@ -438,10 +673,13 @@
       border: 1px solid var(--border-default);
       border-radius: 16px;
       cursor: pointer;
+      transition: var(--transition);
     }
     
     .menu-item:hover {
       background: var(--surface-hover);
+      transform: translateX(4px);
+      border-color: var(--accent-violet);
     }
     
     .menu-item-icon {
@@ -450,35 +688,13 @@
     
     .menu-item-content h4 {
       margin: 0;
-      font-weight: 600;
+      font-weight: 700;
     }
     
     .menu-item-content p {
       margin: 4px 0 0;
       font-size: 13px;
       color: var(--text-secondary);
-    }
-    
-    .action-buttons {
-      display: flex;
-      gap: 8px;
-      padding: 0 12px 12px;
-    }
-    
-    .btn-action {
-      flex: 1;
-      padding: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      background: var(--surface-glass);
-      color: var(--text-primary);
-      border: 1px solid var(--border-default);
-      border-radius: 12px;
-      cursor: pointer;
-    }
-    
-    .btn-action:hover {
-      background: var(--surface-hover);
     }
     
     .store-section {
@@ -491,7 +707,8 @@
     
     .store-title {
       margin: 0 0 12px;
-      font-weight: 600;
+      font-weight: 700;
+      font-size: 16px;
     }
     
     .grocery-item {
@@ -503,6 +720,11 @@
       background: var(--surface-glass);
       border: 1px solid var(--border-subtle);
       border-radius: 12px;
+      transition: var(--transition);
+    }
+    
+    .grocery-item:hover {
+      background: var(--surface-hover);
     }
     
     .checkbox {
@@ -514,11 +736,17 @@
       cursor: pointer;
       display: grid;
       place-items: center;
+      transition: var(--transition);
+    }
+    
+    .checkbox:hover {
+      border-color: var(--accent-emerald);
     }
     
     .checkbox.checked {
-      background: var(--accent-emerald);
+      background: linear-gradient(135deg, var(--accent-emerald), #34d399);
       border-color: var(--accent-emerald);
+      animation: checkIn 0.3s;
     }
     
     .checkbox.checked::after {
@@ -529,6 +757,7 @@
     
     .grocery-item-text {
       flex: 1;
+      font-size: 15px;
     }
     
     .grocery-item.checked .grocery-item-text {
@@ -541,22 +770,23 @@
       left: 50%;
       bottom: 100px;
       transform: translateX(-50%) translateY(20px);
-      padding: 12px 20px;
-      background: rgba(15, 23, 42, 0.95);
+      padding: 12px 24px;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(45, 27, 105, 0.95));
       color: white;
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 700;
       border-radius: 999px;
       backdrop-filter: blur(10px);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
       opacity: 0;
       visibility: hidden;
-      transition: all 0.3s;
+      transition: var(--transition);
       z-index: 2000;
+      border: 1px solid var(--border-subtle);
     }
     
     :root[data-theme="light"] .toast {
-      background: rgba(255, 255, 255, 0.95);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(254, 243, 199, 0.95));
       color: var(--text-primary);
     }
     
@@ -564,6 +794,16 @@
       opacity: 1;
       visibility: visible;
       transform: translateX(-50%) translateY(0);
+      animation: toastPop 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    }
+    
+    @keyframes toastPop {
+      from {
+        transform: translateX(-50%) translateY(20px) scale(0.8);
+      }
+      to {
+        transform: translateX(-50%) translateY(0) scale(1);
+      }
     }
     
     .input-group {
@@ -574,7 +814,7 @@
       display: block;
       margin: 0 0 8px;
       font-size: 12px;
-      font-weight: 600;
+      font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.5px;
       color: var(--text-tertiary);
@@ -588,6 +828,13 @@
       color: var(--text-primary);
       border: 1px solid var(--border-default);
       border-radius: 12px;
+      transition: var(--transition);
+    }
+    
+    .input:focus {
+      outline: none;
+      border-color: var(--accent-violet);
+      box-shadow: 0 0 0 3px var(--accent-glow);
     }
     
     .radio-group {
@@ -598,26 +845,136 @@
     .radio {
       padding: 8px 12px;
       font-size: 13px;
-      font-weight: 600;
+      font-weight: 700;
       background: var(--surface-glass);
       color: var(--text-secondary);
       border: 1px solid var(--border-default);
       border-radius: 12px;
       cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    .radio:hover {
+      background: var(--surface-hover);
+      transform: scale(1.05);
     }
     
     .radio.active {
-      background: var(--accent-violet);
-      border-color: var(--accent-violet);
+      background: linear-gradient(135deg, var(--accent-violet), var(--accent-purple));
+      border: none;
       color: white;
+      box-shadow: 0 2px 8px var(--accent-glow);
+    }
+    
+    /* Week navigation bars */
+    .week-nav-bar {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 80px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 90;
+      padding: 0;
+      background: var(--surface-card);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--border-default);
+      cursor: pointer;
+      transition: var(--transition);
+      font-size: 18px;
+      font-weight: bold;
+      color: var(--text-secondary);
+    }
+    
+    .week-nav-left {
+      left: 0;
+      border-radius: 0 16px 16px 0;
+      border-left: none;
+    }
+    
+    .week-nav-right {
+      right: 0;
+      border-radius: 16px 0 0 16px;
+      border-right: none;
+    }
+    
+    .week-nav-bar:hover {
+      width: 48px;
+      background: var(--surface-hover);
+      color: var(--text-primary);
+      box-shadow: 0 4px 16px var(--accent-glow);
+    }
+    
+    .week-nav-bar:active {
+      transform: translateY(-50%) scale(0.95);
+    }
+    
+    /* Loading animation */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    
+    .day-card {
+      animation: slideIn 0.5s ease-out backwards;
+    }
+    
+    .day-card:nth-child(1) { animation-delay: 0.05s; }
+    .day-card:nth-child(2) { animation-delay: 0.1s; }
+    .day-card:nth-child(3) { animation-delay: 0.15s; }
+    .day-card:nth-child(4) { animation-delay: 0.2s; }
+    .day-card:nth-child(5) { animation-delay: 0.25s; }
+    .day-card:nth-child(6) { animation-delay: 0.3s; }
+    .day-card:nth-child(7) { animation-delay: 0.35s; }
+    
+    /* Responsive touch targets */
+    @media (hover: none) {
+      .week-nav-bar {
+        width: 44px;
+        height: 100px;
+        font-size: 20px;
+      }
+      
+      .btn-icon, .busy-toggle, .radio {
+        min-height: 44px;
+      }
+    }
+    
+    /* Smooth scrolling */
+    .modal-body {
+      scroll-behavior: smooth;
+      -webkit-overflow-scrolling: touch;
+    }
+    
+    .modal-body::-webkit-scrollbar {
+      width: 6px;
+    }
+    
+    .modal-body::-webkit-scrollbar-track {
+      background: var(--surface-glass);
+    }
+    
+    .modal-body::-webkit-scrollbar-thumb {
+      background: var(--accent-violet);
+      border-radius: 3px;
     }
   </style>
 </head>
 <body>
   <header class="header">
-    <button id="menuBtn" class="btn-icon">☰</button>
-    <h1 class="header-title">Tasty Planning</h1>
-    <button id="weekendToggle" class="weekend-toggle">
+    <button id="menuBtn" class="btn-icon" aria-label="Open menu">☰</button>
+    <div style="flex: 1;">
+      <h1 class="header-title">Delicious Planning</h1>
+    </div>
+    <button id="weekendToggle" class="weekend-toggle" role="switch" aria-checked="true" aria-label="Show/Hide weekends">
       <span class="toggle-label">Weekends</span>
       <div class="toggle-switch active" id="weekendSwitch">
         <div class="toggle-knob"></div>
@@ -632,8 +989,11 @@
     <div id="daysList"></div>
   </div>
   
-  <div id="modalOverlay" class="modal-overlay">
-    <div class="modal">
+  <button class="week-nav-bar week-nav-left" id="weekPrev" aria-label="Previous week">◄</button>
+  <button class="week-nav-bar week-nav-right" id="weekNext" aria-label="Next week">►</button>
+  
+  <div id="modalOverlay" class="modal-overlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalSubtitle" tabindex="-1">
       <div class="modal-header">
         <h2 class="modal-title" id="modalTitle"></h2>
         <p class="modal-subtitle" id="modalSubtitle"></p>
@@ -646,360 +1006,257 @@
   <div id="toast" class="toast"></div>
   
   <script>
-    // Configuration
-    const CONFIG = {
-      storageKey: 'mp_enhanced_v3',
-      animations: { modal: 300, toast: 1500 }
+    const $ = (sel, root = document) => root.querySelector(sel);
+    const $$ = (sel, root = document) => Array.from(root.querySelectorAll(sel));
+    const sanitize = (s) => (s || '').replace(/[<>]/g, '');
+    
+    const CONFIG = { 
+      storageKey: 'mp_enhanced_v3', 
+      animations: { modal: 300, toast: 1500 } 
     };
     
-    const MEAL_EMOJIS = {
-      "Ravioli burro e salvia": "🥟",
-      "Spaghetti al limone": "🍝",
-      "Pasta e ceci": "🍝",
-      "Pasta col tonno": "🐟",
-      "Pasta sugo tonno": "🐟",
-      "Piadine prosciutto provolone": "🥪",
-      "Uova fritte": "🍳",
-      "Pasta al pesto": "🌿",
-      "Pasta coi pomodorini": "🍅",
-      "Lenticchie": "🥘",
-      "Spaghetti aglio e olio": "🧄",
-      "Carbonara": "🥓",
-      "Frittata di pasta": "🍳",
-      "Pasta e fagioli": "🫘",
-      "Salmone col riso": "🍣",
-      "Frittata di zucchine": "🥒",
-      "Polpette": "🧆",
-      "Pollo al limone": "🍗",
-      "Merluzzo": "🐟",
-      "Hamburger": "🍔",
-      "Cotolette": "🥩",
-      "Salsicce": "🌭",
-      "Minestrone": "🍲",
-      "Pollo al forno": "🍗",
-      "Scaloppine al limone": "🥩",
-      "Caprese": "🧀",
-      "Cordon bleu": "🥩",
-      "Würstel": "🌭",
-      "Dumplings": "🥟",
-      "Fish sticks": "🐟",
-      "Pollo allo spiedo": "🍗",
-      "Pasta al forno": "🍝",
-      "Parmigiana di melanzane": "🍆",
-      "Zucchine ripiene": "🥒",
-      "Lasagna": "🍝",
-      "Spezzatino con patate": "🥘",
-      "Tortellini con la panna": "🥟",
-      "Tortellini col sugo": "🥟",
-      "Pasta col ragù": "🍝",
-      "Polpettone": "🥩",
-      "Scrimpelle mbuss": "🥞",
-      "Polenta col sugo": "🌽",
-      "Cannelloni": "🥟",
-      "Bistecca": "🥩",
-      "Pizza Delivery": "🍕",
-      "Greco Delivery": "🥙",
-      "Chinese Delivery": "🥡",
-      "Vietnamese Delivery": "🍜",
-      "Ramen Delivery": "🍜",
-      "Purè di patate": "🥔",
-      "Broccoli al vapore": "🥦",
-      "Insalata di pomodori": "🍅",
-      "Tater tots": "🥔",
-      "Barbabietole": "🥬",
-      "Insalata di mais": "🌽",
-      "Patate lesse": "🥔",
-      "Carote al forno": "🥕",
-      "Carote a insalata": "🥕",
-      "Zucchine trifolate": "🥒",
-      "Insalata di cetrioli": "🥒",
-      "Insalata": "🥗",
-      "None": "❌",
-      "Custom": "✏️"
+    const MEAL_EMOJIS = {"Ravioli burro e salvia":"🥟","Spaghetti al limone":"🍝","Pasta e ceci":"🍝","Pasta col tonno":"🐟","Pasta sugo tonno":"🐟","Piadine prosciutto provolone":"🥪","Uova fritte":"🍳","Pasta al pesto":"🌿","Pasta coi pomodorini":"🍅","Lenticchie":"🥘","Spaghetti aglio e olio":"🧄","Carbonara":"🥓","Frittata di pasta":"🍳","Pasta e fagioli":"🫘","Salmone col riso":"🍣","Frittata di zucchine":"🥒","Polpette":"🧆","Pollo al limone":"🍗","Merluzzo":"🐟","Hamburger":"🍔","Cotolette":"🥩","Salsicce":"🌭","Minestrone":"🍲","Pollo al forno":"🍗","Scaloppine al limone":"🥩","Caprese":"🧀","Cordon bleu":"🥩","Würstel":"🌭","Dumplings":"🥟","Fish sticks":"🐟","Pollo allo spiedo":"🍗","Pasta al forno":"🍝","Parmigiana di melanzane":"🍆","Zucchine ripiene":"🥒","Lasagna":"🍝","Spezzatino con patate":"🥘","Tortellini con la panna":"🥟","Tortellini col sugo":"🥟","Pasta col ragù":"🍝","Polpettone":"🥩","Scrimpelle mbuss":"🥞","Polenta col sugo":"🌽","Cannelloni":"🥟","Bistecca":"🥩","Pizza Delivery":"🍕","Greco Delivery":"🥙","Chinese Delivery":"🥡","Vietnamese Delivery":"🍜","Ramen Delivery":"🍜","Purè di patate":"🥔","Broccoli al vapore":"🥦","Insalata di pomodori":"🍅","Tater tots":"🥔","Barbabietole":"🥬","Insalata di mais":"🌽","Patate lesse":"🥔","Carote al forno":"🥕","Carote a insalata":"🥕","Zucchine trifolate":"🥒","Insalata di cetrioli":"🥒","Insalata":"🥗","None":"❌","Custom":"✏️"};
+    
+    const INGREDIENT_EMOJIS = {"Ravioli":"🥟","Sage":"🌿","Spaghetti":"🍝","Lemons":"🍋","Ditalini":"🍝","Chickpeas":"🫘","Tuna":"🐟","Pasta":"🍝","Tomato sauce":"🍅","Flatbreads":"🫓","Prosciutto":"🥩","Provolone cheese":"🧀","Eggs":"🥚","Pesto":"🌿","Pesto sauce":"🌿","Cherry tomatoes":"🍅","Lentils":"🫘","Croutons":"🍞","Bacon":"🥓","Beans":"🫘","Salmon":"🍣","Rice":"🍚","Zucchini":"🥒","Ground beef":"🥩","Bread":"🍞","Breadcrumbs":"🍞","Chicken breast":"🍗","Cod":"🐟","Hamburger buns":"🍔","American cheese slices":"🧀","Lettuce":"🥬","Tomatoes":"🍅","Breaded cutlets":"🥩","Sausages":"🌭","Vegetable soup mix":"🥕","Chicken thighs":"🍗","Veal cutlets":"🥩","Fresh mozzarella":"🧀","Hot dogs":"🌭","Dumplings":"🥟","Fish sticks":"🐟","Whole chicken":"🍗","Shredded mozzarella":"🧀","Eggplant":"🍆","Beef":"🥩","Potatoes":"🥔","Onion":"🧅","Carrots":"🥕","Tortellini":"🥟","Cream":"🥛","Meat sauce":"🍖","Flour":"🌾","Milk":"🥛","Broth":"🍲","Polenta":"🌽","Ricotta":"🧀","Spinach":"🥬","Lasagna noodles":"🍝","Steak":"🥩","Broccoli":"🥦","Tater tots":"🥔","Beets":"🥬","Corn":"🌽","Cucumbers":"🥒","Butter":"🧈"};
+    
+    const MEAL_DATA = { 
+      lunch: ["None","Ravioli burro e salvia","Spaghetti al limone","Pasta e ceci","Pasta col tonno","Pasta sugo tonno","Piadine prosciutto provolone","Uova fritte","Pasta al pesto","Pasta coi pomodorini","Lenticchie","Spaghetti aglio e olio","Carbonara","Frittata di pasta","Pasta e fagioli","Custom"], 
+      dinnerRegular: ["None","Salmone col riso","Frittata di zucchine","Polpette","Pollo al limone","Merluzzo","Hamburger","Cotolette","Salsicce","Minestrone","Pollo al forno","Scaloppine al limone","Caprese","Custom"], 
+      dinnerQuick: ["None","Cordon bleu","Würstel","Dumplings","Fish sticks","Pollo allo spiedo","Custom"], 
+      delivery: ["None","Pizza Delivery","Greco Delivery","Chinese Delivery","Vietnamese Delivery","Ramen Delivery","Custom"], 
+      dinnerWeekend: ["None","Pasta al forno","Parmigiana di melanzane","Zucchine ripiene","Lasagna","Spezzatino con patate","Tortellini con la panna","Tortellini col sugo","Pasta col ragù","Polpettone","Scrimpelle mbuss","Polenta col sugo","Cannelloni","Bistecca","Custom"], 
+      side: ["None","Purè di patate","Broccoli al vapore","Insalata di pomodori","Tater tots","Barbabietole","Insalata di mais","Patate lesse","Carote al forno","Carote a insalata","Zucchine trifolate","Insalata di cetrioli","Insalata","Custom"] 
     };
     
-    const INGREDIENT_EMOJIS = {
-      "Ravioli": "🥟", "Sage": "🌿", "Spaghetti": "🍝", "Lemons": "🍋",
-      "Ditalini": "🍝", "Chickpeas": "🫘", "Tuna": "🐟", "Pasta": "🍝",
-      "Tomato sauce": "🍅", "Flatbreads": "🫓", "Prosciutto": "🥩",
-      "Provolone cheese": "🧀", "Eggs": "🥚", "Pesto": "🌿", 
-      "Cherry tomatoes": "🍅", "Lentils": "🫘", "Croutons": "🍞",
-      "Bacon": "🥓", "Beans": "🫘", "Salmon": "🍣", "Rice": "🍚",
-      "Zucchini": "🥒", "Ground beef": "🥩", "Bread": "🍞", "Breadcrumbs": "🍞",
-      "Chicken breast": "🍗", "Cod": "🐟", "Hamburger buns": "🍔",
-      "American cheese slices": "🧀", "Lettuce": "🥬", "Tomatoes": "🍅",
-      "Breaded cutlets": "🥩", "Sausages": "🌭", "Vegetable soup mix": "🥕",
-      "Chicken thighs": "🍗", "Veal cutlets": "🥩", "Fresh mozzarella": "🧀",
-      "Cordon bleu": "🥩", "Hot dogs": "🌭", "Dumplings": "🥟",
-      "Fish sticks": "🐟", "Whole chicken": "🍗", "Shredded mozzarella": "🧀",
-      "Eggplant": "🍆", "Beef": "🥩", "Potatoes": "🥔", "Onion": "🧅",
-      "Carrots": "🥕", "Tortellini": "🥟", "Cream": "🥛", "Meat sauce": "🍖",
-      "Flour": "🌾", "Milk": "🥛", "Broth": "🍲", "Polenta": "🌽",
-      "Ricotta": "🧀", "Spinach": "🥬", "Lasagna noodles": "🍝", "Steak": "🥩",
-      "Broccoli": "🥦", "Tater tots": "🥔", "Beets": "🥬", "Corn": "🌽",
-      "Cucumbers": "🥒", "Butter": "🧈", "Pesto sauce": "🌿"
+    const INGREDIENTS = {"Ravioli burro e salvia":["Ravioli","Sage"],"Spaghetti al limone":["Spaghetti","Lemons"],"Pasta e ceci":["Ditalini","Chickpeas"],"Pasta col tonno":["Spaghetti","Tuna"],"Pasta sugo tonno":["Pasta","Tuna","Tomato sauce"],"Piadine prosciutto provolone":["Flatbreads","Prosciutto","Provolone cheese"],"Uova fritte":["Eggs"],"Pasta al pesto":["Pasta","Pesto sauce"],"Pasta coi pomodorini":["Pasta","Cherry tomatoes"],"Lenticchie":["Lentils","Croutons"],"Spaghetti aglio e olio":["Spaghetti"],"Carbonara":["Spaghetti","Eggs","Bacon"],"Frittata di pasta":["Eggs"],"Pasta e fagioli":["Pasta","Beans"],"Salmone col riso":["Salmon","Rice"],"Frittata di zucchine":["Eggs","Zucchini"],"Polpette":["Ground beef","Eggs","Bread","Breadcrumbs"],"Pollo al limone":["Chicken breast","Lemons"],"Merluzzo":["Cod"],"Hamburger":["Hamburger buns","Ground beef","American cheese slices","Lettuce","Tomatoes"],"Cotolette":["Breaded cutlets","Breadcrumbs","Eggs"],"Salsicce":["Sausages"],"Minestrone":["Vegetable soup mix","Pasta","Beans"],"Pollo al forno":["Chicken thighs"],"Scaloppine al limone":["Veal cutlets","Lemons"],"Caprese":["Fresh mozzarella","Tomatoes"],"Cordon bleu":["Cordon bleu"],"Würstel":["Hot dogs"],"Dumplings":["Dumplings"],"Fish sticks":["Fish sticks"],"Pollo allo spiedo":["Whole chicken"],"Pasta al forno":["Pasta","Tomato sauce","Shredded mozzarella"],"Parmigiana di melanzane":["Eggplant","Tomato sauce","Shredded mozzarella"],"Zucchine ripiene":["Zucchini","Ground beef","Bread"],"Lasagna":["Lasagna noodles","Meat sauce"],"Spezzatino con patate":["Beef","Potatoes","Onion","Carrots"],"Tortellini con la panna":["Tortellini","Cream"],"Tortellini col sugo":["Tortellini","Tomato sauce"],"Pasta col ragù":["Pasta","Meat sauce"],"Polpettone":["Ground beef","Eggs","Bacon","Bread"],"Scrimpelle mbuss":["Eggs","Flour","Milk","Broth"],"Polenta col sugo":["Polenta","Tomato sauce","Sausages"],"Cannelloni":["Cannelloni","Ricotta","Spinach"],"Bistecca":["Steak"],"Purè di patate":["Potatoes"],"Broccoli al vapore":["Broccoli"],"Insalata di pomodori":["Tomatoes"],"Tater tots":["Tater tots"],"Barbabietole":["Beets"],"Insalata di mais":["Corn"],"Patate lesse":["Potatoes"],"Carote al forno":["Carrots"],"Carote a insalata":["Carrots"],"Zucchine trifolate":["Zucchini"],"Insalata di cetrioli":["Cucumbers"],"Insalata":["Lettuce"]};
+    
+    const STORES = { 
+      Aldi: ["Bacon","Beets","Cannelloni","Carrots","Chicken thighs","Breaded cutlets","Croutons","Dumplings","Beans","Fish sticks","Lemons","Corn","Shredded mozzarella","Potatoes","Chicken breast","Flatbreads","Tomatoes","Cherry tomatoes","Provolone cheese","Prosciutto","Ravioli","Sausages","American cheese slices","Spinach","Tater tots","Tortellini","Eggs","Hot dogs","Zucchini","Ground beef","Ricotta","Milk","Pesto sauce"], 
+      Wegmans: ["Steak","Broccoli","Cucumbers","Onion","Hamburger buns","Butter","Lettuce","Lentils","Eggplant","Cod","Whole chicken","Sage","Salmon","Bread","Tomato sauce"], 
+      Amazon: ["Pasta","Tuna","Breadcrumbs","Rice"], 
+      Other: [] 
     };
     
-    const MEAL_DATA = {
-      lunch: [
-        "None", "Ravioli burro e salvia", "Spaghetti al limone", "Pasta e ceci", 
-        "Pasta col tonno", "Pasta sugo tonno", "Piadine prosciutto provolone", 
-        "Uova fritte", "Pasta al pesto", "Pasta coi pomodorini", "Lenticchie", 
-        "Spaghetti aglio e olio", "Carbonara", "Frittata di pasta", "Pasta e fagioli", "Custom"
-      ],
-      dinnerRegular: [
-        "None", "Salmone col riso", "Frittata di zucchine", "Polpette", "Pollo al limone",
-        "Merluzzo", "Hamburger", "Cotolette", "Salsicce", "Minestrone", "Pollo al forno",
-        "Scaloppine al limone", "Caprese", "Custom"
-      ],
-      dinnerQuick: [
-        "None", "Cordon bleu", "Würstel", "Dumplings", "Fish sticks", "Pollo allo spiedo", "Custom"
-      ],
-      delivery: [
-        "None", "Pizza Delivery", "Greco Delivery", "Chinese Delivery", 
-        "Vietnamese Delivery", "Ramen Delivery", "Custom"
-      ],
-      dinnerWeekend: [
-        "None", "Pasta al forno", "Parmigiana di melanzane", "Zucchine ripiene", 
-        "Lasagna", "Spezzatino con patate", "Tortellini con la panna", 
-        "Tortellini col sugo", "Pasta col ragù", "Polpettone", "Scrimpelle mbuss", 
-        "Polenta col sugo", "Cannelloni", "Bistecca", "Custom"
-      ],
-      side: [
-        "None", "Purè di patate", "Broccoli al vapore", "Insalata di pomodori", 
-        "Tater tots", "Barbabietole", "Insalata di mais", "Patate lesse", 
-        "Carote al forno", "Carote a insalata", "Zucchine trifolate", 
-        "Insalata di cetrioli", "Insalata", "Custom"
-      ]
-    };
-    
-    const INGREDIENTS = {
-      "Ravioli burro e salvia": ["Ravioli", "Sage"],
-      "Spaghetti al limone": ["Spaghetti", "Lemons"],
-      "Pasta e ceci": ["Ditalini", "Chickpeas"],
-      "Pasta col tonno": ["Spaghetti", "Tuna"],
-      "Pasta sugo tonno": ["Pasta", "Tuna", "Tomato sauce"],
-      "Piadine prosciutto provolone": ["Flatbreads", "Prosciutto", "Provolone cheese"],
-      "Uova fritte": ["Eggs"],
-      "Pasta al pesto": ["Pasta", "Pesto sauce"],
-      "Pasta coi pomodorini": ["Pasta", "Cherry tomatoes"],
-      "Lenticchie": ["Lentils", "Croutons"],
-      "Spaghetti aglio e olio": ["Spaghetti"],
-      "Carbonara": ["Spaghetti", "Eggs", "Bacon"],
-      "Frittata di pasta": ["Eggs"],
-      "Pasta e fagioli": ["Pasta", "Beans"],
-      "Salmone col riso": ["Salmon", "Rice"],
-      "Frittata di zucchine": ["Eggs", "Zucchini"],
-      "Polpette": ["Ground beef", "Eggs", "Bread", "Breadcrumbs"],
-      "Pollo al limone": ["Chicken breast", "Lemons"],
-      "Merluzzo": ["Cod"],
-      "Hamburger": ["Hamburger buns", "Ground beef", "American cheese slices", "Lettuce", "Tomatoes"],
-      "Cotolette": ["Breaded cutlets", "Breadcrumbs", "Eggs"],
-      "Salsicce": ["Sausages"],
-      "Minestrone": ["Vegetable soup mix", "Pasta", "Beans"],
-      "Pollo al forno": ["Chicken thighs"],
-      "Scaloppine al limone": ["Veal cutlets", "Lemons"],
-      "Caprese": ["Fresh mozzarella", "Tomatoes"],
-      "Cordon bleu": ["Cordon bleu"],
-      "Würstel": ["Hot dogs"],
-      "Dumplings": ["Dumplings"],
-      "Fish sticks": ["Fish sticks"],
-      "Pollo allo spiedo": ["Whole chicken"],
-      "Pasta al forno": ["Pasta", "Tomato sauce", "Shredded mozzarella"],
-      "Parmigiana di melanzane": ["Eggplant", "Tomato sauce", "Shredded mozzarella"],
-      "Zucchine ripiene": ["Zucchini", "Ground beef", "Bread"],
-      "Lasagna": ["Lasagna noodles", "Meat sauce"],
-      "Spezzatino con patate": ["Beef", "Potatoes", "Onion", "Carrots"],
-      "Tortellini con la panna": ["Tortellini", "Cream"],
-      "Tortellini col sugo": ["Tortellini", "Tomato sauce"],
-      "Pasta col ragù": ["Pasta", "Meat sauce"],
-      "Polpettone": ["Ground beef", "Eggs", "Bacon", "Bread"],
-      "Scrimpelle mbuss": ["Eggs", "Flour", "Milk", "Broth"],
-      "Polenta col sugo": ["Polenta", "Tomato sauce", "Sausages"],
-      "Cannelloni": ["Cannelloni", "Ricotta", "Spinach"],
-      "Bistecca": ["Steak"],
-      "Purè di patate": ["Potatoes"],
-      "Broccoli al vapore": ["Broccoli"],
-      "Insalata di pomodori": ["Tomatoes"],
-      "Tater tots": ["Tater tots"],
-      "Barbabietole": ["Beets"],
-      "Insalata di mais": ["Corn"],
-      "Patate lesse": ["Potatoes"],
-      "Carote al forno": ["Carrots"],
-      "Carote a insalata": ["Carrots"],
-      "Zucchine trifolate": ["Zucchini"],
-      "Insalata di cetrioli": ["Cucumbers"],
-      "Insalata": ["Lettuce"]
-    };
-    
-    const STORES = {
-      Aldi: ["Bacon", "Beets", "Cannelloni", "Carrots", "Chicken thighs", "Breaded cutlets", "Croutons", "Dumplings", "Beans", "Fish sticks", "Lemons", "Corn", "Shredded mozzarella", "Potatoes", "Chicken breast", "Flatbreads", "Tomatoes", "Cherry tomatoes", "Provolone cheese", "Prosciutto", "Ravioli", "Sausages", "American cheese slices", "Spinach", "Tater tots", "Tortellini", "Eggs", "Hot dogs", "Zucchini", "Ground beef", "Ricotta", "Milk", "Pesto sauce"],
-      Wegmans: ["Steak", "Broccoli", "Cucumbers", "Onion", "Hamburger buns", "Butter", "Lettuce", "Lentils", "Eggplant", "Cod", "Whole chicken", "Sage", "Salmon", "Bread", "Tomato sauce"],
-      Amazon: ["Pasta", "Tuna", "Breadcrumbs", "Rice"],
-      Other: []
-    };
-    
-    // State Management
     class MealPlannerApp {
       constructor() {
         this.state = this.loadState() || this.createInitialState();
         this.currentDayIndex = null;
+        this._lastFocus = null;
+        this._touchX = null;
         this.init();
+      }
+      
+      weekKey(date) { 
+        const monday = this.getWeekStart(date); 
+        return `mp_v3_${monday.toISOString().slice(0, 10)}`; 
       }
       
       createInitialState() {
         const weekStart = this.getWeekStart(new Date());
-        const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        
-        return {
-          weekStart: weekStart.toISOString(),
-          showWeekend: true,
+        const names = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        return { 
+          weekStart: weekStart.toISOString(), 
+          showWeekend: true, 
           theme: 'dark',
-          days: days.map((name, index) => ({
-            name,
-            date: new Date(weekStart.getTime() + index * 86400000).toISOString(),
-            lunch: null,
-            dinner: null,
-            side: null,
-            busy: false,
+          days: names.map((name, i) => ({ 
+            name, 
+            date: new Date(weekStart.getTime() + i * 86400000).toISOString(),
+            lunch: null, 
+            dinner: null, 
+            side: null, 
+            busy: false, 
             dinnerType: 'regular',
-            customLunch: null,
-            customDinner: null,
-            customSide: null
+            customLunch: null, 
+            customDinner: null, 
+            customSide: null, 
+            _lastSide: null 
           })),
           groceryExtras: []
         };
       }
       
-      getWeekStart(date) {
-        const d = new Date(date);
-        const day = d.getDay();
-        const diff = d.getDate() - day + (day === 0 ? -6 : 1);
-        return new Date(d.setDate(diff));
+      getWeekStart(date) { 
+        const d = new Date(date); 
+        const day = d.getDay(); 
+        const diff = d.getDate() - day + (day === 0 ? -6 : 1); 
+        return new Date(d.setDate(diff)); 
       }
       
-      formatWeekDate() {
-        const start = new Date(this.state.weekStart);
+      formatWeekDate() { 
+        const start = new Date(this.state.weekStart); 
         const end = new Date(start.getTime() + 6 * 86400000);
-        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        return `${monthNames[start.getMonth()]} ${start.getDate()} - ${end.getDate()}, ${start.getFullYear()}`;
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        return `${months[start.getMonth()]} ${start.getDate()} - ${end.getDate()}, ${start.getFullYear()}`; 
       }
       
-      formatDate(date) {
-        const d = new Date(date);
-        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        return `${monthNames[d.getMonth()]} ${d.getDate()}`;
+      formatDate(dt) { 
+        const d = new Date(dt); 
+        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; 
+        return `${months[d.getMonth()]} ${d.getDate()}`; 
+      }
+      
+      loadState() {
+        try { 
+          const wk = this.weekKey(new Date()); 
+          const a = localStorage.getItem(wk); 
+          if (a) return JSON.parse(a);
+          const legacy = localStorage.getItem(CONFIG.storageKey); 
+          return legacy ? JSON.parse(legacy) : null; 
+        } catch(e) { 
+          return null; 
+        }
+      }
+      
+      saveState() { 
+        try { 
+          const key = this.weekKey(new Date(this.state.weekStart)); 
+          localStorage.setItem(key, JSON.stringify(this.state)); 
+        } catch(e) { 
+          console.error(e); 
+        } 
+      }
+      
+      applyTheme() { 
+        document.documentElement.setAttribute('data-theme', this.state.theme); 
+      }
+      
+      toggleTheme() { 
+        this.state.theme = this.state.theme === 'light' ? 'dark' : 'light'; 
+        this.applyTheme(); 
+        this.saveState(); 
+      }
+      
+      navigateWeek(dir) {
+        const current = new Date(this.state.weekStart);
+        const delta = dir === 'next' ? 7 : -7;
+        const newStart = new Date(current.getTime() + delta * 86400000);
+        const key = this.weekKey(newStart);
+        const existing = JSON.parse(localStorage.getItem(key) || 'null');
+        
+        if (existing) { 
+          this.state = existing; 
+        } else {
+          this.state = this.createInitialState();
+          this.state.weekStart = newStart.toISOString();
+          this.state.days = this.state.days.map((d, i) => ({
+            ...d, 
+            date: new Date(newStart.getTime() + i * 86400000).toISOString()
+          }));
+        }
+        
+        this.saveState(); 
+        this.render();
       }
       
       init() {
         this.applyTheme();
-        this.attachEventListeners();
+        this.attachGlobalListeners();
         this.render();
       }
       
-      loadState() {
-        try {
-          const stored = localStorage.getItem(CONFIG.storageKey);
-          return stored ? JSON.parse(stored) : null;
-        } catch (e) {
-          return null;
-        }
-      }
-      
-      saveState() {
-        try {
-          localStorage.setItem(CONFIG.storageKey, JSON.stringify(this.state));
-        } catch (e) {
-          console.error('Failed to save state:', e);
-        }
-      }
-      
-      applyTheme() {
-        document.documentElement.setAttribute('data-theme', this.state.theme);
-      }
-      
-      toggleTheme() {
-        this.state.theme = this.state.theme === 'light' ? 'dark' : 'light';
-        this.applyTheme();
-        this.saveState();
-      }
-      
-      navigateWeek(direction) {
-        const current = new Date(this.state.weekStart);
-        const days = direction === 'next' ? 7 : -7;
-        const newWeekStart = new Date(current.getTime() + days * 86400000);
-        this.state = this.createInitialState();
-        this.state.weekStart = newWeekStart.toISOString();
-        this.state.days = this.state.days.map((day, index) => ({
-          ...day,
-          date: new Date(newWeekStart.getTime() + index * 86400000).toISOString()
-        }));
-        this.saveState();
-        this.render();
-      }
-      
-      attachEventListeners() {
-        document.getElementById('menuBtn').onclick = () => this.openMenu();
-        document.getElementById('weekendToggle').onclick = () => {
+      attachGlobalListeners() {
+        $('#menuBtn').onclick = () => this.openMenu();
+        
+        const weekendToggle = $('#weekendToggle');
+        weekendToggle.onclick = () => {
           this.state.showWeekend = !this.state.showWeekend;
-          const toggleSwitch = document.getElementById('weekendSwitch');
-          toggleSwitch.classList.toggle('active', this.state.showWeekend);
-          this.saveState();
+          $('#weekendSwitch').classList.toggle('active', this.state.showWeekend);
+          weekendToggle.setAttribute('aria-checked', String(this.state.showWeekend));
+          this.saveState(); 
           this.render();
         };
         
-        const overlay = document.getElementById('modalOverlay');
-        overlay.onclick = (e) => {
-          if (e.target === overlay) this.closeModal();
-        };
+        $('#weekPrev').onclick = () => this.navigateWeek('prev');
+        $('#weekNext').onclick = () => this.navigateWeek('next');
         
-        document.onkeydown = (e) => {
-          if (e.key === 'Escape' && overlay.classList.contains('show')) {
-            this.closeModal();
-          }
-        };
+        const overlay = $('#modalOverlay');
+        overlay.addEventListener('click', (e) => { 
+          if (e.target === overlay) this.closeModal(); 
+        });
+        
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && overlay.classList.contains('show')) this.closeModal();
+          if (overlay.classList.contains('show') && e.key === 'Tab') this.trapFocus(e);
+        });
+        
+        // Touch swipe for week navigation
+        document.addEventListener('touchstart', (e) => { 
+          this._touchX = e.touches[0].clientX; 
+        }, { passive: true });
+        
+        document.addEventListener('touchend', (e) => { 
+          if (this._touchX == null) return; 
+          const dx = e.changedTouches[0].clientX - this._touchX; 
+          if (Math.abs(dx) > 60) dx > 0 ? this.navigateWeek('prev') : this.navigateWeek('next'); 
+          this._touchX = null; 
+        }, { passive: true });
+      }
+      
+      trapFocus(e) {
+        const modal = $('#modalOverlay .modal');
+        const focusable = $$('button,[href],input,textarea,[tabindex]:not([tabindex="-1"])', modal)
+          .filter(el => !el.disabled && el.offsetParent !== null);
+        if (!focusable.length) return;
+        
+        const first = focusable[0], last = focusable[focusable.length - 1];
+        if (e.shiftKey && document.activeElement === first) { 
+          last.focus(); 
+          e.preventDefault(); 
+        } else if (!e.shiftKey && document.activeElement === last) { 
+          first.focus(); 
+          e.preventDefault(); 
+        }
       }
       
       render() {
-        document.getElementById('weekDate').textContent = this.formatWeekDate();
+        const weekDateEl = $('#weekDate');
+        if (weekDateEl) weekDateEl.textContent = this.formatWeekDate();
+        $('#weekendToggle').setAttribute('aria-checked', String(this.state.showWeekend));
+        $('#weekendSwitch').classList.toggle('active', this.state.showWeekend);
         this.renderDays();
       }
       
+      isWeekendName(n) { 
+        return n === 'Saturday' || n === 'Sunday'; 
+      }
+      
       renderDays() {
-        const days = this.state.days.filter(d => 
-          this.state.showWeekend || (d.name !== 'Saturday' && d.name !== 'Sunday')
-        );
+        const days = this.state.days.filter(d => this.state.showWeekend || !this.isWeekendName(d.name));
         
-        const daysHtml = days.map((day, visualIndex) => {
-          const realIndex = this.state.days.indexOf(day);
+        const html = days.map(day => {
+          const idx = this.state.days.indexOf(day);
           const lunchMissing = !day.lunch;
           const dinnerMissing = !day.dinner;
           const sideMissing = day.dinnerType !== 'delivery' && !day.side;
-          const incomplete = lunchMissing || dinnerMissing || sideMissing;
           
-          const lunchDisplay = day.lunch === 'Custom' ? (day.customLunch || 'Enter custom') : day.lunch;
-          const dinnerDisplay = day.dinner === 'Custom' ? (day.customDinner || 'Enter custom') : day.dinner;
-          const sideDisplay = day.side === 'Custom' ? (day.customSide || 'Enter custom') : day.side;
+          const completeness = (day.dinnerType === 'delivery')
+            ? `${Number(!lunchMissing) + Number(!dinnerMissing)}/2`
+            : `${Number(!lunchMissing) + Number(!dinnerMissing) + Number(!sideMissing)}/3`;
           
-          const lunchText = day.lunch === 'None' ? 'No lunch' : (lunchDisplay || 'Select lunch');
-          const dinnerText = day.dinner === 'None' ? 'No dinner' : (dinnerDisplay || 'Select dinner');
-          const sideText = day.dinnerType === 'delivery' ? '' : 
-                         (day.side === 'None' ? 'No side' : (sideDisplay || 'Select side'));
+          const lunchDisp = day.lunch === 'Custom' ? (day.customLunch || 'Enter custom') : day.lunch;
+          const dinnerDisp = day.dinner === 'Custom' ? (day.customDinner || 'Enter custom') : day.dinner;
+          const sideDisp = day.side === 'Custom' ? (day.customSide || 'Enter custom') : day.side;
+          
+          const lunchText = day.lunch === 'None' ? 'No lunch' : (lunchDisp || 'Select lunch');
+          const dinnerText = day.dinner === 'None' ? 'No dinner' : (dinnerDisp || 'Select dinner');
+          const sideText = day.dinnerType === 'delivery' ? '' : (day.side === 'None' ? 'No side' : (sideDisp || 'Select side'));
           
           const lunchEmoji = day.lunch ? (MEAL_EMOJIS[day.lunch] || '🍽️') : '🍽️';
           const dinnerEmoji = day.dinner ? (MEAL_EMOJIS[day.dinner] || '🍽️') : '🍽️';
           
           return `
-            <div class="day-card ${incomplete ? 'incomplete' : ''}">
+            <div class="day-card ${(lunchMissing || dinnerMissing || sideMissing) ? 'incomplete' : ''}" data-day="${idx}">
               <div class="day-header">
                 <div>
-                  <div class="day-title">${day.name}</div>
+                  <div class="day-title">
+                    ${day.name} 
+                    <span class="chip">${completeness}</span>
+                  </div>
                   <div class="day-date">${this.formatDate(day.date)}</div>
                 </div>
-                ${day.busy ? `<button class="busy-toggle active" data-index="${realIndex}">✓ Busy Night</button>` : ''}
               </div>
               
-              <div class="meal-item ${lunchMissing ? 'empty' : ''}" data-meal="lunch" data-index="${realIndex}">
+              <div class="meal-item ${lunchMissing ? 'empty' : ''}" data-meal="lunch" data-index="${idx}">
                 <div class="meal-icon lunch">${lunchEmoji}</div>
                 <div class="meal-content">
                   <h4 class="meal-title">Lunch</h4>
@@ -1007,12 +1264,14 @@
                 </div>
               </div>
               
-              <div class="meal-item ${dinnerMissing ? 'empty' : ''}" data-meal="dinner" data-index="${realIndex}">
+              <div class="meal-item ${dinnerMissing ? 'empty' : ''}" data-meal="dinner" data-index="${idx}">
                 <div class="meal-icon dinner">${dinnerEmoji}</div>
-                <div class="meal-content">
-                  <div style="display: flex; justify-content: space-between; align-items: center;">
-                    <h4 class="meal-title">Dinner</h4>
-                    ${!day.busy ? `<button class="busy-toggle" data-index="${realIndex}">Busy Night</button>` : ''}
+                <div class="meal-content" style="flex: 1;">
+                  <div style="display: flex; justify-content: space-between; align-items: center; gap: 8px;">
+                    <h4 class="meal-title" style="margin: 0;">Dinner</h4>
+                    <button class="busy-toggle ${day.busy ? 'active' : ''}" data-index="${idx}" data-role="busy-toggle">
+                      ${day.busy ? '✓ Busy Night' : 'Busy Night'}
+                    </button>
                   </div>
                   <p class="meal-description">
                     ${dinnerText}
@@ -1024,29 +1283,25 @@
           `;
         }).join('');
         
-        document.getElementById('daysList').innerHTML = daysHtml;
+        $('#daysList').innerHTML = html;
         this.attachDayListeners();
       }
       
       attachDayListeners() {
-        document.querySelectorAll('.meal-item').forEach(item => {
+        $$('#daysList .meal-item').forEach(item => {
           item.onclick = (e) => {
-            if (!e.target.closest('.busy-toggle')) {
-              const index = parseInt(item.dataset.index);
-              const meal = item.dataset.meal;
-              if (meal === 'lunch') {
-                this.openLunchModal(index);
-              } else {
-                this.openDinnerModal(index);
-              }
-            }
+            if (e.target.closest('[data-role="busy-toggle"]')) return;
+            const index = parseInt(item.dataset.index, 10);
+            const meal = item.dataset.meal;
+            if (meal === 'lunch') this.openLunchModal(index);
+            else this.openDinnerModal(index);
           };
         });
         
-        document.querySelectorAll('.busy-toggle').forEach(btn => {
+        $$('#daysList [data-role="busy-toggle"]').forEach(btn => {
           btn.onclick = (e) => {
             e.stopPropagation();
-            const index = parseInt(btn.dataset.index);
+            const index = parseInt(btn.dataset.index, 10);
             const day = this.state.days[index];
             day.busy = !day.busy;
             if (day.busy) {
@@ -1055,66 +1310,89 @@
             } else {
               day.dinnerType = 'regular';
             }
-            this.saveState();
+            this.saveState(); 
             this.render();
           };
         });
       }
       
       openModal({ title, subtitle = '', bodyHTML = '', footer = [] }) {
-        const overlay = document.getElementById('modalOverlay');
-        document.getElementById('modalTitle').textContent = title || '';
-        document.getElementById('modalSubtitle').textContent = subtitle || '';
-        document.getElementById('modalBody').innerHTML = bodyHTML || '';
+        const overlay = $('#modalOverlay');
+        const modal = $('#modalOverlay .modal');
+        $('#modalTitle').textContent = title || '';
+        $('#modalSubtitle').textContent = subtitle || '';
+        $('#modalBody').innerHTML = bodyHTML || '';
         
-        const modalFooter = document.getElementById('modalFooter');
-        modalFooter.innerHTML = '';
-        footer.forEach(btn => {
-          const button = document.createElement('button');
-          button.className = `btn ${btn.type || ''}`;
-          button.textContent = btn.label;
-          button.onclick = btn.onClick;
-          modalFooter.appendChild(button);
+        const mf = $('#modalFooter');
+        mf.innerHTML = '';
+        footer.forEach(b => {
+          const el = document.createElement('button');
+          el.className = `btn ${b.type || ''}`;
+          el.id = b.id || '';
+          el.textContent = b.label;
+          el.onclick = b.onClick;
+          mf.appendChild(el);
         });
         
+        document.body.classList.add('modal-open');
         overlay.classList.add('show');
+        overlay.setAttribute('aria-hidden', 'false');
+        this._lastFocus = document.activeElement;
+        setTimeout(() => modal.focus(), 0);
       }
       
       closeModal() {
-        document.getElementById('modalOverlay').classList.remove('show');
+        const ov = $('#modalOverlay');
+        ov.classList.remove('show');
+        ov.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('modal-open');
+        this._lastFocus && this._lastFocus.focus();
       }
       
       openLunchModal(index) {
         this.currentDayIndex = index;
         const day = this.state.days[index];
         
-        const selected = day.lunch;
-        const bodyHTML = `
-          <div class="action-buttons">
-            <button class="btn-action" id="randomizeLunch">🎲 Randomize</button>
-            <button class="btn-action" id="clearLunch">🗑️ Clear</button>
-          </div>
-          ${day.lunch === 'Custom' ? `
+        let bodyHTML = this.renderBentoGrid('lunch', day.lunch, MEAL_DATA.lunch);
+        if (day.lunch === 'Custom') {
+          bodyHTML += `
             <div class="input-group">
               <label class="input-label">Custom Lunch</label>
-              <input class="input" id="customLunchInput" value="${day.customLunch || ''}" placeholder="Enter custom meal">
-            </div>
-          ` : ''}
-          ${this.renderBentoGrid('lunch', selected, MEAL_DATA.lunch)}
-        `;
+              <input class="input" id="customLunchInput" value="${sanitize(day.customLunch)}" placeholder="Enter custom meal">
+            </div>`;
+        }
         
         this.openModal({
           title: `Lunch - ${day.name}`,
           subtitle: this.formatDate(day.date),
           bodyHTML,
           footer: [
-            { label: 'Cancel', onClick: () => this.closeModal() },
             {
+              id: 'footerRandomize',
+              label: '🎲 Randomize',
+              onClick: () => {
+                const opts = MEAL_DATA.lunch.filter(m => m !== 'None' && m !== 'Custom');
+                day.lunch = opts[Math.floor(Math.random() * opts.length)];
+                this.openLunchModal(index);
+              }
+            },
+            {
+              id: 'footerClear',
+              label: '🗑️ Clear',
+              onClick: () => {
+                day.lunch = null;
+                day.customLunch = null;
+                this.openLunchModal(index);
+              }
+            },
+            { id: 'footerCancel', label: 'Cancel', onClick: () => this.closeModal() },
+            {
+              id: 'footerSave',
               label: 'Save',
               type: 'btn-primary',
               onClick: () => {
                 this.saveState();
-                this.render(); // Update view immediately
+                this.render();
                 this.closeModal();
                 this.showToast('Saved! ✓');
               }
@@ -1122,21 +1400,9 @@
           ]
         });
         
-        document.getElementById('randomizeLunch').onclick = () => {
-          const options = MEAL_DATA.lunch.filter(m => m !== 'None' && m !== 'Custom');
-          day.lunch = options[Math.floor(Math.random() * options.length)];
-          this.openLunchModal(index);
-        };
-        
-        document.getElementById('clearLunch').onclick = () => {
-          day.lunch = null;
-          day.customLunch = null;
-          this.openLunchModal(index);
-        };
-        
         if (day.lunch === 'Custom') {
-          document.getElementById('customLunchInput').oninput = (e) => {
-            day.customLunch = e.target.value;
+          $('#customLunchInput').oninput = (e) => {
+            day.customLunch = sanitize(e.target.value);
           };
         }
         
@@ -1146,78 +1412,82 @@
       openDinnerModal(index) {
         this.currentDayIndex = index;
         const day = this.state.days[index];
+        const dinnerOptions = this.getDinnerOptions(day);
         
-        const isWeekend = day.name === 'Saturday' || day.name === 'Sunday';
-        let dinnerOptions = MEAL_DATA.dinnerRegular;
-        
-        if (day.busy && day.dinnerType === 'quick') {
-          dinnerOptions = MEAL_DATA.dinnerQuick;
-        } else if (day.busy && day.dinnerType === 'delivery') {
-          dinnerOptions = MEAL_DATA.delivery;
-        } else if (!day.busy && isWeekend) {
-          dinnerOptions = MEAL_DATA.dinnerWeekend;
-        }
-        
-        const bodyHTML = `
+        const controlsHTML = `
           <div class="controls">
-            <button id="busyToggle" class="busy-toggle ${day.busy ? 'active' : ''}">
-              ${day.busy ? '✓ Busy Night' : 'Busy Night'}
-            </button>
+            <button id="busyToggle" class="busy-toggle ${day.busy ? 'active' : ''}">${day.busy ? '✓ Busy Night' : 'Busy Night'}</button>
             ${day.busy ? `
               <div class="radio-group">
-                <button class="radio ${day.dinnerType === 'quick' ? 'active' : ''}" data-type="quick">
-                  Quick
-                </button>
-                <button class="radio ${day.dinnerType === 'delivery' ? 'active' : ''}" data-type="delivery">
-                  Delivery
-                </button>
-              </div>
-            ` : ''}
-          </div>
-          
-          <div class="action-buttons">
-            <button class="btn-action" id="randomizeDinner">🎲 Randomize</button>
-            <button class="btn-action" id="clearDinner">🗑️ Clear</button>
-          </div>
-          
-          ${day.dinner === 'Custom' ? `
+                <button class="radio ${day.dinnerType === 'quick' ? 'active' : ''}" data-type="quick">Quick</button>
+                <button class="radio ${day.dinnerType === 'delivery' ? 'active' : ''}" data-type="delivery">Delivery</button>
+              </div>` : ''}
+          </div>`;
+        
+        const dinnerGridHTML = `<div id="dinnerBento">${this.renderBentoGrid('dinner', day.dinner, dinnerOptions)}</div>`;
+        
+        let customDinnerHTML = '';
+        if (day.dinner === 'Custom') {
+          customDinnerHTML = `
             <div class="input-group">
               <label class="input-label">Custom Dinner</label>
-              <input class="input" id="customDinnerInput" value="${day.customDinner || ''}" placeholder="Enter custom meal">
-            </div>
-          ` : ''}
+              <input class="input" id="customDinnerInput" value="${sanitize(day.customDinner)}" placeholder="Enter custom meal">
+            </div>`;
+        }
+        
+        let sideSectionHTML = '';
+        if (day.dinnerType !== 'delivery') {
+          sideSectionHTML = `
+            <div class="input-group"><label class="input-label">Side Dish</label></div>
+            <div id="sideBento">${this.renderBentoGrid('side', day.side, MEAL_DATA.side)}</div>`;
           
-          <div id="dinnerBento">
-            ${this.renderBentoGrid('dinner', day.dinner, dinnerOptions)}
-          </div>
-          
-          ${day.dinnerType !== 'delivery' ? `
-            <div class="input-group">
-              <label class="input-label">Side Dish</label>
-            </div>
-            ${day.side === 'Custom' ? `
+          if (day.side === 'Custom') {
+            sideSectionHTML += `
               <div class="input-group">
-                <input class="input" id="customSideInput" value="${day.customSide || ''}" placeholder="Enter custom side">
-              </div>
-            ` : ''}
-            <div id="sideBento">
-              ${this.renderBentoGrid('side', day.side, MEAL_DATA.side)}
-            </div>
-          ` : ''}
-        `;
+                <input class="input" id="customSideInput" value="${sanitize(day.customSide)}" placeholder="Enter custom side">
+              </div>`;
+          }
+        }
+        
+        const bodyHTML = controlsHTML + dinnerGridHTML + customDinnerHTML + sideSectionHTML;
         
         this.openModal({
           title: `Dinner - ${day.name}`,
           subtitle: this.formatDate(day.date),
           bodyHTML,
           footer: [
-            { label: 'Cancel', onClick: () => this.closeModal() },
             {
+              id: 'footerRandomize',
+              label: '🎲 Randomize',
+              onClick: () => {
+                const opt = dinnerOptions.filter(m => m !== 'None' && m !== 'Custom');
+                day.dinner = opt[Math.floor(Math.random() * opt.length)];
+                if (day.dinnerType !== 'delivery') {
+                  const so = MEAL_DATA.side.filter(m => m !== 'None' && m !== 'Custom');
+                  day.side = so[Math.floor(Math.random() * so.length)];
+                }
+                this.openDinnerModal(index);
+              }
+            },
+            {
+              id: 'footerClear',
+              label: '🗑️ Clear',
+              onClick: () => {
+                day.dinner = null;
+                day.customDinner = null;
+                day.side = null;
+                day.customSide = null;
+                this.openDinnerModal(index);
+              }
+            },
+            { id: 'footerCancel', label: 'Cancel', onClick: () => this.closeModal() },
+            {
+              id: 'footerSave',
               label: 'Save',
               type: 'btn-primary',
               onClick: () => {
                 this.saveState();
-                this.render(); // Update view immediately
+                this.render();
                 this.closeModal();
                 this.showToast('Saved! ✓');
               }
@@ -1225,7 +1495,7 @@
           ]
         });
         
-        document.getElementById('busyToggle').onclick = () => {
+        $('#busyToggle').onclick = () => {
           day.busy = !day.busy;
           if (day.busy) {
             day.dinnerType = 'quick';
@@ -1236,52 +1506,42 @@
           this.openDinnerModal(index);
         };
         
-        document.getElementById('randomizeDinner').onclick = () => {
-          const options = dinnerOptions.filter(m => m !== 'None' && m !== 'Custom');
-          day.dinner = options[Math.floor(Math.random() * options.length)];
-          
-          if (day.dinnerType !== 'delivery') {
-            const sideOptions = MEAL_DATA.side.filter(m => m !== 'None' && m !== 'Custom');
-            day.side = sideOptions[Math.floor(Math.random() * sideOptions.length)];
-          }
-          this.openDinnerModal(index);
-        };
-        
-        document.getElementById('clearDinner').onclick = () => {
-          day.dinner = null;
-          day.customDinner = null;
-          day.side = null;
-          day.customSide = null;
-          this.openDinnerModal(index);
-        };
-        
-        if (day.dinner === 'Custom') {
-          document.getElementById('customDinnerInput').oninput = (e) => {
-            day.customDinner = e.target.value;
-          };
-        }
-        
-        if (day.side === 'Custom') {
-          document.getElementById('customSideInput').oninput = (e) => {
-            day.customSide = e.target.value;
-          };
-        }
-        
-        document.querySelectorAll('.radio[data-type]').forEach(radio => {
-          radio.onclick = () => {
-            day.dinnerType = radio.dataset.type;
+        $$('.radio[data-type]').forEach(r => {
+          r.onclick = () => {
+            day.dinnerType = r.dataset.type;
             day.dinner = null;
-            if (radio.dataset.type === 'delivery') {
+            if (r.dataset.type === 'delivery') {
+              if (day.side != null) day._lastSide = day.side;
               day.side = null;
+            } else {
+              if (day.side == null && day._lastSide) day.side = day._lastSide;
             }
             this.openDinnerModal(index);
           };
         });
         
-        this.attachBentoListeners('dinner', dinnerOptions);
-        if (day.dinnerType !== 'delivery') {
-          this.attachBentoListeners('side');
+        if (day.dinner === 'Custom') {
+          $('#customDinnerInput').oninput = (e) => {
+            day.customDinner = sanitize(e.target.value);
+          };
         }
+        
+        if (day.dinnerType !== 'delivery' && day.side === 'Custom') {
+          $('#customSideInput').oninput = (e) => {
+            day.customSide = sanitize(e.target.value);
+          };
+        }
+        
+        this.attachBentoListeners('dinner', dinnerOptions);
+        if (day.dinnerType !== 'delivery') this.attachBentoListeners('side');
+      }
+      
+      getDinnerOptions(day) {
+        const isWeekend = (day.name === 'Saturday' || day.name === 'Sunday');
+        if (day.busy && day.dinnerType === 'quick') return MEAL_DATA.dinnerQuick;
+        if (day.busy && day.dinnerType === 'delivery') return MEAL_DATA.delivery;
+        if (!day.busy && isWeekend) return MEAL_DATA.dinnerWeekend;
+        return MEAL_DATA.dinnerRegular;
       }
       
       openMenu() {
@@ -1292,64 +1552,60 @@
             <div class="menu-grid">
               <div class="menu-item" id="menuTheme">
                 <div class="menu-item-icon">${this.state.theme === 'dark' ? '🌙' : '☀️'}</div>
-                <div class="menu-item-content">
-                  <h4>Toggle Theme</h4>
-                  <p>${this.state.theme === 'dark' ? 'Switch to light' : 'Switch to dark'}</p>
-                </div>
+                <div class="menu-item-content"><h4>Toggle Theme</h4><p>${this.state.theme === 'dark' ? 'Switch to light' : 'Switch to dark'}</p></div>
               </div>
               <div class="menu-item" id="menuRandomize">
                 <div class="menu-item-icon">🎲</div>
-                <div class="menu-item-content">
-                  <h4>Randomize Week</h4>
-                  <p>Auto-fill empty meals</p>
-                </div>
+                <div class="menu-item-content"><h4>Randomize Week</h4><p>Auto-fill empty meals</p></div>
               </div>
               <div class="menu-item" id="menuShopping">
                 <div class="menu-item-icon">🛒</div>
-                <div class="menu-item-content">
-                  <h4>Shopping List</h4>
-                  <p>View & share</p>
-                </div>
+                <div class="menu-item-content"><h4>Shopping List</h4><p>View & share</p></div>
+              </div>
+              <div class="menu-item" id="menuShareAll">
+                <div class="menu-item-icon">📤</div>
+                <div class="menu-item-content"><h4>Share Plan & List</h4><p>Weekly plan + grocery</p></div>
               </div>
               <div class="menu-item" id="menuClear">
                 <div class="menu-item-icon">🗑️</div>
-                <div class="menu-item-content">
-                  <h4>Clear Week</h4>
-                  <p>Reset all selections</p>
-                </div>
+                <div class="menu-item-content"><h4>Clear Week</h4><p>Reset all selections</p></div>
               </div>
             </div>
           `,
           footer: [{ label: 'Close', onClick: () => this.closeModal() }]
         });
         
-        document.getElementById('menuTheme').onclick = () => {
+        $('#menuTheme').onclick = () => {
           this.toggleTheme();
           this.closeModal();
         };
         
-        document.getElementById('menuRandomize').onclick = () => {
+        $('#menuRandomize').onclick = () => {
           this.randomizeWeek();
           this.closeModal();
           this.showToast('Week randomized! 🎲');
         };
         
-        document.getElementById('menuShopping').onclick = () => {
+        $('#menuShopping').onclick = () => {
           this.openGroceryList();
         };
         
-        document.getElementById('menuClear').onclick = () => {
+        $('#menuShareAll').onclick = () => {
+          this.shareWeekAndGrocery();
+        };
+        
+        $('#menuClear').onclick = () => {
           if (confirm('Clear all meals for this week?')) {
-            this.state.days = this.state.days.map(day => ({
-              ...day,
+            this.state.days = this.state.days.map(d => ({
+              ...d,
               lunch: null,
               dinner: null,
               side: null,
-              busy: false,
               dinnerType: 'regular',
               customLunch: null,
               customDinner: null,
-              customSide: null
+              customSide: null,
+              _lastSide: null
             }));
             this.saveState();
             this.closeModal();
@@ -1360,38 +1616,49 @@
       }
       
       renderBentoGrid(type, selected, options) {
+        const ordered = [...options].sort((a, b) => {
+          const sp = x => (x === 'None' || x === 'Custom') ? 1 : 0;
+          if (sp(a) !== sp(b)) return sp(a) - sp(b);
+          if (a === 'Custom') return 1;
+          if (b === 'Custom') return -1;
+          if (a === 'None') return 1;
+          if (b === 'None') return -1;
+          return String(a).localeCompare(String(b), 'en');
+        });
+        
         return `
           <div class="bento-grid" data-type="${type}">
-            ${options.map(item => `
+            ${ordered.map(item => `
               <div class="bento-item ${selected === item ? 'selected' : ''}" data-value="${item}">
                 <span class="bento-emoji">${MEAL_EMOJIS[item] || '🍽️'}</span>
                 <span>${item}</span>
-              </div>
-            `).join('')}
-          </div>
-        `;
+              </div>`).join('')}
+          </div>`;
       }
       
       attachBentoListeners(type) {
         const grid = document.querySelector(`.bento-grid[data-type="${type}"]`);
         if (!grid) return;
         
-        grid.querySelectorAll('.bento-item').forEach(item => {
-          item.onclick = () => {
-            const value = item.dataset.value;
+        grid.querySelectorAll('.bento-item').forEach(it => {
+          it.onclick = () => {
+            const value = it.dataset.value;
             const day = this.state.days[this.currentDayIndex];
             
             grid.querySelectorAll('.bento-item').forEach(i => i.classList.remove('selected'));
-            item.classList.add('selected');
-            
+            it.classList.add('selected');
             day[type] = value;
             
             if (value === 'Custom') {
-              if (type === 'lunch') {
-                this.openLunchModal(this.currentDayIndex);
-              } else if (type === 'dinner') {
-                this.openDinnerModal(this.currentDayIndex);
-              }
+              if (type === 'lunch') this.openLunchModal(this.currentDayIndex);
+              else this.openDinnerModal(this.currentDayIndex);
+            } else {
+              if (type === 'lunch') day.customLunch = null;
+              if (type === 'dinner') day.customDinner = null;
+              if (type === 'side') day.customSide = null;
+              
+              if (type === 'lunch') this.openLunchModal(this.currentDayIndex);
+              else this.openDinnerModal(this.currentDayIndex);
             }
           };
         });
@@ -1400,31 +1667,19 @@
       randomizeWeek() {
         this.state.days = this.state.days.map(day => {
           if (!day.lunch) {
-            const lunchOptions = MEAL_DATA.lunch.filter(m => m !== 'None' && m !== 'Custom');
-            day.lunch = lunchOptions[Math.floor(Math.random() * lunchOptions.length)];
+            const lo = MEAL_DATA.lunch.filter(m => m !== 'None' && m !== 'Custom');
+            day.lunch = lo[Math.floor(Math.random() * lo.length)];
           }
           
           if (!day.dinner) {
-            let dinnerOptions;
-            const isWeekend = day.name === 'Saturday' || day.name === 'Sunday';
-            
-            if (day.busy && day.dinnerType === 'quick') {
-              dinnerOptions = MEAL_DATA.dinnerQuick;
-            } else if (day.busy && day.dinnerType === 'delivery') {
-              dinnerOptions = MEAL_DATA.delivery;
-            } else if (!day.busy && isWeekend) {
-              dinnerOptions = MEAL_DATA.dinnerWeekend;
-            } else {
-              dinnerOptions = MEAL_DATA.dinnerRegular;
-            }
-            
-            dinnerOptions = dinnerOptions.filter(m => m !== 'None' && m !== 'Custom');
-            day.dinner = dinnerOptions[Math.floor(Math.random() * dinnerOptions.length)];
+            const d0 = this.getDinnerOptions(day);
+            const doo = d0.filter(m => m !== 'None' && m !== 'Custom');
+            day.dinner = doo[Math.floor(Math.random() * doo.length)];
           }
           
           if (!day.side && day.dinnerType !== 'delivery') {
-            const sideOptions = MEAL_DATA.side.filter(m => m !== 'None' && m !== 'Custom');
-            day.side = sideOptions[Math.floor(Math.random() * sideOptions.length)];
+            const so = MEAL_DATA.side.filter(m => m !== 'None' && m !== 'Custom');
+            day.side = so[Math.floor(Math.random() * so.length)];
           }
           
           return day;
@@ -1435,39 +1690,33 @@
       }
       
       openGroceryList() {
-        const groceryData = this.computeGrocery();
-        const stores = Object.keys(groceryData).sort();
+        const data = this.computeGrocery();
+        const stores = Object.keys(data).sort();
         
-        const bodyHTML = stores.length ? stores.map(store => `
+        const body = stores.length ? stores.map(s => `
           <div class="store-section">
-            <h3 class="store-title">${store}</h3>
-            ${groceryData[store].map((item, i) => `
-              <div class="grocery-item" data-store="${store}" data-index="${i}">
+            <h3 class="store-title">${s}</h3>
+            ${data[s].map((item, i) => `
+              <div class="grocery-item" data-store="${s}" data-index="${i}">
                 <div class="checkbox"></div>
                 <div class="grocery-item-text">${INGREDIENT_EMOJIS[item] || ''} ${item}</div>
-              </div>
-            `).join('')}
-          </div>
-        `).join('') : '<div class="store-section"><p>No items to shop for</p></div>';
+              </div>`).join('')}
+          </div>`).join('') : '<div class="store-section"><p>No items to shop for</p></div>';
         
         this.openModal({
           title: 'Shopping List',
           subtitle: 'Check off items as you shop',
-          bodyHTML,
+          bodyHTML: body,
           footer: [
             { label: 'Close', onClick: () => this.closeModal() },
-            {
-              label: 'Share',
-              type: 'btn-primary',
-              onClick: () => this.shareGroceryList(groceryData)
-            }
+            { label: 'Share', type: 'btn-primary', onClick: () => this.shareGroceryList(data) }
           ]
         });
         
-        document.querySelectorAll('.checkbox').forEach(checkbox => {
-          checkbox.onclick = () => {
-            checkbox.classList.toggle('checked');
-            checkbox.parentElement.classList.toggle('checked');
+        $$('.checkbox').forEach(cb => {
+          cb.onclick = () => {
+            cb.classList.toggle('checked');
+            cb.parentElement.classList.toggle('checked');
           };
         });
       }
@@ -1475,26 +1724,20 @@
       computeGrocery() {
         const grouped = {};
         
-        const addItem = (store, item) => {
+        const add = (store, item) => {
           if (!grouped[store]) grouped[store] = [];
-          if (!grouped[store].includes(item)) {
-            grouped[store].push(item);
-          }
+          if (!grouped[store].includes(item)) grouped[store].push(item);
         };
         
-        this.state.days.forEach(day => {
+        this.state.days.forEach(d => {
           const meals = [];
-          if (day.lunch && day.lunch !== 'None' && day.lunch !== 'Custom') meals.push(day.lunch);
-          if (day.dinner && day.dinner !== 'None' && day.dinner !== 'Custom') meals.push(day.dinner);
-          if (day.side && day.side !== 'None' && day.side !== 'Custom' && day.dinnerType !== 'delivery') {
-            meals.push(day.side);
-          }
+          if (d.lunch && d.lunch !== 'None' && d.lunch !== 'Custom') meals.push(d.lunch);
+          if (d.dinner && d.dinner !== 'None' && d.dinner !== 'Custom') meals.push(d.dinner);
+          if (d.side && d.side !== 'None' && d.side !== 'Custom' && d.dinnerType !== 'delivery') meals.push(d.side);
           
-          meals.forEach(meal => {
-            const ingredients = INGREDIENTS[meal] || [];
-            ingredients.forEach(ing => {
-              const store = this.findStoreForItem(ing);
-              addItem(store, ing);
+          meals.forEach(m => {
+            (INGREDIENTS[m] || []).forEach(ing => {
+              add(this.findStoreForItem(ing), ing);
             });
           });
         });
@@ -1509,44 +1752,61 @@
         return 'Other';
       }
       
-      shareGroceryList(groceryData) {
+      shareGroceryList(data) {
         const lines = ['🛒 Shopping List\n'];
-        Object.keys(groceryData).sort().forEach(store => {
-          lines.push(`\n${store}:`);
-          groceryData[store].forEach(item => {
-            lines.push(`• ${INGREDIENT_EMOJIS[item] || ''} ${item}`);
-          });
+        Object.keys(data).sort().forEach(s => {
+          lines.push(`\n${s}:`);
+          data[s].forEach(i => lines.push(`• ${INGREDIENT_EMOJIS[i] || ''} ${i}`));
         });
         
         const text = lines.join('\n');
-        
         if (navigator.share) {
-          navigator.share({
-            title: 'Shopping List',
-            text
-          });
+          navigator.share({ title: 'Shopping List', text });
         } else if (navigator.clipboard) {
           navigator.clipboard.writeText(text);
           this.showToast('Copied to clipboard! 📋');
         }
       }
       
-      showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.classList.add('show');
+      shareWeekAndGrocery() {
+        const plan = this.state.days.map(d => {
+          const dd = this.formatDate(d.date);
+          const L = d.lunch && d.lunch !== 'None' ? (d.lunch === 'Custom' ? (d.customLunch || 'Custom') : d.lunch) : '—';
+          const Dm = d.dinner && d.dinner !== 'None' ? (d.dinner === 'Custom' ? (d.customDinner || 'Custom') : d.dinner) : '—';
+          const Sd = (d.dinnerType !== 'delivery' && d.side && d.side !== 'None') ? (d.side === 'Custom' ? (d.customSide || 'Custom') : d.side) : '—';
+          const busy = d.busy ? (d.dinnerType === 'delivery' ? 'Delivery' : 'Quick') : '';
+          
+          return `${d.name} (${dd})
+  Lunch: ${L}
+  Dinner: ${Dm}${busy ? ` [${busy}]` : ''}${d.dinnerType !== 'delivery' ? `\n  Side: ${Sd}` : ''}`;
+        }).join('\n\n');
         
-        setTimeout(() => {
-          toast.classList.remove('show');
-        }, CONFIG.animations.toast);
+        const grocery = this.computeGrocery();
+        const lines = ['🗓️ Weekly Plan', plan, '\n🛒 Shopping List'];
+        Object.keys(grocery).sort().forEach(s => {
+          lines.push(`\n${s}:`);
+          grocery[s].forEach(i => lines.push(`• ${INGREDIENT_EMOJIS[i] || ''} ${i}`));
+        });
+        
+        const text = lines.join('\n');
+        if (navigator.share) {
+          navigator.share({ title: 'Meal plan & shopping', text });
+        } else if (navigator.clipboard) {
+          navigator.clipboard.writeText(text);
+          this.showToast('Plan & list copied! 📋');
+        }
+      }
+      
+      showToast(msg) {
+        const t = $('#toast');
+        t.textContent = msg;
+        t.classList.add('show');
+        setTimeout(() => t.classList.remove('show'), CONFIG.animations.toast);
       }
     }
     
-    // Initialize app
     if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', () => {
-        new MealPlannerApp();
-      });
+      document.addEventListener('DOMContentLoaded', () => { new MealPlannerApp(); });
     } else {
       new MealPlannerApp();
     }
