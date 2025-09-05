@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <title>Delicious Weeks</title>
+  <title>Tasty Planning</title>
   <style>
     :root {
       /* Dark Theme with Vibrant Accents */
@@ -100,7 +100,7 @@
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 12px;
+      padding: 6px;
       background: var(--surface-glass);
       border: 1px solid var(--border-default);
       border-radius: 999px;
@@ -109,10 +109,40 @@
       font-weight: 600;
     }
     
-    .weekend-toggle.active {
+    .toggle-label {
+      padding: 0 4px;
+      color: var(--text-secondary);
+    }
+    
+    .toggle-switch {
+      position: relative;
+      width: 44px;
+      height: 24px;
+      background: var(--surface-glass);
+      border: 1px solid var(--border-default);
+      border-radius: 999px;
+      transition: all 0.3s;
+    }
+    
+    .toggle-switch.active {
       background: var(--accent-violet);
       border-color: var(--accent-violet);
-      color: white;
+    }
+    
+    .toggle-knob {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 20px;
+      height: 20px;
+      background: white;
+      border-radius: 50%;
+      transition: transform 0.3s;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    }
+    
+    .toggle-switch.active .toggle-knob {
+      transform: translateX(20px);
     }
     
     .container {
@@ -124,9 +154,9 @@
     .week-nav {
       display: flex;
       align-items: center;
-      justify-content: space-between;
+      justify-content: center;
       margin-bottom: 16px;
-      padding: 12px;
+      padding: 16px;
       background: var(--surface-card);
       backdrop-filter: blur(10px);
       border-radius: 16px;
@@ -134,8 +164,9 @@
     }
     
     .week-date {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 600;
+      text-align: center;
     }
     
     .day-card {
@@ -308,34 +339,6 @@
       padding: 16px;
       background: var(--surface-glass);
       border-top: 1px solid var(--border-subtle);
-    }
-    
-    .tabs {
-      display: flex;
-      gap: 8px;
-      padding: 12px;
-      position: sticky;
-      top: 0;
-      background: inherit;
-      z-index: 10;
-    }
-    
-    .tab {
-      flex: 1;
-      padding: 12px;
-      font-weight: 600;
-      text-align: center;
-      background: var(--surface-glass);
-      color: var(--text-secondary);
-      border: 1px solid var(--border-default);
-      border-radius: 12px;
-      cursor: pointer;
-    }
-    
-    .tab.active {
-      background: var(--accent-violet);
-      border-color: var(--accent-violet);
-      color: white;
     }
     
     .controls {
@@ -613,15 +616,18 @@
 <body>
   <header class="header">
     <button id="menuBtn" class="btn-icon">☰</button>
-    <h1 class="header-title">Delicious Weeks</h1>
-    <button id="weekendToggle" class="weekend-toggle active">📅 Weekends</button>
+    <h1 class="header-title">Tasty Planning</h1>
+    <button id="weekendToggle" class="weekend-toggle">
+      <span class="toggle-label">Weekends</span>
+      <div class="toggle-switch active" id="weekendSwitch">
+        <div class="toggle-knob"></div>
+      </div>
+    </button>
   </header>
   
   <div class="container">
     <div class="week-nav">
-      <button id="prevWeek" class="btn-icon">←</button>
       <div class="week-date" id="weekDate"></div>
-      <button id="nextWeek" class="btn-icon">→</button>
     </div>
     <div id="daysList"></div>
   </div>
@@ -837,7 +843,6 @@
     class MealPlannerApp {
       constructor() {
         this.state = this.loadState() || this.createInitialState();
-        this.currentTab = 'lunch';
         this.currentDayIndex = null;
         this.init();
       }
@@ -937,13 +942,11 @@
         document.getElementById('menuBtn').onclick = () => this.openMenu();
         document.getElementById('weekendToggle').onclick = () => {
           this.state.showWeekend = !this.state.showWeekend;
-          document.getElementById('weekendToggle').classList.toggle('active', this.state.showWeekend);
+          const toggleSwitch = document.getElementById('weekendSwitch');
+          toggleSwitch.classList.toggle('active', this.state.showWeekend);
           this.saveState();
           this.render();
         };
-        
-        document.getElementById('prevWeek').onclick = () => this.navigateWeek('prev');
-        document.getElementById('nextWeek').onclick = () => this.navigateWeek('next');
         
         const overlay = document.getElementById('modalOverlay');
         overlay.onclick = (e) => {
@@ -987,7 +990,7 @@
           const dinnerEmoji = day.dinner ? (MEAL_EMOJIS[day.dinner] || '🍽️') : '🍽️';
           
           return `
-            <div class="day-card ${incomplete ? 'incomplete' : ''}" data-index="${realIndex}">
+            <div class="day-card ${incomplete ? 'incomplete' : ''}">
               <div class="day-header">
                 <div>
                   <div class="day-title">${day.name}</div>
@@ -1031,8 +1034,11 @@
             if (!e.target.closest('.busy-toggle')) {
               const index = parseInt(item.dataset.index);
               const meal = item.dataset.meal;
-              this.currentTab = meal;
-              this.openDayModal(index);
+              if (meal === 'lunch') {
+                this.openLunchModal(index);
+              } else {
+                this.openDinnerModal(index);
+              }
             }
           };
         });
@@ -1076,6 +1082,206 @@
       
       closeModal() {
         document.getElementById('modalOverlay').classList.remove('show');
+      }
+      
+      openLunchModal(index) {
+        this.currentDayIndex = index;
+        const day = this.state.days[index];
+        
+        const selected = day.lunch;
+        const bodyHTML = `
+          <div class="action-buttons">
+            <button class="btn-action" id="randomizeLunch">🎲 Randomize</button>
+            <button class="btn-action" id="clearLunch">🗑️ Clear</button>
+          </div>
+          ${day.lunch === 'Custom' ? `
+            <div class="input-group">
+              <label class="input-label">Custom Lunch</label>
+              <input class="input" id="customLunchInput" value="${day.customLunch || ''}" placeholder="Enter custom meal">
+            </div>
+          ` : ''}
+          ${this.renderBentoGrid('lunch', selected, MEAL_DATA.lunch)}
+        `;
+        
+        this.openModal({
+          title: `Lunch - ${day.name}`,
+          subtitle: this.formatDate(day.date),
+          bodyHTML,
+          footer: [
+            { label: 'Cancel', onClick: () => this.closeModal() },
+            {
+              label: 'Save',
+              type: 'btn-primary',
+              onClick: () => {
+                this.saveState();
+                this.render(); // Update view immediately
+                this.closeModal();
+                this.showToast('Saved! ✓');
+              }
+            }
+          ]
+        });
+        
+        document.getElementById('randomizeLunch').onclick = () => {
+          const options = MEAL_DATA.lunch.filter(m => m !== 'None' && m !== 'Custom');
+          day.lunch = options[Math.floor(Math.random() * options.length)];
+          this.openLunchModal(index);
+        };
+        
+        document.getElementById('clearLunch').onclick = () => {
+          day.lunch = null;
+          day.customLunch = null;
+          this.openLunchModal(index);
+        };
+        
+        if (day.lunch === 'Custom') {
+          document.getElementById('customLunchInput').oninput = (e) => {
+            day.customLunch = e.target.value;
+          };
+        }
+        
+        this.attachBentoListeners('lunch');
+      }
+      
+      openDinnerModal(index) {
+        this.currentDayIndex = index;
+        const day = this.state.days[index];
+        
+        const isWeekend = day.name === 'Saturday' || day.name === 'Sunday';
+        let dinnerOptions = MEAL_DATA.dinnerRegular;
+        
+        if (day.busy && day.dinnerType === 'quick') {
+          dinnerOptions = MEAL_DATA.dinnerQuick;
+        } else if (day.busy && day.dinnerType === 'delivery') {
+          dinnerOptions = MEAL_DATA.delivery;
+        } else if (!day.busy && isWeekend) {
+          dinnerOptions = MEAL_DATA.dinnerWeekend;
+        }
+        
+        const bodyHTML = `
+          <div class="controls">
+            <button id="busyToggle" class="busy-toggle ${day.busy ? 'active' : ''}">
+              ${day.busy ? '✓ Busy Night' : 'Busy Night'}
+            </button>
+            ${day.busy ? `
+              <div class="radio-group">
+                <button class="radio ${day.dinnerType === 'quick' ? 'active' : ''}" data-type="quick">
+                  Quick
+                </button>
+                <button class="radio ${day.dinnerType === 'delivery' ? 'active' : ''}" data-type="delivery">
+                  Delivery
+                </button>
+              </div>
+            ` : ''}
+          </div>
+          
+          <div class="action-buttons">
+            <button class="btn-action" id="randomizeDinner">🎲 Randomize</button>
+            <button class="btn-action" id="clearDinner">🗑️ Clear</button>
+          </div>
+          
+          ${day.dinner === 'Custom' ? `
+            <div class="input-group">
+              <label class="input-label">Custom Dinner</label>
+              <input class="input" id="customDinnerInput" value="${day.customDinner || ''}" placeholder="Enter custom meal">
+            </div>
+          ` : ''}
+          
+          <div id="dinnerBento">
+            ${this.renderBentoGrid('dinner', day.dinner, dinnerOptions)}
+          </div>
+          
+          ${day.dinnerType !== 'delivery' ? `
+            <div class="input-group">
+              <label class="input-label">Side Dish</label>
+            </div>
+            ${day.side === 'Custom' ? `
+              <div class="input-group">
+                <input class="input" id="customSideInput" value="${day.customSide || ''}" placeholder="Enter custom side">
+              </div>
+            ` : ''}
+            <div id="sideBento">
+              ${this.renderBentoGrid('side', day.side, MEAL_DATA.side)}
+            </div>
+          ` : ''}
+        `;
+        
+        this.openModal({
+          title: `Dinner - ${day.name}`,
+          subtitle: this.formatDate(day.date),
+          bodyHTML,
+          footer: [
+            { label: 'Cancel', onClick: () => this.closeModal() },
+            {
+              label: 'Save',
+              type: 'btn-primary',
+              onClick: () => {
+                this.saveState();
+                this.render(); // Update view immediately
+                this.closeModal();
+                this.showToast('Saved! ✓');
+              }
+            }
+          ]
+        });
+        
+        document.getElementById('busyToggle').onclick = () => {
+          day.busy = !day.busy;
+          if (day.busy) {
+            day.dinnerType = 'quick';
+            day.dinner = null;
+          } else {
+            day.dinnerType = 'regular';
+          }
+          this.openDinnerModal(index);
+        };
+        
+        document.getElementById('randomizeDinner').onclick = () => {
+          const options = dinnerOptions.filter(m => m !== 'None' && m !== 'Custom');
+          day.dinner = options[Math.floor(Math.random() * options.length)];
+          
+          if (day.dinnerType !== 'delivery') {
+            const sideOptions = MEAL_DATA.side.filter(m => m !== 'None' && m !== 'Custom');
+            day.side = sideOptions[Math.floor(Math.random() * sideOptions.length)];
+          }
+          this.openDinnerModal(index);
+        };
+        
+        document.getElementById('clearDinner').onclick = () => {
+          day.dinner = null;
+          day.customDinner = null;
+          day.side = null;
+          day.customSide = null;
+          this.openDinnerModal(index);
+        };
+        
+        if (day.dinner === 'Custom') {
+          document.getElementById('customDinnerInput').oninput = (e) => {
+            day.customDinner = e.target.value;
+          };
+        }
+        
+        if (day.side === 'Custom') {
+          document.getElementById('customSideInput').oninput = (e) => {
+            day.customSide = e.target.value;
+          };
+        }
+        
+        document.querySelectorAll('.radio[data-type]').forEach(radio => {
+          radio.onclick = () => {
+            day.dinnerType = radio.dataset.type;
+            day.dinner = null;
+            if (radio.dataset.type === 'delivery') {
+              day.side = null;
+            }
+            this.openDinnerModal(index);
+          };
+        });
+        
+        this.attachBentoListeners('dinner', dinnerOptions);
+        if (day.dinnerType !== 'delivery') {
+          this.attachBentoListeners('side');
+        }
       }
       
       openMenu() {
@@ -1177,210 +1383,6 @@
         };
       }
       
-      openDayModal(index) {
-        this.currentDayIndex = index;
-        const day = this.state.days[index];
-        
-        this.openModal({
-          title: `${day.name}`,
-          subtitle: this.formatDate(day.date),
-          bodyHTML: `
-            <div class="tabs">
-              <button class="tab ${this.currentTab === 'lunch' ? 'active' : ''}" data-tab="lunch">
-                Lunch
-              </button>
-              <button class="tab ${this.currentTab === 'dinner' ? 'active' : ''}" data-tab="dinner">
-                Dinner
-              </button>
-            </div>
-            <div id="tabContent"></div>
-          `,
-          footer: [
-            { label: 'Cancel', onClick: () => this.closeModal() },
-            {
-              label: 'Save',
-              type: 'btn-primary',
-              onClick: () => {
-                this.saveState();
-                this.closeModal();
-                this.showToast('Saved! ✓');
-              }
-            }
-          ]
-        });
-        
-        document.querySelectorAll('.tab').forEach(tab => {
-          tab.onclick = () => {
-            this.currentTab = tab.dataset.tab;
-            document.querySelectorAll('.tab').forEach(t =>
-              t.classList.toggle('active', t === tab)
-            );
-            this.renderTabContent();
-          };
-        });
-        
-        this.renderTabContent();
-      }
-      
-      renderTabContent() {
-        const day = this.state.days[this.currentDayIndex];
-        const content = document.getElementById('tabContent');
-        
-        if (this.currentTab === 'lunch') {
-          const selected = day.lunch;
-          content.innerHTML = `
-            <div class="action-buttons">
-              <button class="btn-action" id="randomizeLunch">🎲 Randomize</button>
-              <button class="btn-action" id="clearLunch">🗑️ Clear</button>
-            </div>
-            ${day.lunch === 'Custom' ? `
-              <div class="input-group">
-                <label class="input-label">Custom Lunch</label>
-                <input class="input" id="customLunchInput" value="${day.customLunch || ''}" placeholder="Enter custom meal">
-              </div>
-            ` : ''}
-            ${this.renderBentoGrid('lunch', selected, MEAL_DATA.lunch)}
-          `;
-          
-          document.getElementById('randomizeLunch').onclick = () => {
-            const options = MEAL_DATA.lunch.filter(m => m !== 'None' && m !== 'Custom');
-            day.lunch = options[Math.floor(Math.random() * options.length)];
-            this.renderTabContent();
-          };
-          
-          document.getElementById('clearLunch').onclick = () => {
-            day.lunch = null;
-            day.customLunch = null;
-            this.renderTabContent();
-          };
-          
-          if (day.lunch === 'Custom') {
-            document.getElementById('customLunchInput').oninput = (e) => {
-              day.customLunch = e.target.value;
-            };
-          }
-          
-          this.attachBentoListeners('lunch');
-        } else {
-          const isWeekend = day.name === 'Saturday' || day.name === 'Sunday';
-          let dinnerOptions = MEAL_DATA.dinnerRegular;
-          
-          if (day.busy && day.dinnerType === 'quick') {
-            dinnerOptions = MEAL_DATA.dinnerQuick;
-          } else if (day.busy && day.dinnerType === 'delivery') {
-            dinnerOptions = MEAL_DATA.delivery;
-          } else if (!day.busy && isWeekend) {
-            dinnerOptions = MEAL_DATA.dinnerWeekend;
-          }
-          
-          content.innerHTML = `
-            <div class="controls">
-              <button id="busyToggle" class="busy-toggle ${day.busy ? 'active' : ''}">
-                ${day.busy ? '✓ Busy Night' : 'Busy Night'}
-              </button>
-              ${day.busy ? `
-                <div class="radio-group">
-                  <button class="radio ${day.dinnerType === 'quick' ? 'active' : ''}" data-type="quick">
-                    Quick
-                  </button>
-                  <button class="radio ${day.dinnerType === 'delivery' ? 'active' : ''}" data-type="delivery">
-                    Delivery
-                  </button>
-                </div>
-              ` : ''}
-            </div>
-            
-            <div class="action-buttons">
-              <button class="btn-action" id="randomizeDinner">🎲 Randomize</button>
-              <button class="btn-action" id="clearDinner">🗑️ Clear</button>
-            </div>
-            
-            ${day.dinner === 'Custom' ? `
-              <div class="input-group">
-                <label class="input-label">Custom Dinner</label>
-                <input class="input" id="customDinnerInput" value="${day.customDinner || ''}" placeholder="Enter custom meal">
-              </div>
-            ` : ''}
-            
-            <div id="dinnerBento">
-              ${this.renderBentoGrid('dinner', day.dinner, dinnerOptions)}
-            </div>
-            
-            ${day.dinnerType !== 'delivery' ? `
-              <div class="input-group">
-                <label class="input-label">Side Dish</label>
-              </div>
-              ${day.side === 'Custom' ? `
-                <div class="input-group">
-                  <input class="input" id="customSideInput" value="${day.customSide || ''}" placeholder="Enter custom side">
-                </div>
-              ` : ''}
-              <div id="sideBento">
-                ${this.renderBentoGrid('side', day.side, MEAL_DATA.side)}
-              </div>
-            ` : ''}
-          `;
-          
-          document.getElementById('busyToggle').onclick = () => {
-            day.busy = !day.busy;
-            if (day.busy) {
-              day.dinnerType = 'quick';
-              day.dinner = null;
-            } else {
-              day.dinnerType = 'regular';
-            }
-            this.renderTabContent();
-          };
-          
-          document.getElementById('randomizeDinner').onclick = () => {
-            const options = dinnerOptions.filter(m => m !== 'None' && m !== 'Custom');
-            day.dinner = options[Math.floor(Math.random() * options.length)];
-            
-            if (day.dinnerType !== 'delivery') {
-              const sideOptions = MEAL_DATA.side.filter(m => m !== 'None' && m !== 'Custom');
-              day.side = sideOptions[Math.floor(Math.random() * sideOptions.length)];
-            }
-            this.renderTabContent();
-          };
-          
-          document.getElementById('clearDinner').onclick = () => {
-            day.dinner = null;
-            day.customDinner = null;
-            day.side = null;
-            day.customSide = null;
-            this.renderTabContent();
-          };
-          
-          if (day.dinner === 'Custom') {
-            document.getElementById('customDinnerInput').oninput = (e) => {
-              day.customDinner = e.target.value;
-            };
-          }
-          
-          if (day.side === 'Custom') {
-            document.getElementById('customSideInput').oninput = (e) => {
-              day.customSide = e.target.value;
-            };
-          }
-          
-          document.querySelectorAll('.radio[data-type]').forEach(radio => {
-            radio.onclick = () => {
-              day.dinnerType = radio.dataset.type;
-              day.dinner = null;
-              if (radio.dataset.type === 'delivery') {
-                day.side = null;
-              }
-              this.renderTabContent();
-            };
-          });
-          
-          this.attachBentoListeners('dinner', dinnerOptions);
-          if (day.dinnerType !== 'delivery') {
-            this.attachBentoListeners('side');
-          }
-        }
-      }
-      
       renderBentoGrid(type, selected, options) {
         return `
           <div class="bento-grid" data-type="${type}">
@@ -1409,23 +1411,14 @@
             day[type] = value;
             
             if (value === 'Custom') {
-              this.renderTabContent();
+              if (type === 'lunch') {
+                this.openLunchModal(this.currentDayIndex);
+              } else if (type === 'dinner') {
+                this.openDinnerModal(this.currentDayIndex);
+              }
             }
           };
         });
-      }
-      
-      renderBentoGrid(type, selected, options) {
-        return `
-          <div class="bento-grid" data-type="${type}">
-            ${options.map(item => `
-              <div class="bento-item ${selected === item ? 'selected' : ''}" data-value="${item}">
-                <span class="bento-emoji">${MEAL_EMOJIS[item] || '🍽️'}</span>
-                <span>${item}</span>
-              </div>
-            `).join('')}
-          </div>
-        `;
       }
       
       randomizeWeek() {
