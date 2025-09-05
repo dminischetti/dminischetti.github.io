@@ -3,570 +3,255 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#0a0a0b">
-  <title>Meal Planner</title>
+  <title>Delicious Weeks</title>
   <style>
-    /* ============================================
-   DESIGN SYSTEM & CSS VARIABLES
-   ============================================ */
     :root {
-      /* Color Palette - Rich, sophisticated gradients */
-      --gradient-dark: linear-gradient(145deg, #0f0f10 0%, #1a1a2e 50%, #16213e 100%);
-      --gradient-light: linear-gradient(180deg, #fafafa 0%, #f5f5f7 100%);
-
-      /* Semantic colors with depth */
-      --surface-1: rgba(255, 255, 255, 0.04);
-      --surface-2: rgba(255, 255, 255, 0.08);
-      --surface-3: rgba(255, 255, 255, 0.12);
-      --surface-hover: rgba(255, 255, 255, 0.10);
-      --surface-active: rgba(255, 255, 255, 0.06);
-
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-default: rgba(255, 255, 255, 0.12);
-      --border-strong: rgba(255, 255, 255, 0.18);
-
-      --text-primary: rgba(255, 255, 255, 0.95);
-      --text-secondary: rgba(255, 255, 255, 0.70);
-      --text-tertiary: rgba(255, 255, 255, 0.50);
-
-      /* Accent colors - Vibrant but refined */
-      --accent-primary: #6366f1;
-      --accent-primary-dark: #5558e3;
-      --accent-primary-glow: rgba(99, 102, 241, 0.25);
-
-      --accent-success: #10b981;
-      --accent-warning: #f59e0b;
-      --accent-danger: #ef4444;
-      --accent-info: #60a5fa;
-
-      /* Typography scale - iOS inspired */
-      --font-xs: 11px;
-      --font-sm: 13px;
-      --font-base: 15px;
-      --font-md: 17px;
-      --font-lg: 20px;
-      --font-xl: 24px;
-      --font-2xl: 28px;
-      --font-3xl: 34px;
-
-      /* Spacing system - 4px base unit */
-      --space-1: 4px;
-      --space-2: 8px;
-      --space-3: 12px;
-      --space-4: 16px;
-      --space-5: 20px;
-      --space-6: 24px;
-      --space-8: 32px;
-      --space-10: 40px;
-
-      /* Border radius - Smooth, modern curves */
-      --radius-sm: 8px;
-      --radius-md: 12px;
-      --radius-lg: 16px;
-      --radius-xl: 20px;
-      --radius-2xl: 24px;
-      --radius-full: 9999px;
-
-      /* Animations - Natural, fluid motion */
-      --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
-      --ease-in-out: cubic-bezier(0.4, 0.0, 0.2, 1);
-      --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
-      --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-
-      /* Shadows - Subtle depth */
-      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.10);
-      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.15);
-      --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.20);
-
-      /* Safe areas */
-      --safe-top: env(safe-area-inset-top);
-      --safe-bottom: env(safe-area-inset-bottom);
+      /* Dark Theme with Vibrant Accents */
+      --bg-gradient: linear-gradient(135deg, #1a0f2e 0%, #2d1b69 50%, #0f172a 100%);
+      --surface-glass: rgba(139, 92, 246, 0.03);
+      --surface-hover: rgba(139, 92, 246, 0.08);
+      --surface-card: rgba(15, 23, 42, 0.6);
+      --border-subtle: rgba(139, 92, 246, 0.15);
+      --border-default: rgba(139, 92, 246, 0.25);
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-tertiary: #94a3b8;
+      --accent-violet: #8b5cf6;
+      --accent-purple: #a855f7;
+      --accent-pink: #ec4899;
+      --accent-blue: #3b82f6;
+      --accent-cyan: #06b6d4;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
     }
 
-    /* Light theme overrides */
     :root[data-theme="light"] {
-      --gradient-light: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
-
-      --surface-1: rgba(0, 0, 0, 0.02);
-      --surface-2: rgba(0, 0, 0, 0.04);
-      --surface-3: rgba(0, 0, 0, 0.06);
-      --surface-hover: rgba(0, 0, 0, 0.05);
-      --surface-active: rgba(0, 0, 0, 0.03);
-
-      --border-subtle: rgba(0, 0, 0, 0.06);
-      --border-default: rgba(0, 0, 0, 0.10);
-      --border-strong: rgba(0, 0, 0, 0.15);
-
-      --text-primary: rgba(0, 0, 0, 0.90);
-      --text-secondary: rgba(0, 0, 0, 0.60);
-      --text-tertiary: rgba(0, 0, 0, 0.40);
-
-      --accent-primary: #5558e3;
-      --accent-primary-dark: #4447d1;
-
-      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
-      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.06);
-      --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.08);
-      --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.10);
+      /* Pastel Light Theme */
+      --bg-gradient: linear-gradient(135deg, #fef3c7 0%, #fde8ff 50%, #e0f2fe 100%);
+      --surface-glass: rgba(255, 255, 255, 0.7);
+      --surface-hover: rgba(168, 85, 247, 0.08);
+      --surface-card: rgba(255, 255, 255, 0.8);
+      --border-subtle: rgba(168, 85, 247, 0.15);
+      --border-default: rgba(168, 85, 247, 0.2);
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --text-tertiary: #64748b;
     }
 
-    /* ============================================
-   RESET & BASE STYLES
-   ============================================ */
     * {
       box-sizing: border-box;
       -webkit-tap-highlight-color: transparent;
-      -webkit-touch-callout: none;
       user-select: none;
-    }
-
-    html {
-      height: 100%;
-      -webkit-text-size-adjust: 100%;
     }
 
     body {
       margin: 0;
       min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
-      font-size: var(--font-base);
-      line-height: 1.5;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: var(--bg-gradient);
+      background-attachment: fixed;
       color: var(--text-primary);
-      background: var(--gradient-dark);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      text-rendering: optimizeLegibility;
-      overscroll-behavior: none;
     }
 
-    :root[data-theme="light"] body {
-      background: var(--gradient-light);
-    }
-
-    /* ============================================
-   LAYOUT COMPONENTS
-   ============================================ */
-
-    /* Header - Premium glass morphism */
     .header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px;
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-subtle);
       position: sticky;
       top: 0;
       z-index: 100;
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-      padding: calc(var(--space-3) + var(--safe-top)) var(--space-4) var(--space-3);
-      background: rgba(15, 15, 16, 0.75);
-      backdrop-filter: blur(20px) saturate(180%);
-      -webkit-backdrop-filter: blur(20px) saturate(180%);
-      border-bottom: 1px solid var(--border-subtle);
-      transition: background 0.3s var(--ease-in-out);
     }
 
     :root[data-theme="light"] .header {
-      background: rgba(255, 255, 255, 0.80);
+      background: rgba(255, 255, 255, 0.85);
     }
 
     .header-title {
       flex: 1;
-      margin: 0;
-      font-size: var(--font-lg);
-      font-weight: 700;
-      letter-spacing: -0.3px;
-      background: linear-gradient(135deg, #a78bfa 0%, #fbbf24 50%, #60a5fa 100%);
+      font-size: 28px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      background: linear-gradient(135deg, var(--accent-violet) 0%, var(--accent-pink) 50%, var(--accent-cyan) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      animation: shimmer 3s ease-in-out infinite;
     }
 
-    @keyframes shimmer {
-
-      0%,
-      100% {
-        background-position: 0% 50%;
-      }
-
-      50% {
-        background-position: 100% 50%;
-      }
-    }
-
-    /* Icon Button - Enhanced touch target */
     .btn-icon {
-      position: relative;
-      display: grid;
-      place-items: center;
       width: 44px;
       height: 44px;
-      padding: 0;
-      font-size: 20px;
-      background: var(--surface-1);
+      border-radius: 12px;
+      background: var(--surface-glass);
       border: 1px solid var(--border-default);
-      border-radius: var(--radius-md);
       color: var(--text-primary);
       cursor: pointer;
-      transition: all 0.2s var(--ease-out);
-      -webkit-tap-highlight-color: transparent;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
     }
 
-    .btn-icon:hover {
-      background: var(--surface-hover);
-      transform: scale(1.05);
-    }
-
-    .btn-icon:active {
-      transform: scale(0.95);
-      background: var(--surface-active);
-    }
-
-    /* Theme Toggle - Delightful animation */
-    .theme-toggle {
-      position: relative;
+    .weekend-toggle {
       display: flex;
       align-items: center;
-      gap: var(--space-2);
-      padding: var(--space-2) var(--space-3);
-      background: var(--surface-2);
+      gap: 8px;
+      padding: 8px 12px;
+      background: var(--surface-glass);
       border: 1px solid var(--border-default);
-      border-radius: var(--radius-full);
+      border-radius: 999px;
       cursor: pointer;
-      transition: all 0.3s var(--ease-out);
-    }
-
-    .theme-toggle-label {
-      font-size: var(--font-xs);
+      font-size: 13px;
       font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--text-secondary);
     }
 
-    .theme-toggle-switch {
-      position: relative;
-      width: 42px;
-      height: 24px;
-      background: var(--surface-3);
-      border-radius: var(--radius-full);
-      transition: background 0.3s var(--ease-out);
+    .weekend-toggle.active {
+      background: var(--accent-violet);
+      border-color: var(--accent-violet);
+      color: white;
     }
 
-    .theme-toggle-knob {
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 20px;
-      height: 20px;
-      background: white;
-      border-radius: 50%;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.3s var(--ease-spring);
-    }
-
-    :root[data-theme="light"] .theme-toggle-knob {
-      transform: translateX(18px);
-    }
-
-    /* Container */
     .container {
-      padding: var(--space-4);
-      padding-bottom: calc(var(--space-5) + var(--safe-bottom));
+      padding: 16px;
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    /* ============================================
-   CARDS & DAYS
-   ============================================ */
-
-    .days-list {
+    .week-nav {
       display: flex;
-      flex-direction: column;
-      gap: var(--space-3);
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 16px;
+      padding: 12px;
+      background: var(--surface-card);
+      backdrop-filter: blur(10px);
+      border-radius: 16px;
+      border: 1px solid var(--border-subtle);
+    }
+
+    .week-date {
+      font-size: 18px;
+      font-weight: 600;
     }
 
     .day-card {
-      position: relative;
-      padding: var(--space-4);
-      background: var(--surface-1);
-      border: 1px solid var(--border-default);
-      border-radius: var(--radius-xl);
+      margin-bottom: 12px;
+      padding: 16px;
+      background: var(--surface-card);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--border-default);
+      border-radius: 20px;
       cursor: pointer;
-      transition: all 0.3s var(--ease-out);
-      transform-style: preserve-3d;
-      will-change: transform;
-    }
-
-    .day-card:hover {
-      background: var(--surface-hover);
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .day-card:active {
-      transform: scale(0.98);
+      transition: all 0.2s;
     }
 
     .day-card.incomplete {
+      opacity: 0.7;
       border-style: dashed;
-      border-color: var(--border-strong);
-      animation: pulse-border 2s ease-in-out infinite;
     }
 
-    @keyframes pulse-border {
-
-      0%,
-      100% {
-        opacity: 1;
-      }
-
-      50% {
-        opacity: 0.5;
-      }
+    .day-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(139, 92, 246, 0.2);
     }
 
     .day-header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      margin-bottom: var(--space-3);
+      align-items: center;
+      margin-bottom: 12px;
     }
 
     .day-title {
-      font-size: var(--font-md);
+      font-size: 18px;
       font-weight: 600;
-      color: var(--text-primary);
     }
 
     .day-date {
-      font-size: var(--font-sm);
+      font-size: 14px;
       color: var(--text-secondary);
-      margin-left: var(--space-2);
-    }
-
-    /* Status Chip */
-    .chip {
-      display: inline-flex;
-      align-items: center;
-      padding: var(--space-1) var(--space-3);
-      font-size: var(--font-xs);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      border-radius: var(--radius-full);
-      background: var(--surface-2);
-      border: 1px solid var(--border-default);
-      color: var(--text-secondary);
-    }
-
-    .chip.missing {
-      background: rgba(239, 68, 68, 0.10);
-      border-color: rgba(239, 68, 68, 0.30);
-      color: #fca5a5;
-      animation: pulse 2s ease-in-out infinite;
-    }
-
-    @keyframes pulse {
-
-      0%,
-      100% {
-        opacity: 1;
-      }
-
-      50% {
-        opacity: 0.7;
-      }
-    }
-
-    /* ============================================
-   MEALS
-   ============================================ */
-
-    .meals-grid {
-      display: grid;
-      gap: var(--space-2);
     }
 
     .meal-item {
       display: flex;
-      align-items: center;
-      gap: var(--space-3);
-      padding: var(--space-3);
-      background: var(--surface-2);
+      gap: 12px;
+      padding: 12px;
+      margin-bottom: 8px;
+      background: var(--surface-glass);
+      border-radius: 12px;
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-lg);
-      transition: all 0.2s var(--ease-out);
+      cursor: pointer;
     }
 
     .meal-item.empty {
       opacity: 0.5;
-      filter: grayscale(0.3);
-    }
-
-    .meal-item:not(.empty):hover {
-      background: var(--surface-3);
-      transform: translateX(4px);
     }
 
     .meal-icon {
-      display: grid;
-      place-items: center;
       width: 40px;
       height: 40px;
-      font-size: var(--font-md);
-      font-weight: 700;
-      color: white;
-      border-radius: var(--radius-md);
-      flex-shrink: 0;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 20px;
     }
 
     .meal-icon.lunch {
-      background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-      box-shadow: 0 4px 12px rgba(245, 158, 11, 0.25);
+      background: linear-gradient(135deg, var(--accent-amber), var(--accent-amber));
     }
 
     .meal-icon.dinner {
-      background: linear-gradient(135deg, #60a5fa 0%, #3b82f6 100%);
-      box-shadow: 0 4px 12px rgba(59, 130, 246, 0.25);
+      background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
     }
 
     .meal-content {
       flex: 1;
-      min-width: 0;
-    }
-
-    .meal-header-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--space-2);
     }
 
     .meal-title {
-      margin: 0;
-      font-size: var(--font-base);
       font-weight: 600;
-      color: var(--text-primary);
+      margin: 0;
     }
 
     .meal-description {
-      margin: var(--space-1) 0 0;
-      font-size: var(--font-sm);
+      font-size: 14px;
       color: var(--text-secondary);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+      margin: 0;
     }
 
-    .meal-placeholder {
-      color: var(--text-tertiary);
-      font-style: italic;
-    }
-
-    /* Busy Toggle Inline */
-    .busy-toggle-inline {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-2);
-      padding: var(--space-1) var(--space-3);
-      font-size: var(--font-xs);
+    .busy-toggle {
+      padding: 4px 12px;
+      font-size: 11px;
       font-weight: 600;
-      background: var(--surface-3);
+      background: var(--surface-glass);
       border: 1px solid var(--border-default);
-      border-radius: var(--radius-full);
+      border-radius: 999px;
       color: var(--text-secondary);
       cursor: pointer;
-      transition: all 0.2s var(--ease-out);
     }
 
-    .busy-toggle-inline.active {
-      background: var(--accent-primary);
-      border-color: var(--accent-primary);
+    .busy-toggle.active {
+      background: var(--accent-purple);
+      border-color: var(--accent-purple);
       color: white;
     }
-
-    .busy-toggle-inline:active {
-      transform: scale(0.95);
-    }
-
-    /* ============================================
-   WEEKEND TOGGLE
-   ============================================ */
-
-    .weekend-toggle-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: var(--space-4);
-      margin-top: var(--space-3);
-      background: var(--surface-1);
-      border: 1px solid var(--border-default);
-      border-radius: var(--radius-xl);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    .weekend-toggle-label {
-      font-size: var(--font-base);
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .weekend-toggle-switch {
-      position: relative;
-      width: 51px;
-      height: 31px;
-      background: var(--surface-3);
-      border: 1px solid var(--border-default);
-      border-radius: var(--radius-full);
-      cursor: pointer;
-      transition: all 0.3s var(--ease-out);
-    }
-
-    .weekend-toggle-switch.active {
-      background: var(--accent-primary);
-      border-color: var(--accent-primary);
-    }
-
-    .weekend-toggle-switch::after {
-      content: '';
-      position: absolute;
-      top: 2px;
-      left: 2px;
-      width: 27px;
-      height: 27px;
-      background: white;
-      border-radius: 50%;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.3s var(--ease-spring);
-    }
-
-    .weekend-toggle-switch.active::after {
-      transform: translateX(20px);
-    }
-
-    /* ============================================
-   MODAL
-   ============================================ */
 
     .modal-overlay {
       position: fixed;
       inset: 0;
-      z-index: 1000;
-      display: flex;
-      align-items: flex-end;
-      padding: var(--space-3);
       background: rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      display: flex;
+      align-items: flex-end;
       opacity: 0;
       visibility: hidden;
-      transition: all 0.35s var(--ease-out);
+      transition: all 0.3s;
+      z-index: 1000;
     }
 
     .modal-overlay.show {
@@ -576,15 +261,14 @@
 
     .modal {
       width: 100%;
-      max-width: 520px;
+      max-width: 500px;
       margin: 0 auto;
-      background: rgba(25, 25, 30, 0.95);
-      border: 1px solid var(--border-default);
-      border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+      background: rgba(15, 23, 42, 0.95);
+      border-radius: 28px 28px 0 0;
       transform: translateY(100%);
-      transition: transform 0.45s var(--ease-spring);
-      overflow: hidden;
+      transition: transform 0.3s;
       max-height: 85vh;
+      overflow: hidden;
     }
 
     :root[data-theme="light"] .modal {
@@ -595,155 +279,42 @@
       transform: translateY(0);
     }
 
-    .modal-handle {
-      width: 36px;
-      height: 5px;
-      margin: var(--space-3) auto var(--space-2);
-      background: var(--border-strong);
-      border-radius: var(--radius-full);
-      opacity: 0.5;
-    }
-
     .modal-header {
-      padding: 0 var(--space-5) var(--space-3);
+      padding: 20px;
       text-align: center;
+      border-bottom: 1px solid var(--border-subtle);
     }
 
     .modal-title {
-      margin: 0;
-      font-size: var(--font-lg);
+      font-size: 20px;
       font-weight: 600;
-      color: var(--text-primary);
+      margin: 0;
     }
 
     .modal-subtitle {
-      margin: var(--space-1) 0 0;
-      font-size: var(--font-sm);
+      font-size: 14px;
       color: var(--text-secondary);
+      margin: 4px 0 0;
     }
 
     .modal-body {
-      max-height: 60vh;
+      max-height: 50vh;
       overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
       padding: 0;
     }
 
     .modal-footer {
       display: flex;
-      gap: var(--space-2);
-      padding: var(--space-3) var(--space-4);
-      background: var(--surface-1);
+      gap: 8px;
+      padding: 16px;
+      background: var(--surface-glass);
       border-top: 1px solid var(--border-subtle);
     }
 
-    /* ============================================
-   BUTTONS
-   ============================================ */
-
-    .btn {
-      flex: 1;
-      padding: var(--space-3) var(--space-4);
-      font-size: var(--font-base);
-      font-weight: 600;
-      text-align: center;
-      background: var(--surface-2);
-      color: var(--text-primary);
-      border: 1px solid var(--border-default);
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      transition: all 0.2s var(--ease-out);
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .btn:hover {
-      background: var(--surface-hover);
-    }
-
-    .btn:active {
-      transform: scale(0.97);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-primary-dark) 100%);
-      color: white;
-      border: none;
-      box-shadow: 0 4px 12px var(--accent-primary-glow);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 6px 20px var(--accent-primary-glow);
-    }
-
-    .btn-primary:active {
-      transform: scale(0.97);
-    }
-
-    .btn-danger {
-      background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
-      color: white;
-      border: none;
-    }
-
-    /* ============================================
-   MENU GRID
-   ============================================ */
-
-    .menu-grid {
-      display: grid;
-      gap: var(--space-2);
-      padding: var(--space-3);
-    }
-
-    .menu-item {
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-      padding: var(--space-4);
-      background: var(--surface-1);
-      border: 1px solid var(--border-default);
-      border-radius: var(--radius-lg);
-      cursor: pointer;
-      transition: all 0.2s var(--ease-out);
-    }
-
-    .menu-item:hover {
-      background: var(--surface-hover);
-      transform: translateX(4px);
-    }
-
-    .menu-item:active {
-      transform: scale(0.98);
-    }
-
-    .menu-item-icon {
-      font-size: var(--font-xl);
-      width: 32px;
-      text-align: center;
-    }
-
-    .menu-item-content h4 {
-      margin: 0;
-      font-size: var(--font-base);
-      font-weight: 600;
-      color: var(--text-primary);
-    }
-
-    .menu-item-content p {
-      margin: var(--space-1) 0 0;
-      font-size: var(--font-sm);
-      color: var(--text-secondary);
-    }
-
-    /* ============================================
-   TABS & CONTROLS
-   ============================================ */
-
     .tabs {
       display: flex;
-      gap: var(--space-2);
-      padding: var(--space-2) var(--space-3);
+      gap: 8px;
+      padding: 12px;
       position: sticky;
       top: 0;
       background: inherit;
@@ -752,110 +323,47 @@
 
     .tab {
       flex: 1;
-      padding: var(--space-3);
-      font-size: var(--font-base);
+      padding: 12px;
       font-weight: 600;
       text-align: center;
-      background: var(--surface-1);
+      background: var(--surface-glass);
       color: var(--text-secondary);
       border: 1px solid var(--border-default);
-      border-radius: var(--radius-md);
+      border-radius: 12px;
       cursor: pointer;
-      transition: all 0.2s var(--ease-out);
-    }
-
-    .tab:hover {
-      background: var(--surface-hover);
     }
 
     .tab.active {
-      background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-primary-dark) 100%);
+      background: var(--accent-violet);
+      border-color: var(--accent-violet);
       color: white;
-      border: none;
     }
 
     .controls {
       display: flex;
-      gap: var(--space-2);
-      padding: var(--space-3);
+      gap: 8px;
+      padding: 12px;
       align-items: center;
       flex-wrap: wrap;
     }
 
-    .switch-control {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-2);
-      padding: var(--space-2) var(--space-3);
-      font-size: var(--font-sm);
-      font-weight: 600;
-      background: var(--surface-2);
-      border: 1px solid var(--border-default);
-      border-radius: var(--radius-full);
-      color: var(--text-primary);
-      cursor: pointer;
-      transition: all 0.2s var(--ease-out);
-    }
-
-    .switch-control.active {
-      background: var(--accent-primary);
-      border-color: var(--accent-primary);
-      color: white;
-    }
-
-    .radio-group {
-      display: flex;
-      gap: var(--space-2);
-    }
-
-    .radio {
-      padding: var(--space-2) var(--space-3);
-      font-size: var(--font-sm);
-      font-weight: 600;
-      background: var(--surface-2);
-      color: var(--text-secondary);
-      border: 1px solid var(--border-default);
-      border-radius: var(--radius-md);
-      cursor: pointer;
-      transition: all 0.2s var(--ease-out);
-    }
-
-    .radio:hover {
-      background: var(--surface-hover);
-    }
-
-    .radio.active {
-      background: linear-gradient(135deg, var(--accent-primary) 0%, var(--accent-primary-dark) 100%);
-      color: white;
-      border: none;
-    }
-
-    /* ============================================
-   BENTO GRID
-   ============================================ */
-
     .bento-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-2);
-      padding: var(--space-3);
+      gap: 8px;
+      padding: 12px;
     }
 
     .bento-item {
       position: relative;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: var(--space-2);
-      min-height: 72px;
-      padding: var(--space-3) var(--space-2);
-      background: var(--surface-1);
+      padding: 16px 8px;
+      background: var(--surface-glass);
       border: 1px solid var(--border-default);
-      border-radius: var(--radius-lg);
+      border-radius: 16px;
       cursor: pointer;
-      transition: all 0.2s var(--ease-out);
-      overflow: hidden;
+      text-align: center;
+      font-size: 13px;
+      transition: all 0.2s;
     }
 
     .bento-item:hover {
@@ -863,147 +371,162 @@
       transform: scale(1.05);
     }
 
-    .bento-item:active {
-      transform: scale(0.98);
-    }
-
     .bento-item.selected {
-      background: linear-gradient(135deg, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0.05) 100%);
-      border-color: var(--accent-primary);
-      box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.20) inset;
+      background: rgba(139, 92, 246, 0.15);
+      border-color: var(--accent-violet);
+      box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2) inset;
     }
 
     .bento-item.selected::before {
       content: '✓';
       position: absolute;
-      top: var(--space-2);
-      right: var(--space-2);
-      display: grid;
-      place-items: center;
+      top: 8px;
+      right: 8px;
       width: 20px;
       height: 20px;
-      background: var(--accent-primary);
+      background: var(--accent-violet);
       color: white;
-      font-size: var(--font-xs);
-      font-weight: 700;
       border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 12px;
     }
 
     .bento-emoji {
-      font-size: var(--font-lg);
-      opacity: 0.85;
-    }
-
-    .bento-label {
-      font-size: var(--font-xs);
-      font-weight: 600;
-      text-align: center;
-      line-height: 1.2;
-      color: var(--text-primary);
-    }
-
-    /* ============================================
-   FORMS
-   ============================================ */
-
-    .input-group {
-      padding: 0 var(--space-3) var(--space-3);
-    }
-
-    .input-label {
+      font-size: 24px;
       display: block;
-      margin: 0 0 var(--space-2);
-      font-size: var(--font-xs);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--text-tertiary);
+      margin-bottom: 4px;
     }
 
-    .input {
-      width: 100%;
-      padding: var(--space-3);
-      font-size: var(--font-base);
-      background: var(--surface-1);
+    .btn {
+      flex: 1;
+      padding: 12px 16px;
+      font-weight: 600;
+      background: var(--surface-glass);
       color: var(--text-primary);
       border: 1px solid var(--border-default);
-      border-radius: var(--radius-md);
-      transition: all 0.2s var(--ease-out);
+      border-radius: 12px;
+      cursor: pointer;
     }
 
-    .input:focus {
-      outline: none;
-      border-color: var(--accent-primary);
-      box-shadow: 0 0 0 3px var(--accent-primary-glow);
+    .btn-primary {
+      background: var(--accent-violet);
+      border-color: var(--accent-violet);
+      color: white;
     }
 
-    /* ============================================
-   GROCERY LIST
-   ============================================ */
+    .btn-danger {
+      background: var(--accent-pink);
+      border-color: var(--accent-pink);
+      color: white;
+    }
+
+    .menu-grid {
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .menu-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px;
+      background: var(--surface-glass);
+      border: 1px solid var(--border-default);
+      border-radius: 16px;
+      cursor: pointer;
+    }
+
+    .menu-item:hover {
+      background: var(--surface-hover);
+    }
+
+    .menu-item-icon {
+      font-size: 24px;
+    }
+
+    .menu-item-content h4 {
+      margin: 0;
+      font-weight: 600;
+    }
+
+    .menu-item-content p {
+      margin: 4px 0 0;
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 8px;
+      padding: 0 12px 12px;
+    }
+
+    .btn-action {
+      flex: 1;
+      padding: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      background: var(--surface-glass);
+      color: var(--text-primary);
+      border: 1px solid var(--border-default);
+      border-radius: 12px;
+      cursor: pointer;
+    }
+
+    .btn-action:hover {
+      background: var(--surface-hover);
+    }
 
     .store-section {
-      margin: var(--space-3);
-      padding: var(--space-4);
-      background: var(--surface-1);
+      margin: 12px;
+      padding: 16px;
+      background: var(--surface-glass);
       border: 1px solid var(--border-default);
-      border-radius: var(--radius-lg);
+      border-radius: 16px;
     }
 
     .store-title {
-      margin: 0 0 var(--space-3);
-      font-size: var(--font-base);
+      margin: 0 0 12px;
       font-weight: 600;
-      color: var(--text-primary);
     }
 
     .grocery-item {
       display: flex;
       align-items: center;
-      gap: var(--space-3);
-      padding: var(--space-3);
-      margin-bottom: var(--space-2);
-      background: var(--surface-2);
+      gap: 12px;
+      padding: 12px;
+      margin-bottom: 8px;
+      background: var(--surface-glass);
       border: 1px solid var(--border-subtle);
-      border-radius: var(--radius-md);
-      transition: all 0.2s var(--ease-out);
-    }
-
-    .grocery-item:last-child {
-      margin-bottom: 0;
+      border-radius: 12px;
     }
 
     .checkbox {
-      position: relative;
       width: 24px;
       height: 24px;
-      background: var(--surface-3);
-      border: 2px solid var(--border-strong);
-      border-radius: var(--radius-sm);
+      background: var(--surface-glass);
+      border: 2px solid var(--border-default);
+      border-radius: 8px;
       cursor: pointer;
-      transition: all 0.2s var(--ease-out);
+      display: grid;
+      place-items: center;
     }
 
     .checkbox.checked {
-      background: var(--accent-success);
-      border-color: var(--accent-success);
+      background: var(--accent-emerald);
+      border-color: var(--accent-emerald);
     }
 
     .checkbox.checked::after {
       content: '✓';
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
       color: white;
-      font-size: var(--font-sm);
-      font-weight: 700;
+      font-weight: bold;
     }
 
     .grocery-item-text {
       flex: 1;
-      font-size: var(--font-base);
-      color: var(--text-primary);
-      transition: all 0.2s var(--ease-out);
     }
 
     .grocery-item.checked .grocery-item-text {
@@ -1011,56 +534,22 @@
       text-decoration: line-through;
     }
 
-    .add-item-row {
-      display: grid;
-      grid-template-columns: 1fr 2fr auto;
-      gap: var(--space-2);
-      margin-top: var(--space-3);
-    }
-
-    /* ============================================
-   SUMMARY
-   ============================================ */
-
-    .summary-container {
-      margin: var(--space-3);
-      padding: var(--space-4);
-      background: var(--surface-1);
-      border: 1px solid var(--border-default);
-      border-radius: var(--radius-lg);
-      font-family: 'SF Mono', ui-monospace, Menlo, Consolas, monospace;
-      font-size: var(--font-xs);
-      line-height: 1.6;
-      color: var(--text-secondary);
-      white-space: pre-wrap;
-      word-break: break-word;
-      max-height: 50vh;
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    /* ============================================
-   TOAST
-   ============================================ */
-
     .toast {
       position: fixed;
       left: 50%;
-      bottom: calc(100px + var(--safe-bottom));
+      bottom: 100px;
       transform: translateX(-50%) translateY(20px);
-      padding: var(--space-3) var(--space-5);
-      background: rgba(25, 25, 30, 0.95);
+      padding: 12px 20px;
+      background: rgba(15, 23, 42, 0.95);
       color: white;
-      font-size: var(--font-sm);
+      font-size: 14px;
       font-weight: 600;
-      border: 1px solid var(--border-strong);
-      border-radius: var(--radius-full);
+      border-radius: 999px;
       backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-      box-shadow: var(--shadow-xl);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
       opacity: 0;
       visibility: hidden;
-      transition: all 0.3s var(--ease-out);
+      transition: all 0.3s;
       z-index: 2000;
     }
 
@@ -1075,174 +564,208 @@
       transform: translateX(-50%) translateY(0);
     }
 
-    /* ============================================
-   UTILITIES
-   ============================================ */
-
-    .sr-only {
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border: 0;
+    .input-group {
+      padding: 0 12px 12px;
     }
 
-    /* ============================================
-   ANIMATIONS
-   ============================================ */
-
-    @keyframes fade-in {
-      from {
-        opacity: 0;
-        transform: translateY(10px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .input-label {
+      display: block;
+      margin: 0 0 8px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--text-tertiary);
     }
 
-    @keyframes slide-up {
-      from {
-        transform: translateY(100%);
-      }
-
-      to {
-        transform: translateY(0);
-      }
+    .input {
+      width: 100%;
+      padding: 12px;
+      font-size: 15px;
+      background: var(--surface-glass);
+      color: var(--text-primary);
+      border: 1px solid var(--border-default);
+      border-radius: 12px;
     }
 
-    .fade-in {
-      animation: fade-in 0.3s var(--ease-out) forwards;
+    .radio-group {
+      display: flex;
+      gap: 8px;
     }
 
-    /* ============================================
-   RESPONSIVE & ACCESSIBILITY
-   ============================================ */
-
-    @media (prefers-reduced-motion: reduce) {
-
-      *,
-      *::before,
-      *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
+    .radio {
+      padding: 8px 12px;
+      font-size: 13px;
+      font-weight: 600;
+      background: var(--surface-glass);
+      color: var(--text-secondary);
+      border: 1px solid var(--border-default);
+      border-radius: 12px;
+      cursor: pointer;
     }
 
-    @media (max-width: 375px) {
-      .bento-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    /* Focus visible for keyboard navigation */
-    :focus-visible {
-      outline: 2px solid var(--accent-primary);
-      outline-offset: 2px;
+    .radio.active {
+      background: var(--accent-violet);
+      border-color: var(--accent-violet);
+      color: white;
     }
   </style>
 </head>
 
 <body>
-  <!-- Header -->
-  <header class="header" role="banner">
-    <button id="menuBtn" class="btn-icon" aria-label="Open menu">
-      <span aria-hidden="true">☰</span>
-    </button>
-    <h1 class="header-title">Meal Planner</h1>
-    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">
-      <span class="theme-toggle-label">Dark</span>
-      <div class="theme-toggle-switch">
-        <div class="theme-toggle-knob"></div>
-      </div>
-    </button>
+  <header class="header">
+    <button id="menuBtn" class="btn-icon">☰</button>
+    <h1 class="header-title">Delicious Weeks</h1>
+    <button id="weekendToggle" class="weekend-toggle active">📅 Weekends</button>
   </header>
 
-  <!-- Main Content -->
-  <main class="container" role="main">
-    <div id="daysList" class="days-list" aria-label="Week days"></div>
-  </main>
+  <div class="container">
+    <div class="week-nav">
+      <button id="prevWeek" class="btn-icon">←</button>
+      <div class="week-date" id="weekDate"></div>
+      <button id="nextWeek" class="btn-icon">→</button>
+    </div>
+    <div id="daysList"></div>
+  </div>
 
-  <!-- Modal -->
-  <div id="modalOverlay" class="modal-overlay" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal" role="document">
-      <div class="modal-handle" aria-hidden="true"></div>
+  <div id="modalOverlay" class="modal-overlay">
+    <div class="modal">
       <div class="modal-header">
-        <h2 id="modalTitle" class="modal-title"></h2>
-        <p id="modalSubtitle" class="modal-subtitle"></p>
+        <h2 class="modal-title" id="modalTitle"></h2>
+        <p class="modal-subtitle" id="modalSubtitle"></p>
       </div>
-      <div id="modalBody" class="modal-body"></div>
-      <div id="modalFooter" class="modal-footer"></div>
+      <div class="modal-body" id="modalBody"></div>
+      <div class="modal-footer" id="modalFooter"></div>
     </div>
   </div>
 
-  <!-- Toast Notification -->
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <div id="toast" class="toast"></div>
 
   <script>
-    /**
-     * Meal Planner App - Modern Refactored Version
-     * 
-     * Architecture:
-     * - Modular ES6+ code structure
-     * - Reactive state management
-     * - Component-based rendering
-     * - Event delegation for performance
-     * - Accessibility-first approach
-     */
-
-    // ============================================
-    // CONSTANTS & CONFIGURATION
-    // ============================================
-
+    // Configuration
     const CONFIG = {
-      storageKey: 'mp_v2_state',
-      animations: {
-        modal: 450,
-        toast: 1500,
-        transition: 200
-      },
-      touch: {
-        minSwipeDistance: 50,
-        tapDelay: 300
-      }
+      storageKey: 'mp_enhanced_v3',
+      animations: { modal: 300, toast: 1500 }
+    };
+
+    const MEAL_EMOJIS = {
+      "Ravioli burro e salvia": "🥟",
+      "Spaghetti al limone": "🍝",
+      "Pasta e ceci": "🍝",
+      "Pasta col tonno": "🐟",
+      "Pasta sugo tonno": "🐟",
+      "Piadine prosciutto provolone": "🥪",
+      "Uova fritte": "🍳",
+      "Pasta al pesto": "🌿",
+      "Pasta coi pomodorini": "🍅",
+      "Lenticchie": "🥘",
+      "Spaghetti aglio e olio": "🧄",
+      "Carbonara": "🥓",
+      "Frittata di pasta": "🍳",
+      "Pasta e fagioli": "🫘",
+      "Salmone col riso": "🍣",
+      "Frittata di zucchine": "🥒",
+      "Polpette": "🧆",
+      "Pollo al limone": "🍗",
+      "Merluzzo": "🐟",
+      "Hamburger": "🍔",
+      "Cotolette": "🥩",
+      "Salsicce": "🌭",
+      "Minestrone": "🍲",
+      "Pollo al forno": "🍗",
+      "Scaloppine al limone": "🥩",
+      "Caprese": "🧀",
+      "Cordon bleu": "🥩",
+      "Würstel": "🌭",
+      "Dumplings": "🥟",
+      "Fish sticks": "🐟",
+      "Pollo allo spiedo": "🍗",
+      "Pasta al forno": "🍝",
+      "Parmigiana di melanzane": "🍆",
+      "Zucchine ripiene": "🥒",
+      "Lasagna": "🍝",
+      "Spezzatino con patate": "🥘",
+      "Tortellini con la panna": "🥟",
+      "Tortellini col sugo": "🥟",
+      "Pasta col ragù": "🍝",
+      "Polpettone": "🥩",
+      "Scrimpelle mbuss": "🥞",
+      "Polenta col sugo": "🌽",
+      "Cannelloni": "🥟",
+      "Bistecca": "🥩",
+      "Pizza Delivery": "🍕",
+      "Greco Delivery": "🥙",
+      "Chinese Delivery": "🥡",
+      "Vietnamese Delivery": "🍜",
+      "Ramen Delivery": "🍜",
+      "Purè di patate": "🥔",
+      "Broccoli al vapore": "🥦",
+      "Insalata di pomodori": "🍅",
+      "Tater tots": "🥔",
+      "Barbabietole": "🥬",
+      "Insalata di mais": "🌽",
+      "Patate lesse": "🥔",
+      "Carote al forno": "🥕",
+      "Carote a insalata": "🥕",
+      "Zucchine trifolate": "🥒",
+      "Insalata di cetrioli": "🥒",
+      "Insalata": "🥗",
+      "None": "❌",
+      "Custom": "✏️"
+    };
+
+    const INGREDIENT_EMOJIS = {
+      "Ravioli": "🥟", "Sage": "🌿", "Spaghetti": "🍝", "Lemons": "🍋",
+      "Ditalini": "🍝", "Chickpeas": "🫘", "Tuna": "🐟", "Pasta": "🍝",
+      "Tomato sauce": "🍅", "Flatbreads": "🫓", "Prosciutto": "🥩",
+      "Provolone cheese": "🧀", "Eggs": "🥚", "Pesto": "🌿",
+      "Cherry tomatoes": "🍅", "Lentils": "🫘", "Croutons": "🍞",
+      "Bacon": "🥓", "Beans": "🫘", "Salmon": "🍣", "Rice": "🍚",
+      "Zucchini": "🥒", "Ground beef": "🥩", "Bread": "🍞", "Breadcrumbs": "🍞",
+      "Chicken breast": "🍗", "Cod": "🐟", "Hamburger buns": "🍔",
+      "American cheese slices": "🧀", "Lettuce": "🥬", "Tomatoes": "🍅",
+      "Breaded cutlets": "🥩", "Sausages": "🌭", "Vegetable soup mix": "🥕",
+      "Chicken thighs": "🍗", "Veal cutlets": "🥩", "Fresh mozzarella": "🧀",
+      "Cordon bleu": "🥩", "Hot dogs": "🌭", "Dumplings": "🥟",
+      "Fish sticks": "🐟", "Whole chicken": "🍗", "Shredded mozzarella": "🧀",
+      "Eggplant": "🍆", "Beef": "🥩", "Potatoes": "🥔", "Onion": "🧅",
+      "Carrots": "🥕", "Tortellini": "🥟", "Cream": "🥛", "Meat sauce": "🍖",
+      "Flour": "🌾", "Milk": "🥛", "Broth": "🍲", "Polenta": "🌽",
+      "Ricotta": "🧀", "Spinach": "🥬", "Lasagna noodles": "🍝", "Steak": "🥩",
+      "Broccoli": "🥦", "Tater tots": "🥔", "Beets": "🥬", "Corn": "🌽",
+      "Cucumbers": "🥒", "Butter": "🧈", "Pesto sauce": "🌿"
     };
 
     const MEAL_DATA = {
       lunch: [
-        "Ravioli burro e salvia", "Spaghetti al limone", "Pasta e ceci", "Pasta col tonno",
-        "Pasta sugo tonno", "Piadine prosciutto provolone", "Uova fritte", "Pasta al pesto",
-        "Pasta coi pomodorini", "Lenticchie", "Spaghetti aglio e olio", "Carbonara",
-        "Frittata di pasta", "Pasta e fagioli"
+        "None", "Ravioli burro e salvia", "Spaghetti al limone", "Pasta e ceci",
+        "Pasta col tonno", "Pasta sugo tonno", "Piadine prosciutto provolone",
+        "Uova fritte", "Pasta al pesto", "Pasta coi pomodorini", "Lenticchie",
+        "Spaghetti aglio e olio", "Carbonara", "Frittata di pasta", "Pasta e fagioli", "Custom"
       ],
       dinnerRegular: [
-        "Salmone col riso", "Frittata di zucchine", "Polpette", "Pollo al limone",
+        "None", "Salmone col riso", "Frittata di zucchine", "Polpette", "Pollo al limone",
         "Merluzzo", "Hamburger", "Cotolette", "Salsicce", "Minestrone", "Pollo al forno",
-        "Scaloppine al limone", "Caprese"
+        "Scaloppine al limone", "Caprese", "Custom"
       ],
       dinnerQuick: [
-        "Cordon bleu", "Würstel", "Dumplings", "Fish sticks", "Pollo allo spiedo"
+        "None", "Cordon bleu", "Würstel", "Dumplings", "Fish sticks", "Pollo allo spiedo", "Custom"
       ],
       delivery: [
-        "Pizza Delivery", "Greco Delivery", "Chinese Delivery", "Vietnamese Delivery", "Ramen Delivery"
+        "None", "Pizza Delivery", "Greco Delivery", "Chinese Delivery",
+        "Vietnamese Delivery", "Ramen Delivery", "Custom"
       ],
       dinnerWeekend: [
-        "Pasta al forno", "Parmigiana di melanzane", "Zucchine ripiene", "Lasagna",
-        "Spezzatino con patate", "Tortellini con la panna", "Tortellini col sugo",
-        "Pasta col ragù", "Polpettone", "Scrimpelle mbuss", "Polenta col sugo",
-        "Cannelloni", "Bistecca"
+        "None", "Pasta al forno", "Parmigiana di melanzane", "Zucchine ripiene",
+        "Lasagna", "Spezzatino con patate", "Tortellini con la panna",
+        "Tortellini col sugo", "Pasta col ragù", "Polpettone", "Scrimpelle mbuss",
+        "Polenta col sugo", "Cannelloni", "Bistecca", "Custom"
       ],
       side: [
-        "Purè di patate", "Broccoli al vapore", "Insalata di pomodori", "Tater tots",
-        "Barbabietole", "Insalata di mais", "Patate lesse", "Carote al forno",
-        "Carote a insalata", "Zucchine trifolate", "Insalata di cetrioli", "Insalata"
+        "None", "Purè di patate", "Broccoli al vapore", "Insalata di pomodori",
+        "Tater tots", "Barbabietole", "Insalata di mais", "Patate lesse",
+        "Carote al forno", "Carote a insalata", "Zucchine trifolate",
+        "Insalata di cetrioli", "Insalata", "Custom"
       ]
     };
 
@@ -1254,7 +777,7 @@
       "Pasta sugo tonno": ["Pasta", "Tuna", "Tomato sauce"],
       "Piadine prosciutto provolone": ["Flatbreads", "Prosciutto", "Provolone cheese"],
       "Uova fritte": ["Eggs"],
-      "Pasta al pesto": ["Pasta", "Pesto"],
+      "Pasta al pesto": ["Pasta", "Pesto sauce"],
       "Pasta coi pomodorini": ["Pasta", "Cherry tomatoes"],
       "Lenticchie": ["Lentils", "Croutons"],
       "Spaghetti aglio e olio": ["Spaghetti"],
@@ -1266,7 +789,7 @@
       "Polpette": ["Ground beef", "Eggs", "Bread", "Breadcrumbs"],
       "Pollo al limone": ["Chicken breast", "Lemons"],
       "Merluzzo": ["Cod"],
-      "Hamburger": ["Buns", "Hamburger buns", "American cheese slices", "Lettuce", "Tomatoes"],
+      "Hamburger": ["Hamburger buns", "Ground beef", "American cheese slices", "Lettuce", "Tomatoes"],
       "Cotolette": ["Breaded cutlets", "Breadcrumbs", "Eggs"],
       "Salsicce": ["Sausages"],
       "Minestrone": ["Vegetable soup mix", "Pasta", "Beans"],
@@ -1312,75 +835,18 @@
       Other: []
     };
 
-    const SYNONYMS = {
-      'Buns': 'Hamburger buns',
-      'Pesto': 'Pesto sauce'
-    };
-
-    // ============================================
-    // UTILITY FUNCTIONS
-    // ============================================
-
-    const Utils = {
-      // Date helpers
-      getNextMonday(date = new Date()) {
-        const day = date.getDay();
-        const diff = (8 - day) % 7 || 7;
-        const monday = new Date(date);
-        monday.setDate(date.getDate() + diff);
-        monday.setHours(0, 0, 0, 0);
-        return monday;
-      },
-
-      addDays(date, days) {
-        const result = new Date(date);
-        result.setDate(date.getDate() + days);
-        return result;
-      },
-
-      formatDate(date) {
-        return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
-      },
-
-      // Array helpers
-      pickRandom(array) {
-        return array[Math.floor(Math.random() * array.length)] || null;
-      },
-
-      // DOM helpers
-      escapeHtml(text) {
-        const div = document.createElement('div');
-        div.textContent = text;
-        return div.innerHTML;
-      },
-
-      // Storage helpers
-      debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-          const later = () => {
-            clearTimeout(timeout);
-            func(...args);
-          };
-          clearTimeout(timeout);
-          timeout = setTimeout(later, wait);
-        };
-      }
-    };
-
-    // ============================================
-    // STATE MANAGEMENT
-    // ============================================
-
-    class StateManager {
+    // State Management
+    class MealPlannerApp {
       constructor() {
-        this.state = this.load() || this.createInitialState();
-        this.listeners = new Set();
+        this.state = this.loadState() || this.createInitialState();
+        this.currentTab = 'lunch';
+        this.currentDayIndex = null;
+        this.init();
       }
 
       createInitialState() {
-        const weekStart = Utils.getNextMonday();
-        const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+        const weekStart = this.getWeekStart(new Date());
+        const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
 
         return {
           weekStart: weekStart.toISOString(),
@@ -1388,34 +854,56 @@
           theme: 'dark',
           days: days.map((name, index) => ({
             name,
-            date: Utils.addDays(weekStart, index).toISOString(),
+            date: new Date(weekStart.getTime() + index * 86400000).toISOString(),
             lunch: null,
             dinner: null,
             side: null,
             busy: false,
-            dinnerType: 'regular'
+            dinnerType: 'regular',
+            customLunch: null,
+            customDinner: null,
+            customSide: null
           })),
           groceryExtras: []
         };
       }
 
-      get() {
-        return this.state;
+      getWeekStart(date) {
+        const d = new Date(date);
+        const day = d.getDay();
+        const diff = d.getDate() - day + (day === 0 ? -6 : 1);
+        return new Date(d.setDate(diff));
       }
 
-      set(updates) {
-        this.state = { ...this.state, ...updates };
-        this.save();
-        this.notify();
+      formatWeekDate() {
+        const start = new Date(this.state.weekStart);
+        const end = new Date(start.getTime() + 6 * 86400000);
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        return `${monthNames[start.getMonth()]} ${start.getDate()} - ${end.getDate()}, ${start.getFullYear()}`;
       }
 
-      updateDay(index, updates) {
-        const days = [...this.state.days];
-        days[index] = { ...days[index], ...updates };
-        this.set({ days });
+      formatDate(date) {
+        const d = new Date(date);
+        const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+        return `${monthNames[d.getMonth()]} ${d.getDate()}`;
       }
 
-      save() {
+      init() {
+        this.applyTheme();
+        this.attachEventListeners();
+        this.render();
+      }
+
+      loadState() {
+        try {
+          const stored = localStorage.getItem(CONFIG.storageKey);
+          return stored ? JSON.parse(stored) : null;
+        } catch (e) {
+          return null;
+        }
+      }
+
+      saveState() {
         try {
           localStorage.setItem(CONFIG.storageKey, JSON.stringify(this.state));
         } catch (e) {
@@ -1423,323 +911,243 @@
         }
       }
 
-      load() {
-        try {
-          const stored = localStorage.getItem(CONFIG.storageKey);
-          return stored ? JSON.parse(stored) : null;
-        } catch (e) {
-          console.error('Failed to load state:', e);
-          return null;
-        }
-      }
-
-      subscribe(callback) {
-        this.listeners.add(callback);
-        return () => this.listeners.delete(callback);
-      }
-
-      notify() {
-        this.listeners.forEach(callback => callback(this.state));
-      }
-
-      reset() {
-        const theme = this.state.theme;
-        this.state = this.createInitialState();
-        this.state.theme = theme;
-        this.save();
-        this.notify();
-      }
-    }
-
-    // ============================================
-    // COMPONENTS
-    // ============================================
-
-    class MealPlannerApp {
-      constructor() {
-        this.state = new StateManager();
-        this.currentTab = 'lunch';
-        this.currentDayIndex = null;
-        this.init();
-      }
-
-      init() {
-        this.checkWeekRollover();
-        this.applyTheme();
-        this.attachEventListeners();
-        this.render();
-
-        // Subscribe to state changes
-        this.state.subscribe(() => this.render());
-      }
-
-      checkWeekRollover() {
-        const current = Utils.getNextMonday().toISOString();
-        if (this.state.get().weekStart !== current) {
-          this.state.reset();
-        }
-      }
-
       applyTheme() {
-        const theme = this.state.get().theme;
-        document.documentElement.setAttribute('data-theme', theme);
-        document.querySelector('.theme-toggle-label').textContent =
-          theme === 'light' ? 'Light' : 'Dark';
+        document.documentElement.setAttribute('data-theme', this.state.theme);
       }
 
       toggleTheme() {
-        const newTheme = this.state.get().theme === 'light' ? 'dark' : 'light';
-        this.state.set({ theme: newTheme });
+        this.state.theme = this.state.theme === 'light' ? 'dark' : 'light';
         this.applyTheme();
+        this.saveState();
+      }
+
+      navigateWeek(direction) {
+        const current = new Date(this.state.weekStart);
+        const days = direction === 'next' ? 7 : -7;
+        const newWeekStart = new Date(current.getTime() + days * 86400000);
+        this.state = this.createInitialState();
+        this.state.weekStart = newWeekStart.toISOString();
+        this.state.days = this.state.days.map((day, index) => ({
+          ...day,
+          date: new Date(newWeekStart.getTime() + index * 86400000).toISOString()
+        }));
+        this.saveState();
+        this.render();
       }
 
       attachEventListeners() {
-        // Theme toggle
-        document.getElementById('themeToggle').addEventListener('click', () => {
-          this.toggleTheme();
-        });
+        document.getElementById('menuBtn').onclick = () => this.openMenu();
+        document.getElementById('weekendToggle').onclick = () => {
+          this.state.showWeekend = !this.state.showWeekend;
+          document.getElementById('weekendToggle').classList.toggle('active', this.state.showWeekend);
+          this.saveState();
+          this.render();
+        };
 
-        // Menu button
-        document.getElementById('menuBtn').addEventListener('click', () => {
-          this.openMenu();
-        });
+        document.getElementById('prevWeek').onclick = () => this.navigateWeek('prev');
+        document.getElementById('nextWeek').onclick = () => this.navigateWeek('next');
 
-        // Modal overlay click to close
         const overlay = document.getElementById('modalOverlay');
-        overlay.addEventListener('click', (e) => {
-          if (e.target === overlay) {
-            this.closeModal();
-          }
-        });
+        overlay.onclick = (e) => {
+          if (e.target === overlay) this.closeModal();
+        };
 
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
+        document.onkeydown = (e) => {
           if (e.key === 'Escape' && overlay.classList.contains('show')) {
             this.closeModal();
           }
-        });
+        };
       }
 
       render() {
+        document.getElementById('weekDate').textContent = this.formatWeekDate();
         this.renderDays();
       }
 
       renderDays() {
-        const state = this.state.get();
-        const days = state.days.filter(d =>
-          state.showWeekend || (d.name !== 'Sat' && d.name !== 'Sun')
+        const days = this.state.days.filter(d =>
+          this.state.showWeekend || (d.name !== 'Saturday' && d.name !== 'Sunday')
         );
 
-        const daysHtml = days.map((day, index) => {
-          const realIndex = state.days.indexOf(day);
+        const daysHtml = days.map((day, visualIndex) => {
+          const realIndex = this.state.days.indexOf(day);
           const lunchMissing = !day.lunch;
           const dinnerMissing = !day.dinner;
           const sideMissing = day.dinnerType !== 'delivery' && !day.side;
           const incomplete = lunchMissing || dinnerMissing || sideMissing;
 
-          const lunchText = day.lunch || '<span class="meal-placeholder">Tap to select</span>';
-          const dinnerText = day.dinner || '<span class="meal-placeholder">Tap to select</span>';
-          const sideText = day.dinnerType === 'delivery' ?
-            '<span class="meal-placeholder">—</span>' :
-            (day.side || '<span class="meal-placeholder">Select</span>');
+          const lunchDisplay = day.lunch === 'Custom' ? (day.customLunch || 'Enter custom') : day.lunch;
+          const dinnerDisplay = day.dinner === 'Custom' ? (day.customDinner || 'Enter custom') : day.dinner;
+          const sideDisplay = day.side === 'Custom' ? (day.customSide || 'Enter custom') : day.side;
 
-          let dinnerLabel = 'Dinner';
-          if (day.busy && day.dinnerType === 'quick') dinnerLabel += ' • Quick';
-          if (day.busy && day.dinnerType === 'delivery') dinnerLabel += ' • Order In';
+          const lunchText = day.lunch === 'None' ? 'No lunch' : (lunchDisplay || 'Select lunch');
+          const dinnerText = day.dinner === 'None' ? 'No dinner' : (dinnerDisplay || 'Select dinner');
+          const sideText = day.dinnerType === 'delivery' ? '' :
+            (day.side === 'None' ? 'No side' : (sideDisplay || 'Select side'));
+
+          const lunchEmoji = day.lunch ? (MEAL_EMOJIS[day.lunch] || '🍽️') : '🍽️';
+          const dinnerEmoji = day.dinner ? (MEAL_EMOJIS[day.dinner] || '🍽️') : '🍽️';
 
           return `
-        <article class="day-card ${incomplete ? 'incomplete' : ''}" 
-                 data-index="${realIndex}" 
-                 role="button" 
-                 tabindex="0"
-                 aria-label="${day.name} ${Utils.formatDate(new Date(day.date))}">
-          <div class="day-header">
-            <div>
-              <span class="day-title">${day.name}</span>
-              <span class="day-date">${Utils.formatDate(new Date(day.date))}</span>
-            </div>
-            ${incomplete ? '<span class="chip missing">Missing</span>' : ''}
-          </div>
-          
-          <div class="meals-grid">
-            <div class="meal-item ${lunchMissing ? 'empty' : ''}">
-              <div class="meal-icon lunch" aria-hidden="true">L</div>
-              <div class="meal-content">
-                <h4 class="meal-title">Lunch</h4>
-                <p class="meal-description">${lunchText}</p>
-              </div>
-            </div>
-            
-            <div class="meal-item ${dinnerMissing ? 'empty' : ''}">
-              <div class="meal-icon dinner" aria-hidden="true">D</div>
-              <div class="meal-content">
-                <div class="meal-header-row">
-                  <h4 class="meal-title">${dinnerLabel}</h4>
-                  <button class="busy-toggle-inline ${day.busy ? 'active' : ''}" 
-                          data-index="${realIndex}"
-                          aria-label="${day.busy ? 'Busy day on' : 'Busy day off'}">
-                    ${day.busy ? '✓ Busy' : 'Busy'}
-                  </button>
+            <div class="day-card ${incomplete ? 'incomplete' : ''}" data-index="${realIndex}">
+              <div class="day-header">
+                <div>
+                  <div class="day-title">${day.name}</div>
+                  <div class="day-date">${this.formatDate(day.date)}</div>
                 </div>
-                <p class="meal-description">
-                  ${dinnerText}
-                  ${day.dinnerType !== 'delivery' ? ` • Side: ${sideText}` : ''}
-                </p>
+                ${day.busy ? `<button class="busy-toggle active" data-index="${realIndex}">✓ Busy Night</button>` : ''}
+              </div>
+              
+              <div class="meal-item ${lunchMissing ? 'empty' : ''}" data-meal="lunch" data-index="${realIndex}">
+                <div class="meal-icon lunch">${lunchEmoji}</div>
+                <div class="meal-content">
+                  <h4 class="meal-title">Lunch</h4>
+                  <p class="meal-description">${lunchText}</p>
+                </div>
+              </div>
+              
+              <div class="meal-item ${dinnerMissing ? 'empty' : ''}" data-meal="dinner" data-index="${realIndex}">
+                <div class="meal-icon dinner">${dinnerEmoji}</div>
+                <div class="meal-content">
+                  <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <h4 class="meal-title">Dinner</h4>
+                    ${!day.busy ? `<button class="busy-toggle" data-index="${realIndex}">Busy Night</button>` : ''}
+                  </div>
+                  <p class="meal-description">
+                    ${dinnerText}
+                    ${day.dinnerType !== 'delivery' && sideText ? ` • ${sideText}` : ''}
+                  </p>
+                </div>
               </div>
             </div>
-          </div>
-        </article>
-      `;
+          `;
         }).join('');
 
-        const weekendToggleHtml = `
-      <div class="weekend-toggle-card">
-        <div class="weekend-toggle-label">Weekend Planning</div>
-        <div id="weekendSwitch" 
-             class="weekend-toggle-switch ${state.showWeekend ? 'active' : ''}"
-             role="switch"
-             aria-checked="${state.showWeekend}"
-             tabindex="0"></div>
-      </div>
-    `;
-
-        document.getElementById('daysList').innerHTML = daysHtml + weekendToggleHtml;
-
-        // Attach event listeners
+        document.getElementById('daysList').innerHTML = daysHtml;
         this.attachDayListeners();
       }
 
       attachDayListeners() {
-        // Day cards
-        document.querySelectorAll('.day-card').forEach(card => {
-          card.addEventListener('click', (e) => {
-            if (!e.target.closest('.busy-toggle-inline')) {
-              this.openDayModal(parseInt(card.dataset.index));
+        document.querySelectorAll('.meal-item').forEach(item => {
+          item.onclick = (e) => {
+            if (!e.target.closest('.busy-toggle')) {
+              const index = parseInt(item.dataset.index);
+              const meal = item.dataset.meal;
+              this.currentTab = meal;
+              this.openDayModal(index);
             }
-          });
-
-          card.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              this.openDayModal(parseInt(card.dataset.index));
-            }
-          });
+          };
         });
 
-        // Busy toggles
-        document.querySelectorAll('.busy-toggle-inline').forEach(btn => {
-          btn.addEventListener('click', (e) => {
+        document.querySelectorAll('.busy-toggle').forEach(btn => {
+          btn.onclick = (e) => {
             e.stopPropagation();
             const index = parseInt(btn.dataset.index);
-            const day = this.state.get().days[index];
-            const newBusy = !day.busy;
-
-            const updates = { busy: newBusy };
-            if (newBusy) {
-              updates.dinnerType = 'quick';
-              updates.dinner = null;
+            const day = this.state.days[index];
+            day.busy = !day.busy;
+            if (day.busy) {
+              day.dinnerType = 'quick';
+              day.dinner = null;
             } else {
-              updates.dinnerType = 'regular';
+              day.dinnerType = 'regular';
             }
-
-            this.state.updateDay(index, updates);
-          });
+            this.saveState();
+            this.render();
+          };
         });
-
-        // Weekend switch
-        const weekendSwitch = document.getElementById('weekendSwitch');
-        if (weekendSwitch) {
-          weekendSwitch.addEventListener('click', () => {
-            this.state.set({ showWeekend: !this.state.get().showWeekend });
-          });
-
-          weekendSwitch.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              this.state.set({ showWeekend: !this.state.get().showWeekend });
-            }
-          });
-        }
       }
 
       openModal({ title, subtitle = '', bodyHTML = '', footer = [] }) {
         const overlay = document.getElementById('modalOverlay');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalSubtitle = document.getElementById('modalSubtitle');
-        const modalBody = document.getElementById('modalBody');
+        document.getElementById('modalTitle').textContent = title || '';
+        document.getElementById('modalSubtitle').textContent = subtitle || '';
+        document.getElementById('modalBody').innerHTML = bodyHTML || '';
+
         const modalFooter = document.getElementById('modalFooter');
-
-        modalTitle.textContent = title || '';
-        modalSubtitle.textContent = subtitle || '';
-        modalBody.innerHTML = bodyHTML || '';
-
         modalFooter.innerHTML = '';
         footer.forEach(btn => {
           const button = document.createElement('button');
           button.className = `btn ${btn.type || ''}`;
           button.textContent = btn.label;
-          button.addEventListener('click', btn.onClick);
+          button.onclick = btn.onClick;
           modalFooter.appendChild(button);
         });
 
         overlay.classList.add('show');
-        overlay.setAttribute('aria-hidden', 'false');
-
-        // Focus management
-        setTimeout(() => {
-          const firstButton = modalFooter.querySelector('button');
-          if (firstButton) firstButton.focus();
-        }, CONFIG.animations.modal);
       }
 
       closeModal() {
-        const overlay = document.getElementById('modalOverlay');
-        overlay.classList.remove('show');
-        overlay.setAttribute('aria-hidden', 'true');
+        document.getElementById('modalOverlay').classList.remove('show');
       }
 
       openMenu() {
         this.openModal({
-          title: 'Menu',
-          subtitle: 'Quick actions',
+          title: 'Quick Actions',
+          subtitle: 'Manage your week',
           bodyHTML: `
-        <div class="menu-grid">
-          <div class="menu-item" id="menuRandomize">
-            <div class="menu-item-icon">🎲</div>
-            <div class="menu-item-content">
-              <h4>Randomize Week</h4>
-              <p>Auto-fill all meals</p>
+            <div class="menu-grid">
+              <div class="menu-item" id="menuPrevWeek">
+                <div class="menu-item-icon">⬅️</div>
+                <div class="menu-item-content">
+                  <h4>Previous Week</h4>
+                  <p>Go back one week</p>
+                </div>
+              </div>
+              <div class="menu-item" id="menuNextWeek">
+                <div class="menu-item-icon">➡️</div>
+                <div class="menu-item-content">
+                  <h4>Next Week</h4>
+                  <p>Go forward one week</p>
+                </div>
+              </div>
+              <div class="menu-item" id="menuTheme">
+                <div class="menu-item-icon">${this.state.theme === 'dark' ? '🌙' : '☀️'}</div>
+                <div class="menu-item-content">
+                  <h4>Toggle Theme</h4>
+                  <p>${this.state.theme === 'dark' ? 'Switch to light' : 'Switch to dark'}</p>
+                </div>
+              </div>
+              <div class="menu-item" id="menuRandomize">
+                <div class="menu-item-icon">🎲</div>
+                <div class="menu-item-content">
+                  <h4>Randomize Week</h4>
+                  <p>Auto-fill empty meals</p>
+                </div>
+              </div>
+              <div class="menu-item" id="menuShopping">
+                <div class="menu-item-icon">🛒</div>
+                <div class="menu-item-content">
+                  <h4>Shopping List</h4>
+                  <p>View & share</p>
+                </div>
+              </div>
+              <div class="menu-item" id="menuClear">
+                <div class="menu-item-icon">🗑️</div>
+                <div class="menu-item-content">
+                  <h4>Clear Week</h4>
+                  <p>Reset all selections</p>
+                </div>
+              </div>
             </div>
-          </div>
-          <div class="menu-item" id="menuShopping">
-            <div class="menu-item-icon">🛒</div>
-            <div class="menu-item-content">
-              <h4>Shopping List</h4>
-              <p>Grouped by store</p>
-            </div>
-          </div>
-          <div class="menu-item" id="menuSummary">
-            <div class="menu-item-icon">📋</div>
-            <div class="menu-item-content">
-              <h4>Weekly Summary</h4>
-              <p>Share your meal plan</p>
-            </div>
-          </div>
-          <div class="menu-item" id="menuClear">
-            <div class="menu-item-icon">🗑️</div>
-            <div class="menu-item-content">
-              <h4>Clear Week</h4>
-              <p>Reset all selections</p>
-            </div>
-          </div>
-        </div>
-      `,
-          footer: [
-            { label: 'Close', onClick: () => this.closeModal() }
-          ]
+          `,
+          footer: [{ label: 'Close', onClick: () => this.closeModal() }]
         });
 
-        // Attach menu item listeners
+        document.getElementById('menuPrevWeek').onclick = () => {
+          this.navigateWeek('prev');
+          this.closeModal();
+        };
+
+        document.getElementById('menuNextWeek').onclick = () => {
+          this.navigateWeek('next');
+          this.closeModal();
+        };
+
+        document.getElementById('menuTheme').onclick = () => {
+          this.toggleTheme();
+          this.closeModal();
+        };
+
         document.getElementById('menuRandomize').onclick = () => {
           this.randomizeWeek();
           this.closeModal();
@@ -1750,14 +1158,22 @@
           this.openGroceryList();
         };
 
-        document.getElementById('menuSummary').onclick = () => {
-          this.openSummary();
-        };
-
         document.getElementById('menuClear').onclick = () => {
           if (confirm('Clear all meals for this week?')) {
-            this.state.reset();
+            this.state.days = this.state.days.map(day => ({
+              ...day,
+              lunch: null,
+              dinner: null,
+              side: null,
+              busy: false,
+              dinnerType: 'regular',
+              customLunch: null,
+              customDinner: null,
+              customSide: null
+            }));
+            this.saveState();
             this.closeModal();
+            this.render();
             this.showToast('Week cleared');
           }
         };
@@ -1765,29 +1181,29 @@
 
       openDayModal(index) {
         this.currentDayIndex = index;
-        const day = this.state.get().days[index];
+        const day = this.state.days[index];
 
         this.openModal({
-          title: `${day.name} • ${Utils.formatDate(new Date(day.date))}`,
-          subtitle: 'Select your meals',
+          title: `${day.name}`,
+          subtitle: this.formatDate(day.date),
           bodyHTML: `
-        <div class="tabs">
-          <button class="tab ${this.currentTab === 'lunch' ? 'active' : ''}" data-tab="lunch">
-            Lunch
-          </button>
-          <button class="tab ${this.currentTab === 'dinner' ? 'active' : ''}" data-tab="dinner">
-            Dinner
-          </button>
-        </div>
-        <div id="tabContent"></div>
-      `,
+            <div class="tabs">
+              <button class="tab ${this.currentTab === 'lunch' ? 'active' : ''}" data-tab="lunch">
+                Lunch
+              </button>
+              <button class="tab ${this.currentTab === 'dinner' ? 'active' : ''}" data-tab="dinner">
+                Dinner
+              </button>
+            </div>
+            <div id="tabContent"></div>
+          `,
           footer: [
             { label: 'Cancel', onClick: () => this.closeModal() },
             {
               label: 'Save',
               type: 'btn-primary',
               onClick: () => {
-                this.state.save();
+                this.saveState();
                 this.closeModal();
                 this.showToast('Saved! ✓');
               }
@@ -1795,29 +1211,60 @@
           ]
         });
 
-        // Tab switching
         document.querySelectorAll('.tab').forEach(tab => {
-          tab.addEventListener('click', () => {
+          tab.onclick = () => {
             this.currentTab = tab.dataset.tab;
             document.querySelectorAll('.tab').forEach(t =>
               t.classList.toggle('active', t === tab)
             );
             this.renderTabContent();
-          });
+          };
         });
 
         this.renderTabContent();
       }
 
       renderTabContent() {
-        const day = this.state.get().days[this.currentDayIndex];
+        const day = this.state.days[this.currentDayIndex];
         const content = document.getElementById('tabContent');
 
         if (this.currentTab === 'lunch') {
-          content.innerHTML = this.renderBentoGrid('lunch', day.lunch, MEAL_DATA.lunch);
+          const selected = day.lunch;
+          content.innerHTML = `
+            <div class="action-buttons">
+              <button class="btn-action" id="randomizeLunch">🎲 Randomize</button>
+              <button class="btn-action" id="clearLunch">🗑️ Clear</button>
+            </div>
+            ${day.lunch === 'Custom' ? `
+              <div class="input-group">
+                <label class="input-label">Custom Lunch</label>
+                <input class="input" id="customLunchInput" value="${day.customLunch || ''}" placeholder="Enter custom meal">
+              </div>
+            ` : ''}
+            ${this.renderBentoGrid('lunch', selected, MEAL_DATA.lunch)}
+          `;
+
+          document.getElementById('randomizeLunch').onclick = () => {
+            const options = MEAL_DATA.lunch.filter(m => m !== 'None' && m !== 'Custom');
+            day.lunch = options[Math.floor(Math.random() * options.length)];
+            this.renderTabContent();
+          };
+
+          document.getElementById('clearLunch').onclick = () => {
+            day.lunch = null;
+            day.customLunch = null;
+            this.renderTabContent();
+          };
+
+          if (day.lunch === 'Custom') {
+            document.getElementById('customLunchInput').oninput = (e) => {
+              day.customLunch = e.target.value;
+            };
+          }
+
           this.attachBentoListeners('lunch');
         } else {
-          const isWeekend = day.name === 'Sat' || day.name === 'Sun';
+          const isWeekend = day.name === 'Saturday' || day.name === 'Sunday';
           let dinnerOptions = MEAL_DATA.dinnerRegular;
 
           if (day.busy && day.dinnerType === 'quick') {
@@ -1829,64 +1276,102 @@
           }
 
           content.innerHTML = `
-        <div class="controls">
-          <button id="busyToggle" class="switch-control ${day.busy ? 'active' : ''}">
-            ${day.busy ? '✓ Busy Day' : 'Busy Day'}
-          </button>
-          ${day.busy ? `
-            <div class="radio-group">
-              <button class="radio ${day.dinnerType === 'quick' ? 'active' : ''}" data-type="quick">
-                Quick
+            <div class="controls">
+              <button id="busyToggle" class="busy-toggle ${day.busy ? 'active' : ''}">
+                ${day.busy ? '✓ Busy Night' : 'Busy Night'}
               </button>
-              <button class="radio ${day.dinnerType === 'delivery' ? 'active' : ''}" data-type="delivery">
-                Delivery
-              </button>
+              ${day.busy ? `
+                <div class="radio-group">
+                  <button class="radio ${day.dinnerType === 'quick' ? 'active' : ''}" data-type="quick">
+                    Quick
+                  </button>
+                  <button class="radio ${day.dinnerType === 'delivery' ? 'active' : ''}" data-type="delivery">
+                    Delivery
+                  </button>
+                </div>
+              ` : ''}
             </div>
-          ` : ''}
-        </div>
-        
-        <div id="dinnerBento">
-          ${this.renderBentoGrid('dinner', day.dinner, dinnerOptions)}
-        </div>
-        
-        ${day.dinnerType !== 'delivery' ? `
-          <div class="input-group">
-            <label class="input-label">Side Dish</label>
-          </div>
-          <div id="sideBento">
-            ${this.renderBentoGrid('side', day.side, MEAL_DATA.side)}
-          </div>
-        ` : ''}
-      `;
+            
+            <div class="action-buttons">
+              <button class="btn-action" id="randomizeDinner">🎲 Randomize</button>
+              <button class="btn-action" id="clearDinner">🗑️ Clear</button>
+            </div>
+            
+            ${day.dinner === 'Custom' ? `
+              <div class="input-group">
+                <label class="input-label">Custom Dinner</label>
+                <input class="input" id="customDinnerInput" value="${day.customDinner || ''}" placeholder="Enter custom meal">
+              </div>
+            ` : ''}
+            
+            <div id="dinnerBento">
+              ${this.renderBentoGrid('dinner', day.dinner, dinnerOptions)}
+            </div>
+            
+            ${day.dinnerType !== 'delivery' ? `
+              <div class="input-group">
+                <label class="input-label">Side Dish</label>
+              </div>
+              ${day.side === 'Custom' ? `
+                <div class="input-group">
+                  <input class="input" id="customSideInput" value="${day.customSide || ''}" placeholder="Enter custom side">
+                </div>
+              ` : ''}
+              <div id="sideBento">
+                ${this.renderBentoGrid('side', day.side, MEAL_DATA.side)}
+              </div>
+            ` : ''}
+          `;
 
-          // Busy toggle
           document.getElementById('busyToggle').onclick = () => {
-            const newBusy = !day.busy;
-            const updates = { busy: newBusy };
-
-            if (newBusy) {
-              updates.dinnerType = 'quick';
-              updates.dinner = null;
+            day.busy = !day.busy;
+            if (day.busy) {
+              day.dinnerType = 'quick';
+              day.dinner = null;
             } else {
-              updates.dinnerType = 'regular';
+              day.dinnerType = 'regular';
             }
-
-            this.state.updateDay(this.currentDayIndex, updates);
             this.renderTabContent();
           };
 
-          // Type radios
+          document.getElementById('randomizeDinner').onclick = () => {
+            const options = dinnerOptions.filter(m => m !== 'None' && m !== 'Custom');
+            day.dinner = options[Math.floor(Math.random() * options.length)];
+
+            if (day.dinnerType !== 'delivery') {
+              const sideOptions = MEAL_DATA.side.filter(m => m !== 'None' && m !== 'Custom');
+              day.side = sideOptions[Math.floor(Math.random() * sideOptions.length)];
+            }
+            this.renderTabContent();
+          };
+
+          document.getElementById('clearDinner').onclick = () => {
+            day.dinner = null;
+            day.customDinner = null;
+            day.side = null;
+            day.customSide = null;
+            this.renderTabContent();
+          };
+
+          if (day.dinner === 'Custom') {
+            document.getElementById('customDinnerInput').oninput = (e) => {
+              day.customDinner = e.target.value;
+            };
+          }
+
+          if (day.side === 'Custom') {
+            document.getElementById('customSideInput').oninput = (e) => {
+              day.customSide = e.target.value;
+            };
+          }
+
           document.querySelectorAll('.radio[data-type]').forEach(radio => {
             radio.onclick = () => {
-              const type = radio.dataset.type;
-              const updates = { dinnerType: type };
-
-              if (type === 'delivery') {
-                updates.side = null;
+              day.dinnerType = radio.dataset.type;
+              day.dinner = null;
+              if (radio.dataset.type === 'delivery') {
+                day.side = null;
               }
-              updates.dinner = null;
-
-              this.state.updateDay(this.currentDayIndex, updates);
               this.renderTabContent();
             };
           });
@@ -1898,68 +1383,75 @@
         }
       }
 
-      renderBentoGrid(type, selected, options = MEAL_DATA[type]) {
+      renderBentoGrid(type, selected, options) {
         return `
-      <div class="bento-grid" data-type="${type}">
-        ${options.map(item => `
-          <div class="bento-item ${selected === item ? 'selected' : ''}" 
-               data-value="${item}"
-               role="button"
-               tabindex="0"
-               aria-pressed="${selected === item}">
-            <span class="bento-emoji" aria-hidden="true">🍽️</span>
-            <span class="bento-label">${item}</span>
+          <div class="bento-grid" data-type="${type}">
+            ${options.map(item => `
+              <div class="bento-item ${selected === item ? 'selected' : ''}" data-value="${item}">
+                <span class="bento-emoji">${MEAL_EMOJIS[item] || '🍽️'}</span>
+                <span>${item}</span>
+              </div>
+            `).join('')}
           </div>
-        `).join('')}
-      </div>
-    `;
+        `;
       }
 
-      attachBentoListeners(type, options) {
+      attachBentoListeners(type) {
         const grid = document.querySelector(`.bento-grid[data-type="${type}"]`);
         if (!grid) return;
 
         grid.querySelectorAll('.bento-item').forEach(item => {
-          const handler = () => {
+          item.onclick = () => {
             const value = item.dataset.value;
-            grid.querySelectorAll('.bento-item').forEach(i => {
-              i.classList.remove('selected');
-              i.setAttribute('aria-pressed', 'false');
-            });
+            const day = this.state.days[this.currentDayIndex];
+
+            grid.querySelectorAll('.bento-item').forEach(i => i.classList.remove('selected'));
             item.classList.add('selected');
-            item.setAttribute('aria-pressed', 'true');
 
-            const updates = {};
-            updates[type] = value;
-            this.state.updateDay(this.currentDayIndex, updates);
-          };
+            day[type] = value;
 
-          item.addEventListener('click', handler);
-          item.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault();
-              handler();
+            if (value === 'Custom') {
+              this.renderTabContent();
             }
-          });
+          };
         });
       }
 
       randomizeWeek() {
-        const days = this.state.get().days.map(day => {
-          const isWeekend = day.name === 'Sat' || day.name === 'Sun';
-          const dinnerOptions = isWeekend ? MEAL_DATA.dinnerWeekend : MEAL_DATA.dinnerRegular;
+        this.state.days = this.state.days.map(day => {
+          if (!day.lunch) {
+            const lunchOptions = MEAL_DATA.lunch.filter(m => m !== 'None' && m !== 'Custom');
+            day.lunch = lunchOptions[Math.floor(Math.random() * lunchOptions.length)];
+          }
 
-          return {
-            ...day,
-            lunch: Utils.pickRandom(MEAL_DATA.lunch),
-            dinner: Utils.pickRandom(dinnerOptions),
-            side: Utils.pickRandom(MEAL_DATA.side),
-            busy: false,
-            dinnerType: 'regular'
-          };
+          if (!day.dinner) {
+            let dinnerOptions;
+            const isWeekend = day.name === 'Saturday' || day.name === 'Sunday';
+
+            if (day.busy && day.dinnerType === 'quick') {
+              dinnerOptions = MEAL_DATA.dinnerQuick;
+            } else if (day.busy && day.dinnerType === 'delivery') {
+              dinnerOptions = MEAL_DATA.delivery;
+            } else if (!day.busy && isWeekend) {
+              dinnerOptions = MEAL_DATA.dinnerWeekend;
+            } else {
+              dinnerOptions = MEAL_DATA.dinnerRegular;
+            }
+
+            dinnerOptions = dinnerOptions.filter(m => m !== 'None' && m !== 'Custom');
+            day.dinner = dinnerOptions[Math.floor(Math.random() * dinnerOptions.length)];
+          }
+
+          if (!day.side && day.dinnerType !== 'delivery') {
+            const sideOptions = MEAL_DATA.side.filter(m => m !== 'None' && m !== 'Custom');
+            day.side = sideOptions[Math.floor(Math.random() * sideOptions.length)];
+          }
+
+          return day;
         });
 
-        this.state.set({ days });
+        this.saveState();
+        this.render();
       }
 
       openGroceryList() {
@@ -1967,66 +1459,35 @@
         const stores = Object.keys(groceryData).sort();
 
         const bodyHTML = stores.length ? stores.map(store => `
-      <div class="store-section" data-store="${store}">
-        <h3 class="store-title">${store}</h3>
-        ${groceryData[store].map((item, i) => `
-          <div class="grocery-item ${item.checked ? 'checked' : ''}" data-index="${i}">
-            <div class="checkbox ${item.checked ? 'checked' : ''}" 
-                 role="checkbox" 
-                 aria-checked="${item.checked}"
-                 tabindex="0"></div>
-            <div class="grocery-item-text">${item.item}</div>
+          <div class="store-section">
+            <h3 class="store-title">${store}</h3>
+            ${groceryData[store].map((item, i) => `
+              <div class="grocery-item" data-store="${store}" data-index="${i}">
+                <div class="checkbox"></div>
+                <div class="grocery-item-text">${INGREDIENT_EMOJIS[item] || ''} ${item}</div>
+              </div>
+            `).join('')}
           </div>
-        `).join('')}
-        <div class="add-item-row">
-          <input class="input store-input" placeholder="Store" value="${store}">
-          <input class="input item-input" placeholder="Item name">
-          <button class="btn add-btn">Add</button>
-        </div>
-      </div>
-    `).join('') : `
-      <div class="store-section">
-        <p class="grocery-item-text">No items yet. Add them below.</p>
-        <div class="add-item-row">
-          <input class="input store-input" placeholder="Store">
-          <input class="input item-input" placeholder="Item name">
-          <button class="btn add-btn">Add</button>
-        </div>
-      </div>
-    `;
+        `).join('') : '<div class="store-section"><p>No items to shop for</p></div>';
 
         this.openModal({
           title: 'Shopping List',
           subtitle: 'Check off items as you shop',
           bodyHTML,
           footer: [
-            { label: 'Close', onClick: () => this.closeModal() }
+            { label: 'Close', onClick: () => this.closeModal() },
+            {
+              label: 'Share',
+              type: 'btn-primary',
+              onClick: () => this.shareGroceryList(groceryData)
+            }
           ]
         });
 
-        // Checkbox interactions
         document.querySelectorAll('.checkbox').forEach(checkbox => {
           checkbox.onclick = () => {
             checkbox.classList.toggle('checked');
             checkbox.parentElement.classList.toggle('checked');
-            const checked = checkbox.classList.contains('checked');
-            checkbox.setAttribute('aria-checked', checked);
-          };
-        });
-
-        // Add item buttons
-        document.querySelectorAll('.add-btn').forEach(btn => {
-          btn.onclick = () => {
-            const section = btn.closest('.store-section');
-            const store = section.querySelector('.store-input').value.trim() || 'Other';
-            const item = section.querySelector('.item-input').value.trim();
-
-            if (item) {
-              const extras = [...this.state.get().groceryExtras];
-              extras.push({ store, item, checked: false });
-              this.state.set({ groceryExtras: extras });
-              this.openGroceryList();
-            }
           };
         });
       }
@@ -2036,35 +1497,25 @@
 
         const addItem = (store, item) => {
           if (!grouped[store]) grouped[store] = [];
-          if (!grouped[store].some(x => x.item.toLowerCase() === item.toLowerCase())) {
-            grouped[store].push({ item, checked: false });
+          if (!grouped[store].includes(item)) {
+            grouped[store].push(item);
           }
         };
 
-        this.state.get().days.forEach(day => {
-          const meals = [day.lunch, day.dinner];
-          if (day.dinnerType !== 'delivery' && day.side) {
+        this.state.days.forEach(day => {
+          const meals = [];
+          if (day.lunch && day.lunch !== 'None' && day.lunch !== 'Custom') meals.push(day.lunch);
+          if (day.dinner && day.dinner !== 'None' && day.dinner !== 'Custom') meals.push(day.dinner);
+          if (day.side && day.side !== 'None' && day.side !== 'Custom' && day.dinnerType !== 'delivery') {
             meals.push(day.side);
           }
 
           meals.forEach(meal => {
-            if (!meal) return;
             const ingredients = INGREDIENTS[meal] || [];
             ingredients.forEach(ing => {
-              const normalizedIng = SYNONYMS[ing] || ing;
-              const store = this.findStoreForItem(normalizedIng);
-              addItem(store, normalizedIng);
+              const store = this.findStoreForItem(ing);
+              addItem(store, ing);
             });
-          });
-        });
-
-        // Add extras
-        this.state.get().groceryExtras.forEach(extra => {
-          const store = extra.store || 'Other';
-          if (!grouped[store]) grouped[store] = [];
-          grouped[store].push({
-            item: extra.item,
-            checked: extra.checked || false
           });
         });
 
@@ -2073,73 +1524,31 @@
 
       findStoreForItem(item) {
         for (const [store, items] of Object.entries(STORES)) {
-          if (items.some(x => x.toLowerCase() === item.toLowerCase())) {
-            return store;
-          }
+          if (items.includes(item)) return store;
         }
         return 'Other';
       }
 
-      openSummary() {
-        const lines = [];
-        const state = this.state.get();
-
-        lines.push('📅 WEEKLY MEAL PLAN\n');
-
-        state.days.forEach(day => {
-          if (!state.showWeekend && (day.name === 'Sat' || day.name === 'Sun')) return;
-
-          const tag = day.busy && day.dinnerType === 'quick' ? ' [Quick]' :
-            day.busy && day.dinnerType === 'delivery' ? ' [Delivery]' : '';
-
-          lines.push(`${day.name} ${Utils.formatDate(new Date(day.date))}`);
-          lines.push(`  Lunch:  ${day.lunch || '—'}`);
-          lines.push(`  Dinner: ${day.dinner || '—'}${tag}`);
-          if (day.dinnerType !== 'delivery') {
-            lines.push(`  Side:   ${day.side || '—'}`);
-          }
-          lines.push('');
-        });
-
-        lines.push('\n🛒 SHOPPING LIST\n');
-        const grocery = this.computeGrocery();
-        Object.keys(grocery).sort().forEach(store => {
-          lines.push(`${store}:`);
-          grocery[store].forEach(item => {
-            lines.push(`  • ${item.item}`);
+      shareGroceryList(groceryData) {
+        const lines = ['🛒 Shopping List\n'];
+        Object.keys(groceryData).sort().forEach(store => {
+          lines.push(`\n${store}:`);
+          groceryData[store].forEach(item => {
+            lines.push(`• ${INGREDIENT_EMOJIS[item] || ''} ${item}`);
           });
-          lines.push('');
         });
 
         const text = lines.join('\n');
 
-        this.openModal({
-          title: 'Weekly Summary',
-          subtitle: 'Copy or share your meal plan',
-          bodyHTML: `<div class="summary-container">${Utils.escapeHtml(text)}</div>`,
-          footer: [
-            { label: 'Close', onClick: () => this.closeModal() },
-            {
-              label: 'Share',
-              type: 'btn-primary',
-              onClick: async () => {
-                try {
-                  if (navigator.share) {
-                    await navigator.share({
-                      title: 'Meal Plan',
-                      text
-                    });
-                  } else if (navigator.clipboard) {
-                    await navigator.clipboard.writeText(text);
-                    this.showToast('Copied to clipboard! 📋');
-                  }
-                } catch (e) {
-                  console.error('Share failed:', e);
-                }
-              }
-            }
-          ]
-        });
+        if (navigator.share) {
+          navigator.share({
+            title: 'Shopping List',
+            text
+          });
+        } else if (navigator.clipboard) {
+          navigator.clipboard.writeText(text);
+          this.showToast('Copied to clipboard! 📋');
+        }
       }
 
       showToast(message) {
@@ -2153,24 +1562,13 @@
       }
     }
 
-    // ============================================
-    // INITIALIZATION
-    // ============================================
-
-    // Wait for DOM ready
+    // Initialize app
     if (document.readyState === 'loading') {
       document.addEventListener('DOMContentLoaded', () => {
         new MealPlannerApp();
       });
     } else {
       new MealPlannerApp();
-    }
-
-    // Register service worker for PWA capabilities (optional)
-    if ('serviceWorker' in navigator && location.protocol === 'https:') {
-      navigator.serviceWorker.register('/sw.js').catch(() => {
-        // Service worker registration failed, app still works
-      });
     }
   </script>
 </body>
