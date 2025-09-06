@@ -1,0 +1,2908 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#1a0f2e">
+    <title>Enhanced Meal Planner</title>
+    <style>
+        @layer reset, design-tokens, layout, components, utilities;
+        @layer reset {
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+                -webkit-tap-highlight-color: transparent;
+            }
+            * {
+                margin: 0;
+                padding: 0;
+                user-select: none;
+            }
+            input,
+            textarea,
+            [contenteditable] {
+                user-select: text;
+            }
+            @media (prefers-reduced-motion: reduce) {
+                *,
+                *::before,
+                *::after {
+                    animation-duration: 0.01ms !important;
+                    animation-iteration-count: 1 !important;
+                    transition-duration: 0.01ms !important;
+                }
+            }
+        }
+        @layer design-tokens {
+            :root {
+                /* Color System */
+                --surface-primary: oklch(0.11 0.02 264);
+                --surface-secondary: oklch(0.18 0.04 266);
+                --surface-tertiary: oklch(0.25 0.06 268);
+                --surface-glass: oklch(0.15 0.03 265 / 0.4);
+                --surface-hover: oklch(0.22 0.05 267 / 0.6);
+                --text-primary: oklch(0.98 0.01 264);
+                --text-secondary: oklch(0.78 0.02 264);
+                --text-tertiary: oklch(0.58 0.02 264);
+                --accent-violet: oklch(0.65 0.25 275);
+                --accent-purple: oklch(0.68 0.24 295);
+                --accent-pink: oklch(0.72 0.22 335);
+                --accent-blue: oklch(0.6 0.2 255);
+                --accent-cyan: oklch(0.7 0.18 215);
+                --accent-emerald: oklch(0.72 0.2 155);
+                --accent-amber: oklch(0.78 0.18 85);
+                --accent-orange: oklch(0.75 0.2 65);
+                --border-subtle: oklch(0.25 0.06 268 / 0.3);
+                --border-default: oklch(0.35 0.08 270 / 0.5);
+                --shadow-sm: 0 1px 2px oklch(0 0 0 / 0.05);
+                --shadow-md: 0 4px 6px oklch(0 0 0 / 0.1);
+                --shadow-lg: 0 10px 15px oklch(0 0 0 / 0.1);
+                --shadow-xl: 0 20px 25px oklch(0 0 0 / 0.15);
+                /* Spacing Scale */
+                --space-1: 0.25rem;
+                --space-2: 0.5rem;
+                --space-3: 0.75rem;
+                --space-4: 1rem;
+                --space-5: 1.25rem;
+                --space-6: 1.5rem;
+                --space-8: 2rem;
+                --space-12: 3rem;
+                --space-16: 4rem;
+                /* Typography */
+                --font-system: system-ui, -apple-system, 'SF Pro Display', sans-serif;
+                --font-size-xs: 0.75rem;
+                --font-size-sm: 0.875rem;
+                --font-size-base: 1rem;
+                --font-size-lg: 1.125rem;
+                --font-size-xl: 1.25rem;
+                --font-size-2xl: 1.5rem;
+                --font-size-3xl: 1.875rem;
+                /* Animation */
+                --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+                --ease-out: cubic-bezier(0.0, 0.0, 0.2, 1);
+                --ease-in-out: cubic-bezier(0.4, 0.0, 0.2, 1);
+                /* Safe Areas */
+                --safe-top: env(safe-area-inset-top, 0px);
+                --safe-bottom: env(safe-area-inset-bottom, 0px);
+                --safe-left: env(safe-area-inset-left, 0px);
+                --safe-right: env(safe-area-inset-right, 0px);
+                /* Touch Targets */
+                --touch-target: 44px;
+                /* Radius */
+                --radius-sm: 8px;
+                --radius-md: 12px;
+                --radius-lg: 16px;
+                --radius-xl: 20px;
+                --radius-2xl: 24px;
+                --radius-full: 9999px;
+            }
+            :root[data-theme="light"] {
+                --surface-primary: oklch(0.98 0.01 264);
+                --surface-secondary: oklch(0.95 0.02 266);
+                --surface-tertiary: oklch(0.92 0.03 268);
+                --surface-glass: oklch(0.98 0.01 264 / 0.8);
+                --surface-hover: oklch(0.88 0.02 267 / 0.6);
+                --text-primary: oklch(0.15 0.02 264);
+                --text-secondary: oklch(0.35 0.03 264);
+                --text-tertiary: oklch(0.55 0.03 264);
+                --border-subtle: oklch(0.85 0.02 268 / 0.5);
+                --border-default: oklch(0.75 0.03 270 / 0.6);
+            }
+        }
+        @layer layout {
+            html {
+                block-size: 100%;
+                color-scheme: dark light;
+            }
+            body {
+                min-block-size: 100vh;
+                font-family: var(--font-system);
+                background: linear-gradient(135deg,
+                        var(--surface-primary) 0%,
+                        var(--surface-secondary) 50%,
+                        var(--surface-tertiary) 100%);
+                background-attachment: fixed;
+                color: var(--text-primary);
+                -webkit-font-smoothing: antialiased;
+                overflow-x: hidden;
+                padding-block-end: calc(76px + var(--safe-bottom));
+                position: relative;
+            }
+            body::before {
+                content: '';
+                position: fixed;
+                inset: 0;
+                background:
+                    radial-gradient(circle at 20% 80%, var(--accent-violet) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 20%, var(--accent-pink) 0%, transparent 50%),
+                    radial-gradient(circle at 40% 40%, var(--accent-cyan) 0%, transparent 50%);
+                opacity: 0.05;
+                animation: ambient-float 20s ease-in-out infinite;
+                pointer-events: none;
+                will-change: transform;
+            }
+            @keyframes ambient-float {
+                0%,
+                100% {
+                    transform: translate(0, 0) rotate(0deg);
+                }
+                33% {
+                    transform: translate(-20px, -20px) rotate(1deg);
+                }
+                66% {
+                    transform: translate(20px, -10px) rotate(-1deg);
+                }
+            }
+            body.modal-open {
+                overflow: hidden;
+                block-size: 100vh;
+            }
+            .container {
+                padding-inline: var(--space-4);
+                max-inline-size: 600px;
+                margin-inline: auto;
+            }
+        }
+        @layer components {
+            /* Header */
+            .header {
+                display: flex;
+                align-items: center;
+                gap: var(--space-3);
+                padding: var(--space-4);
+                padding-block-start: calc(var(--space-4) + var(--safe-top));
+                background: var(--surface-glass);
+                backdrop-filter: blur(20px) saturate(1.8);
+                border-block-end: 1px solid var(--border-subtle);
+                position: sticky;
+                inset-block-start: 0;
+                z-index: 100;
+                transition: background-color 0.3s var(--ease-out);
+            }
+            .header-title {
+                flex: 1;
+                font-size: var(--font-size-3xl);
+                font-weight: 900;
+                letter-spacing: -0.025em;
+                line-height: 1.1;
+                background: linear-gradient(135deg,
+                        var(--accent-violet),
+                        var(--accent-pink),
+                        var(--accent-cyan));
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;
+                background-size: 200% 200%;
+                animation: gradient-shift 8s ease infinite;
+            }
+            @keyframes gradient-shift {
+                0%,
+                100% {
+                    background-position: 0% 50%;
+                }
+                50% {
+                    background-position: 100% 50%;
+                }
+            }
+            /* Buttons */
+            .btn-icon {
+                inline-size: var(--touch-target);
+                block-size: var(--touch-target);
+                border-radius: var(--radius-md);
+                background: var(--surface-glass);
+                border: 1px solid var(--border-default);
+                color: var(--text-primary);
+                cursor: pointer;
+                display: grid;
+                place-items: center;
+                font-size: var(--font-size-xl);
+                transition: all 0.3s var(--ease-out);
+                position: relative;
+                overflow: hidden;
+                contain: layout style;
+            }
+            .btn-icon::before {
+                content: '';
+                position: absolute;
+                inset: 50% 50% 50% 50%;
+                border-radius: 50%;
+                background: var(--accent-violet);
+                opacity: 0.3;
+                transform: scale(0);
+                transition: transform 0.6s var(--ease-spring);
+                will-change: transform;
+            }
+            .btn-icon:hover::before {
+                transform: scale(4);
+            }
+            .btn-icon:active {
+                transform: scale(0.95);
+            }
+            /* Week Navigation */
+            .week-nav {
+                display: block;
+                margin-block-end: var(--space-4);
+                padding: var(--space-4);
+                background: var(--surface-glass);
+                backdrop-filter: blur(10px) saturate(1.5);
+                border-radius: var(--radius-xl);
+                border: 1px solid var(--border-subtle);
+                text-align: center;
+                position: relative;
+                overflow: hidden;
+                transition: all 0.3s var(--ease-out);
+            }
+            .week-nav::before {
+                content: '';
+                position: absolute;
+                inset: -2px;
+                background: linear-gradient(45deg,
+                        var(--accent-violet),
+                        var(--accent-pink),
+                        var(--accent-cyan));
+                border-radius: var(--radius-xl);
+                opacity: 0;
+                z-index: -1;
+                transition: opacity 0.3s var(--ease-out);
+            }
+            .week-nav:hover::before {
+                opacity: 0.3;
+            }
+            .week-date {
+                font-size: var(--font-size-xl);
+                font-weight: 700;
+                letter-spacing: -0.01em;
+            }
+            /* Day Cards */
+            .day-card {
+                margin-block-end: var(--space-3);
+                padding: var(--space-4);
+                background: var(--surface-glass);
+                backdrop-filter: blur(10px) saturate(1.5);
+                border: 1px solid var(--border-default);
+                border-radius: var(--radius-xl);
+                cursor: pointer;
+                transition: all 0.3s var(--ease-out);
+                position: relative;
+                overflow: hidden;
+                animation: slide-in 0.5s var(--ease-out) backwards;
+                contain: layout style;
+            }
+            .day-card::before {
+                content: '';
+                position: absolute;
+                inset-block-start: 0;
+                inset-inline: 0;
+                block-size: 3px;
+                background: linear-gradient(90deg, var(--accent-violet), var(--accent-pink));
+                transform: translateY(-100%);
+                transition: transform 0.3s var(--ease-out);
+            }
+            .day-card:hover::before {
+                transform: translateY(0);
+            }
+            .day-card.incomplete {
+                opacity: 0.92;
+                border-style: dashed;
+                animation: pulse-border 3s ease-in-out infinite;
+            }
+            @keyframes pulse-border {
+                0%,
+                100% {
+                    border-color: var(--border-default);
+                }
+                50% {
+                    border-color: var(--accent-amber);
+                }
+            }
+            .day-card:hover {
+                transform: translateY(-2px);
+                box-shadow: var(--shadow-xl), 0 0 40px color-mix(in oklch, var(--accent-violet) 20%, transparent);
+            }
+            .day-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-block-end: var(--space-3);
+                gap: var(--space-2);
+            }
+            .day-title {
+                font-size: var(--font-size-lg);
+                font-weight: 700;
+                display: flex;
+                align-items: center;
+                gap: var(--space-2);
+            }
+            .day-date {
+                font-size: var(--font-size-sm);
+                color: var(--text-secondary);
+                margin-block-start: var(--space-1);
+            }
+            /* Chips & Badges */
+            .chip {
+                font-size: var(--font-size-xs);
+                padding: var(--space-1) var(--space-2);
+                border-radius: var(--radius-full);
+                background: linear-gradient(135deg, var(--accent-violet), var(--accent-purple));
+                color: white;
+                font-weight: 600;
+                box-shadow: var(--shadow-md);
+                animation: glow-pulse 2s ease-in-out infinite;
+            }
+            .warn-badge {
+                display: inline-flex;
+                align-items: center;
+                gap: var(--space-1);
+                font-size: var(--font-size-xs);
+                font-weight: 800;
+                padding: var(--space-1) calc(var(--space-1) * 1.5);
+                border-radius: var(--radius-full);
+                background: linear-gradient(135deg, var(--accent-amber), oklch(0.75 0.18 65));
+                color: var(--surface-primary);
+                cursor: pointer;
+                transition: all 0.3s var(--ease-out);
+                position: relative;
+            }
+            .warn-badge:hover {
+                transform: scale(1.05);
+                box-shadow: var(--shadow-lg);
+            }
+            .warn-badge:active {
+                transform: scale(0.95);
+            }
+            @keyframes glow-pulse {
+                0%,
+                100% {
+                    box-shadow: var(--shadow-md);
+                }
+                50% {
+                    box-shadow: var(--shadow-lg), 0 0 20px color-mix(in oklch, var(--accent-violet) 40%, transparent);
+                }
+            }
+            /* Meal Items */
+            .meal-item {
+                display: flex;
+                gap: var(--space-3);
+                padding: var(--space-3);
+                margin-block-end: var(--space-2);
+                background: var(--surface-glass);
+                border-radius: var(--radius-md);
+                border: 1px solid var(--border-subtle);
+                cursor: pointer;
+                transition: all 0.3s var(--ease-out);
+                position: relative;
+                overflow: hidden;
+                min-block-size: var(--touch-target);
+            }
+            .meal-item::after {
+                content: '';
+                position: absolute;
+                inset-block-start: 50%;
+                inset-inline-end: var(--space-3);
+                transform: translateY(-50%);
+                inline-size: 6px;
+                block-size: 6px;
+                border-radius: 50%;
+                background: var(--accent-emerald);
+                opacity: 0;
+                transition: opacity 0.3s var(--ease-out);
+            }
+            .meal-item:not(.empty)::after {
+                opacity: 1;
+            }
+            .meal-item:hover {
+                background: var(--surface-hover);
+                transform: translateX(4px);
+            }
+            .meal-item:active {
+                transform: scale(0.98);
+            }
+            .meal-item.empty {
+                opacity: 0.6;
+            }
+            .meal-icon {
+                inline-size: 40px;
+                block-size: 40px;
+                border-radius: var(--radius-sm);
+                display: grid;
+                place-items: center;
+                font-size: var(--font-size-xl);
+                transition: transform 0.3s var(--ease-spring);
+                flex-shrink: 0;
+            }
+            .meal-icon.breakfast {
+                background: linear-gradient(135deg, var(--accent-orange), var(--accent-amber));
+                box-shadow: var(--shadow-md);
+            }
+            .meal-icon.lunch {
+                background: linear-gradient(135deg, var(--accent-amber), oklch(0.8 0.16 85));
+                box-shadow: var(--shadow-md);
+            }
+            .meal-icon.dinner {
+                background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+                box-shadow: var(--shadow-md);
+            }
+            .meal-item:hover .meal-icon {
+                transform: rotate(10deg) scale(1.1);
+            }
+            .meal-content {
+                flex: 1;
+                min-inline-size: 0;
+            }
+            .meal-title {
+                font-weight: 700;
+                margin: 0;
+                font-size: var(--font-size-base);
+            }
+            .meal-description {
+                font-size: var(--font-size-sm);
+                color: var(--text-secondary);
+                margin: var(--space-1) 0 0;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            /* Type Toggles */
+            .type-toggles {
+                display: flex;
+                gap: var(--space-2);
+                align-items: center;
+                flex-wrap: wrap;
+            }
+            .type-toggle {
+                padding: var(--space-1) calc(var(--space-2) + var(--space-1));
+                font-size: var(--font-size-xs);
+                font-weight: 800;
+                border-radius: var(--radius-full);
+                border: 1px solid var(--border-default);
+                background: var(--surface-glass);
+                color: var(--text-secondary);
+                cursor: pointer;
+                transition: all 0.3s var(--ease-out);
+                user-select: none;
+                min-block-size: var(--touch-target);
+                min-inline-size: var(--touch-target);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .type-toggle:hover {
+                background: var(--surface-hover);
+                transform: translateY(-1px);
+            }
+            .type-toggle.active.quick {
+                background: linear-gradient(135deg, var(--accent-purple), var(--accent-pink));
+                color: white;
+                border: none;
+                box-shadow: var(--shadow-md);
+            }
+            .type-toggle.active.delivery {
+                background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+                color: white;
+                border: none;
+                box-shadow: var(--shadow-md);
+            }
+            /* Modal System */
+            .modal-overlay {
+                position: fixed;
+                inset: 0;
+                background: oklch(0 0 0 / 0.75);
+                backdrop-filter: blur(10px);
+                display: flex;
+                align-items: flex-end;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s var(--ease-out);
+                z-index: 1000;
+            }
+            .modal-overlay.show {
+                opacity: 1;
+                visibility: visible;
+            }
+            .modal {
+                inline-size: 100%;
+                max-inline-size: 500px;
+                margin-inline: auto;
+                background: var(--surface-secondary);
+                border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+                transform: translateY(100%);
+                transition: transform 0.45s var(--ease-spring);
+                max-block-size: 85vh;
+                overflow: hidden;
+                outline: none;
+                box-shadow: var(--shadow-xl);
+                border: 1px solid var(--border-subtle);
+            }
+            .modal-overlay.show .modal {
+                transform: translateY(0);
+            }
+            .modal-header {
+                padding: var(--space-5);
+                text-align: center;
+                border-block-end: 1px solid var(--border-subtle);
+                background: linear-gradient(180deg, transparent, var(--surface-glass));
+            }
+            .modal-title {
+                font-size: var(--font-size-xl);
+                font-weight: 700;
+                margin: 0;
+            }
+            .modal-subtitle {
+                font-size: var(--font-size-sm);
+                color: var(--text-secondary);
+                margin: var(--space-1) 0 0;
+            }
+            .modal-body {
+                max-block-size: 62vh;
+                overflow-y: auto;
+                padding: 0;
+                scroll-behavior: smooth;
+                -webkit-overflow-scrolling: touch;
+                overscroll-behavior: contain;
+            }
+            .modal-body::-webkit-scrollbar {
+                inline-size: 6px;
+            }
+            .modal-body::-webkit-scrollbar-track {
+                background: var(--surface-glass);
+            }
+            .modal-body::-webkit-scrollbar-thumb {
+                background: var(--accent-violet);
+                border-radius: 3px;
+            }
+            .modal-footer {
+                display: flex;
+                gap: var(--space-2);
+                padding: var(--space-3);
+                background: var(--surface-glass);
+                border-block-start: 1px solid var(--border-subtle);
+                position: sticky;
+                inset-block-end: 0;
+                padding-block-end: calc(var(--space-3) + var(--safe-bottom));
+            }
+            /* Controls */
+            .controls {
+                display: flex;
+                gap: var(--space-2);
+                padding: var(--space-3);
+                align-items: center;
+                flex-wrap: wrap;
+                justify-content: space-between;
+            }
+            /* Bento Grid */
+            .bento-grid {
+                display: grid;
+                grid-template-columns: repeat(3, 1fr);
+                gap: var(--space-2);
+                padding: var(--space-3);
+            }
+            .bento-item {
+                position: relative;
+                padding: var(--space-3) var(--space-2);
+                background: var(--surface-glass);
+                border: 1px solid var(--border-default);
+                border-radius: var(--radius-lg);
+                cursor: pointer;
+                text-align: center;
+                font-size: var(--font-size-sm);
+                transition: all 0.3s var(--ease-out);
+                min-block-size: 72px;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                gap: var(--space-1);
+                min-inline-size: var(--touch-target);
+                contain: layout style;
+            }
+            .bento-item:hover {
+                background: var(--surface-hover);
+                transform: scale(1.05);
+                box-shadow: var(--shadow-lg);
+            }
+            .bento-item:active {
+                transform: scale(0.98);
+            }
+            .bento-item.selected {
+                background: linear-gradient(135deg,
+                        color-mix(in oklch, var(--accent-violet) 15%, transparent),
+                        color-mix(in oklch, var(--accent-pink) 10%, transparent));
+                border-color: var(--accent-violet);
+                box-shadow: 0 0 0 2px color-mix(in oklch, var(--accent-violet) 20%, transparent) inset;
+            }
+            .bento-item.selected::before {
+                content: '✓';
+                position: absolute;
+                inset-block-start: var(--space-2);
+                inset-inline-end: var(--space-2);
+                inline-size: 20px;
+                block-size: 20px;
+                background: linear-gradient(135deg, var(--accent-violet), var(--accent-purple));
+                color: white;
+                border-radius: 50%;
+                display: grid;
+                place-items: center;
+                font-size: var(--font-size-xs);
+                animation: check-in 0.3s var(--ease-spring);
+            }
+            @keyframes check-in {
+                from {
+                    transform: scale(0);
+                    opacity: 0;
+                }
+                to {
+                    transform: scale(1);
+                    opacity: 1;
+                }
+            }
+            .bento-emoji {
+                font-size: 24px;
+                display: block;
+                transition: transform 0.3s var(--ease-out);
+            }
+            .bento-item:hover .bento-emoji {
+                transform: scale(1.2);
+            }
+            /* Button System */
+            .btn {
+                flex: 1;
+                padding: var(--space-3) var(--space-4);
+                font-weight: 700;
+                background: var(--surface-glass);
+                color: var(--text-primary);
+                border: 1px solid var(--border-default);
+                border-radius: var(--radius-md);
+                cursor: pointer;
+                transition: all 0.3s var(--ease-out);
+                position: relative;
+                overflow: hidden;
+                min-block-size: var(--touch-target);
+                font-family: inherit;
+                font-size: var(--font-size-sm);
+            }
+            .btn:hover {
+                transform: translateY(-1px);
+                box-shadow: var(--shadow-md);
+            }
+            .btn:active {
+                transform: scale(0.98);
+            }
+            .btn-primary {
+                background: linear-gradient(135deg, var(--accent-violet), var(--accent-purple));
+                border: none;
+                color: white;
+                box-shadow: var(--shadow-md);
+            }
+            .btn-primary:hover {
+                box-shadow: var(--shadow-lg);
+            }
+            /* Input System */
+            .input-group {
+                padding: var(--space-3);
+            }
+            .input-label {
+                display: block;
+                font-weight: 700;
+                margin-block-end: var(--space-2);
+                color: var(--text-secondary);
+            }
+            .input {
+                inline-size: 100%;
+                padding: var(--space-3);
+                background: var(--surface-glass);
+                border: 1px solid var(--border-default);
+                border-radius: var(--radius-md);
+                color: var(--text-primary);
+                font-family: inherit;
+                font-size: var(--font-size-base);
+                transition: all 0.3s var(--ease-out);
+                min-block-size: var(--touch-target);
+            }
+            .input:focus {
+                outline: none;
+                border-color: var(--accent-violet);
+                box-shadow: 0 0 0 3px color-mix(in oklch, var(--accent-violet) 20%, transparent);
+            }
+            /* Store Sections */
+            .store-section {
+                margin: var(--space-3);
+                padding: var(--space-4);
+                background: var(--surface-glass);
+                border: 1px solid var(--border-default);
+                border-radius: var(--radius-lg);
+            }
+            .store-title {
+                margin: 0 0 var(--space-3);
+                font-weight: 700;
+                font-size: var(--font-size-lg);
+            }
+            .grocery-item {
+                display: flex;
+                align-items: center;
+                gap: var(--space-3);
+                padding: var(--space-3);
+                margin-block-end: var(--space-2);
+                background: var(--surface-glass);
+                border: 1px solid var(--border-subtle);
+                border-radius: var(--radius-md);
+                transition: all 0.3s var(--ease-out);
+                min-block-size: var(--touch-target);
+            }
+            .grocery-item:hover {
+                background: var(--surface-hover);
+            }
+            .checkbox {
+                inline-size: 24px;
+                block-size: 24px;
+                background: var(--surface-glass);
+                border: 2px solid var(--border-default);
+                border-radius: var(--radius-sm);
+                cursor: pointer;
+                display: grid;
+                place-items: center;
+                transition: all 0.3s var(--ease-out);
+                flex-shrink: 0;
+            }
+            .checkbox:hover {
+                border-color: var(--accent-emerald);
+            }
+            .checkbox.checked {
+                background: linear-gradient(135deg, var(--accent-emerald), oklch(0.75 0.18 155));
+                border-color: var(--accent-emerald);
+                animation: check-in 0.3s var(--ease-spring);
+            }
+            .checkbox.checked::after {
+                content: '✓';
+                color: white;
+                font-weight: bold;
+                font-size: var(--font-size-xs);
+            }
+            .grocery-item-text {
+                flex: 1;
+                font-size: var(--font-size-base);
+                transition: all 0.3s var(--ease-out);
+            }
+            .grocery-item.checked .grocery-item-text {
+                opacity: 0.5;
+                text-decoration: line-through;
+            }
+            /* Toast System */
+            .toast {
+                position: fixed;
+                inset-inline-start: 50%;
+                inset-block-end: calc(100px + var(--safe-bottom));
+                transform: translateX(-50%) translateY(20px);
+                padding: var(--space-3) var(--space-6);
+                background: var(--surface-secondary);
+                color: var(--text-primary);
+                font-size: var(--font-size-sm);
+                font-weight: 700;
+                border-radius: var(--radius-full);
+                backdrop-filter: blur(10px) saturate(1.5);
+                box-shadow: var(--shadow-xl);
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s var(--ease-out);
+                z-index: 2000;
+                border: 1px solid var(--border-subtle);
+                max-inline-size: 90vw;
+            }
+            .toast.show {
+                opacity: 1;
+                visibility: visible;
+                transform: translateX(-50%) translateY(0);
+                animation: toast-pop 0.3s var(--ease-spring);
+            }
+            @keyframes toast-pop {
+                from {
+                    transform: translateX(-50%) translateY(20px) scale(0.8);
+                }
+                to {
+                    transform: translateX(-50%) translateY(0) scale(1);
+                }
+            }
+            /* Week Navigation Bars - Made thinner and taller */
+            .week-nav-bar {
+                position: fixed;
+                inset-block-start: 50%;
+                transform: translateY(-50%);
+                inline-size: 32px; /* Reduced from 40px */
+                block-size: 100px; /* Increased from 80px */
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                z-index: 90;
+                padding: 0;
+                background: var(--surface-glass);
+                backdrop-filter: blur(10px) saturate(1.5);
+                border: 1px solid var(--border-default);
+                cursor: pointer;
+                transition: all 0.3s var(--ease-out);
+                font-size: var(--font-size-lg);
+                font-weight: bold;
+                color: var(--text-secondary);
+                contain: layout style;
+            }
+            .week-nav-left {
+                inset-inline-start: 0;
+                border-start-end-radius: var(--radius-lg);
+                border-end-end-radius: var(--radius-lg);
+                border-inline-start: none;
+            }
+            .week-nav-right {
+                inset-inline-end: 0;
+                border-start-start-radius: var(--radius-lg);
+                border-end-start-radius: var(--radius-lg);
+                border-inline-end: none;
+            }
+            .week-nav-bar:hover {
+                inline-size: 40px; /* Increased hover width slightly */
+                background: var(--surface-hover);
+                color: var(--text-primary);
+                box-shadow: var(--shadow-lg);
+            }
+            .week-nav-bar:active {
+                transform: translateY(-50%) scale(0.95);
+            }
+            /* Weekend Toggle */
+            .weekend-card {
+                margin: var(--space-3) 0;
+                padding: var(--space-4);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background: var(--surface-glass);
+                border: 1px solid var(--border-default);
+                border-radius: var(--radius-lg);
+                gap: var(--space-4);
+            }
+            .weekend-label {
+                font-weight: 800;
+                color: var(--text-secondary);
+            }
+            .toggle-switch {
+                position: relative;
+                inline-size: 48px;
+                block-size: 26px;
+                background: var(--surface-glass);
+                border: 1px solid var(--border-default);
+                border-radius: var(--radius-full);
+                transition: all 0.3s var(--ease-out);
+                cursor: pointer;
+                flex-shrink: 0;
+            }
+            .toggle-switch.active {
+                background: var(--accent-violet);
+                border-color: var(--accent-violet);
+                box-shadow: 0 0 12px color-mix(in oklch, var(--accent-violet) 40%, transparent);
+            }
+            .toggle-knob {
+                position: absolute;
+                inset-block-start: 2px;
+                inset-inline-start: 2px;
+                inline-size: 22px;
+                block-size: 22px;
+                background: white;
+                border-radius: 50%;
+                transition: transform 0.3s var(--ease-spring);
+                box-shadow: var(--shadow-sm);
+            }
+            .toggle-switch.active .toggle-knob {
+                transform: translateX(22px);
+            }
+            /* Bottom Bar */
+            .bottom-bar {
+                position: fixed;
+                inset-inline: 0;
+                inset-block-end: 0;
+                z-index: 101;
+                background: var(--surface-glass);
+                border-block-start: 1px solid var(--border-subtle);
+                backdrop-filter: blur(20px) saturate(1.8);
+                padding-block-end: var(--safe-bottom);
+            }
+            .bottom-actions {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr);
+                gap: var(--space-1);
+                padding: var(--space-2);
+                max-inline-size: 700px;
+                margin-inline: auto;
+            }
+            .bar-btn {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: var(--space-1);
+                padding: var(--space-2) var(--space-2);
+                background: var(--surface-glass);
+                border: 1px solid var(--border-default);
+                border-radius: var(--radius-md);
+                color: var(--text-secondary);
+                font-size: var(--font-size-xs);
+                font-weight: 800;
+                cursor: pointer;
+                transition: all 0.3s var(--ease-out);
+                min-block-size: var(--touch-target);
+                text-align: center;
+            }
+            .bar-btn:hover {
+                background: var(--surface-hover);
+                transform: translateY(-1px);
+                box-shadow: var(--shadow-md);
+            }
+            .bar-ico {
+                font-size: var(--font-size-lg);
+            }
+            /* Warning explanation modal styles */
+            .warning-explanation {
+                padding: var(--space-4);
+                text-align: center;
+                background: linear-gradient(135deg, 
+                    color-mix(in oklch, var(--accent-amber) 10%, transparent),
+                    color-mix(in oklch, var(--accent-orange) 5%, transparent));
+                border-radius: var(--radius-lg);
+                margin: var(--space-3);
+                border: 1px solid color-mix(in oklch, var(--accent-amber) 30%, transparent);
+            }
+            .warning-explanation h3 {
+                color: var(--accent-amber);
+                margin-bottom: var(--space-3);
+                font-size: var(--font-size-lg);
+            }
+            .warning-explanation p {
+                color: var(--text-secondary);
+                line-height: 1.5;
+                margin-bottom: var(--space-2);
+            }
+            .warning-explanation .emoji {
+                font-size: var(--font-size-2xl);
+                margin-bottom: var(--space-2);
+            }
+        }
+        @layer utilities {
+            /* Animation Delays */
+            .day-card:nth-child(1) {
+                animation-delay: 0.05s;
+            }
+            .day-card:nth-child(2) {
+                animation-delay: 0.1s;
+            }
+            .day-card:nth-child(3) {
+                animation-delay: 0.15s;
+            }
+            .day-card:nth-child(4) {
+                animation-delay: 0.2s;
+            }
+            .day-card:nth-child(5) {
+                animation-delay: 0.25s;
+            }
+            .day-card:nth-child(6) {
+                animation-delay: 0.3s;
+            }
+            .day-card:nth-child(7) {
+                animation-delay: 0.35s;
+            }
+            @keyframes slide-in {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+            /* Touch Responsive */
+            @media (hover: none) {
+                .week-nav-bar {
+                    inline-size: var(--touch-target);
+                    block-size: 100px;
+                    font-size: var(--font-size-xl);
+                }
+                .btn-icon,
+                .type-toggle {
+                    min-block-size: var(--touch-target);
+                }
+            }
+            /* Focus Visible */
+            *:focus-visible {
+                outline: 2px solid var(--accent-violet);
+                outline-offset: 2px;
+            }
+            /* Screen Reader Only */
+            .sr-only {
+                position: absolute;
+                inline-size: 1px;
+                block-size: 1px;
+                padding: 0;
+                margin: -1px;
+                overflow: hidden;
+                clip: rect(0, 0, 0, 0);
+                white-space: nowrap;
+                border: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div style="flex: 1;">
+            <h1 class="header-title">Enhanced Meal Planner</h1>
+        </div>
+        <button id="themeToggleBtn" class="btn-icon" aria-label="Toggle theme">🌙</button>
+    </header>
+    <div class="container">
+        <div class="week-nav">
+            <div class="week-date" id="weekDate"></div>
+        </div>
+        <div id="daysList" role="main" aria-label="Weekly meal plan"></div>
+    </div>
+    <button class="week-nav-bar week-nav-left" id="weekPrev" aria-label="Previous week">◄</button>
+    <button class="week-nav-bar week-nav-right" id="weekNext" aria-label="Next week">►</button>
+    <div class="bottom-bar">
+        <div class="bottom-actions">
+            <button id="barRandomize" class="bar-btn" aria-label="Randomize entire week">
+                <span class="bar-ico">🎲</span><span>Randomize</span>
+            </button>
+            <button id="barShopping" class="bar-btn" aria-label="View shopping list">
+                <span class="bar-ico">🛒</span><span>Shopping</span>
+            </button>
+            <button id="barShareAll" class="bar-btn" aria-label="Share week plan and shopping list">
+                <span class="bar-ico">📤</span><span>Share All</span>
+            </button>
+            <button id="barClear" class="bar-btn" aria-label="Clear all meals">
+                <span class="bar-ico">🗑️</span><span>Clear</span>
+            </button>
+        </div>
+    </div>
+    <div id="modalOverlay" class="modal-overlay" aria-hidden="true">
+        <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalSubtitle"
+            tabindex="-1">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modalTitle"></h2>
+                <p class="modal-subtitle" id="modalSubtitle"></p>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer" id="modalFooter"></div>
+        </div>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script>
+        // Modern selector helpers with error boundaries
+        const $ = (selector, root = document) => {
+            try {
+                return root.querySelector(selector);
+            } catch (e) {
+                console.warn(`Selector error: ${selector}`, e);
+                return null;
+            }
+        };
+        const $$ = (selector, root = document) => {
+            try {
+                return Array.from(root.querySelectorAll(selector));
+            } catch (e) {
+                console.warn(`Selector error: ${selector}`, e);
+                return [];
+            }
+        };
+        // Enhanced sanitization with HTML entity encoding
+        const sanitize = (str) => {
+            if (typeof str !== 'string') return '';
+            return str
+                .replace(/[<>]/g, '')
+                .replace(/&/g, '&amp;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#x27;')
+                .trim();
+        };
+        // Configuration constants
+        const CONFIG = Object.freeze({
+            storageKey: 'mp_enhanced_v4',
+            animations: Object.freeze({
+                modal: 300,
+                toast: 1500
+            }),
+            performance: Object.freeze({
+                debounceMs: 16,
+                touchThreshold: 60
+            })
+        });
+        // Enhanced data with breakfast options for weekends
+        const DATA = {
+            "ingredients": {
+                "ravioli": { "name": "Ravioli", "emoji": "🥟" },
+                "sage": { "name": "Sage", "emoji": "🌿" },
+                "spaghetti": { "name": "Spaghetti", "emoji": "🍝" },
+                "lemons": { "name": "Lemons", "emoji": "🍋" },
+                "ditalini": { "name": "Ditalini", "emoji": "🍝" },
+                "chickpeas": { "name": "Chickpeas", "emoji": "🫘" },
+                "tuna": { "name": "Tuna", "emoji": "🐟" },
+                "pasta": { "name": "Pasta", "emoji": "🍝" },
+                "tomato_sauce": { "name": "Tomato sauce", "emoji": "🍅" },
+                "flatbreads": { "name": "Flatbreads", "emoji": "🫓" },
+                "prosciutto": { "name": "Prosciutto", "emoji": "🥩" },
+                "provolone_cheese": { "name": "Provolone cheese", "emoji": "🧀" },
+                "eggs": { "name": "Eggs", "emoji": "🥚" },
+                "pesto": { "name": "Pesto", "emoji": "🌿" },
+                "cherry_tomatoes": { "name": "Cherry tomatoes", "emoji": "🍅" },
+                "lentils": { "name": "Lentils", "emoji": "🫘" },
+                "croutons": { "name": "Croutons", "emoji": "🍞" },
+                "bacon": { "name": "Bacon", "emoji": "🥓" },
+                "beans": { "name": "Beans", "emoji": "🫘" },
+                "salmon": { "name": "Salmon", "emoji": "🍣" },
+                "rice": { "name": "Rice", "emoji": "🍚" },
+                "zucchini": { "name": "Zucchini", "emoji": "🥒" },
+                "ground_beef": { "name": "Ground beef", "emoji": "🥩" },
+                "bread": { "name": "Bread", "emoji": "🍞" },
+                "breadcrumbs": { "name": "Breadcrumbs", "emoji": "🍞" },
+                "chicken_breast": { "name": "Chicken breast", "emoji": "🍗" },
+                "cod": { "name": "Cod", "emoji": "🐟" },
+                "hamburger_buns": { "name": "Hamburger buns", "emoji": "🍔" },
+                "american_cheese_slices": { "name": "American cheese slices", "emoji": "🧀" },
+                "lettuce": { "name": "Lettuce", "emoji": "🥬" },
+                "tomatoes": { "name": "Tomatoes", "emoji": "🍅" },
+                "breaded_cutlets": { "name": "Breaded cutlets", "emoji": "🥩" },
+                "sausages": { "name": "Sausages", "emoji": "🌭" },
+                "vegetable_soup_mix": { "name": "Vegetable soup mix", "emoji": "🥕" },
+                "chicken_thighs": { "name": "Chicken thighs", "emoji": "🍗" },
+                "veal_cutlets": { "name": "Veal cutlets", "emoji": "🥩" },
+                "fresh_mozzarella": { "name": "Fresh mozzarella", "emoji": "🧀" },
+                "cordon_bleu": { "name": "Cordon bleu", "emoji": "🥩" },
+                "hot_dogs": { "name": "Hot dogs", "emoji": "🌭" },
+                "dumplings": { "name": "Dumplings", "emoji": "🥟" },
+                "fish_sticks": { "name": "Fish sticks", "emoji": "🐟" },
+                "whole_chicken": { "name": "Whole chicken", "emoji": "🍗" },
+                "shredded_mozzarella": { "name": "Shredded mozzarella", "emoji": "🧀" },
+                "eggplant": { "name": "Eggplant", "emoji": "🍆" },
+                "beef": { "name": "Beef", "emoji": "🥩" },
+                "potatoes": { "name": "Potatoes", "emoji": "🥔" },
+                "onion": { "name": "Onion", "emoji": "🧅" },
+                "carrots": { "name": "Carrots", "emoji": "🥕" },
+                "tortellini": { "name": "Tortellini", "emoji": "🥟" },
+                "cream": { "name": "Cream", "emoji": "🥛" },
+                "meat_sauce": { "name": "Meat sauce", "emoji": "🍖" },
+                "flour": { "name": "Flour", "emoji": "🌾" },
+                "milk": { "name": "Milk", "emoji": "🥛" },
+                "broth": { "name": "Broth", "emoji": "🍲" },
+                "polenta": { "name": "Polenta", "emoji": "🌽" },
+                "ricotta": { "name": "Ricotta", "emoji": "🧀" },
+                "spinach": { "name": "Spinach", "emoji": "🥬" },
+                "lasagna_noodles": { "name": "Lasagna noodles", "emoji": "🍝" },
+                "steak": { "name": "Steak", "emoji": "🥩" },
+                "broccoli": { "name": "Broccoli", "emoji": "🥦" },
+                "tater_tots": { "name": "Tater tots", "emoji": "🥔" },
+                "beets": { "name": "Beets", "emoji": "🥬" },
+                "corn": { "name": "Corn", "emoji": "🌽" },
+                "cucumbers": { "name": "Cucumbers", "emoji": "🥒" },
+                "butter": { "name": "Butter", "emoji": "🧈" },
+                "pesto_sauce": { "name": "Pesto sauce", "emoji": "🌿" },
+                // New breakfast ingredients
+                "maple_syrup": { "name": "Maple syrup", "emoji": "🍁" },
+                "vanilla": { "name": "Vanilla", "emoji": "🌟" },
+                "croissant_dough": { "name": "Croissant dough", "emoji": "🥐" },
+                "baking_powder": { "name": "Baking powder", "emoji": "🧂" },
+                "jam": { "name": "Jam", "emoji": "🍓" }
+            },
+            "meals": {
+                "none": { "name": "None", "emoji": "❌", "ingredients": [], "type": "other" },
+                "custom": { "name": "Custom", "emoji": "✏️", "ingredients": [], "type": "other" },
+                // Existing meals...
+                "ravioli_burro_e_salvia": { "name": "Ravioli burro e salvia", "emoji": "🥟", "ingredients": ["ravioli", "sage"], "type": "vegetarian" },
+                "spaghetti_al_limone": { "name": "Spaghetti al limone", "emoji": "🍝", "ingredients": ["spaghetti", "lemons"], "type": "vegetarian" },
+                "pasta_e_ceci": { "name": "Pasta e ceci", "emoji": "🍝", "ingredients": ["ditalini", "chickpeas"], "type": "vegetarian" },
+                "pasta_col_tonno": { "name": "Pasta col tonno", "emoji": "🐟", "ingredients": ["spaghetti", "tuna"], "type": "fish" },
+                "pasta_sugo_tonno": { "name": "Pasta sugo tonno", "emoji": "🐟", "ingredients": ["pasta", "tuna", "tomato_sauce"], "type": "fish" },
+                "piadine_prosciutto_provolone": { "name": "Piadine prosciutto provolone", "emoji": "🥪", "ingredients": ["flatbreads", "prosciutto", "provolone_cheese"], "type": "meat" },
+                "uova_fritte": { "name": "Uova fritte", "emoji": "🍳", "ingredients": ["eggs"], "type": "vegetarian" },
+                "pasta_al_pesto": { "name": "Pasta al pesto", "emoji": "🌿", "ingredients": ["pasta", "pesto_sauce"], "type": "vegetarian" },
+                "pasta_coi_pomodorini": { "name": "Pasta coi pomodorini", "emoji": "🍅", "ingredients": ["pasta", "cherry_tomatoes"], "type": "vegetarian" },
+                "lenticchie": { "name": "Lenticchie", "emoji": "🥘", "ingredients": ["lentils", "croutons"], "type": "vegetarian" },
+                "spaghetti_aglio_e_olio": { "name": "Spaghetti aglio e olio", "emoji": "🧄", "ingredients": ["spaghetti"], "type": "vegetarian" },
+                "carbonara": { "name": "Carbonara", "emoji": "🥓", "ingredients": ["spaghetti", "eggs", "bacon"], "type": "meat" },
+                "frittata_di_pasta": { "name": "Frittata di pasta", "emoji": "🍳", "ingredients": ["eggs"], "type": "vegetarian" },
+                "pasta_e_fagioli": { "name": "Pasta e fagioli", "emoji": "🫘", "ingredients": ["pasta", "beans"], "type": "vegetarian" },
+                "salmone_col_riso": { "name": "Salmone col riso", "emoji": "🍣", "ingredients": ["salmon", "rice"], "type": "fish" },
+                "frittata_di_zucchine": { "name": "Frittata di zucchine", "emoji": "🥒", "ingredients": ["eggs", "zucchini"], "type": "vegetarian" },
+                "polpette": { "name": "Polpette", "emoji": "🧆", "ingredients": ["ground_beef", "eggs", "bread", "breadcrumbs"], "type": "meat" },
+                "pollo_al_limone": { "name": "Pollo al limone", "emoji": "🍗", "ingredients": ["chicken_breast", "lemons"], "type": "meat" },
+                "merluzzo": { "name": "Merluzzo", "emoji": "🐟", "ingredients": ["cod"], "type": "fish" },
+                "hamburger": { "name": "Hamburger", "emoji": "🍔", "ingredients": ["hamburger_buns", "ground_beef", "american_cheese_slices", "lettuce", "tomatoes"], "type": "meat" },
+                "cotolette": { "name": "Cotolette", "emoji": "🥩", "ingredients": ["breaded_cutlets", "breadcrumbs", "eggs"], "type": "meat" },
+                "salsicce": { "name": "Salsicce", "emoji": "🌭", "ingredients": ["sausages"], "type": "meat" },
+                "minestrone": { "name": "Minestrone", "emoji": "🍲", "ingredients": ["vegetable_soup_mix", "pasta", "beans"], "type": "vegetarian" },
+                "pollo_al_forno": { "name": "Pollo al forno", "emoji": "🍗", "ingredients": ["chicken_thighs"], "type": "meat" },
+                "scaloppine_al_limone": { "name": "Scaloppine al limone", "emoji": "🥩", "ingredients": ["veal_cutlets", "lemons"], "type": "meat" },
+                "caprese": { "name": "Caprese", "emoji": "🧀", "ingredients": ["fresh_mozzarella", "tomatoes"], "type": "vegetarian" },
+                "cordon_bleu": { "name": "Cordon bleu", "emoji": "🥩", "ingredients": ["cordon_bleu"], "type": "meat" },
+                "würstel": { "name": "Würstel", "emoji": "🌭", "ingredients": ["hot_dogs"], "type": "meat" },
+                "dumplings": { "name": "Dumplings", "emoji": "🥟", "ingredients": ["dumplings"], "type": "meat" },
+                "fish_sticks": { "name": "Fish sticks", "emoji": "🐟", "ingredients": ["fish_sticks"], "type": "fish" },
+                "pollo_allo_spiedo": { "name": "Pollo allo spiedo", "emoji": "🍗", "ingredients": ["whole_chicken"], "type": "meat" },
+                "pasta_al_forno": { "name": "Pasta al forno", "emoji": "🍝", "ingredients": ["pasta", "tomato_sauce", "shredded_mozzarella"], "type": "vegetarian" },
+                "parmigiana_di_melanzane": { "name": "Parmigiana di melanzane", "emoji": "🍆", "ingredients": ["eggplant", "tomato_sauce", "shredded_mozzarella"], "type": "vegetarian" },
+                "zucchine_ripiene": { "name": "Zucchine ripiene", "emoji": "🥒", "ingredients": ["zucchini", "ground_beef", "bread"], "type": "meat" },
+                "lasagna": { "name": "Lasagna", "emoji": "🍝", "ingredients": ["lasagna_noodles", "meat_sauce"], "type": "meat" },
+                "spezzatino_con_patate": { "name": "Spezzatino con patate", "emoji": "🥘", "ingredients": ["beef", "potatoes", "onion", "carrots"], "type": "meat" },
+                "tortellini_con_la_panna": { "name": "Tortellini con la panna", "emoji": "🥟", "ingredients": ["tortellini", "cream"], "type": "vegetarian" },
+                "tortellini_col_sugo": { "name": "Tortellini col sugo", "emoji": "🥟", "ingredients": ["tortellini", "tomato_sauce"], "type": "vegetarian" },
+                "pasta_col_ragù": { "name": "Pasta col ragù", "emoji": "🍝", "ingredients": ["pasta", "meat_sauce"], "type": "meat" },
+                "polpettone": { "name": "Polpettone", "emoji": "🥩", "ingredients": ["ground_beef", "eggs", "bacon", "bread"], "type": "meat" },
+                "scrimpelle_mbuss": { "name": "Scrimpelle mbuss", "emoji": "🥞", "ingredients": ["eggs", "flour", "milk", "broth"], "type": "vegetarian" },
+                "polenta_col_sugo": { "name": "Polenta col sugo", "emoji": "🌽", "ingredients": ["polenta", "tomato_sauce", "sausages"], "type": "meat" },
+                "cannelloni": { "name": "Cannelloni", "emoji": "🥟", "ingredients": ["cannelloni", "ricotta", "spinach"], "type": "vegetarian" },
+                "bistecca": { "name": "Bistecca", "emoji": "🥩", "ingredients": ["steak"], "type": "meat" },
+                "pizza_delivery": { "name": "Pizza Delivery", "emoji": "🍕", "ingredients": [], "type": "other" },
+                "greco_delivery": { "name": "Greco Delivery", "emoji": "🥙", "ingredients": [], "type": "other" },
+                "chinese_delivery": { "name": "Chinese Delivery", "emoji": "🥡", "ingredients": [], "type": "other" },
+                "vietnamese_delivery": { "name": "Vietnamese Delivery", "emoji": "🍜", "ingredients": [], "type": "other" },
+                "ramen_delivery": { "name": "Ramen Delivery", "emoji": "🍜", "ingredients": [], "type": "other" },
+                // Side dishes
+                "purè_di_patate": { "name": "Purè di patate", "emoji": "🥔", "ingredients": ["potatoes"], "type": "vegetarian" },
+                "broccoli_al_vapore": { "name": "Broccoli al vapore", "emoji": "🥦", "ingredients": ["broccoli"], "type": "vegetarian" },
+                "insalata_di_pomodori": { "name": "Insalata di pomodori", "emoji": "🍅", "ingredients": ["tomatoes"], "type": "vegetarian" },
+                "tater_tots": { "name": "Tater tots", "emoji": "🥔", "ingredients": ["tater_tots"], "type": "vegetarian" },
+                "barbabietole": { "name": "Barbabietole", "emoji": "🥬", "ingredients": ["beets"], "type": "vegetarian" },
+                "insalata_di_mais": { "name": "Insalata di mais", "emoji": "🌽", "ingredients": ["corn"], "type": "vegetarian" },
+                "patate_lesse": { "name": "Patate lesse", "emoji": "🥔", "ingredients": ["potatoes"], "type": "vegetarian" },
+                "carote_al_forno": { "name": "Carote al forno", "emoji": "🥕", "ingredients": ["carrots"], "type": "vegetarian" },
+                "carote_a_insalata": { "name": "Carote a insalata", "emoji": "🥕", "ingredients": ["carrots"], "type": "vegetarian" },
+                "zucchine_trifolate": { "name": "Zucchine trifolate", "emoji": "🥒", "ingredients": ["zucchini"], "type": "vegetarian" },
+                "insalata_di_cetrioli": { "name": "Insalata di cetrioli", "emoji": "🥒", "ingredients": ["cucumbers"], "type": "vegetarian" },
+                "insalata": { "name": "Insalata", "emoji": "🥗", "ingredients": ["lettuce"], "type": "vegetarian" },
+                // New weekend breakfast options
+                "french_toast": { "name": "French Toast", "emoji": "🍞", "ingredients": ["bread", "eggs", "milk", "vanilla", "maple_syrup"], "type": "vegetarian" },
+                "croissants": { "name": "Croissants", "emoji": "🥐", "ingredients": ["croissant_dough", "butter", "jam"], "type": "vegetarian" },
+                "biscuits": { "name": "Biscuits", "emoji": "🧈", "ingredients": ["flour", "butter", "milk", "baking_powder"], "type": "vegetarian" }
+            },
+            "mealCategories": {
+                "lunch": ["none", "ravioli_burro_e_salvia", "spaghetti_al_limone", "pasta_e_ceci", "pasta_col_tonno", "pasta_sugo_tonno", "piadine_prosciutto_provolone", "uova_fritte", "pasta_al_pesto", "pasta_coi_pomodorini", "lenticchie", "spaghetti_aglio_e_olio", "carbonara", "frittata_di_pasta", "pasta_e_fagioli", "custom"],
+                "dinnerRegular": ["none", "salmone_col_riso", "frittata_di_zucchine", "polpette", "pollo_al_limone", "merluzzo", "hamburger", "cotolette", "salsicce", "minestrone", "pollo_al_forno", "scaloppine_al_limone", "caprese", "custom"],
+                "dinnerQuick": ["none", "cordon_bleu", "würstel", "dumplings", "fish_sticks", "pollo_allo_spiedo", "custom"],
+                "delivery": ["none", "pizza_delivery", "greco_delivery", "chinese_delivery", "vietnamese_delivery", "ramen_delivery", "custom"],
+                "dinnerWeekend": ["none", "pasta_al_forno", "parmigiana_di_melanzane", "zucchine_ripiene", "lasagna", "spezzatino_con_patate", "tortellini_con_la_panna", "tortellini_col_sugo", "pasta_col_ragù", "polpettone", "scrimpelle_mbuss", "polenta_col_sugo", "cannelloni", "bistecca", "custom"],
+                "side": ["none", "purè_di_patate", "broccoli_al_vapore", "insalata_di_pomodori", "tater_tots", "barbabietole", "insalata_di_mais", "patate_lesse", "carote_al_forno", "carote_a_insalata", "zucchine_trifolate", "insalata_di_cetrioli", "insalata", "custom"],
+                // New breakfast category for weekends
+                "breakfastWeekend": ["none", "french_toast", "croissants", "biscuits", "custom"]
+            },
+            "stores": {
+                "Aldi": ["bacon", "beets", "cannelloni", "carrots", "chicken_thighs", "breaded_cutlets", "croutons", "dumplings", "beans", "fish_sticks", "lemons", "corn", "shredded_mozzarella", "potatoes", "chicken_breast", "flatbreads", "tomatoes", "cherry_tomatoes", "provolone_cheese", "prosciutto", "ravioli", "sausages", "american_cheese_slices", "spinach", "tater_tots", "tortellini", "eggs", "hot_dogs", "zucchini", "ground_beef", "ricotta", "milk", "pesto_sauce", "croissant_dough", "jam"],
+                "Wegmans": ["steak", "broccoli", "cucumbers", "onion", "hamburger_buns", "butter", "lettuce", "lentils", "eggplant", "cod", "whole_chicken", "sage", "salmon", "bread", "tomato_sauce", "maple_syrup", "vanilla", "baking_powder"],
+                "Amazon": ["pasta", "tuna", "breadcrumbs", "rice", "flour"],
+                "Other": []
+            }
+        };
+
+        // Derived data maps
+        const titleize = (key) => key.replace(/_/g, ' ').replace(/\b\w/g, char => char.toUpperCase());
+        const getIngredient = (key) => DATA.ingredients[key] || { name: titleize(key), emoji: '' };
+        const MEALS = DATA.meals;
+        const MEAL_EMOJIS = Object.fromEntries(Object.values(MEALS).map(meal => [meal.name, meal.emoji]));
+        const MEAL_TYPE = Object.fromEntries(Object.values(MEALS).map(meal => [meal.name, meal.type || 'other']));
+        const INGREDIENT_EMOJIS = (() => {
+            const map = {};
+            for (const ingredient of Object.values(DATA.ingredients)) {
+                map[ingredient.name] = ingredient.emoji;
+            }
+            return map;
+        })();
+        const MEAL_DATA = {
+            lunch: DATA.mealCategories.lunch.map(key => MEALS[key]?.name || titleize(key)),
+            dinnerRegular: DATA.mealCategories.dinnerRegular.map(key => MEALS[key]?.name || titleize(key)),
+            dinnerQuick: DATA.mealCategories.dinnerQuick.map(key => MEALS[key]?.name || titleize(key)),
+            delivery: DATA.mealCategories.delivery.map(key => MEALS[key]?.name || titleize(key)),
+            dinnerWeekend: DATA.mealCategories.dinnerWeekend.map(key => MEALS[key]?.name || titleize(key)),
+            side: DATA.mealCategories.side.map(key => MEALS[key]?.name || titleize(key)),
+            breakfastWeekend: DATA.mealCategories.breakfastWeekend.map(key => MEALS[key]?.name || titleize(key))
+        };
+        const INGREDIENTS = (() => {
+            const ingredientMap = {};
+            for (const meal of Object.values(MEALS)) {
+                ingredientMap[meal.name] = (meal.ingredients || []).map(ingredientKey => getIngredient(ingredientKey).name);
+            }
+            return ingredientMap;
+        })();
+        const STORES = (() => {
+            const storeMap = {};
+            for (const [storeName, ingredientKeys] of Object.entries(DATA.stores)) {
+                storeMap[storeName] = ingredientKeys.map(key => getIngredient(key).name);
+            }
+            return storeMap;
+        })();
+
+        // Food type classifier for dinner constraint logic
+        const getDinnerFoodType = (mealName) => {
+            const type = MEAL_TYPE[mealName] || 'other';
+            return (type === 'meat' || type === 'fish') ? type : (type === 'vegetarian' ? 'vegetarian' : 'other');
+        };
+
+        // Performance utilities
+        const debounce = (func, wait) => {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        };
+
+        // Enhanced event delegation with passive listeners
+        const addPassiveListener = (element, event, handler) => {
+            if (element && typeof element.addEventListener === 'function') {
+                element.addEventListener(event, handler, { passive: true });
+            }
+        };
+
+        class MealPlannerApp {
+            constructor() {
+                this.state = this.loadState() || this.createInitialState();
+                this.currentDayIndex = null;
+                this._lastFocus = null;
+                this._touchStartX = null;
+                this._observers = new Set();
+                this._boundMethods = new Map();
+                this.init();
+            }
+
+            // Lifecycle methods
+            init() {
+                this.applyTheme();
+                this.attachGlobalListeners();
+                this.setupIntersectionObserver();
+                this.render();
+            }
+
+            destroy() {
+                // Cleanup for memory management
+                this._observers.forEach(observer => observer.disconnect());
+                this._observers.clear();
+                this._boundMethods.clear();
+                document.removeEventListener('keydown', this._handleKeydown);
+                document.removeEventListener('touchstart', this._handleTouchStart);
+                document.removeEventListener('touchend', this._handleTouchEnd);
+            }
+
+            // Week management with enhanced weekend support
+            weekKey(date) {
+                const monday = this.getWeekStart(date);
+                return `mp_v4_${monday.toISOString().slice(0, 10)}`;
+            }
+
+            createInitialState() {
+                const weekStart = this.getWeekStart(new Date());
+                const dayNames = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                return {
+                    weekStart: weekStart.toISOString(),
+                    showWeekend: true,
+                    theme: 'dark',
+                    days: dayNames.map((name, index) => ({
+                        name,
+                        date: new Date(weekStart.getTime() + index * 86400000).toISOString(),
+                        breakfast: null, // Added breakfast support
+                        lunch: null,
+                        dinner: null,
+                        side: null,
+                        busy: false,
+                        dinnerType: 'regular',
+                        customBreakfast: null, // Added custom breakfast support
+                        customLunch: null,
+                        customDinner: null,
+                        customSide: null,
+                        _lastSide: null
+                    })),
+                    groceryExtras: []
+                };
+            }
+
+            getWeekStart(date) {
+                const day = new Date(date);
+                const dayOfWeek = day.getDay();
+                const diff = day.getDate() - dayOfWeek + (dayOfWeek === 0 ? -6 : 1);
+                const monday = new Date(day.setDate(diff));
+                monday.setHours(0, 0, 0, 0);
+                return monday;
+            }
+
+            formatWeekDate() {
+                const start = new Date(this.state.weekStart);
+                const end = new Date(start.getTime() + 6 * 86400000);
+                const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'];
+                return `${months[start.getMonth()]} ${start.getDate()} - ${end.getDate()}, ${start.getFullYear()}`;
+            }
+
+            formatDate(dateString) {
+                const date = new Date(dateString);
+                const months = ['January', 'February', 'March', 'April', 'May', 'June',
+                    'July', 'August', 'September', 'October', 'November', 'December'];
+                return `${months[date.getMonth()]} ${date.getDate()}`;
+            }
+
+            // Storage methods
+            loadState() {
+                try {
+                    const weekKey = this.weekKey(new Date());
+                    const weekData = localStorage.getItem(weekKey);
+                    if (weekData) return JSON.parse(weekData);
+                    // Legacy compatibility
+                    const legacyData = localStorage.getItem(CONFIG.storageKey);
+                    return legacyData ? JSON.parse(legacyData) : null;
+                } catch (error) {
+                    console.warn('Failed to load state:', error);
+                    return null;
+                }
+            }
+
+            saveState() {
+                try {
+                    const key = this.weekKey(new Date(this.state.weekStart));
+                    localStorage.setItem(key, JSON.stringify(this.state));
+                } catch (error) {
+                    console.error('Failed to save state:', error);
+                }
+            }
+
+            // Theme management
+            applyTheme() {
+                document.documentElement.setAttribute('data-theme', this.state.theme);
+                const themeBtn = $('#themeToggleBtn');
+                if (themeBtn) {
+                    themeBtn.textContent = this.state.theme === 'dark' ? '🌙' : '☀️';
+                    themeBtn.setAttribute('aria-label', `Switch to ${this.state.theme === 'dark' ? 'light' : 'dark'} theme`);
+                }
+            }
+
+            toggleTheme() {
+                this.state.theme = this.state.theme === 'light' ? 'dark' : 'light';
+                this.applyTheme();
+                this.saveState();
+            }
+
+            // Week navigation
+            navigateWeek(direction) {
+                const currentWeek = new Date(this.state.weekStart);
+                const weekOffset = direction === 'next' ? 7 : -7;
+                const newWeekStart = new Date(currentWeek.getTime() + weekOffset * 86400000);
+                const weekKey = this.weekKey(newWeekStart);
+                const existingWeekData = JSON.parse(localStorage.getItem(weekKey) || 'null');
+
+                if (existingWeekData) {
+                    this.state = existingWeekData;
+                } else {
+                    this.state = this.createInitialState();
+                    this.state.weekStart = newWeekStart.toISOString();
+                    this.state.days = this.state.days.map((day, index) => ({
+                        ...day,
+                        date: new Date(newWeekStart.getTime() + index * 86400000).toISOString()
+                    }));
+                }
+                this.applyTheme();
+                this.saveState();
+                this.render();
+            }
+
+            // Performance optimization: Intersection Observer for animations
+            setupIntersectionObserver() {
+                if ('IntersectionObserver' in window) {
+                    const observer = new IntersectionObserver((entries) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                entry.target.style.willChange = 'transform, opacity';
+                            } else {
+                                entry.target.style.willChange = 'auto';
+                            }
+                        });
+                    }, { threshold: 0.1 });
+                    this._observers.add(observer);
+                }
+            }
+
+            // Enhanced event handling
+            attachGlobalListeners() {
+                this._handleKeydown = this._handleKeydown || this.handleKeydown.bind(this);
+                this._handleTouchStart = this._handleTouchStart || this.handleTouchStart.bind(this);
+                this._handleTouchEnd = this._handleTouchEnd || this.handleTouchEnd.bind(this);
+
+                // Theme toggle
+                const themeBtn = $('#themeToggleBtn');
+                if (themeBtn) {
+                    themeBtn.onclick = () => this.toggleTheme();
+                }
+
+                // Bottom bar actions
+                const actions = [
+                    { id: 'barRandomize', handler: () => this.handleRandomizeWeek() },
+                    { id: 'barShopping', handler: () => this.openGroceryList() },
+                    { id: 'barShareAll', handler: () => this.shareWeekAndGrocery() },
+                    { id: 'barClear', handler: () => this.handleClearWeek() }
+                ];
+                actions.forEach(({ id, handler }) => {
+                    const element = $(`#${id}`);
+                    if (element) {
+                        element.onclick = handler;
+                    }
+                });
+
+                // Week navigation
+                const weekPrev = $('#weekPrev');
+                const weekNext = $('#weekNext');
+                if (weekPrev) weekPrev.onclick = () => this.navigateWeek('prev');
+                if (weekNext) weekNext.onclick = () => this.navigateWeek('next');
+
+                // Modal handling
+                const overlay = $('#modalOverlay');
+                if (overlay) {
+                    overlay.addEventListener('click', (event) => {
+                        if (event.target === overlay) this.closeModal();
+                    });
+                }
+
+                // Global keyboard and touch
+                document.addEventListener('keydown', this._handleKeydown);
+                addPassiveListener(document, 'touchstart', this._handleTouchStart);
+                addPassiveListener(document, 'touchend', this._handleTouchEnd);
+            }
+
+            handleRandomizeWeek() {
+                this.randomizeWeek();
+                this.showToast('Week randomized! 🎲');
+            }
+
+            handleClearWeek() {
+                if (confirm('Clear all meals for this week?')) {
+                    this.state.days = this.state.days.map(day => ({
+                        ...day,
+                        breakfast: null,
+                        lunch: null,
+                        dinner: null,
+                        side: null,
+                        dinnerType: 'regular',
+                        busy: false,
+                        customBreakfast: null,
+                        customLunch: null,
+                        customDinner: null,
+                        customSide: null,
+                        _lastSide: null
+                    }));
+                    this.saveState();
+                    this.render();
+                    this.showToast('Week cleared');
+                }
+            }
+
+            handleKeydown(event) {
+                const overlay = $('#modalOverlay');
+                if (!overlay) return;
+                if (event.key === 'Escape' && overlay.classList.contains('show')) {
+                    this.closeModal();
+                }
+                if (overlay.classList.contains('show') && event.key === 'Tab') {
+                    this.trapFocus(event);
+                }
+            }
+
+            handleTouchStart(event) {
+                this._touchStartX = event.touches?.[0]?.clientX || null;
+            }
+
+            handleTouchEnd(event) {
+                if (this._touchStartX === null) return;
+                const touchEndX = event.changedTouches?.[0]?.clientX;
+                if (touchEndX === undefined) return;
+                const deltaX = touchEndX - this._touchStartX;
+                if (Math.abs(deltaX) > CONFIG.performance.touchThreshold) {
+                    deltaX > 0 ? this.navigateWeek('prev') : this.navigateWeek('next');
+                }
+                this._touchStartX = null;
+            }
+
+            // Focus management for accessibility
+            trapFocus(event) {
+                const modal = $('#modalOverlay .modal');
+                if (!modal) return;
+                const focusableElements = $$('button, [href], input, textarea, [tabindex]:not([tabindex="-1"])', modal)
+                    .filter(el => !el.disabled && el.offsetParent !== null);
+                if (!focusableElements.length) return;
+                const firstElement = focusableElements[0];
+                const lastElement = focusableElements[focusableElements.length - 1];
+                if (event.shiftKey && document.activeElement === firstElement) {
+                    lastElement.focus();
+                    event.preventDefault();
+                } else if (!event.shiftKey && document.activeElement === lastElement) {
+                    firstElement.focus();
+                    event.preventDefault();
+                }
+            }
+
+            // Enhanced rendering system with breakfast support
+            render() {
+                const weekDateElement = $('#weekDate');
+                if (weekDateElement) {
+                    weekDateElement.textContent = this.formatWeekDate();
+                }
+                this.renderDays();
+            }
+
+            isWeekendName(dayName) {
+                return dayName === 'Saturday' || dayName === 'Sunday';
+            }
+
+            makeTypeToggles(dayIndex) {
+                const day = this.state.days[dayIndex];
+                const createToggle = (label, type) => {
+                    const isActive = day.dinnerType === type;
+                    const activeClass = isActive ? `active ${type}` : '';
+                    return `<button class="type-toggle ${activeClass}" 
+                        data-role="type-toggle" 
+                        data-type="${type}" 
+                        data-index="${dayIndex}"
+                        aria-pressed="${isActive}"
+                        aria-label="${label} dinner type">${label}</button>`;
+                };
+                return `<div class="type-toggles" data-index="${dayIndex}">
+                    ${createToggle('Quick', 'quick')}
+                    ${createToggle('Delivery', 'delivery')}
+                </div>`;
+            }
+
+            renderDays() {
+                const allDays = this.state.days.slice();
+                const dayCards = [];
+
+                // Render weekdays
+                for (let i = 0; i < 5; i++) {
+                    dayCards.push(this.renderDayCard(allDays[i], i));
+                }
+
+                // Weekend toggle card
+                dayCards.push(this.renderWeekendToggleCard());
+
+                // Weekend days if shown
+                if (this.state.showWeekend) {
+                    dayCards.push(this.renderDayCard(allDays[5], 5));
+                    dayCards.push(this.renderDayCard(allDays[6], 6));
+                }
+
+                const daysList = $('#daysList');
+                if (daysList) {
+                    daysList.innerHTML = dayCards.join('');
+                }
+
+                this.attachDayListeners();
+                this.attachInlineControls();
+            }
+
+            renderWeekendToggleCard() {
+                const isActive = this.state.showWeekend;
+                return `<div class="weekend-card" role="region" aria-label="Weekend visibility">
+                    <div class="weekend-label">Show weekends</div>
+                    <button id="inlineWeekendToggle" 
+                            class="toggle-switch ${isActive ? 'active' : ''}" 
+                            role="switch" 
+                            aria-checked="${String(isActive)}" 
+                            aria-label="Show or hide weekend days">
+                        <div class="toggle-knob"></div>
+                    </button>
+                </div>`;
+            }
+
+            violatesConsecutiveAt(index) {
+                const dinnerType = getDinnerFoodType(this.state.days[index].dinner);
+                if (dinnerType !== 'meat' && dinnerType !== 'fish') return false;
+                const prevType = this.getNeighborCategory(index - 1);
+                const nextType = this.getNeighborCategory(index + 1);
+                return prevType === dinnerType || nextType === dinnerType;
+            }
+
+            // Enhanced warning badge with click handler
+            showWarningExplanation(index) {
+                const day = this.state.days[index];
+                const foodType = getDinnerFoodType(day.dinner);
+                const explanationHTML = `
+                    <div class="warning-explanation">
+                        <div class="emoji">⚠️</div>
+                        <h3>Dietary Balance Warning</h3>
+                        <p><strong>Why this warning appears:</strong></p>
+                        <p>You have ${foodType === 'meat' ? 'meat' : 'fish'} dishes on consecutive days. For better nutritional balance, it's recommended to alternate between meat, fish, and vegetarian options throughout the week.</p>
+                        <p><strong>Health benefits of variety:</strong></p>
+                        <p>• Better nutrient diversity<br>
+                        • Reduced environmental impact<br>
+                        • More interesting meal experiences<br>
+                        • Better digestive health</p>
+                        <p>You can still keep this selection if you prefer!</p>
+                    </div>`;
+
+                this.openModal({
+                    title: 'Consecutive Days Warning',
+                    subtitle: `${day.name} - ${this.formatDate(day.date)}`,
+                    bodyHTML: explanationHTML,
+                    footer: [
+                        {
+                            label: 'Got it!',
+                            type: 'btn-primary',
+                            onClick: () => this.closeModal()
+                        }
+                    ]
+                });
+            }
+
+            renderDayCard(day, index) {
+                const isWeekend = this.isWeekendName(day.name);
+                
+                // Calculate completeness
+                const breakfastMissing = isWeekend && !day.breakfast;
+                const lunchMissing = !day.lunch;
+                const dinnerMissing = !day.dinner;
+                const sideMissing = (day.dinnerType !== 'delivery') ? (!day.side || day.side === 'None') : false;
+                
+                const expectedMeals = isWeekend ? (day.dinnerType === 'delivery' ? 3 : 4) : (day.dinnerType === 'delivery' ? 2 : 3);
+                const completedMeals = Number(!breakfastMissing || !isWeekend) + Number(!lunchMissing) + Number(!dinnerMissing) + (day.dinnerType === 'delivery' ? 0 : Number(!sideMissing));
+                const completeness = `${completedMeals}/${expectedMeals}`;
+
+                // Prepare display text
+                const breakfastDisplay = day.breakfast === 'Custom' ? (day.customBreakfast || 'Enter custom') : day.breakfast;
+                const lunchDisplay = day.lunch === 'Custom' ? (day.customLunch || 'Enter custom') : day.lunch;
+                const dinnerDisplay = day.dinner === 'Custom' ? (day.customDinner || 'Enter custom') : day.dinner;
+                const sideDisplay = day.side === 'Custom' ? (day.customSide || 'Enter custom') : day.side;
+
+                const breakfastText = day.breakfast === 'None' ? 'No breakfast' : (breakfastDisplay || 'Select breakfast');
+                const lunchText = day.lunch === 'None' ? 'No lunch' : (lunchDisplay || 'Select lunch');
+                const dinnerText = day.dinner === 'None' ? 'No dinner' : (dinnerDisplay || 'Select dinner');
+                const sideText = (day.dinnerType !== 'delivery' && day.side && day.side !== 'None') ? (sideDisplay || '') : '';
+
+                // Prepare emojis
+                const breakfastEmoji = day.breakfast ? (MEAL_EMOJIS[day.breakfast] || '🍽️') : '🍽️';
+                const lunchEmoji = day.lunch ? (MEAL_EMOJIS[day.lunch] || '🍽️') : '🍽️';
+                const dinnerEmoji = day.dinner ? (MEAL_EMOJIS[day.dinner] || '🍽️') : '🍽️';
+
+                // Warning badge with click handler
+                const hasConsecutiveWarning = this.violatesConsecutiveAt(index);
+                const warningBadge = hasConsecutiveWarning ?
+                    `<span class="warn-badge" 
+                           data-warning-index="${index}"
+                           title="Click to learn why this warning appears">⚠️</span>` : '';
+
+                const isIncomplete = breakfastMissing || lunchMissing || dinnerMissing || sideMissing;
+
+                // Build breakfast section for weekends
+                const breakfastSection = isWeekend ? `
+                    <div class="meal-item ${breakfastMissing ? 'empty' : ''}" 
+                         data-meal="breakfast" 
+                         data-index="${index}"
+                         role="button"
+                         tabindex="0"
+                         aria-label="Select breakfast for ${day.name}">
+                        <div class="meal-icon breakfast">${breakfastEmoji}</div>
+                        <div class="meal-content">
+                            <h4 class="meal-title">Breakfast</h4>
+                            <p class="meal-description">${breakfastText}</p>
+                        </div>
+                    </div>
+                ` : '';
+
+                return `<div class="day-card ${isIncomplete ? 'incomplete' : ''}" data-day="${index}">
+                    <div class="day-header">
+                        <div>
+                            <div class="day-title">
+                                ${day.name} 
+                                <span class="chip">${completeness}</span> 
+                                ${warningBadge}
+                            </div>
+                            <div class="day-date">${this.formatDate(day.date)}</div>
+                        </div>
+                        ${this.makeTypeToggles(index)}
+                    </div>
+                    ${breakfastSection}
+                    <div class="meal-item ${lunchMissing ? 'empty' : ''}" 
+                         data-meal="lunch" 
+                         data-index="${index}"
+                         role="button"
+                         tabindex="0"
+                         aria-label="Select lunch for ${day.name}">
+                        <div class="meal-icon lunch">${lunchEmoji}</div>
+                        <div class="meal-content">
+                            <h4 class="meal-title">Lunch</h4>
+                            <p class="meal-description">${lunchText}</p>
+                        </div>
+                    </div>
+                    <div class="meal-item ${dinnerMissing ? 'empty' : ''}" 
+                         data-meal="dinner" 
+                         data-index="${index}"
+                         role="button"
+                         tabindex="0"
+                         aria-label="Select dinner for ${day.name}">
+                        <div class="meal-icon dinner">${dinnerEmoji}</div>
+                        <div class="meal-content" style="flex:1;">
+                            <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;">
+                                <h4 class="meal-title" style="margin:0;">Dinner</h4>
+                            </div>
+                            <p class="meal-description">${dinnerText}${sideText ? ` • ${sideText}` : ''}</p>
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+            attachDayListeners() {
+                const mealItems = $('#daysList .meal-item');
+                mealItems.forEach(item => {
+                    const clickHandler = () => {
+                        const index = parseInt(item.dataset.index, 10);
+                        const mealType = item.dataset.meal;
+                        if (mealType === 'breakfast') {
+                            this.openBreakfastModal(index);
+                        } else if (mealType === 'lunch') {
+                            this.openLunchModal(index);
+                        } else {
+                            this.openDinnerModal(index);
+                        }
+                    };
+                    const keyHandler = (event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            clickHandler();
+                        }
+                    };
+                    item.onclick = clickHandler;
+                    item.onkeydown = keyHandler;
+                });
+
+                // Attach warning badge click handlers
+                const warningBadges = $('.warn-badge[data-warning-index]');
+                warningBadges.forEach(badge => {
+                    badge.onclick = (event) => {
+                        event.stopPropagation();
+                        const index = parseInt(badge.dataset.warningIndex, 10);
+                        this.showWarningExplanation(index);
+                    };
+                });
+            }
+
+            attachInlineControls() {
+                const weekendToggle = $('#inlineWeekendToggle');
+                if (weekendToggle) {
+                    weekendToggle.onclick = () => {
+                        this.state.showWeekend = !this.state.showWeekend;
+                        this.saveState();
+                        this.render();
+                    };
+                }
+
+                const typeToggles = $('#daysList .type-toggle');
+                typeToggles.forEach(button => {
+                    button.onclick = (event) => {
+                        event.stopPropagation();
+                        const index = parseInt(button.dataset.index, 10);
+                        const type = button.dataset.type;
+                        const day = this.state.days[index];
+
+                        if (day.dinnerType === type) {
+                            day.dinnerType = 'regular';
+                            day.busy = false;
+                        } else {
+                            day.dinnerType = type;
+                            day.busy = true;
+                        }
+
+                        // Handle side dish logic for delivery
+                        if (day.dinnerType === 'delivery') {
+                            if (day.side && day.side !== 'None') {
+                                day._lastSide = day.side;
+                            }
+                            day.side = 'None';
+                        } else {
+                            if ((day.side == null || day.side === 'None') && day._lastSide) {
+                                day.side = day._lastSide;
+                            }
+                        }
+
+                        day.dinner = null;
+                        this.saveState();
+                        this.render();
+                    };
+                });
+            }
+
+            // Modal system
+            openModal({ title, subtitle = '', bodyHTML = '', footer = [] }) {
+                const overlay = $('#modalOverlay');
+                const modal = $('#modalOverlay .modal');
+                if (!overlay || !modal) return;
+
+                const titleElement = $('#modalTitle');
+                const subtitleElement = $('#modalSubtitle');
+                const bodyElement = $('#modalBody');
+                const footerElement = $('#modalFooter');
+
+                if (titleElement) titleElement.textContent = title || '';
+                if (subtitleElement) subtitleElement.textContent = subtitle || '';
+                if (bodyElement) bodyElement.innerHTML = bodyHTML || '';
+                if (footerElement) {
+                    footerElement.innerHTML = '';
+                    footer.forEach(buttonConfig => {
+                        const button = document.createElement('button');
+                        button.className = `btn ${buttonConfig.type || ''}`;
+                        if (buttonConfig.id) button.id = buttonConfig.id;
+                        button.textContent = buttonConfig.label;
+                        button.onclick = buttonConfig.onClick;
+                        footerElement.appendChild(button);
+                    });
+                }
+
+                document.body.classList.add('modal-open');
+                overlay.classList.add('show');
+                overlay.setAttribute('aria-hidden', 'false');
+                this._lastFocus = document.activeElement;
+                setTimeout(() => modal.focus(), 0);
+            }
+
+            closeModal() {
+                const overlay = $('#modalOverlay');
+                if (!overlay) return;
+
+                overlay.classList.remove('show');
+                overlay.setAttribute('aria-hidden', 'true');
+                document.body.classList.remove('modal-open');
+
+                if (this._lastFocus && typeof this._lastFocus.focus === 'function') {
+                    this._lastFocus.focus();
+                }
+            }
+
+            // New breakfast modal for weekends
+            openBreakfastModal(index) {
+                this.currentDayIndex = index;
+                const day = this.state.days[index];
+
+                let bodyHTML = this.renderBentoGrid('breakfast', day.breakfast, MEAL_DATA.breakfastWeekend);
+
+                if (day.breakfast === 'Custom') {
+                    bodyHTML += `<div class="input-group">
+                        <label class="input-label">Custom Breakfast</label>
+                        <input class="input" 
+                               id="customBreakfastInput" 
+                               value="${sanitize(day.customBreakfast || '')}" 
+                               placeholder="Enter custom breakfast">
+                    </div>`;
+                }
+
+                this.openModal({
+                    title: `Breakfast - ${day.name}`,
+                    subtitle: this.formatDate(day.date),
+                    bodyHTML,
+                    footer: [
+                        {
+                            id: 'footerRandomize',
+                            label: '🎲 Randomize',
+                            onClick: () => {
+                                day.breakfast = this.pickUniqueForDay('breakfast', index, MEAL_DATA.breakfastWeekend);
+                                this.openBreakfastModal(index);
+                            }
+                        },
+                        {
+                            id: 'footerClear',
+                            label: '🗑️ Clear',
+                            onClick: () => {
+                                day.breakfast = null;
+                                day.customBreakfast = null;
+                                this.openBreakfastModal(index);
+                            }
+                        },
+                        {
+                            id: 'footerCancel',
+                            label: 'Cancel',
+                            onClick: () => this.closeModal()
+                        },
+                        {
+                            id: 'footerSave',
+                            label: 'Save',
+                            type: 'btn-primary',
+                            onClick: () => {
+                                this.saveState();
+                                this.render();
+                                this.closeModal();
+                                this.showToast('Saved! ✓');
+                            }
+                        }
+                    ]
+                });
+
+                if (day.breakfast === 'Custom') {
+                    const customInput = $('#customBreakfastInput');
+                    if (customInput) {
+                        customInput.oninput = (event) => {
+                            day.customBreakfast = sanitize(event.target.value);
+                        };
+                    }
+                }
+
+                this.attachBentoListeners('breakfast');
+            }
+
+            // Enhanced lunch modal (preserved exactly)
+            openLunchModal(index) {
+                this.currentDayIndex = index;
+                const day = this.state.days[index];
+
+                let bodyHTML = this.renderBentoGrid('lunch', day.lunch, MEAL_DATA.lunch);
+
+                if (day.lunch === 'Custom') {
+                    bodyHTML += `<div class="input-group">
+                        <label class="input-label">Custom Lunch</label>
+                        <input class="input" 
+                               id="customLunchInput" 
+                               value="${sanitize(day.customLunch || '')}" 
+                               placeholder="Enter custom meal">
+                    </div>`;
+                }
+
+                this.openModal({
+                    title: `Lunch - ${day.name}`,
+                    subtitle: this.formatDate(day.date),
+                    bodyHTML,
+                    footer: [
+                        {
+                            id: 'footerRandomize',
+                            label: '🎲 Randomize',
+                            onClick: () => {
+                                day.lunch = this.pickUniqueForDay('lunch', index, MEAL_DATA.lunch);
+                                this.openLunchModal(index);
+                            }
+                        },
+                        {
+                            id: 'footerClear',
+                            label: '🗑️ Clear',
+                            onClick: () => {
+                                day.lunch = null;
+                                day.customLunch = null;
+                                this.openLunchModal(index);
+                            }
+                        },
+                        {
+                            id: 'footerCancel',
+                            label: 'Cancel',
+                            onClick: () => this.closeModal()
+                        },
+                        {
+                            id: 'footerSave',
+                            label: 'Save',
+                            type: 'btn-primary',
+                            onClick: () => {
+                                this.saveState();
+                                this.render();
+                                this.closeModal();
+                                this.showToast('Saved! ✓');
+                            }
+                        }
+                    ]
+                });
+
+                if (day.lunch === 'Custom') {
+                    const customInput = $('#customLunchInput');
+                    if (customInput) {
+                        customInput.oninput = (event) => {
+                            day.customLunch = sanitize(event.target.value);
+                        };
+                    }
+                }
+
+                this.attachBentoListeners('lunch');
+            }
+
+            // Enhanced dinner modal (preserved exactly)
+            openDinnerModal(index) {
+                this.currentDayIndex = index;
+                const day = this.state.days[index];
+                const dinnerOptions = this.getDinnerOptions(day);
+
+                const controlsHTML = `
+                    <div class="controls">
+                        <div style="font-weight:800;color:var(--text-secondary)">Dinner Type</div>
+                        <div class="type-toggles" data-index="${index}">
+                            <button class="type-toggle ${day.dinnerType === 'quick' ? 'active quick' : ''}" 
+                                    data-role="type-toggle" 
+                                    data-type="quick" 
+                                    data-index="${index}">Quick</button>
+                            <button class="type-toggle ${day.dinnerType === 'delivery' ? 'active delivery' : ''}" 
+                                    data-role="type-toggle" 
+                                    data-type="delivery" 
+                                    data-index="${index}">Delivery</button>
+                        </div>
+                    </div>`;
+
+                const dinnerGridHTML = `<div id="dinnerBento">${this.renderBentoGrid('dinner', day.dinner, dinnerOptions)}</div>`;
+
+                let customDinnerHTML = '';
+                if (day.dinner === 'Custom') {
+                    customDinnerHTML = `<div class="input-group">
+                        <label class="input-label">Custom Dinner</label>
+                        <input class="input" 
+                               id="customDinnerInput" 
+                               value="${sanitize(day.customDinner || '')}" 
+                               placeholder="Enter custom meal">
+                    </div>`;
+                }
+
+                let sideSectionHTML = `
+                    <div class="input-group">
+                        <label class="input-label">Side Dish ${day.dinnerType === 'delivery' ? '(optional)' : ''}</label>
+                    </div>
+                    <div id="sideBento">${this.renderBentoGrid('side', day.side, MEAL_DATA.side)}</div>`;
+
+                if (day.side === 'Custom') {
+                    sideSectionHTML += `<div class="input-group">
+                        <input class="input" 
+                               id="customSideInput" 
+                               value="${sanitize(day.customSide || '')}" 
+                               placeholder="Enter custom side">
+                    </div>`;
+                }
+
+                const bodyHTML = controlsHTML + dinnerGridHTML + customDinnerHTML + sideSectionHTML;
+
+                this.openModal({
+                    title: `Dinner - ${day.name}`,
+                    subtitle: this.formatDate(day.date),
+                    bodyHTML,
+                    footer: [
+                        {
+                            id: 'footerRandomize',
+                            label: '🎲 Randomize',
+                            onClick: () => {
+                                this.randomizeOneDinner(index);
+                                this.openDinnerModal(index);
+                            }
+                        },
+                        {
+                            id: 'footerClear',
+                            label: '🗑️ Clear',
+                            onClick: () => {
+                                day.dinner = null;
+                                day.customDinner = null;
+                                day.side = null;
+                                day.customSide = null;
+                                this.openDinnerModal(index);
+                            }
+                        },
+                        {
+                            id: 'footerCancel',
+                            label: 'Cancel',
+                            onClick: () => this.closeModal()
+                        },
+                        {
+                            id: 'footerSave',
+                            label: 'Save',
+                            type: 'btn-primary',
+                            onClick: () => {
+                                if (this.violatesConsecutiveAt(index)) {
+                                    this.warnConsecutive(index);
+                                }
+                                this.saveState();
+                                this.render();
+                                this.closeModal();
+                                this.showToast('Saved! ✓');
+                            }
+                        }
+                    ]
+                });
+
+                // Type toggle handlers within modal
+                const modalTypeToggles = $('.type-toggle[data-role="type-toggle"]');
+                modalTypeToggles.forEach(toggle => {
+                    toggle.onclick = () => {
+                        const type = toggle.dataset.type;
+                        if (day.dinnerType === type) {
+                            day.dinnerType = 'regular';
+                            day.busy = false;
+                        } else {
+                            day.dinnerType = type;
+                            day.busy = true;
+                        }
+
+                        if (day.dinnerType === 'delivery') {
+                            if (day.side && day.side !== 'None') {
+                                day._lastSide = day.side;
+                            }
+                            day.side = 'None';
+                        } else {
+                            if ((day.side == null || day.side === 'None') && day._lastSide) {
+                                day.side = day._lastSide;
+                            }
+                        }
+
+                        day.dinner = null;
+                        this.openDinnerModal(index);
+                    };
+                });
+
+                // Custom input handlers
+                if (day.dinner === 'Custom') {
+                    const customDinnerInput = $('#customDinnerInput');
+                    if (customDinnerInput) {
+                        customDinnerInput.oninput = (event) => {
+                            day.customDinner = sanitize(event.target.value);
+                        };
+                    }
+                }
+
+                if (day.side === 'Custom') {
+                    const customSideInput = $('#customSideInput');
+                    if (customSideInput) {
+                        customSideInput.oninput = (event) => {
+                            day.customSide = sanitize(event.target.value);
+                        };
+                    }
+                }
+
+                this.attachBentoListeners('dinner', dinnerOptions);
+                this.attachBentoListeners('side');
+            }
+
+            // Constraint engine methods (preserved exactly)
+            getDinnerOptions(day) {
+                const isWeekend = (day.name === 'Saturday' || day.name === 'Sunday');
+                if (day.dinnerType === 'quick') return MEAL_DATA.dinnerQuick;
+                if (day.dinnerType === 'delivery') return MEAL_DATA.delivery;
+                if (isWeekend) return MEAL_DATA.dinnerWeekend;
+                return MEAL_DATA.dinnerRegular;
+            }
+
+            usedSet(mealType) {
+                const usedMeals = new Set();
+                this.state.days.forEach(day => {
+                    const meal = day[mealType];
+                    if (!meal) return;
+                    if (meal === 'None' || meal === 'Custom') return;
+                    usedMeals.add(meal);
+                });
+                return usedMeals;
+            }
+
+            pickUniqueForDay(mealType, dayIndex, availableOptions) {
+                const usedMeals = this.usedSet(mealType);
+                const cleanOptions = availableOptions.filter(meal => meal !== 'None' && meal !== 'Custom');
+                let availablePool = cleanOptions.filter(meal =>
+                    !usedMeals.has(meal) || this.state.days[dayIndex][mealType] === meal
+                );
+
+                if (!availablePool.length) {
+                    availablePool = cleanOptions; // Fallback to all options
+                }
+
+                return availablePool[Math.floor(Math.random() * availablePool.length)];
+            }
+
+            getNeighborCategory(dayIndex) {
+                if (dayIndex < 0 || dayIndex >= this.state.days.length) return null;
+                const dinnerName = this.state.days[dayIndex].dinner;
+                const foodType = getDinnerFoodType(dinnerName);
+                return (foodType === 'meat' || foodType === 'fish') ? foodType : null;
+            }
+
+            warnConsecutive(dayIndex) {
+                const foodType = getDinnerFoodType(this.state.days[dayIndex].dinner);
+                const message = foodType === 'meat' ?
+                    'Attenzione: 2 giorni consecutivi di carne.' :
+                    'Attenzione: 2 giorni consecutivi di pesce.';
+                this.showToast(message);
+            }
+
+            // Enhanced constraint algorithms with breakfast support
+            assignUniqueList(mealType) {
+                const emptyDayIndices = this.state.days
+                    .map((day, index) => {
+                        // For breakfast, only consider weekend days
+                        if (mealType === 'breakfast') {
+                            return (this.isWeekendName(day.name) && !day[mealType]) ? index : null;
+                        }
+                        return !day[mealType] ? index : null;
+                    })
+                    .filter(index => index !== null);
+
+                if (!emptyDayIndices.length) return;
+
+                const mealOptions = mealType === 'breakfast' ? MEAL_DATA.breakfastWeekend :
+                                  mealType === 'side' ? MEAL_DATA.side : MEAL_DATA[mealType];
+                const cleanOptions = mealOptions.filter(meal => meal !== 'None' && meal !== 'Custom');
+                const usedMeals = this.usedSet(mealType);
+                let availablePool = cleanOptions.filter(meal => !usedMeals.has(meal));
+
+                if (availablePool.length < emptyDayIndices.length) {
+                    availablePool = cleanOptions.slice();
+                }
+
+                // Fisher-Yates shuffle
+                const shuffle = (array) => {
+                    for (let i = array.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [array[i], array[j]] = [array[j], array[i]];
+                    }
+                    return array;
+                };
+
+                availablePool = shuffle(availablePool);
+                let poolIndex = 0;
+
+                for (const dayIndex of emptyDayIndices) {
+                    let selectedMeal = null;
+                    for (let attempt = 0; attempt < availablePool.length; attempt++) {
+                        const candidate = availablePool[(poolIndex + attempt) % availablePool.length];
+                        if (!usedMeals.has(candidate)) {
+                            selectedMeal = candidate;
+                            poolIndex = (poolIndex + attempt + 1) % availablePool.length;
+                            break;
+                        }
+                    }
+
+                    if (!selectedMeal) {
+                        selectedMeal = availablePool[poolIndex];
+                        poolIndex = (poolIndex + 1) % availablePool.length;
+                    }
+
+                    this.state.days[dayIndex][mealType] = selectedMeal;
+                    usedMeals.add(selectedMeal);
+                }
+            }
+
+            planDinnersUniqueNoConsecutive() {
+                const workingDays = this.state.days.map(day => ({ ...day }));
+                const fixedDinners = workingDays.map(day =>
+                    (day.dinner && day.dinner !== 'None' && day.dinner !== 'Custom') ? day.dinner : null
+                );
+                const usedDinners = new Set(fixedDinners.filter(Boolean));
+                const result = new Array(7).fill(null);
+
+                for (let i = 0; i < 7; i++) {
+                    result[i] = fixedDinners[i];
+                }
+
+                const getValidOptionsAt = (dayIndex) => {
+                    const day = workingDays[dayIndex];
+                    const baseOptions = this.getDinnerOptions(day).filter(meal => meal !== 'None' && meal !== 'Custom');
+                    let validOptions = baseOptions.filter(meal => !usedDinners.has(meal));
+
+                    const prevType = dayIndex > 0 ? getDinnerFoodType(result[dayIndex - 1]) : null;
+                    const nextType = (dayIndex < 6 && fixedDinners[dayIndex + 1]) ?
+                        getDinnerFoodType(fixedDinners[dayIndex + 1]) : null;
+
+                    validOptions = validOptions.filter(mealName => {
+                        const mealType = getDinnerFoodType(mealName);
+                        if (mealType === 'meat' && (prevType === 'meat' || nextType === 'meat')) return false;
+                        if (mealType === 'fish' && (prevType === 'fish' || nextType === 'fish')) return false;
+                        return true;
+                    });
+
+                    return validOptions;
+                };
+
+                const dayOrder = [...Array(7).keys()];
+                const daysToFill = dayOrder.filter(i => !fixedDinners[i]);
+
+                const backtrackFill = (position) => {
+                    if (position === daysToFill.length) return true;
+
+                    const dayIndex = daysToFill[position];
+                    const validOptions = getValidOptionsAt(dayIndex);
+
+                    if (!validOptions.length) {
+                        // Relaxed constraints: ignore next-day constraint only
+                        const day = workingDays[dayIndex];
+                        const baseOptions = this.getDinnerOptions(day).filter(meal =>
+                            meal !== 'None' && meal !== 'Custom' && !usedDinners.has(meal)
+                        );
+                        const prevType = dayIndex > 0 ? getDinnerFoodType(result[dayIndex - 1]) : null;
+                        const relaxedOptions = baseOptions.filter(mealName => {
+                            const mealType = getDinnerFoodType(mealName);
+                            if (mealType === 'meat' && prevType === 'meat') return false;
+                            if (mealType === 'fish' && prevType === 'fish') return false;
+                            return true;
+                        });
+
+                        if (!relaxedOptions.length) return false;
+
+                        for (const meal of relaxedOptions) {
+                            result[dayIndex] = meal;
+                            usedDinners.add(meal);
+                            if (backtrackFill(position + 1)) return true;
+                            usedDinners.delete(meal);
+                            result[dayIndex] = null;
+                        }
+                        return false;
+                    }
+
+                    // Shuffle for variety
+                    for (let i = validOptions.length - 1; i > 0; i--) {
+                        const j = Math.floor(Math.random() * (i + 1));
+                        [validOptions[i], validOptions[j]] = [validOptions[j], validOptions[i]];
+                    }
+
+                    for (const meal of validOptions) {
+                        result[dayIndex] = meal;
+                        usedDinners.add(meal);
+                        if (backtrackFill(position + 1)) return true;
+                        usedDinners.delete(meal);
+                        result[dayIndex] = null;
+                    }
+                    return false;
+                };
+
+                const success = backtrackFill(0);
+                if (success) {
+                    for (let i = 0; i < 7; i++) {
+                        if (!fixedDinners[i]) {
+                            this.state.days[i].dinner = result[i];
+                        }
+                    }
+                }
+            }
+
+            assignUniqueSides() {
+                const usedSides = this.usedSet('side');
+                const cleanSideOptions = MEAL_DATA.side.filter(side => side !== 'None' && side !== 'Custom');
+                const eligibleDayIndices = this.state.days
+                    .map((day, index) =>
+                        (day.dinnerType !== 'delivery' && (!day.side || day.side === 'None')) ? index : null
+                    )
+                    .filter(index => index !== null);
+
+                if (!eligibleDayIndices.length) return;
+
+                let availablePool = cleanSideOptions.filter(side => !usedSides.has(side));
+                if (availablePool.length < eligibleDayIndices.length) {
+                    availablePool = cleanSideOptions.slice();
+                }
+
+                // Shuffle pool
+                for (let i = availablePool.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [availablePool[i], availablePool[j]] = [availablePool[j], availablePool[i]];
+                }
+
+                let poolIndex = 0;
+                for (const dayIndex of eligibleDayIndices) {
+                    let selectedSide = null;
+                    for (let attempt = 0; attempt < availablePool.length; attempt++) {
+                        const candidate = availablePool[(poolIndex + attempt) % availablePool.length];
+                        if (!usedSides.has(candidate)) {
+                            selectedSide = candidate;
+                            poolIndex = (poolIndex + attempt + 1) % availablePool.length;
+                            break;
+                        }
+                    }
+
+                    if (!selectedSide) {
+                        selectedSide = availablePool[poolIndex];
+                        poolIndex = (poolIndex + 1) % availablePool.length;
+                    }
+
+                    this.state.days[dayIndex].side = selectedSide;
+                    usedSides.add(selectedSide);
+                }
+
+                // Set delivery days to 'None'
+                this.state.days.forEach(day => {
+                    if (day.dinnerType === 'delivery') {
+                        day.side = 'None';
+                    }
+                });
+            }
+
+            // Enhanced randomization with breakfast support
+            randomizeWeek() {
+                this.assignUniqueList('breakfast'); // Add breakfast randomization
+                this.assignUniqueList('lunch');
+                this.planDinnersUniqueNoConsecutive();
+                this.assignUniqueSides();
+                this.saveState();
+                this.render();
+            }
+
+            randomizeOneDinner(dayIndex) {
+                const day = this.state.days[dayIndex];
+                const dinnerOptions = this.getDinnerOptions(day).filter(meal => meal !== 'None' && meal !== 'Custom');
+                const usedDinners = this.usedSet('dinner');
+
+                if (day.dinner) {
+                    usedDinners.delete(day.dinner);
+                }
+
+                const prevType = this.getNeighborCategory(dayIndex - 1);
+                const nextFixedType = this.getNeighborCategory(dayIndex + 1);
+
+                let validPool = dinnerOptions.filter(mealName => {
+                    if (usedDinners.has(mealName)) return false;
+                    const mealType = getDinnerFoodType(mealName);
+                    if (mealType === 'meat' && (prevType === 'meat' || nextFixedType === 'meat')) return false;
+                    if (mealType === 'fish' && (prevType === 'fish' || nextFixedType === 'fish')) return false;
+                    return true;
+                });
+
+                if (!validPool.length) {
+                    validPool = dinnerOptions.filter(mealName => {
+                        if (usedDinners.has(mealName)) return false;
+                        const mealType = getDinnerFoodType(mealName);
+                        if (mealType === 'meat' && prevType === 'meat') return false;
+                        if (mealType === 'fish' && prevType === 'fish') return false;
+                        return true;
+                    });
+                }
+
+                if (!validPool.length) {
+                    validPool = dinnerOptions;
+                }
+
+                day.dinner = validPool[Math.floor(Math.random() * validPool.length)];
+
+                // Handle side assignment
+                if (day.dinnerType === 'delivery') {
+                    day.side = 'None';
+                } else {
+                    const usedSides = this.usedSet('side');
+                    if (day.side) {
+                        usedSides.delete(day.side);
+                    }
+                    const availableSides = MEAL_DATA.side.filter(side =>
+                        side !== 'None' && side !== 'Custom' && !usedSides.has(side)
+                    );
+                    if (availableSides.length) {
+                        day.side = availableSides[Math.floor(Math.random() * availableSides.length)];
+                    } else if (!day.side || day.side === 'None' || day.side === 'Custom') {
+                        const fallbackSides = MEAL_DATA.side.filter(side => side !== 'None' && side !== 'Custom');
+                        day.side = fallbackSides[Math.floor(Math.random() * fallbackSides.length)];
+                    }
+                }
+
+                if (this.violatesConsecutiveAt(dayIndex)) {
+                    this.warnConsecutive(dayIndex);
+                }
+            }
+
+            // Enhanced bento grid system
+            renderBentoGrid(gridType, selectedMeal, availableOptions) {
+                const sortedOptions = [...availableOptions].sort((a, b) => {
+                    const getSpecialPriority = (meal) => ((meal === 'None' || meal === 'Custom') ? 1 : 0);
+                    if (getSpecialPriority(a) !== getSpecialPriority(b)) {
+                        return getSpecialPriority(a) - getSpecialPriority(b);
+                    }
+                    if (a === 'Custom') return 1;
+                    if (b === 'Custom') return -1;
+                    if (a === 'None') return 1;
+                    if (b === 'None') return -1;
+                    return String(a).localeCompare(String(b), 'en');
+                });
+
+                return `<div class="bento-grid" data-type="${gridType}">
+                    ${sortedOptions.map(option => `
+                        <div class="bento-item ${selectedMeal === option ? 'selected' : ''}" 
+                             data-value="${option}"
+                             role="button"
+                             tabindex="0"
+                             aria-pressed="${selectedMeal === option}"
+                             aria-label="Select ${option}">
+                            <span class="bento-emoji">${MEAL_EMOJIS[option] || '🍽️'}</span>
+                            <span>${option}</span>
+                        </div>
+                    `).join('')}
+                </div>`;
+            }
+
+            attachBentoListeners(gridType) {
+                const grid = document.querySelector(`.bento-grid[data-type="${gridType}"]`);
+                if (!grid) return;
+
+                const bentoItems = grid.querySelectorAll('.bento-item');
+                bentoItems.forEach(item => {
+                    const clickHandler = () => {
+                        const selectedValue = item.dataset.value;
+                        const currentDay = this.state.days[this.currentDayIndex];
+
+                        grid.querySelectorAll('.bento-item').forEach(gridItem => {
+                            gridItem.classList.remove('selected');
+                            gridItem.setAttribute('aria-pressed', 'false');
+                        });
+                        item.classList.add('selected');
+                        item.setAttribute('aria-pressed', 'true');
+
+                        // Uniqueness validation for lunches, breakfasts, and sides
+                        if ((gridType === 'lunch' || gridType === 'breakfast' || gridType === 'side') && 
+                            selectedValue !== 'None' && selectedValue !== 'Custom') {
+                            const usedMeals = this.usedSet(gridType);
+                            usedMeals.delete(currentDay[gridType]);
+                            if (usedMeals.has(selectedValue)) {
+                                this.showToast(`Questo ${gridType} è già usato questa settimana`);
+                                return;
+                            }
+                        }
+
+                        currentDay[gridType] = selectedValue;
+
+                        if (selectedValue === 'Custom') {
+                            if (gridType === 'breakfast') {
+                                this.openBreakfastModal(this.currentDayIndex);
+                            } else if (gridType === 'lunch') {
+                                this.openLunchModal(this.currentDayIndex);
+                            } else {
+                                this.openDinnerModal(this.currentDayIndex);
+                            }
+                        } else {
+                            if (gridType === 'breakfast') currentDay.customBreakfast = null;
+                            if (gridType === 'lunch') currentDay.customLunch = null;
+                            if (gridType === 'dinner') {
+                                currentDay.customDinner = null;
+                                if (this.violatesConsecutiveAt(this.currentDayIndex)) {
+                                    this.warnConsecutive(this.currentDayIndex);
+                                }
+                            }
+                            if (gridType === 'side') currentDay.customSide = null;
+
+                            if (gridType === 'breakfast') {
+                                this.openBreakfastModal(this.currentDayIndex);
+                            } else if (gridType === 'lunch') {
+                                this.openLunchModal(this.currentDayIndex);
+                            } else {
+                                this.openDinnerModal(this.currentDayIndex);
+                            }
+                        }
+                    };
+
+                    const keyHandler = (event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            clickHandler();
+                        }
+                    };
+
+                    item.onclick = clickHandler;
+                    item.onkeydown = keyHandler;
+                });
+            }
+
+            // Enhanced grocery list system with breakfast ingredients
+            openGroceryList() {
+                const groceryData = this.computeGrocery();
+                const storeNames = Object.keys(groceryData).sort();
+
+                const groceryHTML = storeNames.length ?
+                    storeNames.map(storeName => `
+                        <div class="store-section">
+                            <h3 class="store-title">${storeName}</h3>
+                            ${groceryData[storeName].map((item, index) => `
+                                <div class="grocery-item" data-store="${storeName}" data-index="${index}">
+                                    <div class="checkbox" role="checkbox" aria-checked="false" tabindex="0" aria-label="Mark ${item} as purchased"></div>
+                                    <div class="grocery-item-text">${INGREDIENT_EMOJIS[item] || ''} ${item}</div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `).join('') :
+                    '<div class="store-section"><p>No items to shop for</p></div>';
+
+                this.openModal({
+                    title: 'Shopping List',
+                    subtitle: 'Check off items as you shop',
+                    bodyHTML: groceryHTML,
+                    footer: [
+                        {
+                            label: 'Close',
+                            onClick: () => this.closeModal()
+                        },
+                        {
+                            label: 'Share',
+                            type: 'btn-primary',
+                            onClick: () => this.shareGroceryList(groceryData)
+                        }
+                    ]
+                });
+
+                // Attach checkbox listeners
+                const checkboxes = $('.checkbox');
+                checkboxes.forEach(checkbox => {
+                    const clickHandler = () => {
+                        checkbox.classList.toggle('checked');
+                        checkbox.parentElement.classList.toggle('checked');
+                        const isChecked = checkbox.classList.contains('checked');
+                        checkbox.setAttribute('aria-checked', String(isChecked));
+                    };
+                    const keyHandler = (event) => {
+                        if (event.key === 'Enter' || event.key === ' ') {
+                            event.preventDefault();
+                            clickHandler();
+                        }
+                    };
+                    checkbox.onclick = clickHandler;
+                    checkbox.onkeydown = keyHandler;
+                });
+            }
+
+            computeGrocery() {
+                const groupedIngredients = {};
+
+                const addIngredient = (storeName, ingredientName) => {
+                    if (!groupedIngredients[storeName]) {
+                        groupedIngredients[storeName] = [];
+                    }
+                    if (!groupedIngredients[storeName].includes(ingredientName)) {
+                        groupedIngredients[storeName].push(ingredientName);
+                    }
+                };
+
+                this.state.days.forEach(day => {
+                    const dailyMeals = [];
+
+                    // Include breakfast for weekends
+                    if (this.isWeekendName(day.name) && day.breakfast && day.breakfast !== 'None' && day.breakfast !== 'Custom') {
+                        dailyMeals.push(day.breakfast);
+                    }
+
+                    if (day.lunch && day.lunch !== 'None' && day.lunch !== 'Custom') {
+                        dailyMeals.push(day.lunch);
+                    }
+                    if (day.dinner && day.dinner !== 'None' && day.dinner !== 'Custom') {
+                        dailyMeals.push(day.dinner);
+                    }
+                    if (day.side && day.side !== 'None' && day.side !== 'Custom') {
+                        dailyMeals.push(day.side);
+                    }
+
+                    dailyMeals.forEach(mealName => {
+                        const ingredients = INGREDIENTS[mealName] || [];
+                        ingredients.forEach(ingredient => {
+                            addIngredient(this.findStoreForItem(ingredient), ingredient);
+                        });
+                    });
+                });
+
+                return groupedIngredients;
+            }
+
+            findStoreForItem(ingredientName) {
+                for (const [storeName, storeItems] of Object.entries(STORES)) {
+                    if (storeItems.includes(ingredientName)) {
+                        return storeName;
+                    }
+                }
+                return 'Other';
+            }
+
+            shareGroceryList(groceryData) {
+                const textLines = ['🛒 Shopping List\n'];
+
+                Object.keys(groceryData).sort().forEach(storeName => {
+                    textLines.push(`\n${storeName}:`);
+                    groceryData[storeName].forEach(item => {
+                        textLines.push(`• ${INGREDIENT_EMOJIS[item] || ''} ${item}`);
+                    });
+                });
+
+                const shareText = textLines.join('\n');
+
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Shopping List',
+                        text: shareText
+                    }).catch(console.warn);
+                } else if (navigator.clipboard) {
+                    navigator.clipboard.writeText(shareText).then(() => {
+                        this.showToast('Copied to clipboard! 📋');
+                    }).catch(console.warn);
+                }
+            }
+
+            shareWeekAndGrocery() {
+                const weekPlan = this.state.days.map(day => {
+                    const dateDisplay = this.formatDate(day.date);
+                    const isWeekend = this.isWeekendName(day.name);
+                    
+                    const breakfastText = isWeekend && day.breakfast && day.breakfast !== 'None' ?
+                        (day.breakfast === 'Custom' ? (day.customBreakfast || 'Custom') : day.breakfast) : null;
+                    const lunchText = day.lunch && day.lunch !== 'None' ?
+                        (day.lunch === 'Custom' ? (day.customLunch || 'Custom') : day.lunch) : '—';
+                    const dinnerText = day.dinner && day.dinner !== 'None' ?
+                        (day.dinner === 'Custom' ? (day.customDinner || 'Custom') : day.dinner) : '—';
+                    const sideText = (day.dinnerType !== 'delivery' && day.side && day.side !== 'None') ?
+                        (day.side === 'Custom' ? (day.customSide || 'Custom') : day.side) : '—';
+
+                    const typeIndicator = day.dinnerType === 'delivery' ? 'Delivery' :
+                        (day.dinnerType === 'quick' ? 'Quick' : '');
+
+                    let dayText = `${day.name} (${dateDisplay})`;
+                    if (breakfastText) dayText += `\n  Breakfast: ${breakfastText}`;
+                    dayText += `\n  Lunch: ${lunchText}`;
+                    dayText += `\n  Dinner: ${dinnerText}${typeIndicator ? ` [${typeIndicator}]` : ''}`;
+                    if (day.dinnerType !== 'delivery') dayText += `\n  Side: ${sideText}`;
+
+                    return dayText;
+                }).join('\n\n');
+
+                const groceryData = this.computeGrocery();
+                const combinedLines = [
+                    '🗓️ Weekly Plan',
+                    weekPlan,
+                    '\n🛒 Shopping List'
+                ];
+
+                Object.keys(groceryData).sort().forEach(storeName => {
+                    combinedLines.push(`\n${storeName}:`);
+                    groceryData[storeName].forEach(item => {
+                        combinedLines.push(`• ${INGREDIENT_EMOJIS[item] || ''} ${item}`);
+                    });
+                });
+
+                const combinedText = combinedLines.join('\n');
+
+                if (navigator.share) {
+                    navigator.share({
+                        title: 'Meal plan & shopping',
+                        text: combinedText
+                    }).catch(console.warn);
+                } else if (navigator.clipboard) {
+                    navigator.clipboard.writeText(combinedText).then(() => {
+                        this.showToast('Plan & list copied! 📋');
+                    }).catch(console.warn);
+                }
+            }
+
+            // Toast notification system
+            showToast(message) {
+                const toast = $('#toast');
+                if (!toast) return;
+
+                toast.textContent = message;
+                toast.classList.add('show');
+
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, CONFIG.animations.toast);
+            }
+        }
+
+        // Progressive enhancement and app initialization
+        const initializeApp = () => {
+            try {
+                window.mealPlannerApp = new MealPlannerApp();
+            } catch (error) {
+                console.error('Failed to initialize app:', error);
+                document.body.innerHTML = '<div style="padding: 2rem; text-align: center; color: var(--text-primary);">Sorry, the app failed to load. Please refresh the page.</div>';
+            }
+        };
+
+        // DOM ready state handling
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializeApp);
+        } else {
+            initializeApp();
+        }
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            if (window.mealPlannerApp && typeof window.mealPlannerApp.destroy === 'function') {
+                window.mealPlannerApp.destroy();
+            }
+        });
+    </script>
+</body>
+</html>
