@@ -1356,8 +1356,8 @@
           <div class="desc">${dnTx}${s1 ? ` • ${s1}` : ''}${s2 ? ` • ${s2}` : ''}</div>
         </div>
         <div class="inline-toggles">
-          <button class="tag ${d.dinnerType === 'quick' ? 'active quick' : ''}" data-toggle="quick" data-day="${i}">Quick</button>
-          <button class="tag ${d.dinnerType === 'delivery' ? 'active delivery' : ''}" data-toggle="delivery" data-day="${i}">Delivery</button>
+          <button class="tag ${d.dinnerType === 'quick' ? 'active quick' : ''}" data-toggle="quick" data-day="${i}">⚡ Quick</button>
+          <button class="tag ${d.dinnerType === 'delivery' ? 'active delivery' : ''}" data-toggle="delivery" data-day="${i}">🚚 Delivery</button>
         </div>
       </div>
     </section>`;
@@ -1475,8 +1475,8 @@
       <div class="control-row">
         <div class="kbd">Dinner Type</div>
         <div>
-          <button class="tag ${d.dinnerType === 'quick' ? 'active quick' : ''}" id="modalQuick">Quick</button>
-          <button class="tag ${d.dinnerType === 'delivery' ? 'active delivery' : ''}" id="modalDelivery">Delivery</button>
+          <button class="tag ${d.dinnerType === 'quick' ? 'active quick' : ''}" id="modalQuick">⚡ Quick</button>
+          <button class="tag ${d.dinnerType === 'delivery' ? 'active delivery' : ''}" id="modalDelivery">🚚 Delivery</button>
         </div>
       </div>`;
         body += this.grid('dinner', d.dinner, this.dinnerOptions(d));
