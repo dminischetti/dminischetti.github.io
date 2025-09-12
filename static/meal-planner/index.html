@@ -555,9 +555,35 @@
     }
 
     .btn.primary {
-      background: var(--tint);
+      background: var(--tint-2);
       border-color: transparent;
-      color: #fff
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .btn.cancel {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      color: #e05a5a;
+      font-weight: 800;
+    }
+
+    .btn.random {
+      background: #5b4b8a;
+      border: none;
+      color: #fff;
+      font-weight: 800;
+    }
+
+    .btn.secondary {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      color: var(--tint-2);
+      font-weight: 800;
+    }
+
+    .btn.secondary:hover {
+      background: color-mix(in oklab, var(--tint-2) 10%, var(--bg-soft) 90%);
     }
 
     /* toast */
@@ -615,18 +641,6 @@
     /* helpers */
     .hide {
       display: none
-    }
-
-    /* secondary button style */
-    .btn.secondary {
-      background: var(--bg-soft);
-      border: 1px solid var(--border);
-      color: var(--tint-2);
-      font-weight: 800;
-    }
-
-    .btn.secondary:hover {
-      background: color-mix(in oklab, var(--tint-2) 10%, var(--bg-soft) 90%);
     }
   </style>
 </head>
@@ -789,7 +803,7 @@
         "polenta_col_sugo": { "name": "Polenta col sugo", "emoji": "🌽", "ingredients": ["polenta", "tomato_sauce", "sausages"], "type": "meat" },
         "cannelloni": { "name": "Cannelloni", "emoji": "🥟", "ingredients": ["cannelloni", "ricotta", "spinach"], "type": "vegetarian" },
         "bistecca": { "name": "Bistecca", "emoji": "🥩", "ingredients": ["steak"], "type": "meat" },
-        
+
         "pizza_delivery": { "name": "Pizza", "emoji": "🍕", "ingredients": [], "type": "other" },
         "greco_delivery": { "name": "Greek", "emoji": "🥙", "ingredients": [], "type": "other" },
         "chinese_delivery": { "name": "Dumplings", "emoji": "🥡", "ingredients": [], "type": "other" },
@@ -1313,7 +1327,7 @@
         const map = {}; const add = (s, i) => { if (!map[s]) map[s] = []; if (!map[s].includes(i)) map[s].push(i); };
         this.state.days.forEach(d => {
           const list = [];
-          if ((d.name === 'Saturday' || d.name === 'Sunday') && d.breakfast  && d.breakfast !== 'Custom') list.push(d.breakfast);
+          if ((d.name === 'Saturday' || d.name === 'Sunday') && d.breakfast && d.breakfast !== 'Custom') list.push(d.breakfast);
           ['lunch', 'dinner'].forEach(t => { if (d[t] && d[t] !== 'Custom') list.push(d[t]); });
           (d.side || []).forEach(s => { if (s && s !== 'Custom') list.push(s); });
           if (d.breadFlag) list.push('Bread');
