@@ -743,8 +743,7 @@
         "butter": { "name": "Butter", "emoji": "🧈" },
         "pesto_sauce": { "name": "Pesto sauce", "emoji": "🌿" }
       },
-      "meals": { /* (unchanged) */
-        "none": { "name": "None", "emoji": "❌", "ingredients": [], "type": "other" },
+      "meals": {
         "custom": { "name": "Custom", "emoji": "✏️", "ingredients": [], "type": "other" },
         "ravioli_burro_e_salvia": { "name": "Ravioli burro e salvia", "emoji": "🥟", "ingredients": ["ravioli", "sage"], "type": "vegetarian" },
         "spaghetti_al_limone": { "name": "Spaghetti al limone", "emoji": "🍝", "ingredients": ["spaghetti", "lemons"], "type": "vegetarian" },
@@ -844,13 +843,13 @@
     };
     const ID2NAME = (id) => {
       if (DATA.meals[id]) return DATA.meals[id].name;
-      return ({ croissants: 'Croissants', pancakes: 'Pancakes', french_toast: 'French toast', biscuits: 'Biscuits', none: 'None', custom: 'Custom' })[id] || id;
+      return ({ croissants: 'Croissants', pancakes: 'Pancakes', french_toast: 'French toast', biscuits: 'Biscuits', custom: 'Custom' })[id] || id;
     };
     Object.entries(DATA.mealCategories).forEach(([cat, ids]) => {
       CATS[cat] = ids.map(ID2NAME);
       if (cat === 'breakfast') {
         ids.forEach(id => {
-          if (id === 'none' || id === 'custom') return;
+          if (id === 'custom') return;
           const nm = ID2NAME(id);
           if (!MEALS_BY_NAME[nm] && BF_FALLBACK[id]) {
             const m = BF_FALLBACK[id];
@@ -968,8 +967,8 @@
         const bTx = d.breakfast === 'Custom'
           ? (d.customBreakfast || 'Custom')
           : (d.breakfast || 'Select breakfast');
-        const lTx = d.lunch === 'Custom' ? (d.customLunch || 'Custom') : d.lunch === 'None' ? 'No lunch' : (d.lunch || 'Select lunch');
-        const dnTx = d.dinner === 'Custom' ? (d.customDinner || 'Custom') : d.dinner === 'None' ? 'No dinner' : (d.dinner || 'Select dinner');
+        const lTx = d.lunch === 'Custom' ? (d.customLunch || 'Custom') : d.lunch ? d.lunch : 'Select lunch';
+        const dnTx = d.dinner === 'Custom' ? (d.customDinner || 'Custom') : d.dinner ? d.dinner : 'Select dinner';
         const sides = (d.side || []).map(s =>
           s === 'Custom' ? (d.customSide?.join(', ') || 'Custom') : s
         ).join(' • ');
@@ -1272,7 +1271,7 @@
         if (opts.length) d[type] = opts[Math.floor(Math.random() * opts.length)];
         if (type === 'dinner' && d.dinnerType !== 'delivery') {
           const so = CATS.side.filter(x => x !== 'Custom');
-          d.side = so[Math.floor(Math.random() * so.length)];
+          d.side = [so[Math.floor(Math.random() * so.length)]];
         }
         (type === 'breakfast') ? this.openBreakfast(i) : (type === 'lunch') ? this.openLunch(i) : this.openDinner(i);
       }
@@ -1287,7 +1286,9 @@
           const do_ = this.dinnerOptions(d).filter(x => x !== 'Custom');
           d.lunch = lo[Math.floor(Math.random() * lo.length)];
           d.dinner = do_[Math.floor(Math.random() * do_.length)];
-          if (d.dinnerType !== 'delivery') d.side = so[Math.floor(Math.random() * so.length)];
+          if (d.dinnerType !== 'delivery') {
+            d.side = [so[Math.floor(Math.random() * so.length)]];
+          }
         });
         this.save(); this.render(); this.toast('Week randomized! 🎲');
       }
@@ -1308,9 +1309,9 @@
         const map = {}; const add = (s, i) => { if (!map[s]) map[s] = []; if (!map[s].includes(i)) map[s].push(i); };
         this.state.days.forEach(d => {
           const list = [];
-          if ((d.name === 'Saturday' || d.name === 'Sunday') && d.breakfast && d.breakfast !== 'None' && d.breakfast !== 'Custom') list.push(d.breakfast);
-          ['lunch', 'dinner'].forEach(t => { if (d[t] && d[t] !== 'None' && d[t] !== 'Custom') list.push(d[t]); });
-          (d.side || []).forEach(s => { if (s && s !== 'None' && s !== 'Custom') list.push(s); });
+          if ((d.name === 'Saturday' || d.name === 'Sunday') && d.breakfast  && d.breakfast !== 'Custom') list.push(d.breakfast);
+          ['lunch', 'dinner'].forEach(t => { if (d[t] && d[t] !== 'Custom') list.push(d[t]); });
+          (d.side || []).forEach(s => { if (s && s !== 'Custom') list.push(s); });
           if (d.breadFlag) list.push('Bread');
           list.forEach(m => {
             const ings = MEAL_ING[m] || [];
@@ -1363,8 +1364,7 @@
           t += `  Lunch: ${l || '—'}\n  Dinner: ${dn || '—'}`;
           if (d.dinnerType === 'delivery') t += ' [Delivery]';
           else if (d.dinnerType === 'quick') t += ' [Quick]';
-          if (s1 && s1 !== 'None') t += `\n  Side: ${s1}`;
-          if (s2 && s2 !== 'None') t += `\n  Side 2: ${s2}`;
+          if (s1) t += `\n  Side: ${s1}`;
           if (d.breadFlag) t += `\n  Bread: yes`;
           t += '\n\n';
         });
@@ -1439,7 +1439,7 @@
 
         this.state.days.forEach(d => {
           // Lunch
-          if (d.lunch && d.lunch !== "None") {
+          if (d.lunch) {
             const title = "Lunch: " + (d.lunch === "Custom" ? d.customLunch : d.lunch);
             ics += "BEGIN:VEVENT\n";
             ics += "SUMMARY:" + title + "\n";
@@ -1448,14 +1448,13 @@
             ics += "END:VEVENT\n";
           }
           // Dinner
-          if (d.dinner && d.dinner !== "None") {
+          if (d.dinner) {
             let title = "Dinner: " + (d.dinner === "Custom" ? d.customDinner : d.dinner);
             if (d.side && d.side.length) {
               const sides = d.side.map(s => s === "Custom" ? d.customSide.join(", ") : s);
               title += " + " + sides.join(", ");
             }
-            if (s1 && s1 !== "None") title += " + " + s1;
-            if (s2 && s2 !== "None") title += " + " + s2;
+            if (s1) title += " + " + s1;
             ics += "BEGIN:VEVENT\n";
             ics += "SUMMARY:" + title + "\n";
             ics += "DTSTART:" + fmtDateTime(d.date, 20, 0) + "\n";
