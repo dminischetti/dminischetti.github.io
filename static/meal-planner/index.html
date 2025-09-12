@@ -866,8 +866,8 @@
         this.state.days.forEach(d => {
           d.breakfast ??= null;
           d.customBreakfast ??= null;
-          d.side2 ??= null;
-          d.customSide2 ??= null;
+          if (!Array.isArray(d.side)) d.side = d.side ? [d.side] : [];
+          d.customSide ??= [];
           d.breadFlag ??= false;
         });
         // Ensure theme is set
@@ -889,13 +889,11 @@
             lunch: null,
             dinner: null,
             side: null,
-            side2: null,
             dinnerType: 'regular',
             customBreakfast: null,
             customLunch: null,
             customDinner: null,
             customSide: null,
-            customSide2: null,
             breadFlag: false
           }))
         };
@@ -906,21 +904,21 @@
       save() { try { localStorage.setItem(this.key(new Date(this.state.weekStart)), JSON.stringify(this.state)) } catch { } }
 
       init() { this.applyTheme(); this.render(); this.bindGlobal(); }
-      
-      applyTheme() { 
+
+      applyTheme() {
         // Use class-based theme switching
         if (this.state.theme === 'dark') {
           document.body.classList.add('dark');
         } else {
           document.body.classList.remove('dark');
         }
-        document.getElementById('themeToggle').textContent = this.state.theme === 'dark' ? '🌙' : '☀️'; 
+        document.getElementById('themeToggle').textContent = this.state.theme === 'dark' ? '🌙' : '☀️';
       }
-      
-      toggleTheme() { 
-        this.state.theme = this.state.theme === 'dark' ? 'light' : 'dark'; 
-        this.applyTheme(); 
-        this.save(); 
+
+      toggleTheme() {
+        this.state.theme = this.state.theme === 'dark' ? 'light' : 'dark';
+        this.applyTheme();
+        this.save();
       }
 
       nav(dir) {
@@ -961,9 +959,9 @@
         const bTx = d.breakfast === 'Custom' ? (d.customBreakfast || 'Custom') : d.breakfast === 'None' ? 'No breakfast' : (d.breakfast || 'Select breakfast');
         const lTx = d.lunch === 'Custom' ? (d.customLunch || 'Custom') : d.lunch === 'None' ? 'No lunch' : (d.lunch || 'Select lunch');
         const dnTx = d.dinner === 'Custom' ? (d.customDinner || 'Custom') : d.dinner === 'None' ? 'No dinner' : (d.dinner || 'Select dinner');
-        const s1 = d.side === 'Custom' ? (d.customSide || 'Custom') : d.side === 'None' ? '' : (d.side || '');
-        const s2 = d.side2 === 'Custom' ? (d.customSide2 || 'Custom') : d.side2 === 'None' ? '' : (d.side2 || '');
-
+        const sides = (d.side || []).map(s =>
+          s === 'Custom' ? (d.customSide?.join(', ') || 'Custom') : s
+        ).join(' • ');
         const be = MEAL_EMOJI[d.breakfast] || '☕️';
         const le = MEAL_EMOJI[d.lunch] || '🍽️';
         const de = MEAL_EMOJI[d.dinner] || '🍽️';
@@ -1006,7 +1004,7 @@
         <div class="icon dinner">${de}</div>
         <div class="content">
           <div class="title">Dinner</div>
-          <div class="desc">${dnTx}${s1 ? ` • ${s1}` : ''}${s2 ? ` • ${s2}` : ''}</div>
+<div class="desc">${dnTx}${sides ? ` • ${sides}` : ''}</div>
         </div>
         <div class="inline-toggles">
           <button class="tag ${d.dinnerType === 'quick' ? 'active quick' : ''}" data-toggle="quick" data-day="${i}">⚡ Quick</button>
@@ -1139,15 +1137,10 @@
         if (d.dinner === 'Custom') {
           body += `<div class="field"><div class="label">Custom Dinner</div><input class="input" id="customDinnerInput" value="${d.customDinner || ''}" placeholder="Enter custom meal"/></div>`;
         }
-        body += `<div class="field"><div class="label">Side Dish</div></div>`;
-        body += this.grid('side', d.side, CATS.side);
-        if (d.side === 'Custom') {
-          body += `<div class="field"><input class="input" id="customSideInput" value="${d.customSide || ''}" placeholder="Enter custom side"/></div>`;
-        }
-        body += `<div class="field"><div class="label">Side 2 (optional)</div></div>`;
-        body += this.grid('side2', d.side2, CATS.side);
-        if (d.side2 === 'Custom') {
-          body += `<div class="field"><input class="input" id="customSide2Input" value="${d.customSide2 || ''}" placeholder="Enter custom side 2"/></div>`;
+        body += `<div class="field"><div class="label">Side Dishes (select multiple)</div></div>`;
+        body += this.multiGrid('side', d.side, CATS.side);
+        if (d.side.includes('Custom')) {
+          body += `<div class="field"><input class="input" id="customSideInput" value="${d.customSide.join(', ') || ''}" placeholder="Enter custom sides (comma-separated)"/></div>`;
         }
 
         this.showSheet({
@@ -1169,7 +1162,7 @@
                 this.openDinner(i); // Refresh the modal to show updated state
               };
             }
-            
+
             const q = document.getElementById('modalQuick');
             const dl = document.getElementById('modalDelivery');
             if (q) q.onclick = () => { d.dinnerType = (d.dinnerType === 'quick' ? 'regular' : 'quick'); this.openDinner(i); };
@@ -1177,11 +1170,25 @@
           }
         });
       }
+
+      multiGrid(type, selectedArr, options) {
+        return `<div class="grid" data-type="${type}">
+    ${options.map(name => `
+      <div class="tile ${selectedArr.includes(name) ? 'selected' : ''}" data-meal="${name}" data-type="${type}">
+        <div class="emo">${MEAL_EMOJI[name] || '🍽️'}</div>
+        <div>${name}</div>
+      </div>`).join('')}
+  </div>`;
+      }
+
       saveDinner(i) {
         const d = this.state.days[i];
         if (d.dinner === 'Custom') { const el = document.getElementById('customDinnerInput'); if (el) d.customDinner = el.value; }
         if (d.side === 'Custom') { const el = document.getElementById('customSideInput'); if (el) d.customSide = el.value; }
-        if (d.side2 === 'Custom') { const el = document.getElementById('customSide2Input'); if (el) d.customSide2 = el.value; }
+        if (d.side.includes('Custom')) {
+          const el = document.getElementById('customSideInput');
+          if (el) d.customSide = el.value.split(',').map(s => s.trim()).filter(Boolean);
+        }
         this.save(); this.render(); this.hideSheet(); this.toast('Saved! ✓');
       }
 
@@ -1202,14 +1209,30 @@
         setTimeout(() => {
           document.querySelectorAll('.tile').forEach(t => {
             t.onclick = () => {
-              const type = t.dataset.type, val = t.dataset.meal, d = this.state.days[this.idx];
-              document.querySelectorAll(`.grid[data-type="${type}"] .tile`).forEach(x => x.classList.remove('selected'));
-              t.classList.add('selected');
-              d[type] = val;
-              if (val === 'Custom') {
-                if (type === 'breakfast') this.openBreakfast(this.idx);
-                else if (type === 'lunch') this.openLunch(this.idx);
-                else this.openDinner(this.idx);
+              const type = t.dataset.type, val = t.dataset.meal;
+              const d = this.state.days[this.idx];
+
+              if (type === 'side') {
+                if (!d.side) d.side = [];
+                if (d.side.includes(val)) {
+                  d.side = d.side.filter(x => x !== val);
+                } else {
+                  d.side.push(val);
+                }
+                if (val === 'Custom' && !d.customSide.includes(val)) {
+                  this.openDinner(this.idx);
+                } else {
+                  t.classList.toggle('selected');
+                }
+              } else {
+                document.querySelectorAll(`.grid[data-type="${type}"] .tile`).forEach(x => x.classList.remove('selected'));
+                t.classList.add('selected');
+                d[type] = val;
+                if (val === 'Custom') {
+                  if (type === 'breakfast') this.openBreakfast(this.idx);
+                  else if (type === 'lunch') this.openLunch(this.idx);
+                  else this.openDinner(this.idx);
+                }
               }
             };
           });
@@ -1272,7 +1295,8 @@
         this.state.days.forEach(d => {
           const list = [];
           if ((d.name === 'Saturday' || d.name === 'Sunday') && d.breakfast && d.breakfast !== 'None' && d.breakfast !== 'Custom') list.push(d.breakfast);
-          ['lunch', 'dinner', 'side', 'side2'].forEach(t => { if (d[t] && d[t] !== 'None' && d[t] !== 'Custom') list.push(d[t]); });
+          ['lunch', 'dinner'].forEach(t => { if (d[t] && d[t] !== 'None' && d[t] !== 'Custom') list.push(d[t]); });
+          (d.side || []).forEach(s => { if (s && s !== 'None' && s !== 'Custom') list.push(s); });
           if (d.breadFlag) list.push('Bread');
           list.forEach(m => {
             const ings = MEAL_ING[m] || [];
@@ -1337,48 +1361,46 @@
       }
 
       shareRecap() {
-  // 1. Build recap text (like shareWeek)
-  let recap = '🗓️ Weekly Meal Plan\n\n';
-  this.state.days.forEach(d => {
-    recap += `${d.name} (${this.fmtDate(d.date)})\n`;
-    const b = d.breakfast === 'Custom' ? d.customBreakfast : d.breakfast;
-    const l = d.lunch === 'Custom' ? d.customLunch : d.lunch;
-    const dn = d.dinner === 'Custom' ? d.customDinner : d.dinner;
-    const s1 = d.side === 'Custom' ? d.customSide : d.side;
-    const s2 = d.side2 === 'Custom' ? d.customSide2 : d.side2;
-    if (d.name === 'Saturday' || d.name === 'Sunday') recap += `  Breakfast: ${b || '—'}\n`;
-    recap += `  Lunch: ${l || '—'}\n  Dinner: ${dn || '—'}`;
-    if (d.dinnerType === 'delivery') recap += ' [Delivery]';
-    else if (d.dinnerType === 'quick') recap += ' [Quick]';
-    if (s1 && s1 !== 'None') recap += `\n  Side: ${s1}`;
-    if (s2 && s2 !== 'None') recap += `\n  Side 2: ${s2}`;
-    if (d.breadFlag) recap += `\n  Bread: yes`;
-    recap += '\n\n';
-  });
+        // 1. Build recap text (like shareWeek)
+        let recap = '🗓️ Weekly Meal Plan\n\n';
+        this.state.days.forEach(d => {
+          recap += `${d.name} (${this.fmtDate(d.date)})\n`;
+          const b = d.breakfast === 'Custom' ? d.customBreakfast : d.breakfast;
+          const l = d.lunch === 'Custom' ? d.customLunch : d.lunch;
+          const dn = d.dinner === 'Custom' ? d.customDinner : d.dinner;
+          const sides = (d.side || []).map(s => s === 'Custom' ? d.customSide.join(', ') : s).filter(x => x && x !== 'None');
+          if (d.name === 'Saturday' || d.name === 'Sunday') recap += `  Breakfast: ${b || '—'}\n`;
+          recap += `  Lunch: ${l || '—'}\n  Dinner: ${dn || '—'}`;
+          if (d.dinnerType === 'delivery') recap += ' [Delivery]';
+          else if (d.dinnerType === 'quick') recap += ' [Quick]';
+          if (sides.length) t += `\n  Sides: ${sides.join(', ')}`;
+          if (d.breadFlag) recap += `\n  Bread: yes`;
+          recap += '\n\n';
+        });
 
-  // 2. Build shopping list (like openShopping)
-  const g = this.groceries();
-  recap += '\n🛒 Shopping List\n\n';
-  Object.keys(g).sort().forEach(s => {
-    recap += `${s}:\n`;
-    g[s].forEach(i => recap += `• ${ING_EMOJI[i] || ''} ${i}\n`);
-    recap += '\n';
-  });
+        // 2. Build shopping list (like openShopping)
+        const g = this.groceries();
+        recap += '\n🛒 Shopping List\n\n';
+        Object.keys(g).sort().forEach(s => {
+          recap += `${s}:\n`;
+          g[s].forEach(i => recap += `• ${ING_EMOJI[i] || ''} ${i}\n`);
+          recap += '\n';
+        });
 
-  // 3. Build modal body (visual)
-  let body = `<pre style="white-space:pre-wrap;font-size:13px;line-height:1.4em;padding:12px">${recap}</pre>`;
+        // 3. Build modal body (visual)
+        let body = `<pre style="white-space:pre-wrap;font-size:13px;line-height:1.4em;padding:12px">${recap}</pre>`;
 
-  // 4. Show in sheet
-  this.showSheet({
-    title: 'Share Meal Plan',
-    sub: 'Weekly recap + shopping list',
-    body,
-    footer: [
-      { label: 'Close', cb: () => this.hideSheet() },
-      { label: 'Send', primary: true, cb: () => this.share('Meal Plan & Shopping', recap) }
-    ]
-  });
-}
+        // 4. Show in sheet
+        this.showSheet({
+          title: 'Share Meal Plan',
+          sub: 'Weekly recap + shopping list',
+          body,
+          footer: [
+            { label: 'Close', cb: () => this.hideSheet() },
+            { label: 'Send', primary: true, cb: () => this.share('Meal Plan & Shopping', recap) }
+          ]
+        });
+      }
 
 
       share(title, text) { if (navigator.share) navigator.share({ title, text }); else if (navigator.clipboard) { navigator.clipboard.writeText(text); this.toast('Copied to clipboard! 📋'); } }
