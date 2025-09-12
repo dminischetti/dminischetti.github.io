@@ -1027,9 +1027,20 @@
             const day = +btn.dataset.day;
             const type = btn.dataset.toggle;
             const d = this.state.days[day];
+
             d.dinnerType = (d.dinnerType === type) ? 'regular' : type;
-            if (d.dinnerType === 'delivery') { d.side = []; d.customSide = []; }
-            this.save(); this.render();
+
+            if (d.dinnerType === 'quick' || d.dinnerType === 'delivery') {
+              d.dinner = null;
+              d.customDinner = null;
+            }
+            if (d.dinnerType === 'delivery') {
+              d.side = [];
+              d.customSide = [];
+            }
+
+            this.save();
+            this.render();
           };
         });
         // bread pill
@@ -1157,8 +1168,19 @@
 
             const q = document.getElementById('modalQuick');
             const dl = document.getElementById('modalDelivery');
-            if (q) q.onclick = () => { d.dinnerType = (d.dinnerType === 'quick' ? 'regular' : 'quick'); this.openDinner(i); };
-            if (dl) dl.onclick = () => { d.dinnerType = (d.dinnerType === 'delivery' ? 'regular' : 'delivery'); if (d.dinnerType === 'delivery') { d.side = []; d.customSide = []; } this.openDinner(i); };
+            if (q) q.onclick = () => {
+              d.dinnerType = (d.dinnerType === 'quick' ? 'regular' : 'quick');
+              d.dinner = null;
+              d.customDinner = null;
+              this.openDinner(i);
+            };
+            if (dl) dl.onclick = () => {
+              d.dinnerType = (d.dinnerType === 'delivery' ? 'regular' : 'delivery');
+              d.dinner = null;
+              d.customDinner = null;
+              if (d.dinnerType === 'delivery') { d.side = []; d.customSide = []; }
+              this.openDinner(i);
+            };
           }
         });
       }
