@@ -1454,7 +1454,6 @@
               const sides = d.side.map(s => s === "Custom" ? d.customSide.join(", ") : s);
               title += " + " + sides.join(", ");
             }
-            if (s1) title += " + " + s1;
             ics += "BEGIN:VEVENT\n";
             ics += "SUMMARY:" + title + "\n";
             ics += "DTSTART:" + fmtDateTime(d.date, 20, 0) + "\n";
