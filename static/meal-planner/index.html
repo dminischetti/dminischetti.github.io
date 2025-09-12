@@ -616,6 +616,18 @@
     .hide {
       display: none
     }
+
+    /* secondary button style */
+    .btn.secondary {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      color: var(--tint-2);
+      font-weight: 800;
+    }
+
+    .btn.secondary:hover {
+      background: color-mix(in oklab, var(--tint-2) 10%, var(--bg-soft) 90%);
+    }
   </style>
 </head>
 
@@ -635,16 +647,13 @@
   <div class="bottom-bar">
     <div class="actions">
       <button class="bar-btn" id="randomizeBtn">
-        <div class="bar-ico">🎲</div><span>Randomize</span>
+        <div class="bar-ico">🎲</div><span>Random</span>
       </button>
       <button class="bar-btn" id="shareBtn">
-        <div class="bar-ico">📤</div><span>Share</span>
+        <div class="bar-ico">📤</div><span>Send</span>
       </button>
       <button class="bar-btn" id="clearBtn">
         <div class="bar-ico">🗑️</div><span>Clear</span>
-      </button>
-      <button class="bar-btn" id="exportICSBtn">
-        <div class="bar-ico">📅</div><span>Export</span>
       </button>
     </div>
   </div>
@@ -800,13 +809,13 @@
         "insalata": { "name": "Insalata", "emoji": "🥗", "ingredients": ["lettuce"], "type": "vegetarian" }
       },
       "mealCategories": {
-        "lunch": ["none", "ravioli_burro_e_salvia", "spaghetti_al_limone", "pasta_e_ceci", "pasta_col_tonno", "pasta_sugo_tonno", "piadine_prosciutto_provolone", "uova_fritte", "pasta_al_pesto", "pasta_coi_pomodorini", "lenticchie", "spaghetti_aglio_e_olio", "carbonara", "frittata_di_pasta", "pasta_e_fagioli", "custom"],
-        "dinnerRegular": ["none", "salmone_col_riso", "frittata_di_zucchine", "polpette", "pollo_al_limone", "merluzzo", "hamburger", "cotolette", "salsicce", "minestrone", "pollo_al_forno", "scaloppine_al_limone", "caprese", "custom"],
-        "dinnerQuick": ["none", "cordon_bleu", "würstel", "dumplings", "fish_sticks", "pollo_allo_spiedo", "custom"],
-        "delivery": ["none", "pizza_delivery", "greco_delivery", "chinese_delivery", "vietnamese_delivery", "ramen_delivery", "custom"],
-        "dinnerWeekend": ["none", "pasta_al_forno", "parmigiana_di_melanzane", "zucchine_ripiene", "lasagna", "spezzatino_con_patate", "tortellini_con_la_panna", "tortellini_col_sugo", "pasta_col_ragù", "polpettone", "scrimpelle_mbuss", "polenta_col_sugo", "cannelloni", "bistecca", "custom"],
-        "side": ["none", "purè_di_patate", "broccoli_al_vapore", "insalata_di_pomodori", "tater_tots", "barbabietole", "insalata_di_mais", "patate_lesse", "carote_al_forno", "carote_a_insalata", "zucchine_trifolate", "insalata_di_cetrioli", "insalata", "custom"],
-        "breakfast": ["none", "croissants", "pancakes", "french_toast", "biscuits", "custom"]
+        "lunch": ["ravioli_burro_e_salvia", "spaghetti_al_limone", "pasta_e_ceci", "pasta_col_tonno", "pasta_sugo_tonno", "piadine_prosciutto_provolone", "uova_fritte", "pasta_al_pesto", "pasta_coi_pomodorini", "lenticchie", "spaghetti_aglio_e_olio", "carbonara", "frittata_di_pasta", "pasta_e_fagioli", "custom"],
+        "dinnerRegular": ["salmone_col_riso", "frittata_di_zucchine", "polpette", "pollo_al_limone", "merluzzo", "hamburger", "cotolette", "salsicce", "minestrone", "pollo_al_forno", "scaloppine_al_limone", "caprese", "custom"],
+        "dinnerQuick": ["cordon_bleu", "würstel", "dumplings", "fish_sticks", "pollo_allo_spiedo", "custom"],
+        "delivery": ["pizza_delivery", "greco_delivery", "chinese_delivery", "vietnamese_delivery", "ramen_delivery", "custom"],
+        "dinnerWeekend": ["pasta_al_forno", "parmigiana_di_melanzane", "zucchine_ripiene", "lasagna", "spezzatino_con_patate", "tortellini_con_la_panna", "tortellini_col_sugo", "pasta_col_ragù", "polpettone", "scrimpelle_mbuss", "polenta_col_sugo", "cannelloni", "bistecca", "custom"],
+        "side": ["purè_di_patate", "broccoli_al_vapore", "insalata_di_pomodori", "tater_tots", "barbabietole", "insalata_di_mais", "patate_lesse", "carote_al_forno", "carote_a_insalata", "zucchine_trifolate", "insalata_di_cetrioli", "insalata", "custom"],
+        "breakfast": ["croissants", "pancakes", "french_toast", "biscuits", "custom"]
       },
       "stores": {
         "Aldi": ["bacon", "beets", "cannelloni", "carrots", "chicken_thighs", "breaded_cutlets", "croutons", "dumplings", "beans", "fish_sticks", "lemons", "corn", "shredded_mozzarella", "potatoes", "chicken_breast", "flatbreads", "tomatoes", "cherry_tomatoes", "provolone_cheese", "prosciutto", "ravioli", "sausages", "american_cheese_slices", "spinach", "tater_tots", "tortellini", "eggs", "hot_dogs", "zucchini", "ground_beef", "ricotta", "milk", "pesto_sauce"],
@@ -956,7 +965,9 @@
 
       dayCard(d, i) {
         const w = (d.name === 'Saturday' || d.name === 'Sunday');
-        const bTx = d.breakfast === 'Custom' ? (d.customBreakfast || 'Custom') : d.breakfast === 'None' ? 'No breakfast' : (d.breakfast || 'Select breakfast');
+        const bTx = d.breakfast === 'Custom'
+          ? (d.customBreakfast || 'Custom')
+          : (d.breakfast || 'Select breakfast');
         const lTx = d.lunch === 'Custom' ? (d.customLunch || 'Custom') : d.lunch === 'None' ? 'No lunch' : (d.lunch || 'Select lunch');
         const dnTx = d.dinner === 'Custom' ? (d.customDinner || 'Custom') : d.dinner === 'None' ? 'No dinner' : (d.dinner || 'Select dinner');
         const sides = (d.side || []).map(s =>
@@ -973,8 +984,7 @@
     <section class="day-card ${comp < need ? 'incomplete' : ''}" data-day="${i}">
       <div class="day-header">
         <div>
-          <div class="day-title">${d.name}</div>
-          <div class="day-date">${this.fmtDate(d.date)}</div>
+          <div class="day-title">${d.name}, ${this.fmtDate(d.date)}</div>
         </div>
         <div class="day-actions">
           <button class="pill bread ${d.breadFlag ? 'is-on' : ''}" data-day="${i}">
@@ -1084,9 +1094,8 @@
           body,
           footer: [
             { label: '🎲 Random', cb: () => this.randomize('breakfast', i) },
-            { label: '🗑️ Clear', cb: () => this.clear('breakfast', i) },
-            { label: 'Cancel', cb: () => this.hideSheet() },
-            { label: 'Save', primary: true, cb: () => this.saveBreakfast(i) }
+            { label: '❌ Cancel', cb: () => this.hideSheet() },
+            { label: '✅ Save', primary: true, cb: () => this.saveBreakfast(i) }
           ]
         });
       }
@@ -1108,9 +1117,8 @@
           body,
           footer: [
             { label: '🎲 Random', cb: () => this.randomize('lunch', i) },
-            { label: '🗑️ Clear', cb: () => this.clear('lunch', i) },
-            { label: 'Cancel', cb: () => this.hideSheet() },
-            { label: 'Save', primary: true, cb: () => this.saveLunch(i) }
+            { label: '❌ Cancel', cb: () => this.hideSheet() },
+            { label: '✅ Save', primary: true, cb: () => this.saveLunch(i) }
           ]
         });
       }
@@ -1149,9 +1157,8 @@
           body,
           footer: [
             { label: '🎲 Random', cb: () => this.randomize('dinner', i) },
-            { label: '🗑️ Clear', cb: () => this.clear('dinner', i) },
-            { label: 'Cancel', cb: () => this.hideSheet() },
-            { label: 'Save', primary: true, cb: () => this.saveDinner(i) }
+            { label: '❌ Cancel', cb: () => this.hideSheet() },
+            { label: '✅ Save', primary: true, cb: () => this.saveDinner(i) }
           ],
           after: () => {
             // Fix: Add click handler for the bread button in modal
@@ -1201,7 +1208,9 @@
         const foot = document.getElementById('modalFooter'); foot.innerHTML = '';
         (footer || []).forEach(f => {
           const b = document.createElement('button');
-          b.className = 'btn' + (f.primary ? ' primary' : '');
+          b.className = 'btn';
+          if (f.primary) b.classList.add('primary');
+          if (f.className) b.classList.add(f.className);
           b.textContent = f.label; b.onclick = f.cb; foot.appendChild(b);
         });
         ov.classList.add('show');
@@ -1225,13 +1234,18 @@
                   t.classList.toggle('selected');
                 }
               } else {
-                document.querySelectorAll(`.grid[data-type="${type}"] .tile`).forEach(x => x.classList.remove('selected'));
-                t.classList.add('selected');
-                d[type] = val;
-                if (val === 'Custom') {
-                  if (type === 'breakfast') this.openBreakfast(this.idx);
-                  else if (type === 'lunch') this.openLunch(this.idx);
-                  else this.openDinner(this.idx);
+                if (d[type] === val) {
+                  d[type] = null;
+                  t.classList.remove('selected');
+                } else {
+                  document.querySelectorAll(`.grid[data-type="${type}"] .tile`).forEach(x => x.classList.remove('selected'));
+                  t.classList.add('selected');
+                  d[type] = val;
+                  if (val === 'Custom') {
+                    if (type === 'breakfast') this.openBreakfast(this.idx);
+                    else if (type === 'lunch') this.openLunch(this.idx);
+                    else this.openDinner(this.idx);
+                  }
                 }
               }
             };
@@ -1254,23 +1268,23 @@
         if (type === 'breakfast') opts = CATS.breakfast;
         else if (type === 'lunch') opts = CATS.lunch;
         else opts = this.dinnerOptions(d);
-        opts = opts.filter(x => x !== 'None' && x !== 'Custom');
+        opts = opts.filter(x => x !== 'Custom');
         if (opts.length) d[type] = opts[Math.floor(Math.random() * opts.length)];
         if (type === 'dinner' && d.dinnerType !== 'delivery') {
-          const so = CATS.side.filter(x => x !== 'None' && x !== 'Custom');
+          const so = CATS.side.filter(x => x !== 'Custom');
           d.side = so[Math.floor(Math.random() * so.length)];
         }
         (type === 'breakfast') ? this.openBreakfast(i) : (type === 'lunch') ? this.openLunch(i) : this.openDinner(i);
       }
 
       randomizeWeek() {
-        const lo = CATS.lunch.filter(x => x !== 'None' && x !== 'Custom');
-        const so = CATS.side.filter(x => x !== 'None' && x !== 'Custom');
-        const bo = CATS.breakfast.filter(x => x !== 'None' && x !== 'Custom');
+        const lo = CATS.lunch.filter(x => x !== 'Custom');
+        const so = CATS.side.filter(x => x !== 'Custom');
+        const bo = CATS.breakfast.filter(x => x !== 'Custom');
         this.state.days.forEach(d => {
           if (d.name === 'Saturday' || d.name === 'Sunday') { d.breakfast = bo[Math.floor(Math.random() * bo.length)]; }
           else { d.breakfast = null; d.customBreakfast = null; }
-          const do_ = this.dinnerOptions(d).filter(x => x !== 'None' && x !== 'Custom');
+          const do_ = this.dinnerOptions(d).filter(x => x !== 'Custom');
           d.lunch = lo[Math.floor(Math.random() * lo.length)];
           d.dinner = do_[Math.floor(Math.random() * do_.length)];
           if (d.dinnerType !== 'delivery') d.side = so[Math.floor(Math.random() * so.length)];
@@ -1361,24 +1375,28 @@
       }
 
       shareRecap() {
-        // 1. Build recap text (like shareWeek)
         let recap = '🗓️ Weekly Meal Plan\n\n';
         this.state.days.forEach(d => {
           recap += `${d.name} (${this.fmtDate(d.date)})\n`;
           const b = d.breakfast === 'Custom' ? d.customBreakfast : d.breakfast;
           const l = d.lunch === 'Custom' ? d.customLunch : d.lunch;
           const dn = d.dinner === 'Custom' ? d.customDinner : d.dinner;
-          const sides = (d.side || []).map(s => s === 'Custom' ? d.customSide.join(', ') : s).filter(x => x && x !== 'None');
-          if (d.name === 'Saturday' || d.name === 'Sunday') recap += `  Breakfast: ${b || '—'}\n`;
+          if (d.name === 'Saturday' || d.name === 'Sunday') {
+            recap += `  Breakfast: ${b || '—'}\n`;
+          }
           recap += `  Lunch: ${l || '—'}\n  Dinner: ${dn || '—'}`;
           if (d.dinnerType === 'delivery') recap += ' [Delivery]';
           else if (d.dinnerType === 'quick') recap += ' [Quick]';
-          if (sides.length) t += `\n  Sides: ${sides.join(', ')}`;
+
+          if (d.side?.length) {
+            const sides = d.side.map(s => s === 'Custom' ? d.customSide.join(', ') : s);
+            recap += `\n  Sides: ${sides.join(', ')}`;
+          }
+
           if (d.breadFlag) recap += `\n  Bread: yes`;
           recap += '\n\n';
         });
 
-        // 2. Build shopping list (like openShopping)
         const g = this.groceries();
         recap += '\n🛒 Shopping List\n\n';
         Object.keys(g).sort().forEach(s => {
@@ -1387,20 +1405,20 @@
           recap += '\n';
         });
 
-        // 3. Build modal body (visual)
         let body = `<pre style="white-space:pre-wrap;font-size:13px;line-height:1.4em;padding:12px">${recap}</pre>`;
 
-        // 4. Show in sheet
         this.showSheet({
           title: 'Share Meal Plan',
           sub: 'Weekly recap + shopping list',
           body,
           footer: [
             { label: 'Close', cb: () => this.hideSheet() },
+            { label: 'Export ICS', cb: () => this.exportICS(), className: 'secondary' },
             { label: 'Send', primary: true, cb: () => this.share('Meal Plan & Shopping', recap) }
           ]
         });
       }
+
 
 
       share(title, text) { if (navigator.share) navigator.share({ title, text }); else if (navigator.clipboard) { navigator.clipboard.writeText(text); this.toast('Copied to clipboard! 📋'); } }
