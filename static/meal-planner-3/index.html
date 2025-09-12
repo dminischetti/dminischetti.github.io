@@ -1,142 +1,1015 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 <title>Meal Planner</title>
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-body{font-family:system-ui,-apple-system,sans-serif;background:linear-gradient(135deg,#1a0f2e,#2a1f3e);color:#f0f0f0;min-height:100vh;padding-bottom:80px}
-.container{max-width:600px;margin:0 auto;padding:0 16px}
-.header{background:rgba(255,255,255,.1);backdrop-filter:blur(10px);padding:20px;position:sticky;top:0;z-index:100;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(255,255,255,.2)}
-.header h1{font-size:24px;background:linear-gradient(135deg,#8b5cf6,#ec4899);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
-.week-nav{text-align:center;padding:20px;margin:20px 0;background:rgba(255,255,255,.05);border-radius:12px;font-size:18px;font-weight:700}
-.day-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);border-radius:12px;padding:16px;margin-bottom:12px;cursor:pointer;transition:all .3s}
-.day-card:hover{transform:translateY(-2px);box-shadow:0 4px 12px rgba(0,0,0,.3)}
-.day-card.incomplete{border-style:dashed;opacity:.9}
-.day-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px}
-.bread-toggle{padding:4px;border-radius:8px;transition:all .2s}
-.bread-toggle:hover{background:rgba(255,255,255,.1)}
-.bread-toggle.active{background:linear-gradient(135deg,#10b981,#34d399)}
-.day-title{font-size:16px;font-weight:700}
-.day-date{font-size:12px;color:#aaa;margin-top:4px}
-.chip{display:inline-block;padding:2px 8px;background:linear-gradient(135deg,#8b5cf6,#a855f7);border-radius:12px;font-size:11px;color:#fff;font-weight:700}
-.meal-item{display:flex;gap:12px;padding:12px;margin:8px 0;background:rgba(255,255,255,.05);border-radius:8px;border:1px solid rgba(255,255,255,.1);align-items:center;cursor:pointer;transition:all .2s}
-.meal-item:hover{background:rgba(255,255,255,.1);transform:translateX(4px)}
-.meal-item.empty{opacity:.6}
-.meal-icon{width:40px;height:40px;display:flex;align-items:center;justify-content:center;border-radius:8px;font-size:20px}
-.meal-icon.lunch{background:linear-gradient(135deg,#f59e0b,#fbbf24)}
-.meal-icon.dinner{background:linear-gradient(135deg,#3b82f6,#06b6d4)}
-.meal-icon.breakfast{background:linear-gradient(135deg,#ec4899,#f59e0b)}
-.meal-content{flex:1}
-.meal-title{font-weight:700;font-size:14px;display:flex;align-items:center;gap:6px}
-.meal-description{font-size:12px;color:#aaa;margin-top:2px}
-/* week-view inline dinner toggles */
-.type-toggles.inline{margin-left:auto;display:flex;gap:8px}
-.meal-item .type-toggle{padding:4px 10px;font-size:10px}
 
-.btn{padding:12px 20px;border:none;border-radius:8px;cursor:pointer;font-weight:700;transition:all .2s;background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.2)}
-.btn:hover{transform:translateY(-1px);box-shadow:0 2px 8px rgba(0,0,0,.2)}
-.btn-primary{background:linear-gradient(135deg,#8b5cf6,#a855f7);border:none}
-.btn-icon{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:8px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);cursor:pointer;transition:all .2s}
-.btn-icon:hover{background:rgba(255,255,255,.2)}
-.type-toggle{padding:6px 12px;border-radius:20px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);color:#aaa;font-size:12px;font-weight:700;cursor:pointer;transition:all .2s}
-.type-toggle.active{color:#fff;box-shadow:0 2px 8px rgba(0,0,0,.2)}
-.type-toggle.active.quick{background:linear-gradient(135deg,#a855f7,#ec4899);border:none}
-.type-toggle.active.delivery{background:linear-gradient(135deg,#3b82f6,#06b6d4);border:none}
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.8);display:none;align-items:flex-end;z-index:1000}
-.modal-overlay.show{display:flex}
-.modal{width:100%;max-width:500px;margin:0 auto;background:#2a1f3e;border-radius:20px 20px 0 0;max-height:85vh;overflow:hidden}
-.modal-header{padding:20px;text-align:center;border-bottom:1px solid rgba(255,255,255,.1)}
-.modal-title{font-size:20px;font-weight:700}
-.modal-subtitle{font-size:14px;color:#aaa;margin-top:4px}
-.modal-body{max-height:60vh;overflow-y:auto;padding:0}
-.modal-footer{display:flex;gap:8px;padding:12px;background:rgba(255,255,255,.05);border-top:1px solid rgba(255,255,255,.1)}
-.bento-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:12px}
-.bento-item{padding:12px 8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);border-radius:12px;cursor:pointer;text-align:center;font-size:13px;transition:all .2s;display:flex;flex-direction:column;align-items:center;gap:4px;min-height:72px;position:relative}
-.bento-item:hover{background:rgba(255,255,255,.1);transform:scale(1.05)}
-.bento-item.selected{background:rgba(139,92,246,.2);border-color:#8b5cf6}
-.bento-item.selected::before{content:'✓';position:absolute;top:4px;right:4px;width:20px;height:20px;background:linear-gradient(135deg,#8b5cf6,#a855f7);color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px}
-.bento-emoji{font-size:24px}
-.controls{display:flex;gap:8px;padding:12px;align-items:center;justify-content:space-between}
-.input-group{padding:12px}
-.input-label{display:block;font-weight:700;margin-bottom:8px;color:#aaa;font-size:14px}
-.input{width:100%;padding:12px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);border-radius:8px;color:#fff;font-size:14px}
-.input:focus{outline:0;border-color:#8b5cf6;box-shadow:0 0 0 3px rgba(139,92,246,.2)}
-.store-section{margin:12px;padding:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);border-radius:12px}
-.store-title{font-weight:700;font-size:16px;margin-bottom:12px}
-.grocery-item{display:flex;align-items:center;gap:12px;padding:12px;margin-bottom:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:8px}
-.checkbox{width:24px;height:24px;background:rgba(255,255,255,.05);border:2px solid rgba(255,255,255,.3);border-radius:6px;cursor:pointer;display:flex;align-items:center;justify-content:center}
-.checkbox.checked{background:linear-gradient(135deg,#10b981,#34d399);border-color:#10b981}
-.checkbox.checked::after{content:'✓';color:#fff;font-weight:700;font-size:14px}
-.grocery-item.checked .grocery-item-text{opacity:.5;text-decoration:line-through}
-.toast{position:fixed;bottom:100px;left:50%;transform:translateX(-50%);padding:12px 24px;background:#2a1f3e;color:#fff;font-size:14px;font-weight:700;border-radius:20px;box-shadow:0 4px 12px rgba(0,0,0,.3);opacity:0;visibility:hidden;transition:all .3s;z-index:2000;border:1px solid rgba(255,255,255,.2)}
-.toast.show{opacity:1;visibility:visible}
-.week-nav-bar{position:fixed;top:50%;transform:translateY(-50%);width:40px;height:80px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.2);cursor:pointer;font-size:18px;color:#aaa;z-index:90}
-.week-nav-bar:hover{background:rgba(255,255,255,.2);color:#fff}
-.week-nav-left{left:0;border-radius:0 12px 12px 0;border-left:none}
-.week-nav-right{right:0;border-radius:12px 0 0 12px;border-right:none}
-.weekend-card{margin:12px 0;padding:16px;display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);border-radius:12px}
-.toggle-switch{position:relative;width:48px;height:26px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.2);border-radius:13px;cursor:pointer}
-.toggle-switch.active{background:#8b5cf6;border-color:#8b5cf6}
-.toggle-knob{position:absolute;top:2px;left:2px;width:22px;height:22px;background:#fff;border-radius:50%;transition:transform .3s}
-.toggle-switch.active .toggle-knob{transform:translateX(22px)}
-.bottom-bar{position:fixed;bottom:0;left:0;right:0;background:rgba(255,255,255,.1);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.2);z-index:101}
-.bottom-actions{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;padding:8px;max-width:700px;margin:0 auto}
-.bar-btn{display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.2);border-radius:8px;color:#aaa;font-size:11px;font-weight:700;cursor:pointer;transition:all .2s}
-.bar-btn:hover{background:rgba(255,255,255,.1);transform:translateY(-1px)}
-.bar-ico{font-size:18px}
-body.light{background:linear-gradient(135deg,#f3f4f6,#e5e7eb);color:#1f2937}
-body.light .header,body.light .week-nav,body.light .day-card,body.light .meal-item,body.light .btn,body.light .btn-icon,body.light .type-toggle,body.light .modal,body.light .bento-item,body.light .input,body.light .store-section,body.light .grocery-item,body.light .weekend-card,body.light .bottom-bar,body.light .bar-btn,body.light .week-nav-bar{background:rgba(0,0,0,.05);border-color:rgba(0,0,0,.1);color:#1f2937}
-body.light .modal{background:#fff}
-body.light .toast{background:#fff;color:#1f2937;border-color:rgba(0,0,0,.1)}
-body.light .day-date,body.light .meal-description,body.light .modal-subtitle,body.light .input-label,body.light .type-toggle,body.light .bar-btn,body.light .week-nav-bar{color:#6b7280}
-body.light .input{color:#1f2937}
-body.light .checkbox{background:#fff;border-color:#d1d5db}
+<style>
+    :root {
+        --bg: #fff5f0;
+        --bg-soft: #fff9f5;
+        --card: #ffffff;
+        --muted: #8c7569;
+        --text: #362420;
+        --border: #f2d6c9;
+
+        --tint: #ff7b4a;
+        --tint-2: #4caf50;
+        --ok: #10b981;
+        --info: #06b6d4;
+        --warn: #f59e0b;
+
+        --radius-8: 12px;
+        --radius-12: 16px;
+
+        --shadow-1: 0 8px 24px rgba(0, 0, 0, .08);
+        --shadow-2: 0 12px 28px rgba(0, 0, 0, .12);
+
+        --tap: 48px; /* target size */
+
+        /* typography */
+        --h1: clamp(20px, 3.6vw, 24px);
+        --h2: clamp(16px, 3.2vw, 20px);
+        --body: clamp(14px, 3vw, 16px);
+        --small: 12px;
+    }
+
+    /* dark mode */
+    @media (prefers-color-scheme: dark) {
+        :root {
+            --bg: #1a1817;
+            --bg-soft: #24201e;
+            --card: #2a2624;
+            --muted: #a3968f;
+            --text: #f0e6e0;
+            --border: #4a4039;
+
+            --shadow-1: 0 8px 24px rgba(0, 0, 0, .35);
+            --shadow-2: 0 20px 32px rgba(0, 0, 0, .40);
+        }
+    }
+
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0
+    }
+
+    html,
+    body {
+        height: 100%
+    }
+
+    body {
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+        background: radial-gradient(1200px 800px at 20% -10%, rgba(255, 123, 74, .12), transparent 45%),
+            radial-gradient(1200px 900px at 110% 10%, rgba(76, 175, 80, .08), transparent 50%),
+            var(--bg);
+        color: var(--text);
+        -webkit-tap-highlight-color: transparent;
+        padding-bottom: 84px;
+    }
+
+    .container {
+        max-width: 720px;
+        margin: 0 auto;
+        padding: 0 16px
+    }
+
+    /* header */
+    .header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 16px;
+        background: color-mix(in oklab, var(--bg) 70%, var(--bg-soft) 30%);
+        border-bottom: 1px solid var(--border);
+        backdrop-filter: saturate(120%) blur(6px);
+    }
+
+    .header h1 {
+        font-size: var(--h1);
+        font-weight: 800;
+        letter-spacing: .2px;
+        color: var(--tint);
+    }
+
+    .btn-icon {
+        width: var(--tap);
+        height: var(--tap);
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: var(--bg-soft);
+        color: var(--text);
+        box-shadow: var(--shadow-1);
+        cursor: pointer;
+        transition: transform .08s ease, background .2s ease;
+    }
+
+    .btn-icon:active {
+        transform: scale(.98)
+    }
+
+    /* week banner */
+    .week-nav {
+        margin: 16px 0 12px;
+        padding: 12px 14px;
+        text-align: center;
+        font-weight: 700;
+        font-size: var(--body);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-12);
+        background: var(--bg-soft);
+    }
+
+    /* day card */
+    .day-card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-12);
+        margin: 10px 0;
+        padding: 12px;
+        box-shadow: var(--shadow-1);
+    }
+
+    .day-card.incomplete {
+        border-style: dashed;
+        opacity: .95
+    }
+
+    .day-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 6px;
+    }
+
+    .day-title {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        font-weight: 800;
+        letter-spacing: .2px
+    }
+
+    .day-date {
+        font-size: var(--small);
+        color: var(--muted);
+        margin-top: 4px
+    }
+
+    .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 2px 8px;
+        font-size: 11px;
+        font-weight: 800;
+        border-radius: 999px;
+        color: #fff;
+        background: var(--tint);
+    }
+
+    /* day header right (bread) */
+    .day-actions {
+        display: flex;
+        align-items: center;
+        gap: 8px
+    }
+
+    .pill {
+        height: 32px;
+        padding: 0 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 12px;
+        font-weight: 700;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: var(--bg-soft);
+        color: var(--muted);
+        cursor: pointer;
+        transition: filter .15s ease, transform .08s ease;
+    }
+
+    .pill:active {
+        transform: scale(.98)
+    }
+
+    .pill.is-on {
+        color: #fff;
+        border-color: transparent;
+        background: var(--tint-2)
+    }
+
+    /* meal rows */
+    .meal {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        padding: 10px;
+        margin-top: 8px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: var(--bg-soft);
+        min-height: 64px;
+        cursor: pointer;
+        transition: background .2s ease, transform .08s ease;
+    }
+
+    .meal:active {
+        transform: translateY(1px)
+    }
+
+    .meal.empty {
+        opacity: .65
+    }
+
+    .meal .icon {
+        width: 44px;
+        height: 44px;
+        display: grid;
+        place-items: center;
+        border-radius: 12px;
+        font-size: 20px;
+        color: #fff;
+    }
+
+    .icon.lunch {
+        background: linear-gradient(135deg, #ff9a3d, #ff7b4a)
+    }
+
+    .icon.dinner {
+        background: linear-gradient(135deg, #6b8e23, #8fbc8f)
+    }
+
+    .icon.breakfast {
+        background: linear-gradient(135deg, #ffb347, #ffcc33)
+    }
+
+    .meal .content {
+        flex: 1;
+        min-width: 0
+    }
+
+    .meal .title {
+        font-weight: 800;
+        font-size: 13px;
+        display: flex;
+        align-items: center;
+        gap: 6px
+    }
+
+    .meal .desc {
+        margin-top: 2px;
+        font-size: 12px;
+        color: var(--muted);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap
+    }
+
+    /* inline dinner toggles */
+    .inline-toggles {
+        display: flex;
+        gap: 6px;
+        margin-left: auto
+    }
+
+    .tag {
+        height: 28px;
+        padding: 0 10px;
+        border-radius: 999px;
+        border: 1px solid var(--border);
+        background: var(--bg-soft);
+        font-size: 11px;
+        font-weight: 800;
+        color: var(--muted);
+        display: inline-flex;
+        align-items: center;
+        cursor: pointer;
+    }
+
+    .tag.active.quick {
+        color: #fff;
+        background: var(--tint);
+        border-color: transparent
+    }
+
+    .tag.active.delivery {
+        color: #fff;
+        background: var(--tint-2);
+        border-color: transparent
+    }
+
+    /* weekend reveal block */
+    .weekend-card {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background: var(--bg-soft);
+        border: 1px solid var(--border);
+        border-radius: var(--radius-12);
+        padding: 12px;
+        margin: 12px 0 6px;
+    }
+
+    .switch {
+        position: relative;
+        width: 54px;
+        height: 30px;
+        border-radius: 999px;
+        cursor: pointer;
+        border: 1px solid var(--border);
+        background: #e8d5c9
+    }
+
+    .switch .knob {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: #fff;
+        transition: transform .18s ease
+    }
+
+    .switch.on {
+        background: var(--tint);
+        border-color: transparent
+    }
+
+    .switch.on .knob {
+        transform: translateX(24px)
+    }
+
+    /* bottom bar */
+    .bottom-bar {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 60;
+        background: color-mix(in oklab, var(--bg) 72%, var(--bg-soft) 28%);
+        border-top: 1px solid var(--border);
+        padding: 8px env(safe-area-inset-right) 8px env(safe-area-inset-left);
+        backdrop-filter: blur(6px);
+    }
+
+    .actions {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 8px;
+        max-width: 760px;
+        margin: 0 auto;
+    }
+
+    .bar-btn {
+        display: grid;
+        place-items: center;
+        height: 56px;
+        border-radius: 14px;
+        border: 1px solid var(--border);
+        background: var(--card);
+        color: var(--text);
+        font-size: 12px;
+        font-weight: 800;
+        gap: 6px;
+        box-shadow: var(--shadow-1);
+        cursor: pointer;
+    }
+
+    .bar-btn span {
+        opacity: .85
+    }
+
+    .bar-ico {
+        font-size: 18px
+    }
+
+    /* modal (bottom sheet) */
+    .modal-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(8, 10, 20, .6);
+        display: none;
+        z-index: 70
+    }
+
+    .modal-overlay.show {
+        display: block
+    }
+
+    .sheet {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 80;
+        background: var(--card);
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+        border: 1px solid var(--border);
+        box-shadow: var(--shadow-2);
+        transform: translateY(100%);
+        transition: transform .24s ease-out;
+        max-height: 82vh;
+        overflow: hidden;
+    }
+
+    .modal-overlay.show+.sheet {
+        transform: translateY(0)
+    }
+
+    .sheet-head {
+        padding: 14px;
+        border-bottom: 1px solid var(--border);
+        text-align: center
+    }
+
+    .sheet-title {
+        font-size: var(--h2);
+        font-weight: 800
+    }
+
+    .sheet-sub {
+        font-size: 12px;
+        color: var(--muted);
+        margin-top: 4px
+    }
+
+    .sheet-body {
+        max-height: calc(82vh - 112px);
+        overflow: auto
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+        padding: 12px
+    }
+
+    .tile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 6px;
+        padding: 12px 8px;
+        min-height: 72px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: var(--bg-soft);
+        cursor: pointer;
+        text-align: center;
+        font-size: 13px;
+        transition: transform .08s ease, background .15s ease;
+    }
+
+    .tile:active {
+        transform: scale(.98)
+    }
+
+    .tile.selected {
+        border-color: transparent;
+        background: color-mix(in oklab, var(--tint) 22%, var(--bg-soft) 78%)
+    }
+
+    .tile .emo {
+        font-size: 22px
+    }
+
+    .control-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 8px;
+        padding: 12px
+    }
+
+    .kbd {
+        font-size: 12px;
+        color: var(--muted);
+        font-weight: 700
+    }
+
+    .field {
+        padding: 10px 12px;
+        margin: 8px 12px 0
+    }
+
+    .label {
+        font-size: 12px;
+        color: var(--muted);
+        font-weight: 800;
+        margin-bottom: 6px
+    }
+
+    .input {
+        width: 100%;
+        height: 44px;
+        padding: 10px 12px;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: var(--bg-soft);
+        color: var(--text);
+        font-size: 14px;
+        outline: none;
+    }
+
+    .sheet-foot {
+        display: flex;
+        gap: 8px;
+        padding: 10px;
+        border-top: 1px solid var(--border);
+        background: var(--bg-soft)
+    }
+
+    .btn {
+        height: 44px;
+        flex: 1;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+        background: var(--card);
+        color: var(--text);
+        font-weight: 800;
+        cursor: pointer
+    }
+
+    .btn.primary {
+        background: var(--tint);
+        border-color: transparent;
+        color: #fff
+    }
+
+    /* toast */
+    .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 90px;
+        transform: translateX(-50%);
+        background: var(--card);
+        color: var(--text);
+        border: 1px solid var(--border);
+        padding: 10px 16px;
+        border-radius: 999px;
+        box-shadow: var(--shadow-1);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity .18s ease, visibility .18s ease;
+        z-index: 90;
+        font-weight: 800;
+        font-size: 12px;
+    }
+
+    .toast.show {
+        opacity: 1;
+        visibility: visible
+    }
+
+    /* week nav arrows */
+    .nav {
+        position: fixed;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 40px;
+        height: 80px;
+        display: grid;
+        place-items: center;
+        background: var(--card);
+        border: 1px solid var(--border);
+        color: var(--muted);
+        border-radius: 12px;
+        z-index: 40;
+        cursor: pointer;
+    }
+
+    .nav.left {
+        left: 6px;
+        border-left: none
+    }
+
+    .nav.right {
+        right: 6px;
+        border-right: none
+    }
+
+    /* helpers */
+    .hide {
+        display: none
+    }
 </style>
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App Cucina Minimal</title>
+    <style>
+        /* =========================
+           MODERN MINIMAL DESIGN SYSTEM
+           ========================= */
+        :root {
+            /* Color palette - minimal e moderno */
+            --bg: #ffffff;
+            --bg-soft: #f8f9fc;
+            --card: #ffffff;
+            --muted: #6b7280;
+            --text: #111827;
+            --border: #e5e7eb;
+            
+            --tint: #3b82f6;    /* Blu moderno */
+            --tint-2: #10b981;  /* Verde per elementi salutari */
+            --accent: #8b5cf6;  /* Viola per accenti */
+            
+            --ok: #10b981;
+            --info: #3b82f6;
+            --warn: #f59e0b;
+            
+            --radius: 8px;
+            --radius-lg: 12px;
+            
+            --shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            
+            --tap: 44px;
+            
+            /* Typography */
+            --h1: clamp(24px, 4vw, 28px);
+            --h2: clamp(20px, 3.5vw, 24px);
+            --body: clamp(14px, 2.5vw, 16px);
+            --small: 13px;
+            --caption: 12px;
+        }
+
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --bg: #0f1117;
+                --bg-soft: #151922;
+                --card: #1a1f2e;
+                --muted: #9ca3af;
+                --text: #f3f4f6;
+                --border: #374151;
+                
+                --shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+                --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+            }
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html, body {
+            height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            -webkit-tap-highlight-color: transparent;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 16px;
+        }
+
+        /* Header minimal */
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background-color: var(--bg);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(8px);
+        }
+
+        .header h1 {
+            font-size: var(--h2);
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        /* Bottoni minimali */
+        .btn-icon {
+            width: var(--tap);
+            height: var(--tap);
+            display: grid;
+            place-items: center;
+            border-radius: var(--radius);
+            background: transparent;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            border: none;
+        }
+
+        .btn-icon:hover {
+            background-color: var(--bg-soft);
+            color: var(--text);
+        }
+
+        /* Navigazione settimana */
+        .week-nav {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 24px 0 16px;
+            padding: 12px 16px;
+            border-radius: var(--radius);
+            background-color: var(--bg-soft);
+            border: 1px solid var(--border);
+        }
+
+        .week-title {
+            font-weight: 500;
+            font-size: var(--body);
+        }
+
+        .nav-arrows {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* Card giorno */
+        .day-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            margin: 12px 0;
+            padding: 16px;
+            box-shadow: var(--shadow);
+        }
+
+        .day-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+
+        .day-title {
+            font-size: var(--body);
+            font-weight: 600;
+        }
+
+        .day-date {
+            font-size: var(--caption);
+            color: var(--muted);
+        }
+
+        /* Pasti */
+        .meal {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            margin-top: 8px;
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            background: var(--bg-soft);
+            transition: all 0.15s ease;
+            cursor: pointer;
+        }
+
+        .meal:hover {
+            border-color: var(--tint);
+            box-shadow: var(--shadow);
+        }
+
+        .meal.empty {
+            opacity: 0.6;
+        }
+
+        .meal-icon {
+            width: 36px;
+            height: 36px;
+            display: grid;
+            place-items: center;
+            border-radius: var(--radius);
+            font-size: 16px;
+            background: var(--bg);
+            color: var(--tint);
+            border: 1px solid var(--border);
+        }
+
+        .meal-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .meal-title {
+            font-weight: 500;
+            font-size: var(--small);
+        }
+
+        .meal-desc {
+            margin-top: 2px;
+            font-size: var(--caption);
+            color: var(--muted);
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Barra inferiore */
+        .bottom-bar {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 60;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            padding: 12px 16px;
+            backdrop-filter: blur(8px);
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 12px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .bar-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 0;
+            border-radius: var(--radius);
+            background: transparent;
+            color: var(--muted);
+            font-size: var(--caption);
+            font-weight: 500;
+            cursor: pointer;
+            border: none;
+            transition: all 0.15s ease;
+        }
+
+        .bar-btn.active {
+            color: var(--tint);
+        }
+
+        .bar-btn:hover {
+            background: var(--bg-soft);
+        }
+
+        .bar-icon {
+            font-size: 20px;
+        }
+
+        /* Modalità weekend */
+        .weekend-toggle {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 12px 16px;
+            margin: 16px 0;
+        }
+
+        .toggle {
+            position: relative;
+            width: 44px;
+            height: 24px;
+            border-radius: 12px;
+            background: var(--border);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .toggle.on {
+            background: var(--tint);
+        }
+
+        .toggle-knob {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: white;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .toggle.on .toggle-knob {
+            transform: translateX(20px);
+        }
+
+        /* Etichette */
+        .tag {
+            display: inline-flex;
+            align-items: center;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 500;
+            background: var(--bg-soft);
+            color: var(--muted);
+            border: 1px solid var(--border);
+        }
+
+        .tag.active {
+            background: var(--tint);
+            color: white;
+            border-color: var(--tint);
+        }
+
+        /* Utility classes */
+        .flex {
+            display: flex;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .gap-2 {
+            gap: 8px;
+        }
+
+        .mt-4 {
+            margin-top: 16px;
+        }
+
+        .mb-2 {
+            margin-bottom: 8px;
+        }
+
+        .text-sm {
+            font-size: var(--small);
+        }
+
+        .text-muted {
+            color: var(--muted);
+        }
+    </style>
+
+
+
 </head>
 <body>
-<header class="header">
-  <h1>Meal Planner</h1>
-  <button id="themeToggle" class="btn-icon">🌙</button>
-</header>
+  <header class="header">
+    <h1>Meal Planner</h1>
+    <button id="themeToggle" class="btn-icon" aria-label="Toggle theme">🌙</button>
+  </header>
 
-<div class="container">
-  <div class="week-nav" id="weekDate">Loading...</div>
-  <div id="daysList"></div>
-</div>
-
-<button class="week-nav-bar week-nav-left" id="prevWeek">◄</button>
-<button class="week-nav-bar week-nav-right" id="nextWeek">►</button>
-
-<div class="bottom-bar">
-  <div class="bottom-actions">
-    <button class="bar-btn" id="randomizeBtn"><span class="bar-ico">🎲</span><span>Randomize</span></button>
-    <button class="bar-btn" id="shoppingBtn"><span class="bar-ico">🛒</span><span>Shopping</span></button>
-    <button class="bar-btn" id="shareBtn"><span class="bar-ico">📤</span><span>Share All</span></button>
-    <button class="bar-btn" id="clearBtn"><span class="bar-ico">🗑️</span><span>Clear</span></button>
+  <div class="container">
+    <div id="daysList"></div>
   </div>
-</div>
 
-<!-- Modal -->
-<div id="modalOverlay" class="modal-overlay">
-  <div class="modal">
-    <div class="modal-header">
-      <h2 class="modal-title" id="modalTitle"></h2>
-      <p class="modal-subtitle" id="modalSubtitle"></p>
+  <button class="nav left" id="prevWeek">◄</button>
+  <button class="nav right" id="nextWeek">►</button>
+
+  <div class="bottom-bar">
+    <div class="actions">
+      <button class="bar-btn" id="randomizeBtn"><div class="bar-ico">🎲</div><span>Randomize</span></button>
+      <button class="bar-btn" id="shoppingBtn"><div class="bar-ico">🛒</div><span>Shopping</span></button>
+      <button class="bar-btn" id="shareBtn"><div class="bar-ico">📤</div><span>Share All</span></button>
+      <button class="bar-btn" id="clearBtn"><div class="bar-ico">🗑️</div><span>Clear</span></button>
     </div>
-    <div class="modal-body" id="modalBody"></div>
-    <div class="modal-footer" id="modalFooter"></div>
   </div>
-</div>
 
-<div id="toast" class="toast"></div>
+  <!-- Bottom Sheet Modal -->
+  <div id="modalOverlay" class="modal-overlay"></div>
+  <section id="sheet" class="sheet" aria-modal="true" role="dialog">
+    <div class="sheet-head">
+      <div class="sheet-title" id="modalTitle"></div>
+      <div class="sheet-sub" id="modalSubtitle"></div>
+    </div>
+    <div class="sheet-body" id="modalBody"></div>
+    <div class="sheet-foot" id="modalFooter"></div>
+  </section>
+
+  <div id="toast" class="toast">Saved! ✓</div>
 
 <script>
-/* =========================
-   DATA provided by you
-   ========================= */
-const DATA = 
+/* ========= DATA (your provided object) ========= */
+const DATA =
 {
   "ingredients": {
     "ravioli":{"name":"Ravioli","emoji":"🥟"},
@@ -206,7 +1079,7 @@ const DATA =
     "butter":{"name":"Butter","emoji":"🧈"},
     "pesto_sauce":{"name":"Pesto sauce","emoji":"🌿"}
   },
-  "meals": {
+  "meals": { /* (unchanged) */ 
     "none":{"name":"None","emoji":"❌","ingredients":[],"type":"other"},
     "custom":{"name":"Custom","emoji":"✏️","ingredients":[],"type":"other"},
     "ravioli_burro_e_salvia":{"name":"Ravioli burro e salvia","emoji":"🥟","ingredients":["ravioli","sage"],"type":"vegetarian"},
@@ -288,64 +1161,50 @@ const DATA =
   }
 };
 
-/* ========= Build lookups from DATA (with breakfast fallbacks) ========= */
+/* ========= Build lookups ========= */
 const MEALS_BY_NAME={}, MEAL_EMOJI={}, MEAL_ING={}, MEAL_TYPE={}, ING_EMOJI={}, CATS={}, STORES={};
-
-// Ingredients
 Object.values(DATA.ingredients).forEach(i => { ING_EMOJI[i.name]=i.emoji; });
-
-// Meals
 Object.entries(DATA.meals).forEach(([k,m])=>{
   MEALS_BY_NAME[m.name]=m;
-  MEAL_EMOJI[m.name]=m.emoji || '🍽️';
+  MEAL_EMOJI[m.name]=m.emoji||'🍽️';
   MEAL_ING[m.name]=(m.ingredients||[]).map(id=>DATA.ingredients[id]?.name||id);
   MEAL_TYPE[m.name]=m.type||'other';
 });
 
-// Ensure breakfast meals exist even if not present in DATA.meals
-const breakfastFallbacks = {
-  croissants: { name:'Croissants', emoji:'🥐', ingredients:[] },
-  pancakes: { name:'Pancakes', emoji:'🥞', ingredients:['flour','milk','eggs','butter'] },
-  french_toast: { name:'French toast', emoji:'🍞', ingredients:['bread','eggs','milk','butter'] },
-  biscuits: { name:'Biscuits', emoji:'🥯', ingredients:['flour','milk','butter'] }
+/* breakfast IDs exist only in categories — create fallbacks */
+const BF_FALLBACK={
+  croissants:{name:'Croissants',emoji:'🥐',ingredients:[]},
+  pancakes:{name:'Pancakes',emoji:'🥞',ingredients:['flour','milk','eggs','butter']},
+  french_toast:{name:'French toast',emoji:'🍞',ingredients:['bread','eggs','milk','butter']},
+  biscuits:{name:'Biscuits',emoji:'🥯',ingredients:['flour','milk','butter']}
 };
-(DATA.mealCategories.breakfast||[]).forEach(key=>{
-  if(key==='none'||key==='custom') return;
-  const exists = Object.values(DATA.meals).some(m => m.name.toLowerCase().replace(/\s+/g,'_')===key);
-  if(!exists && breakfastFallbacks[key]){
-    const m = breakfastFallbacks[key];
-    MEALS_BY_NAME[m.name] = { name:m.name, emoji:m.emoji, ingredients:m.ingredients.map(id=>DATA.ingredients[id]?.name||id) };
-    MEAL_EMOJI[m.name]=m.emoji;
-    MEAL_ING[m.name]=m.ingredients.map(id=>DATA.ingredients[id]?.name||id);
-    MEAL_TYPE[m.name]='vegetarian';
+const ID2NAME = (id) => {
+  if(DATA.meals[id]) return DATA.meals[id].name;
+  return ({croissants:'Croissants',pancakes:'Pancakes',french_toast:'French toast',biscuits:'Biscuits',none:'None',custom:'Custom'})[id]||id;
+};
+Object.entries(DATA.mealCategories).forEach(([cat,ids])=>{
+  CATS[cat]=ids.map(ID2NAME);
+  if(cat==='breakfast'){
+    ids.forEach(id=>{
+      if(id==='none'||id==='custom') return;
+      const nm=ID2NAME(id);
+      if(!MEALS_BY_NAME[nm] && BF_FALLBACK[id]){
+        const m=BF_FALLBACK[id];
+        MEALS_BY_NAME[m.name]=m;
+        MEAL_EMOJI[m.name]=m.emoji;
+        MEAL_ING[m.name]=(m.ingredients||[]).map(x=>DATA.ingredients[x]?.name||x);
+      }
+    });
   }
 });
+Object.entries(DATA.stores).forEach(([s,ids])=>{STORES[s]=ids.map(id=>DATA.ingredients[id]?.name||id)});
 
-// Categories (map IDs to display names using meals, or sensible title-cases)
-function idToName(id){
-  if(DATA.meals[id]) return DATA.meals[id].name;
-  // fallback for breakfast entries
-  const map={
-    croissants:'Croissants', pancakes:'Pancakes', french_toast:'French toast', biscuits:'Biscuits',
-    none:'None', custom:'Custom'
-  };
-  return map[id] || id;
-}
-Object.entries(DATA.mealCategories).forEach(([cat, ids])=>{
-  CATS[cat] = ids.map(idToName);
-});
-
-// Stores mapping (IDs to ingredient display names)
-Object.entries(DATA.stores).forEach(([store, ids])=>{
-  STORES[store] = ids.map(id=>DATA.ingredients[id]?.name||id);
-});
-
-/* ===================== App ===================== */
+/* ========= App ========= */
 class MealPlanner {
   constructor(){
-    this.state=this.loadState()||this.createInitialState();
+    this.state=this.loadState()||this.initialState();
     this.migrate();
-    this.currentDayIndex=null;
+    this.idx=null;
     this.init();
   }
   migrate(){
@@ -354,12 +1213,11 @@ class MealPlanner {
       d.customBreakfast ??= null;
       d.side2 ??= null;
       d.customSide2 ??= null;
-      d.breadFlag ??= false;
+      d.breadFlag ??= false; // day-level bread
     });
   }
-  init(){ this.applyTheme(); this.render(); this.attachListeners(); }
-  createInitialState(){
-    const start=this.getWeekStart(new Date());
+  initialState(){
+    const start=this.weekStart(new Date());
     const names=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'];
     return {
       weekStart:start.toISOString(),
@@ -373,7 +1231,7 @@ class MealPlanner {
         dinner:null,
         side:null,
         side2:null,
-        dinnerType:'regular', // regular|quick|delivery
+        dinnerType:'regular',
         customBreakfast:null,
         customLunch:null,
         customDinner:null,
@@ -383,448 +1241,436 @@ class MealPlanner {
       }))
     };
   }
-  getWeekStart(d){
-    const dt=new Date(d), day=dt.getDay(); // 0 Sun
-    const diff=dt.getDate()-day+(day===0?-6:1);
-    const monday=new Date(dt.setDate(diff));
-    monday.setHours(0,0,0,0);
-    return monday;
-  }
-  getWeekKey(d){ return `meal_plan_${this.getWeekStart(d).toISOString().slice(0,10)}`; }
-  loadState(){ try{const key=this.getWeekKey(new Date()); const raw=localStorage.getItem(key); return raw?JSON.parse(raw):null;}catch{return null} }
-  saveState(){ try{const key=this.getWeekKey(new Date(this.state.weekStart)); localStorage.setItem(key,JSON.stringify(this.state));}catch{} }
-  applyTheme(){ document.body.className=this.state.theme; document.getElementById('themeToggle').textContent=this.state.theme==='dark'?'🌙':'☀️'; }
-  toggleTheme(){ this.state.theme=this.state.theme==='dark'?'light':'dark'; this.applyTheme(); this.saveState(); }
-  navigateWeek(dir){
+  weekStart(d){ const dt=new Date(d), day=dt.getDay(); const diff=dt.getDate()-day+(day===0?-6:1); const m=new Date(dt.setDate(diff)); m.setHours(0,0,0,0); return m; }
+  key(d){ return `meal_plan_${this.weekStart(d).toISOString().slice(0,10)}`; }
+  loadState(){ try{const k=this.key(new Date()); const j=localStorage.getItem(k); return j?JSON.parse(j):null}catch{return null} }
+  save(){ try{localStorage.setItem(this.key(new Date(this.state.weekStart)), JSON.stringify(this.state))}catch{} }
+
+  init(){ this.applyTheme(); this.render(); this.bindGlobal(); }
+  applyTheme(){ document.body.classList.toggle('light', this.state.theme==='light'); document.getElementById('themeToggle').textContent= this.state.theme==='dark'?'🌙':'☀️'; }
+  toggleTheme(){ this.state.theme=this.state.theme==='dark'?'light':'dark'; this.applyTheme(); this.save(); }
+
+  nav(dir){
     const cur=new Date(this.state.weekStart);
-    const n=new Date(cur.getTime()+(dir==='next'?7:-7)*86400000);
-    n.setHours(0,0,0,0);
-    const key=this.getWeekKey(n); const existing=localStorage.getItem(key);
-    if(existing){ this.state=JSON.parse(existing); }
+    const next=new Date(cur.getTime()+(dir==='next'?7:-7)*86400000);
+    next.setHours(0,0,0,0);
+    const k=this.key(next); const ex=localStorage.getItem(k);
+    if(ex){ this.state=JSON.parse(ex); }
     else{
-      this.state=this.createInitialState();
-      this.state.weekStart=n.toISOString();
-      this.state.days.forEach((d,i)=>d.date=new Date(n.getTime()+i*86400000).toISOString());
+      this.state=this.initialState();
+      this.state.weekStart=next.toISOString();
+      this.state.days.forEach((d,i)=>d.date=new Date(next.getTime()+i*86400000).toISOString());
     }
-    this.migrate();
-    this.applyTheme(); this.render();
+    this.migrate(); this.applyTheme(); this.render();
   }
+
   fmtWeek(){ const s=new Date(this.state.weekStart), e=new Date(s.getTime()+6*86400000); const M=['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']; return `${M[s.getMonth()]} ${s.getDate()} - ${e.getDate()}, ${s.getFullYear()}`; }
-  fmtDate(d){ const dt=new Date(d), M=['January','February','March','April','May','June','July','August','September','October','November','December']; return `${M[dt.getMonth()]} ${dt.getDate()}`; }
+  fmtDate(d){ const dt=new Date(d); const M=['January','February','March','April','May','June','July','August','September','October','November','December']; return `${M[dt.getMonth()]} ${dt.getDate()}`; }
 
-  render(){ document.getElementById('weekDate').textContent=this.fmtWeek(); this.renderDays(); }
+  render(){  this.renderDays(); }
   renderDays(){
-    const first5=this.state.days.slice(0,5).map((d,i)=>this.renderDayCard(d,i)).join('');
-    const weekendToggle=`<div class="weekend-card"><span style="font-weight:700">Show weekends</span><div class="toggle-switch ${this.state.showWeekend?'active':''}" id="weekendToggle"><div class="toggle-knob"></div></div></div>`;
-    const weekend=this.state.showWeekend?this.state.days.slice(5,7).map((d,i)=>this.renderDayCard(d,i+5)).join(''):'';
-    document.getElementById('daysList').innerHTML=first5+weekendToggle+weekend;
-    this.attachDayListeners();
+    const days = [
+      ...this.state.days.slice(0,5).map((d,i)=>this.dayCard(d,i)),
+      `<div class="weekend-card">
+        <div style="font-weight:800">Show weekends</div>
+        <div id="weekendToggle" class="switch ${this.state.showWeekend?'on':''}" role="switch" aria-checked="${this.state.showWeekend}">
+          <div class="knob"></div>
+        </div>
+      </div>`,
+      ...(this.state.showWeekend?this.state.days.slice(5).map((d,i)=>this.dayCard(d,i+5)):[])
+    ].join('');
+    document.getElementById('daysList').innerHTML=days;
+    this.bindDays();
   }
-  renderDayCard(day, idx){
-    const isWeekend = day.name==='Saturday' || day.name==='Sunday';
 
-    const bText = day.breakfast==='Custom'?(day.customBreakfast||'Custom'): day.breakfast==='None'?'No breakfast': (day.breakfast||'Select breakfast');
-    const lText = day.lunch==='Custom'?(day.customLunch||'Custom'): day.lunch==='None'?'No lunch': (day.lunch||'Select lunch');
-    const dText = day.dinner==='Custom'?(day.customDinner||'Custom'): day.dinner==='None'?'No dinner': (day.dinner||'Select dinner');
-    const s1Text = day.side==='Custom'?(day.customSide||'Custom'): day.side==='None'?'': (day.side||'');
-    const s2Text = day.side2==='Custom'?(day.customSide2||'Custom'): day.side2==='None'?'': (day.side2||'');
+  dayCard(d,i){
+    const w = (d.name==='Saturday'||d.name==='Sunday');
+    const bTx = d.breakfast==='Custom'?(d.customBreakfast||'Custom'): d.breakfast==='None'?'No breakfast': (d.breakfast||'Select breakfast');
+    const lTx = d.lunch==='Custom'?(d.customLunch||'Custom'): d.lunch==='None'?'No lunch': (d.lunch||'Select lunch');
+    const dnTx= d.dinner==='Custom'?(d.customDinner||'Custom'): d.dinner==='None'?'No dinner': (d.dinner||'Select dinner');
+    const s1 = d.side==='Custom'?(d.customSide||'Custom'): d.side==='None'?'':(d.side||'');
+    const s2 = d.side2==='Custom'?(d.customSide2||'Custom'): d.side2==='None'?'':(d.side2||'');
 
-    const bEmoji = MEAL_EMOJI[day.breakfast]||'☕️';
-    const lEmoji = MEAL_EMOJI[day.lunch]||'🍽️';
-    const dEmoji = MEAL_EMOJI[day.dinner]||'🍽️';
+    const be = MEAL_EMOJI[d.breakfast]||'☕️';
+    const le = MEAL_EMOJI[d.lunch]||'🍽️';
+    const de = MEAL_EMOJI[d.dinner]||'🍽️';
 
-    const needed = (day.dinnerType==='delivery'?2:3) + (isWeekend?1:0);
-    const complete = (isWeekend&&day.breakfast?1:0) + (day.lunch?1:0) + (day.dinner?1:0) + (day.dinnerType!=='delivery'&&day.side?1:0);
+    const need = (d.dinnerType==='delivery'?2:3) + (w?1:0);
+    const comp = (w&&d.breakfast?1:0) + (d.lunch?1:0) + (d.dinner?1:0) + (d.dinnerType!=='delivery'&&d.side?1:0);
 
     return `
-    <div class="day-card ${complete<needed?'incomplete':''}" data-day="${idx}">
+    <section class="day-card ${comp<need?'incomplete':''}" data-day="${i}">
       <div class="day-header">
         <div>
-          <div class="day-title">${day.name}<span class="chip">${complete}/${needed}</span></div>
-          <div class="day-date">${this.fmtDate(day.date)}</div>
+          <div class="day-title">${d.name}</div>
+          <div class="day-date">${this.fmtDate(d.date)}</div>
         </div>
-        <div style="display:flex;align-items:center;gap:8px">
-          <div class="bread-toggle ${day.breadFlag?'active':''}" data-day="${idx}" title="Toggle Bread">🍞</div>
+        <div class="day-actions">
+          <button class="pill bread ${d.breadFlag?'is-on':''}" data-day="${i}">🍞 Bread</button>
         </div>
       </div>
 
-      ${isWeekend ? `
-      <div class="meal-item ${!day.breakfast?'empty':''}" data-meal="breakfast" data-day="${idx}">
-        <div class="meal-icon breakfast">${bEmoji}</div>
-        <div class="meal-content">
-          <div class="meal-title">Breakfast</div>
-          <div class="meal-description">${bText}</div>
+      ${w?`
+      <div class="meal ${!d.breakfast?'empty':''}" data-meal="breakfast" data-day="${i}">
+        <div class="icon breakfast">${be}</div>
+        <div class="content">
+          <div class="title">Breakfast</div>
+          <div class="desc">${bTx}</div>
         </div>
       </div>`:''}
 
-      <div class="meal-item ${!day.lunch?'empty':''}" data-meal="lunch" data-day="${idx}">
-        <div class="meal-icon lunch">${lEmoji}</div>
-        <div class="meal-content">
-          <div class="meal-title">Lunch</div>
-          <div class="meal-description">${lText}</div>
+      <div class="meal ${!d.lunch?'empty':''}" data-meal="lunch" data-day="${i}">
+        <div class="icon lunch">${le}</div>
+        <div class="content">
+          <div class="title">Lunch</div>
+          <div class="desc">${lTx}</div>
         </div>
       </div>
 
-      <div class="meal-item ${!day.dinner?'empty':''}" data-meal="dinner" data-day="${idx}">
-        <div class="meal-icon dinner">${dEmoji}</div>
-        <div class="meal-content">
-          <div class="meal-title">Dinner</div>
-          <div class="meal-description">${dText}${s1Text?` • ${s1Text}`:''}${s2Text?` • ${s2Text}`:''}</div>
+      <div class="meal ${!d.dinner?'empty':''}" data-meal="dinner" data-day="${i}">
+        <div class="icon dinner">${de}</div>
+        <div class="content">
+          <div class="title">Dinner</div>
+          <div class="desc">${dnTx}${s1?` • ${s1}`:''}${s2?` • ${s2}`:''}</div>
         </div>
-        <div class="type-toggles inline">
-          <button class="type-toggle wv-toggle ${day.dinnerType==='quick'?'active quick':''}" data-origin="week" data-type="quick" data-day="${idx}">Quick</button>
-          <button class="type-toggle wv-toggle ${day.dinnerType==='delivery'?'active delivery':''}" data-origin="week" data-type="delivery" data-day="${idx}">Delivery</button>
+        <div class="inline-toggles">
+          <button class="tag ${d.dinnerType==='quick'?'active quick':''}" data-toggle="quick" data-day="${i}">Quick</button>
+          <button class="tag ${d.dinnerType==='delivery'?'active delivery':''}" data-toggle="delivery" data-day="${i}">Delivery</button>
         </div>
       </div>
-    </div>`;
+    </section>`;
   }
-  attachDayListeners(){
-    // open modals on row click
-    document.querySelectorAll('.meal-item').forEach(el=>{
-      el.onclick=()=>{ const idx=+el.dataset.day; const mt=el.dataset.meal;
-        if(mt==='breakfast') this.openBreakfast(idx);
-        else if(mt==='lunch') this.openLunch(idx);
-        else this.openDinner(idx);
+
+  bindDays(){
+    // open rows
+    document.querySelectorAll('.meal').forEach(el=>{
+      el.onclick = () => {
+        const day = +el.dataset.day;
+        const t = el.dataset.meal;
+        if(t==='breakfast') this.openBreakfast(day);
+        else if(t==='lunch') this.openLunch(day);
+        else this.openDinner(day);
       };
     });
-    // inline week-view toggles
-    document.querySelectorAll('.wv-toggle').forEach(btn=>{
+    // inline dinner toggles
+    document.querySelectorAll('.tag').forEach(btn=>{
+      btn.onclick = (e)=>{
+        e.stopPropagation();
+        const day=+btn.dataset.day;
+        const type=btn.dataset.toggle;
+        const d=this.state.days[day];
+        d.dinnerType = (d.dinnerType===type)?'regular':type;
+        if(d.dinnerType==='delivery'){ d.side='None'; d.side2=null; d.customSide2=null; }
+        this.save(); this.render();
+      };
+    });
+    // bread pill
+    document.querySelectorAll('.pill.bread').forEach(btn=>{
       btn.onclick=(e)=>{
         e.stopPropagation();
-        const idx=+btn.dataset.day, type=btn.dataset.type, d=this.state.days[idx];
-        d.dinnerType = (d.dinnerType===type) ? 'regular' : type;
-        if(d.dinnerType==='delivery'){ d.side='None'; d.side2=null; d.customSide2=null; }
-        this.saveState(); this.render();
+        const day=+btn.dataset.day;
+        const d=this.state.days[day];
+        d.breadFlag = !d.breadFlag;
+        this.save(); this.render();
       };
     });
-    // weekend visibility + bread toggle
+    // weekend toggle
     const wt=document.getElementById('weekendToggle');
-    if(wt) wt.onclick=()=>{ this.state.showWeekend=!this.state.showWeekend; this.saveState(); this.render(); };
-
-    document.querySelectorAll('.bread-toggle').forEach(b=>{
-      b.onclick=(e)=>{ e.stopPropagation(); const idx=+b.dataset.day; this.state.days[idx].breadFlag=!this.state.days[idx].breadFlag; this.saveState(); this.render(); };
-    });
+    if(wt) wt.onclick=()=>{ this.state.showWeekend=!this.state.showWeekend; this.save(); this.render(); };
   }
 
-  getDinnerOptions(day){
-    const isWeekend = day.name==='Saturday' || day.name==='Sunday';
-    if(day.dinnerType==='quick') return CATS.dinnerQuick;
-    if(day.dinnerType==='delivery') return CATS.delivery;
-    if(isWeekend) return CATS.dinnerWeekend;
+  dinnerOptions(d){
+    const w = (d.name==='Saturday'||d.name==='Sunday');
+    if(d.dinnerType==='quick') return CATS.dinnerQuick;
+    if(d.dinnerType==='delivery') return CATS.delivery;
+    if(w) return CATS.dinnerWeekend;
     return CATS.dinnerRegular;
   }
 
-  renderGrid(type, selected, options){
-    return `<div class="bento-grid" data-type="${type}">
+  grid(type, selected, options){
+    return `<div class="grid" data-type="${type}">
       ${options.map(name=>`
-        <div class="bento-item ${selected===name?'selected':''}" data-meal="${name}" data-type="${type}">
-          <span class="bento-emoji">${MEAL_EMOJI[name]||'🍽️'}</span>
-          <span>${name}</span>
+        <div class="tile ${selected===name?'selected':''}" data-meal="${name}" data-type="${type}">
+          <div class="emo">${MEAL_EMOJI[name]||'🍽️'}</div>
+          <div>${name}</div>
         </div>`).join('')}
     </div>`;
   }
 
-  openBreakfast(idx){
-    const day=this.state.days[idx];
-    if(!(day.name==='Saturday'||day.name==='Sunday')) return; // breakfast only weekends
-    this.currentDayIndex=idx;
-    let body=this.renderGrid('breakfast', day.breakfast, CATS.breakfast);
-    if(day.breakfast==='Custom'){
-      body+=`<div class="input-group">
-        <label class="input-label">Custom Breakfast</label>
-        <input class="input" id="customBreakfastInput" value="${day.customBreakfast||''}" placeholder="Enter custom breakfast">
-      </div>`;
+  openBreakfast(i){
+    const d=this.state.days[i];
+    if(!(d.name==='Saturday'||d.name==='Sunday')) return;
+    this.idx=i;
+    let body=this.grid('breakfast', d.breakfast, CATS.breakfast);
+    if(d.breakfast==='Custom'){
+      body += `<div class="field"><div class="label">Custom Breakfast</div><input class="input" id="customBreakfastInput" value="${d.customBreakfast||''}" placeholder="Enter custom breakfast"/></div>`;
     }
-    this.openModal({
-      title:`Breakfast - ${day.name}`,
-      subtitle:this.fmtDate(day.date),
+    this.showSheet({
+      title:`Breakfast — ${d.name}`,
+      sub:this.fmtDate(d.date),
       body,
       footer:[
-        {label:'🎲 Random', onClick:()=>this.randomize('breakfast', idx)},
-        {label:'🗑️ Clear', onClick:()=>this.clear('breakfast', idx)},
-        {label:'Cancel', onClick:()=>this.closeModal()},
-        {label:'Save', primary:true, onClick:()=>this.saveBreakfast(idx)}
+        {label:'🎲 Random',cb:()=>this.randomize('breakfast',i)},
+        {label:'🗑️ Clear',cb:()=>this.clear('breakfast',i)},
+        {label:'Cancel',cb:()=>this.hideSheet()},
+        {label:'Save',primary:true,cb:()=>this.saveBreakfast(i)}
       ]
     });
   }
-  saveBreakfast(idx){
-    const day=this.state.days[idx];
-    if(day.breakfast==='Custom'){ const el=document.getElementById('customBreakfastInput'); if(el) day.customBreakfast=el.value; }
-    this.saveState(); this.render(); this.closeModal(); this.toast('Saved! ✓');
+  saveBreakfast(i){
+    const d=this.state.days[i];
+    if(d.breakfast==='Custom'){ const el=document.getElementById('customBreakfastInput'); if(el) d.customBreakfast=el.value; }
+    this.save(); this.render(); this.hideSheet(); this.toast('Saved! ✓');
   }
 
-  openLunch(idx){
-    const day=this.state.days[idx]; this.currentDayIndex=idx;
-    let body=this.renderGrid('lunch', day.lunch, CATS.lunch);
-    if(day.lunch==='Custom'){
-      body+=`<div class="input-group">
-        <label class="input-label">Custom Lunch</label>
-        <input class="input" id="customLunchInput" value="${day.customLunch||''}" placeholder="Enter custom meal">
-      </div>`;
+  openLunch(i){
+    const d=this.state.days[i]; this.idx=i;
+    let body=this.grid('lunch', d.lunch, CATS.lunch);
+    if(d.lunch==='Custom'){
+      body += `<div class="field"><div class="label">Custom Lunch</div><input class="input" id="customLunchInput" value="${d.customLunch||''}" placeholder="Enter custom meal"/></div>`;
     }
-    this.openModal({
-      title:`Lunch - ${day.name}`,
-      subtitle:this.fmtDate(day.date),
+    this.showSheet({
+      title:`Lunch — ${d.name}`,
+      sub:this.fmtDate(d.date),
       body,
       footer:[
-        {label:'🎲 Random', onClick:()=>this.randomize('lunch', idx)},
-        {label:'🗑️ Clear', onClick:()=>this.clear('lunch', idx)},
-        {label:'Cancel', onClick:()=>this.closeModal()},
-        {label:'Save', primary:true, onClick:()=>this.saveLunch(idx)}
+        {label:'🎲 Random',cb:()=>this.randomize('lunch',i)},
+        {label:'🗑️ Clear',cb:()=>this.clear('lunch',i)},
+        {label:'Cancel',cb:()=>this.hideSheet()},
+        {label:'Save',primary:true,cb:()=>this.saveLunch(i)}
       ]
     });
   }
-  saveLunch(idx){
-    const day=this.state.days[idx];
-    if(day.lunch==='Custom'){ const el=document.getElementById('customLunchInput'); if(el) day.customLunch=el.value; }
-    this.saveState(); this.render(); this.closeModal(); this.toast('Saved! ✓');
+  saveLunch(i){
+    const d=this.state.days[i];
+    if(d.lunch==='Custom'){ const el=document.getElementById('customLunchInput'); if(el) d.customLunch=el.value; }
+    this.save(); this.render(); this.hideSheet(); this.toast('Saved! ✓');
   }
 
-  openDinner(idx){
-    const day=this.state.days[idx]; this.currentDayIndex=idx;
-    const options=this.getDinnerOptions(day);
+  openDinner(i){
+    const d=this.state.days[i]; this.idx=i;
     let body = `
-      <div class="controls">
-        <span style="font-weight:700;color:#aaa">Dinner Type</span>
-        <div class="type-toggles">
-          <button class="type-toggle ${day.dinnerType==='quick'?'active quick':''}" id="modalQuick">Quick</button>
-          <button class="type-toggle ${day.dinnerType==='delivery'?'active delivery':''}" id="modalDelivery">Delivery</button>
+      <div class="control-row">
+        <div class="kbd">Dinner Type</div>
+        <div>
+          <button class="tag ${d.dinnerType==='quick'?'active quick':''}" id="modalQuick">Quick</button>
+          <button class="tag ${d.dinnerType==='delivery'?'active delivery':''}" id="modalDelivery">Delivery</button>
         </div>
       </div>`;
-    body += this.renderGrid('dinner', day.dinner, options);
-    if(day.dinner==='Custom'){
-      body += `<div class="input-group"><label class="input-label">Custom Dinner</label>
-        <input class="input" id="customDinnerInput" value="${day.customDinner||''}" placeholder="Enter custom meal"></div>`;
+    body += this.grid('dinner', d.dinner, this.dinnerOptions(d));
+    if(d.dinner==='Custom'){
+      body += `<div class="field"><div class="label">Custom Dinner</div><input class="input" id="customDinnerInput" value="${d.customDinner||''}" placeholder="Enter custom meal"/></div>`;
     }
-    body += `<div class="input-group"><label class="input-label">Side Dish</label></div>`;
-    body += this.renderGrid('side', day.side, CATS.side);
-    if(day.side==='Custom'){
-      body += `<div class="input-group"><input class="input" id="customSideInput" value="${day.customSide||''}" placeholder="Enter custom side"></div>`;
+    body += `<div class="field"><div class="label">Side Dish</div></div>`;
+    body += this.grid('side', d.side, CATS.side);
+    if(d.side==='Custom'){
+      body += `<div class="field"><input class="input" id="customSideInput" value="${d.customSide||''}" placeholder="Enter custom side"/></div>`;
     }
-    body += `<div class="input-group"><label class="input-label">Side 2 (optional)</label></div>`;
-    body += this.renderGrid('side2', day.side2, CATS.side);
-    if(day.side2==='Custom'){
-      body += `<div class="input-group"><input class="input" id="customSide2Input" value="${day.customSide2||''}" placeholder="Enter custom side 2"></div>`;
+    body += `<div class="field"><div class="label">Side 2 (optional)</div></div>`;
+    body += this.grid('side2', d.side2, CATS.side);
+    if(d.side2==='Custom'){
+      body += `<div class="field"><input class="input" id="customSide2Input" value="${d.customSide2||''}" placeholder="Enter custom side 2"/></div>`;
     }
 
-    this.openModal({
-      title:`Dinner - ${day.name}`,
-      subtitle:this.fmtDate(day.date),
+    this.showSheet({
+      title:`Dinner — ${d.name}`,
+      sub:this.fmtDate(d.date),
       body,
       footer:[
-        {label:'🎲 Random', onClick:()=>this.randomize('dinner', idx)},
-        {label:'🗑️ Clear', onClick:()=>this.clear('dinner', idx)},
-        {label:'Cancel', onClick:()=>this.closeModal()},
-        {label:'Save', primary:true, onClick:()=>this.saveDinner(idx)}
-      ]
+        {label:'🎲 Random',cb:()=>this.randomize('dinner',i)},
+        {label:'🗑️ Clear',cb:()=>this.clear('dinner',i)},
+        {label:'Cancel',cb:()=>this.hideSheet()},
+        {label:'Save',primary:true,cb:()=>this.saveDinner(i)}
+      ],
+      after:()=>{
+        const q=document.getElementById('modalQuick');
+        const dl=document.getElementById('modalDelivery');
+        if(q) q.onclick=()=>{ d.dinnerType=(d.dinnerType==='quick'?'regular':'quick'); this.openDinner(i); };
+        if(dl) dl.onclick=()=>{ d.dinnerType=(d.dinnerType==='delivery'?'regular':'delivery'); if(d.dinnerType==='delivery'){ d.side='None'; d.side2=null; d.customSide2=null; } this.openDinner(i); };
+      }
     });
-
-    // attach modal toggles
-    setTimeout(()=>{
-      const q=document.getElementById('modalQuick'), dl=document.getElementById('modalDelivery');
-      if(q) q.onclick=()=>{ day.dinnerType = (day.dinnerType==='quick'?'regular':'quick'); this.openDinner(idx); };
-      if(dl) dl.onclick=()=>{ day.dinnerType = (day.dinnerType==='delivery'?'regular':'delivery'); if(day.dinnerType==='delivery'){ day.side='None'; day.side2=null; day.customSide2=null; } this.openDinner(idx); };
-    },0);
   }
-  saveDinner(idx){
-    const day=this.state.days[idx];
-    if(day.dinner==='Custom'){ const i=document.getElementById('customDinnerInput'); if(i) day.customDinner=i.value; }
-    if(day.side==='Custom'){ const i=document.getElementById('customSideInput'); if(i) day.customSide=i.value; }
-    if(day.side2==='Custom'){ const i=document.getElementById('customSide2Input'); if(i) day.customSide2=i.value; }
-    this.saveState(); this.render(); this.closeModal(); this.toast('Saved! ✓');
+  saveDinner(i){
+    const d=this.state.days[i];
+    if(d.dinner==='Custom'){ const el=document.getElementById('customDinnerInput'); if(el) d.customDinner=el.value; }
+    if(d.side==='Custom'){ const el=document.getElementById('customSideInput'); if(el) d.customSide=el.value; }
+    if(d.side2==='Custom'){ const el=document.getElementById('customSide2Input'); if(el) d.customSide2=el.value; }
+    this.save(); this.render(); this.hideSheet(); this.toast('Saved! ✓');
   }
 
-  openModal({title,subtitle,body,footer}){
-    const overlay=document.getElementById('modalOverlay');
+  showSheet({title,sub,body,footer,after}){
+    const ov=document.getElementById('modalOverlay');
+    const sh=document.getElementById('sheet');
     document.getElementById('modalTitle').textContent=title;
-    document.getElementById('modalSubtitle').textContent=subtitle;
+    document.getElementById('modalSubtitle').textContent=sub||'';
     document.getElementById('modalBody').innerHTML=body;
     const foot=document.getElementById('modalFooter'); foot.innerHTML='';
-    footer.forEach(cfg=>{ const b=document.createElement('button'); b.className=cfg.primary?'btn btn-primary':'btn'; b.textContent=cfg.label; b.onclick=cfg.onClick; foot.appendChild(b); });
-    overlay.classList.add('show');
-
+    (footer||[]).forEach(f=>{
+      const b=document.createElement('button');
+      b.className='btn'+(f.primary?' primary':'');
+      b.textContent=f.label; b.onclick=f.cb; foot.appendChild(b);
+    });
+    ov.classList.add('show');
+    // bind tiles
     setTimeout(()=>{
-      document.querySelectorAll('.bento-item').forEach(item=>{
-        item.onclick=()=>{
-          const type=item.dataset.type, name=item.dataset.meal, day=this.state.days[this.currentDayIndex];
-          document.querySelectorAll(`.bento-grid[data-type="${type}"] .bento-item`).forEach(x=>x.classList.remove('selected'));
-          item.classList.add('selected');
-          day[type] = name;
-          if(name==='Custom'){
-            if(type==='breakfast') this.openBreakfast(this.currentDayIndex);
-            else if(type==='lunch') this.openLunch(this.currentDayIndex);
-            else this.openDinner(this.currentDayIndex);
+      document.querySelectorAll('.tile').forEach(t=>{
+        t.onclick=()=>{
+          const type=t.dataset.type, val=t.dataset.meal, d=this.state.days[this.idx];
+          document.querySelectorAll(`.grid[data-type="${type}"] .tile`).forEach(x=>x.classList.remove('selected'));
+          t.classList.add('selected');
+          d[type]=val;
+          if(val==='Custom'){
+            if(type==='breakfast') this.openBreakfast(this.idx);
+            else if(type==='lunch') this.openLunch(this.idx);
+            else this.openDinner(this.idx);
           }
         };
       });
+      after&&after();
     },0);
   }
-  closeModal(){ document.getElementById('modalOverlay').classList.remove('show'); }
+  hideSheet(){ document.getElementById('modalOverlay').classList.remove('show'); }
 
-  clear(type, idx){
-    const d=this.state.days[idx];
+  clear(type, i){
+    const d=this.state.days[i];
     d[type]=null; d[`custom${type[0].toUpperCase()+type.slice(1)}`]=null;
     if(type==='dinner'){ d.side=null; d.customSide=null; d.side2=null; d.customSide2=null; }
-    if(type==='breakfast') this.openBreakfast(idx);
-    else if(type==='lunch') this.openLunch(idx);
-    else this.openDinner(idx);
+    (type==='breakfast')?this.openBreakfast(i): (type==='lunch')?this.openLunch(i):this.openDinner(i);
   }
 
-  randomize(type, idx){
-    const d=this.state.days[idx];
+  randomize(type, i){
+    const d=this.state.days[i];
     let opts=[];
-    if(type==='breakfast') opts = CATS.breakfast;
-    else if(type==='lunch') opts = CATS.lunch;
-    else opts = this.getDinnerOptions(d);
-    opts = opts.filter(x=>x!=='None' && x!=='Custom');
-    if(opts.length){ d[type] = opts[Math.floor(Math.random()*opts.length)]; }
-    if(type==='dinner' && d.dinnerType!=='delivery'){
+    if(type==='breakfast') opts=CATS.breakfast;
+    else if(type==='lunch') opts=CATS.lunch;
+    else opts=this.dinnerOptions(d);
+    opts=opts.filter(x=>x!=='None'&&x!=='Custom');
+    if(opts.length) d[type]=opts[Math.floor(Math.random()*opts.length)];
+    if(type==='dinner'&&d.dinnerType!=='delivery'){
       const so=CATS.side.filter(x=>x!=='None'&&x!=='Custom');
-      if(so.length) d.side = so[Math.floor(Math.random()*so.length)];
+      d.side=so[Math.floor(Math.random()*so.length)];
     }
-    if(type==='breakfast') this.openBreakfast(idx);
-    else if(type==='lunch') this.openLunch(idx);
-    else this.openDinner(idx);
+    (type==='breakfast')?this.openBreakfast(i): (type==='lunch')?this.openLunch(i):this.openDinner(i);
   }
 
   randomizeWeek(){
-    const lunchOpts=CATS.lunch.filter(x=>x!=='None'&&x!=='Custom');
-    const sideOpts=CATS.side.filter(x=>x!=='None'&&x!=='Custom');
-    const bfastOpts=CATS.breakfast.filter(x=>x!=='None'&&x!=='Custom');
-
+    const lo=CATS.lunch.filter(x=>x!=='None'&&x!=='Custom');
+    const so=CATS.side.filter(x=>x!=='None'&&x!=='Custom');
+    const bo=CATS.breakfast.filter(x=>x!=='None'&&x!=='Custom');
     this.state.days.forEach(d=>{
-      if(d.name==='Saturday'||d.name==='Sunday'){
-        d.breakfast = bfastOpts[Math.floor(Math.random()*bfastOpts.length)];
-      } else { d.breakfast=null; d.customBreakfast=null; }
-      const dinnerOpts=this.getDinnerOptions(d).filter(x=>x!=='None'&&x!=='Custom');
-      d.lunch = lunchOpts[Math.floor(Math.random()*lunchOpts.length)];
-      d.dinner = dinnerOpts[Math.floor(Math.random()*dinnerOpts.length)];
-      if(d.dinnerType!=='delivery'){ d.side = sideOpts[Math.floor(Math.random()*sideOpts.length)]; }
-      d.side2=null; d.customSide2=null; // leave optional side empty by default
+      if(d.name==='Saturday'||d.name==='Sunday'){ d.breakfast=bo[Math.floor(Math.random()*bo.length)]; }
+      else { d.breakfast=null; d.customBreakfast=null; }
+      const do_=this.dinnerOptions(d).filter(x=>x!=='None'&&x!=='Custom');
+      d.lunch=lo[Math.floor(Math.random()*lo.length)];
+      d.dinner=do_[Math.floor(Math.random()*do_.length)];
+      if(d.dinnerType!=='delivery') d.side=so[Math.floor(Math.random()*so.length)];
+      d.side2=null; d.customSide2=null;
     });
-
-    this.saveState(); this.render(); this.toast('Week randomized! 🎲');
+    this.save(); this.render(); this.toast('Week randomized! 🎲');
   }
 
   clearWeek(){
     if(confirm('Clear all meals for this week?')){
       this.state.days.forEach(d=>{
-        d.breakfast=null; d.customBreakfast=null;
-        d.lunch=null; d.customLunch=null;
-        d.dinner=null; d.customDinner=null;
-        d.side=null; d.customSide=null;
-        d.side2=null; d.customSide2=null;
-        d.dinnerType='regular';
-        d.breadFlag=false;
+        d.breakfast=d.lunch=d.dinner=d.side=d.side2=null;
+        d.customBreakfast=d.customLunch=d.customDinner=d.customSide=d.customSide2=null;
+        d.dinnerType='regular'; d.breadFlag=false;
       });
-      this.saveState(); this.render(); this.toast('Week cleared');
+      this.save(); this.render(); this.toast('Week cleared');
     }
   }
 
-  generateGrocery(){
-    const map={};
-    const add=(store,item)=>{ if(!map[store]) map[store]=[]; if(!map[store].includes(item)) map[store].push(item); };
-
+  groceries(){
+    const map={}; const add=(s,i)=>{ if(!map[s]) map[s]=[]; if(!map[s].includes(i)) map[s].push(i); };
     this.state.days.forEach(d=>{
-      const meals=[];
-      if((d.name==='Saturday'||d.name==='Sunday') && d.breakfast && d.breakfast!=='None' && d.breakfast!=='Custom') meals.push(d.breakfast);
-      ['lunch','dinner','side','side2'].forEach(t=>{ if(d[t] && d[t]!=='None' && d[t]!=='Custom') meals.push(d[t]); });
-      if(d.breadFlag) meals.push('Bread'); // treat bread flag as an item
-
-      meals.forEach(m=>{
-        const ings = MEAL_ING[m] || (DATA.ingredients[m]?.name ? [DATA.ingredients[m].name] : []);
+      const list=[];
+      if((d.name==='Saturday'||d.name==='Sunday')&&d.breakfast&&d.breakfast!=='None'&&d.breakfast!=='Custom') list.push(d.breakfast);
+      ['lunch','dinner','side','side2'].forEach(t=>{ if(d[t]&&d[t]!=='None'&&d[t]!=='Custom') list.push(d[t]); });
+      if(d.breadFlag) list.push('Bread');
+      list.forEach(m=>{
+        const ings = MEAL_ING[m] || [];
         ings.forEach(ing=>{
-          const store = this.findStore(ing);
-          add(store, ing);
+          const store=this.storeFor(ing); add(store, ing);
         });
       });
     });
-
     return map;
   }
-  findStore(ingredient){
-    for(const [store, items] of Object.entries(STORES)){
-      if(items.includes(ingredient)) return store;
-    }
-    return 'Other';
-  }
+  storeFor(ing){ for(const [s,items] of Object.entries(STORES)) if(items.includes(ing)) return s; return 'Other' }
 
-  openShoppingList(){
-    const g=this.generateGrocery(), stores=Object.keys(g).sort();
+  openShopping(){
+    const g=this.groceries(), stores=Object.keys(g).sort();
     let body='';
     stores.forEach(s=>{
-      body+=`<div class="store-section">
-        <h3 class="store-title">${s}</h3>
-        ${g[s].map(it=>`
-          <div class="grocery-item">
-            <div class="checkbox"></div>
-            <div class="grocery-item-text">${ING_EMOJI[it]||''} ${it}</div>
-          </div>`).join('')}
-      </div>`;
+      body+=`<div class="field"><div class="label" style="margin-bottom:8px;font-size:13px;font-weight:900">${s}</div></div>`;
+      body+=`<div class="grid" style="grid-template-columns:1fr">`+
+        g[s].map(it=>`<div class="tile" style="justify-content:flex-start;flex-direction:row;gap:10px">
+          <div class="emo">${ING_EMOJI[it]||'🛒'}</div><div style="font-weight:700">${it}</div>
+        </div>`).join('')+`</div>`;
     });
-    this.openModal({
+    this.showSheet({
       title:'Shopping List',
-      subtitle:'Check off items as you shop',
+      sub:'Check off items as you shop',
       body,
       footer:[
-        {label:'Close', onClick:()=>this.closeModal()},
-        {label:'Share', primary:true, onClick:()=>this.shareShoppingList(g)}
+        {label:'Close',cb:()=>this.hideSheet()},
+        {label:'Share',primary:true,cb:()=>this.shareShopping(g)}
       ]
     });
-    setTimeout(()=>{ document.querySelectorAll('.checkbox').forEach(c=>c.onclick=()=>{c.classList.toggle('checked'); c.parentElement.classList.toggle('checked');}); },0);
   }
-
-  shareShoppingList(g){
-    let text='🛒 Shopping List\n\n';
-    Object.keys(g).sort().forEach(store=>{
-      text+=`${store}:\n`;
-      g[store].forEach(it=>{ text+=`• ${ING_EMOJI[it]||''} ${it}\n`; });
-      text+='\n';
+  shareShopping(g){
+    let t='🛒 Shopping List\n\n';
+    Object.keys(g).sort().forEach(s=>{
+      t+=`${s}:\n`; g[s].forEach(i=>t+=`• ${ING_EMOJI[i]||''} ${i}\n`); t+='\n';
     });
-    this.share('Shopping List', text);
+    this.share('Shopping List', t);
   }
 
-  shareWeekPlan(){
-    let text='🗓️ Weekly Meal Plan\n\n';
+  shareWeek(){
+    let t='🗓️ Weekly Meal Plan\n\n';
     this.state.days.forEach(d=>{
-      text+=`${d.name} (${this.fmtDate(d.date)})\n`;
+      t+=`${d.name} (${this.fmtDate(d.date)})\n`;
       const b=d.breakfast==='Custom'?d.customBreakfast:d.breakfast;
       const l=d.lunch==='Custom'?d.customLunch:d.lunch;
       const dn=d.dinner==='Custom'?d.customDinner:d.dinner;
       const s1=d.side==='Custom'?d.customSide:d.side;
       const s2=d.side2==='Custom'?d.customSide2:d.side2;
-      if(d.name==='Saturday'||d.name==='Sunday') text+=`  Breakfast: ${b||'—'}\n`;
-      text+=`  Lunch: ${l||'—'}\n  Dinner: ${dn||'—'}`;
-      if(d.dinnerType==='delivery') text+=' [Delivery]';
-      else if(d.dinnerType==='quick') text+=' [Quick]';
-      if(s1&&s1!=='None') text+=`\n  Side: ${s1}`;
-      if(s2&&s2!=='None') text+=`\n  Side 2: ${s2}`;
-      if(d.breadFlag) text+=`\n  Bread: yes`;
-      text+='\n\n';
+      if(d.name==='Saturday'||d.name==='Sunday') t+=`  Breakfast: ${b||'—'}\n`;
+      t+=`  Lunch: ${l||'—'}\n  Dinner: ${dn||'—'}`;
+      if(d.dinnerType==='delivery') t+=' [Delivery]';
+      else if(d.dinnerType==='quick') t+=' [Quick]';
+      if(s1&&s1!=='None') t+=`\n  Side: ${s1}`;
+      if(s2&&s2!=='None') t+=`\n  Side 2: ${s2}`;
+      if(d.breadFlag) t+=`\n  Bread: yes`;
+      t+='\n\n';
     });
-    const g=this.generateGrocery(); text+='\n🛒 Shopping List\n\n';
-    Object.keys(g).sort().forEach(store=>{ text+=`${store}:\n`; g[store].forEach(it=>text+=`• ${ING_EMOJI[it]||''} ${it}\n`); text+='\n'; });
-    this.share('Meal Plan & Shopping', text);
+    const g=this.groceries(); t+='\n🛒 Shopping List\n\n';
+    Object.keys(g).sort().forEach(s=>{ t+=`${s}:\n`; g[s].forEach(i=>t+=`• ${ING_EMOJI[i]||''} ${i}\n`); t+='\n'; });
+    this.share('Meal Plan & Shopping', t);
   }
 
-  share(title,text){ if(navigator.share) navigator.share({title,text}); else if(navigator.clipboard){ navigator.clipboard.writeText(text); this.toast('Copied to clipboard! 📋'); } }
-  toast(msg){ const t=document.getElementById('toast'); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),2000); }
+  share(title,text){ if(navigator.share) navigator.share({title, text}); else if(navigator.clipboard){ navigator.clipboard.writeText(text); this.toast('Copied to clipboard! 📋'); } }
+  toast(msg){ const el=document.getElementById('toast'); el.textContent=msg; el.classList.add('show'); setTimeout(()=>el.classList.remove('show'),1800); }
 
-  attachListeners(){
+  bindGlobal(){
     const on=(id,fn)=>document.getElementById(id).onclick=fn;
     on('themeToggle',()=>this.toggleTheme());
-    on('prevWeek',()=>this.navigateWeek('prev'));
-    on('nextWeek',()=>this.navigateWeek('next'));
+    on('prevWeek',()=>this.nav('prev'));
+    on('nextWeek',()=>this.nav('next'));
     on('randomizeBtn',()=>this.randomizeWeek());
-    on('shoppingBtn',()=>this.openShoppingList());
-    on('shareBtn',()=>this.shareWeekPlan());
+    on('shoppingBtn',()=>this.openShopping());
+    on('shareBtn',()=>this.shareWeek());
     on('clearBtn',()=>this.clearWeek());
-    on('modalOverlay',e=>{ if(e.target.id==='modalOverlay') this.closeModal(); });
-    document.addEventListener('keydown',e=>{
-      if(e.key==='Escape') this.closeModal();
+    // overlay close
+    document.getElementById('modalOverlay').onclick=(e)=>{
+      if(e.target.id==='modalOverlay') this.hideSheet();
+    };
+    // keys
+    document.addEventListener('keydown',(e)=>{
+      if(e.key==='Escape') this.hideSheet();
       const open=document.getElementById('modalOverlay').classList.contains('show');
-      if(e.key==='ArrowLeft' && !open) this.navigateWeek('prev');
-      if(e.key==='ArrowRight' && !open) this.navigateWeek('next');
+      if(e.key==='ArrowLeft' && !open) this.nav('prev');
+      if(e.key==='ArrowRight' && !open) this.nav('next');
     });
   }
 }
