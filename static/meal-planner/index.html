@@ -1043,7 +1043,7 @@
             const type = btn.dataset.toggle;
             const d = this.state.days[day];
             d.dinnerType = (d.dinnerType === type) ? 'regular' : type;
-            if (d.dinnerType === 'delivery') { d.side = ['None']; d.side2 = null; d.customSide2 = null; }
+            if (d.dinnerType === 'delivery') { d.side = []; d.customSide = []; }
             this.save(); this.render();
           };
         });
@@ -1173,7 +1173,7 @@
             const q = document.getElementById('modalQuick');
             const dl = document.getElementById('modalDelivery');
             if (q) q.onclick = () => { d.dinnerType = (d.dinnerType === 'quick' ? 'regular' : 'quick'); this.openDinner(i); };
-            if (dl) dl.onclick = () => { d.dinnerType = (d.dinnerType === 'delivery' ? 'regular' : 'delivery'); if (d.dinnerType === 'delivery') { d.side = 'None'; d.side2 = null; d.customSide2 = null; } this.openDinner(i); };
+            if (dl) dl.onclick = () => { d.dinnerType = (d.dinnerType === 'delivery' ? 'regular' : 'delivery'); if (d.dinnerType === 'delivery') { d.side = []; d.customSide = []; } this.openDinner(i); };
           }
         });
       }
@@ -1258,7 +1258,7 @@
       clear(type, i) {
         const d = this.state.days[i];
         d[type] = null; d[`custom${type[0].toUpperCase() + type.slice(1)}`] = null;
-        if (type === 'dinner') { d.side = []; d.customSide = []; d.side2 = null; d.customSide2 = null; }
+        if (type === 'dinner') { d.side = []; d.customSide = []; }
         (type === 'breakfast') ? this.openBreakfast(i) : (type === 'lunch') ? this.openLunch(i) : this.openDinner(i);
       }
 
@@ -1288,7 +1288,6 @@
           d.lunch = lo[Math.floor(Math.random() * lo.length)];
           d.dinner = do_[Math.floor(Math.random() * do_.length)];
           if (d.dinnerType !== 'delivery') d.side = so[Math.floor(Math.random() * so.length)];
-          d.side2 = null; d.customSide2 = null;
         });
         this.save(); this.render(); this.toast('Week randomized! 🎲');
       }
@@ -1298,7 +1297,7 @@
           this.state.days.forEach(d => {
             d.breakfast = d.lunch = d.dinner = null;
             d.customBreakfast = d.customLunch = d.customDinner = null;
-            d.side = d.side2 = d.customSide = d.customSide2 = [];
+            d.side = d.customSide = [];
             d.dinnerType = 'regular'; d.breadFlag = false;
           });
           this.save(); this.render(); this.toast('Week cleared');
@@ -1360,7 +1359,6 @@
           const l = d.lunch === 'Custom' ? d.customLunch : d.lunch;
           const dn = d.dinner === 'Custom' ? d.customDinner : d.dinner;
           const s1 = d.side === 'Custom' ? d.customSide : d.side;
-          const s2 = d.side2 === 'Custom' ? d.customSide2 : d.side2;
           if (d.name === 'Saturday' || d.name === 'Sunday') t += `  Breakfast: ${b || '—'}\n`;
           t += `  Lunch: ${l || '—'}\n  Dinner: ${dn || '—'}`;
           if (d.dinnerType === 'delivery') t += ' [Delivery]';
@@ -1452,8 +1450,10 @@
           // Dinner
           if (d.dinner && d.dinner !== "None") {
             let title = "Dinner: " + (d.dinner === "Custom" ? d.customDinner : d.dinner);
-            const s1 = d.side === "Custom" ? d.customSide : d.side;
-            const s2 = d.side2 === "Custom" ? d.customSide2 : d.side2;
+            if (d.side && d.side.length) {
+              const sides = d.side.map(s => s === "Custom" ? d.customSide.join(", ") : s);
+              title += " + " + sides.join(", ");
+            }
             if (s1 && s1 !== "None") title += " + " + s1;
             if (s2 && s2 !== "None") title += " + " + s2;
             ics += "BEGIN:VEVENT\n";
