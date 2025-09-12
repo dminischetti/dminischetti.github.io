@@ -248,15 +248,15 @@
     }
 
     .icon.breakfast {
-      background: linear-gradient(135deg, #FFFACD, #FFD700);
+      background: linear-gradient(135deg, #00A6FF, #FFFFFF);
     }
 
     .icon.lunch {
-      background: linear-gradient(135deg, #87CEEB, #FFEB3B);
+      background: linear-gradient(135deg, #FA8607, #FFF57B);
     }
 
     .icon.dinner {
-      background: linear-gradient(135deg, #191970, #2E0854);
+      background: linear-gradient(135deg, #01426D, #01162E);
     }
 
     .meal .content {
@@ -1009,7 +1009,7 @@
         <div class="bar-ico">🗑️</div><span>Clear</span>
       </button>
       <button class="bar-btn" id="exportICSBtn">
-        <div class="bar-ico">📅</div><span>Export ICS</span>
+        <div class="bar-ico">📅</div><span>Export</span>
       </button>
     </div>
   </div>
@@ -1475,6 +1475,9 @@
       <div class="control-row">
         <div class="kbd">Dinner Type</div>
         <div>
+          <button class="pill bread ${d.breadFlag ? 'is-on' : ''}" data-day="${i}">
+            ${d.breadFlag ? '🍞 Bread' : '🚫 No Bread'}
+          </button>
           <button class="tag ${d.dinnerType === 'quick' ? 'active quick' : ''}" id="modalQuick">⚡ Quick</button>
           <button class="tag ${d.dinnerType === 'delivery' ? 'active delivery' : ''}" id="modalDelivery">🚚 Delivery</button>
         </div>
