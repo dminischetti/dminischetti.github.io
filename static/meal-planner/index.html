@@ -637,11 +637,8 @@
       <button class="bar-btn" id="randomizeBtn">
         <div class="bar-ico">🎲</div><span>Randomize</span>
       </button>
-      <button class="bar-btn" id="shoppingBtn">
-        <div class="bar-ico">🛒</div><span>Shopping</span>
-      </button>
       <button class="bar-btn" id="shareBtn">
-        <div class="bar-ico">📤</div><span>Share All</span>
+        <div class="bar-ico">📤</div><span>Share</span>
       </button>
       <button class="bar-btn" id="clearBtn">
         <div class="bar-ico">🗑️</div><span>Clear</span>
@@ -1339,6 +1336,51 @@
         this.share('Meal Plan & Shopping', t);
       }
 
+      shareRecap() {
+  // 1. Build recap text (like shareWeek)
+  let recap = '🗓️ Weekly Meal Plan\n\n';
+  this.state.days.forEach(d => {
+    recap += `${d.name} (${this.fmtDate(d.date)})\n`;
+    const b = d.breakfast === 'Custom' ? d.customBreakfast : d.breakfast;
+    const l = d.lunch === 'Custom' ? d.customLunch : d.lunch;
+    const dn = d.dinner === 'Custom' ? d.customDinner : d.dinner;
+    const s1 = d.side === 'Custom' ? d.customSide : d.side;
+    const s2 = d.side2 === 'Custom' ? d.customSide2 : d.side2;
+    if (d.name === 'Saturday' || d.name === 'Sunday') recap += `  Breakfast: ${b || '—'}\n`;
+    recap += `  Lunch: ${l || '—'}\n  Dinner: ${dn || '—'}`;
+    if (d.dinnerType === 'delivery') recap += ' [Delivery]';
+    else if (d.dinnerType === 'quick') recap += ' [Quick]';
+    if (s1 && s1 !== 'None') recap += `\n  Side: ${s1}`;
+    if (s2 && s2 !== 'None') recap += `\n  Side 2: ${s2}`;
+    if (d.breadFlag) recap += `\n  Bread: yes`;
+    recap += '\n\n';
+  });
+
+  // 2. Build shopping list (like openShopping)
+  const g = this.groceries();
+  recap += '\n🛒 Shopping List\n\n';
+  Object.keys(g).sort().forEach(s => {
+    recap += `${s}:\n`;
+    g[s].forEach(i => recap += `• ${ING_EMOJI[i] || ''} ${i}\n`);
+    recap += '\n';
+  });
+
+  // 3. Build modal body (visual)
+  let body = `<pre style="white-space:pre-wrap;font-size:13px;line-height:1.4em;padding:12px">${recap}</pre>`;
+
+  // 4. Show in sheet
+  this.showSheet({
+    title: 'Share Meal Plan',
+    sub: 'Weekly recap + shopping list',
+    body,
+    footer: [
+      { label: 'Close', cb: () => this.hideSheet() },
+      { label: 'Send', primary: true, cb: () => this.share('Meal Plan & Shopping', recap) }
+    ]
+  });
+}
+
+
       share(title, text) { if (navigator.share) navigator.share({ title, text }); else if (navigator.clipboard) { navigator.clipboard.writeText(text); this.toast('Copied to clipboard! 📋'); } }
       toast(msg) { const el = document.getElementById('toast'); el.textContent = msg; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 1800); }
 
@@ -1408,8 +1450,7 @@
         on('prevWeek', () => this.nav('prev'));
         on('nextWeek', () => this.nav('next'));
         on('randomizeBtn', () => this.randomizeWeek());
-        on('shoppingBtn', () => this.openShopping());
-        on('shareBtn', () => this.shareWeek());
+        on('shareBtn', () => this.shareRecap());
         on('clearBtn', () => this.clearWeek());
         on('exportICSBtn', () => this.exportICS());
         // overlay close
