@@ -28,7 +28,6 @@
       --shadow-2: 0 12px 28px rgba(0, 0, 0, .12);
 
       --tap: 48px;
-      /* target size */
 
       /* typography */
       --h1: clamp(20px, 3.6vw, 24px);
@@ -37,19 +36,17 @@
       --small: 12px;
     }
 
-    /* dark mode */
-    @media (prefers-color-scheme: dark) {
-      :root {
-        --bg: #1a1817;
-        --bg-soft: #24201e;
-        --card: #2a2624;
-        --muted: #a3968f;
-        --text: #f0e6e0;
-        --border: #4a4039;
+    /* dark mode - class based instead of media query */
+    body.dark {
+      --bg: #1a1817;
+      --bg-soft: #24201e;
+      --card: #2a2624;
+      --muted: #a3968f;
+      --text: #f0e6e0;
+      --border: #4a4039;
 
-        --shadow-1: 0 8px 24px rgba(0, 0, 0, .35);
-        --shadow-2: 0 20px 32px rgba(0, 0, 0, .40);
-      }
+      --shadow-1: 0 8px 24px rgba(0, 0, 0, .35);
+      --shadow-2: 0 20px 32px rgba(0, 0, 0, .40);
     }
 
     * {
@@ -356,40 +353,48 @@
       transform: translateX(24px)
     }
 
-    /* bottom bar */
+    /* bottom bar - optimized */
     .bottom-bar {
       position: fixed;
       left: 0;
       right: 0;
       bottom: 0;
       z-index: 60;
-      background: color-mix(in oklab, var(--bg) 72%, var(--bg-soft) 28%);
+      background: var(--bg);
       border-top: 1px solid var(--border);
-      padding: 8px env(safe-area-inset-right) 8px env(safe-area-inset-left);
+      padding: 8px;
       backdrop-filter: blur(6px);
     }
 
     .actions {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      display: flex;
       gap: 8px;
       max-width: 760px;
       margin: 0 auto;
+      padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);
     }
 
     .bar-btn {
-      display: grid;
-      place-items: center;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       height: 56px;
       border-radius: 14px;
       border: 1px solid var(--border);
       background: var(--card);
       color: var(--text);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 800;
-      gap: 6px;
-      box-shadow: var(--shadow-1);
+      gap: 4px;
       cursor: pointer;
+      transition: transform .08s ease, background .15s ease;
+    }
+
+    .bar-btn:active {
+      transform: scale(.96);
+      background: var(--bg-soft);
     }
 
     .bar-btn span {
@@ -612,374 +617,7 @@
       display: none
     }
   </style>
-
-
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Cucina Minimal</title>
-    <style>
-      /* =========================
-           MODERN MINIMAL DESIGN SYSTEM
-           ========================= */
-      :root {
-        /* Color palette - minimal e moderno */
-        --bg: #ffffff;
-        --bg-soft: #f8f9fc;
-        --card: #ffffff;
-        --muted: #6b7280;
-        --text: #111827;
-        --border: #e5e7eb;
-
-        --tint: #3b82f6;
-        /* Blu moderno */
-        --tint-2: #10b981;
-        /* Verde per elementi salutari */
-        --accent: #8b5cf6;
-        /* Viola per accenti */
-
-        --ok: #10b981;
-        --info: #3b82f6;
-        --warn: #f59e0b;
-
-        --radius: 8px;
-        --radius-lg: 12px;
-
-        --shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-        --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-
-        --tap: 44px;
-
-        /* Typography */
-        --h1: clamp(24px, 4vw, 28px);
-        --h2: clamp(20px, 3.5vw, 24px);
-        --body: clamp(14px, 2.5vw, 16px);
-        --small: 13px;
-        --caption: 12px;
-      }
-
-      /* Dark mode */
-      @media (prefers-color-scheme: dark) {
-        :root {
-          --bg: #0f1117;
-          --bg-soft: #151922;
-          --card: #1a1f2e;
-          --muted: #9ca3af;
-          --text: #f3f4f6;
-          --border: #374151;
-
-          --shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
-          --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
-        }
-      }
-
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
-
-      html,
-      body {
-        height: 100%;
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-        background-color: var(--bg);
-        color: var(--text);
-        -webkit-tap-highlight-color: transparent;
-        line-height: 1.5;
-      }
-
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 0 16px;
-      }
-
-      /* Header minimal */
-      .header {
-        position: sticky;
-        top: 0;
-        z-index: 50;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 16px;
-        background-color: var(--bg);
-        border-bottom: 1px solid var(--border);
-        backdrop-filter: blur(8px);
-      }
-
-      .header h1 {
-        font-size: var(--h2);
-        font-weight: 600;
-        color: var(--text);
-      }
-
-      /* Bottoni minimali */
-      .btn-icon {
-        width: var(--tap);
-        height: var(--tap);
-        display: grid;
-        place-items: center;
-        border-radius: var(--radius);
-        background: transparent;
-        color: var(--muted);
-        cursor: pointer;
-        transition: all 0.15s ease;
-        border: none;
-      }
-
-      .btn-icon:hover {
-        background-color: var(--bg-soft);
-        color: var(--text);
-      }
-
-      /* Navigazione settimana */
-      .week-nav {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin: 24px 0 16px;
-        padding: 12px 16px;
-        border-radius: var(--radius);
-        background-color: var(--bg-soft);
-        border: 1px solid var(--border);
-      }
-
-      .week-title {
-        font-weight: 500;
-        font-size: var(--body);
-      }
-
-      .nav-arrows {
-        display: flex;
-        gap: 8px;
-      }
-
-      /* Card giorno */
-      .day-card {
-        background: var(--card);
-        border: 1px solid var(--border);
-        border-radius: var(--radius-lg);
-        margin: 12px 0;
-        padding: 16px;
-        box-shadow: var(--shadow);
-      }
-
-      .day-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-bottom: 12px;
-      }
-
-      .day-title {
-        font-size: var(--body);
-        font-weight: 600;
-      }
-
-      .day-date {
-        font-size: var(--caption);
-        color: var(--muted);
-      }
-
-      /* Pasti */
-      .meal {
-        display: flex;
-        align-items: center;
-        gap: 12px;
-        padding: 12px;
-        margin-top: 8px;
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        background: var(--bg-soft);
-        transition: all 0.15s ease;
-        cursor: pointer;
-      }
-
-      .meal:hover {
-        border-color: var(--tint);
-        box-shadow: var(--shadow);
-      }
-
-      .meal.empty {
-        opacity: 0.6;
-      }
-
-      .meal-icon {
-        width: 36px;
-        height: 36px;
-        display: grid;
-        place-items: center;
-        border-radius: var(--radius);
-        font-size: 16px;
-        background: var(--bg);
-        color: var(--tint);
-        border: 1px solid var(--border);
-      }
-
-      .meal-content {
-        flex: 1;
-        min-width: 0;
-      }
-
-      .meal-title {
-        font-weight: 500;
-        font-size: var(--small);
-      }
-
-      .meal-desc {
-        margin-top: 2px;
-        font-size: var(--caption);
-        color: var(--muted);
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-      }
-
-      /* Barra inferiore */
-      .bottom-bar {
-        position: fixed;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        z-index: 60;
-        background: var(--bg);
-        border-top: 1px solid var(--border);
-        padding: 12px 16px;
-        backdrop-filter: blur(8px);
-      }
-
-      .actions {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 12px;
-        max-width: 800px;
-        margin: 0 auto;
-      }
-
-      .bar-btn {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 4px;
-        padding: 8px 0;
-        border-radius: var(--radius);
-        background: transparent;
-        color: var(--muted);
-        font-size: var(--caption);
-        font-weight: 500;
-        cursor: pointer;
-        border: none;
-        transition: all 0.15s ease;
-      }
-
-      .bar-btn.active {
-        color: var(--tint);
-      }
-
-      .bar-btn:hover {
-        background: var(--bg-soft);
-      }
-
-      .bar-icon {
-        font-size: 20px;
-      }
-
-      /* Modalità weekend */
-      .weekend-toggle {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background: var(--bg-soft);
-        border: 1px solid var(--border);
-        border-radius: var(--radius);
-        padding: 12px 16px;
-        margin: 16px 0;
-      }
-
-      .toggle {
-        position: relative;
-        width: 44px;
-        height: 24px;
-        border-radius: 12px;
-        background: var(--border);
-        cursor: pointer;
-        transition: all 0.2s ease;
-      }
-
-      .toggle.on {
-        background: var(--tint);
-      }
-
-      .toggle-knob {
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        width: 20px;
-        height: 20px;
-        border-radius: 50%;
-        background: white;
-        transition: all 0.2s ease;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-      }
-
-      .toggle.on .toggle-knob {
-        transform: translateX(20px);
-      }
-
-      /* Etichette */
-      .tag {
-        display: inline-flex;
-        align-items: center;
-        padding: 4px 8px;
-        border-radius: 4px;
-        font-size: 11px;
-        font-weight: 500;
-        background: var(--bg-soft);
-        color: var(--muted);
-        border: 1px solid var(--border);
-      }
-
-      .tag.active {
-        background: var(--tint);
-        color: white;
-        border-color: var(--tint);
-      }
-
-      /* Utility classes */
-      .flex {
-        display: flex;
-      }
-
-      .items-center {
-        align-items: center;
-      }
-
-      .gap-2 {
-        gap: 8px;
-      }
-
-      .mt-4 {
-        margin-top: 16px;
-      }
-
-      .mb-2 {
-        margin-bottom: 8px;
-      }
-
-      .text-sm {
-        font-size: var(--small);
-      }
-
-      .text-muted {
-        color: var(--muted);
-      }
-    </style>
-
-
-
-  </head>
+</head>
 
 <body>
   <header class="header">
@@ -1233,8 +871,12 @@
           d.customBreakfast ??= null;
           d.side2 ??= null;
           d.customSide2 ??= null;
-          d.breadFlag ??= false; // day-level bread
+          d.breadFlag ??= false;
         });
+        // Ensure theme is set
+        if (!this.state.theme) {
+          this.state.theme = 'dark';
+        }
       }
       initialState() {
         const start = this.weekStart(new Date());
@@ -1267,8 +909,22 @@
       save() { try { localStorage.setItem(this.key(new Date(this.state.weekStart)), JSON.stringify(this.state)) } catch { } }
 
       init() { this.applyTheme(); this.render(); this.bindGlobal(); }
-      applyTheme() { document.body.classList.toggle('light', this.state.theme === 'light'); document.getElementById('themeToggle').textContent = this.state.theme === 'dark' ? '🌙' : '☀️'; }
-      toggleTheme() { this.state.theme = this.state.theme === 'dark' ? 'light' : 'dark'; this.applyTheme(); this.save(); }
+      
+      applyTheme() { 
+        // Use class-based theme switching
+        if (this.state.theme === 'dark') {
+          document.body.classList.add('dark');
+        } else {
+          document.body.classList.remove('dark');
+        }
+        document.getElementById('themeToggle').textContent = this.state.theme === 'dark' ? '🌙' : '☀️'; 
+      }
+      
+      toggleTheme() { 
+        this.state.theme = this.state.theme === 'dark' ? 'light' : 'dark'; 
+        this.applyTheme(); 
+        this.save(); 
+      }
 
       nav(dir) {
         const cur = new Date(this.state.weekStart);
@@ -1475,7 +1131,7 @@
       <div class="control-row">
         <div class="kbd">Dinner Type</div>
         <div>
-          <button class="pill bread ${d.breadFlag ? 'is-on' : ''}" data-day="${i}">
+          <button class="pill bread ${d.breadFlag ? 'is-on' : ''}" id="modalBread" data-day="${i}">
             ${d.breadFlag ? '🍞 Bread' : '🚫 No Bread'}
           </button>
           <button class="tag ${d.dinnerType === 'quick' ? 'active quick' : ''}" id="modalQuick">⚡ Quick</button>
@@ -1508,6 +1164,15 @@
             { label: 'Save', primary: true, cb: () => this.saveDinner(i) }
           ],
           after: () => {
+            // Fix: Add click handler for the bread button in modal
+            const breadBtn = document.getElementById('modalBread');
+            if (breadBtn) {
+              breadBtn.onclick = () => {
+                d.breadFlag = !d.breadFlag;
+                this.openDinner(i); // Refresh the modal to show updated state
+              };
+            }
+            
             const q = document.getElementById('modalQuick');
             const dl = document.getElementById('modalDelivery');
             if (q) q.onclick = () => { d.dinnerType = (d.dinnerType === 'quick' ? 'regular' : 'quick'); this.openDinner(i); };
