@@ -1148,7 +1148,7 @@
         if (d.dinner === 'Custom') {
           body += `<div class="field"><div class="label">Custom Dinner</div><input class="input" id="customDinnerInput" value="${d.customDinner || ''}" placeholder="Enter custom meal"/></div>`;
         }
-        body += `<div class="field"><div class="label">Side Dishes (select multiple)</div></div>`;
+        body += `<div class="field"><div class="label">Side Dishes</div></div>`;
         body += this.multiGrid('side', d.side, CATS.side);
         if (d.side.includes('Custom')) {
           body += `<div class="field"><input class="input" id="customSideInput" value="${d.customSide.join(', ') || ''}" placeholder="Enter custom sides (comma-separated)"/></div>`;
