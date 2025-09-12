@@ -1194,7 +1194,6 @@
         (footer || []).forEach(f => {
           const b = document.createElement('button');
           b.className = 'btn';
-          if (f.primary) b.classList.add('primary');
           if (f.className) b.classList.add(f.className);
           b.textContent = f.label; b.onclick = f.cb; foot.appendChild(b);
         });
