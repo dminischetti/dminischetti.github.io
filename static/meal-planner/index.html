@@ -847,7 +847,7 @@
     Object.values(DATA.ingredients).forEach(i => { ING_EMOJI[i.name] = i.emoji; });
     Object.entries(DATA.meals).forEach(([k, m]) => {
       MEALS_BY_NAME[m.name] = m;
-      MEAL_EMOJI[m.name] = m.emoji || '🍽️';
+      MEAL_EMOJI[m.name] = m.emoji || '❓';
       MEAL_ING[m.name] = (m.ingredients || []).map(id => DATA.ingredients[id]?.name || id);
       MEAL_TYPE[m.name] = m.type || 'other';
     });
@@ -990,9 +990,9 @@
         const sides = (d.side || []).map(s =>
           s === 'Custom' ? (d.customSide?.join(', ') || 'Custom') : s
         ).join(' • ');
-        const be = MEAL_EMOJI[d.breakfast] || '☕️';
-        const le = MEAL_EMOJI[d.lunch] || '🍽️';
-        const de = MEAL_EMOJI[d.dinner] || '🍽️';
+        const be = MEAL_EMOJI[d.breakfast] || '❓';
+        const le = MEAL_EMOJI[d.lunch] || '❓';
+        const de = MEAL_EMOJI[d.dinner] || '❓';
 
         const need = (d.dinnerType === 'delivery' ? 2 : 3) + (w ? 1 : 0);
         const comp = (w && d.breakfast ? 1 : 0) + (d.lunch ? 1 : 0) + (d.dinner ? 1 : 0) + (d.dinnerType !== 'delivery' && d.side ? 1 : 0);
@@ -1091,7 +1091,7 @@
         return `<div class="grid" data-type="${type}">
       ${options.map(name => `
         <div class="tile ${selected === name ? 'selected' : ''}" data-meal="${name}" data-type="${type}">
-          <div class="emo">${MEAL_EMOJI[name] || '🍽️'}</div>
+          <div class="emo">${MEAL_EMOJI[name] || '❓'}</div>
           <div>${name}</div>
         </div>`).join('')}
     </div>`;
@@ -1199,7 +1199,7 @@
         return `<div class="grid" data-type="${type}">
     ${options.map(name => `
       <div class="tile ${selectedArr.includes(name) ? 'selected' : ''}" data-meal="${name}" data-type="${type}">
-        <div class="emo">${MEAL_EMOJI[name] || '🍽️'}</div>
+        <div class="emo">${MEAL_EMOJI[name] || '❓'}</div>
         <div>${name}</div>
       </div>`).join('')}
   </div>`;
@@ -1379,9 +1379,9 @@
           const l = d.lunch === 'Custom' ? d.customLunch : d.lunch;
           const dn = d.dinner === 'Custom' ? d.customDinner : d.dinner;
 
-          const be = b ? (MEAL_EMOJI[b] || '🍽️') + ' ' + b : '—';
-          const le = l ? (MEAL_EMOJI[l] || '🍽️') + ' ' + l : '—';
-          const de = dn ? (MEAL_EMOJI[dn] || '🍽️') + ' ' + dn : '—';
+          const be = b ? (MEAL_EMOJI[b] || '❓') + ' ' + b : '—';
+          const le = l ? (MEAL_EMOJI[l] || '❓') + ' ' + l : '—';
+          const de = dn ? (MEAL_EMOJI[dn] || '❓') + ' ' + dn : '—';
 
           if (d.name === 'Saturday' || d.name === 'Sunday') {
             t += `  Breakfast: ${be}\n`;
@@ -1394,8 +1394,8 @@
           if (d.side?.length) {
             const sides = d.side.map(s =>
               s === 'Custom'
-                ? d.customSide.map(cs => (MEAL_EMOJI[cs] || '🍽️') + ' ' + cs).join(', ')
-                : (MEAL_EMOJI[s] || '🍽️') + ' ' + s
+                ? d.customSide.map(cs => (MEAL_EMOJI[cs] || '❓') + ' ' + cs).join(', ')
+                : (MEAL_EMOJI[s] || '❓') + ' ' + s
             );
             t += `\n  Sides: ${sides.join(', ')}`;
           }
@@ -1424,9 +1424,9 @@
           const l = d.lunch === 'Custom' ? d.customLunch : d.lunch;
           const dn = d.dinner === 'Custom' ? d.customDinner : d.dinner;
 
-          const be = b ? (MEAL_EMOJI[b] || '🍽️') + ' ' + b : '—';
-          const le = l ? (MEAL_EMOJI[l] || '🍽️') + ' ' + l : '—';
-          const de = dn ? (MEAL_EMOJI[dn] || '🍽️') + ' ' + dn : '—';
+          const be = b ? (MEAL_EMOJI[b] || '❓') + ' ' + b : '—';
+          const le = l ? (MEAL_EMOJI[l] || '❓') + ' ' + l : '—';
+          const de = dn ? (MEAL_EMOJI[dn] || '❓') + ' ' + dn : '—';
 
           if (d.name === 'Saturday' || d.name === 'Sunday') {
             recap += `  Breakfast: ${be}\n`;
@@ -1439,8 +1439,8 @@
           if (d.side?.length) {
             const sides = d.side.map(s =>
               s === 'Custom'
-                ? d.customSide.map(cs => (MEAL_EMOJI[cs] || '🍽️') + ' ' + cs).join(', ')
-                : (MEAL_EMOJI[s] || '🍽️') + ' ' + s
+                ? d.customSide.map(cs => (MEAL_EMOJI[cs] || '❓') + ' ' + cs).join(', ')
+                : (MEAL_EMOJI[s] || '❓') + ' ' + s
             );
             recap += `\n  Sides: ${sides.join(', ')}`;
           }
