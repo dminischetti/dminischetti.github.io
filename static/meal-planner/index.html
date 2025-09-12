@@ -1374,20 +1374,44 @@
         let t = '🗓️ Weekly Meal Plan\n\n';
         this.state.days.forEach(d => {
           t += `${d.name} (${this.fmtDate(d.date)})\n`;
+
           const b = d.breakfast === 'Custom' ? d.customBreakfast : d.breakfast;
           const l = d.lunch === 'Custom' ? d.customLunch : d.lunch;
           const dn = d.dinner === 'Custom' ? d.customDinner : d.dinner;
-          const s1 = d.side === 'Custom' ? d.customSide : d.side;
-          if (d.name === 'Saturday' || d.name === 'Sunday') t += `  Breakfast: ${b || '—'}\n`;
-          t += `  Lunch: ${l || '—'}\n  Dinner: ${dn || '—'}`;
+
+          const be = b ? (MEAL_EMOJI[b] || '🍽️') + ' ' + b : '—';
+          const le = l ? (MEAL_EMOJI[l] || '🍽️') + ' ' + l : '—';
+          const de = dn ? (MEAL_EMOJI[dn] || '🍽️') + ' ' + dn : '—';
+
+          if (d.name === 'Saturday' || d.name === 'Sunday') {
+            t += `  Breakfast: ${be}\n`;
+          }
+          t += `  Lunch: ${le}\n  Dinner: ${de}`;
           if (d.dinnerType === 'delivery') t += ' [Delivery]';
           else if (d.dinnerType === 'quick') t += ' [Quick]';
-          if (s1) t += `\n  Side: ${s1}`;
+
+          // Sides con emoji
+          if (d.side?.length) {
+            const sides = d.side.map(s =>
+              s === 'Custom'
+                ? d.customSide.map(cs => (MEAL_EMOJI[cs] || '🍽️') + ' ' + cs).join(', ')
+                : (MEAL_EMOJI[s] || '🍽️') + ' ' + s
+            );
+            t += `\n  Sides: ${sides.join(', ')}`;
+          }
+
           if (d.breadFlag) t += `\n  Bread: yes`;
           t += '\n\n';
         });
-        const g = this.groceries(); t += '\n🛒 Shopping List\n\n';
-        Object.keys(g).sort().forEach(s => { t += `${s}:\n`; g[s].forEach(i => t += `• ${ING_EMOJI[i] || ''} ${i}\n`); t += '\n'; });
+
+        const g = this.groceries();
+        t += '\n🛒 Shopping List\n\n';
+        Object.keys(g).sort().forEach(s => {
+          t += `${s}:\n`;
+          g[s].forEach(i => t += `• ${ING_EMOJI[i] || ''} ${i}\n`);
+          t += '\n';
+        });
+
         this.share('Meal Plan & Shopping', t);
       }
 
@@ -1395,18 +1419,29 @@
         let recap = '🗓️ Weekly Meal Plan\n\n';
         this.state.days.forEach(d => {
           recap += `${d.name} (${this.fmtDate(d.date)})\n`;
+
           const b = d.breakfast === 'Custom' ? d.customBreakfast : d.breakfast;
           const l = d.lunch === 'Custom' ? d.customLunch : d.lunch;
           const dn = d.dinner === 'Custom' ? d.customDinner : d.dinner;
+
+          const be = b ? (MEAL_EMOJI[b] || '🍽️') + ' ' + b : '—';
+          const le = l ? (MEAL_EMOJI[l] || '🍽️') + ' ' + l : '—';
+          const de = dn ? (MEAL_EMOJI[dn] || '🍽️') + ' ' + dn : '—';
+
           if (d.name === 'Saturday' || d.name === 'Sunday') {
-            recap += `  Breakfast: ${b || '—'}\n`;
+            recap += `  Breakfast: ${be}\n`;
           }
-          recap += `  Lunch: ${l || '—'}\n  Dinner: ${dn || '—'}`;
+          recap += `  Lunch: ${le}\n  Dinner: ${de}`;
           if (d.dinnerType === 'delivery') recap += ' [Delivery]';
           else if (d.dinnerType === 'quick') recap += ' [Quick]';
 
+          // Sides con emoji
           if (d.side?.length) {
-            const sides = d.side.map(s => s === 'Custom' ? d.customSide.join(', ') : s);
+            const sides = d.side.map(s =>
+              s === 'Custom'
+                ? d.customSide.map(cs => (MEAL_EMOJI[cs] || '🍽️') + ' ' + cs).join(', ')
+                : (MEAL_EMOJI[s] || '🍽️') + ' ' + s
+            );
             recap += `\n  Sides: ${sides.join(', ')}`;
           }
 
@@ -1435,8 +1470,6 @@
           ]
         });
       }
-
-
 
       share(title, text) { if (navigator.share) navigator.share({ title, text }); else if (navigator.clipboard) { navigator.clipboard.writeText(text); this.toast('Copied to clipboard! 📋'); } }
       toast(msg) { const el = document.getElementById('toast'); el.textContent = msg; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 1800); }
