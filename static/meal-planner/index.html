@@ -299,11 +299,11 @@
       cursor: pointer;
     }
 
-    .tag.active.delivery {
-      color: #fff;
-      background: var(--tint-2);
-      border-color: transparent
-    }
+.tag.active {
+  color: #fff;
+  background: var(--tint);
+  border-color: transparent;
+}
 
     /* weekend reveal block */
     .weekend-card {
@@ -1002,8 +1002,8 @@
 <div class="desc">${dnTx}${sides ? ` • ${sides}` : ''}</div>
         </div>
         <div class="inline-toggles">
-          <button class="tag ${d.dinnerType === 'quick' ? 'active quick' : ''}" data-toggle="quick" data-day="${i}">⚡ Quick</button>
-          <button class="tag ${d.dinnerType === 'delivery' ? 'active delivery' : ''}" data-toggle="delivery" data-day="${i}">🚚 Delivery</button>
+          <button class="tag ${d.dinnerType === 'quick' ? 'active' : ''}" data-toggle="quick" data-day="${i}">⚡ Quick</button>
+          <button class="tag ${d.dinnerType === 'delivery' ? 'active' : ''}" data-toggle="delivery" data-day="${i}">🚚 Delivery</button>
         </div>
       </div>
     </section>`;
