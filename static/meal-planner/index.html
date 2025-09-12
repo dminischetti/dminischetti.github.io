@@ -1467,65 +1467,79 @@
       share(title, text) { if (navigator.share) navigator.share({ title, text }); else if (navigator.clipboard) { navigator.clipboard.writeText(text); this.toast('Copied to clipboard! 📋'); } }
       toast(msg) { const el = document.getElementById('toast'); el.textContent = msg; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 1800); }
 
-      exportICS() {
-        function fmtDateTime(date, hour, min = 0) {
-          const d = new Date(date);
-          d.setHours(hour, min, 0, 0);
-          return d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-        }
-        function fmtDate(date) {
-          const d = new Date(date);
-          d.setHours(0, 0, 0, 0);
-          return d.toISOString().replace(/[-:]/g, "").split("T")[0].replace(/-/g, "");
-        }
+exportICS() {
+  function fmtDateTime(date, hour, min = 0) {
+    const d = new Date(date);
+    d.setHours(hour, min, 0, 0);
+    return d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+  }
+  function fmtDate(date) {
+    const d = new Date(date);
+    d.setHours(0, 0, 0, 0);
+    return d.toISOString().replace(/[-:]/g, "").split("T")[0].replace(/-/g, "");
+  }
 
-        let ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//MealPlanner//EN\n";
+  let ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//MealPlanner//EN\n";
 
-        this.state.days.forEach(d => {
-          // Lunch
-          if (d.lunch) {
-            const title = "Lunch: " + (d.lunch === "Custom" ? d.customLunch : d.lunch);
-            ics += "BEGIN:VEVENT\n";
-            ics += "SUMMARY:" + title + "\n";
-            ics += "DTSTART:" + fmtDateTime(d.date, 13, 0) + "\n";
-            ics += "DTEND:" + fmtDateTime(d.date, 14, 0) + "\n";
-            ics += "END:VEVENT\n";
-          }
-          // Dinner
-          if (d.dinner) {
-            let title = "Dinner: " + (d.dinner === "Custom" ? d.customDinner : d.dinner);
-            if (d.side && d.side.length) {
-              const sides = d.side.map(s => s === "Custom" ? d.customSide.join(", ") : s);
-              title += " + " + sides.join(", ");
-            }
-            ics += "BEGIN:VEVENT\n";
-            ics += "SUMMARY:" + title + "\n";
-            ics += "DTSTART:" + fmtDateTime(d.date, 20, 0) + "\n";
-            ics += "DTEND:" + fmtDateTime(d.date, 21, 0) + "\n";
-            ics += "END:VEVENT\n";
-          }
-          // Bread (all day)
-          if (d.breadFlag) {
-            ics += "BEGIN:VEVENT\n";
-            ics += "SUMMARY:Bread\n";
-            ics += "DTSTART;VALUE=DATE:" + fmtDate(d.date) + "\n";
-            ics += "DTEND;VALUE=DATE:" + fmtDate(new Date(new Date(d.date).getTime() + 86400000)) + "\n";
-            ics += "END:VEVENT\n";
-          }
-        });
+  this.state.days.forEach(d => {
+    const dayName = new Date(d.date).toLocaleDateString("en-US", { weekday: "long" });
 
-        ics += "END:VCALENDAR";
+    // ✅ Breakfast (solo se esiste)
+    if (d.breakfast) {
+      const title = "Breakfast: " + (d.breakfast === "Custom" ? d.customBreakfast : d.breakfast);
+      ics += "BEGIN:VEVENT\n";
+      ics += "SUMMARY:" + title + "\n";
+      // esempio: 8:00 - 9:00
+      ics += "DTSTART:" + fmtDateTime(d.date, 8, 0) + "\n";
+      ics += "DTEND:" + fmtDateTime(d.date, 9, 0) + "\n";
+      ics += "END:VEVENT\n";
+    }
 
-        // download
-        const blob = new Blob([ics], { type: "text/calendar" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "mealplan.ics";
-        a.click();
-        URL.revokeObjectURL(url);
+    // Lunch
+    if (d.lunch) {
+      const title = "Lunch: " + (d.lunch === "Custom" ? d.customLunch : d.lunch);
+      ics += "BEGIN:VEVENT\n";
+      ics += "SUMMARY:" + title + "\n";
+      ics += "DTSTART:" + fmtDateTime(d.date, 13, 0) + "\n";
+      ics += "DTEND:" + fmtDateTime(d.date, 14, 0) + "\n";
+      ics += "END:VEVENT\n";
+    }
+
+    // Dinner
+    if (d.dinner) {
+      let title = "Dinner: " + (d.dinner === "Custom" ? d.customDinner : d.dinner);
+      if (d.side && d.side.length) {
+        const sides = d.side.map(s => s === "Custom" ? d.customSide.join(", ") : s);
+        title += " + " + sides.join(", ");
       }
+      ics += "BEGIN:VEVENT\n";
+      ics += "SUMMARY:" + title + "\n";
+      ics += "DTSTART:" + fmtDateTime(d.date, 20, 0) + "\n";
+      ics += "DTEND:" + fmtDateTime(d.date, 21, 0) + "\n";
+      ics += "END:VEVENT\n";
+    }
 
+    // Bread (all day)
+    if (d.breadFlag) {
+      ics += "BEGIN:VEVENT\n";
+      ics += "SUMMARY:Bread\n";
+      ics += "DTSTART;VALUE=DATE:" + fmtDate(d.date) + "\n";
+      ics += "DTEND;VALUE=DATE:" + fmtDate(new Date(new Date(d.date).getTime() + 86400000)) + "\n";
+      ics += "END:VEVENT\n";
+    }
+  });
+
+  ics += "END:VCALENDAR";
+
+  // download
+  const blob = new Blob([ics], { type: "text/calendar" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "mealplan.ics";
+  a.click();
+  URL.revokeObjectURL(url);
+}
 
       bindGlobal() {
         const on = (id, fn) => document.getElementById(id).onclick = fn;
