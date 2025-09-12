@@ -2042,68 +2042,53 @@
           UIComponents.showToast('Copied to clipboard! 📋');
         }
       }
+      
+      exportCalendar() {
+        const formatDateTime = (date, hour) => {
+          const d = new Date(date);
+          d.setHours(hour, 0, 0, 0);
+          return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+        };
 
-    exportCalendar() {
-    const formatDateTime = (date, hour) => {
-        const d = new Date(date);
-        d.setHours(hour, 0, 0, 0);
-        return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
-    };
+        let ics = 'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//MealPlanner//EN\n';
 
-    const createEvent = (title, date, startHour, endHour) => {
-        return [
-        'BEGIN:VEVENT',
-        `UID:${Date.now()}-${Math.random().toString(36).slice(2)}@mealplanner`,
-        `DTSTAMP:${formatDateTime(new Date(), 0)}`,
-        `SUMMARY:${title}`,
-        `DTSTART:${formatDateTime(date, startHour)}`,
-        `DTEND:${formatDateTime(date, endHour)}`,
-        'END:VEVENT'
-        ].join('\n') + '\n';
-    };
+        this.state.state.days.forEach(day => {
+          // Lunch
+          if (day.lunch) {
+            const lunchName = day.lunch === 'Custom' ? day.customLunch : day.lunch;
+            ics += 'BEGIN:VEVENT\n';
+            ics += `SUMMARY:Lunch: ${lunchName}\n`;
+            ics += `DTSTART:${formatDateTime(day.date, 13)}\n`;
+            ics += `DTEND:${formatDateTime(day.date, 14)}\n`;
+            ics += 'END:VEVENT\n';
+          }
 
-    let ics = [
-        'BEGIN:VCALENDAR',
-        'VERSION:2.0',
-        'PRODID:-//MealPlanner//EN'
-    ].join('\n') + '\n';
+          // Dinner
+          if (day.dinner) {
+            let dinnerName = day.dinner === 'Custom' ? day.customDinner : day.dinner;
+            if (day.side.length > 0) {
+              const sides = day.side.map(s => s === 'Custom' ? day.customSide.join(', ') : s);
+              dinnerName += ` + ${sides.join(', ')}`;
+            }
+            ics += 'BEGIN:VEVENT\n';
+            ics += `SUMMARY:Dinner: ${dinnerName}\n`;
+            ics += `DTSTART:${formatDateTime(day.date, 20)}\n`;
+            ics += `DTEND:${formatDateTime(day.date, 21)}\n`;
+            ics += 'END:VEVENT\n';
+          }
+        });
 
-    this.state.state.days.forEach(day => {
-        const isWeekend = day.name === 'Saturday' || day.name === 'Sunday';
+        ics += 'END:VCALENDAR';
 
-        // Breakfast (weekend only)
-        if (isWeekend && day.breakfast) {
-        const breakfastName = day.breakfast === 'custom' ? day.customBreakfast : MealData.meals[day.breakfast]?.name;
-        ics += createEvent(`Breakfast: ${breakfastName}`, day.date, 8, 9);
+        const blob = new Blob([ics], { type: 'text/calendar' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'mealplan.ics';
+        a.click();
+        URL.revokeObjectURL(url);
+      }
         }
-
-        // Lunch
-        if (day.lunch) {
-        const lunchName = day.lunch === 'custom' ? day.customLunch : MealData.meals[day.lunch]?.name;
-        ics += createEvent(`Lunch: ${lunchName}`, day.date, 13, 14);
-        }
-
-        // Dinner
-        if (day.dinner) {
-        let dinnerName = day.dinner === 'custom' ? day.customDinner : MealData.meals[day.dinner]?.name;
-        if (day.side.length > 0) {
-            const sides = day.side.map(s => s === 'custom' ? day.customSide.join(', ') : MealData.meals[s]?.name);
-            dinnerName += ` + ${sides.join(', ')}`;
-        }
-        ics += createEvent(`Dinner: ${dinnerName}`, day.date, 20, 21);
-        }
-    });
-
-    ics += 'END:VCALENDAR';
-
-    const blob = new Blob([ics], { type: 'text/calendar' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = 'mealplan.ics';
-    a.click();
-    URL.revokeObjectURL(url);
-    }
 
     // Initialize app when DOM is ready
     document.addEventListener('DOMContentLoaded', () => {
