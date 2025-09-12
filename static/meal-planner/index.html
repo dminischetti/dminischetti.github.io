@@ -897,12 +897,12 @@
             breakfast: null,
             lunch: null,
             dinner: null,
-            side: null,
+            side: [],
             dinnerType: 'regular',
             customBreakfast: null,
             customLunch: null,
             customDinner: null,
-            customSide: null,
+            customSide: [],
             breadFlag: false
           }))
         };
@@ -1043,7 +1043,7 @@
             const type = btn.dataset.toggle;
             const d = this.state.days[day];
             d.dinnerType = (d.dinnerType === type) ? 'regular' : type;
-            if (d.dinnerType === 'delivery') { d.side = 'None'; d.side2 = null; d.customSide2 = null; }
+            if (d.dinnerType === 'delivery') { d.side = ['None']; d.side2 = null; d.customSide2 = null; }
             this.save(); this.render();
           };
         });
@@ -1258,7 +1258,7 @@
       clear(type, i) {
         const d = this.state.days[i];
         d[type] = null; d[`custom${type[0].toUpperCase() + type.slice(1)}`] = null;
-        if (type === 'dinner') { d.side = null; d.customSide = null; d.side2 = null; d.customSide2 = null; }
+        if (type === 'dinner') { d.side = []; d.customSide = []; d.side2 = null; d.customSide2 = null; }
         (type === 'breakfast') ? this.openBreakfast(i) : (type === 'lunch') ? this.openLunch(i) : this.openDinner(i);
       }
 
@@ -1296,8 +1296,9 @@
       clearWeek() {
         if (confirm('Clear all meals for this week?')) {
           this.state.days.forEach(d => {
-            d.breakfast = d.lunch = d.dinner = d.side = d.side2 = null;
-            d.customBreakfast = d.customLunch = d.customDinner = d.customSide = d.customSide2 = null;
+            d.breakfast = d.lunch = d.dinner = null;
+            d.customBreakfast = d.customLunch = d.customDinner = null;
+            d.side = d.side2 = d.customSide = d.customSide2 = [];
             d.dinnerType = 'regular'; d.breadFlag = false;
           });
           this.save(); this.render(); this.toast('Week cleared');
@@ -1492,7 +1493,6 @@
         on('randomizeBtn', () => this.randomizeWeek());
         on('shareBtn', () => this.shareRecap());
         on('clearBtn', () => this.clearWeek());
-        on('exportICSBtn', () => this.exportICS());
         // overlay close
         document.getElementById('modalOverlay').onclick = (e) => {
           if (e.target.id === 'modalOverlay') this.hideSheet();
