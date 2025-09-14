@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dominic Minischetti | Backend Engineer</title>
+
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Fonts & Icons -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Animation / Plugins -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <style>
+    :root {
+      --primary-color: #3b82f6;
+      --secondary-color: #1e40af;
+      --accent-color: #f59e0b;
+      --dark-color: #111827;
+      --light-color: #f8fafc;
+      --text-color: #374151;
+      --gradient-bg: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    }
+
+    [data-theme="dark"] {
+      --primary-color: #60a5fa;
+      --secondary-color: #3b82f6;
+      --accent-color: #fbbf24;
+      --dark-color: #0f172a;
+      --light-color: #1e293b;
+      --text-color: #e2e8f0;
+      --gradient-bg: linear-gradient(135deg, #1e293b, #0f172a);
+    }
+
+    [data-theme="green"] {
+      --primary-color: #10b981;
+      --secondary-color: #059669;
+      --accent-color: #f59e0b;
+    }
+
+    [data-theme="purple"] {
+      --primary-color: #8b5cf6;
+      --secondary-color: #7c3aed;
+      --accent-color: #f59e0b;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      scroll-behavior: smooth;
+      background-color: var(--light-color);
+      color: var(--text-color);
+      transition: all 0.3s ease;
+    }
+
+    /* Preloader */
+    .preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--gradient-bg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .preloader.fade-out {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 60px;
+      height: 60px;
+      border: 4px solid rgba(255,255,255,0.3);
+      border-top: 4px solid white;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    /* Theme Customizer */
+    .theme-customizer {
+      position: fixed;
+      top: 50%;
+      right: -250px;
+      transform: translateY(-50%);
+      width: 250px;
+      background: white;
+      padding: 20px;
+      border-radius: 10px 0 0 10px;
+      box-shadow: -5px 0 20px rgba(0,0,0,0.1);
+      z-index: 1000;
+      transition: right 0.3s ease;
+    }
+
+    .theme-customizer.open {
+      right: 0;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 50%;
+      right: 0;
+      transform: translateY(-50%);
+      background: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 15px 10px;
+      border-radius: 10px 0 0 10px;
+      cursor: pointer;
+      z-index: 1001;
+      font-size: 18px;
+    }
+
+    .color-options {
+      display: flex;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .color-option {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 2px solid #ddd;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .color-option:hover {
+      transform: scale(1.1);
+    }
+
+    .color-option.blue { background: #3b82f6; }
+    .color-option.green { background: #10b981; }
+    .color-option.purple { background: #8b5cf6; }
+
+    /* Navbar */
+    .navbar {
+      background: rgba(17, 24, 39, 0.95) !important;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+      padding: 1rem 0;
+    }
+
+    .navbar.scrolled {
+      padding: 0.5rem 0;
+      box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+    }
+
+    .navbar-brand {
+      font-family: 'Space Grotesk', sans-serif;
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: white !important;
+    }
+
+    .navbar-nav .nav-link {
+      color: rgba(255,255,255,0.9) !important;
+      font-weight: 500;
+      margin: 0 10px;
+      transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover {
+      color: var(--primary-color) !important;
+    }
+
+    /* Hero Sections */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-classic {
+      background: var(--gradient-bg);
+      color: white;
+      text-align: center;
+    }
+
+    .hero-slider {
+      background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), 
+                  url('https://picsum.photos/1920/1080?tech') center/cover no-repeat;
+      color: white;
+    }
+
+    .hero-minimal {
+      background: var(--light-color);
+      color: var(--text-color);
+    }
+
+    .hero-particles {
+      background: var(--dark-color);
+      color: white;
+    }
+
+    .hero h1 {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+    }
+
+    .hero h3 {
+      font-size: clamp(1.2rem, 3vw, 1.8rem);
+      font-weight: 400;
+      margin-bottom: 2rem;
+      opacity: 0.9;
+    }
+
+    .hero-selector {
+      position: absolute;
+      top: 100px;
+      right: 20px;
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 10px;
+      padding: 10px;
+      z-index: 100;
+    }
+
+    .hero-selector button {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      color: white;
+      padding: 5px 10px;
+      margin: 2px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .hero-selector button.active,
+    .hero-selector button:hover {
+      background: var(--primary-color);
+      border-color: var(--primary-color);
+    }
+
+    /* Animated Background Elements */
+    .floating-shapes {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .shape {
+      position: absolute;
+      background: rgba(255,255,255,0.1);
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .shape:nth-child(1) { width: 80px; height: 80px; top: 20%; left: 10%; animation-delay: 0s; }
+    .shape:nth-child(2) { width: 60px; height: 60px; top: 60%; left: 80%; animation-delay: 2s; }
+    .shape:nth-child(3) { width: 100px; height: 100px; top: 40%; left: 60%; animation-delay: 4s; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(180deg); }
+    }
+
+    /* Animated Counters */
+    .stats-section {
+      background: var(--gradient-bg);
+      color: white;
+      padding: 4rem 0;
+    }
+
+    .stat-item {
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+
+    .stat-number {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 3rem;
+      font-weight: 700;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Portfolio Filtering */
+    .portfolio-filters {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .filter-btn {
+      background: transparent;
+      border: 2px solid var(--primary-color);
+      color: var(--primary-color);
+      padding: 10px 20px;
+      margin: 5px;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .portfolio-item {
+      margin-bottom: 30px;
+      overflow: hidden;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+
+    .portfolio-item:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+    }
+
+    .portfolio-item img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .portfolio-item:hover img {
+      transform: scale(1.1);
+    }
+
+    .portfolio-content {
+      padding: 1.5rem;
+      background: white;
+    }
+
+    /* Blog Section */
+    .blog-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      margin-bottom: 2rem;
+    }
+
+    .blog-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .blog-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+
+    .blog-content {
+      padding: 1.5rem;
+    }
+
+    .blog-meta {
+      color: var(--primary-color);
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* Contact & Map */
+    .contact-section {
+      background: var(--light-color);
+    }
+
+    .map-container {
+      height: 400px;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .contact-form {
+      background: white;
+      padding: 2rem;
+      border-radius: 15px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+
+    .form-control {
+      border: 2px solid #e5e7eb;
+      border-radius: 10px;
+      padding: 12px 15px;
+      transition: border-color 0.3s ease;
+    }
+
+    .form-control:focus {
+      border-color: var(--primary-color);
+      box-shadow: 0 0 0 0.2rem rgba(59, 130, 246, 0.25);
+    }
+
+    .btn-primary {
+      background: var(--gradient-bg);
+      border: none;
+      border-radius: 25px;
+      padding: 12px 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(59, 130, 246, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark-color);
+      color: white;
+      padding: 3rem 0 1rem;
+      text-align: center;
+    }
+
+    .social-links {
+      margin: 2rem 0;
+    }
+
+    .social-links a {
+      display: inline-block;
+      width: 50px;
+      height: 50px;
+      background: var(--primary-color);
+      color: white;
+      text-align: center;
+      line-height: 50px;
+      margin: 0 10px;
+      border-radius: 50%;
+      transition: all 0.3s ease;
+      font-size: 1.2rem;
+    }
+
+    .social-links a:hover {
+      background: var(--accent-color);
+      transform: translateY(-3px);
+      color: white;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-selector {
+        top: 80px;
+        right: 10px;
+      }
+      
+      .hero-selector button {
+        padding: 3px 6px;
+        font-size: 10px;
+      }
+      
+      .stat-number {
+        font-size: 2.5rem;
+      }
+      
+      .theme-customizer {
+        width: 200px;
+        right: -200px;
+      }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #f1f1f1;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--primary-color);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--secondary-color);
+    }
+
+    /* Section Spacing */
+    section {
+      padding: 5rem 0;
+    }
+
+    .section-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 700;
+      text-align: center;
+      margin-bottom: 3rem;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      width: 60px;
+      height: 4px;
+      background: var(--gradient-bg);
+      display: block;
+      margin: 1rem auto;
+      border-radius: 2px;
+    }
+  </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar">
+
+<!-- Preloader -->
+<div class="preloader">
+  <div class="spinner"></div>
+</div>
+
+<!-- Theme Customizer -->
+<button class="theme-toggle" onclick="toggleCustomizer()">
+  <i class="fas fa-cog"></i>
+</button>
+
+<div class="theme-customizer" id="themeCustomizer">
+  <h6 class="mb-3">Customize Theme</h6>
+  
+  <div class="mb-3">
+    <label class="form-label">Theme Mode</label>
+    <div>
+      <button class="btn btn-sm btn-outline-primary me-2" onclick="setTheme('light')">Light</button>
+      <button class="btn btn-sm btn-outline-primary" onclick="setTheme('dark')">Dark</button>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Color Scheme</label>
+    <div class="color-options">
+      <div class="color-option blue" onclick="setColorScheme('blue')"></div>
+      <div class="color-option green" onclick="setColorScheme('green')"></div>
+      <div class="color-option purple" onclick="setColorScheme('purple')"></div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Hero Layout</label>
+    <select class="form-select form-select-sm" onchange="changeHeroLayout(this.value)">
+      <option value="classic">Classic</option>
+      <option value="slider">Full Screen</option>
+      <option value="minimal">Minimal</option>
+      <option value="particles">Animated</option>
+    </select>
+  </div>
+</div>
+
+<!-- Navbar -->
+<nav id="navbar" class="navbar navbar-expand-lg fixed-top">
+  <div class="container">
+    <a class="navbar-brand" href="#">Dominic</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="navMenu" class="collapse navbar-collapse">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="#experience">Experience</a></li>
+        <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+        <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+        <li class="nav-item"><a class="nav-link" href="#blog">Blog</a></li>
+        <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Selector -->
+<div class="hero-selector">
+  <button onclick="changeHeroLayout('classic')" class="active">Classic</button>
+  <button onclick="changeHeroLayout('slider')">Slider</button>
+  <button onclick="changeHeroLayout('minimal')">Minimal</button>
+  <button onclick="changeHeroLayout('particles')">Animated</button>
+</div>
+
+<!-- Hero Sections -->
+<section id="hero-classic" class="hero hero-classic">
+  <div class="floating-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+  <div class="container text-center">
+    <h1 class="animate__animated animate__fadeInUp">Dominic Minischetti</h1>
+    <h3 class="animate__animated animate__fadeInUp animate__delay-1s">
+      <span id="typed"></span>
+    </h3>
+    <div class="animate__animated animate__fadeInUp animate__delay-2s">
+      <a href="#contact" class="btn btn-primary btn-lg me-3">Let's Connect</a>
+      <a href="#projects" class="btn btn-outline-light btn-lg">View Projects</a>
+    </div>
+  </div>
+</section>
+
+<section id="hero-slider" class="hero hero-slider" style="display:none;">
+  <div class="container text-center">
+    <h1 class="animate__animated animate__slideInLeft">Backend Engineer</h1>
+    <h3 class="animate__animated animate__slideInRight animate__delay-1s">Building Scalable Solutions</h3>
+    <p class="lead animate__animated animate__fadeInUp animate__delay-2s">Transforming complex problems into elegant code</p>
+    <a href="#about" class="btn btn-primary btn-lg animate__animated animate__zoomIn animate__delay-3s">Discover More</a>
+  </div>
+</section>
+
+<section id="hero-minimal" class="hero hero-minimal" style="display:none;">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <h1 class="animate__animated animate__fadeInLeft">Hi, I'm Dominic</h1>
+        <h3 class="animate__animated animate__fadeInLeft animate__delay-1s">I write code that works.</h3>
+        <p class="lead animate__animated animate__fadeInLeft animate__delay-2s">
+          Backend engineer specializing in PHP, MySQL, and scalable systems. 
+          When I'm not debugging, I'm probably debating why Italian bread beats NY bagels.
+        </p>
+        <a href="#contact" class="btn btn-primary animate__animated animate__fadeInLeft animate__delay-3s">Get In Touch</a>
+      </div>
+      <div class="col-lg-6 animate__animated animate__fadeInRight animate__delay-1s">
+        <img src="https://picsum.photos/500/600?portrait" alt="Dominic" class="img-fluid rounded-3 shadow-lg">
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="hero-particles" class="hero hero-particles" style="display:none;">
+  <div class="floating-shapes">
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+    <div class="shape"></div>
+  </div>
+  <div class="container text-center">
+    <h1 class="animate__animated animate__bounceInDown">Code. Debug. Repeat.</h1>
+    <h3 class="animate__animated animate__bounceInUp animate__delay-1s">Backend Engineer Extraordinaire</h3>
+    <div class="animate__animated animate__fadeIn animate__delay-2s">
+      <a href="#projects" class="btn btn-primary btn-lg">Explore Work</a>
+    </div>
+  </div>
+</section>
+
+<!-- Animated Stats -->
+<section class="stats-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-3 col-md-6">
+        <div class="stat-item" data-aos="fade-up">
+          <span class="stat-number" data-count="5">0</span>
+          <div class="stat-label">Years Experience</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="100">
+          <span class="stat-number" data-count="50">0</span>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="200">
+          <span class="stat-number" data-count="1000">0</span>
+          <div class="stat-label">Cups of Coffee ☕</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-md-6">
+        <div class="stat-item" data-aos="fade-up" data-aos-delay="300">
+          <span class="stat-number" data-count="99">0</span>
+          <div class="stat-label">% Uptime Goal</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About -->
+<section id="about" class="py-5">
+  <div class="container" data-aos="fade-up">
+    <h2 class="section-title">About Me</h2>
+    <div class="row align-items-center">
+      <div class="col-lg-6">
+        <p class="lead">
+          Backend engineer with 5+ years of experience in PHP, MySQL, and scalable backend systems. 
+          I specialize in eCommerce, CMS platforms, and WMS development — with a focus on performance optimization, 
+          clean architecture, and maintainable code.
+        </p>
+        <p>
+          👋 By day, I'm a backend engineer making sure systems don't implode.  
+          By night, I'm a dad, husband, and bread-debater 🍞 (Italian bread > NY bagels — fight me).
+        </p>
+        <p>
+          Born in New York, raised in Italy, and now back in the city that never sleeps. 
+          My life has been a series of loops—like a recursive function that just won't quit.
+        </p>
+      </div>
+      <div class="col-lg-6">
+        <div class="row g-4">
+          <div class="col-6">
+            <div class="bg-light p-4 rounded-3 text-center">
+              <i class="fas fa-code fa-2x text-primary mb-2"></i>
+              <h6>Clean Code</h6>
+              <p class="small mb-0">Writing maintainable solutions</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="bg-light p-4 rounded-3 text-center">
+              <i class="fas fa-database fa-2x text-primary mb-2"></i>
+              <h6>Database Expert</h6>
+              <p class="small mb-0">Optimizing complex queries</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="bg-light p-4 rounded-3 text-center">
+              <i class="fas fa-bug fa-2x text-primary mb-2"></i>
+              <h6>Debug Master</h6>
+              <p class="small mb-0">Finding needles in haystacks</p>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="bg-light p-4 rounded-3 text-center">
+              <i class="fas fa-coffee fa-2x text-primary mb-2"></i>
+              <h6>Coffee Powered</h6>
+              <p class="small mb-0">Fuel for problem solving</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Experience -->
+<section id="experience" class="py-5 bg-light">
+  <div class="container" data-aos="fade-up">
+    <h2 class="section-title">Experience</h2>
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="timeline">
+          <div class="timeline-item mb-5">
+            <div class="row align-items-center">
+              <div class="col-md-3 text-md-end">
+                <span class="badge bg-primary px-3 py-2">2024 - Present</span>
+              </div>
+              <div class="col-md-9">
+                <div class="bg-white p-4 rounded-3 shadow-sm">
+                  <h5 class="mb-2">Backend PHP Developer</h5>
+                  <h6 class="text-primary mb-2">BLOX Digital</h6>
+                  <p class="mb-0">Building scalable CMS solutions for media organizations, optimizing performance and enhancing deployment processes.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="timeline-item mb-5">
+            <div class="row align-items-center">
+              <div class="col-md-3 text-md-end">
+                <span class="badge bg-secondary px-3 py-2">2022 - 2024</span>
+              </div>
+              <div class="col-md-9">
+                <div class="bg-white p-4 rounded-3 shadow-sm">
+                  <h5 class="mb-2">Backend Developer</h5>
+                  <h6 class="text-primary mb-2">Appliances Connection</h6>
+                  <p class="mb-0">Built comprehensive Warehouse Management System, improving inventory tracking and order fulfillment efficiency.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="timeline-item">
+            <div class="row align-items-center">
+              <div class="col-md-3 text-md-end">
+                <span class="badge bg-info px-3 py-2">2021 - 2022</span>
+              </div>
+              <div class="col-md-9">
+                <div class="bg-white p-4 rounded-3 shadow-sm">
+                  <h5 class="mb-2">Full Stack Developer</h5>
+                  <h6 class="text-primary mb-2">Kingsleague</h6>
+                  <p class="mb-0">Developed platform features with PHP, MySQL, Firebase, and Docker, implementing automated testing solutions.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Skills -->
+<section id="skills" class="py-5">
+  <div class="container" data-aos="fade-up">
+    <h2 class="section-title">Skills</h2>
+    <div class="row g-4">
+      <div class="col-lg-6">
+        <div class="skill-item mb-4">
+          <div class="d-flex justify-content-between mb-2">
+            <span class="fw-medium">PHP / Laravel</span>
+            <span class="text-primary">90%</span>
+          </div>
+          <div class="progress" style="height: 8px;">
+            <div class="progress-bar bg-primary" style="width: 90%"></div>
+          </div>
+        </div>
+        
+        <div class="skill-item mb-4">
+          <div class="d-flex justify-content-between mb-2">
+            <span class="fw-medium">MySQL / Database Design</span>
+            <span class="text-info">85%</span>
+          </div>
+          <div class="progress" style="height: 8px;">
+            <div class="progress-bar bg-info" style="width: 85%"></div>
+          </div>
+        </div>
+        
+        <div class="skill-item mb-4">
+          <div class="d-flex justify-content-between mb-2">
+            <span class="fw-medium">Docker / DevOps</span>
+            <span class="text-warning">75%</span>
+          </div>
+          <div class="progress" style="height: 8px;">
+            <div class="progress-bar bg-warning" style="width: 75%"></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-6">
+        <div class="skill-item mb-4">
+          <div class="d-flex justify-content-between mb-2">
+            <span class="fw-medium">REST APIs</span>
+            <span class="text-danger">80%</span>
+          </div>
+          <div class="progress" style="height: 8px;">
+            <div class="progress-bar bg-danger" style="width: 80%"></div>
+          </div>
+        </div>
+        
+        <div class="skill-item mb-4">
+          <div class="d-flex justify-content-between mb-2">
+            <span class="fw-medium">Linux Administration</span>
+            <span class="text-secondary">70%</span>
+          </div>
+          <div class="progress" style="height: 8px;">
+            <div class="progress-bar bg-secondary" style="width: 70%"></div>
+          </div>
+        </div>
+        
+        <div class="skill-item mb-4">
+          <div class="d-flex justify-content-between mb-2">
+            <span class="fw-medium">Problem Solving & Debugging</span>
+            <span class="text-success">95%</span>
+          </div>
+          <div class="progress" style="height: 8px;">
+            <div class="progress-bar bg-success" style="width: 95%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Projects -->
+<section id="projects" class="py-5 bg-light">
+  <div class="container" data-aos="fade-up">
+    <h2 class="section-title">Projects</h2>
+    
+    <!-- Portfolio Filters -->
+    <div class="portfolio-filters">
+      <button class="filter-btn active" data-filter="*">All</button>
+      <button class="filter-btn" data-filter=".cms">CMS</button>
+      <button class="filter-btn" data-filter=".ecommerce">eCommerce</button>
+      <button class="filter-btn" data-filter=".wms">WMS</button>
+      <button class="filter-btn" data-filter=".api">API</button>
+    </div>
+    
+    <div class="row portfolio-container" id="portfolioContainer">
+      <div class="col-lg-4 col-md-6 portfolio-item wms">
+        <div class="project-card">
+          <img src="https://picsum.photos/400/300?warehouse" class="card-img-top" alt="WMS Project">
+          <div class="portfolio-content">
+            <h5>Warehouse Management System</h5>
+            <p>Built comprehensive WMS improving inventory tracking and order fulfillment by 40%.</p>
+            <div class="project-tech">
+              <span class="badge bg-primary me-1">PHP</span>
+              <span class="badge bg-info me-1">MySQL</span>
+              <span class="badge bg-secondary">Bootstrap</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 col-md-6 portfolio-item cms">
+        <div class="project-card">
+          <img src="https://picsum.photos/400/300?cms" class="card-img-top" alt="CMS Project">
+          <div class="portfolio-content">
+            <h5>Scalable CMS Platform</h5>
+            <p>High-performance content management system handling millions of page views monthly.</p>
+            <div class="project-tech">
+              <span class="badge bg-primary me-1">Laravel</span>
+              <span class="badge bg-success me-1">Redis</span>
+              <span class="badge bg-warning">Docker</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 col-md-6 portfolio-item ecommerce">
+        <div class="project-card">
+          <img src="https://picsum.photos/400/300?ecommerce" class="card-img-top" alt="eCommerce Project">
+          <div class="portfolio-content">
+            <h5>eCommerce Optimization</h5>
+            <p>Performance optimization reducing page load times by 60% and increasing conversions.</p>
+            <div class="project-tech">
+              <span class="badge bg-danger me-1">PHP</span>
+              <span class="badge bg-info me-1">MySQL</span>
+              <span class="badge bg-success">Memcached</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 col-md-6 portfolio-item api">
+        <div class="project-card">
+          <img src="https://picsum.photos/400/300?api" class="card-img-top" alt="API Project">
+          <div class="portfolio-content">
+            <h5>RESTful API Suite</h5>
+            <p>Comprehensive API ecosystem supporting mobile apps and third-party integrations.</p>
+            <div class="project-tech">
+              <span class="badge bg-primary me-1">Laravel</span>
+              <span class="badge bg-secondary me-1">JWT</span>
+              <span class="badge bg-info">Swagger</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 col-md-6 portfolio-item cms api">
+        <div class="project-card">
+          <img src="https://picsum.photos/400/300?media" class="card-img-top" alt="Media Platform">
+          <div class="portfolio-content">
+            <h5>Media Organization Platform</h5>
+            <p>Scalable content delivery system for news organizations with real-time analytics.</p>
+            <div class="project-tech">
+              <span class="badge bg-primary me-1">PHP</span>
+              <span class="badge bg-success me-1">MongoDB</span>
+              <span class="badge bg-warning">Elasticsearch</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="col-lg-4 col-md-6 portfolio-item ecommerce">
+        <div class="project-card">
+          <img src="https://picsum.photos/400/300?mobile" class="card-img-top" alt="Mobile Commerce">
+          <div class="portfolio-content">
+            <h5>Mobile Commerce Solution</h5>
+            <p>Backend infrastructure supporting mobile shopping apps with offline capabilities.</p>
+            <div class="project-tech">
+              <span class="badge bg-danger me-1">Laravel</span>
+              <span class="badge bg-info me-1">Redis</span>
+              <span class="badge bg-dark">Firebase</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Blog Section -->
+<section id="blog" class="py-5">
+  <div class="container" data-aos="fade-up">
+    <h2 class="section-title">Latest Blog Posts</h2>
+    <div class="row g-4">
+      <div class="col-lg-4 col-md-6">
+        <article class="blog-card">
+          <img src="https://picsum.photos/400/250?code" alt="Blog Post" class="card-img-top">
+          <div class="blog-content">
+            <div class="blog-meta">
+              <i class="fas fa-calendar me-2"></i>January 15, 2025
+              <span class="mx-2">•</span>
+              <i class="fas fa-user me-2"></i>Dominic Minischetti
+            </div>
+            <h5 class="mb-3">Optimizing MySQL Performance: 10 Tips That Actually Work</h5>
+            <p class="text-muted">Real-world strategies for database optimization that I've learned from 5+ years of backend development...</p>
+            <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+          </div>
+        </article>
+      </div>
+      
+      <div class="col-lg-4 col-md-6">
+        <article class="blog-card">
+          <img src="https://picsum.photos/400/250?debugging" alt="Blog Post" class="card-img-top">
+          <div class="blog-content">
+            <div class="blog-meta">
+              <i class="fas fa-calendar me-2"></i>January 8, 2025
+              <span class="mx-2">•</span>
+              <i class="fas fa-user me-2"></i>Dominic Minischetti
+            </div>
+            <h5 class="mb-3">The Art of Debugging: When Code Becomes a Detective Story</h5>
+            <p class="text-muted">My favorite debugging techniques and the most bizarre bugs I've encountered in my career...</p>
+            <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+          </div>
+        </article>
+      </div>
+      
+      <div class="col-lg-4 col-md-6">
+        <article class="blog-card">
+          <img src="https://picsum.photos/400/250?docker" alt="Blog Post" class="card-img-top">
+          <div class="blog-content">
+            <div class="blog-meta">
+              <i class="fas fa-calendar me-2"></i>December 22, 2024
+              <span class="mx-2">•</span>
+              <i class="fas fa-user me-2"></i>Dominic Minischetti
+            </div>
+            <h5 class="mb-3">Docker for PHP Developers: Beyond Hello World</h5>
+            <p class="text-muted">Setting up production-ready PHP environments with Docker, including tips for Laravel applications...</p>
+            <a href="#" class="btn btn-outline-primary btn-sm">Read More</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="py-5 contact-section">
+  <div class="container" data-aos="fade-up">
+    <h2 class="section-title">Let's Connect</h2>
+    <div class="row g-5">
+      <div class="col-lg-6">
+        <div class="contact-form">
+          <h4 class="mb-4">Send me a message</h4>
+          <form action="sendmail.php" method="post">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+              </div>
+              <div class="col-md-6">
+                <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+              </div>
+              <div class="col-12">
+                <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+              </div>
+              <div class="col-12">
+                <textarea name="message" class="form-control" rows="6" placeholder="Your Message" required></textarea>
+              </div>
+              <div class="col-12">
+                <button type="submit" class="btn btn-primary btn-lg">
+                  <i class="fas fa-paper-plane me-2"></i>Send Message
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      
+      <div class="col-lg-6">
+        <div class="contact-info mb-4">
+          <h4 class="mb-4">Get in touch</h4>
+          <div class="contact-item d-flex align-items-center mb-3">
+            <div class="contact-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+              <i class="fas fa-envelope"></i>
+            </div>
+            <div>
+              <h6 class="mb-0">Email</h6>
+              <a href="mailto:dominic.minischetti@gmail.com" class="text-decoration-none">dominic.minischetti@gmail.com</a>
+            </div>
+          </div>
+          
+          <div class="contact-item d-flex align-items-center mb-3">
+            <div class="contact-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+              <i class="fas fa-map-marker-alt"></i>
+            </div>
+            <div>
+              <h6 class="mb-0">Location</h6>
+              <span>Brooklyn, New York</span>
+            </div>
+          </div>
+          
+          <div class="contact-item d-flex align-items-center mb-4">
+            <div class="contact-icon bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3" style="width: 50px; height: 50px;">
+              <i class="fas fa-clock"></i>
+            </div>
+            <div>
+              <h6 class="mb-0">Availability</h6>
+              <span>Open to remote opportunities</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Google Maps -->
+        <div class="map-container">
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d193595.15830869428!2d-74.119763973046!3d40.69766374874431!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c24416947c2109%3A0x82765c7404007886!2sBrooklyn%2C%20NY!5e0!3m2!1sen!2sus!4v1692177633586!5m2!1sen!2sus" 
+            width="100%" 
+            height="100%" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="social-links">
+      <a href="https://github.com/dominicminischetti" target="_blank"><i class="fab fa-github"></i></a>
+      <a href="https://linkedin.com/in/dominicminischetti" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+      <a href="https://twitter.com/dominicmini" target="_blank"><i class="fab fa-twitter"></i></a>
+      <a href="mailto:dominic.minischetti@gmail.com"><i class="fas fa-envelope"></i></a>
+    </div>
+    <p>© 2025 Dominic Minischetti. Built with ❤️, Bootstrap, and way too much coffee.</p>
+    <p class="small text-muted">Powered by passion for clean code and Italian bread supremacy 🍞</p>
+  </div>
+</footer>
+
+<!-- JS Plugins -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.12/typed.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+
+<script>
+  // Preloader
+  window.addEventListener('load', function() {
+    setTimeout(function() {
+      document.querySelector('.preloader').classList.add('fade-out');
+    }, 1000);
+  });
+
+  // Typed Hero Text
+  document.addEventListener('DOMContentLoaded', function() {
+    new Typed('#typed', {
+      strings: [
+        "Backend Engineer.", 
+        "PHP Performance Optimizer.", 
+        "Database Whisperer.", 
+        "Bug Hunter Extraordinaire.",
+        "Scalable Systems Builder.", 
+        "Dad, Debugger & Bread Enthusiast."
+      ],
+      typeSpeed: 60,
+      backSpeed: 40,
+      backDelay: 2000,
+      loop: true
+    });
+  });
+
+  // Scroll Animations
+  AOS.init({
+    duration: 1000,
+    once: true,
+    offset: 100
+  });
+
+  // Animated Counters
+  function animateCounters() {
+    const counters = document.querySelectorAll('.stat-number[data-count]');
+    const speed = 200;
+
+    counters.forEach(counter => {
+      const animate = () => {
+        const value = +counter.getAttribute('data-count');
+        const data = +counter.innerText;
+        const time = value / speed;
+        
+        if (data < value) {
+          counter.innerText = Math.ceil(data + time);
+          setTimeout(animate, 1);
+        } else {
+          counter.innerText = value;
+        }
+      }
+      animate();
+    });
+  }
+
+  // Trigger counter animation when stats section is visible
+  const observerOptions = {
+    threshold: 0.5,
+    rootMargin: '0px 0px -100px 0px'
+  };
+
+  const observer = new IntersectionObserver(function(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateCounters();
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  const statsSection = document.querySelector('.stats-section');
+  if (statsSection) {
+    observer.observe(statsSection);
+  }
+
+  // Portfolio Filtering
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const portfolioItems = document.querySelectorAll('.portfolio-item');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      const filter = this.getAttribute('data-filter');
+      
+      // Update active button
+      filterBtns.forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+      
+      // Filter items
+      portfolioItems.forEach(item => {
+        if (filter === '*' || item.classList.contains(filter.substring(1))) {
+          item.style.display = 'block';
+          item.style.animation = 'fadeInUp 0.5s ease forwards';
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Hero Layout Switcher
+  function changeHeroLayout(layout) {
+    // Hide all hero sections
+    const heroes = ['hero-classic', 'hero-slider', 'hero-minimal', 'hero-particles'];
+    heroes.forEach(hero => {
+      document.getElementById(hero).style.display = 'none';
+    });
+    
+    // Show selected hero
+    document.getElementById('hero-' + layout).style.display = 'flex';
+    
+    // Update buttons
+    document.querySelectorAll('.hero-selector button').forEach(btn => {
+      btn.classList.remove('active');
+    });
+    document.querySelector(`[onclick="changeHeroLayout('${layout}')"]`).classList.add('active');
+  }
+
+  // Theme Customizer
+  function toggleCustomizer() {
+    const customizer = document.getElementById('themeCustomizer');
+    customizer.classList.toggle('open');
+  }
+
+  function setTheme(theme) {
+    document.documentElement.setAttribute('data-theme', theme);
+    localStorage.setItem('theme', theme);
+  }
+
+  function setColorScheme(color) {
+    document.documentElement.setAttribute('data-theme', color);
+    localStorage.setItem('colorScheme', color);
+  }
+
+  // Load saved theme
+  const savedTheme = localStorage.getItem('theme');
+  const savedColor = localStorage.getItem('colorScheme');
+  if (savedTheme) setTheme(savedTheme);
+  if (savedColor) setColorScheme(savedColor);
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (window.scrollY > 50) {
+      navbar.classList.add('scrolled');
+    } else {
+      navbar.classList.remove('scrolled');
+    }
+  });
+
+  // Smooth scrolling for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+      e.preventDefault();
+      const target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        target.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      }
+    });
+  });
+
+  // Form submission handling
+  document.querySelector('form[action="sendmail.php"]').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    // Show success message (you would implement actual form submission here)
+    alert('Thank you for your message! I\'ll get back to you soon.');
+    this.reset();
+  });
+
+  // Add some interactive particles to animated hero
+  function createParticles() {
+    const particlesHero = document.getElementById('hero-particles');
+    const shapes = particlesHero.querySelector('.floating-shapes');
+    
+    for (let i = 0; i < 15; i++) {
+      const particle = document.createElement('div');
+      particle.className = 'shape';
+      particle.style.width = Math.random() * 60 + 20 + 'px';
+      particle.style.height = particle.style.width;
+      particle.style.left = Math.random() * 100 + '%';
+      particle.style.top = Math.random() * 100 + '%';
+      particle.style.animationDelay = Math.random() * 6 + 's';
+      particle.style.animationDuration = (Math.random() * 4 + 4) + 's';
+      shapes.appendChild(particle);
+    }
+  }
+
+  // Initialize particles
+  createParticles();
+
+  // Add fade-in effect for portfolio items
+  const portfolioObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  });
+
+  portfolioItems.forEach(item => {
+    item.style.opacity = '0';
+    item.style.transform = 'translateY(20px)';
+    item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    portfolioObserver.observe(item);
+  });
+
+  // Add keyboard navigation for accessibility
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+      const customizer = document.getElementById('themeCustomizer');
+      customizer.classList.remove('open');
+    }
+  });
+</script>
+</body>
+</html>
