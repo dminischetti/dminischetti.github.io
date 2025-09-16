@@ -24,8 +24,11 @@ jobs:
       # Copia TUTTI i file root (index.html, CSS, immagini, ecc.)
       - name: Copy root files
         run: |
-          mkdir -p public
-          rsync -av --exclude='blog/' --exclude='.github/' ./ public/
+              mkdir -p public
+              cp -f index.html public/
+              cp -rf static/* public/ || true
+              [ -f CNAME ] && cp -f CNAME public/ || true
+
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
