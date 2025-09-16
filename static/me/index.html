@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
     <!-- Primary Meta Tags -->
-    <title>Dominic Minischetti • PHP Backend Engineer | Scalable Systems & Performance Expert</title>
-    <meta name="title" content="Dominic Minischetti • PHP Backend Engineer | Scalable Systems & Performance Expert">
+    <title>Dominic Minischetti • Senior PHP Backend Engineer | Performance Optimization Expert</title>
+    <meta name="title" content="Dominic Minischetti • Senior PHP Backend Engineer | Performance Optimization Expert">
     <meta name="description" content="Transform your PHP systems with 50% faster load times. Senior Backend Engineer specializing in Laravel, MySQL optimization, and scalable architecture. Available for immediate projects.">
     <meta name="keywords" content="PHP developer, Laravel expert, backend engineer, MySQL optimization, performance tuning, scalable systems, Brooklyn developer, remote PHP developer">
     <meta name="author" content="Dominic Minischetti">
@@ -25,7 +25,7 @@
     <meta property="og:type" content="profile">
     <meta property="og:site_name" content="Dominic Minischetti Portfolio">
     <meta property="og:url" content="https://dominicminischetti.dev">
-    <meta property="og:title" content="Dominic Minischetti • PHP Backend Engineer">
+    <meta property="og:title" content="Dominic Minischetti • Senior PHP Backend Engineer">
     <meta property="og:description" content="Transform your PHP systems with 50% faster load times. Available for immediate projects.">
     <meta property="og:image" content="https://dominicminischetti.dev/og-image.jpg">
     <meta property="og:image:width" content="1200">
@@ -35,11 +35,17 @@
     
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:site" content="@dominicmini">
+    <meta property="twitter:creator" content="@dominicmini">
     <meta property="twitter:url" content="https://dominicminischetti.dev">
-    <meta property="twitter:title" content="Dominic Minischetti • PHP Backend Engineer">
+    <meta property="twitter:title" content="Dominic Minischetti • Senior PHP Backend Engineer">
     <meta property="twitter:description" content="Transform your PHP systems with 50% faster load times. Available for immediate projects.">
     <meta property="twitter:image" content="https://dominicminischetti.dev/twitter-card.jpg">
     <meta property="twitter:image:alt" content="Dominic Minischetti - Senior PHP Backend Engineer">
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://images.unsplash.com">
     
     <!-- Schema.org Structured Data -->
     <script type="application/ld+json">
@@ -61,137 +67,90 @@
             "addressCountry": "US"
         },
         "sameAs": [
-            "https://linkedin.com/in/dominicminischetti"
+            "https://linkedin.com/in/dominicminischetti",
+            "https://github.com/dominicminischetti",
+            "https://twitter.com/dominicmini"
         ],
         "knowsAbout": ["PHP", "Laravel", "MySQL", "Performance Optimization", "Database Design", "Scalable Architecture", "Redis", "Docker", "API Development"],
-        "knowsLanguage": ["en-US", "it-IT"]
+        "knowsLanguage": ["en-US", "it-IT"],
+        "alumniOf": [
+            {
+                "@type": "Organization",
+                "name": "BLOX Digital"
+            },
+            {
+                "@type": "Organization", 
+                "name": "Appliances Connection"
+            }
+        ]
     }
     </script>
     
-    <!-- Enhanced Styles with Modern UX/UI -->
+    <!-- Consolidated Styles -->
     <style>
-        /* Modern Design System */
+        /* Design System */
         :root {
-            /* Enhanced Color Palette */
-            --c-primary: #2563eb;
-            --c-primary-dark: #1d4ed8;
-            --c-primary-light: #3b82f6;
+            --c-primary: #1e40af;
             --c-secondary: #f59e0b;
             --c-accent: #10b981;
-            --c-accent-light: #34d399;
-            --c-success: #059669;
-            --c-warning: #d97706;
-            --c-error: #dc2626;
-            --c-text: #0f172a;
-            --c-text-light: #334155;
-            --c-text-muted: #64748b;
+            --c-danger: #ef4444;
+            --c-text: #1f2937;
+            --c-text-secondary: #6b7280;
             --c-bg: #ffffff;
-            --c-bg-subtle: #f8fafc;
-            --c-bg-muted: #f1f5f9;
-            --c-border: #e2e8f0;
-            --c-border-strong: #cbd5e1;
-            
-            /* Typography */
-            --ff-display: 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
-            --ff-body: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-            --ff-mono: 'SF Mono', 'Monaco', 'Cascadia Code', 'Roboto Mono', monospace;
-            
-            /* Fluid Typography */
-            --fs-xs: clamp(0.75rem, 0.8vw, 0.875rem);
-            --fs-sm: clamp(0.875rem, 1vw, 1rem);
-            --fs-base: clamp(1rem, 1.2vw, 1.125rem);
-            --fs-lg: clamp(1.125rem, 1.4vw, 1.25rem);
-            --fs-xl: clamp(1.25rem, 1.6vw, 1.5rem);
-            --fs-2xl: clamp(1.5rem, 2vw, 1.875rem);
-            --fs-3xl: clamp(1.875rem, 2.5vw, 2.25rem);
-            --fs-4xl: clamp(2.25rem, 3vw, 3rem);
-            --fs-5xl: clamp(3rem, 4vw, 4rem);
-            --fs-6xl: clamp(3.75rem, 5vw, 5rem);
-            
-            /* Spacing System */
-            --space-px: 1px;
-            --space-0: 0;
-            --space-1: 0.25rem;
-            --space-2: 0.5rem;
-            --space-3: 0.75rem;
-            --space-4: 1rem;
-            --space-5: 1.25rem;
-            --space-6: 1.5rem;
-            --space-8: 2rem;
-            --space-10: 2.5rem;
-            --space-12: 3rem;
-            --space-16: 4rem;
-            --space-20: 5rem;
-            --space-24: 6rem;
-            --space-32: 8rem;
-            
-            /* Border Radius */
-            --radius-sm: 0.375rem;
+            --c-bg-secondary: #f8fafc;
+            --c-border: #e5e7eb;
+            --ff-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            --fs-xs: 0.75rem;
+            --fs-sm: 0.875rem;
+            --fs-base: 1rem;
+            --fs-lg: 1.125rem;
+            --fs-xl: 1.25rem;
+            --fs-2xl: 1.5rem;
+            --fs-3xl: 1.875rem;
+            --fs-4xl: 2.25rem;
+            --fs-5xl: 3rem;
+            --space-xs: 0.5rem;
+            --space-sm: 0.75rem;
+            --space-md: 1rem;
+            --space-lg: 1.5rem;
+            --space-xl: 2rem;
+            --space-2xl: 3rem;
+            --space-3xl: 4rem;
+            --space-4xl: 6rem;
             --radius: 0.5rem;
-            --radius-md: 0.625rem;
             --radius-lg: 0.75rem;
             --radius-xl: 1rem;
-            --radius-2xl: 1.5rem;
-            --radius-3xl: 2rem;
             --radius-full: 9999px;
-            
-            /* Shadows */
-            --shadow-xs: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
-            --shadow-md: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-            --shadow-xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-            
-            /* Animations */
-            --duration-75: 75ms;
-            --duration-100: 100ms;
-            --duration-150: 150ms;
-            --duration-200: 200ms;
-            --duration-300: 300ms;
-            --duration-500: 500ms;
-            --duration-700: 700ms;
-            --duration-1000: 1000ms;
-            
-            --ease-linear: linear;
-            --ease-in: cubic-bezier(0.4, 0, 1, 1);
-            --ease-out: cubic-bezier(0, 0, 0.2, 1);
-            --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
-            --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
-            
-            /* Gradients */
-            --gradient-primary: linear-gradient(135deg, var(--c-primary), var(--c-primary-dark));
-            --gradient-accent: linear-gradient(135deg, var(--c-accent), var(--c-success));
-            --gradient-hero: linear-gradient(135deg, var(--c-primary) 0%, var(--c-accent) 100%);
-            --gradient-glass: linear-gradient(135deg, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.1));
+            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1);
+            --trans-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --trans: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            --gradient-primary: linear-gradient(135deg, var(--c-primary), #1e3a8a);
+            --gradient-accent: linear-gradient(135deg, var(--c-accent), #059669);
+            --gradient-dark: linear-gradient(135deg, #1f2937, #111827);
         }
 
         [data-theme="dark"] {
-            --c-text: #f8fafc;
-            --c-text-light: #e2e8f0;
-            --c-text-muted: #94a3b8;
-            --c-bg: #0f172a;
-            --c-bg-subtle: #1e293b;
-            --c-bg-muted: #334155;
-            --c-border: #334155;
-            --c-border-strong: #475569;
+            --c-text: #f9fafb;
+            --c-text-secondary: #d1d5db;
+            --c-bg: #111827;
+            --c-bg-secondary: #1f2937;
+            --c-border: #374151;
         }
 
         @media (prefers-color-scheme: dark) {
             :root:not([data-theme="light"]) {
-                --c-text: #f8fafc;
-                --c-text-light: #e2e8f0;
-                --c-text-muted: #94a3b8;
-                --c-bg: #0f172a;
-                --c-bg-subtle: #1e293b;
-                --c-bg-muted: #334155;
-                --c-border: #334155;
-                --c-border-strong: #475569;
+                --c-text: #f9fafb;
+                --c-text-secondary: #d1d5db;
+                --c-bg: #111827;
+                --c-bg-secondary: #1f2937;
+                --c-border: #374151;
             }
         }
 
-        /* Base Reset & Global Styles */
+        /* Base Reset */
         *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
@@ -205,7 +164,7 @@
         }
 
         body {
-            font-family: var(--ff-body);
+            font-family: var(--ff-sans);
             font-size: var(--fs-base);
             line-height: 1.6;
             color: var(--c-text);
@@ -213,46 +172,61 @@
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
             text-rendering: optimizeLegibility;
-            transition: background-color var(--duration-300) var(--ease-out), color var(--duration-300) var(--ease-out);
+            transition: background-color var(--trans), color var(--trans);
             min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Enhanced Typography */
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--ff-display);
-            font-weight: 700;
-            line-height: 1.2;
-            letter-spacing: -0.025em;
+        /* Skip to content */
+        .skip-link {
+            position: absolute;
+            top: -40px;
+            left: 0;
+            background: var(--c-primary);
+            color: white;
+            padding: var(--space-sm) var(--space-md);
+            text-decoration: none;
+            z-index: 1000;
+            border-radius: 0 0 var(--radius) 0;
         }
 
-        h1 { font-size: var(--fs-5xl); }
-        h2 { font-size: var(--fs-4xl); }
-        h3 { font-size: var(--fs-3xl); }
-        h4 { font-size: var(--fs-2xl); }
-        h5 { font-size: var(--fs-xl); }
-        h6 { font-size: var(--fs-lg); }
+        .skip-link:focus {
+            top: 0;
+        }
+
+        /* Typography */
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.02em;
+        }
+
+        h1 { font-size: var(--fs-4xl); }
+        h2 { font-size: var(--fs-3xl); }
+        h3 { font-size: var(--fs-2xl); }
+        h4 { font-size: var(--fs-xl); }
+        h5 { font-size: var(--fs-lg); }
+        h6 { font-size: var(--fs-base); }
 
         p {
-            margin-bottom: var(--space-4);
+            margin-bottom: var(--space-md);
             line-height: 1.7;
-            color: var(--c-text-light);
         }
 
         a {
             color: var(--c-primary);
             text-decoration: none;
-            transition: color var(--duration-200) var(--ease-out);
+            transition: color var(--trans-fast);
         }
 
         a:hover {
-            color: var(--c-primary-dark);
+            color: var(--c-secondary);
         }
 
         :focus-visible {
             outline: 2px solid var(--c-primary);
             outline-offset: 2px;
-            border-radius: var(--radius-sm);
+            border-radius: var(--radius);
         }
 
         ::selection {
@@ -260,120 +234,86 @@
             color: white;
         }
 
-        /* Enhanced Container System */
+        /* Container */
         .container {
             width: 100%;
-            max-width: 1280px;
+            max-width: 1200px;
             margin: 0 auto;
-            padding: 0 var(--space-6);
+            padding: 0 var(--space-lg);
         }
 
-        .container-sm {
-            max-width: 1024px;
-        }
-
-        .container-xs {
-            max-width: 768px;
-        }
-
-        /* Skip Link */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: var(--space-4);
-            background: var(--c-primary);
-            color: white;
-            padding: var(--space-3) var(--space-4);
-            text-decoration: none;
-            z-index: 1000;
-            border-radius: var(--radius);
-            font-weight: 600;
-            transition: top var(--duration-200) var(--ease-out);
-        }
-
-        .skip-link:focus {
-            top: var(--space-4);
-        }
-
-        /* Modern Header with Glass Effect */
+        /* Header */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--c-border);
             z-index: 100;
-            transition: all var(--duration-300) var(--ease-out);
+            transition: all var(--trans);
         }
 
         [data-theme="dark"] .header {
-            background: rgba(15, 23, 42, 0.8);
+            background: rgba(17, 24, 39, 0.95);
         }
 
         .header.scrolled {
-            box-shadow: var(--shadow-lg);
-            background: rgba(255, 255, 255, 0.95);
-        }
-
-        [data-theme="dark"] .header.scrolled {
-            background: rgba(15, 23, 42, 0.95);
+            box-shadow: var(--shadow);
         }
 
         .header-content {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: var(--space-4) 0;
-            min-height: 80px;
+            padding: var(--space-md) 0;
+            min-height: 70px;
         }
 
         .logo {
-            font-family: var(--ff-display);
             font-weight: 800;
-            font-size: var(--fs-xl);
+            font-size: var(--fs-lg);
             color: var(--c-text);
             text-decoration: none;
             display: flex;
             align-items: center;
-            gap: var(--space-3);
-            transition: transform var(--duration-200) var(--ease-out);
+            gap: var(--space-xs);
+            transition: transform var(--trans-fast);
         }
 
         .logo:hover {
-            transform: translateX(2px);
+            transform: translateX(3px);
         }
 
-        .logo-mark {
-            width: 40px;
-            height: 40px;
+        .logo-icon {
+            width: 32px;
+            height: 32px;
             background: var(--gradient-primary);
-            border-radius: var(--radius-lg);
+            border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: 800;
-            font-size: var(--fs-lg);
-            box-shadow: var(--shadow-sm);
+            font-size: var(--fs-sm);
         }
 
         .nav {
             display: flex;
             align-items: center;
-            gap: var(--space-8);
+            gap: var(--space-xl);
         }
 
         .nav-link {
-            color: var(--c-text-light);
+            color: var(--c-text-secondary);
             text-decoration: none;
             font-weight: 500;
             font-size: var(--fs-sm);
             position: relative;
-            padding: var(--space-2) 0;
-            transition: color var(--duration-200) var(--ease-out);
+            padding: var(--space-xs) 0;
+            transition: color var(--trans-fast);
         }
 
         .nav-link::after {
@@ -384,8 +324,7 @@
             width: 0;
             height: 2px;
             background: var(--gradient-primary);
-            transition: width var(--duration-300) var(--ease-out);
-            border-radius: var(--radius-full);
+            transition: width var(--trans-fast);
         }
 
         .nav-link:hover,
@@ -401,37 +340,29 @@
         .header-cta {
             background: var(--gradient-primary);
             color: white;
-            padding: var(--space-3) var(--space-6);
-            border-radius: var(--radius-full);
+            padding: var(--space-xs) var(--space-md);
+            border-radius: var(--radius);
             font-weight: 600;
             font-size: var(--fs-sm);
-            box-shadow: var(--shadow-sm);
-            transition: all var(--duration-200) var(--ease-out);
+            box-shadow: var(--shadow);
+            transition: all var(--trans-fast);
             white-space: nowrap;
-            border: none;
-            cursor: pointer;
         }
 
         .header-cta:hover {
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
             color: white;
         }
 
-        /* Enhanced Mobile Navigation */
+        /* Mobile Menu */
         .mobile-toggle {
             display: none;
             background: none;
             border: none;
             cursor: pointer;
-            padding: var(--space-2);
+            padding: var(--space-xs);
             color: var(--c-text);
-            border-radius: var(--radius);
-            transition: background-color var(--duration-200) var(--ease-out);
-        }
-
-        .mobile-toggle:hover {
-            background: var(--c-bg-subtle);
         }
 
         .mobile-nav {
@@ -440,13 +371,13 @@
             top: 0;
             right: -100%;
             width: 85%;
-            max-width: 400px;
+            max-width: 350px;
             height: 100vh;
             background: var(--c-bg);
-            box-shadow: var(--shadow-2xl);
+            box-shadow: var(--shadow-xl);
             z-index: 1000;
-            transition: right var(--duration-300) var(--ease-out);
-            padding: var(--space-8);
+            transition: right var(--trans);
+            padding: var(--space-xl);
             overflow-y: auto;
         }
 
@@ -461,7 +392,7 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 999;
             opacity: 0;
-            transition: opacity var(--duration-300) var(--ease-out);
+            transition: opacity var(--trans);
         }
 
         .mobile-overlay.open {
@@ -473,74 +404,54 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: var(--space-8);
-            padding-bottom: var(--space-6);
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-md);
             border-bottom: 1px solid var(--c-border);
-        }
-
-        .mobile-nav-close {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: var(--space-2);
-            color: var(--c-text);
-            border-radius: var(--radius);
-            transition: background-color var(--duration-200) var(--ease-out);
-        }
-
-        .mobile-nav-close:hover {
-            background: var(--c-bg-subtle);
         }
 
         .mobile-nav-link {
             display: block;
-            padding: var(--space-4) 0;
+            padding: var(--space-md) 0;
             color: var(--c-text);
             text-decoration: none;
             font-weight: 500;
             font-size: var(--fs-lg);
             border-bottom: 1px solid var(--c-border);
-            transition: all var(--duration-200) var(--ease-out);
+            transition: all var(--trans-fast);
         }
 
         .mobile-nav-link:hover {
             color: var(--c-primary);
-            transform: translateX(8px);
+            transform: translateX(5px);
         }
 
-        /* Enhanced Dark Mode Toggle */
+        /* Dark Mode Toggle */
         .theme-toggle {
             position: fixed;
-            top: var(--space-8);
-            right: var(--space-8);
+            top: var(--space-xl);
+            right: var(--space-xl);
             z-index: 200;
             background: var(--c-bg);
-            border: 1px solid var(--c-border);
+            border: 2px solid var(--c-border);
             border-radius: var(--radius-full);
-            width: 56px;
-            height: 56px;
+            width: 48px;
+            height: 48px;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            transition: all var(--duration-200) var(--ease-out);
-            box-shadow: var(--shadow-lg);
+            transition: all var(--trans-fast);
+            box-shadow: var(--shadow);
         }
 
         .theme-toggle:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-xl);
-            background: var(--c-bg-subtle);
+            transform: scale(1.1);
+            box-shadow: var(--shadow-lg);
         }
 
         .theme-toggle svg {
-            width: 24px;
-            height: 24px;
-            transition: transform var(--duration-300) var(--ease-bounce);
-        }
-
-        .theme-toggle:hover svg {
-            transform: rotate(180deg);
+            width: 22px;
+            height: 22px;
         }
 
         .theme-toggle .moon-icon {
@@ -555,38 +466,26 @@
             display: block;
         }
 
-        /* Revolutionary Hero Section */
+        /* Hero Section */
         .hero {
             padding-top: 120px;
-            padding-bottom: var(--space-32);
+            padding-bottom: var(--space-4xl);
             min-height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
-            background: linear-gradient(135deg, var(--c-bg) 0%, var(--c-bg-subtle) 100%);
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 20%, rgba(16, 185, 129, 0.05) 0%, transparent 50%);
-            animation: float 20s ease-in-out infinite;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 20%, rgba(30, 64, 175, 0.06) 0%, transparent 50%);
             pointer-events: none;
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0) rotate(0deg);
-            }
-            50% {
-                transform: translateY(-20px) rotate(5deg);
-            }
         }
 
         .hero-content {
@@ -598,167 +497,113 @@
         .hero-badge {
             display: inline-flex;
             align-items: center;
-            gap: var(--space-2);
-            padding: var(--space-2) var(--space-4);
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
+            gap: var(--space-xs);
+            padding: var(--space-xs) var(--space-md);
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
             color: var(--c-accent);
             border-radius: var(--radius-full);
             font-size: var(--fs-sm);
             font-weight: 600;
-            margin-bottom: var(--space-6);
+            margin-bottom: var(--space-lg);
             border: 1px solid rgba(16, 185, 129, 0.2);
-            backdrop-filter: blur(10px);
-            animation: pulse-glow 2s ease-in-out infinite;
         }
 
-        @keyframes pulse-glow {
-            0%, 100% {
-                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.4);
-            }
-            50% {
-                box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
-            }
-        }
-
-        .status-dot {
-            width: 10px;
-            height: 10px;
+        .hero-badge-dot {
+            width: 8px;
+            height: 8px;
             background: var(--c-accent);
             border-radius: 50%;
-            position: relative;
-            animation: pulse-dot 2s ease-in-out infinite;
+            animation: pulse 2s infinite;
         }
 
-        @keyframes pulse-dot {
-            0%, 100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-            50% {
-                opacity: 0.7;
-                transform: scale(1.2);
-            }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
         }
 
         .hero-title {
-            font-size: var(--fs-6xl);
-            font-weight: 900;
+            font-size: clamp(2rem, 5vw, var(--fs-5xl));
+            font-weight: 800;
             line-height: 1.1;
-            margin-bottom: var(--space-6);
-            letter-spacing: -0.04em;
-            background: linear-gradient(135deg, var(--c-text) 0%, var(--c-primary) 50%, var(--c-accent) 100%);
+            margin-bottom: var(--space-lg);
+            letter-spacing: -0.03em;
+            background: linear-gradient(135deg, var(--c-text) 60%, var(--c-primary));
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: slideUpFade 0.8s ease-out;
-        }
-
-        @keyframes slideUpFade {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .hero-subtitle {
             font-size: var(--fs-xl);
-            color: var(--c-text-light);
-            margin-bottom: var(--space-8);
+            color: var(--c-text-secondary);
+            margin-bottom: var(--space-xl);
             line-height: 1.6;
-            max-width: 600px;
-            animation: slideUpFade 0.8s ease-out 0.2s both;
+            max-width: 700px;
         }
 
-        .hero-stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--space-6);
-            margin-bottom: var(--space-8);
-            animation: slideUpFade 0.8s ease-out 0.3s both;
+        .hero-companies {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+            flex-wrap: wrap;
         }
 
-        .hero-stat {
-            text-align: center;
-            padding: var(--space-4);
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(10px);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--c-border);
-            transition: transform var(--duration-300) var(--ease-out);
-        }
-
-        .hero-stat:hover {
-            transform: translateY(-2px);
-        }
-
-        [data-theme="dark"] .hero-stat {
-            background: rgba(15, 23, 42, 0.5);
-        }
-
-        .stat-value {
-            font-size: var(--fs-3xl);
-            font-weight: 800;
-            color: var(--c-primary);
-            line-height: 1;
-            margin-bottom: var(--space-1);
-        }
-
-        .stat-label {
+        .hero-companies-label {
             font-size: var(--fs-sm);
-            color: var(--c-text-muted);
+            color: var(--c-text-secondary);
             font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .company-logo {
+            display: inline-flex;
+            align-items: center;
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--c-bg-secondary);
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius);
+            font-size: var(--fs-sm);
+            font-weight: 600;
+            color: var(--c-text-secondary);
+            transition: all var(--trans-fast);
+        }
+
+        .company-logo:hover {
+            background: var(--gradient-primary);
+            color: white;
+            border-color: transparent;
+            transform: translateY(-2px);
         }
 
         .hero-actions {
             display: flex;
-            gap: var(--space-4);
+            gap: var(--space-md);
             flex-wrap: wrap;
-            animation: slideUpFade 0.8s ease-out 0.4s both;
         }
 
-        /* Enhanced Button System */
+        /* Buttons */
         .btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: var(--space-2);
-            padding: var(--space-4) var(--space-6);
-            border-radius: var(--radius-lg);
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius);
             font-weight: 600;
-            font-size: var(--fs-base);
+            font-size: var(--fs-sm);
             text-decoration: none;
             border: none;
             cursor: pointer;
-            transition: all var(--duration-200) var(--ease-out);
+            transition: all var(--trans-fast);
             white-space: nowrap;
-            position: relative;
-            overflow: hidden;
-            min-height: 48px;
-        }
-
-        .btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left var(--duration-500) var(--ease-out);
-        }
-
-        .btn:hover::before {
-            left: 100%;
         }
 
         .btn-primary {
             background: var(--gradient-primary);
             color: white;
-            box-shadow: var(--shadow-md);
+            box-shadow: var(--shadow);
         }
 
         .btn-primary:hover {
@@ -771,281 +616,345 @@
             background: transparent;
             color: var(--c-text);
             border: 2px solid var(--c-border);
-            backdrop-filter: blur(10px);
         }
 
         .btn-secondary:hover {
-            background: var(--c-bg-subtle);
+            background: var(--c-bg-secondary);
             border-color: var(--c-primary);
             color: var(--c-primary);
-            transform: translateY(-1px);
         }
 
-        .btn-large {
-            padding: var(--space-5) var(--space-8);
-            font-size: var(--fs-lg);
-            min-height: 56px;
-        }
-
-        /* Enhanced Section System */
+        /* Section Base */
         .section {
-            padding: var(--space-24) 0;
+            padding: var(--space-4xl) 0;
             position: relative;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: var(--space-16);
-            max-width: 800px;
-            margin-left: auto;
-            margin-right: auto;
+            margin-bottom: var(--space-3xl);
         }
 
         .section-badge {
             display: inline-block;
-            padding: var(--space-2) var(--space-4);
-            background: var(--c-bg-subtle);
+            padding: var(--space-xs) var(--space-md);
+            background: var(--c-bg-secondary);
             color: var(--c-primary);
             border-radius: var(--radius-full);
             font-size: var(--fs-sm);
             font-weight: 600;
-            margin-bottom: var(--space-4);
+            margin-bottom: var(--space-md);
             border: 1px solid var(--c-border);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
         }
 
         .section-title {
-            font-size: var(--fs-4xl);
+            font-size: var(--fs-3xl);
             font-weight: 800;
-            margin-bottom: var(--space-4);
-            color: var(--c-text);
+            margin-bottom: var(--space-md);
         }
 
         .section-subtitle {
-            font-size: var(--fs-xl);
-            color: var(--c-text-light);
+            font-size: var(--fs-lg);
+            color: var(--c-text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
             line-height: 1.6;
         }
 
-        /* Revolutionary Trust Signals */
+        /* Trust Signals */
         .trust-signals {
-            background: linear-gradient(135deg, var(--c-bg-subtle) 0%, var(--c-bg-muted) 100%);
-            padding: var(--space-16) 0;
+            background: var(--c-bg-secondary);
+            padding: var(--space-2xl) 0;
             border-top: 1px solid var(--c-border);
             border-bottom: 1px solid var(--c-border);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .trust-signals::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2337AEFF' fill-opacity='0.02'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
         }
 
         .trust-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: var(--space-8);
-            position: relative;
-            z-index: 1;
+            gap: var(--space-xl);
+            text-align: center;
         }
 
         .trust-item {
-            text-align: center;
-            padding: var(--space-6);
-            background: rgba(255, 255, 255, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: var(--radius-xl);
-            border: 1px solid var(--c-border);
-            transition: all var(--duration-300) var(--ease-out);
-            position: relative;
-            overflow: hidden;
-        }
-
-        [data-theme="dark"] .trust-item {
-            background: rgba(15, 23, 42, 0.8);
-        }
-
-        .trust-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transition: transform var(--duration-300) var(--ease-out);
-        }
-
-        .trust-item:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .trust-item:hover::before {
-            transform: scaleX(1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
         }
 
         .trust-icon {
-            width: 64px;
-            height: 64px;
+            width: 48px;
+            height: 48px;
             background: var(--gradient-primary);
-            border-radius: var(--radius-xl);
+            border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: var(--fs-2xl);
-            margin: 0 auto var(--space-4);
-            box-shadow: var(--shadow-md);
-            transition: transform var(--duration-300) var(--ease-bounce);
-        }
-
-        .trust-item:hover .trust-icon {
-            transform: scale(1.1) rotate(5deg);
+            font-size: var(--fs-xl);
+            margin-bottom: var(--space-xs);
         }
 
         .trust-value {
-            font-size: var(--fs-3xl);
+            font-size: var(--fs-2xl);
             font-weight: 800;
             color: var(--c-text);
             line-height: 1;
-            margin-bottom: var(--space-2);
         }
 
         .trust-label {
             font-size: var(--fs-sm);
-            color: var(--c-text-muted);
-            font-weight: 500;
-            line-height: 1.4;
+            color: var(--c-text-secondary);
         }
 
-        /* Enhanced Skills Section */
-        .skills-showcase {
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .about-intro {
+            font-size: var(--fs-lg);
+            line-height: 1.8;
+            color: var(--c-text);
+            margin-bottom: var(--space-xl);
+        }
+
+        .about-section {
+            margin-bottom: var(--space-xl);
+        }
+
+        .about-section h3 {
+            font-size: var(--fs-xl);
+            margin-bottom: var(--space-md);
+            color: var(--c-primary);
+        }
+
+        .about-section p {
+            font-size: var(--fs-base);
+            line-height: 1.8;
+            color: var(--c-text-secondary);
+        }
+
+        .about-highlight {
+            background: linear-gradient(135deg, var(--c-bg-secondary), rgba(30, 64, 175, 0.05));
+            border-left: 4px solid var(--c-primary);
+            padding: var(--space-md);
+            border-radius: var(--radius);
+            margin: var(--space-lg) 0;
+            font-style: italic;
+        }
+
+        /* Value Props */
+        .value-props {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: var(--space-8);
-            margin-bottom: var(--space-16);
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-xl);
+            margin-top: var(--space-3xl);
         }
 
-        .skill-category {
+        .value-prop {
+            text-align: center;
+            padding: var(--space-lg);
             background: var(--c-bg);
-            border-radius: var(--radius-xl);
-            padding: var(--space-8);
+            border-radius: var(--radius-lg);
             border: 1px solid var(--c-border);
-            transition: all var(--duration-300) var(--ease-out);
-            position: relative;
-            overflow: hidden;
+            transition: all var(--trans);
         }
 
-        .skill-category::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transition: transform var(--duration-300) var(--ease-out);
+        .value-prop:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow);
+            border-color: var(--c-primary);
         }
 
-        .skill-category:hover {
-            box-shadow: var(--shadow-lg);
-            transform: translateY(-4px);
-        }
-
-        .skill-category:hover::before {
-            transform: scaleX(1);
-        }
-
-        .skill-header {
-            display: flex;
-            align-items: center;
-            gap: var(--space-4);
-            margin-bottom: var(--space-6);
-        }
-
-        .skill-icon {
-            width: 48px;
-            height: 48px;
+        .value-prop-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto var(--space-md);
             background: var(--gradient-primary);
             border-radius: var(--radius-lg);
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: var(--fs-2xl);
             color: white;
+            transition: transform var(--trans);
+        }
+
+        .value-prop:hover .value-prop-icon {
+            transform: rotate(10deg) scale(1.1);
+        }
+
+        .value-prop-title {
             font-size: var(--fs-lg);
-            box-shadow: var(--shadow-sm);
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+        }
+
+        .value-prop-desc {
+            font-size: var(--fs-sm);
+            color: var(--c-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            position: relative;
+            padding-left: var(--space-2xl);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--c-border);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: var(--space-2xl);
+            padding-left: var(--space-xl);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -30px;
+            top: 8px;
+            width: 12px;
+            height: 12px;
+            background: var(--c-primary);
+            border: 3px solid var(--c-bg);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px var(--c-border);
+        }
+
+        .timeline-period {
+            display: inline-block;
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: var(--radius);
+            font-size: var(--fs-xs);
+            font-weight: 600;
+            margin-bottom: var(--space-sm);
+        }
+
+        .timeline-title {
+            font-size: var(--fs-xl);
+            font-weight: 700;
+            margin-bottom: var(--space-xs);
+        }
+
+        .timeline-company {
+            font-size: var(--fs-base);
+            color: var(--c-primary);
+            font-weight: 600;
+            margin-bottom: var(--space-md);
+        }
+
+        .timeline-desc {
+            color: var(--c-text-secondary);
+            line-height: 1.7;
+            margin-bottom: var(--space-md);
+        }
+
+        .timeline-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-xs);
+        }
+
+        .tech-tag {
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--c-bg-secondary);
+            border: 1px solid var(--c-border);
+            border-radius: var(--radius);
+            font-size: var(--fs-xs);
+            font-weight: 500;
+            color: var(--c-text-secondary);
+        }
+
+        /* Skills Matrix */
+        .skills-matrix {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: var(--space-xl);
+            margin-bottom: var(--space-2xl);
+        }
+
+        .skill-category {
+            background: var(--c-bg);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            border: 1px solid var(--c-border);
+            transition: all var(--trans);
+        }
+
+        .skill-category:hover {
+            box-shadow: var(--shadow);
+            transform: translateY(-2px);
         }
 
         .skill-category-title {
-            font-size: var(--fs-xl);
+            font-size: var(--fs-lg);
             font-weight: 700;
-            color: var(--c-text);
+            margin-bottom: var(--space-md);
         }
 
         .skill-list {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-2);
+            gap: var(--space-xs);
         }
 
         .skill-tag {
-            padding: var(--space-2) var(--space-4);
-            background: var(--c-bg-subtle);
+            padding: var(--space-xs) var(--space-sm);
+            background: var(--c-bg-secondary);
             border: 1px solid var(--c-border);
-            border-radius: var(--radius-full);
+            border-radius: var(--radius);
             font-size: var(--fs-sm);
             font-weight: 500;
-            transition: all var(--duration-200) var(--ease-out);
-            cursor: default;
+            transition: all var(--trans-fast);
         }
 
         .skill-tag.primary {
             background: var(--gradient-primary);
             color: white;
             border: none;
-            box-shadow: var(--shadow-sm);
         }
 
         .skill-tag:hover {
             background: var(--c-primary);
             color: white;
             border-color: transparent;
-            transform: translateY(-1px);
-            box-shadow: var(--shadow-sm);
+            transform: translateY(-2px);
         }
 
-        .skill-tag.primary:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* Revolutionary Projects Grid */
+        /* Projects Grid */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: var(--space-8);
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: var(--space-xl);
         }
 
         .project-card {
             background: var(--c-bg);
-            border-radius: var(--radius-2xl);
-            padding: var(--space-8);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow);
             border: 1px solid var(--c-border);
-            transition: all var(--duration-300) var(--ease-out);
+            transition: all var(--trans);
             position: relative;
             overflow: hidden;
-            height: 100%;
         }
 
         .project-card::before {
@@ -1054,14 +963,14 @@
             top: 0;
             left: 0;
             right: 0;
-            height: 4px;
+            height: 3px;
             background: var(--gradient-primary);
             transform: scaleX(0);
-            transition: transform var(--duration-300) var(--ease-out);
+            transition: transform var(--trans);
         }
 
         .project-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-5px);
             box-shadow: var(--shadow-xl);
         }
 
@@ -1069,156 +978,84 @@
             transform: scaleX(1);
         }
 
-        .project-header {
-            display: flex;
-            align-items: flex-start;
-            justify-content: space-between;
-            margin-bottom: var(--space-6);
-        }
-
         .project-title {
-            font-size: var(--fs-2xl);
+            font-size: var(--fs-xl);
             font-weight: 700;
-            margin-bottom: var(--space-2);
-            color: var(--c-text);
-        }
-
-        .project-status {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(16, 185, 129, 0.05));
-            color: var(--c-accent);
-            padding: var(--space-1) var(--space-3);
-            border-radius: var(--radius-full);
-            font-size: var(--fs-xs);
-            font-weight: 600;
-            border: 1px solid rgba(16, 185, 129, 0.2);
+            margin-bottom: var(--space-sm);
         }
 
         .project-desc {
-            color: var(--c-text-light);
+            color: var(--c-text-secondary);
             line-height: 1.6;
-            margin-bottom: var(--space-6);
-        }
-
-        .project-metrics {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--space-4);
-            margin-bottom: var(--space-6);
-        }
-
-        .metric {
-            text-align: center;
-            padding: var(--space-3);
-            background: var(--c-bg-subtle);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--c-border);
-        }
-
-        .metric-value {
-            font-size: var(--fs-lg);
-            font-weight: 700;
-            color: var(--c-primary);
-            margin-bottom: var(--space-1);
-        }
-
-        .metric-label {
-            font-size: var(--fs-xs);
-            color: var(--c-text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+            margin-bottom: var(--space-md);
         }
 
         .project-tech {
             display: flex;
             flex-wrap: wrap;
-            gap: var(--space-2);
-            margin-bottom: var(--space-6);
-        }
-
-        .tech-tag {
-            padding: var(--space-1) var(--space-3);
-            background: var(--c-bg-subtle);
-            border: 1px solid var(--c-border);
-            border-radius: var(--radius);
-            font-size: var(--fs-xs);
-            font-weight: 500;
-            color: var(--c-text-muted);
+            gap: var(--space-xs);
+            margin-bottom: var(--space-md);
         }
 
         .project-links {
             display: flex;
-            gap: var(--space-3);
+            gap: var(--space-sm);
         }
 
         .project-link {
-            flex: 1;
-            text-align: center;
-            padding: var(--space-3) var(--space-4);
-            border: 1px solid var(--c-border);
-            border-radius: var(--radius-lg);
+            color: var(--c-primary);
             font-size: var(--fs-sm);
             font-weight: 500;
-            color: var(--c-text);
             text-decoration: none;
-            transition: all var(--duration-200) var(--ease-out);
+            padding: var(--space-xs) var(--space-sm);
+            border: 1px solid var(--c-primary);
+            border-radius: var(--radius);
+            transition: all var(--trans-fast);
         }
 
         .project-link:hover {
             background: var(--c-primary);
             color: white;
-            border-color: transparent;
-            transform: translateY(-1px);
         }
 
-        /* Enhanced Testimonials */
+        /* Testimonials */
         .testimonials-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--space-8);
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-xl);
         }
 
         .testimonial-card {
             background: var(--c-bg);
-            border-radius: var(--radius-2xl);
-            padding: var(--space-8);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
             border: 1px solid var(--c-border);
             position: relative;
-            transition: all var(--duration-300) var(--ease-out);
-            height: 100%;
+            transition: all var(--trans);
         }
 
         .testimonial-card:hover {
-            transform: translateY(-4px);
+            transform: translateY(-3px);
             box-shadow: var(--shadow-lg);
         }
 
-        .quote-icon {
-            position: absolute;
-            top: var(--space-6);
-            right: var(--space-6);
-            font-size: var(--fs-3xl);
-            color: var(--c-primary);
-            opacity: 0.2;
-        }
-
         .testimonial-text {
-            font-size: var(--fs-lg);
+            font-size: var(--fs-base);
             line-height: 1.7;
-            margin-bottom: var(--space-6);
+            margin-bottom: var(--space-lg);
             font-style: italic;
-            color: var(--c-text-light);
-            padding-top: var(--space-4);
+            color: var(--c-text-secondary);
         }
 
         .testimonial-author {
             display: flex;
             align-items: center;
-            gap: var(--space-4);
+            gap: var(--space-md);
         }
 
         .testimonial-avatar {
-            width: 56px;
-            height: 56px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             background: var(--gradient-primary);
             color: white;
@@ -1226,8 +1063,6 @@
             align-items: center;
             justify-content: center;
             font-weight: 700;
-            font-size: var(--fs-lg);
-            box-shadow: var(--shadow-md);
         }
 
         .testimonial-info {
@@ -1236,31 +1071,19 @@
 
         .testimonial-name {
             font-weight: 700;
-            margin-bottom: var(--space-1);
-            color: var(--c-text);
+            margin-bottom: 2px;
         }
 
         .testimonial-role {
             font-size: var(--fs-sm);
-            color: var(--c-text-muted);
+            color: var(--c-text-secondary);
         }
 
-        .testimonial-rating {
-            display: flex;
-            gap: 2px;
-            margin-top: var(--space-2);
-        }
-
-        .star {
-            color: #fbbf24;
-            font-size: var(--fs-sm);
-        }
-
-        /* Revolutionary CTA Section */
+        /* CTA Section */
         .cta-section {
-            background: var(--gradient-hero);
+            background: var(--gradient-primary);
             color: white;
-            padding: var(--space-24) 0;
+            padding: var(--space-4xl) 0;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -1277,27 +1100,26 @@
         .cta-content {
             position: relative;
             z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
         }
 
         .cta-title {
-            font-size: var(--fs-4xl);
+            font-size: var(--fs-3xl);
             font-weight: 800;
-            margin-bottom: var(--space-6);
-            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: var(--space-md);
         }
 
         .cta-subtitle {
-            font-size: var(--fs-xl);
+            font-size: var(--fs-lg);
             opacity: 0.9;
-            margin-bottom: var(--space-8);
-            line-height: 1.6;
+            margin-bottom: var(--space-xl);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .cta-actions {
             display: flex;
-            gap: var(--space-4);
+            gap: var(--space-md);
             justify-content: center;
             flex-wrap: wrap;
         }
@@ -1305,23 +1127,17 @@
         .cta-btn {
             background: white;
             color: var(--c-primary);
-            padding: var(--space-5) var(--space-8);
-            border-radius: var(--radius-full);
+            padding: var(--space-md) var(--space-xl);
+            border-radius: var(--radius);
             font-weight: 700;
-            font-size: var(--fs-lg);
+            font-size: var(--fs-base);
             text-decoration: none;
-            transition: all var(--duration-200) var(--ease-out);
+            transition: all var(--trans-fast);
             box-shadow: var(--shadow-lg);
-            border: none;
-            cursor: pointer;
-            min-height: 56px;
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-2);
         }
 
         .cta-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px);
             box-shadow: var(--shadow-xl);
         }
 
@@ -1336,179 +1152,123 @@
             color: var(--c-primary);
         }
 
-        /* Enhanced Contact Section */
+        /* Contact Section */
         .contact-content {
-            max-width: 900px;
+            max-width: 700px;
             margin: 0 auto;
-        }
-
-        .contact-intro {
             text-align: center;
-            margin-bottom: var(--space-12);
-        }
-
-        .contact-intro p {
-            font-size: var(--fs-lg);
-            color: var(--c-text-light);
-            line-height: 1.7;
         }
 
         .contact-methods {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-8);
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-xl);
+            margin-top: var(--space-3xl);
         }
 
         .contact-method {
-            padding: var(--space-8);
+            padding: var(--space-lg);
             background: var(--c-bg);
-            border-radius: var(--radius-2xl);
+            border-radius: var(--radius-lg);
             border: 1px solid var(--c-border);
-            transition: all var(--duration-300) var(--ease-out);
+            transition: all var(--trans);
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .contact-method::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transition: transform var(--duration-300) var(--ease-out);
         }
 
         .contact-method:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .contact-method:hover::before {
-            transform: scaleX(1);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
 
         .contact-icon {
-            width: 72px;
-            height: 72px;
+            width: 56px;
+            height: 56px;
             background: var(--gradient-primary);
             color: white;
-            border-radius: var(--radius-2xl);
+            border-radius: var(--radius-lg);
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto var(--space-6);
-            font-size: var(--fs-2xl);
-            box-shadow: var(--shadow-lg);
-            transition: transform var(--duration-300) var(--ease-bounce);
-        }
-
-        .contact-method:hover .contact-icon {
-            transform: scale(1.1) rotate(5deg);
+            margin: 0 auto var(--space-md);
+            font-size: var(--fs-xl);
         }
 
         .contact-method h3 {
-            font-size: var(--fs-xl);
-            margin-bottom: var(--space-2);
-            color: var(--c-text);
+            font-size: var(--fs-lg);
+            margin-bottom: var(--space-xs);
         }
 
         .contact-method p {
-            color: var(--c-text-muted);
-            font-size: var(--fs-base);
-            margin-bottom: var(--space-6);
+            color: var(--c-text-secondary);
+            font-size: var(--fs-sm);
+            margin-bottom: var(--space-md);
         }
 
         .contact-link {
             display: inline-flex;
             align-items: center;
-            gap: var(--space-2);
+            gap: var(--space-xs);
             color: var(--c-primary);
             font-weight: 600;
             text-decoration: none;
-            font-size: var(--fs-lg);
-            transition: all var(--duration-200) var(--ease-out);
+            transition: all var(--trans-fast);
         }
 
         .contact-link:hover {
-            transform: translateX(4px);
-            color: var(--c-primary-dark);
+            transform: translateX(5px);
         }
 
-        /* Enhanced Footer */
+        /* Footer */
         .footer {
-            background: linear-gradient(135deg, var(--c-text) 0%, #1e293b 100%);
+            background: var(--gradient-dark);
             color: white;
-            padding: var(--space-16) 0 var(--space-8);
-            margin-top: var(--space-24);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
+            padding: var(--space-3xl) 0 var(--space-xl);
+            margin-top: var(--space-4xl);
         }
 
         .footer-content {
             text-align: center;
-            position: relative;
-            z-index: 1;
         }
 
         .footer-text {
             opacity: 0.8;
-            font-size: var(--fs-lg);
-            margin-bottom: var(--space-8);
-            line-height: 1.6;
+            font-size: var(--fs-sm);
+            margin-bottom: var(--space-lg);
         }
 
         .social-links {
             display: flex;
-            gap: var(--space-4);
+            gap: var(--space-md);
             justify-content: center;
-            margin-bottom: var(--space-8);
+            margin-bottom: var(--space-xl);
         }
 
         .social-link {
-            width: 56px;
-            height: 56px;
+            width: 48px;
+            height: 48px;
             background: rgba(255, 255, 255, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: var(--radius-xl);
+            border-radius: var(--radius);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             text-decoration: none;
-            transition: all var(--duration-300) var(--ease-out);
-            backdrop-filter: blur(10px);
+            transition: all var(--trans-fast);
         }
 
         .social-link:hover {
             background: var(--c-primary);
             border-color: transparent;
-            transform: translateY(-4px);
+            transform: translateY(-3px);
             color: white;
-            box-shadow: var(--shadow-lg);
         }
 
-        .footer-copy {
-            opacity: 0.7;
-            font-size: var(--fs-base);
-        }
-
-        /* Enhanced Animations */
+        /* Animations */
         .fade-in {
             opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
         }
 
         .fade-in.visible {
@@ -1516,56 +1276,7 @@
             transform: translateY(0);
         }
 
-        .slide-in-left {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .slide-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(40px);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .slide-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .scale-in {
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
-        }
-
-        .scale-in.visible {
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        /* Enhanced Responsive Design */
-        @media (max-width: 1024px) {
-            .hero-stats {
-                grid-template-columns: repeat(3, 1fr);
-                gap: var(--space-4);
-            }
-
-            .trust-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: var(--space-6);
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
+        /* Responsive */
         @media (max-width: 768px) {
             .nav {
                 display: none;
@@ -1576,42 +1287,28 @@
             }
 
             .theme-toggle {
-                top: var(--space-4);
-                right: var(--space-4);
-                width: 48px;
-                height: 48px;
+                top: var(--space-md);
+                right: var(--space-md);
             }
 
             .hero {
                 padding-top: 100px;
-                text-align: center;
             }
 
             .hero-title {
-                font-size: var(--fs-4xl);
+                font-size: var(--fs-3xl);
             }
 
-            .hero-stats {
-                grid-template-columns: 1fr;
-                gap: var(--space-4);
-            }
-
-            .hero-actions {
-                justify-content: center;
+            .hero-companies {
                 flex-direction: column;
+                align-items: flex-start;
             }
 
-            .btn {
-                width: 100%;
-                max-width: 300px;
+            .timeline {
+                padding-left: var(--space-lg);
             }
 
-            .trust-grid {
-                grid-template-columns: 1fr;
-                gap: var(--space-4);
-            }
-
-            .skills-showcase {
+            .skills-matrix {
                 grid-template-columns: 1fr;
             }
 
@@ -1627,40 +1324,27 @@
                 grid-template-columns: 1fr;
             }
 
-            .project-metrics {
-                grid-template-columns: 1fr;
+            .trust-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
 
-            .cta-actions {
-                flex-direction: column;
-                align-items: center;
+            .value-props {
+                grid-template-columns: 1fr;
             }
         }
 
         @media (max-width: 480px) {
-            .container {
-                padding: 0 var(--space-4);
+            .trust-grid {
+                grid-template-columns: 1fr;
             }
 
-            .hero-title {
-                font-size: var(--fs-3xl);
+            .hero-actions {
+                flex-direction: column;
             }
 
-            .section-title {
-                font-size: var(--fs-3xl);
-            }
-
-            .cta-title {
-                font-size: var(--fs-3xl);
-            }
-        }
-
-        /* Performance Optimizations */
-        @media (prefers-reduced-motion: reduce) {
-            *, *::before, *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
+            .btn {
+                width: 100%;
+                justify-content: center;
             }
         }
 
@@ -1669,8 +1353,7 @@
             .header,
             .footer,
             .theme-toggle,
-            .mobile-toggle,
-            .cta-section {
+            .mobile-toggle {
                 display: none !important;
             }
 
@@ -1680,7 +1363,7 @@
             }
 
             .section {
-                padding: var(--space-8) 0;
+                padding: 2rem 0;
                 page-break-inside: avoid;
             }
 
@@ -1688,11 +1371,14 @@
                 font-size: 11pt;
                 line-height: 1.4;
             }
+        }
 
-            .btn {
-                border: 1px solid #333;
-                background: transparent !important;
-                color: #333 !important;
+        /* Accessibility */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
             }
         }
     </style>
@@ -1701,23 +1387,23 @@
 <body>
     <a href="#main" class="skip-link">Skip to main content</a>
 
-    <!-- Enhanced Dark Mode Toggle -->
+    <!-- Dark Mode Toggle -->
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <circle cx="12" cy="12" r="5" />
             <path d="M12 1v6M12 17v6M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h6M17 12h6M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
         </svg>
-        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
         </svg>
     </button>
 
-    <!-- Enhanced Header -->
+    <!-- Header -->
     <header class="header" role="banner">
         <div class="container">
             <div class="header-content">
                 <a href="#" class="logo" aria-label="Dominic Minischetti Home">
-                    <div class="logo-mark">DM</div>
+                    <span class="logo-icon">DM</span>
                     <span>Dominic Minischetti</span>
                 </a>
                 <nav class="nav" role="navigation" aria-label="Main navigation">
@@ -1726,10 +1412,10 @@
                     <a href="#skills" class="nav-link">Skills</a>
                     <a href="#projects" class="nav-link">Projects</a>
                     <a href="#testimonials" class="nav-link">Reviews</a>
-                    <a href="#contact" class="header-cta">Get Started</a>
+                    <a href="#contact" class="header-cta">Get Started →</a>
                 </nav>
                 <button class="mobile-toggle" onclick="toggleMobileNav()" aria-label="Toggle navigation menu">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="24" height="24">
                         <line x1="3" y1="6" x2="21" y2="6" />
                         <line x1="3" y1="12" x2="21" y2="12" />
                         <line x1="3" y1="18" x2="21" y2="18" />
@@ -1739,16 +1425,13 @@
         </div>
     </header>
 
-    <!-- Enhanced Mobile Navigation -->
+    <!-- Mobile Navigation -->
     <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileNav()"></div>
     <nav class="mobile-nav" id="mobileNav">
         <div class="mobile-nav-header">
-            <div class="logo">
-                <div class="logo-mark">DM</div>
-                <span>Menu</span>
-            </div>
-            <button class="mobile-nav-close" onclick="toggleMobileNav()" aria-label="Close navigation">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <span class="logo">Menu</span>
+            <button onclick="toggleMobileNav()" aria-label="Close navigation">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="18" y1="6" x2="6" y2="18" />
                     <line x1="6" y1="6" x2="18" y2="18" />
                 </svg>
@@ -1763,146 +1446,210 @@
     </nav>
 
     <main id="main">
-        <!-- Revolutionary Hero Section -->
+        <!-- Hero Section -->
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
                     <div class="hero-badge fade-in">
-                        <div class="status-dot"></div>
-                        Available for immediate opportunities
+                        <div class="hero-badge-dot"></div>
+                        Open to new opportunities
                     </div>
                     <h1 class="hero-title fade-in">
-                        PHP Backend Engineer • Scalable Systems & Performance Expert
+                        Senior PHP Backend Engineer specializing in scalable systems and clean architecture
                     </h1>
                     <p class="hero-subtitle fade-in">
-                        I transform slow, legacy PHP systems into high-performance platforms that scale. 
-                        Specialized in optimizing databases, building robust APIs, and delivering 
-                        maintainable code that engineering teams love to work with.
+                        I build robust backend solutions that handle high traffic, optimize database performance,
+                        and maintain clean, maintainable codebases. Currently engineering solutions at BLOX Digital
+                        while exploring opportunities to tackle new technical challenges.
                     </p>
-                    
-                    <div class="hero-stats fade-in">
-                        <div class="hero-stat">
-                            <div class="stat-value">12+</div>
-                            <div class="stat-label">Years Experience</div>
-                        </div>
-                        <div class="hero-stat">
-                            <div class="stat-value">50+</div>
-                            <div class="stat-label">Projects Delivered</div>
-                        </div>
-                        <div class="hero-stat">
-                            <div class="stat-value">100%</div>
-                            <div class="stat-label">Client Satisfaction</div>
-                        </div>
+                    <div class="hero-companies fade-in">
+                        <span class="hero-companies-label">Experience with</span>
+                        <span class="company-logo">BLOX Digital</span>
+                        <span class="company-logo">Appliances Connection</span>
+                        <span class="company-logo">Kingsleague</span>
                     </div>
-
                     <div class="hero-actions fade-in">
-                        <a href="/Dominic-Minischetti-CV.pdf" class="btn btn-primary btn-large" download>
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                                <path d="M14 2v6h6"/>
-                                <path d="M16 13H8"/>
-                                <path d="M16 17H8"/>
-                                <path d="M10 9H8"/>
-                            </svg>
-                            Download CV
-                        </a>
-                        <a href="https://linkedin.com/in/dominicminischetti" class="btn btn-secondary btn-large" target="_blank" rel="noopener">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
-                                <rect x="2" y="9" width="4" height="12"/>
-                                <circle cx="4" cy="4" r="2"/>
-                            </svg>
+                        <a href="https://linkedin.com/in/dominicminischetti" class="btn btn-primary" target="_blank" rel="noopener">
                             Connect on LinkedIn
                         </a>
-                        <a href="https://calendly.com/dominic-minischetti/intro-call" class="btn btn-secondary btn-large" target="_blank" rel="noopener">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <rect x="3" y="4" width="18" height="18" rx="2"/>
-                                <path d="M3 10h18M8 2v4M16 2v4"/>
-                            </svg>
-                            Schedule Call
+                        <a href="/Dominic-Minischetti-CV.pdf" class="btn btn-secondary" download>
+                            Download CV
+                        </a>
+                        <a href="https://calendly.com/dominic-minischetti/intro-call" class="btn btn-secondary" target="_blank" rel="noopener">
+                            Book a Call
                         </a>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Revolutionary Trust Signals -->
-        <section class="trust-signals" aria-label="Impact metrics">
+        <!-- Trust Signals -->
+        <section class="trust-signals" aria-label="Achievements">
             <div class="container">
                 <div class="trust-grid">
                     <div class="trust-item fade-in">
                         <div class="trust-icon">🚀</div>
-                        <div class="trust-value">2.5s → 0.8s</div>
-                        <div class="trust-label">Average Page Load Improvement</div>
-                    </div>
-                    <div class="trust-item fade-in">
-                        <div class="trust-icon">💾</div>
-                        <div class="trust-value">$18k/mo</div>
-                        <div class="trust-label">AWS Cost Savings Delivered</div>
+                        <div class="trust-value">12+</div>
+                        <div class="trust-label">Production Systems Optimized</div>
                     </div>
                     <div class="trust-item fade-in">
                         <div class="trust-icon">⚡</div>
+                        <div class="trust-value">2.5s → 0.8s</div>
+                        <div class="trust-label">Avg Page Load Improvement</div>
+                    </div>
+                    <div class="trust-item fade-in">
+                        <div class="trust-icon">💾</div>
                         <div class="trust-value">70%</div>
                         <div class="trust-label">Database Load Reduction</div>
                     </div>
                     <div class="trust-item fade-in">
                         <div class="trust-icon">🎯</div>
                         <div class="trust-value">100%</div>
-                        <div class="trust-label">Production Deadlines Met</div>
+                        <div class="trust-label">On-Time Delivery</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Enhanced About Section -->
+        <!-- About Section -->
         <section id="about" class="section">
             <div class="container">
                 <div class="section-header">
-                    <div class="section-badge fade-in">About Me</div>
-                    <h2 class="section-title fade-in">Backend Engineer & Performance Specialist</h2>
+                    <span class="section-badge fade-in">ABOUT ME</span>
+                    <h2 class="section-title fade-in">Backend Engineer & Problem Solver</h2>
                     <p class="section-subtitle fade-in">
-                        I solve the problems that keep engineering teams up at night: slow queries, 
-                        scaling bottlenecks, and technical debt that makes feature development a nightmare.
+                        Passionate about building efficient, scalable systems that make a real impact
                     </p>
                 </div>
-
-                <div class="container-sm">
-                    <div class="fade-in" style="text-align: center; margin-bottom: var(--space-12);">
-                        <p style="font-size: var(--fs-xl); line-height: 1.7; color: var(--c-text-light); margin-bottom: var(--space-6);">
-                            With 12+ years of experience transforming PHP legacy code into scalable platforms 
-                            handling millions of requests, I specialize in performance optimization and clean architecture 
-                            that makes developers productive and businesses profitable.
+                <div class="about-content">
+                    <p class="about-intro fade-in">
+                        With over a decade of experience in backend development, I specialize in PHP and MySQL,
+                        focusing on performance optimization and scalable architecture. I thrive on solving complex
+                        technical challenges and transforming legacy systems into modern, efficient solutions.
+                    </p>
+                    <div class="about-section fade-in">
+                        <h3>Technical Philosophy</h3>
+                        <p>
+                            I believe in writing clean, maintainable code that not only solves today's problems but
+                            is also adaptable for tomorrow's challenges. My approach combines solid engineering
+                            principles with pragmatic solutions, always keeping the end user and business goals in mind.
                         </p>
-                        
-                        <div style="background: linear-gradient(135deg, var(--c-bg-subtle), rgba(37, 99, 235, 0.05)); 
-                                   border-left: 4px solid var(--c-primary); padding: var(--space-6); 
-                                   border-radius: var(--radius-lg); font-style: italic; font-size: var(--fs-lg);">
-                            "Good code is like good bread – it requires the right ingredients, proper technique, 
-                            and patience to rise. Both my Italian heritage and engineering background taught me this."
+                    </div>
+                    <div class="about-highlight fade-in">
+                        "Good code is like good bread – it requires the right ingredients, proper technique,
+                        and patience to rise. Both my Italian heritage and engineering background taught me this."
+                    </div>
+                    <div class="about-section fade-in">
+                        <h3>Background & Approach</h3>
+                        <p>
+                            Born in New York and raised in Italy, I bring an international perspective to my work.
+                            This unique background has taught me to adapt quickly, communicate effectively across
+                            cultures, and approach problems from multiple angles. I'm equally comfortable working independently
+                            on complex backend systems or collaborating with cross-functional teams to deliver solutions.
+                        </p>
+                    </div>
+                </div>
+                <div class="value-props">
+                    <div class="value-prop fade-in">
+                        <div class="value-prop-icon">⚡</div>
+                        <h3 class="value-prop-title">Speed Obsessed</h3>
+                        <p class="value-prop-desc">Every millisecond counts. I optimize until your app flies.</p>
+                    </div>
+                    <div class="value-prop fade-in">
+                        <div class="value-prop-icon">🛡️</div>
+                        <h3 class="value-prop-title">Rock-Solid Reliable</h3>
+                        <p class="value-prop-desc">99.9% uptime isn't a goal—it's the minimum standard.</p>
+                    </div>
+                    <div class="value-prop fade-in">
+                        <div class="value-prop-icon">📈</div>
+                        <h3 class="value-prop-title">Scale Without Fear</h3>
+                        <p class="value-prop-desc">Built systems handling millions of requests without breaking a sweat.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section" style="background: var(--c-bg-secondary);">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge fade-in">EXPERIENCE</span>
+                    <h2 class="section-title fade-in">Professional Journey</h2>
+                    <p class="section-subtitle fade-in">
+                        Building scalable solutions and solving complex challenges across industries
+                    </p>
+                </div>
+                <div class="timeline">
+                    <div class="timeline-item fade-in">
+                        <span class="timeline-period">Jul 2024 - Present</span>
+                        <h3 class="timeline-title">Backend PHP Developer</h3>
+                        <div class="timeline-company">BLOX Digital</div>
+                        <p class="timeline-desc">
+                            Developing and optimizing content management systems for high-traffic media organizations.
+                            Working with PHP and MySQL to enhance system performance, implement new features, and
+                            ensure reliable content delivery. Collaborating with cross-functional teams to improve
+                            deployment processes and maintain system stability.
+                        </p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">CMS Development</span>
+                            <span class="tech-tag">Performance Optimization</span>
+                            <span class="tech-tag">Agile</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item fade-in">
+                        <span class="timeline-period">May 2022 - Mar 2024</span>
+                        <h3 class="timeline-title">Backend PHP Developer</h3>
+                        <div class="timeline-company">Appliances Connection</div>
+                        <p class="timeline-desc">
+                            Designed and built a comprehensive Warehouse Management System from the ground up,
+                            transforming manual inventory processes into automated workflows. Developed responsive
+                            interfaces for handheld devices, integrated barcode scanning functionality, and
+                            implemented real-time inventory tracking.
+                        </p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Bootstrap</span>
+                            <span class="tech-tag">REST APIs</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item fade-in">
+                        <span class="timeline-period">Aug 2021 - May 2022</span>
+                        <h3 class="timeline-title">Full Stack Developer</h3>
+                        <div class="timeline-company">Kingsleague</div>
+                        <p class="timeline-desc">
+                            Developed platform features using PHP, MySQL, and Firebase to support growing user base.
+                            Implemented automated testing with Python and Selenium to improve code reliability.
+                            Containerized applications using Docker for consistent development and deployment environments.
+                        </p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Firebase</span>
+                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Python</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Enhanced Skills Section -->
-        <section id="skills" class="section" style="background: var(--c-bg-subtle);">
+        <!-- Skills Section -->
+        <section id="skills" class="section">
             <div class="container">
                 <div class="section-header">
-                    <div class="section-badge fade-in">Technical Skills</div>
-                    <h2 class="section-title fade-in">Full-Stack Backend Expertise</h2>
+                    <span class="section-badge fade-in">SKILLS</span>
+                    <h2 class="section-title fade-in">Technical Expertise</h2>
                     <p class="section-subtitle fade-in">
-                        From database optimization to API design, I have the technical depth to solve 
-                        complex backend challenges and the communication skills to explain solutions clearly.
+                        Comprehensive skill set developed through years of hands-on experience
                     </p>
                 </div>
-
-                <div class="skills-showcase">
+                <div class="skills-matrix">
                     <div class="skill-category fade-in">
-                        <div class="skill-header">
-                            <div class="skill-icon">🔧</div>
-                            <h3 class="skill-category-title">Backend Development</h3>
-                        </div>
+                        <h3 class="skill-category-title">Backend Development</h3>
                         <div class="skill-list">
                             <span class="skill-tag primary">PHP 7/8</span>
                             <span class="skill-tag primary">Laravel</span>
@@ -1910,338 +1657,159 @@
                             <span class="skill-tag">CodeIgniter</span>
                             <span class="skill-tag">PSR Standards</span>
                             <span class="skill-tag">SOLID Principles</span>
-                            <span class="skill-tag">Clean Architecture</span>
                         </div>
                     </div>
-
                     <div class="skill-category fade-in">
-                        <div class="skill-header">
-                            <div class="skill-icon">🗄️</div>
-                            <h3 class="skill-category-title">Database & Performance</h3>
-                        </div>
+                        <h3 class="skill-category-title">Database & Storage</h3>
                         <div class="skill-list">
                             <span class="skill-tag primary">MySQL</span>
                             <span class="skill-tag primary">Query Optimization</span>
-                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">MariaDB</span>
+                            <span class="skill-tag">SQL Server</span>
+                            <span class="skill-tag">MongoDB</span>
                             <span class="skill-tag">Redis</span>
-                            <span class="skill-tag">Database Design</span>
-                            <span class="skill-tag">Indexing Strategy</span>
-                            <span class="skill-tag">Performance Tuning</span>
                         </div>
                     </div>
-
                     <div class="skill-category fade-in">
-                        <div class="skill-header">
-                            <div class="skill-icon">⚙️</div>
-                            <h3 class="skill-category-title">DevOps & Infrastructure</h3>
-                        </div>
+                        <h3 class="skill-category-title">DevOps & Tools</h3>
                         <div class="skill-list">
                             <span class="skill-tag primary">Docker</span>
                             <span class="skill-tag primary">Git</span>
-                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Jenkins</span>
                             <span class="skill-tag">Linux</span>
                             <span class="skill-tag">Nginx</span>
-                            <span class="skill-tag">CI/CD</span>
-                            <span class="skill-tag">Monitoring</span>
+                            <span class="skill-tag">Apache</span>
                         </div>
                     </div>
-
                     <div class="skill-category fade-in">
-                        <div class="skill-header">
-                            <div class="skill-icon">🔗</div>
-                            <h3 class="skill-category-title">APIs & Integration</h3>
-                        </div>
+                        <h3 class="skill-category-title">APIs & Integration</h3>
                         <div class="skill-list">
-                            <span class="skill-tag primary">REST APIs</span>
-                            <span class="skill-tag">GraphQL</span>
+                            <span class="skill-tag primary">RESTful APIs</span>
+                            <span class="skill-tag">API Design</span>
                             <span class="skill-tag">JWT Authentication</span>
                             <span class="skill-tag">OAuth</span>
-                            <span class="skill-tag">API Documentation</span>
-                            <span class="skill-tag">Rate Limiting</span>
-                            <span class="skill-tag">Webhooks</span>
+                            <span class="skill-tag">Swagger/OpenAPI</span>
+                            <span class="skill-tag">Postman</span>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Enhanced Projects Section -->
-        <section id="projects" class="section">
+        <!-- Projects Section -->
+        <section id="projects" class="section" style="background: var(--c-bg-secondary);">
             <div class="container">
                 <div class="section-header">
-                    <div class="section-badge fade-in">Featured Work</div>
-                    <h2 class="section-title fade-in">Projects That Made a Difference</h2>
+                    <span class="section-badge fade-in">PROJECTS</span>
+                    <h2 class="section-title fade-in">Featured Work</h2>
                     <p class="section-subtitle fade-in">
-                        Real-world solutions that solved critical business problems and delivered 
-                        measurable impact for growing companies.
+                        Representative projects showcasing technical skills and problem-solving abilities
                     </p>
                 </div>
-
                 <div class="projects-grid">
                     <div class="project-card fade-in">
-                        <div class="project-header">
-                            <div>
-                                <h3 class="project-title">Warehouse Management System</h3>
-                            </div>
-                            <div class="project-status">Production</div>
-                        </div>
-                        
+                        <h3 class="project-title">Warehouse Management System</h3>
                         <p class="project-desc">
-                            Built a comprehensive WMS from scratch that automated manual inventory processes 
-                            for a $50M+ appliances retailer. Integrated barcode scanning, real-time tracking, 
-                            and predictive reordering across 3 warehouse locations.
+                            Comprehensive WMS built from scratch to replace manual inventory tracking processes.
+                            Features include real-time inventory updates, barcode scanning integration, automated
+                            reorder points, and responsive interfaces for handheld devices.
                         </p>
-
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <div class="metric-value">85%</div>
-                                <div class="metric-label">Time Savings</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">99.2%</div>
-                                <div class="metric-label">Accuracy</div>
-                            </div>
-                        </div>
-
                         <div class="project-tech">
+                            <span class="tech-tag">PHP</span>
                             <span class="tech-tag">Laravel</span>
                             <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">Redis</span>
                             <span class="tech-tag">Bootstrap</span>
-                            <span class="tech-tag">REST APIs</span>
                         </div>
-
                         <div class="project-links">
-                            <a href="#contact" class="project-link">Request Case Study</a>
+                            <a href="#contact" class="project-link">Contact for Details</a>
                         </div>
                     </div>
-
                     <div class="project-card fade-in">
-                        <div class="project-header">
-                            <div>
-                                <h3 class="project-title">High-Traffic CMS Platform</h3>
-                            </div>
-                            <div class="project-status">Production</div>
-                        </div>
-                        
+                        <h3 class="project-title">High-Traffic CMS Platform</h3>
                         <p class="project-desc">
-                            Optimized content management system serving 2M+ monthly page views for media 
-                            organizations. Implemented advanced caching strategies and database optimizations 
-                            that reduced server costs by $18k/month.
+                            Optimized content management system serving millions of monthly page views for media
+                            organizations. Implemented advanced caching strategies, database query optimization,
+                            and efficient content delivery mechanisms.
                         </p>
-
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <div class="metric-value">68%</div>
-                                <div class="metric-label">Load Time Reduction</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">$18k</div>
-                                <div class="metric-label">Monthly Savings</div>
-                            </div>
-                        </div>
-
                         <div class="project-tech">
                             <span class="tech-tag">PHP</span>
                             <span class="tech-tag">MySQL</span>
                             <span class="tech-tag">Redis</span>
-                            <span class="tech-tag">Elasticsearch</span>
-                            <span class="tech-tag">AWS</span>
+                            <span class="tech-tag">Performance Optimization</span>
                         </div>
-
                         <div class="project-links">
-                            <a href="#contact" class="project-link">Learn More</a>
+                            <a href="#contact" class="project-link">Contact for Details</a>
                         </div>
                     </div>
-
                     <div class="project-card fade-in">
-                        <div class="project-header">
-                            <div>
-                                <h3 class="project-title">Enterprise API Platform</h3>
-                            </div>
-                            <div class="project-status">Production</div>
-                        </div>
-                        
+                        <h3 class="project-title">RESTful API Platform</h3>
                         <p class="project-desc">
-                            Designed and built a unified API platform that consolidated data access across 
-                            8 legacy systems. Implemented comprehensive authentication, rate limiting, 
-                            and auto-generated documentation.
+                            Designed and built comprehensive API platform to unify data access across multiple
+                            applications. Implemented JWT authentication, rate limiting, comprehensive error handling,
+                            and automatic API documentation.
                         </p>
-
-                        <div class="project-metrics">
-                            <div class="metric">
-                                <div class="metric-value">500K+</div>
-                                <div class="metric-label">Daily Requests</div>
-                            </div>
-                            <div class="metric">
-                                <div class="metric-value">99.9%</div>
-                                <div class="metric-label">Uptime</div>
-                            </div>
-                        </div>
-
                         <div class="project-tech">
                             <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">REST API</span>
                             <span class="tech-tag">JWT</span>
-                            <span class="tech-tag">OpenAPI</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">Docker</span>
+                            <span class="tech-tag">Swagger</span>
                         </div>
-
                         <div class="project-links">
-                            <a href="#contact" class="project-link">Technical Details</a>
+                            <a href="#contact" class="project-link">Contact for Details</a>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Enhanced Experience Section -->
-        <section id="experience" class="section" style="background: var(--c-bg-subtle);">
-            <div class="container">
-                <div class="section-header">
-                    <div class="section-badge fade-in">Professional Journey</div>
-                    <h2 class="section-title fade-in">Building Scalable Solutions</h2>
-                    <p class="section-subtitle fade-in">
-                        12+ years of turning complex business requirements into reliable, 
-                        high-performance backend systems.
-                    </p>
-                </div>
-
-                <div class="container-sm">
-                    <div style="display: grid; gap: var(--space-8);">
-                        <div class="project-card fade-in">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-4);">
-                                <div>
-                                    <h3 style="font-size: var(--fs-xl); margin-bottom: var(--space-2);">Backend PHP Developer</h3>
-                                    <div style="color: var(--c-primary); font-weight: 600; margin-bottom: var(--space-2);">BLOX Digital</div>
-                                </div>
-                                <div class="project-status">Jul 2024 - Present</div>
-                            </div>
-                            <p style="color: var(--c-text-light); line-height: 1.6; margin-bottom: var(--space-4);">
-                                Developing and optimizing content management systems for high-traffic media organizations. 
-                                Working with PHP and MySQL to enhance system performance, implement new features, and 
-                                ensure reliable content delivery for millions of monthly visitors.
-                            </p>
-                            <div class="project-tech">
-                                <span class="tech-tag">PHP</span>
-                                <span class="tech-tag">MySQL</span>
-                                <span class="tech-tag">Performance Optimization</span>
-                                <span class="tech-tag">CMS Development</span>
-                            </div>
-                        </div>
-
-                        <div class="project-card fade-in">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-4);">
-                                <div>
-                                    <h3 style="font-size: var(--fs-xl); margin-bottom: var(--space-2);">Backend PHP Developer</h3>
-                                    <div style="color: var(--c-primary); font-weight: 600; margin-bottom: var(--space-2);">Appliances Connection</div>
-                                </div>
-                                <div class="project-status">May 2022 - Mar 2024</div>
-                            </div>
-                            <p style="color: var(--c-text-light); line-height: 1.6; margin-bottom: var(--space-4);">
-                                Designed and built a comprehensive Warehouse Management System from the ground up, 
-                                transforming manual inventory processes into automated workflows. Delivered $18k/month 
-                                in operational cost savings through process automation.
-                            </p>
-                            <div class="project-tech">
-                                <span class="tech-tag">Laravel</span>
-                                <span class="tech-tag">MySQL</span>
-                                <span class="tech-tag">REST APIs</span>
-                                <span class="tech-tag">Bootstrap</span>
-                            </div>
-                        </div>
-
-                        <div class="project-card fade-in">
-                            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--space-4);">
-                                <div>
-                                    <h3 style="font-size: var(--fs-xl); margin-bottom: var(--space-2);">Full Stack Developer</h3>
-                                    <div style="color: var(--c-primary); font-weight: 600; margin-bottom: var(--space-2);">Kingsleague</div>
-                                </div>
-                                <div class="project-status">Aug 2021 - May 2022</div>
-                            </div>
-                            <p style="color: var(--c-text-light); line-height: 1.6; margin-bottom: var(--space-4);">
-                                Developed platform features using PHP, MySQL, and Firebase to support growing user base. 
-                                Implemented automated testing with Python and Selenium, improving code reliability 
-                                and deployment confidence.
-                            </p>
-                            <div class="project-tech">
-                                <span class="tech-tag">PHP</span>
-                                <span class="tech-tag">MySQL</span>
-                                <span class="tech-tag">Firebase</span>
-                                <span class="tech-tag">Docker</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Enhanced Testimonials Section -->
+        <!-- Testimonials Section -->
         <section id="testimonials" class="section">
             <div class="container">
                 <div class="section-header">
-                    <div class="section-badge fade-in">Client Reviews</div>
-                    <h2 class="section-title fade-in">What People Say</h2>
+                    <span class="section-badge fade-in">TESTIMONIALS</span>
+                    <h2 class="section-title fade-in">Professional Endorsements</h2>
                     <p class="section-subtitle fade-in">
-                        Real feedback from engineering managers, product leads, and team members 
-                        who've worked with me on challenging projects.
+                        What colleagues and managers say about working with me
                     </p>
                 </div>
-
                 <div class="testimonials-grid">
                     <div class="testimonial-card fade-in">
-                        <div class="quote-icon">"</div>
                         <p class="testimonial-text">
-                            "Dominic consistently delivers high-quality code and thoughtful solutions. His attention 
-                            to database optimization and system architecture has been invaluable to our team. 
-                            He's also excellent at mentoring junior developers and explaining complex concepts."
+                            "Dominic consistently delivers high-quality code and thoughtful solutions. His attention
+                            to database optimization and system architecture has been invaluable to our team.
+                            He's also great at mentoring junior developers."
                         </p>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">SC</div>
                             <div class="testimonial-info">
                                 <div class="testimonial-name">Sarah Chen</div>
                                 <div class="testimonial-role">Engineering Manager, BLOX Digital</div>
-                                <div class="testimonial-rating">
-                                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-                                </div>
                             </div>
                         </div>
                     </div>
-
                     <div class="testimonial-card fade-in">
-                        <div class="quote-icon">"</div>
                         <p class="testimonial-text">
-                            "Working with Dominic on the warehouse system was exceptional. He took time to understand 
-                            our complex processes and built exactly what we needed. The system has completely 
-                            transformed our operations and saved us significant money."
+                            "Working with Dominic on the warehouse system was excellent. He took time to understand
+                            our processes and built exactly what we needed. The system has transformed our operations."
                         </p>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">MR</div>
                             <div class="testimonial-info">
                                 <div class="testimonial-name">Mike Rodriguez</div>
-                                <div class="testimonial-role">Operations Director, Appliances Connection</div>
-                                <div class="testimonial-rating">
-                                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-                                </div>
+                                <div class="testimonial-role">Operations Lead, Appliances Connection</div>
                             </div>
                         </div>
                     </div>
-
                     <div class="testimonial-card fade-in">
-                        <div class="quote-icon">"</div>
                         <p class="testimonial-text">
-                            "Dominic brings both deep technical expertise and excellent communication skills. 
-                            He can explain complex technical concepts to non-technical stakeholders and always 
-                            considers the business impact of his engineering decisions."
+                            "Dominic brings both technical expertise and great communication skills. He can explain
+                            complex technical concepts clearly and always considers the business impact of his solutions."
                         </p>
                         <div class="testimonial-author">
                             <div class="testimonial-avatar">JL</div>
                             <div class="testimonial-info">
                                 <div class="testimonial-name">Jennifer Liu</div>
                                 <div class="testimonial-role">Product Manager, Former Colleague</div>
-                                <div class="testimonial-rating">
-                                    <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -2249,18 +1817,239 @@
             </div>
         </section>
 
-        <!-- Revolutionary CTA Section -->
+        <!-- CTA Section -->
         <section class="cta-section" aria-label="Call to action">
             <div class="container">
                 <div class="cta-content">
-                    <h2 class="cta-title fade-in">Ready to Strengthen Your Engineering Team?</h2>
+                    <h2 class="cta-title fade-in">Ready to Transform Your Backend?</h2>
                     <p class="cta-subtitle fade-in">
-                        Let's discuss how I can help scale your backend systems, optimize performance, 
-                        and deliver the reliable infrastructure your business needs to grow.
+                        Let's discuss how I can help optimize your systems and deliver scalable solutions.
+                        Available for immediate projects and consultations.
                     </p>
                     <div class="cta-actions fade-in">
-                        <a href="#contact" class="cta-btn">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                                <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/>
-                            </svg>
-                            Start the Conversation
+                        <a href="#contact" class="cta-btn">Get In Touch</a>
+                        <a href="https://calendly.com/dominic-minischetti/consultation" class="cta-btn cta-btn-secondary" target="_blank" rel="noopener">
+                            Schedule Consultation
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge fade-in">CONTACT</span>
+                    <h2 class="section-title fade-in">Let's Connect</h2>
+                    <p class="section-subtitle fade-in">
+                        Open to discussing new opportunities and technical challenges
+                    </p>
+                </div>
+                <div class="contact-content">
+                    <p class="fade-in" style="font-size: var(--fs-lg); margin-bottom: var(--space-2xl);">
+                        I'm interested in roles where I can contribute to impactful projects, work with
+                        talented teams, and continue growing as an engineer. Whether you're looking for
+                        someone to optimize your backend systems, build new features, or tackle complex
+                        technical challenges, I'd love to hear from you.
+                    </p>
+                    <div class="contact-methods">
+                        <div class="contact-method fade-in">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                    <rect x="2" y="9" width="4" height="12" />
+                                    <circle cx="4" cy="4" r="2" />
+                                </svg>
+                            </div>
+                            <h3>LinkedIn</h3>
+                            <p>Connect professionally</p>
+                            <a href="https://linkedin.com/in/dominicminischetti" class="contact-link" target="_blank" rel="noopener">
+                                View Profile →
+                            </a>
+                        </div>
+                        <div class="contact-method fade-in">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                                    <path d="m22 7-10 5L2 7" />
+                                </svg>
+                            </div>
+                            <h3>Email</h3>
+                            <p>Direct communication</p>
+                            <a href="mailto:dominic.minischetti@gmail.com" class="contact-link">
+                                Send Email →
+                            </a>
+                        </div>
+                        <div class="contact-method fade-in">
+                            <div class="contact-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                                    <path d="M3 10h18M8 2v4M16 2v4" />
+                                </svg>
+                            </div>
+                            <h3>Schedule Call</h3>
+                            <p>30-min consultation</p>
+                            <a href="https://calendly.com/dominic-minischetti/consultation" class="contact-link" target="_blank" rel="noopener">
+                                Book Meeting →
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <p class="footer-text">
+                    Senior PHP Backend Engineer specializing in performance optimization and scalable systems.
+                    Building fast, reliable applications since 2012.
+                </p>
+                <div class="social-links">
+                    <a href="https://linkedin.com/in/dominicminischetti" class="social-link" target="_blank" rel="noopener" aria-label="LinkedIn">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                            <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                            <rect x="2" y="9" width="4" height="12" />
+                            <circle cx="4" cy="4" r="2" />
+                        </svg>
+                    </a>
+                    <a href="https://github.com/dominicminischetti" class="social-link" target="_blank" rel="noopener" aria-label="GitHub">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                            <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22" />
+                        </svg>
+                    </a>
+                    <a href="mailto:dominic.minischetti@gmail.com" class="social-link" aria-label="Email">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="20" height="20">
+                            <rect x="2" y="4" width="20" height="16" rx="2" />
+                            <path d="m22 7-10 5L2 7" />
+                        </svg>
+                    </a>
+                </div>
+                <p style="font-size: var(--fs-sm); opacity: 0.7; margin-top: var(--space-lg);">
+                    © 2025 Dominic Minischetti. Built with clean code and strong coffee in Brooklyn, NY.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Theme Management
+        const initTheme = () => {
+            const savedTheme = localStorage.getItem('theme');
+            const systemPrefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = savedTheme || (systemPrefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+        };
+
+        window.toggleTheme = () => {
+            const current = document.documentElement.getAttribute('data-theme') || 'light';
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem('theme', next);
+        };
+
+        // Mobile Navigation
+        window.toggleMobileNav = () => {
+            const nav = document.getElementById('mobileNav');
+            const overlay = document.getElementById('mobileOverlay');
+            const isOpen = nav.classList.contains('open');
+            
+            nav.classList.toggle('open');
+            overlay.classList.toggle('open');
+            document.body.style.overflow = isOpen ? '' : 'hidden';
+        };
+
+        // Smooth Scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const target = document.querySelector(targetId);
+                
+                if (target) {
+                    const headerHeight = 80;
+                    const targetPosition = target.offsetTop - headerHeight;
+                    
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+
+                    // Close mobile nav if open
+                    const mobileNav = document.getElementById('mobileNav');
+                    if (mobileNav && mobileNav.classList.contains('open')) {
+                        toggleMobileNav();
+                    }
+                }
+            });
+        });
+
+        // Active Navigation
+        const updateActiveNav = () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => {
+                            link.classList.remove('active');
+                            if (link.getAttribute('href') === `#${entry.target.id}`) {
+                                link.classList.add('active');
+                            }
+                        });
+                    }
+                });
+            }, {
+                rootMargin: '-100px 0px -60%',
+                threshold: 0
+            });
+
+            sections.forEach(section => observer.observe(section));
+        };
+
+        // Header Scroll Effect
+        const initHeaderScroll = () => {
+            const header = document.querySelector('.header');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 100) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }, { passive: true });
+        };
+
+        // Fade In Animations
+        const initAnimations = () => {
+            const animatedElements = document.querySelectorAll('.fade-in');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            });
+
+            animatedElements.forEach(el => observer.observe(el));
+        };
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            initTheme();
+            updateActiveNav();
+            initHeaderScroll();
+            initAnimations();
+        });
+    </script>
+</body>
+</html>
