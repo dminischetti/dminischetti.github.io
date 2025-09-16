@@ -1,0 +1,4 @@
+baseURL = "https://minischetti.org/blog/"
+title = "Dominic's Blog"
+languageCode = "en-us"
+publishDir = "../public/blog"
