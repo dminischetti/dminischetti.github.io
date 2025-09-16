@@ -1,7 +1,8 @@
-baseURL: "https://minischetti.org/"
+baseURL: "https://minischetti.org/blog/"
 title: "Dominic's Sandbox"
 theme: "PaperMod"
 languageCode: "en-us"
+publishDir: "public/blog"
 
 params:
   env: "production"
