@@ -1,0 +1,20 @@
+BEGIN:VCARD
+VERSION:3.0
+FN;CHARSET=UTF-8:Dominic Minischetti
+N;CHARSET=UTF-8:Minischetti;Dominic;;;
+NICKNAME:Dominic
+GENDER:M
+BDAY:19790126
+EMAIL;CHARSET=UTF-8;TYPE=HOME,INTERNET:dominic.minischetti@gmail.com
+EMAIL;CHARSET=UTF-8;TYPE=WORK,INTERNET:dminischetti@bloxdigital.com
+TEL;TYPE=CELL,VOICE:(+1)347-606-6909
+ADR;CHARSET=UTF-8;TYPE=HOME:;;;Brooklyn;NY;11204;USA
+TITLE:Backend PHP Developer
+ROLE;CHARSET=UTF-8:Backend PHP Developer
+ORG;CHARSET=UTF-8:Blox Digital
+URL;CHARSET=UTF-8:https://minischetti.org
+URL;TYPE=WORK;CHARSET=UTF-8:https://www.bloxdigital.com/
+PHOTO;VALUE=uri:https://minischetti.org/me/dominic_photo.png
+X-SOCIALPROFILE;TYPE=linkedin:https://linkedin.com/in/dminischetti/
+REV:2025-09-16T15:26:21Z
+END:VCARD
