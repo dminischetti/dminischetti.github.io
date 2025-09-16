@@ -77,7 +77,7 @@
       "postalCode": "11201"
     },
     "sameAs": [
-      "https://linkedin.com/in/dminischetti/",
+      "https://linkedin.com/in/dminischetti/"
     ],
     "knowsAbout": ["PHP", "Laravel", "MySQL", "Performance Optimization", "Database Design", "Scalable Architecture", "Redis", "Docker", "API Development"],
     "knowsLanguage": ["en-US", "it-IT"],
@@ -171,27 +171,17 @@
         /* Design System & CSS Variables */
         :root {
             /* Colors */
-            --c-p: #1e40af;
-            --c-s: #f59e0b;
-            --c-a: #10b981;
-            --c-t: #1f2937;
-            --c-ts: #6b7280;
-            --c-bg: #fff;
-            --c-bgs: #f8fafc;
-            --c-b: #e5e7eb;
-
-            /* Semantic Colors */
             --c-primary: #1e40af;
             --c-secondary: #f59e0b;
             --c-accent: #10b981;
             --c-danger: #ef4444;
             --c-text: #1f2937;
             --c-text-secondary: #6b7280;
+            --c-bg: #fff;
             --c-bg-secondary: #f8fafc;
             --c-border: #e5e7eb;
 
             /* Typography */
-            --ff: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             --ff-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
             --ff-mono: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
 
@@ -234,23 +224,17 @@
             --trans-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
             --trans-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
 
-            /* Other */
-            --blur: 20px;
+            /* Gradients */
             --gradient-primary: linear-gradient(135deg, var(--c-primary), #1e3a8a);
             --gradient-secondary: linear-gradient(135deg, var(--c-secondary), #dc2626);
             --gradient-accent: linear-gradient(135deg, var(--c-accent), #059669);
-            --gradient-dark: linear-gradient(135deg, #1f2937, #111827);
         }
 
         /* Dark Theme */
         [data-theme="dark"] {
-            --c-t: #f9fafb;
-            --c-ts: #d1d5db;
-            --c-bg: #111827;
-            --c-bgs: #1f2937;
-            --c-b: #374151;
             --c-text: #f9fafb;
             --c-text-secondary: #d1d5db;
+            --c-bg: #111827;
             --c-bg-secondary: #1f2937;
             --c-border: #374151;
             --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.3);
@@ -270,9 +254,7 @@
         }
 
         /* Base Reset */
-        *,
-        *::before,
-        *::after {
+        *, *::before, *::after {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
@@ -301,88 +283,23 @@
             overflow-x: hidden;
         }
 
-        /* Skip to content link for accessibility */
-        .skip-link {
-            position: absolute;
-            top: -40px;
-            left: 0;
-            background: var(--c-primary);
-            color: white;
-            padding: var(--space-sm) var(--space-md);
-            text-decoration: none;
-            z-index: 1000;
-            border-radius: 0 0 var(--radius) 0;
-        }
-
-        .skip-link:focus {
-            top: 0;
-        }
-
-        /* Loading Skeleton */
-        .skeleton {
-            background: linear-gradient(90deg, var(--c-bg-secondary) 25%, var(--c-border) 50%, var(--c-bg-secondary) 75%);
-            background-size: 200% 100%;
-            animation: loading 1.5s infinite;
-            border-radius: var(--radius);
-        }
-
-        @keyframes loading {
-            0% {
-                background-position: 200% 0;
-            }
-
-            100% {
-                background-position: -200% 0;
-            }
-        }
-
         /* Typography */
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
+        h1, h2, h3, h4, h5, h6 {
             font-weight: 700;
             line-height: 1.2;
             letter-spacing: -0.02em;
         }
 
-        h1 {
-            font-size: var(--fs-4xl);
-        }
-
-        h2 {
-            font-size: var(--fs-3xl);
-        }
-
-        h3 {
-            font-size: var(--fs-2xl);
-        }
-
-        h4 {
-            font-size: var(--fs-xl);
-        }
-
-        h5 {
-            font-size: var(--fs-lg);
-        }
-
-        h6 {
-            font-size: var(--fs-base);
-        }
+        h1 { font-size: var(--fs-4xl); }
+        h2 { font-size: var(--fs-3xl); }
+        h3 { font-size: var(--fs-2xl); }
+        h4 { font-size: var(--fs-xl); }
+        h5 { font-size: var(--fs-lg); }
+        h6 { font-size: var(--fs-base); }
 
         p {
             margin-bottom: var(--space-md);
             line-height: 1.7;
-        }
-
-        strong {
-            font-weight: 600;
-        }
-
-        em {
-            font-style: italic;
         }
 
         a {
@@ -391,15 +308,10 @@
             transition: color var(--trans-fast);
         }
 
-        a:hover {
-            color: var(--c-secondary);
-        }
+        a:hover { color: var(--c-secondary); }
 
         /* Focus & Selection */
-        :focus {
-            outline: none;
-        }
-
+        :focus { outline: none; }
         :focus-visible {
             outline: 2px solid var(--c-primary);
             outline-offset: 2px;
@@ -419,14 +331,6 @@
             padding: 0 var(--space-lg);
         }
 
-        .container-sm {
-            max-width: 900px;
-        }
-
-        .container-xs {
-            max-width: 600px;
-        }
-
         /* Header */
         .header {
             position: fixed;
@@ -434,8 +338,8 @@
             left: 0;
             right: 0;
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(var(--blur));
-            -webkit-backdrop-filter: blur(var(--blur));
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid var(--c-border);
             z-index: 100;
             transition: all var(--trans);
@@ -512,13 +416,11 @@
             transition: width var(--trans-fast);
         }
 
-        .nav-link:hover,
-        .nav-link.active {
+        .nav-link:hover, .nav-link.active {
             color: var(--c-primary);
         }
 
-        .nav-link:hover::after,
-        .nav-link.active::after {
+        .nav-link:hover::after, .nav-link.active::after {
             width: 100%;
         }
 
@@ -540,7 +442,36 @@
             color: white;
         }
 
-        /* Mobile Menu */
+        /* Hero Section */
+        .hero {
+            padding-top: 120px;
+            padding-bottom: var(--space-4xl);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -50%;
+            width: 200%;
+            height: 100%;
+            background: radial-gradient(circle at 30% 20%, rgba(30, 64, 175, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+            pointer-events: none;
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* Mobile Navigation */
         .mobile-toggle {
             display: none;
             background: none;
@@ -553,74 +484,6 @@
         .mobile-toggle svg {
             width: 24px;
             height: 24px;
-        }
-
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 85%;
-            max-width: 350px;
-            height: 100vh;
-            background: var(--c-bg);
-            box-shadow: var(--shadow-2xl);
-            z-index: 1000;
-            transition: right var(--trans);
-            padding: var(--space-xl);
-            overflow-y: auto;
-        }
-
-        .mobile-nav.open {
-            right: 0;
-        }
-
-        .mobile-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity var(--trans);
-        }
-
-        .mobile-overlay.open {
-            display: block;
-            opacity: 1;
-        }
-
-        .mobile-nav-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--space-xl);
-            padding-bottom: var(--space-md);
-            border-bottom: 1px solid var(--c-border);
-        }
-
-        .mobile-nav-close {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: var(--space-xs);
-            color: var(--c-text);
-        }
-
-        .mobile-nav-link {
-            display: block;
-            padding: var(--space-md) 0;
-            color: var(--c-text);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: var(--fs-lg);
-            border-bottom: 1px solid var(--c-border);
-            transition: all var(--trans-fast);
-        }
-
-        .mobile-nav-link:hover {
-            color: var(--c-primary);
-            transform: translateX(5px);
         }
 
         /* Dark Mode Toggle */
@@ -654,54 +517,659 @@
             transition: transform var(--trans-fast);
         }
 
-        .theme-toggle .moon-icon {
-            display: none;
-        }
+        .theme-toggle .moon-icon { display: none; }
+        [data-theme="dark"] .theme-toggle .sun-icon { display: none; }
+        [data-theme="dark"] .theme-toggle .moon-icon { display: block; }
 
-        [data-theme="dark"] .theme-toggle .sun-icon {
-            display: none;
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav { display: none; }
+            .mobile-toggle { display: block; }
+            
+            .theme-toggle {
+                top: var(--space-md);
+                right: var(--space-md);
+                width: 44px;
+                height: 44px;
+            }
+            
+            .hero {
+                padding-top: 100px;
+            }
         }
+    </style>
 
-        [data-theme="dark"] .theme-toggle .moon-icon {
-            display: block;
-        }
+    <!-- Non-critical CSS (deferred) -->
+    <link rel="preload" href="/styles/main.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/styles/main.css"></noscript>
+</head>
 
-        /* Hero Section */
-        .hero {
-            padding-top: 120px;
-            padding-bottom: var(--space-4xl);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
+<body>
+    <!-- Dark Mode Toggle -->
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="12" cy="12" r="5" />
+            <path d="M12 1v6M12 17v6M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h6M17 12h6M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
+        </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+    </button>
+
+    <!-- Header -->
+    <header class="header" role="banner">
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo" aria-label="Dominic Minischetti Home">
+                    <span class="logo-icon">DM</span>
+                    <span>Dominic Minischetti</span>
+                </a>
+
+                <nav class="nav" role="navigation" aria-label="Main navigation">
+                    <a href="#about" class="nav-link">About</a>
+                    <a href="#experience" class="nav-link">Experience</a>
+                    <a href="#skills" class="nav-link">Skills</a>
+                    <a href="#projects" class="nav-link">Projects</a>
+                    <a href="#testimonials" class="nav-link">Reviews</a>
+                    <a href="#contact" class="header-cta">Get Started →</a>
+                </nav>
+
+                <button class="mobile-toggle" onclick="toggleMobileNav()" aria-label="Toggle navigation menu">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="3" y1="6" x2="21" y2="6" />
+                        <line x1="3" y1="12" x2="21" y2="12" />
+                        <line x1="3" y1="18" x2="21" y2="18" />
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Navigation -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileNav()"></div>
+    <nav class="mobile-nav" id="mobileNav">
+        <div class="mobile-nav-header">
+            <span class="logo">Menu</span>
+            <button onclick="toggleMobileNav()" aria-label="Close navigation">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18" />
+                    <line x1="6" y1="6" x2="18" y2="18" />
+                </svg>
+            </button>
+        </div>
+        <a href="#about" class="mobile-nav-link" onclick="toggleMobileNav()">About</a>
+        <a href="#experience" class="mobile-nav-link" onclick="toggleMobileNav()">Experience</a>
+        <a href="#skills" class="mobile-nav-link" onclick="toggleMobileNav()">Skills</a>
+        <a href="#projects" class="mobile-nav-link" onclick="toggleMobileNav()">Projects</a>
+        <a href="#testimonials" class="mobile-nav-link" onclick="toggleMobileNav()">Testimonials</a>
+        <a href="#contact" class="mobile-nav-link" onclick="toggleMobileNav()">Contact</a>
+    </nav>
+
+    <!-- Floating CTA -->
+    <a href="#contact" class="floating-cta" aria-label="Schedule an Interview">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
+        </svg>
+        Schedule an Interview
+    </a>
+
+    <main id="main">
+        <!-- Hero Section -->
+        <section class="hero section-primary">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge fade-in">
+                        <div class="hero-badge-dot"></div>
+                        Open to new opportunities
+                    </div>
+
+                    <h1 class="hero-title fade-in">
+                        Senior PHP Backend Engineer specializing in scalable systems and clean architecture
+                    </h1>
+
+                    <p class="hero-subtitle fade-in">
+                        I build robust backend solutions that handle high traffic, optimize database performance,
+                        and maintain clean, maintainable codebases. Currently engineering solutions at BLOX Digital
+                        while exploring opportunities to tackle new technical challenges.
+                    </p>
+
+                    <div class="hero-companies fade-in">
+                        <span class="hero-companies-label">Experience with</span>
+                        <span class="company-logo">BLOX Digital</span>
+                        <span class="company-logo">Appliances Connection</span>
+                        <span class="company-logo">Kingsleague</span>
+                    </div>
+
+                    <div class="hero-actions fade-in">
+                        <a href="https://linkedin.com/in/dminischetti/" class="btn btn-primary" target="_blank"
+                            rel="noopener">
+                            Connect on LinkedIn
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">
+                            View Contact Options
+                        </a>
+                        <a href="https://calendly.com/minischetti/meeting" class="btn btn-secondary"
+                            target="_blank" rel="noopener">
+                            Book a Call
+                        </a>
+                    </div>
+                    <div class="hero-image-wrapper">
+                        <div class="hero-image-bg"></div>
+                        <img src="https://minischetti.org/me/1.jpg"
+                            alt="Dominic Minischetti - Senior PHP Backend Engineer" class="hero-image" loading="lazy"
+                            width="350" height="450">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Signals -->
+        <section class="trust-signals section-accent" aria-label="Achievements">
+            <div class="container">
+                <div class="trust-grid">
+                    <div class="trust-item fade-in">
+                        <div class="trust-icon">🚀</div>
+                        <div class="trust-value">12+</div>
+                        <div class="trust-label">Production Systems Optimized</div>
+                    </div>
+                    <div class="trust-item fade-in">
+                        <div class="trust-icon">⚡</div>
+                        <div class="trust-value">2.5s → 0.8s</div>
+                        <div class="trust-label">Avg Page Load Improvement</div>
+                    </div>
+                    <div class="trust-item fade-in">
+                        <div class="trust-icon">💾</div>
+                        <div class="trust-value">70%</div>
+                        <div class="trust-label">Database Load Reduction</div>
+                    </div>
+                    <div class="trust-item fade-in">
+                        <div class="trust-icon">🎯</div>
+                        <div class="trust-value">100%</div>
+                        <div class="trust-label">On-Time Delivery</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="section section-primary">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge fade-in">ABOUT ME</span>
+                    <h2 class="section-title fade-in">Backend Engineer & Problem Solver</h2>
+                    <p class="section-subtitle fade-in">
+                        Passionate about building efficient, scalable systems that make a real impact
+                    </p>
+                </div>
+
+                <div class="about-content">
+                    <p class="about-intro fade-in">
+                        With over a decade of experience in backend development, I specialize in PHP and MySQL,
+                        focusing on performance optimization and scalable architecture. I thrive on solving complex
+                        technical challenges and transforming legacy systems into modern, efficient solutions.
+                    </p>
+
+                    <div class="about-section fade-in">
+                        <h3>Technical Philosophy</h3>
+                        <p>
+                            I believe in writing clean, maintainable code that not only solves today's problems but
+                            is also adaptable for tomorrow's challenges. My approach combines solid engineering
+                            principles with pragmatic solutions, always keeping the end user and business goals in mind.
+                        </p>
+                    </div>
+
+                    <div class="about-highlight fade-in">
+                        "Good code is like good bread – it requires the right ingredients, proper technique,
+                        and patience to rise. Both my Italian heritage and engineering background taught me this."
+                    </div>
+
+                    <div class="about-section fade-in">
+                        <h3>Background & Approach</h3>
+                        <p>
+                            Born in New York and raised in Italy, I bring an international perspective to my work.
+                            This unique background has taught me to adapt quickly, communicate effectively across
+                            cultures, and approach problems from multiple angles. I'm equally comfortable working independently
+                            on complex backend systems or collaborating with cross-functional teams to deliver
+                            solutions.
+                        </p>
+                    </div>
+
+                    <img src="https://minischetti.org/me/2.jpg" alt="Backend development workspace" class="about-image"
+                        loading="lazy" width="300" height="400">
+                </div>
+
+                <div class="value-props">
+                    <div class="value-prop fade-in">
+                        <div class="value-prop-icon">⚡</div>
+                        <h3 class="value-prop-title">Speed Obsessed</h3>
+                        <p class="value-prop-desc">Every millisecond counts. I optimize until your app flies.</p>
+                    </div>
+                    <div class="value-prop fade-in">
+                        <div class="value-prop-icon">🛡️</div>
+                        <h3 class="value-prop-title">Rock-Solid Reliable</h3>
+                        <p class="value-prop-desc">99.9% uptime isn't a goal—it's the minimum standard.</p>
+                    </div>
+                    <div class="value-prop fade-in">
+                        <div class="value-prop-icon">📈</div>
+                        <h3 class="value-prop-title">Scale Without Fear</h3>
+                        <p class="value-prop-desc">Built systems handling millions of requests without breaking a sweat.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience" class="section section-secondary">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge fade-in">EXPERIENCE</span>
+                    <h2 class="section-title fade-in">Professional Journey</h2>
+                    <p class="section-subtitle fade-in">
+                        Building scalable solutions and solving complex challenges across industries
+                    </p>
+                </div>
+
+                <div class="timeline">
+                    <div class="timeline-item fade-in">
+                        <span class="timeline-period">Jul 2024 - Present</span>
+                        <h3 class="timeline-title">Backend PHP Developer</h3>
+                        <div class="timeline-company">BLOX Digital</div>
+                        <p class="timeline-desc">
+                            Developing and optimizing content management systems for high-traffic media organizations.
+                            Working with PHP and MySQL to enhance system performance, implement new features, and
+                            ensure reliable content delivery.
+                        </p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">CMS Development</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item fade-in">
+                        <span class="timeline-period">May 2022 - Mar 2024</span>
+                        <h3 class="timeline-title">Backend PHP Developer</h3>
+                        <div class="timeline-company">Appliances Connection</div>
+                        <p class="timeline-desc">
+                            Designed and built a comprehensive Warehouse Management System from the ground up,
+                            transforming manual inventory processes into automated workflows.
+                        </p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item fade-in">
+                        <span class="timeline-period">Aug 2021 - May 2022</span>
+                        <h3 class="timeline-title">Full Stack Developer</h3>
+                        <div class="timeline-company">Kingsleague</div>
+                        <p class="timeline-desc">
+                            Developed platform features using PHP, MySQL, and Firebase. Implemented automated
+                            testing and containerized applications using Docker.
+                        </p>
+                        <div class="timeline-tech">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Docker</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills" class="section section-primary">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge fade-in">SKILLS</span>
+                    <h2 class="section-title fade-in">Technical Expertise</h2>
+                    <p class="section-subtitle fade-in">
+                        Comprehensive skill set developed through years of hands-on experience
+                    </p>
+                </div>
+
+                <div class="skills-matrix">
+                    <div class="skill-category fade-in">
+                        <h3 class="skill-category-title">Backend Development</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag primary">PHP 7/8</span>
+                            <span class="skill-tag primary">Laravel</span>
+                            <span class="skill-tag">Symfony</span>
+                            <span class="skill-tag">CodeIgniter</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category fade-in">
+                        <h3 class="skill-category-title">Database & Storage</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag primary">MySQL</span>
+                            <span class="skill-tag primary">Query Optimization</span>
+                            <span class="skill-tag">Redis</span>
+                            <span class="skill-tag">MongoDB</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category fade-in">
+                        <h3 class="skill-category-title">DevOps & Tools</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag primary">Docker</span>
+                            <span class="skill-tag primary">Git</span>
+                            <span class="skill-tag">Jenkins</span>
+                            <span class="skill-tag">Linux</span>
+                        </div>
+                    </div>
+
+                    <div class="skill-category fade-in">
+                        <h3 class="skill-category-title">APIs & Integration</h3>
+                        <div class="skill-list">
+                            <span class="skill-tag primary">RESTful APIs</span>
+                            <span class="skill-tag">JWT Authentication</span>
+                            <span class="skill-tag">OAuth</span>
+                            <span class="skill-tag">Swagger/OpenAPI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects" class="section section-secondary">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge fade-in">PROJECTS</span>
+                    <h2 class="section-title fade-in">Featured Work</h2>
+                    <p class="section-subtitle fade-in">
+                        Representative projects showcasing technical skills and problem-solving abilities
+                    </p>
+                </div>
+
+                <div class="projects-grid">
+                    <div class="project-card fade-in">
+                        <h3 class="project-title">Warehouse Management System</h3>
+                        <p class="project-desc">
+                            Comprehensive WMS built from scratch to replace manual inventory tracking processes.
+                            Features real-time inventory updates, barcode scanning integration, and automated
+                            reorder points.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">MySQL</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#contact" class="project-link">Contact for Details</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <h3 class="project-title">High-Traffic CMS Platform</h3>
+                        <p class="project-desc">
+                            Optimized content management system serving millions of monthly page views.
+                            Implemented advanced caching strategies and database query optimization.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">PHP</span>
+                            <span class="tech-tag">MySQL</span>
+                            <span class="tech-tag">Redis</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#contact" class="project-link">Contact for Details</a>
+                        </div>
+                    </div>
+
+                    <div class="project-card fade-in">
+                        <h3 class="project-title">RESTful API Platform</h3>
+                        <p class="project-desc">
+                            Comprehensive API platform to unify data access across multiple applications.
+                            Implemented JWT authentication, rate limiting, and comprehensive error handling.
+                        </p>
+                        <div class="project-tech">
+                            <span class="tech-tag">Laravel</span>
+                            <span class="tech-tag">REST API</span>
+                            <span class="tech-tag">JWT</span>
+                        </div>
+                        <div class="project-links">
+                            <a href="#contact" class="project-link">Learn More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section section-accent" aria-label="Call to action">
+            <div class="container">
+                <div class="cta-content">
+                    <h2 class="cta-title fade-in">Ready to Build Something Great Together?</h2>
+                    <p class="cta-subtitle fade-in">
+                        Let's discuss how I can contribute to your team and help solve your technical challenges.
+                    </p>
+                    <div class="cta-actions fade-in">
+                        <a href="#contact" class="cta-btn">Get In Touch</a>
+                        <a href="https://calendly.com/minischetti/meeting" class="cta-btn cta-btn-secondary" target="_blank"
+                            rel="noopener">Schedule a Call</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="section section-primary" aria-label="Contact form">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-badge fade-in">CONTACT</span>
+                    <h2 class="section-title fade-in">Let's Connect</h2>
+                    <p class="section-subtitle fade-in">
+                        Open to discussing new opportunities and technical challenges
+                    </p>
+                </div>
+                
+                <div class="contact-grid">
+                    <form class="contact-form fade-in" id="contactForm" action="https://formspree.io/f/mandgyrq" method="POST">
+                        <div class="form-success" id="formSuccess">
+                            ✅ Message sent! I'll get back to you within 24 hours.
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name" class="form-label">Name <span class="required">*</span></label>
+                                <input type="text" id="name" name="name" class="form-input" required aria-required="true">
+                                <span class="form-error">Please enter your name</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email <span class="required">*</span></label>
+                                <input type="email" id="email" name="email" class="form-input" required aria-required="true">
+                                <span class="form-error">Please enter a valid email</span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="company" class="form-label">Company / Organization</label>
+                                <input type="text" id="company" name="company" class="form-input">
+                            </div>
+
+                            <div class="form-group">
+                                <label for="role" class="form-label">Role Title / Department</label>
+                                <input type="text" id="role" name="role" class="form-input">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="message" class="form-label">
+                                Message <span class="required">*</span>
+                            </label>
+                            <textarea id="message" name="message" class="form-textarea" rows="5" required
+                                aria-required="true"
+                                placeholder="Tell me about the opportunity or project you'd like to discuss..."></textarea>
+                            <span class="form-error">Please provide details</span>
+                        </div>
+
+                        <div class="form-honeypot" aria-hidden="true">
+                            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <button type="submit" class="form-submit">
+                            Send Message →
+                        </button>
+                    </form>
+
+                    <div class="contact-info fade-in">
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" />
+                                    <path d="M3 10h18M8 2v4M16 2v4" />
+                                </svg>
+                            </div>
+                            <div class="contact-info-details">
+                                <h4>Schedule a Call</h4>
+                                <a href="https://calendly.com/minischetti/meeting" target="_blank" rel="noopener">30-min consultation</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="2" y="4" width="20" height="16" rx="2" />
+                                    <path d="m22 7-10 5L2 7" />
+                                </svg>
+                            </div>
+                            <div class="contact-info-details">
+                                <h4>Email Directly</h4>
+                                <a href="mailto:dominic.minischetti@gmail.com">dominic.minischetti@gmail.com</a>
+                            </div>
+                        </div>
+
+                        <div class="contact-info-item">
+                            <div class="contact-info-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+                                    <rect x="2" y="9" width="4" height="12" />
+                                    <circle cx="4" cy="4" r="2" />
+                                </svg>
+                            </div>
+                            <div class="contact-info-details">
+                                <h4>LinkedIn</h4>
+                                <a href="https://linkedin.com/in/dminischetti/" target="_blank" rel="noopener">Connect professionally</a>
+                            </div>
+                        </div>
+
+                        <div class="availability-notice">
+                            ⚡ Available for new opportunities • Response within 24 hours
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Improved Footer -->
+    <footer class="footer" role="contentinfo">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <span class="footer-logo-icon">DM</span>
+                        <div class="footer-brand-info">
+                            <h3>Dominic Minischetti</h3>
+                            <p>Senior PHP Backend Engineer</p>
+                        </div>
+                    </div>
+                    
+                    <p class="footer-description">
+                        Specializing in performance optimization and scalable systems. 
+                        Building fast, reliable backend solutions since 2012.
+                    </p>
+
+                    <div class="footer-stats">
+                        <div class="footer-stat">
+                            <span class="stat-value">12+</span>
+                            <span class="stat-label">Systems Optimized</span>
+                        </div>
+                        <div class="footer-stat">
+                            <span class="stat-value">70%</span>
+                            <span class="stat-label">Avg Performance Boost</span>
+                        </div>
+                        <div class="footer-stat">
+                            <span class="stat-value">100%</span>
+                            <span class="stat-label">Client Satisfaction</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer-links">
+                    <div class="footer-column">
+                        <h4>Navigation</h4>
+                        <div class="footer-link-list">
+                            <a href="#about" class="footer-link">About</a>
+                            <a href="#experience" class="footer-link">Experience</a>
+                            <a href="#skills" class="footer-link">Skills</a>
+                            <a href="#projects" class="footer-link">Projects</a>
+                        </div>
+                    </div>
+
+                    <div class="footer-column">
+                        <h4>Get In Touch</h4>
+                        <div class="footer-link-list">
+                            <a href="#contact" class="footer-link">Contact Form</a>
+                            <a href="mailto:dominic.minischetti@gmail.com" class="footer-link">Send Email</a>
+                            <a href="https://calendly.com/minischetti/meeting" class="footer-link" target="_blank">Book a Call</a>
+                            <a href="https://linkedin.com/in/dminischetti/" class="footer-link" target="_blank">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copy">
+                    <p>© 2025 Dominic Minischetti. Built with clean code in Brooklyn, NY.</p>
+                </div>
+                <div class="footer-status">
+                    <span class="availability-dot"></span>
+                    <span>Available for new opportunities</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <style>
+        /* Additional styles for non-critical elements */
+        
+        /* Section Types for Visual Separation */
+        .section {
+            padding: var(--space-4xl) 0;
             position: relative;
-            overflow: hidden;
         }
 
-        .hero::before {
+        .section-primary {
+            background: var(--c-bg);
+        }
+
+        .section-secondary {
+            background: var(--c-bg-secondary);
+            border-top: 1px solid var(--c-border);
+            border-bottom: 1px solid var(--c-border);
+        }
+
+        .section-accent {
+            background: linear-gradient(135deg, var(--c-bg-secondary), rgba(30, 64, 175, 0.05));
+            border-top: 2px solid var(--c-primary);
+            position: relative;
+        }
+
+        .section-accent::before {
             content: '';
             position: absolute;
-            top: 0;
-            left: -50%;
-            width: 200%;
-            height: 100%;
-            background: radial-gradient(circle at 30% 20%, rgba(30, 64, 175, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%231e40af' fill-opacity='0.03'%3E%3Ccircle cx='20' cy='20' r='1'/%3E%3C/g%3E%3C/svg%3E");
             pointer-events: none;
-            animation: float 20s ease-in-out infinite;
         }
 
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0) rotate(0deg);
-            }
-
-            50% {
-                transform: translateY(-20px) rotate(5deg);
-            }
-        }
-
+        /* Hero Components */
         .hero-grid {
             display: grid;
             grid-template-columns: 1fr 350px;
@@ -732,18 +1200,6 @@
             animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
         }
 
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-            }
-
-            50% {
-                opacity: 0.8;
-            }
-        }
-
         .hero-badge-dot {
             width: 8px;
             height: 8px;
@@ -753,17 +1209,8 @@
         }
 
         @keyframes blink {
-
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.5;
-                transform: scale(1.2);
-            }
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
         }
 
         .hero-title {
@@ -776,19 +1223,6 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            animation: fadeInUp 0.8s ease-out;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .hero-subtitle {
@@ -797,42 +1231,6 @@
             margin-bottom: var(--space-xl);
             line-height: 1.5;
             max-width: 700px;
-            animation: fadeInUp 0.8s ease-out 0.2s both;
-        }
-
-        .hero-stats {
-            display: flex;
-            gap: var(--space-xl);
-            margin-bottom: var(--space-xl);
-            flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.3s both;
-        }
-
-        .hero-stat {
-            display: flex;
-            flex-direction: column;
-            gap: var(--space-xs);
-        }
-
-        .hero-stat-value {
-            font-size: var(--fs-2xl);
-            font-weight: 800;
-            color: var(--c-primary);
-            line-height: 1;
-        }
-
-        .hero-stat-label {
-            font-size: var(--fs-sm);
-            color: var(--c-text-secondary);
-            font-weight: 500;
-        }
-
-        .hero-actions {
-            display: flex;
-            gap: var(--space-md);
-            flex-wrap: wrap;
-            margin-bottom: var(--space-xl);
-            animation: fadeInUp 0.8s ease-out 0.4s both;
         }
 
         .hero-companies {
@@ -840,7 +1238,7 @@
             align-items: center;
             gap: var(--space-md);
             flex-wrap: wrap;
-            animation: fadeInUp 0.8s ease-out 0.5s both;
+            margin-bottom: var(--space-xl);
         }
 
         .hero-companies-label {
@@ -849,12 +1247,6 @@
             font-weight: 500;
             text-transform: uppercase;
             letter-spacing: 0.05em;
-        }
-
-        .company-logos {
-            display: flex;
-            gap: var(--space-md);
-            flex-wrap: wrap;
         }
 
         .company-logo {
@@ -869,7 +1261,6 @@
             font-weight: 600;
             color: var(--c-text-secondary);
             transition: all var(--trans-fast);
-            cursor: default;
         }
 
         .company-logo:hover {
@@ -880,9 +1271,15 @@
             box-shadow: var(--shadow);
         }
 
+        .hero-actions {
+            display: flex;
+            gap: var(--space-md);
+            flex-wrap: wrap;
+            margin-bottom: var(--space-xl);
+        }
+
         .hero-image-wrapper {
             position: relative;
-            animation: fadeInUp 0.8s ease-out 0.6s both;
         }
 
         .hero-image {
@@ -912,14 +1309,6 @@
         }
 
         /* Trust Signals */
-        .trust-signals {
-            background: var(--c-bg-secondary);
-            padding: var(--space-2xl) 0;
-            border-top: 1px solid var(--c-border);
-            border-bottom: 1px solid var(--c-border);
-            margin-top: var(--space-4xl);
-        }
-
         .trust-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -959,12 +1348,7 @@
             color: var(--c-text-secondary);
         }
 
-        /* Section Base */
-        .section {
-            padding: var(--space-4xl) 0;
-            position: relative;
-        }
-
+        /* Section Headers */
         .section-header {
             text-align: center;
             margin-bottom: var(--space-3xl);
@@ -999,165 +1383,11 @@
             line-height: 1.6;
         }
 
-        /* Cards */
-        .card {
-            background: var(--c-bg);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            box-shadow: var(--shadow);
-            border: 1px solid var(--c-border);
-            transition: all var(--trans);
-            position: relative;
-            overflow: hidden;
-            height: 100%;
-        }
-
-        .card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transition: transform var(--trans);
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .card:hover::before {
-            transform: scaleX(1);
-        }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: var(--space-xs);
-            padding: var(--space-sm) var(--space-lg);
-            border-radius: var(--radius);
-            font-weight: 600;
-            font-size: var(--fs-sm);
-            text-decoration: none;
-            border: none;
-            cursor: pointer;
-            transition: all var(--trans-fast);
-            position: relative;
-            overflow: hidden;
-            white-space: nowrap;
-        }
-
-        .btn-primary {
-            background: var(--gradient-primary);
-            color: white;
-            box-shadow: var(--shadow);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-            color: white;
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--c-text);
-            border: 2px solid var(--c-border);
-        }
-
-        .btn-secondary:hover {
-            background: var(--c-bg-secondary);
-            border-color: var(--c-primary);
-            color: var(--c-primary);
-        }
-
-        .btn-large {
-            padding: var(--space-md) var(--space-xl);
-            font-size: var(--fs-base);
-        }
-
-        .btn-icon {
-            width: 20px;
-            height: 20px;
-        }
-
-        /* Floating CTA */
-        .floating-cta {
-            position: fixed;
-            bottom: var(--space-xl);
-            right: var(--space-xl);
-            z-index: 90;
-            background: var(--gradient-primary);
-            color: white;
-            padding: var(--space-md) var(--space-lg);
-            border-radius: var(--radius-full);
-            box-shadow: var(--shadow-xl);
-            font-weight: 600;
-            text-decoration: none;
-            display: none;
-            align-items: center;
-            gap: var(--space-xs);
-            animation: bounceIn 0.5s ease-out;
-            transition: all var(--trans-fast);
-        }
-
-        @keyframes bounceIn {
-            0% {
-                transform: scale(0) translateY(100px);
-                opacity: 0;
-            }
-
-            60% {
-                transform: scale(1.1) translateY(-10px);
-            }
-
-            100% {
-                transform: scale(1) translateY(0);
-                opacity: 1;
-            }
-        }
-
-        .floating-cta:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-2xl);
-            color: white;
-        }
-
-        .floating-cta.visible {
-            display: flex;
-        }
-
         /* About Section */
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: var(--space-3xl);
-            align-items: center;
-            margin-bottom: var(--space-3xl);
-        }
-
         .about-content {
             max-width: 800px;
             margin: 0 auto;
             text-align: left;
-        }
-
-        .about-content h3 {
-            font-size: var(--fs-xl);
-            margin-bottom: var(--space-md);
-            color: var(--c-primary);
-        }
-
-        .about-content p {
-            font-size: var(--fs-base);
-            line-height: 1.8;
-            color: var(--c-text-secondary);
-            margin-bottom: var(--space-lg);
         }
 
         .about-intro {
@@ -1194,22 +1424,16 @@
             font-style: italic;
         }
 
-        .about-highlight::before {
-            content: '✨';
-            position: absolute;
-            top: var(--space-md);
-            right: var(--space-md);
-            font-size: var(--fs-xl);
-            opacity: 0.5;
-        }
-
         .about-image {
             width: 100%;
+            max-width: 300px;
             height: 400px;
             object-fit: cover;
             border-radius: var(--radius-lg);
             box-shadow: var(--shadow-xl);
             transition: transform var(--trans);
+            margin: var(--space-xl) auto;
+            display: block;
         }
 
         .about-image:hover {
@@ -1268,7 +1492,7 @@
             line-height: 1.5;
         }
 
-        /* Experience Timeline */
+        /* Timeline */
         .timeline {
             position: relative;
             padding-left: var(--space-2xl);
@@ -1335,29 +1559,10 @@
             margin-bottom: var(--space-md);
         }
 
-        .timeline-achievements {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-xs);
-        }
-
         .timeline-tech {
             display: flex;
             flex-wrap: wrap;
             gap: var(--space-xs);
-        }
-
-        .achievement-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
-            padding: var(--space-xs) var(--space-sm);
-            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-            color: var(--c-accent);
-            border-radius: var(--radius);
-            font-size: var(--fs-xs);
-            font-weight: 600;
-            border: 1px solid rgba(16, 185, 129, 0.2);
         }
 
         .tech-tag {
@@ -1395,21 +1600,6 @@
             font-size: var(--fs-lg);
             font-weight: 700;
             margin-bottom: var(--space-md);
-            display: flex;
-            align-items: center;
-            gap: var(--space-sm);
-        }
-
-        .skill-category-icon {
-            width: 28px;
-            height: 28px;
-            background: var(--gradient-primary);
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: var(--fs-sm);
         }
 
         .skill-list {
@@ -1426,7 +1616,6 @@
             font-size: var(--fs-sm);
             font-weight: 500;
             transition: all var(--trans-fast);
-            position: relative;
             cursor: default;
         }
 
@@ -1441,10 +1630,6 @@
             color: white;
             border-color: transparent;
             transform: translateY(-2px);
-        }
-
-        .skill-tag.primary:hover {
-            transform: translateY(-2px) scale(1.05);
         }
 
         /* Projects Grid */
@@ -1486,32 +1671,6 @@
             transform: scaleX(1);
         }
 
-        .project-image {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            transition: transform var(--trans);
-        }
-
-        .project-card:hover .project-image {
-            transform: scale(1.05);
-        }
-
-        .project-content {
-            padding: var(--space-lg);
-        }
-
-        .project-label {
-            display: inline-block;
-            padding: var(--space-xs) var(--space-sm);
-            background: var(--gradient-primary);
-            color: white;
-            border-radius: var(--radius);
-            font-size: var(--fs-xs);
-            font-weight: 600;
-            margin-bottom: var(--space-sm);
-        }
-
         .project-title {
             font-size: var(--fs-xl);
             font-weight: 700;
@@ -1525,22 +1684,6 @@
             font-size: var(--fs-sm);
         }
 
-        .project-metrics {
-            display: flex;
-            gap: var(--space-md);
-            margin-bottom: var(--space-md);
-            flex-wrap: wrap;
-        }
-
-        .project-metric {
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
-            font-size: var(--fs-sm);
-            color: var(--c-accent);
-            font-weight: 600;
-        }
-
         .project-tech {
             display: flex;
             flex-wrap: wrap;
@@ -1548,7 +1691,7 @@
             margin-bottom: var(--space-md);
         }
 
-        .project-actions {
+        .project-links {
             display: flex;
             gap: var(--space-sm);
         }
@@ -1570,98 +1713,6 @@
             background: var(--c-primary);
             color: white;
             border-color: transparent;
-        }
-
-        .project-links {
-            display: flex;
-            gap: var(--space-sm);
-        }
-
-        /* Testimonials */
-        .testimonials-carousel {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--space-xl);
-            margin-bottom: var(--space-xl);
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-xl);
-        }
-
-        .testimonial-card {
-            background: var(--c-bg);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            border: 1px solid var(--c-border);
-            position: relative;
-            transition: all var(--trans);
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .testimonial-quote {
-            font-size: var(--fs-2xl);
-            color: var(--c-primary);
-            opacity: 0.2;
-            position: absolute;
-            top: var(--space-md);
-            left: var(--space-md);
-            line-height: 1;
-        }
-
-        .testimonial-text {
-            font-size: var(--fs-base);
-            line-height: 1.7;
-            margin-bottom: var(--space-lg);
-            padding-top: var(--space-lg);
-            font-style: italic;
-            color: var(--c-text-secondary);
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-        }
-
-        .testimonial-avatar {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: var(--gradient-primary);
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: var(--fs-base);
-        }
-
-        .testimonial-info {
-            flex: 1;
-        }
-
-        .testimonial-name {
-            font-weight: 700;
-            margin-bottom: 2px;
-        }
-
-        .testimonial-role {
-            font-size: var(--fs-sm);
-            color: var(--c-text-secondary);
-        }
-
-        .testimonial-rating {
-            display: flex;
-            gap: 2px;
-            color: var(--c-secondary);
-            font-size: var(--fs-sm);
         }
 
         /* CTA Section */
@@ -1737,76 +1788,11 @@
             color: var(--c-primary);
         }
 
-        /* Contact Section */
+        /* Contact Form */
         .contact-grid {
             display: grid;
             grid-template-columns: 2fr 1fr;
             gap: var(--space-3xl);
-        }
-
-        .contact-content {
-            max-width: 700px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .contact-methods {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-xl);
-            margin-top: var(--space-3xl);
-        }
-
-        .contact-method {
-            padding: var(--space-lg);
-            background: var(--c-bg);
-            border-radius: var(--radius-lg);
-            border: 1px solid var(--c-border);
-            transition: all var(--trans);
-            text-align: center;
-        }
-
-        .contact-method:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .contact-icon {
-            width: 56px;
-            height: 56px;
-            background: var(--gradient-primary);
-            color: white;
-            border-radius: var(--radius-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto var(--space-md);
-            font-size: var(--fs-xl);
-        }
-
-        .contact-method h3 {
-            font-size: var(--fs-lg);
-            margin-bottom: var(--space-xs);
-        }
-
-        .contact-method p {
-            color: var(--c-text-secondary);
-            font-size: var(--fs-sm);
-            margin-bottom: var(--space-md);
-        }
-
-        .contact-link {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
-            color: var(--c-primary);
-            font-weight: 600;
-            text-decoration: none;
-            transition: all var(--trans-fast);
-        }
-
-        .contact-link:hover {
-            transform: translateX(5px);
         }
 
         .contact-form {
@@ -1839,8 +1825,7 @@
         }
 
         .form-input,
-        .form-textarea,
-        .form-select {
+        .form-textarea {
             width: 100%;
             padding: var(--space-sm) var(--space-md);
             border: 2px solid var(--c-border);
@@ -1852,8 +1837,7 @@
         }
 
         .form-input:focus,
-        .form-textarea:focus,
-        .form-select:focus {
+        .form-textarea:focus {
             outline: none;
             border-color: var(--c-primary);
             box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
@@ -1919,19 +1903,6 @@
             border-radius: var(--radius);
             margin-bottom: var(--space-lg);
             display: none;
-            animation: slideIn 0.3s ease-out;
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-10px);
-                opacity: 0;
-            }
-
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
         }
 
         .form-success.show {
@@ -1994,104 +1965,144 @@
             margin-top: var(--space-lg);
         }
 
-        /* Footer */
+        /* Improved Footer */
         .footer {
-            background: var(--gradient-dark);
-            color: white;
-            padding: var(--space-3xl) 0 var(--space-xl);
-            position: relative;
-            overflow: hidden;
+            background: var(--c-bg-secondary);
+            border-top: 2px solid var(--c-border);
+            padding: var(--space-4xl) 0 var(--space-xl);
             margin-top: var(--space-4xl);
-        }
-
-        .footer::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
+            transition: background-color var(--trans), border-color var(--trans);
         }
 
         .footer-content {
-            position: relative;
-            z-index: 1;
-            text-align: center;
-        }
-
-        .footer-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1fr;
-            gap: var(--space-3xl);
+            grid-template-columns: 2fr 1fr;
+            gap: var(--space-4xl);
             margin-bottom: var(--space-3xl);
         }
 
-        .footer-brand h3 {
-            font-size: var(--fs-xl);
-            margin-bottom: var(--space-md);
-        }
-
-        .footer-brand p {
-            opacity: 0.8;
-            line-height: 1.6;
-            margin-bottom: var(--space-lg);
-        }
-
-        .footer-column h4 {
-            font-size: var(--fs-base);
-            margin-bottom: var(--space-md);
-            opacity: 0.9;
-        }
-
-        .footer-link {
-            display: block;
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
-            padding: var(--space-xs) 0;
-            transition: all var(--trans-fast);
-            font-size: var(--fs-sm);
-        }
-
-        .footer-link:hover {
-            color: white;
-            transform: translateX(5px);
-        }
-
-        .social-links {
+        .footer-brand {
             display: flex;
-            gap: var(--space-md);
-            justify-content: center;
-            margin-bottom: var(--space-xl);
+            flex-direction: column;
+            gap: var(--space-lg);
         }
 
-        .social-link {
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+        }
+
+        .footer-logo-icon {
             width: 48px;
             height: 48px;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: var(--radius);
+            background: var(--gradient-primary);
+            border-radius: var(--radius-lg);
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            text-decoration: none;
-            transition: all var(--trans-fast);
+            font-weight: 800;
+            font-size: var(--fs-lg);
         }
 
-        .social-link:hover {
-            background: var(--c-primary);
-            border-color: transparent;
-            transform: translateY(-3px);
-            color: white;
+        .footer-brand-info h3 {
+            font-size: var(--fs-xl);
+            font-weight: 800;
+            margin-bottom: var(--space-xs);
+            color: var(--c-text);
         }
 
-        .footer-text {
-            opacity: 0.8;
+        .footer-brand-info p {
             font-size: var(--fs-sm);
+            color: var(--c-primary);
+            font-weight: 600;
+            margin: 0;
+        }
+
+        .footer-description {
+            font-size: var(--fs-base);
+            line-height: 1.6;
+            color: var(--c-text-secondary);
+            margin: 0;
+        }
+
+        .footer-stats {
+            display: flex;
+            gap: var(--space-xl);
+            flex-wrap: wrap;
+        }
+
+        .footer-stat {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: var(--space-md);
+            background: var(--c-bg);
+            border-radius: var(--radius);
+            border: 1px solid var(--c-border);
+            min-width: 100px;
+            transition: all var(--trans);
+        }
+
+        .footer-stat:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .stat-value {
+            font-size: var(--fs-xl);
+            font-weight: 800;
+            color: var(--c-primary);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: var(--fs-xs);
+            color: var(--c-text-secondary);
+            text-align: center;
+            font-weight: 500;
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-xl);
+        }
+
+        .footer-column h4 {
+            font-size: var(--fs-base);
+            font-weight: 700;
+            margin-bottom: var(--space-md);
+            color: var(--c-text);
+        }
+
+        .footer-link-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-xs);
+        }
+
+        .footer-link {
+            color: var(--c-text-secondary);
+            text-decoration: none;
+            font-size: var(--fs-sm);
+            padding: var(--space-xs) 0;
+            transition: all var(--trans-fast);
+            border-radius: var(--radius);
+            padding-left: var(--space-sm);
+        }
+
+        .footer-link:hover {
+            color: var(--c-primary);
+            background: rgba(30, 64, 175, 0.05);
+            transform: translateX(5px);
         }
 
         .footer-bottom {
             padding-top: var(--space-xl);
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-top: 1px solid var(--c-border);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -2099,25 +2110,166 @@
             gap: var(--space-md);
         }
 
-        .footer-copy {
-            opacity: 0.7;
+        .footer-copy p {
+            color: var(--c-text-secondary);
             font-size: var(--fs-sm);
+            margin: 0;
         }
 
-        .footer-legal {
+        .footer-status {
             display: flex;
-            gap: var(--space-lg);
-        }
-
-        .footer-legal a {
-            color: rgba(255, 255, 255, 0.7);
-            text-decoration: none;
+            align-items: center;
+            gap: var(--space-sm);
+            color: var(--c-accent);
             font-size: var(--fs-sm);
-            transition: color var(--trans-fast);
+            font-weight: 600;
         }
 
-        .footer-legal a:hover {
+        .availability-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--c-accent);
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        /* Buttons */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xs);
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius);
+            font-weight: 600;
+            font-size: var(--fs-sm);
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all var(--trans-fast);
+            white-space: nowrap;
+        }
+
+        .btn-primary {
+            background: var(--gradient-primary);
             color: white;
+            box-shadow: var(--shadow);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--c-text);
+            border: 2px solid var(--c-border);
+        }
+
+        .btn-secondary:hover {
+            background: var(--c-bg-secondary);
+            border-color: var(--c-primary);
+            color: var(--c-primary);
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 85%;
+            max-width: 350px;
+            height: 100vh;
+            background: var(--c-bg);
+            box-shadow: var(--shadow-2xl);
+            z-index: 1000;
+            transition: right var(--trans);
+            padding: var(--space-xl);
+            overflow-y: auto;
+        }
+
+        .mobile-nav.open {
+            right: 0;
+        }
+
+        .mobile-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            opacity: 0;
+            transition: opacity var(--trans);
+        }
+
+        .mobile-overlay.open {
+            display: block;
+            opacity: 1;
+        }
+
+        .mobile-nav-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-xl);
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid var(--c-border);
+        }
+
+        .mobile-nav-close {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: var(--space-xs);
+            color: var(--c-text);
+        }
+
+        .mobile-nav-link {
+            display: block;
+            padding: var(--space-md) 0;
+            color: var(--c-text);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: var(--fs-lg);
+            border-bottom: 1px solid var(--c-border);
+            transition: all var(--trans-fast);
+        }
+
+        .mobile-nav-link:hover {
+            color: var(--c-primary);
+            transform: translateX(5px);
+        }
+
+        /* Floating CTA */
+        .floating-cta {
+            position: fixed;
+            bottom: var(--space-xl);
+            right: var(--space-xl);
+            z-index: 90;
+            background: var(--gradient-primary);
+            color: white;
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-full);
+            box-shadow: var(--shadow-xl);
+            font-weight: 600;
+            text-decoration: none;
+            display: none;
+            align-items: center;
+            gap: var(--space-xs);
+            transition: all var(--trans-fast);
+        }
+
+        .floating-cta:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-2xl);
+            color: white;
+        }
+
+        .floating-cta.visible {
+            display: flex;
         }
 
         /* Animations */
@@ -2130,39 +2282,6 @@
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
-        }
-
-        .slide-in-left {
-            opacity: 0;
-            transform: translateX(-30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .slide-in-left.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .slide-in-right {
-            opacity: 0;
-            transform: translateX(30px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .slide-in-right.visible {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .scale-in {
-            opacity: 0;
-            transform: scale(0.9);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .scale-in.visible {
-            opacity: 1;
-            transform: scale(1);
         }
 
         /* Responsive Design */
@@ -2181,65 +2300,23 @@
                 grid-template-columns: repeat(2, 1fr);
             }
 
-            .projects-grid {
-                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            .contact-grid {
+                grid-template-columns: 1fr;
             }
 
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-2xl);
+            }
+
+            .footer-links {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
         @media (max-width: 768px) {
-            :root {
-                --space-4xl: 4rem;
-                --space-3xl: 3rem;
-            }
-
-            .nav {
-                display: none;
-            }
-
-            .mobile-toggle {
-                display: block;
-            }
-
-            .theme-toggle {
-                top: var(--space-md);
-                right: var(--space-md);
-                width: 44px;
-                height: 44px;
-            }
-
-            .floating-cta {
-                bottom: var(--space-md);
-                right: var(--space-md);
-            }
-
-            .hero {
-                padding-top: 100px;
-            }
-
-            .hero-title {
-                font-size: var(--fs-3xl);
-            }
-
-            .hero-stats {
-                justify-content: center;
-            }
-
-            .hero-actions {
-                justify-content: center;
-            }
-
-            .hero-companies {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .about-grid {
+            .trust-grid {
                 grid-template-columns: 1fr;
-                text-align: center;
             }
 
             .value-props {
@@ -2250,19 +2327,7 @@
                 grid-template-columns: 1fr;
             }
 
-            .testimonials-carousel {
-                grid-template-columns: 1fr;
-            }
-
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-methods {
+            .projects-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -2270,9 +2335,12 @@
                 grid-template-columns: 1fr;
             }
 
-            .footer-grid {
+            .footer-links {
                 grid-template-columns: 1fr;
-                text-align: center;
+            }
+
+            .footer-stats {
+                justify-content: center;
             }
 
             .footer-bottom {
@@ -2280,12 +2348,18 @@
                 text-align: center;
             }
 
-            .social-links {
-                justify-content: center;
-            }
-
             .timeline {
                 padding-left: var(--space-lg);
+            }
+
+            .hero-companies {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .floating-cta {
+                bottom: var(--space-md);
+                right: var(--space-md);
             }
         }
 
@@ -2298,14 +2372,6 @@
                 font-size: var(--fs-2xl);
             }
 
-            .trust-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
             .btn {
                 width: 100%;
                 justify-content: center;
@@ -2315,917 +2381,13 @@
                 justify-content: center;
                 width: 100%;
             }
-        }
 
-        /* Print Styles */
-        @media print {
-            body {
-                font-size: 11pt;
-                line-height: 1.4;
-            }
-
-            .header,
-            .footer,
-            .theme-toggle,
-            .floating-cta,
-            .mobile-toggle,
-            .mobile-nav,
-            .cta-section,
-            .contact-form,
-            .testimonials-carousel {
-                display: none !important;
-            }
-
-            .hero {
-                padding-top: 0;
-                min-height: auto;
-            }
-
-            .section {
-                padding: 1rem 0;
-                page-break-inside: avoid;
-            }
-
-            .card {
-                page-break-inside: avoid;
-                box-shadow: none;
-                border: 1px solid #ddd;
-            }
-
-            a {
-                color: inherit;
-                text-decoration: none;
-            }
-
-            a[href]::after {
-                content: " (" attr(href) ")";
-                font-size: 0.8em;
-                color: #666;
-            }
-        }
-
-        /* Accessibility */
-        @media (prefers-reduced-motion: reduce) {
-
-            *,
-            *::before,
-            *::after {
-                animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
-            }
-        }
-
-        /* High Contrast Mode */
-        @media (prefers-contrast: high) {
-            :root {
-                --c-primary: #0000ff;
-                --c-secondary: #ff6600;
-                --c-text: #000000;
-                --c-bg: #ffffff;
-                --c-border: #000000;
-            }
-
-            [data-theme="dark"] {
-                --c-primary: #66ccff;
-                --c-secondary: #ffcc00;
-                --c-text: #ffffff;
-                --c-bg: #000000;
-                --c-border: #ffffff;
+            .footer-stats {
+                flex-direction: column;
+                align-items: center;
             }
         }
     </style>
-    <!-- Full CSS (deferred) -->
-    <link rel="preload" href="data:text/css;base64,LyogRnVsbCBQcm9kdWN0aW9uIFN0eWxlcyAqLw==" as="style"
-        onload="this.onload=null;this.rel='stylesheet'">
-    <noscript>
-        <link rel="stylesheet" href="data:text/css;base64,LyogRnVsbCBQcm9kdWN0aW9uIFN0eWxlcyAqLw==">
-    </noscript>
-</head>
-
-<body>
-    <!-- Dark Mode Toggle -->
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <circle cx="12" cy="12" r="5" />
-            <path
-                d="M12 1v6M12 17v6M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h6M17 12h6M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-        </svg>
-        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-        </svg>
-    </button>
-
-    <!-- Header -->
-    <header class="header" role="banner">
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo" aria-label="Dominic Minischetti Home">
-                    <span class="logo-icon">DM</span>
-                    <span>Dominic Minischetti</span>
-                </a>
-
-                <nav class="nav" role="navigation" aria-label="Main navigation">
-                    <a href="#about" class="nav-link">About</a>
-                    <a href="#experience" class="nav-link">Experience</a>
-                    <a href="#skills" class="nav-link">Skills</a>
-                    <a href="#projects" class="nav-link">Projects</a>
-                    <a href="#testimonials" class="nav-link">Reviews</a>
-                    <a href="#contact" class="header-cta">Get Started →</a>
-                </nav>
-
-                <button class="mobile-toggle" onclick="toggleMobileNav()" aria-label="Toggle navigation menu">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <line x1="3" y1="6" x2="21" y2="6" />
-                        <line x1="3" y1="12" x2="21" y2="12" />
-                        <line x1="3" y1="18" x2="21" y2="18" />
-                    </svg>
-                </button>
-            </div>
-        </div>
-    </header>
-
-    <!-- Mobile Navigation -->
-    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileNav()"></div>
-    <nav class="mobile-nav" id="mobileNav">
-        <div class="mobile-nav-header">
-            <span class="logo">Menu</span>
-            <button onclick="toggleMobileNav()" aria-label="Close navigation">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-            </button>
-        </div>
-        <a href="#about" class="mobile-nav-link" onclick="toggleMobileNav()">About</a>
-        <a href="#experience" class="mobile-nav-link" onclick="toggleMobileNav()">Experience</a>
-        <a href="#skills" class="mobile-nav-link" onclick="toggleMobileNav()">Skills</a>
-        <a href="#projects" class="mobile-nav-link" onclick="toggleMobileNav()">Projects</a>
-        <a href="#testimonials" class="mobile-nav-link" onclick="toggleMobileNav()">Testimonials</a>
-        <a href="#contact" class="mobile-nav-link" onclick="toggleMobileNav()">Contact</a>
-    </nav>
-
-    <!-- Floating CTA -->
-    <a href="#contact" class="floating-cta" aria-label="Schedule an Interview">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-        </svg>
-        Schedule an Interview
-    </a>
-
-    <main id="main">
-        <!-- Hero Section -->
-        <section class="hero">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-badge fade-in">
-                        <div class="hero-badge-dot"></div>
-                        Open to new opportunities
-                    </div>
-
-                    <h1 class="hero-title fade-in">
-                        Senior PHP Backend Engineer specializing in scalable systems and clean architecture
-                    </h1>
-
-                    <p class="hero-subtitle fade-in">
-                        I build robust backend solutions that handle high traffic, optimize database performance,
-                        and maintain clean, maintainable codebases. Currently engineering solutions at BLOX Digital
-                        while exploring opportunities to tackle new technical challenges.
-                    </p>
-
-                    <div class="hero-companies fade-in">
-                        <span class="hero-companies-label">Experience with</span>
-                        <span class="company-logo">BLOX Digital</span>
-                        <span class="company-logo">Appliances Connection</span>
-                        <span class="company-logo">Kingsleague</span>
-                    </div>
-
-                    <div class="hero-actions fade-in">
-                        <a href="https://linkedin.com/in/dminischetti/" class="btn btn-primary" target="_blank"
-                            rel="noopener">
-                            Connect on LinkedIn
-                        </a>
-                        <a href="/Dominic-Minischetti-CV.pdf" class="btn btn-secondary" download>
-                            Download CV
-                        </a>
-                        <a href="https://calendly.com/minischetti/meeting" class="btn btn-secondary"
-                            target="_blank" rel="noopener">
-                            Book a Call
-                        </a>
-                    </div>
-                    <div class="hero-image-wrapper">
-                        <div class="hero-image-bg"></div>
-                        <img src="https://minischetti.org/me/1.jpg"
-                            alt="Dominic Minischetti - Senior PHP Backend Engineer" class="hero-image" loading="lazy"
-                            width="350" height="450">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Trust Signals -->
-        <section class="trust-signals" aria-label="Achievements">
-            <div class="container">
-                <div class="trust-grid">
-                    <div class="trust-item fade-in">
-                        <div class="trust-icon">🚀</div>
-                        <div class="trust-value">12+</div>
-                        <div class="trust-label">Production Systems Optimized</div>
-                    </div>
-                    <div class="trust-item fade-in">
-                        <div class="trust-icon">⚡</div>
-                        <div class="trust-value">2.5s → 0.8s</div>
-                        <div class="trust-label">Avg Page Load Improvement</div>
-                    </div>
-                    <div class="trust-item fade-in">
-                        <div class="trust-icon">💾</div>
-                        <div class="trust-value">70%</div>
-                        <div class="trust-label">Database Load Reduction</div>
-                    </div>
-                    <div class="trust-item fade-in">
-                        <div class="trust-icon">🎯</div>
-                        <div class="trust-value">100%</div>
-                        <div class="trust-label">On-Time Delivery</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-badge fade-in">ABOUT ME</span>
-                    <h2 class="section-title fade-in">Backend Engineer & Problem Solver</h2>
-                    <p class="section-subtitle fade-in">
-                        Passionate about building efficient, scalable systems that make a real impact
-                    </p>
-                </div>
-
-                <div class="about-content">
-                    <p class="about-intro fade-in">
-                        With over a decade of experience in backend development, I specialize in PHP and MySQL,
-                        focusing on performance optimization and scalable architecture. I thrive on solving complex
-                        technical challenges and transforming legacy systems into modern, efficient solutions.
-                    </p>
-
-                    <div class="about-section fade-in">
-                        <h3>Technical Philosophy</h3>
-                        <p>
-                            I believe in writing clean, maintainable code that not only solves today's problems but
-                            is also adaptable for tomorrow's challenges. My approach combines solid engineering
-                            principles
-                            with pragmatic solutions, always keeping the end user and business goals in mind.
-                        </p>
-                    </div>
-
-                    <div class="about-highlight fade-in">
-                        "Good code is like good bread – it requires the right ingredients, proper technique,
-                        and patience to rise. Both my Italian heritage and engineering background taught me this."
-                    </div>
-
-                    <div class="about-section fade-in">
-                        <h3>Background & Approach</h3>
-                        <p>
-                            Born in New York and raised in Italy, I bring an international perspective to my work.
-                            This unique background has taught me to adapt quickly, communicate effectively across
-                            cultures,
-                            and approach problems from multiple angles. I'm equally comfortable working independently
-                            on complex backend systems or collaborating with cross-functional teams to deliver
-                            solutions.
-                        </p>
-                    </div>
-
-                    <div class="about-section fade-in">
-                        <h3>Beyond the Code</h3>
-                        <p>
-                            When I'm not optimizing databases or building APIs, I enjoy mentoring junior developers,
-                            contributing to open-source projects, and exploring new technologies. I believe in
-                            continuous
-                            learning and staying current with industry best practices and emerging trends.
-                        </p>
-                    </div>
-
-
-                    <img src="https://minischetti.org/me/2.jpg" alt="Backend development workspace" class="about-image"
-                        loading="lazy" width="300" height="400">
-                </div>
-
-                <div class="value-props">
-                    <div class="value-prop fade-in">
-                        <div class="value-prop-icon">⚡</div>
-                        <h3 class="value-prop-title">Speed Obsessed</h3>
-                        <p class="value-prop-desc">Every millisecond counts. I optimize until your app flies.</p>
-                    </div>
-                    <div class="value-prop fade-in">
-                        <div class="value-prop-icon">🛡️</div>
-                        <h3 class="value-prop-title">Rock-Solid Reliable</h3>
-                        <p class="value-prop-desc">99.9% uptime isn't a goal—it's the minimum standard.</p>
-                    </div>
-                    <div class="value-prop fade-in">
-                        <div class="value-prop-icon">📈</div>
-                        <h3 class="value-prop-title">Scale Without Fear</h3>
-                        <p class="value-prop-desc">Built systems handling millions of requests without breaking a sweat.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience" class="section" style="background: var(--c-bg-secondary);">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-badge fade-in">EXPERIENCE</span>
-                    <h2 class="section-title fade-in">Professional Journey</h2>
-                    <p class="section-subtitle fade-in">
-                        Building scalable solutions and solving complex challenges across industries
-                    </p>
-                </div>
-
-                <div class="timeline">
-                    <div class="timeline-item fade-in">
-                        <span class="timeline-period">Jul 2024 - Present</span>
-                        <h3 class="timeline-title">Backend PHP Developer</h3>
-                        <div class="timeline-company">BLOX Digital</div>
-                        <p class="timeline-desc">
-                            Developing and optimizing content management systems for high-traffic media organizations.
-                            Working with PHP and MySQL to enhance system performance, implement new features, and
-                            ensure reliable content delivery. Collaborating with cross-functional teams to improve
-                            deployment processes and maintain system stability.
-                        </p>
-                        <div class="timeline-tech">
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">CMS Development</span>
-                            <span class="tech-tag">Performance Optimization</span>
-                            <span class="tech-tag">Agile</span>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item fade-in">
-                        <span class="timeline-period">May 2022 - Mar 2024</span>
-                        <h3 class="timeline-title">Backend PHP Developer</h3>
-                        <div class="timeline-company">Appliances Connection</div>
-                        <p class="timeline-desc">
-                            Designed and built a comprehensive Warehouse Management System from the ground up,
-                            transforming manual inventory processes into automated workflows. Developed responsive
-                            interfaces for handheld devices, integrated barcode scanning functionality, and
-                            implemented real-time inventory tracking. Worked closely with warehouse staff to
-                            understand requirements and iterate on solutions.
-                        </p>
-                        <div class="timeline-tech">
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">Laravel</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">Bootstrap</span>
-                            <span class="tech-tag">REST APIs</span>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item fade-in">
-                        <span class="timeline-period">Aug 2021 - May 2022</span>
-                        <h3 class="timeline-title">Full Stack Developer</h3>
-                        <div class="timeline-company">Kingsleague</div>
-                        <p class="timeline-desc">
-                            Developed platform features using PHP, MySQL, and Firebase to support growing user base.
-                            Implemented automated testing with Python and Selenium to improve code reliability.
-                            Containerized applications using Docker for consistent development and deployment
-                            environments.
-                        </p>
-                        <div class="timeline-tech">
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">Firebase</span>
-                            <span class="tech-tag">Docker</span>
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Selenium</span>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item fade-in">
-                        <span class="timeline-period">2012 - 2021</span>
-                        <h3 class="timeline-title">Earlier Roles</h3>
-                        <div class="timeline-company">Various Companies</div>
-                        <p class="timeline-desc">
-                            Built foundation in database administration, web development, and IT support across
-                            multiple organizations. Managed SQL databases, developed PHP applications, maintained
-                            web servers, and ensured system reliability. These roles provided deep understanding
-                            of full-stack development and system administration.
-                        </p>
-                        <div class="timeline-tech">
-                            <span class="tech-tag">Database Administration</span>
-                            <span class="tech-tag">SQL</span>
-                            <span class="tech-tag">Web Development</span>
-                            <span class="tech-tag">System Administration</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-badge fade-in">SKILLS</span>
-                    <h2 class="section-title fade-in">Technical Expertise</h2>
-                    <p class="section-subtitle fade-in">
-                        Comprehensive skill set developed through years of hands-on experience
-                    </p>
-                </div>
-
-                <div class="skills-matrix">
-                    <div class="skill-category fade-in">
-                        <h3 class="skill-category-title">Backend Development</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag primary">PHP 7/8</span>
-                            <span class="skill-tag primary">Laravel</span>
-                            <span class="skill-tag">Symfony</span>
-                            <span class="skill-tag">CodeIgniter</span>
-                            <span class="skill-tag">PSR Standards</span>
-                            <span class="skill-tag">SOLID Principles</span>
-                            <span class="skill-tag">MVC Architecture</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category fade-in">
-                        <h3 class="skill-category-title">Database & Storage</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag primary">MySQL</span>
-                            <span class="skill-tag primary">Query Optimization</span>
-                            <span class="skill-tag">MariaDB</span>
-                            <span class="skill-tag">SQL Server</span>
-                            <span class="skill-tag">MongoDB</span>
-                            <span class="skill-tag">Redis</span>
-                            <span class="skill-tag">Database Design</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category fade-in">
-                        <h3 class="skill-category-title">DevOps & Tools</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag primary">Docker</span>
-                            <span class="skill-tag primary">Git</span>
-                            <span class="skill-tag">Jenkins</span>
-                            <span class="skill-tag">Linux</span>
-                            <span class="skill-tag">Nginx</span>
-                            <span class="skill-tag">Apache</span>
-                            <span class="skill-tag">CI/CD</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category fade-in">
-                        <h3 class="skill-category-title">APIs & Integration</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag primary">RESTful APIs</span>
-                            <span class="skill-tag">API Design</span>
-                            <span class="skill-tag">JWT Authentication</span>
-                            <span class="skill-tag">OAuth</span>
-                            <span class="skill-tag">Swagger/OpenAPI</span>
-                            <span class="skill-tag">Postman</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category fade-in">
-                        <h3 class="skill-category-title">Frontend & UI</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">HTML5/CSS3</span>
-                            <span class="skill-tag">Bootstrap</span>
-                            <span class="skill-tag">jQuery</span>
-                            <span class="skill-tag">Responsive Design</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category fade-in">
-                        <h3 class="skill-category-title">Methodologies</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag">Agile/Scrum</span>
-                            <span class="skill-tag">Test-Driven Development</span>
-                            <span class="skill-tag">Code Review</span>
-                            <span class="skill-tag">Performance Testing</span>
-                            <span class="skill-tag">Documentation</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="section" style="background: var(--c-bg-secondary);">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-badge fade-in">PROJECTS</span>
-                    <h2 class="section-title fade-in">Featured Work</h2>
-                    <p class="section-subtitle fade-in">
-                        Representative projects showcasing technical skills and problem-solving abilities
-                    </p>
-                </div>
-
-                <div class="projects-grid">
-                    <div class="project-card fade-in">
-                        <h3 class="project-title">Warehouse Management System</h3>
-                        <p class="project-desc">
-                            Comprehensive WMS built from scratch to replace manual inventory tracking processes.
-                            Features include real-time inventory updates, barcode scanning integration, automated
-                            reorder points, and responsive interfaces for handheld devices. The system handles
-                            complex warehouse workflows and provides detailed reporting capabilities.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">Laravel</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">Bootstrap</span>
-                            <span class="tech-tag">JavaScript</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#contact" class="project-link">Contact for Details</a>
-                        </div>
-                    </div>
-
-                    <div class="project-card fade-in">
-                        <h3 class="project-title">High-Traffic CMS Platform</h3>
-                        <p class="project-desc">
-                            Optimized content management system serving millions of monthly page views for media
-                            organizations. Implemented advanced caching strategies, database query optimization,
-                            and efficient content delivery mechanisms. Focused on maintaining system stability
-                            under high load while ensuring fast page load times.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">Redis</span>
-                            <span class="tech-tag">Performance Optimization</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#contact" class="project-link">Contact for Details</a>
-                        </div>
-                    </div>
-
-                    <div class="project-card fade-in">
-                        <h3 class="project-title">RESTful API Platform</h3>
-                        <p class="project-desc">
-                            Designed and built comprehensive API platform to unify data access across multiple
-                            applications. Implemented JWT authentication, rate limiting, comprehensive error handling,
-                            and automatic API documentation. The platform serves as a central hub for data exchange
-                            between various systems.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Laravel</span>
-                            <span class="tech-tag">REST API</span>
-                            <span class="tech-tag">JWT</span>
-                            <span class="tech-tag">Swagger</span>
-                            <span class="tech-tag">MySQL</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#contact" class="project-link">Contact for Details</a>
-                        </div>
-                    </div>
-
-                    <div class="project-card fade-in">
-                        <h3 class="project-title">Automated Testing Framework</h3>
-                        <p class="project-desc">
-                            Developed comprehensive testing framework using Python and Selenium to automate
-                            quality assurance processes. Created test suites covering critical user workflows,
-                            API endpoints, and database operations. Integrated with CI/CD pipeline for
-                            continuous testing.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Selenium</span>
-                            <span class="tech-tag">PHPUnit</span>
-                            <span class="tech-tag">Jenkins</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#contact" class="project-link">Learn More</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Testimonials Section -->
-        <section id="testimonials" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-badge fade-in">TESTIMONIALS</span>
-                    <h2 class="section-title fade-in">Professional Endorsements</h2>
-                    <p class="section-subtitle fade-in">
-                        What colleagues and managers say about working with me
-                    </p>
-                </div>
-
-                <div class="testimonials-grid">
-                    <div class="testimonial-card fade-in">
-                        <p class="testimonial-text">
-                            "Dominic consistently delivers high-quality code and thoughtful solutions. His attention
-                            to database optimization and system architecture has been invaluable to our team.
-                            He's also great at mentoring junior developers."
-                        </p>
-                        <div class="testimonial-author">
-                            <div class="testimonial-avatar">SC</div>
-                            <div class="testimonial-info">
-                                <div class="testimonial-name">Sarah Chen</div>
-                                <div class="testimonial-role">Engineering Manager, BLOX Digital</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card fade-in">
-                        <p class="testimonial-text">
-                            "Working with Dominic on the warehouse system was excellent. He took time to understand
-                            our processes and built exactly what we needed. The system has transformed our operations."
-                        </p>
-                        <div class="testimonial-author">
-                            <div class="testimonial-avatar">MR</div>
-                            <div class="testimonial-info">
-                                <div class="testimonial-name">Mike Rodriguez</div>
-                                <div class="testimonial-role">Operations Lead, Appliances Connection</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="testimonial-card fade-in">
-                        <p class="testimonial-text">
-                            "Dominic brings both technical expertise and great communication skills. He can explain
-                            complex technical concepts clearly and always considers the business impact of his
-                            solutions."
-                        </p>
-                        <div class="testimonial-author">
-                            <div class="testimonial-avatar">JL</div>
-                            <div class="testimonial-info">
-                                <div class="testimonial-name">Jennifer Liu</div>
-                                <div class="testimonial-role">Product Manager, Former Colleague</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- CTA Section -->
-        <section class="cta-section" aria-label="Call to action">
-            <div class="container">
-                <div class="cta-content">
-                    <h2 class="cta-title fade-in">Your System Deserves Better Performance</h2>
-                    <p class="cta-subtitle fade-in">
-                        Let's discuss how I can transform your backend into a speed machine.
-                        Free 30-minute consultation to identify your biggest bottlenecks.
-                    </p>
-                    <div class="cta-actions fade-in">
-                        <a href="https://calendly.com/minischetti/meeting" class="cta-btn cta-btn-secondary" target="_blank"
-                            rel="noopener">Book a Call to Discuss Hiring</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Contact Section -->
-        <section id="contact" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-badge fade-in">CONTACT</span>
-                    <h2 class="section-title fade-in">Let's Connect</h2>
-                    <p class="section-subtitle fade-in">
-                        Open to discussing new opportunities and technical challenges
-                    </p>
-                </div>
-
-                <div class="contact-content">
-                    <p class="fade-in" style="font-size: var(--fs-lg); margin-bottom: var(--space-2xl);">
-                        I'm interested in roles where I can contribute to impactful projects, work with
-                        talented teams, and continue growing as an engineer. Whether you're looking for
-                        someone to optimize your backend systems, build new features, or tackle complex
-                        technical challenges, I'd love to hear from you.
-                    </p>
-
-                    <div class="contact-methods">
-                        <div class="contact-method fade-in">
-                            <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path
-                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                    <rect x="2" y="9" width="4" height="12" />
-                                    <circle cx="4" cy="4" r="2" />
-                                </svg>
-                            </div>
-                            <h3>LinkedIn</h3>
-                            <p>Connect professionally</p>
-                            <a href="https://linkedin.com/in/dminischetti/" class="contact-link" target="_blank"
-                                rel="noopener">
-                                View Profile →
-                            </a>
-                        </div>
-
-                        <div class="contact-method fade-in">
-                            <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="2" y="4" width="20" height="16" rx="2" />
-                                    <path d="m22 7-10 5L2 7" />
-                                </svg>
-                            </div>
-                            <h3>Email</h3>
-                            <p>Direct communication</p>
-                            <a href="mailto:dominic.minischetti@gmail.com" class="contact-link">
-                                Send Email →
-                            </a>
-                        </div>
-
-                        <div class="contact-method fade-in">
-                            <div class="contact-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                                    <path d="M14 2v6h6M16 13H8M16 17H8M10 9H8" />
-                                </svg>
-                            </div>
-                            <h3>Resume</h3>
-                            <p>Full professional history</p>
-                            <a href="/Dominic-Minischetti-CV.pdf" class="contact-link" download>
-                                Download CV →
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Contact Section -->
-        <section id="contact" class="section" aria-label="Contact form">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-badge fade-in">GET STARTED</span>
-                    <h2 class="section-title fade-in">Let's Build Something Fast</h2>
-                    <p class="section-subtitle fade-in">
-                        Available for contracts, consultations, and performance audits
-                    </p>
-                </div>
-                <div class="contact-grid">
-                    <form class="contact-form fade-in" id="contactForm" action="https://formspree.io/f/mandgyrq"
-                        method="POST">
-                        <div class="form-success" id="formSuccess">
-                            ✅ Message sent! I'll get back to you within 24 hours.
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name" class="form-label">Name <span class="required">*</span></label>
-                                <input type="text" id="name" name="name" class="form-input" required
-                                    aria-required="true">
-                                <span class="form-error">Please enter your name</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="email" class="form-label">Email <span class="required">*</span></label>
-                                <input type="email" id="email" name="email" class="form-input" required
-                                    aria-required="true">
-                                <span class="form-error">Please enter a valid email</span>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="company" class="form-label">Company / Organization</label>
-                                <input type="text" id="company" name="company" class="form-input">
-                            </div>
-
-                            <div class="form-group">
-                                <label for="role" class="form-label">Role Title / Department</label>
-                                <input type="text" id="role" name="role" class="form-input">
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message" class="form-label">
-                                Tell me about the role <span class="required">*</span>
-                            </label>
-                            <textarea id="message" name="message" class="form-textarea" rows="5" required
-                                aria-required="true"
-                                placeholder="What position are you hiring for? What challenges would I help solve?"></textarea>
-                            <span class="form-error">Please provide details about the role</span>
-                        </div>
-
-                        <div class="form-honeypot" aria-hidden="true">
-                            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off">
-                        </div>
-
-                        <button type="submit" class="form-submit">
-                            Send Message →
-                        </button>
-                    </form>
-
-                    <div class="contact-info fade-in">
-                        <div class="contact-info-item">
-                            <div class="contact-info-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="3" y="4" width="18" height="18" rx="2" />
-                                    <path d="M3 10h18M8 2v4M16 2v4" />
-                                </svg>
-                            </div>
-                            <div class="contact-info-details">
-                                <h4>Schedule a Call</h4>
-                                <a href="https://calendly.com/minischetti/meeting" target="_blank" rel="noopener">Book 30-min
-                                    consultation</a>
-                            </div>
-                        </div>
-
-                        <div class="contact-info-item">
-                            <div class="contact-info-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="2" y="4" width="20" height="16" rx="2" />
-                                    <path d="m22 7-10 5L2 7" />
-                                </svg>
-                            </div>
-                            <div class="contact-info-details">
-                                <h4>Email Directly</h4>
-                                <a href="mailto:dominic.minischetti@gmail.com">dominic.minischetti@gmail.com</a>
-                            </div>
-                        </div>
-
-                        <div class="contact-info-item">
-                            <div class="contact-info-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path
-                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                    <rect x="2" y="9" width="4" height="12" />
-                                    <circle cx="4" cy="4" r="2" />
-                                </svg>
-                            </div>
-                            <div class="contact-info-details">
-                                <h4>Connect on LinkedIn</h4>
-                                <a href="https://linkedin.com/in/dminischetti/" target="_blank" rel="noopener">View
-                                    Profile</a>
-                            </div>
-                        </div>
-
-                        <div class="contact-info-item">
-                            <div class="contact-info-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10" />
-                                    <path d="M12 6v6l4 2" />
-                                </svg>
-                            </div>
-                            <div class="contact-info-details">
-                                <h4>Response Time</h4>
-                                <span>Within 24 hours</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer" role="contentinfo">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-grid">
-                    <div class="footer-brand">
-                        <h3>Dominic Minischetti</h3>
-                        <p>
-                            Senior PHP Backend Engineer specializing in performance optimization and scalable systems.
-                            Turning slow applications into speed demons since 2012.
-                        </p>
-
-
-                        <div class="footer-column">
-                            <h4>Quick Links</h4>
-                            <a href="#about" class="footer-link">About</a>
-                            <a href="#experience" class="footer-link">Experience</a>
-                            <a href="#projects" class="footer-link">Projects</a>
-                            <a href="#contact" class="footer-link">Contact</a>
-                        </div>
-
-                        <div class="footer-column">
-                            <h4>Services</h4>
-                            <a href="#contact" class="footer-link">Performance Optimization</a>
-                            <a href="#contact" class="footer-link">Backend Development</a>
-                            <a href="#contact" class="footer-link">API Development</a>
-                            <a href="#contact" class="footer-link">Code Audits</a>
-                        </div>
-
-                        <div class="footer-column">
-                            <h4>Resources</h4>
-                            <a href="/Dominic-Minischetti-Resume.pdf" class="footer-link" download>Download Resume</a>
-                            <a href="https://calendly.com/minischetti/meeting" class="footer-link" target="_blank"
-                                rel="noopener">Book Consultation</a>
-
-                            <a href="#testimonials" class="footer-link">Client Reviews</a>
-                        </div>
-                    </div>
-
-                    <div class="footer-bottom">
-                        <div class="footer-copy">
-                            © 2025 Dominic Minischetti. Built with clean code and strong coffee in Brooklyn, NY.
-                        </div>
-                        <div class="footer-legal">
-                            <a href="/privacy">Privacy Policy</a>
-                            <a href="/terms">Terms of Service</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </footer>
 
     <script>
         // Theme Management
@@ -3337,15 +2499,95 @@
             animatedElements.forEach(el => observer.observe(el));
         };
 
-        // Initialize
+        // Floating CTA
+        const initFloatingCTA = () => {
+            const cta = document.querySelector('.floating-cta');
+            const heroSection = document.querySelector('.hero');
+
+            window.addEventListener('scroll', () => {
+                if (heroSection) {
+                    const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+                    if (window.pageYOffset > heroBottom) {
+                        cta.classList.add('visible');
+                    } else {
+                        cta.classList.remove('visible');
+                    }
+                }
+            }, { passive: true });
+        };
+
+        // Form Handling
+        const initContactForm = () => {
+            const form = document.getElementById('contactForm');
+            const successMessage = document.getElementById('formSuccess');
+
+            if (form) {
+                form.addEventListener('submit', async (e) => {
+                    e.preventDefault();
+                    
+                    // Basic form validation
+                    const name = form.name.value.trim();
+                    const email = form.email.value.trim();
+                    const message = form.message.value.trim();
+                    
+                    let isValid = true;
+                    
+                    // Clear previous errors
+                    document.querySelectorAll('.form-group').forEach(group => {
+                        group.classList.remove('error');
+                    });
+                    
+                    if (!name) {
+                        document.querySelector('#name').closest('.form-group').classList.add('error');
+                        isValid = false;
+                    }
+                    
+                    if (!email || !email.includes('@')) {
+                        document.querySelector('#email').closest('.form-group').classList.add('error');
+                        isValid = false;
+                    }
+                    
+                    if (!message) {
+                        document.querySelector('#message').closest('.form-group').classList.add('error');
+                        isValid = false;
+                    }
+                    
+                    if (!isValid) return;
+                    
+                    // Submit form
+                    try {
+                        const response = await fetch(form.action, {
+                            method: form.method,
+                            body: new FormData(form),
+                            headers: {
+                                'Accept': 'application/json'
+                            }
+                        });
+                        
+                        if (response.ok) {
+                            successMessage.classList.add('show');
+                            form.reset();
+                            setTimeout(() => {
+                                successMessage.classList.remove('show');
+                            }, 5000);
+                        }
+                    } catch (error) {
+                        console.error('Form submission error:', error);
+                    }
+                });
+            }
+        };
+
+        // Initialize everything when DOM is ready
         document.addEventListener('DOMContentLoaded', () => {
             initTheme();
             updateActiveNav();
             initHeaderScroll();
             initAnimations();
+            initFloatingCTA();
+            initContactForm();
         });
     </script>
 </body>
 
 </html>
-
