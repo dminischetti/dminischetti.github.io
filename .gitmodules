@@ -1,6 +1,3 @@
-[submodule "my-hugo-site/themes/PaperMod"]
-	path = my-hugo-site/themes/PaperMod
-	url = https://github.com/adityatelange/hugo-PaperMod.git
 [submodule "blog/blog/themes/LoveIt"]
 	path = blog/blog/themes/LoveIt
 	url = https://github.com/dillonzq/LoveIt.git
