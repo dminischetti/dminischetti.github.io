@@ -2,13 +2,22 @@ name: Deploy site + blog
 
 on:
   push:
-    branches: [ "main" ]
+    branches: ["main"]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: true
 
 jobs:
-  build-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repo
+      - name: Checkout
         uses: actions/checkout@v4
 
       - name: Setup Hugo
@@ -17,21 +26,35 @@ jobs:
           hugo-version: 'latest'
           extended: true
 
-      # Costruisce SOLO il sito Hugo dentro /blog
-      - name: Build Hugo (blog)
+      # Build del blog Hugo dalla cartella /blog verso /public/blog
+      - name: Build blog
         run: hugo --minify --source blog --destination public/blog
 
-      # Copia TUTTI i file root (index.html, CSS, immagini, ecc.)
+      # Copia TUTTI i file statici della root (index.html, CNAME, /static, ecc.) in /public
       - name: Copy root files
         run: |
-              mkdir -p public
-              cp -f index.html public/
-              cp -rf static/* public/ || true
-              [ -f CNAME ] && cp -f CNAME public/ || true
+          mkdir -p public
+          [ -f index.html ] && cp -f index.html public/ || true
+          [ -f CNAME ] && cp -f CNAME public/ || true
+          [ -d static ] && rsync -av static/ public/ || true
 
+      # (Debug utile) Mostra cosa stai pubblicando
+      - name: List publish dir
+        run: ls -R public
 
-      - name: Deploy to GitHub Pages
-        uses: peaceiris/actions-gh-pages@v3
+      # Crea l'artifact per Pages
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+          path: ./public
+
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
