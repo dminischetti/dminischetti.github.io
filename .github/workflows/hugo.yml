@@ -17,17 +17,15 @@ jobs:
           hugo-version: 'latest'
           extended: true
 
-      # Costruisce SOLO il sito Hugo nella cartella /blog
+      # Costruisce SOLO il sito Hugo dentro /blog
       - name: Build Hugo (blog)
         run: hugo --minify --source blog --destination public/blog
 
-      # Copia i file statici della root (index.html, CNAME, css/js, ecc.)
+      # Copia TUTTI i file root (index.html, CSS, immagini, ecc.)
       - name: Copy root files
         run: |
           mkdir -p public
-          cp index.html public/
-          cp -r static/* public/ || true
-          cp CNAME public/ || true
+          rsync -av --exclude='blog/' --exclude='.github/' ./ public/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
