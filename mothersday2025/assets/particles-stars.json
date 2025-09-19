@@ -1,0 +1,11 @@
+{
+    "preset": "stars",
+    "background": { "color": "#0e0b16" },
+    "particles": {
+      "number": { "value": 100 },
+      "size": { "value": 1.5 },
+      "opacity": { "value": 0.8 },
+      "color": { "value": "#ffffff" }
+    }
+  }
+  
