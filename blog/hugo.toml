@@ -1,0 +1,45 @@
+baseURL = "https://minischetti.org/blog/"
+languageCode = "en"
+title = "My Blog"
+theme = "FixIt"
+
+enableRobotsTXT = true
+enableGitInfo = true
+enableEmoji = true
+
+[params]
+  version = "0.2.X"
+  
+  [params.header]
+    desktopMode = "fixed"
+    mobileMode = "auto"
+    
+  [params.footer]
+    enable = true
+    
+  [params.section]
+    paginate = 20
+    dateFormat = "01-02"
+    rss = 10
+
+  [params.list]
+    paginate = 20
+    dateFormat = "01-02"
+    rss = 10
+
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true
+  [markup.highlight]
+    codeFences = true
+    guessSyntax = true
+    lineNos = true
+    lineNumbersInTable = true
+    noClasses = false
+  [markup.tableOfContents]
+    startLevel = 2
+    endLevel = 6
+
+[outputs]
+  home = ["HTML", "RSS", "JSON"]
