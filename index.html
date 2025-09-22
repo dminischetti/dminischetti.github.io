@@ -1,2474 +1,1572 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="it">
 
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-
-    <!-- Primary Meta Tags -->
-    <title>
-        Dominic Minischetti • Senior PHP Backend Engineer | Performance
-        Optimization Expert
-    </title>
-    <meta name="title" content="Dominic Minischetti • Senior PHP Backend Engineer | Performance Optimization Expert" />
-    <meta name="description"
-        content="Senior PHP Backend Engineer specializing in PHP, MySQL optimization, and scalable architecture. Proven track record in optimizing CMS and WMS platforms for enterprise clients." />
-    <meta name="keywords"
-        content="PHP developer, Laravel expert, backend engineer, MySQL optimization, performance tuning, scalable systems, Brooklyn developer, remote PHP developer" />
-    <meta name="author" content="Dominic Minischetti" />
-    <meta name="robots" content="index, follow" />
-    <meta name="googlebot" content="index, follow, max-video-preview:-1, max-image-preview:large, max-snippet:-1" />
-
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://minischetti.org" />
-
-    <!-- Favicon Suite -->
-    <link rel="icon" type="image/svg+xml"
-        href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3e%3crect width='100' height='100' rx='20' fill='%231e40af'/%3e%3ctext x='50' y='65' text-anchor='middle' font-size='60' font-weight='bold' fill='white' font-family='-apple-system,system-ui'%3eDM%3c/text%3e%3c/svg%3e" />
-    <link rel="apple-touch-icon"
-        href="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3e%3crect width='100' height='100' rx='20' fill='%231e40af'/%3e%3ctext x='50' y='65' text-anchor='middle' font-size='60' font-weight='bold' fill='white' font-family='-apple-system,system-ui'%3eDM%3c/text%3e%3c/svg%3e" />
-    <meta name="theme-color" content="#1e40af" />
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="profile" />
-    <meta property="og:site_name" content="Dominic Minischetti Portfolio" />
-    <meta property="og:url" content="https://minischetti.org" />
-    <meta property="og:title" content="Dominic Minischetti • Senior PHP Backend Engineer" />
-    <meta property="og:description"
-        content="Senior PHP Backend Engineer specializing in scalable backend systems and performance optimization." />
-    <meta property="og:image" content="https://minischetti.org/images/og-image.png" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Dominic Minischetti - Senior PHP Backend Engineer" />
-    <meta property="og:locale" content="en_US" />
-
-    <!-- LinkedIn -->
-    <meta property="linkedin:card" content="summary" />
-    <meta property="linkedin:title" content="Dominic Minischetti • Senior PHP Backend Engineer" />
-    <meta property="linkedin:description"
-        content="Backend Engineer with expertise in PHP, MySQL optimization, and scalable architecture." />
-
-    <!-- Web App Manifest -->
-    <link rel="manifest"
-        href="data:application/json;base64,eyJuYW1lIjoiRG9taW5pYyBNaW5pc2NoZXR0aSBQb3J0Zm9saW8iLCJzaG9ydF9uYW1lIjoiRE0gUG9ydGZvbGlvIiwic3RhcnRfdXJsIjoiLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiNmZmZmZmYiLCJ0aGVtZV9jb2xvciI6IiMxZTQwYWYiLCJvcmllbnRhdGlvbiI6InBvcnRyYWl0LXByaW1hcnkifQ==" />
-
-    <!-- Preconnect to external domains -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://images.unsplash.com" />
-    <link rel="dns-prefetch" href="https://cdn.jsdelivr.net" />
-
-    <!-- Schema.org Structured Data -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "Person",
-        "@id": "https://minischetti.org/#person",
-        "name": "Dominic Minischetti",
-        "givenName": "Dominic",
-        "familyName": "Minischetti",
-        "jobTitle": "Senior PHP Backend Engineer",
-        "description": "Senior PHP Backend Engineer",
-        "url": "https://minischetti.org",
-        "image": "https://minischetti.org/images/dominic_photo.jpg",
-        "email": "dominic.minischetti@gmail.com",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Brooklyn",
-          "addressRegion": "NY",
-          "addressCountry": "US",
-          "postalCode": "11204"
-        },
-        "sameAs": [
-          "https://linkedin.com/in/dminischetti/"
-        ],
-        "knowsAbout": ["PHP", "Laravel", "MySQL", "Performance Optimization", "Database Design", "Scalable Architecture", "Redis", "Docker", "API Development"],
-        "knowsLanguage": ["en-US", "it-IT"],
-        "nationality": {
-          "@type": "Country",
-          "name": "United States"
-        },
-        "offers": {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Senior PHP Backend Development",
-            "description": "High-performance PHP development and optimization services"
-          }
-        }
-      }
-    </script>
-
-    <!-- BreadcrumbList Schema -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://minischetti.org"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Projects",
-            "item": "https://minischetti.org#projects"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "Contact",
-            "item": "https://minischetti.org#contact"
-          }
-        ]
-      }
-    </script>
-
-    <!-- FAQ Schema -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "What is Dominic Minischetti's hourly rate?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Rates depend on project scope. Contact me for a tailored quote."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What technologies does Dominic specialize in?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "I specialize in PHP, MySQL optimization, Redis caching, Docker containerization, and building scalable REST APIs. I focus on performance optimization and database efficiency."
-            }
-          }
-        ]
-      }
-    </script>
-
-    <!-- Critical CSS (optimized and consolidated) -->
-    <style>
-        /* CSS Custom Properties */
-        :root {
-            /* Colors */
-            --c-primary: #1e40af;
-            --c-secondary: #f59e0b;
-            --c-accent: #10b981;
-            --c-danger: #ef4444;
-            --c-text: #1f2937;
-            --c-text-secondary: #6b7280;
-            --c-bg: #fff;
-            --c-bg-secondary: #f8fafc;
-            --c-border: #e5e7eb;
-
-            /* Typography */
-            --ff-sans: system-ui, -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
-            --ff-mono: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
-
-            /* Fluid Typography */
-            --fs-xs: clamp(0.75rem, 1.5vw, 0.875rem);
-            --fs-sm: clamp(0.875rem, 2vw, 1rem);
-            --fs-base: clamp(1rem, 2.5vw, 1.125rem);
-            --fs-lg: clamp(1.125rem, 3vw, 1.25rem);
-            --fs-xl: clamp(1.25rem, 3.5vw, 1.5rem);
-            --fs-2xl: clamp(1.5rem, 4vw, 1.875rem);
-            --fs-3xl: clamp(1.875rem, 5vw, 2.25rem);
-            --fs-4xl: clamp(2.25rem, 6vw, 3rem);
-            --fs-5xl: clamp(3rem, 8vw, 4rem);
-
-            /* Spacing Scale */
-            --space-xs: 0.5rem;
-            --space-sm: 0.75rem;
-            --space-md: 1rem;
-            --space-lg: 1.5rem;
-            --space-xl: 2rem;
-            --space-2xl: 3rem;
-            --space-3xl: 4rem;
-            --space-4xl: 6rem;
-
-            /* Border Radius */
-            --radius: 0.5rem;
-            --radius-lg: 0.75rem;
-            --radius-xl: 1rem;
-            --radius-full: 9999px;
-
-            /* Shadows */
-            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.15);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.15);
-            --shadow-2xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
-
-            /* Transitions */
-            --trans: 250ms ease;
-            --trans-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
-            --trans-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
-
-            /* Gradients */
-            --gradient-primary: linear-gradient(135deg, var(--c-primary), #1e3a8a);
-            --gradient-secondary: linear-gradient(135deg, var(--c-secondary), #dc2626);
-            --gradient-accent: linear-gradient(135deg, var(--c-accent), #059669);
-        }
-
-        /* Dark Theme Variables */
-        [data-theme="dark"] {
-            --c-text: #f9fafb;
-            --c-text-secondary: #e5e7eb;
-            --c-bg: #111827;
-            --c-bg-secondary: #1f2937;
-            --c-border: #374151;
-            --shadow-sm: 0 1px 3px 0 rgb(0 0 0 / 0.3);
-            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.3);
-            --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4);
-            --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.5);
-        }
-
-        @media (prefers-color-scheme: dark) {
-            :root:not([data-theme="light"]) {
-                --c-text: #f9fafb;
-                --c-text-secondary: #e5e7eb;
-                --c-bg: #111827;
-                --c-bg-secondary: #1f2937;
-                --c-border: #374151;
-            }
-        }
-
-        /* Base Reset & Typography */
-        *,
-        *::before,
-        *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-            font-size: 16px;
-            -webkit-tap-highlight-color: transparent;
-            height: 100%;
-        }
-
-        body {
-            font-family: var(--ff-sans);
-            font-size: var(--fs-base);
-            line-height: 1.6;
-            color: var(--c-text);
-            background: var(--c-bg);
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-rendering: optimizeLegibility;
-            font-feature-settings: "kern" 1;
-            transition: background-color var(--trans), color var(--trans);
-            min-height: 100vh;
-            overflow-x: hidden;
-        }
-
-        /* Typography Hierarchy */
-        h1,
-        h2,
-        h3,
-        h4,
-        h5,
-        h6 {
-            font-weight: 700;
-            line-height: 1.2;
-            letter-spacing: -0.02em;
-        }
-
-        h1 {
-            font-size: var(--fs-4xl);
-        }
-
-        h2 {
-            font-size: var(--fs-3xl);
-        }
-
-        h3 {
-            font-size: var(--fs-2xl);
-        }
-
-        h4 {
-            font-size: var(--fs-xl);
-        }
-
-        h5 {
-            font-size: var(--fs-lg);
-        }
-
-        h6 {
-            font-size: var(--fs-base);
-        }
-
-        p {
-            margin-bottom: var(--space-md);
-            line-height: 1.7;
-        }
-
-        a {
-            color: var(--c-primary);
-            text-decoration: none;
-            transition: color var(--trans-fast);
-        }
-
-        a:hover {
-            color: var(--c-secondary);
-        }
-
-        /* Focus & Selection */
-        :focus {
-            outline: none;
-        }
-
-        :focus-visible {
-            outline: 2px solid var(--c-primary);
-            outline-offset: 2px;
-            border-radius: var(--radius);
-        }
-
-        ::selection {
-            background: var(--c-primary);
-            color: white;
-        }
-
-        /* Layout Components */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--space-lg);
-        }
-
-        .section {
-            padding: var(--space-4xl) 0;
-            position: relative;
-        }
-
-        .section-primary {
-            background: var(--c-bg);
-        }
-
-        .section-secondary {
-            background: var(--c-bg-secondary);
-            border-block: 1px solid var(--c-border);
-        }
-
-        .section-accent {
-            background: linear-gradient(135deg, var(--c-bg-secondary), rgba(30, 64, 175, 0.05));
-            border-top: 2px solid var(--c-primary);
-            position: relative;
-        }
-
-        .section-accent::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%231e40af' fill-opacity='0.03'%3E%3Ccircle cx='20' cy='20' r='1'/%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
-        }
-
-        /* Header */
-        .header {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid var(--c-border);
-            z-index: 100;
-            transition: all var(--trans);
-        }
-
-        [data-theme="dark"] .header {
-            background: rgba(17, 24, 39, 0.95);
-        }
-
-        .header.scrolled {
-            box-shadow: var(--shadow);
-        }
-
-        .header-content {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: var(--space-md) 0;
-            min-height: 70px;
-        }
-
-        .logo {
-            font-weight: 800;
-            font-size: var(--fs-lg);
-            color: var(--c-text);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
-            transition: transform var(--trans-fast);
-        }
-
-        .logo:hover {
-            transform: translateX(5px);
-        }
-
-        .logo-icon {
-            width: 32px;
-            height: 32px;
-            background: var(--gradient-primary);
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 800;
-            font-size: var(--fs-sm);
-        }
-
-        .nav {
-            display: flex;
-            align-items: center;
-            gap: var(--space-xl);
-        }
-
-        .nav-link {
-            color: var(--c-text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: var(--fs-sm);
-            position: relative;
-            padding: var(--space-xs) 0;
-            transition: color var(--trans-fast);
-        }
-
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--gradient-primary);
-            transition: width var(--trans-fast);
-        }
-
-        .nav-link:hover,
-        .nav-link.active {
-            color: var(--c-primary);
-        }
-
-        .nav-link:hover::after,
-        .nav-link.active::after {
-            width: 100%;
-        }
-
-        .header-cta {
-            background: var(--gradient-primary);
-            color: white;
-            padding: var(--space-xs) var(--space-md);
-            border-radius: var(--radius);
-            font-weight: 600;
-            font-size: var(--fs-sm);
-            box-shadow: var(--shadow);
-            transition: all var(--trans-fast);
-            white-space: nowrap;
-        }
-
-        .header-cta:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-            color: white;
-        }
-
-        /* Theme Toggle */
-        .theme-toggle {
-            position: fixed;
-            top: var(--space-xl);
-            right: var(--space-xl);
-            z-index: 200;
-            background: var(--c-bg);
-            border: 2px solid var(--c-border);
-            border-radius: var(--radius-full);
-            width: 52px;
-            height: 52px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all var(--trans-fast);
-            box-shadow: var(--shadow);
-        }
-
-        .theme-toggle:hover {
-            transform: scale(1.1) rotate(180deg);
-            box-shadow: var(--shadow-lg);
-            border-color: var(--c-primary);
-        }
-
-        .theme-toggle svg {
-            width: 24px;
-            height: 24px;
-            transition: transform var(--trans-fast);
-        }
-
-        .theme-toggle .moon-icon {
-            display: none;
-        }
-
-        [data-theme="dark"] .theme-toggle .sun-icon {
-            display: none;
-        }
-
-        [data-theme="dark"] .theme-toggle .moon-icon {
-            display: block;
-        }
-
-        /* Mobile Navigation */
-        .mobile-toggle {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: var(--space-xs);
-            color: var(--c-text);
-        }
-
-        .mobile-toggle svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        .mobile-nav {
-            display: none;
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 85%;
-            max-width: 350px;
-            height: 100vh;
-            background: var(--c-bg);
-            box-shadow: var(--shadow-2xl);
-            z-index: 1000;
-            transition: right var(--trans);
-            padding: var(--space-xl);
-            overflow-y: auto;
-        }
-
-        .mobile-nav.open {
-            right: 0;
-        }
-
-        .mobile-overlay {
-            display: none;
-            position: fixed;
-            inset: 0;
-            background: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            opacity: 0;
-            transition: opacity var(--trans);
-        }
-
-        .mobile-overlay.open {
-            display: block;
-            opacity: 1;
-        }
-
-        .mobile-nav-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: var(--space-xl);
-            padding-bottom: var(--space-md);
-            border-bottom: 1px solid var(--c-border);
-        }
-
-        .mobile-nav-header button {
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: var(--space-xs);
-            color: var(--c-text);
-        }
-
-        .mobile-nav-link {
-            display: block;
-            padding: var(--space-md) 0;
-            color: var(--c-text);
-            text-decoration: none;
-            font-weight: 500;
-            font-size: var(--fs-lg);
-            border-bottom: 1px solid var(--c-border);
-            transition: all var(--trans-fast);
-        }
-
-        .mobile-nav-link:hover {
-            color: var(--c-primary);
-            transform: translateX(5px);
-        }
-
-        /* Hero Section */
-        .hero {
-            padding-top: 120px;
-            padding-bottom: var(--space-4xl);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -50%;
-            width: 200%;
-            height: 100%;
-            background:
-                radial-gradient(circle at 30% 20%, rgba(30, 64, 175, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-            animation: float 20s ease-in-out infinite;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0) rotate(0deg);
-            }
-
-            50% {
-                transform: translateY(-20px) rotate(5deg);
-            }
-        }
-
-        @keyframes pulse {
-
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.8;
-                transform: scale(1.05);
-            }
-        }
-
-        @keyframes blink {
-
-            0%,
-            100% {
-                opacity: 1;
-                transform: scale(1);
-            }
-
-            50% {
-                opacity: 0.5;
-                transform: scale(1.2);
-            }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 900px;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
-            padding: var(--space-xs) var(--space-md);
-            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-            color: var(--c-accent);
-            border-radius: var(--radius-full);
-            font-size: var(--fs-sm);
-            font-weight: 600;
-            margin-bottom: var(--space-lg);
-            border: 1px solid rgba(16, 185, 129, 0.2);
-            animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        .hero-badge-dot {
-            width: 8px;
-            height: 8px;
-            background: var(--c-accent);
-            border-radius: 50%;
-            animation: blink 1.4s infinite;
-        }
-
-        .hero-title {
-            font-size: clamp(2rem, 5vw, var(--fs-5xl));
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: var(--space-lg);
-            letter-spacing: -0.03em;
-            background: linear-gradient(135deg, var(--c-text) 60%, var(--c-primary));
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero-subtitle {
-            font-size: var(--fs-xl);
-            color: var(--c-text-secondary);
-            margin-bottom: var(--space-xl);
-            line-height: 1.5;
-            max-width: 700px;
-        }
-
-        .hero-companies {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            flex-wrap: wrap;
-            margin-bottom: var(--space-xl);
-        }
-
-        .hero-companies-label {
-            font-size: var(--fs-sm);
-            color: var(--c-text-secondary);
-            font-weight: 500;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .company-logo {
-            display: flex;
-            align-items: center;
-            gap: var(--space-xs);
-            padding: var(--space-xs) var(--space-sm);
-            background: var(--c-bg-secondary);
-            border: 1px solid var(--c-border);
-            border-radius: var(--radius);
-            font-size: var(--fs-sm);
-            font-weight: 600;
-            color: var(--c-text-secondary);
-            transition: all var(--trans-fast);
-        }
-
-        .company-logo:hover {
-            background: var(--gradient-primary);
-            color: white;
-            border-color: transparent;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow);
-        }
-
-        .hero-image-wrapper {
-            position: relative;
-        }
-
-        .hero-image {
-            width: 100%;
-            height: 450px;
-            object-fit: cover;
-            border-radius: var(--radius-xl);
-            box-shadow: var(--shadow-2xl);
-            transition: transform var(--trans);
-            position: relative;
-            z-index: 2;
-        }
-
-        .hero-image:hover {
-            transform: scale(1.02) rotate(1deg);
-        }
-
-        .hero-image-bg {
-            position: absolute;
-            inset: -20px;
-            background: var(--gradient-primary);
-            border-radius: var(--radius-xl);
-            opacity: 0.1;
-            filter: blur(40px);
-            z-index: 1;
-            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-
-        /* Section Headers */
-        .section-header {
-            text-align: center;
-            margin-bottom: var(--space-3xl);
-        }
-
-        .section-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-xs);
-            padding: var(--space-xs) var(--space-md);
-            background: var(--c-bg-secondary);
-            color: var(--c-primary);
-            border-radius: var(--radius-full);
-            font-size: var(--fs-sm);
-            font-weight: 600;
-            margin-bottom: var(--space-md);
-            border: 1px solid var(--c-border);
-        }
-
-        .section-title {
-            font-size: var(--fs-3xl);
-            font-weight: 800;
-            margin-bottom: var(--space-md);
-            letter-spacing: -0.02em;
-        }
-
-        .section-subtitle {
-            font-size: var(--fs-lg);
-            color: var(--c-text-secondary);
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        /* Animations */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Floating CTA */
-        .floating-cta {
-            position: fixed;
-            bottom: var(--space-xl);
-            right: var(--space-xl);
-            z-index: 90;
-            background: var(--gradient-primary);
-            color: white;
-            padding: var(--space-md) var(--space-lg);
-            border-radius: var(--radius-full);
-            box-shadow: var(--shadow-xl);
-            font-weight: 600;
-            text-decoration: none;
-            display: none;
-            align-items: center;
-            gap: var(--space-xs);
-            transition: all var(--trans-fast);
-        }
-
-        .floating-cta:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-2xl);
-            color: white;
-        }
-
-        .floating-cta.visible {
-            display: flex;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav {
-                display: none;
-            }
-
-            .mobile-toggle {
-                display: block;
-            }
-
-            .theme-toggle {
-                top: var(--space-md);
-                right: var(--space-md);
-                width: 44px;
-                height: 44px;
-            }
-
-            .hero {
-                padding-top: 100px;
-            }
-
-            .hero-companies {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .floating-cta {
-                bottom: var(--space-md);
-                right: var(--space-md);
-            }
-        }
-
-        /* About Section Styles */
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: left;
-        }
-
-        .about-intro {
-            font-size: var(--fs-lg);
-            line-height: 1.8;
-            color: var(--c-text);
-            margin-bottom: var(--space-xl);
-        }
-
-        .about-section {
-            margin-bottom: var(--space-xl);
-        }
-
-        .about-section h3 {
-            font-size: var(--fs-xl);
-            margin-bottom: var(--space-md);
-            color: var(--c-primary);
-        }
-
-        .about-section p {
-            font-size: var(--fs-base);
-            line-height: 1.8;
-            color: var(--c-text-secondary);
-        }
-
-        .about-highlight {
-            background: linear-gradient(135deg, var(--c-bg-secondary), rgba(30, 64, 175, 0.05));
-            border-left: 4px solid var(--c-primary);
-            padding: var(--space-md);
-            border-radius: var(--radius);
-            margin: var(--space-lg) 0;
-            font-style: italic;
-        }
-
-        /* Timeline Styles */
-        .timeline {
-            position: relative;
-            padding-left: var(--space-2xl);
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--c-border);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: var(--space-2xl);
-            padding-left: var(--space-xl);
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -30px;
-            top: 8px;
-            width: 12px;
-            height: 12px;
-            background: var(--c-primary);
-            border: 3px solid var(--c-bg);
-            border-radius: 50%;
-            box-shadow: 0 0 0 4px var(--c-border);
-        }
-
-        .timeline-period {
-            display: inline-block;
-            padding: var(--space-xs) var(--space-sm);
-            background: var(--gradient-primary);
-            color: white;
-            border-radius: var(--radius);
-            font-size: var(--fs-xs);
-            font-weight: 600;
-            margin-bottom: var(--space-sm);
-        }
-
-        .timeline-title {
-            font-size: var(--fs-xl);
-            font-weight: 700;
-            margin-bottom: var(--space-xs);
-        }
-
-        .timeline-company {
-            font-size: var(--fs-base);
-            color: var(--c-primary);
-            font-weight: 600;
-            margin-bottom: var(--space-md);
-        }
-
-        .timeline-desc {
-            color: var(--c-text-secondary);
-            line-height: 1.7;
-            margin-bottom: var(--space-md);
-        }
-
-        .timeline-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-xs);
-        }
-
-        /* Tech Tags */
-        .tech-tag {
-            padding: var(--space-xs) var(--space-sm);
-            background: var(--c-bg-secondary);
-            border: 1px solid var(--c-border);
-            border-radius: var(--radius);
-            font-size: var(--fs-xs);
-            font-weight: 500;
-            color: var(--c-text-secondary);
-        }
-
-        /* Skills Section */
-        .skills-matrix {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: var(--space-xl);
-            margin-bottom: var(--space-3xl);
-        }
-
-        .skill-category {
-            background: var(--c-bg);
-            border-radius: var(--radius-lg);
-            padding: var(--space-lg);
-            border: 1px solid var(--c-border);
-            transition: all var(--trans);
-        }
-
-        .skill-category:hover {
-            box-shadow: var(--shadow);
-            transform: translateY(-2px);
-        }
-
-        .skill-category-title {
-            font-size: var(--fs-lg);
-            font-weight: 700;
-            margin-bottom: var(--space-md);
-        }
-
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-xs);
-        }
-
-        .skill-tag {
-            padding: var(--space-xs) var(--space-sm);
-            background: var(--c-bg-secondary);
-            border: 1px solid var(--c-border);
-            border-radius: var(--radius);
-            font-size: var(--fs-sm);
-            font-weight: 500;
-            transition: all var(--trans-fast);
-            cursor: default;
-        }
-
-        .skill-tag.primary {
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-        }
-
-        .skill-tag:hover {
-            background: var(--c-primary);
-            color: white;
-            border-color: transparent;
-            transform: translateY(-2px);
-        }
-
-        /* Projects Grid */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: var(--space-xl);
-        }
-
-        .project-card {
-            background: var(--c-bg);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--c-border);
-            transition: all var(--trans);
-            position: relative;
-            padding: var(--space-xl);
-        }
-
-        .project-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: var(--gradient-primary);
-            transform: scaleX(0);
-            transition: transform var(--trans);
-        }
-
-        .project-card:hover {
-            transform: translateY(-8px) rotate(1deg);
-            box-shadow: var(--shadow-xl);
-        }
-
-        .project-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .project-title {
-            font-size: var(--fs-xl);
-            font-weight: 700;
-            margin-bottom: var(--space-sm);
-        }
-
-        .project-desc {
-            color: var(--c-text-secondary);
-            line-height: 1.6;
-            margin-bottom: var(--space-md);
-            font-size: var(--fs-sm);
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: var(--space-xs);
-            margin-bottom: var(--space-md);
-        }
-
-        .project-links {
-            display: flex;
-            gap: var(--space-sm);
-        }
-
-        .project-link {
-            flex: 1;
-            text-align: center;
-            padding: var(--space-xs) var(--space-sm);
-            border: 1px solid var(--c-border);
-            border-radius: var(--radius);
-            font-size: var(--fs-sm);
-            font-weight: 500;
-            color: var(--c-text);
-            text-decoration: none;
-            transition: all var(--trans-fast);
-        }
-
-        .project-link:hover {
-            background: var(--c-primary);
-            color: white;
-            border-color: transparent;
-        }
-
-        /* Testimonials */
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-xl);
-        }
-
-        .testimonial-card {
-            background: var(--c-bg);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            border: 1px solid var(--c-border);
-            box-shadow: var(--shadow);
-            transition: all var(--trans);
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .testimonial-text {
-            font-size: var(--fs-base);
-            line-height: 1.7;
-            margin-bottom: var(--space-md);
-            font-style: italic;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-        }
-
-        .testimonial-avatar {
-            width: 48px;
-            height: 48px;
-            background: var(--gradient-primary);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            font-size: var(--fs-sm);
-        }
-
-        .testimonial-name {
-            font-weight: 700;
-            font-size: var(--fs-base);
-            margin-bottom: 2px;
-        }
-
-        .testimonial-role {
-            font-size: var(--fs-sm);
-            color: var(--c-text-secondary);
-        }
-
-        /* CTA Section */
-        .cta-section {
-            background: var(--gradient-primary);
-            color: white;
-            padding: var(--space-4xl) 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='1'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
-            pointer-events: none;
-        }
-
-        .cta-content {
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-title {
-            font-size: var(--fs-3xl);
-            font-weight: 800;
-            margin-bottom: var(--space-md);
-        }
-
-        .cta-subtitle {
-            font-size: var(--fs-lg);
-            opacity: 0.9;
-            margin-bottom: var(--space-xl);
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        /* Contact Form */
-        .contact-form {
-            background: var(--c-bg);
-            border-radius: var(--radius-lg);
-            padding: var(--space-xl);
-            border: 1px solid var(--c-border);
-            box-shadow: var(--shadow);
-            max-width: 800px;
-            margin: 0 auto var(--space-xl);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: var(--space-md);
-        }
-
-        .form-group {
-            margin-bottom: var(--space-lg);
-        }
-
-        .form-label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: var(--space-xs);
-            font-size: var(--fs-sm);
-            color: var(--c-text);
-        }
-
-        .form-label .required {
-            color: var(--c-danger);
-        }
-
-        .form-input,
-        .form-textarea {
-            width: 100%;
-            padding: var(--space-sm) var(--space-md);
-            border: 2px solid var(--c-border);
-            border-radius: var(--radius);
-            font-family: inherit;
-            font-size: var(--fs-base);
-            background: var(--c-bg);
-            transition: all var(--trans-fast);
-            color: var(--c-text);
-        }
-
-        .form-input:focus,
-        .form-textarea:focus {
-            outline: none;
-            border-color: var(--c-primary);
-            box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
-        }
-
-        .form-textarea {
-            min-height: 120px;
-            resize: vertical;
-        }
-
-        .form-error {
-            color: var(--c-danger);
-            font-size: var(--fs-sm);
-            margin-top: var(--space-xs);
-            display: none;
-        }
-
-        .form-group.error .form-input,
-        .form-group.error .form-textarea {
-            border-color: var(--c-danger);
-        }
-
-        .form-group.error .form-error {
-            display: block;
-        }
-
-        .form-honeypot {
-            position: absolute;
-            left: -9999px;
-            width: 1px;
-            height: 1px;
-            overflow: hidden;
-        }
-
-        .form-submit {
-            width: 100%;
-            padding: var(--space-md);
-            background: var(--gradient-primary);
-            color: white;
-            border: none;
-            border-radius: var(--radius);
-            font-weight: 700;
-            font-size: var(--fs-base);
-            cursor: pointer;
-            transition: all var(--trans-fast);
-            box-shadow: var(--shadow);
-        }
-
-        .form-submit:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .form-submit:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .form-success {
-            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
-            color: var(--c-accent);
-            padding: var(--space-md);
-            border-radius: var(--radius);
-            margin-bottom: var(--space-lg);
-            display: none;
-        }
-
-        .form-success.show {
-            display: block;
-        }
-
-        /* Contact Info */
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--space-md);
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .contact-info-item {
-            display: flex;
-            align-items: center;
-            gap: var(--space-md);
-            padding: var(--space-md);
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: var(--radius);
-            transition: transform var(--trans-fast);
-        }
-
-        .contact-info-item:hover {
-            transform: translateY(-2px);
-        }
-
-        .contact-info-icon {
-            width: 44px;
-            height: 44px;
-            background: rgba(255, 255, 255, 0.2);
-            color: white;
-            border-radius: var(--radius);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-        }
-
-        .contact-info-icon svg {
-            width: 20px;
-            height: 20px;
-        }
-
-        .contact-info-details h4 {
-            font-weight: 700;
-            margin-bottom: 2px;
-            font-size: var(--fs-sm);
-        }
-
-        .contact-info-details a {
-            color: rgba(255, 255, 255, 0.8);
-            text-decoration: none;
-            font-size: var(--fs-sm);
-        }
-
-        .contact-info-details a:hover {
-            color: white;
-        }
-
-        .availability-notice {
-            grid-column: 1 / -1;
-            background: rgba(255, 255, 255, 0.15);
-            padding: var(--space-md);
-            border-radius: var(--radius);
-            text-align: center;
-            font-weight: 600;
-            margin-top: var(--space-md);
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--c-bg-secondary);
-            border-top: 2px solid var(--c-border);
-            padding: var(--space-xl) 0;
-            margin-top: var(--space-4xl);
-        }
-
-        .footer-bottom {
-            text-align: center;
-        }
-
-        .footer-copy p {
-            color: var(--c-text-secondary);
-            font-size: var(--fs-sm);
-            margin: 0;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        /* Enhanced Responsive Design */
-        @media (max-width: 1024px) {
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-info {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        @media (max-width: 768px) {
-            .skills-matrix {
-                grid-template-columns: 1fr;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-row {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-info {
-                grid-template-columns: 1fr;
-            }
-
-            .timeline {
-                padding-left: var(--space-lg);
-            }
-
-            .timeline-item {
-                padding-left: var(--space-md);
-            }
-
-            .timeline-item::before {
-                left: -24px;
-                width: 10px;
-                height: 10px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero-title {
-                font-size: var(--fs-2xl);
-            }
-
-            .section-title {
-                font-size: var(--fs-2xl);
-            }
-
-            .contact-form {
-                padding: var(--space-lg);
-            }
-
-            .testimonial-card {
-                padding: var(--space-lg);
-            }
-
-            .project-card {
-                padding: var(--space-lg);
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Meal Planner</title>
+
+  <style>
+    :root {
+      --bg: #fff5f0;
+      --bg-soft: #fff9f5;
+      --card: #ffffff;
+      --muted: #8c7569;
+      --text: #362420;
+      --border: #f2d6c9;
+
+      --tint: #ff7b4a;
+      --tint-2: #4caf50;
+      --ok: #10b981;
+      --info: #06b6d4;
+      --warn: #f59e0b;
+
+      --radius-8: 12px;
+      --radius-12: 16px;
+
+      --shadow-1: 0 8px 24px rgba(0, 0, 0, .08);
+      --shadow-2: 0 12px 28px rgba(0, 0, 0, .12);
+
+      --tap: 48px;
+
+      /* typography */
+      --h1: clamp(20px, 3.6vw, 24px);
+      --h2: clamp(16px, 3.2vw, 20px);
+      --body: clamp(14px, 3vw, 16px);
+      --small: 12px;
+    }
+
+    /* dark mode - class based instead of media query */
+    body.dark {
+      --bg: #1a1817;
+      --bg-soft: #24201e;
+      --card: #2a2624;
+      --muted: #a3968f;
+      --text: #f0e6e0;
+      --border: #4a4039;
+
+      --shadow-1: 0 8px 24px rgba(0, 0, 0, .35);
+      --shadow-2: 0 20px 32px rgba(0, 0, 0, .40);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(255, 123, 74, .12), transparent 45%),
+        radial-gradient(1200px 900px at 110% 10%, rgba(76, 175, 80, .08), transparent 50%),
+        var(--bg);
+      color: var(--text);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 16px;
+      padding-bottom: 80px;
+    }
+
+    /* header */
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: color-mix(in oklab, var(--bg) 70%, var(--bg-soft) 30%);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: saturate(120%) blur(6px);
+    }
+
+    .header h1 {
+      font-size: var(--h1);
+      font-weight: 800;
+      letter-spacing: .2px;
+      color: var(--tint);
+    }
+
+    .btn-icon {
+      width: var(--tap);
+      height: var(--tap);
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--text);
+      box-shadow: var(--shadow-1);
+      cursor: pointer;
+      transition: transform .08s ease, background .2s ease;
+    }
+
+    .btn-icon:active {
+      transform: scale(.98)
+    }
+
+    /* week banner */
+    .week-nav {
+      margin: 16px 0 12px;
+      padding: 12px 14px;
+      text-align: center;
+      font-weight: 700;
+      font-size: var(--body);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-12);
+      background: var(--bg-soft);
+    }
+
+    /* day card */
+    .day-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-12);
+      margin: 10px 0;
+      padding: 12px;
+      box-shadow: var(--shadow-1);
+    }
+
+    .day-card.incomplete {
+      border-style: dashed;
+      opacity: .95
+    }
+
+    .day-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .day-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: .2px
+    }
+
+    .day-date {
+      font-size: var(--small);
+      color: var(--muted);
+      margin-top: 4px
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 800;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--tint);
+    }
+
+    /* day header right (bread) */
+    .day-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .pill {
+      height: 32px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--muted);
+      cursor: pointer;
+      transition: filter .15s ease, transform .08s ease;
+    }
+
+    .pill:active {
+      transform: scale(.98)
+    }
+
+    .pill.is-on {
+      color: #fff;
+      border-color: transparent;
+      background: var(--tint-2)
+    }
+
+    /* meal rows */
+    .meal {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      margin-top: 8px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg-soft);
+      min-height: 64px;
+      cursor: pointer;
+      transition: background .2s ease, transform .08s ease;
+    }
+
+    .meal:active {
+      transform: translateY(1px)
+    }
+
+    .meal.empty {
+      opacity: .65
+    }
+
+    .meal .icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      font-size: 22px;
+      text-shadow:
+        0 0 3px rgba(0, 0, 0, 0.8),
+        0 0 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .icon.breakfast {
+      background: linear-gradient(135deg, #00A6FF, #FFFFFF);
+    }
+
+    .icon.lunch {
+      background: linear-gradient(135deg, #FA8607, #FFF57B);
+    }
+
+    .icon.dinner {
+      background: linear-gradient(135deg, #01426D, #01162E);
+    }
+
+    .meal .content {
+      flex: 1;
+      min-width: 0
+    }
+
+    .meal .title {
+      font-weight: 800;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .meal .desc {
+      margin-top: 2px;
+      font-size: 12px;
+      color: var(--muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap
+    }
+
+    /* inline dinner toggles */
+    .inline-toggles {
+      display: flex;
+      gap: 6px;
+      margin-left: auto
+    }
+
+    .tag {
+      height: 28px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--muted);
+      display: inline-flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+.tag.active {
+  color: #fff;
+  background: var(--tint);
+  border-color: transparent;
+}
+
+    /* weekend reveal block */
+    .weekend-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-12);
+      padding: 12px;
+      margin: 12px 0 6px;
+    }
+
+    .switch {
+      position: relative;
+      width: 54px;
+      height: 30px;
+      border-radius: 999px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: #e8d5c9
+    }
+
+    .switch .knob {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform .18s ease
+    }
+
+    .switch.on {
+      background: var(--tint);
+      border-color: transparent
+    }
+
+    .switch.on .knob {
+      transform: translateX(24px)
+    }
+
+    /* bottom bar - optimized */
+    .bottom-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 60;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 8px;
+      backdrop-filter: blur(6px);
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);
+    }
+
+    .bar-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 56px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 800;
+      gap: 4px;
+      cursor: pointer;
+      transition: transform .08s ease, background .15s ease;
+    }
+
+    .bar-btn:active {
+      transform: scale(.96);
+      background: var(--bg-soft);
+    }
+
+    .bar-btn span {
+      opacity: .85
+    }
+
+    .bar-ico {
+      font-size: 18px
+    }
+
+    /* modal (bottom sheet) */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 10, 20, .6);
+      display: none;
+      z-index: 70
+    }
+
+    .modal-overlay.show {
+      display: block
+    }
+
+    .sheet {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 80;
+      background: var(--card);
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-2);
+      transform: translateY(100%);
+      transition: transform .24s ease-out;
+      overflow: hidden;
+    }
+
+    .modal-overlay.show+.sheet {
+      transform: translateY(0)
+    }
+
+    .sheet-head {
+      padding: 14px;
+      border-bottom: 1px solid var(--border);
+      text-align: center
+    }
+
+    .sheet-title {
+      font-size: var(--h2);
+      font-weight: 800
+    }
+
+    .sheet-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px
+    }
+
+    .sheet-body {
+      max-height: calc(82vh - 112px);
+      overflow: auto
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 12px
+    }
+
+    .tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 8px;
+      min-height: 72px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg-soft);
+      cursor: pointer;
+      text-align: center;
+      font-size: 13px;
+      transition: transform .08s ease, background .15s ease;
+    }
+
+    .tile:active {
+      transform: scale(.98)
+    }
+
+    .tile.selected {
+      border-color: transparent;
+      background: color-mix(in oklab, var(--tint) 22%, var(--bg-soft) 78%)
+    }
+
+    .tile .emo {
+      font-size: 22px
+    }
+
+    .control-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 12px
+    }
+
+    .kbd {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 700
+    }
+
+    .field {
+      padding: 10px 12px;
+      margin: 8px 12px 0
+    }
+
+    .label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 800;
+      margin-bottom: 6px
+    }
+
+    .input {
+      width: 100%;
+      height: 44px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+    }
+
+    .sheet-foot {
+      display: flex;
+      gap: 8px;
+      padding: 10px;
+      border-top: 1px solid var(--border);
+      background: var(--bg-soft)
+    }
+
+    .btn {
+      height: 44px;
+      flex: 1;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .btn.cancel {
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      color: #e05a5a;
+      font-weight: 800;
+    }
+
+    /* toast */
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 90px;
+      transform: translateX(-50%);
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      border-radius: 999px;
+      box-shadow: var(--shadow-1);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .18s ease, visibility .18s ease;
+      z-index: 90;
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      visibility: visible
+    }
+
+    /* week nav arrows */
+    .nav {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 80px;
+      display: grid;
+      place-items: center;
+      background: var(--card);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 12px;
+      z-index: 40;
+      cursor: pointer;
+    }
+
+    .nav.left {
+      left: 6px;
+      border-left: none
+    }
+
+    .nav.right {
+      right: 6px;
+      border-right: none
+    }
+
+    /* helpers */
+    .hide {
+      display: none
+    }
+  </style>
 </head>
 
 <body>
-    <!-- Dark Mode Toggle -->
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode">
-        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-            <circle cx="12" cy="12" r="5" />
-            <path
-                d="M12 1v6M12 17v6M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h6M17 12h6M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-        </svg>
-        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            aria-hidden="true">
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-        </svg>
-    </button>
+  <header class="header">
+    <h1>Meal Planner</h1>
+    <button id="themeToggle" class="btn-icon" aria-label="Toggle theme">🌙</button>
+  </header>
 
-    <!-- Header -->
-    <header class="header" role="banner">
-        <div class="container">
-            <div class="header-content">
-                <a href="#" class="logo" aria-label="Dominic Minischetti Home">
-                    <span class="logo-icon" aria-hidden="true">DM</span>
-                    <span>Dominic Minischetti</span>
-                </a>
+  <div class="container">
+    <div id="daysList"></div>
+  </div>
 
-                <nav class="nav" role="navigation" aria-label="Main navigation">
-                    <a href="#about" class="nav-link">About</a>
-                    <a href="#experience" class="nav-link">Experience</a>
-                    <a href="#skills" class="nav-link">Skills</a>
-                    <a href="#projects" class="nav-link">Projects</a>
-                    <a href="#testimonials" class="nav-link">Reviews</a>
-                    <a href="/blog" class="header-cta">Blog →</a>
-                </nav>
+  <button class="nav left" id="prevWeek">◄</button>
+  <button class="nav right" id="nextWeek">►</button>
 
-                <button class="mobile-toggle" onclick="toggleMobileNav()" aria-label="Toggle navigation menu">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <line x1="3" y1="6" x2="21" y2="6" />
-                        <line x1="3" y1="12" x2="21" y2="12" />
-                        <line x1="3" y1="18" x2="21" y2="18" />
-                    </svg>
-                </button>
-            </div>
+  <div class="bottom-bar">
+    <div class="actions">
+      <button class="bar-btn" id="randomizeBtn">
+        <div class="bar-ico">🎲</div><span>Random</span>
+      </button>
+      <button class="bar-btn" id="clearBtn">
+        <div class="bar-ico">🗑️</div><span>Clear</span>
+      </button>
+      <button class="bar-btn" id="shareBtn">
+        <div class="bar-ico">▶️</div><span>Send</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Bottom Sheet Modal -->
+  <div id="modalOverlay" class="modal-overlay"></div>
+  <section id="sheet" class="sheet" aria-modal="true" role="dialog">
+    <div class="sheet-head">
+      <div class="sheet-title" id="modalTitle"></div>
+      <div class="sheet-sub" id="modalSubtitle"></div>
+    </div>
+    <div class="sheet-body" id="modalBody"></div>
+    <div class="sheet-foot" id="modalFooter"></div>
+  </section>
+
+  <div id="toast" class="toast">Saved! ✓</div>
+
+  <script>
+    /* ========= DATA (your provided object) ========= */
+    const DATA =
+    {
+      "ingredients": {
+        "ravioli": { "name": "Ravioli", "emoji": "🥟" },
+        "sage": { "name": "Sage", "emoji": "🌿" },
+        "spaghetti": { "name": "Spaghetti", "emoji": "🍝" },
+        "lemons": { "name": "Lemons", "emoji": "🍋" },
+        "ditalini": { "name": "Ditalini", "emoji": "🍝" },
+        "chickpeas": { "name": "Chickpeas", "emoji": "🫘" },
+        "tuna": { "name": "Tuna", "emoji": "🐟" },
+        "pasta": { "name": "Pasta", "emoji": "🍝" },
+        "tomato_sauce": { "name": "Tomato sauce", "emoji": "🍅" },
+        "flatbreads": { "name": "Flatbreads", "emoji": "🫓" },
+        "prosciutto": { "name": "Prosciutto", "emoji": "🥩" },
+        "provolone_cheese": { "name": "Provolone cheese", "emoji": "🧀" },
+        "eggs": { "name": "Eggs", "emoji": "🥚" },
+        "pesto": { "name": "Pesto", "emoji": "🌿" },
+        "cherry_tomatoes": { "name": "Cherry tomatoes", "emoji": "🍅" },
+        "lentils": { "name": "Lentils", "emoji": "🫘" },
+        "croutons": { "name": "Croutons", "emoji": "🍞" },
+        "bacon": { "name": "Bacon", "emoji": "🥓" },
+        "beans": { "name": "Beans", "emoji": "🫘" },
+        "salmon": { "name": "Salmon", "emoji": "🍣" },
+        "rice": { "name": "Rice", "emoji": "🍚" },
+        "zucchini": { "name": "Zucchini", "emoji": "🥒" },
+        "ground_beef": { "name": "Ground beef", "emoji": "🥩" },
+        "bread": { "name": "Bread", "emoji": "🍞" },
+        "breadcrumbs": { "name": "Breadcrumbs", "emoji": "🍞" },
+        "chicken_breast": { "name": "Chicken breast", "emoji": "🍗" },
+        "cod": { "name": "Cod", "emoji": "🐟" },
+        "hamburger_buns": { "name": "Hamburger buns", "emoji": "🍔" },
+        "american_cheese_slices": { "name": "American cheese slices", "emoji": "🧀" },
+        "lettuce": { "name": "Lettuce", "emoji": "🥬" },
+        "tomatoes": { "name": "Tomatoes", "emoji": "🍅" },
+        "breaded_cutlets": { "name": "Breaded cutlets", "emoji": "🥩" },
+        "sausages": { "name": "Sausages", "emoji": "🌭" },
+        "vegetable_soup_mix": { "name": "Vegetable soup mix", "emoji": "🥕" },
+        "chicken_thighs": { "name": "Chicken thighs", "emoji": "🍗" },
+        "veal_cutlets": { "name": "Veal cutlets", "emoji": "🥩" },
+        "fresh_mozzarella": { "name": "Fresh mozzarella", "emoji": "🧀" },
+        "cordon_bleu": { "name": "Cordon bleu", "emoji": "🥩" },
+        "hot_dogs": { "name": "Hot dogs", "emoji": "🌭" },
+        "dumplings": { "name": "Dumplings", "emoji": "🥟" },
+        "fish_sticks": { "name": "Fish sticks", "emoji": "🐟" },
+        "whole_chicken": { "name": "Whole chicken", "emoji": "🍗" },
+        "shredded_mozzarella": { "name": "Shredded mozzarella", "emoji": "🧀" },
+        "eggplant": { "name": "Eggplant", "emoji": "🍆" },
+        "beef": { "name": "Beef", "emoji": "🥩" },
+        "potatoes": { "name": "Potatoes", "emoji": "🥔" },
+        "onion": { "name": "Onion", "emoji": "🧅" },
+        "carrots": { "name": "Carrots", "emoji": "🥕" },
+        "tortellini": { "name": "Tortellini", "emoji": "🥟" },
+        "cream": { "name": "Ccream", "emoji": "🥛" },
+        "meat_sauce": { "name": "Meat sauce", "emoji": "🍖" },
+        "flour": { "name": "Flour", "emoji": "🌾" },
+        "milk": { "name": "Milk", "emoji": "🥛" },
+        "broth": { "name": "Broth", "emoji": "🍲" },
+        "polenta": { "name": "Polenta", "emoji": "🌽" },
+        "ricotta": { "name": "Ricotta", "emoji": "🧀" },
+        "spinach": { "name": "Spinach", "emoji": "🥬" },
+        "lasagna_noodles": { "name": "Lasagna noodles", "emoji": "🍝" },
+        "steak": { "name": "Steak", "emoji": "🥩" },
+        "broccoli": { "name": "Broccoli", "emoji": "🥦" },
+        "tater_tots": { "name": "Tater tots", "emoji": "🥔" },
+        "beets": { "name": "Beets", "emoji": "🥬" },
+        "corn": { "name": "Corn", "emoji": "🌽" },
+        "cucumbers": { "name": "Cucumbers", "emoji": "🥒" },
+        "butter": { "name": "Butter", "emoji": "🧈" },
+        "pesto_sauce": { "name": "Pesto sauce", "emoji": "🌿" }
+      },
+      "meals": {
+        "custom": { "name": "Custom", "emoji": "🍽️", "ingredients": [], "type": "other" },
+        "ravioli_burro_e_salvia": { "name": "Ravioli burro e salvia", "emoji": "🥟", "ingredients": ["ravioli", "sage"], "type": "vegetarian" },
+        "spaghetti_al_limone": { "name": "Spaghetti al limone", "emoji": "🍝", "ingredients": ["spaghetti", "lemons"], "type": "vegetarian" },
+        "pasta_e_ceci": { "name": "Pasta e ceci", "emoji": "🍝", "ingredients": ["ditalini", "chickpeas"], "type": "vegetarian" },
+        "pasta_col_tonno": { "name": "Pasta col tonno", "emoji": "🐟", "ingredients": ["spaghetti", "tuna"], "type": "fish" },
+        "pasta_sugo_tonno": { "name": "Pasta sugo tonno", "emoji": "🐟", "ingredients": ["pasta", "tuna", "tomato_sauce"], "type": "fish" },
+        "piadine_prosciutto_provolone": { "name": "Piadine prosciutto provolone", "emoji": "🥪", "ingredients": ["flatbreads", "prosciutto", "provolone_cheese"], "type": "meat" },
+        "uova_fritte": { "name": "Uova fritte", "emoji": "🍳", "ingredients": ["eggs"], "type": "vegetarian" },
+        "pasta_al_pesto": { "name": "Pasta al pesto", "emoji": "🌿", "ingredients": ["pasta", "pesto_sauce"], "type": "vegetarian" },
+        "pasta_coi_pomodorini": { "name": "Pasta coi pomodorini", "emoji": "🍅", "ingredients": ["pasta", "cherry_tomatoes"], "type": "vegetarian" },
+        "lenticchie": { "name": "Lenticchie", "emoji": "🥘", "ingredients": ["lentils", "croutons"], "type": "vegetarian" },
+        "spaghetti_aglio_e_olio": { "name": "Spaghetti aglio e olio", "emoji": "🧄", "ingredients": ["spaghetti"], "type": "vegetarian" },
+        "carbonara": { "name": "Carbonara", "emoji": "🥓", "ingredients": ["spaghetti", "eggs", "bacon"], "type": "meat" },
+        "frittata_di_pasta": { "name": "Frittata di pasta", "emoji": "🍳", "ingredients": ["eggs"], "type": "vegetarian" },
+        "pasta_e_fagioli": { "name": "Pasta e fagioli", "emoji": "🫘", "ingredients": ["pasta", "beans"], "type": "vegetarian" },
+        "salmone_col_riso": { "name": "Salmone col riso", "emoji": "🍣", "ingredients": ["salmon", "rice"], "type": "fish" },
+        "frittata_di_zucchine": { "name": "Frittata di zucchine", "emoji": "🥒", "ingredients": ["eggs", "zucchini"], "type": "vegetarian" },
+        "polpette": { "name": "Polpette", "emoji": "🧆", "ingredients": ["ground_beef", "eggs", "bread", "breadcrumbs"], "type": "meat" },
+        "pollo_al_limone": { "name": "Pollo al limone", "emoji": "🍗", "ingredients": ["chicken_breast", "lemons"], "type": "meat" },
+        "merluzzo": { "name": "Merluzzo", "emoji": "🐟", "ingredients": ["cod"], "type": "fish" },
+        "hamburger": { "name": "Hamburger", "emoji": "🍔", "ingredients": ["hamburger_buns", "ground_beef", "american_cheese_slices", "lettuce", "tomatoes"], "type": "meat" },
+        "cotolette": { "name": "Cotolette", "emoji": "🥩", "ingredients": ["breaded_cutlets", "breadcrumbs", "eggs"], "type": "meat" },
+        "salsicce": { "name": "Salsicce", "emoji": "🌭", "ingredients": ["sausages"], "type": "meat" },
+        "minestrone": { "name": "Minestrone", "emoji": "🍲", "ingredients": ["vegetable_soup_mix", "pasta", "beans"], "type": "vegetarian" },
+        "pollo_al_forno": { "name": "Pollo al forno", "emoji": "🍗", "ingredients": ["chicken_thighs"], "type": "meat" },
+        "scaloppine_al_limone": { "name": "Scaloppine al limone", "emoji": "🥩", "ingredients": ["veal_cutlets", "lemons"], "type": "meat" },
+        "caprese": { "name": "Caprese", "emoji": "🧀", "ingredients": ["fresh_mozzarella", "tomatoes"], "type": "vegetarian" },
+        "cordon_bleu": { "name": "Cordon bleu", "emoji": "🥩", "ingredients": ["cordon_bleu"], "type": "meat" },
+        "würstel": { "name": "Würstel", "emoji": "🌭", "ingredients": ["hot_dogs"], "type": "meat" },
+        "dumplings": { "name": "Dumplings", "emoji": "🥟", "ingredients": ["dumplings"], "type": "meat" },
+        "fish_sticks": { "name": "Fish sticks", "emoji": "🐟", "ingredients": ["fish_sticks"], "type": "fish" },
+        "pollo_allo_spiedo": { "name": "Pollo allo spiedo", "emoji": "🍗", "ingredients": ["whole_chicken"], "type": "meat" },
+        "pasta_al_forno": { "name": "Pasta al forno", "emoji": "🍝", "ingredients": ["pasta", "tomato_sauce", "shredded_mozzarella"], "type": "vegetarian" },
+        "parmigiana_di_melanzane": { "name": "Parmigiana di melanzane", "emoji": "🍆", "ingredients": ["eggplant", "tomato_sauce", "shredded_mozzarella"], "type": "vegetarian" },
+        "zucchine_ripiene": { "name": "Zucchine ripiene", "emoji": "🥒", "ingredients": ["zucchini", "ground_beef", "bread"], "type": "meat" },
+        "lasagna": { "name": "Lasagna", "emoji": "🍝", "ingredients": ["lasagna_noodles", "meat_sauce"], "type": "meat" },
+        "spezzatino_con_patate": { "name": "Spezzatino con patate", "emoji": "🥘", "ingredients": ["beef", "potatoes", "onion", "carrots"], "type": "meat" },
+        "tortellini_con_la_panna": { "name": "Tortellini con la panna", "emoji": "🥟", "ingredients": ["tortellini", "cream"], "type": "vegetarian" },
+        "tortellini_col_sugo": { "name": "Tortellini col sugo", "emoji": "🥟", "ingredients": ["tortellini", "tomato_sauce"], "type": "vegetarian" },
+        "pasta_col_ragù": { "name": "Pasta col ragù", "emoji": "🍝", "ingredients": ["pasta", "meat_sauce"], "type": "meat" },
+        "polpettone": { "name": "Polpettone", "emoji": "🥩", "ingredients": ["ground_beef", "eggs", "bacon", "bread"], "type": "meat" },
+        "scrimpelle_mbuss": { "name": "Scrimpelle mbuss", "emoji": "🥞", "ingredients": ["eggs", "flour", "milk", "broth"], "type": "vegetarian" },
+        "polenta_col_sugo": { "name": "Polenta col sugo", "emoji": "🌽", "ingredients": ["polenta", "tomato_sauce", "sausages"], "type": "meat" },
+        "cannelloni": { "name": "Cannelloni", "emoji": "🥟", "ingredients": ["cannelloni", "ricotta", "spinach"], "type": "vegetarian" },
+        "bistecca": { "name": "Bistecca", "emoji": "🥩", "ingredients": ["steak"], "type": "meat" },
+
+        "pizza_delivery": { "name": "Pizza", "emoji": "🍕", "ingredients": [], "type": "other" },
+        "greco_delivery": { "name": "Greek", "emoji": "🥙", "ingredients": [], "type": "other" },
+        "chinese_delivery": { "name": "Dumplings", "emoji": "🥡", "ingredients": [], "type": "other" },
+        "vietnamese_delivery": { "name": "Pho", "emoji": "🍜", "ingredients": [], "type": "other" },
+        "ramen_delivery": { "name": "Ramen", "emoji": "🍜", "ingredients": [], "type": "other" },
+        "georgian_delivery": { "name": "Khinkali", "emoji": "🥟", "ingredients": [], "type": "other" },
+        "hamburger_delivery": { "name": "Hamburger", "emoji": "🍔", "ingredients": [], "type": "other" },
+
+        "purè_di_patate": { "name": "Purè di patate", "emoji": "🥔", "ingredients": ["potatoes"], "type": "vegetarian" },
+        "broccoli_al_vapore": { "name": "Broccoli al vapore", "emoji": "🥦", "ingredients": ["broccoli"], "type": "vegetarian" },
+        "insalata_di_pomodori": { "name": "Insalata di pomodori", "emoji": "🍅", "ingredients": ["tomatoes"], "type": "vegetarian" },
+        "tater_tots": { "name": "Tater tots", "emoji": "🥔", "ingredients": ["tater_tots"], "type": "vegetarian" },
+        "barbabietole": { "name": "Barbabietole", "emoji": "🥬", "ingredients": ["beets"], "type": "vegetarian" },
+        "insalata_di_mais": { "name": "Insalata di mais", "emoji": "🌽", "ingredients": ["canned_corn"], "type": "vegetarian" },
+        "patate_lesse": { "name": "Patate lesse", "emoji": "🥔", "ingredients": ["potatoes"], "type": "vegetarian" },
+        "carote_al_forno": { "name": "Carote al forno", "emoji": "🥕", "ingredients": ["carrots"], "type": "vegetarian" },
+        "carote_a_insalata": { "name": "Carote a insalata", "emoji": "🥕", "ingredients": ["carrots"], "type": "vegetarian" },
+        "zucchine_trifolate": { "name": "Zucchine trifolate", "emoji": "🥒", "ingredients": ["zucchini"], "type": "vegetarian" },
+        "insalata_di_cetrioli": { "name": "Insalata di cetrioli", "emoji": "🥒", "ingredients": ["cucumbers"], "type": "vegetarian" },
+        "insalata": { "name": "Insalata", "emoji": "🥗", "ingredients": ["lettuce"], "type": "vegetarian" },
+        "corn_on_the_cob": { "name": "Corn on the Cob", "emoji": "🌽", "ingredients": ["corn"], "type": "vegetarian" }
+      },
+      "mealCategories": {
+        "lunch": ["ravioli_burro_e_salvia", "spaghetti_al_limone", "pasta_e_ceci", "pasta_col_tonno", "pasta_sugo_tonno", "piadine_prosciutto_provolone", "uova_fritte", "pasta_al_pesto", "pasta_coi_pomodorini", "lenticchie", "spaghetti_aglio_e_olio", "carbonara", "frittata_di_pasta", "pasta_e_fagioli", "custom"],
+        "dinnerRegular": ["salmone_col_riso", "frittata_di_zucchine", "polpette", "pollo_al_limone", "merluzzo", "hamburger", "cotolette", "salsicce", "minestrone", "pollo_al_forno", "scaloppine_al_limone", "caprese", "custom"],
+        "dinnerQuick": ["cordon_bleu", "würstel", "dumplings", "fish_sticks", "pollo_allo_spiedo", "custom"],
+        "delivery": ["pizza_delivery", "chinese_delivery", "greco_delivery", "vietnamese_delivery", "georgian_delivery", "hamburger_delivery", "ramen_delivery", "custom"],
+        "dinnerWeekend": ["pasta_al_forno", "parmigiana_di_melanzane", "zucchine_ripiene", "lasagna", "spezzatino_con_patate", "tortellini_con_la_panna", "tortellini_col_sugo", "pasta_col_ragù", "polpettone", "scrimpelle_mbuss", "polenta_col_sugo", "cannelloni", "bistecca", "custom"],
+        "side": ["purè_di_patate", "broccoli_al_vapore", "insalata_di_pomodori", "tater_tots", "barbabietole", "insalata_di_mais", "patate_lesse", "carote_al_forno", "carote_a_insalata", "zucchine_trifolate", "insalata_di_cetrioli", "insalata", "corn_on_the_cob", "custom"],
+        "breakfast": ["croissants", "pancakes", "french_toast", "biscuits", "custom"]
+      },
+      "stores": {
+        "Aldi": ["bacon", "beets", "cannelloni", "carrots", "chicken_thighs", "breaded_cutlets", "croutons", "dumplings", "beans", "fish_sticks", "lemons", "corn", "shredded_mozzarella", "potatoes", "chicken_breast", "flatbreads", "tomatoes", "cherry_tomatoes", "provolone_cheese", "prosciutto", "ravioli", "sausages", "american_cheese_slices", "spinach", "tater_tots", "tortellini", "eggs", "hot_dogs", "zucchini", "ground_beef", "ricotta", "milk", "pesto_sauce", "canned_corn"],
+        "Wegmans": ["steak", "broccoli", "cucumbers", "onion", "hamburger_buns", "butter", "lettuce", "lentils", "eggplant", "cod", "whole_chicken", "sage", "salmon", "bread", "tomato_sauce"],
+        "Amazon": ["pasta", "tuna", "breadcrumbs", "rice"],
+        "Other": []
+      }
+    };
+
+    /* ========= Build lookups ========= */
+    const MEALS_BY_NAME = {}, MEAL_EMOJI = {}, MEAL_ING = {}, MEAL_TYPE = {}, ING_EMOJI = {}, CATS = {}, STORES = {};
+    Object.values(DATA.ingredients).forEach(i => { ING_EMOJI[i.name] = i.emoji; });
+    Object.entries(DATA.meals).forEach(([k, m]) => {
+      MEALS_BY_NAME[m.name] = m;
+      MEAL_EMOJI[m.name] = m.emoji || '❓';
+      MEAL_ING[m.name] = (m.ingredients || []).map(id => DATA.ingredients[id]?.name || id);
+      MEAL_TYPE[m.name] = m.type || 'other';
+    });
+
+    /* breakfast IDs exist only in categories — create fallbacks */
+    const BF_FALLBACK = {
+      croissants: { name: 'Croissants', emoji: '🥐', ingredients: [] },
+      pancakes: { name: 'Pancakes', emoji: '🥞', ingredients: ['flour', 'milk', 'eggs', 'butter'] },
+      french_toast: { name: 'French toast', emoji: '🍞', ingredients: ['bread', 'eggs', 'milk', 'butter'] },
+      biscuits: { name: 'Biscuits', emoji: '🥯', ingredients: ['flour', 'milk', 'butter'] }
+    };
+    const ID2NAME = (id) => {
+      if (DATA.meals[id]) return DATA.meals[id].name;
+      return ({ croissants: 'Croissants', pancakes: 'Pancakes', french_toast: 'French toast', biscuits: 'Biscuits', custom: 'Custom' })[id] || id;
+    };
+    Object.entries(DATA.mealCategories).forEach(([cat, ids]) => {
+      CATS[cat] = ids.map(ID2NAME);
+      if (cat === 'breakfast') {
+        ids.forEach(id => {
+          if (id === 'custom') return;
+          const nm = ID2NAME(id);
+          if (!MEALS_BY_NAME[nm] && BF_FALLBACK[id]) {
+            const m = BF_FALLBACK[id];
+            MEALS_BY_NAME[m.name] = m;
+            MEAL_EMOJI[m.name] = m.emoji;
+            MEAL_ING[m.name] = (m.ingredients || []).map(x => DATA.ingredients[x]?.name || x);
+          }
+        });
+      }
+    });
+    Object.entries(DATA.stores).forEach(([s, ids]) => { STORES[s] = ids.map(id => DATA.ingredients[id]?.name || id) });
+
+    /* ========= App ========= */
+    class MealPlanner {
+      constructor() {
+        this.state = this.loadState() || this.initialState();
+        this.migrate();
+        this.idx = null;
+        this.init();
+      }
+      migrate() {
+        this.state.days.forEach(d => {
+          d.breakfast ??= null;
+          d.customBreakfast ??= null;
+          if (!Array.isArray(d.side)) d.side = d.side ? [d.side] : [];
+          d.customSide ??= [];
+          d.breadFlag ??= false;
+        });
+        // Ensure theme is set
+        if (!this.state.theme) {
+          this.state.theme = 'dark';
+        }
+      }
+      initialState() {
+        const start = this.weekStart(new Date());
+        const names = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+        return {
+          weekStart: start.toISOString(),
+          showWeekend: true,
+          theme: 'dark',
+          days: names.map((n, i) => ({
+            name: n,
+            date: new Date(start.getTime() + i * 86400000).toISOString(),
+            breakfast: null,
+            lunch: null,
+            dinner: null,
+            side: [],
+            dinnerType: 'regular',
+            customBreakfast: null,
+            customLunch: null,
+            customDinner: null,
+            customSide: [],
+            breadFlag: false
+          }))
+        };
+      }
+      weekStart(d) { const dt = new Date(d), day = dt.getDay(); const diff = dt.getDate() - day + (day === 0 ? -6 : 1); const m = new Date(dt.setDate(diff)); m.setHours(0, 0, 0, 0); return m; }
+      key(d) { return `meal_plan_${this.weekStart(d).toISOString().slice(0, 10)}`; }
+      loadState() { try { const k = this.key(new Date()); const j = localStorage.getItem(k); return j ? JSON.parse(j) : null } catch { return null } }
+      save() { try { localStorage.setItem(this.key(new Date(this.state.weekStart)), JSON.stringify(this.state)) } catch { } }
+
+      init() { this.applyTheme(); this.render(); this.bindGlobal(); }
+
+      applyTheme() {
+        // Use class-based theme switching
+        if (this.state.theme === 'dark') {
+          document.body.classList.add('dark');
+        } else {
+          document.body.classList.remove('dark');
+        }
+        document.getElementById('themeToggle').textContent = this.state.theme === 'dark' ? '🌙' : '☀️';
+      }
+
+      toggleTheme() {
+        this.state.theme = this.state.theme === 'dark' ? 'light' : 'dark';
+        this.applyTheme();
+        this.save();
+      }
+
+      nav(dir) {
+        const cur = new Date(this.state.weekStart);
+        const next = new Date(cur.getTime() + (dir === 'next' ? 7 : -7) * 86400000);
+        next.setHours(0, 0, 0, 0);
+        const k = this.key(next); const ex = localStorage.getItem(k);
+        if (ex) { this.state = JSON.parse(ex); }
+        else {
+          this.state = this.initialState();
+          this.state.weekStart = next.toISOString();
+          this.state.days.forEach((d, i) => d.date = new Date(next.getTime() + i * 86400000).toISOString());
+        }
+        this.migrate(); this.applyTheme(); this.render();
+      }
+
+      fmtWeek() { const s = new Date(this.state.weekStart), e = new Date(s.getTime() + 6 * 86400000); const M = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']; return `${M[s.getMonth()]} ${s.getDate()} - ${e.getDate()}, ${s.getFullYear()}`; }
+      fmtDate(d) { const dt = new Date(d); const M = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']; return `${M[dt.getMonth()]} ${dt.getDate()}`; }
+
+      render() { this.renderDays(); }
+      renderDays() {
+        const days = [
+          ...this.state.days.slice(0, 5).map((d, i) => this.dayCard(d, i)),
+          `<div class="weekend-card">
+        <div style="font-weight:800">Show weekends</div>
+        <div id="weekendToggle" class="switch ${this.state.showWeekend ? 'on' : ''}" role="switch" aria-checked="${this.state.showWeekend}">
+          <div class="knob"></div>
         </div>
-    </header>
+      </div>`,
+          ...(this.state.showWeekend ? this.state.days.slice(5).map((d, i) => this.dayCard(d, i + 5)) : [])
+        ].join('');
+        document.getElementById('daysList').innerHTML = days;
+        this.bindDays();
+      }
 
-    <!-- Mobile Navigation -->
-    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileNav()"></div>
-    <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="Mobile navigation">
-        <div class="mobile-nav-header">
-            <span class="logo">Menu</span>
-            <button onclick="toggleMobileNav()" aria-label="Close navigation">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                    aria-hidden="true">
-                    <line x1="18" y1="6" x2="6" y2="18" />
-                    <line x1="6" y1="6" x2="18" y2="18" />
-                </svg>
-            </button>
+      dayCard(d, i) {
+        const w = (d.name === 'Saturday' || d.name === 'Sunday');
+        const bTx = d.breakfast === 'Custom'
+          ? (d.customBreakfast || 'Custom')
+          : (d.breakfast || 'Select breakfast');
+        const lTx = d.lunch === 'Custom' ? (d.customLunch || 'Custom') : d.lunch ? d.lunch : 'Select lunch';
+        const dnTx = d.dinner === 'Custom' ? (d.customDinner || 'Custom') : d.dinner ? d.dinner : 'Select dinner';
+        const sides = (d.side || []).map(s =>
+          s === 'Custom' ? (d.customSide?.join(', ') || 'Custom') : s
+        ).join(' • ');
+        const be = MEAL_EMOJI[d.breakfast] || '❓';
+        const le = MEAL_EMOJI[d.lunch] || '❓';
+        const de = MEAL_EMOJI[d.dinner] || '❓';
+
+        const need = (d.dinnerType === 'delivery' ? 2 : 3) + (w ? 1 : 0);
+        const comp = (w && d.breakfast ? 1 : 0) + (d.lunch ? 1 : 0) + (d.dinner ? 1 : 0) + (d.dinnerType !== 'delivery' && d.side ? 1 : 0);
+
+        return `
+    <section class="day-card ${comp < need ? 'incomplete' : ''}" data-day="${i}">
+      <div class="day-header">
+        <div>
+          <div class="day-title">${d.name}, ${this.fmtDate(d.date)}</div>
         </div>
-        <a href="#about" class="mobile-nav-link" onclick="toggleMobileNav()">About</a>
-        <a href="#experience" class="mobile-nav-link" onclick="toggleMobileNav()">Experience</a>
-        <a href="#skills" class="mobile-nav-link" onclick="toggleMobileNav()">Skills</a>
-        <a href="#projects" class="mobile-nav-link" onclick="toggleMobileNav()">Projects</a>
-        <a href="#testimonials" class="mobile-nav-link" onclick="toggleMobileNav()">Testimonials</a>
-        <a href="#contact" class="mobile-nav-link" onclick="toggleMobileNav()">Contact</a>
-    </nav>
-
-    <!-- Floating CTA -->
-    <a href="#" class="floating-cta" aria-label="Schedule a Call"
-        onclick="Calendly.initPopupWidget({url: 'https://calendly.com/minischetti/meeting'}); return false;">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-            aria-hidden="true">
-            <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
-        </svg>
-        Schedule a Call
-    </a>
-
-    <!-- Calendly embed script -->
-    <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
-    <script src="https://assets.calendly.com/assets/external/widget.js" type="text/javascript" async></script>
-
-    <main id="main">
-        <!-- Hero Section -->
-        <section class="hero section-primary" aria-label="Hero section">
-            <div class="container">
-                <div class="hero-content">
-                    <div class="hero-badge fade-in">
-                        <div class="hero-badge-dot" aria-hidden="true"></div>
-                        Open to new opportunities
-                    </div>
-
-                    <h1 class="hero-title fade-in">
-                        Expert PHP Backend Engineer | Scalable Systems & Clean
-                        Architecture
-                    </h1>
-
-                    <p class="hero-subtitle fade-in">
-                        I architect and build robust backend solutions designed for high
-                        traffic and optimal database performance. My focus is on clean,
-                        maintainable code and scalable systems. Currently, I'm driving
-                        innovation at BLOX Digital and am actively seeking challenging
-                        opportunities to leverage my expertise.
-                    </p>
-
-                    <div class="hero-companies fade-in">
-                        <span class="hero-companies-label">Experience with</span>
-                        <span class="company-logo">BLOX Digital</span>
-                        <span class="company-logo">Appliances Connection</span>
-                        <span class="company-logo">Kingsleague</span>
-                    </div>
-
-                    <div class="hero-image-wrapper">
-                        <div class="hero-image-bg" aria-hidden="true"></div>
-                        <img src="https://minischetti.org/images/1.jpg"
-                            alt="Dominic Minischetti - Senior PHP Backend Engineer" class="hero-image" loading="lazy"
-                            width="350" height="450" />
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- About Section -->
-        <section id="about" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-badge fade-in">ABOUT ME</span>
-                    <h2 class="section-title fade-in">
-                        Backend Engineer & Problem Solver
-                    </h2>
-                    <p class="section-subtitle fade-in">
-                        Passionate about building efficient, scalable systems that make a
-                        real impact
-                    </p>
-                </div>
-
-                <div class="about-content">
-                    <p class="about-intro fade-in">
-                        With over a decade of experience in backend development, I
-                        specialize in PHP and MySQL, focusing on performance optimization
-                        and scalable architecture. I thrive on solving complex technical
-                        challenges and transforming legacy systems into modern, efficient
-                        solutions.
-                    </p>
-
-                    <div class="about-section fade-in">
-                        <h3>Technical Philosophy</h3>
-                        <p>
-                            I believe in writing clean, maintainable code that not only
-                            solves today's problems but is also adaptable for tomorrow's
-                            challenges. My approach combines solid engineering principles
-                            with pragmatic solutions, always keeping the end user and
-                            business goals in mind.
-                        </p>
-                    </div>
-
-                    <div class="about-highlight fade-in">
-                        "Good code is like good bread – it requires the right ingredients,
-                        proper technique, and patience to rise. Both my Italian heritage
-                        and engineering background taught me this."
-                    </div>
-
-                    <div class="about-section fade-in">
-                        <h3>Background & Approach</h3>
-                        <p>
-                            Born in New York and raised in Italy, I bring an international
-                            perspective to my work. This unique background has taught me to
-                            adapt quickly, communicate effectively across cultures, and
-                            approach problems from multiple angles. I'm equally comfortable
-                            working independently on complex backend systems or
-                            collaborating with cross-functional teams to deliver solutions.
-                        </p>
-                    </div>
-
-                    <div class="about-section fade-in">
-                        <h3>Beyond the Code</h3>
-                        <p>
-                            When I'm not optimizing databases or building APIs, I enjoy
-                            mentoring junior developers, contributing to open-source
-                            projects, and exploring new technologies. I believe in
-                            continuous learning and staying current with industry best
-                            practices and emerging trends.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Experience Section -->
-        <section id="experience" class="section section-secondary">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-badge fade-in">EXPERIENCE</span>
-                    <h2 class="section-title fade-in">Professional Journey</h2>
-                    <p class="section-subtitle fade-in">
-                        Building scalable solutions and solving complex challenges across
-                        industries
-                    </p>
-                </div>
-
-                <div class="timeline">
-                    <div class="timeline-item fade-in">
-                        <span class="timeline-period">Jul 2024 - Present</span>
-                        <h3 class="timeline-title">Backend PHP Developer</h3>
-                        <div class="timeline-company">BLOX Digital</div>
-                        <p class="timeline-desc">
-                            Developing and optimizing content management systems for
-                            high-traffic media organizations. Working with PHP and MySQL to
-                            enhance system performance, implement new features, and ensure
-                            reliable content delivery. Collaborating with cross-functional
-                            teams to improve deployment processes and maintain system
-                            stability.
-                        </p>
-                        <div class="timeline-tech">
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">CMS Development</span>
-                            <span class="tech-tag">Performance Optimization</span>
-                            <span class="tech-tag">Agile</span>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item fade-in">
-                        <span class="timeline-period">May 2022 - Mar 2024</span>
-                        <h3 class="timeline-title">Backend PHP Developer</h3>
-                        <div class="timeline-company">Appliances Connection</div>
-                        <p class="timeline-desc">
-                            Designed and built a comprehensive Warehouse Management System
-                            from the ground up, transforming manual inventory processes into
-                            automated workflows. Developed responsive interfaces for
-                            handheld devices, integrated barcode scanning functionality, and
-                            implemented real-time inventory tracking. Worked closely with
-                            warehouse staff to understand requirements and iterate on
-                            solutions.
-                        </p>
-                        <div class="timeline-tech">
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">Laravel</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">Bootstrap</span>
-                            <span class="tech-tag">REST APIs</span>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item fade-in">
-                        <span class="timeline-period">Aug 2021 - May 2022</span>
-                        <h3 class="timeline-title">Full Stack Developer</h3>
-                        <div class="timeline-company">Kingsleague</div>
-                        <p class="timeline-desc">
-                            Developed platform features using PHP, MySQL, and Firebase to
-                            support growing user base. Implemented automated testing with
-                            Python and Selenium to improve code reliability. Containerized
-                            applications using Docker for consistent development and
-                            deployment environments.
-                        </p>
-                        <div class="timeline-tech">
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">Firebase</span>
-                            <span class="tech-tag">Docker</span>
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Selenium</span>
-                        </div>
-                    </div>
-
-                    <div class="timeline-item fade-in">
-                        <span class="timeline-period">2012 - 2021</span>
-                        <h3 class="timeline-title">Earlier Roles</h3>
-                        <div class="timeline-company">Various Companies</div>
-                        <p class="timeline-desc">
-                            Built foundation in database administration, web development,
-                            and IT support across multiple organizations. Managed SQL
-                            databases, developed PHP applications, maintained web servers,
-                            and ensured system reliability. These roles provided deep
-                            understanding of full-stack development and system
-                            administration.
-                        </p>
-                        <div class="timeline-tech">
-                            <span class="tech-tag">Database Administration</span>
-                            <span class="tech-tag">SQL</span>
-                            <span class="tech-tag">Web Development</span>
-                            <span class="tech-tag">System Administration</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Skills Section -->
-        <section id="skills" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-badge fade-in">SKILLS</span>
-                    <h2 class="section-title fade-in">Technical Expertise</h2>
-                    <p class="section-subtitle fade-in">
-                        Comprehensive skill set developed through years of hands-on
-                        experience
-                    </p>
-                </div>
-
-                <div class="skills-matrix">
-                    <div class="skill-category fade-in">
-                        <h3 class="skill-category-title">Backend Development</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag primary">PHP 7/8</span>
-                            <span class="skill-tag primary">Laravel</span>
-                            <span class="skill-tag">PSR Standards</span>
-                            <span class="skill-tag">SOLID Principles</span>
-                            <span class="skill-tag">MVC Architecture</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category fade-in">
-                        <h3 class="skill-category-title">Database & Storage</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag primary">MySQL</span>
-                            <span class="skill-tag primary">Query Optimization</span>
-                            <span class="skill-tag">MariaDB</span>
-                            <span class="skill-tag">SQL Server</span>
-                            <span class="skill-tag">MongoDB</span>
-                            <span class="skill-tag">Database Design</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category fade-in">
-                        <h3 class="skill-category-title">DevOps & Tools</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag primary">Docker</span>
-                            <span class="skill-tag primary">Git</span>
-                            <span class="skill-tag">Linux</span>
-                            <span class="skill-tag">Nginx</span>
-                            <span class="skill-tag">Apache</span>
-                            <span class="skill-tag">CI/CD</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category fade-in">
-                        <h3 class="skill-category-title">APIs & Integration</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag primary">RESTful APIs</span>
-                            <span class="skill-tag">API Design</span>
-                            <span class="skill-tag">JWT Authentication</span>
-                            <span class="skill-tag">OAuth</span>
-                            <span class="skill-tag">Swagger/OpenAPI</span>
-                            <span class="skill-tag">Postman</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category fade-in">
-                        <h3 class="skill-category-title">Frontend & UI</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag">JavaScript</span>
-                            <span class="skill-tag">HTML5/CSS3</span>
-                            <span class="skill-tag">Bootstrap</span>
-                            <span class="skill-tag">jQuery</span>
-                            <span class="skill-tag">Responsive Design</span>
-                        </div>
-                    </div>
-
-                    <div class="skill-category fade-in">
-                        <h3 class="skill-category-title">Methodologies</h3>
-                        <div class="skill-list">
-                            <span class="skill-tag">Agile/Scrum</span>
-                            <span class="skill-tag">Test-Driven Development</span>
-                            <span class="skill-tag">Code Review</span>
-                            <span class="skill-tag">Performance Testing</span>
-                            <span class="skill-tag">Documentation</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Projects Section -->
-        <section id="projects" class="section section-secondary">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-badge fade-in">PROJECTS</span>
-                    <h2 class="section-title fade-in">Featured Work</h2>
-                    <p class="section-subtitle fade-in">
-                        Representative projects showcasing technical skills and
-                        problem-solving abilities
-                    </p>
-                </div>
-
-                <div class="projects-grid">
-                    <article class="project-card fade-in">
-                        <h3 class="project-title">Warehouse Management System</h3>
-                        <p class="project-desc">
-                            Took a Warehouse Management System and rebuilt it around the people who use it. By listening
-                            to staff and re-engineering workflows, I delivered a system that was faster, simpler, and
-                            error-proof across PC and handheld devices. From real-time inventory updates to barcode
-                            scanning, automated reorder points, and detailed reporting, the platform became the
-                            warehouse’s most trusted tool.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">PHP</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">Bootstrap</span>
-                            <span class="tech-tag">JavaScript</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#contact" class="project-link">Contact for Details</a>
-                        </div>
-                    </article>
-
-                    <article class="project-card fade-in">
-                        <h3 class="project-title">RESTful API Platform</h3>
-                        <p class="project-desc">
-                            Designed and built a robust API platform to unify data access across multiple applications.
-                            Integrated authentication, rate limiting, automatic documentation, and resilient error
-                            handling, ensuring reliability, seamless partner integrations, and smooth user experiences.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">REST API</span>
-                            <span class="tech-tag">JWT</span>
-                            <span class="tech-tag">Swagger</span>
-                            <span class="tech-tag">MySQL</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#contact" class="project-link">Contact for Details</a>
-                        </div>
-                    </article>
-
-                    <article class="project-card fade-in">
-                        <h3 class="project-title">Automated Testing Framework</h3>
-                        <p class="project-desc">
-                            Developed comprehensive testing framework using Python and
-                            Selenium to automate quality assurance processes. Created test
-                            suites covering critical user workflows, API endpoints, and
-                            database operations. Integrated with CI/CD pipeline for
-                            continuous testing.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Python</span>
-                            <span class="tech-tag">Selenium</span>
-                            <span class="tech-tag">PHPUnit</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="#contact" class="project-link">Contact for Details</a>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </section>
-        <!-- Testimonials Section -->
-        <section id="testimonials" class="section">
-            <div class="container">
-                <div class="section-header">
-                    <span class="section-badge fade-in">TESTIMONIALS</span>
-                    <h2 class="section-title fade-in">Professional Endorsements</h2>
-                    <p class="section-subtitle fade-in">
-                        What colleagues and managers say about working with me
-                    </p>
-                </div>
-
-<div class="testimonials-grid">
-  <blockquote class="testimonial-card fade-in">
-    <p class="testimonial-text">
-        "Dominic is fantastic to work with. He reqlly bridges the gap between technical expertise and clear communication. He has a knack for breaking down technical ideas so everyone can understand them, and he consistently keeps the business goals in mind."
-    </p>
-    <cite class="testimonial-author">
-      <div class="testimonial-avatar" aria-hidden="true">SC</div>
-      <div class="testimonial-info">
-        <div class="testimonial-role">Full Stack Developer, Kingsleague</div>
-      </div>
-    </cite>
-  </blockquote>
-
-  <blockquote class="testimonial-card fade-in">
-    <p class="testimonial-text">
-      "Working with Dominic was an wonderful experience. He really took the time to understand what the users needed, and then he delivered a system that was a perfect fit. The impact was immediate: operations were transformed, and we saw a huge boost in efficiency and speed."
-    </p>
-    <cite class="testimonial-author">
-      <div class="testimonial-avatar" aria-hidden="true">MR</div>
-      <div class="testimonial-info">
-        <div class="testimonial-role">Backend Developer, Appliances Connection</div>
-      </div>
-    </cite>
-  </blockquote>
-
-  <blockquote class="testimonial-card fade-in">
-    <p class="testimonial-text">
-      "You can tell Dominic is very passionate about what he does. He approaches every project with enthusiasm and commitment to getting it right. That level of dedication is what makes him such a valuable asset."
-    </p>
-    <cite class="testimonial-author">
-      <div class="testimonial-avatar" aria-hidden="true">JL</div>
-      <div class="testimonial-info">
-        <div class="testimonial-role">Product Manager, Former Colleague</div>
-      </div>
-    </cite>
-  </blockquote>
-</div>
-            </div>
-        </section>
-
-        <!-- CTA Section -->
-        <section id="contact" class="cta-section section-accent" aria-label="Contact section">
-            <div class="container">
-                <div class="cta-content">
-                    <h2 class="cta-title fade-in">
-                        Ready to Build Something Great Together?
-                    </h2>
-                    <p class="cta-subtitle fade-in">
-                        Let's discuss how I can contribute to your team and help solve
-                        your technical challenges.
-                    </p>
-
-                    <form class="contact-form fade-in" id="contactForm" action="https://formspree.io/f/mandgyrq"
-                        method="POST" novalidate>
-                        <div class="form-success" id="formSuccess" role="alert">
-                            ✅ Message sent! I'll get back to you within 24 hours.
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="name" class="form-label">Name
-                                    <span class="required" aria-label="required">*</span></label>
-                                <input type="text" id="name" name="name" class="form-input" required
-                                    aria-required="true" autocomplete="name" />
-                                <span class="form-error" role="alert">Please enter your name</span>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="email" class="form-label">Email
-                                    <span class="required" aria-label="required">*</span></label>
-                                <input type="email" id="email" name="email" class="form-input" required
-                                    aria-required="true" autocomplete="email" />
-                                <span class="form-error" role="alert">Please enter a valid email</span>
-                            </div>
-                        </div>
-
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="company" class="form-label">Company / Organization</label>
-                                <input type="text" id="company" name="company" class="form-input"
-                                    autocomplete="organization" />
-                            </div>
-
-                            <div class="form-group">
-                                <label for="role" class="form-label">Role Title / Department</label>
-                                <input type="text" id="role" name="role" class="form-input"
-                                    autocomplete="organization-title" />
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="message" class="form-label">
-                                Message <span class="required" aria-label="required">*</span>
-                            </label>
-                            <textarea id="message" name="message" class="form-textarea" rows="5" required
-                                aria-required="true"
-                                placeholder="Tell me about the opportunity or project you'd like to discuss..."></textarea>
-                            <span class="form-error" role="alert">Please provide details</span>
-                        </div>
-
-                        <div class="form-honeypot" aria-hidden="true">
-                            <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" />
-                        </div>
-
-                        <button type="submit" class="form-submit">Send Message →</button>
-                    </form>
-
-                    <div class="contact-info fade-in">
-                        <div class="contact-info-item">
-                            <div class="contact-info-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path
-                                        d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
-                                    <rect x="2" y="9" width="4" height="12" />
-                                    <circle cx="4" cy="4" r="2" />
-                                </svg>
-                            </div>
-                            <div class="contact-info-details">
-                                <h4> qq LinkedIn</h4>
-                                <a href="https://linkedin.com/in/dminischetti/" target="_blank" rel="noopener">Connect
-                                    professionally</a>
-                            </div>
-                        </div>
-
-                        <div class="contact-info-item">
-                            <div class="contact-info-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="3" y="4" width="18" height="18" rx="2" />
-                                    <path d="M3 10h18M8 2v4M16 2v4" />
-                                </svg>
-                            </div>
-                            <div class="contact-info-details">
-                                <h4>Schedule a Call</h4>
-                                <a href="https://calendly.com/minischetti/meeting" target="_blank" rel="noopener">30-min
-                                    consultation</a>
-                            </div>
-                        </div>
-
-                        <div class="contact-info-item">
-                            <div class="contact-info-icon" aria-hidden="true">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path
-                                        d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2" />
-                                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
-                                </svg>
-                            </div>
-                            <div class="contact-info-details">
-                                <h4>Save Contact</h4>
-                                <a href="/media/vcard.vcf" download="Dominic-Minischetti.vcf">Download vCard</a>
-                            </div>
-                        </div>
-
-                        <div class="availability-notice">
-                            ⚡ Available for new opportunities • Response within 24 hours
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="footer" role="contentinfo">
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-bottom">
-                    <div class="footer-copy">
-                        <p>
-                            © 2025 Dominic Minischetti
-                        </p>
-                        <p>
-                            Dedicated to optimizing performance
-                            and building scalable backend systems. I've been crafting fast,
-                            reliable solutions since 2012.
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div class="day-actions">
+          <button class="pill bread ${d.breadFlag ? 'is-on' : ''}" data-day="${i}">
+            ${d.breadFlag ? '🍞 Bread' : '🚫 No Bread'}
+          </button>
         </div>
-    </footer>
+      </div>
 
+      ${w ? `
+      <div class="meal ${!d.breakfast ? 'empty' : ''}" data-meal="breakfast" data-day="${i}">
+        <div class="icon breakfast">${be}</div>
+        <div class="content">
+          <div class="title">Breakfast</div>
+          <div class="desc">${bTx}</div>
+        </div>
+      </div>`: ''}
 
-    <!-- Optimized JavaScript -->
-    <script>
-        // Optimized Theme Management
-        const Theme = {
-            init() {
-                const saved = localStorage.getItem('theme');
-                const system = window.matchMedia('(prefers-color-scheme: dark)').matches;
-                const theme = saved || (system ? 'dark' : 'light');
-                document.documentElement.setAttribute('data-theme', theme);
-            },
+      <div class="meal ${!d.lunch ? 'empty' : ''}" data-meal="lunch" data-day="${i}">
+        <div class="icon lunch">${le}</div>
+        <div class="content">
+          <div class="title">Lunch</div>
+          <div class="desc">${lTx}</div>
+        </div>
+      </div>
 
-            toggle() {
-                const current = document.documentElement.getAttribute('data-theme') || 'light';
-                const next = current === 'dark' ? 'light' : 'dark';
-                document.documentElement.setAttribute('data-theme', next);
-                localStorage.setItem('theme', next);
+      <div class="meal ${!d.dinner ? 'empty' : ''}" data-meal="dinner" data-day="${i}">
+        <div class="icon dinner">${de}</div>
+        <div class="content">
+          <div class="title">Dinner</div>
+<div class="desc">${dnTx}${sides ? ` • ${sides}` : ''}</div>
+        </div>
+        <div class="inline-toggles">
+          <button class="tag ${d.dinnerType === 'quick' ? 'active' : ''}" data-toggle="quick" data-day="${i}">⚡ Quick</button>
+          <button class="tag ${d.dinnerType === 'delivery' ? 'active' : ''}" data-toggle="delivery" data-day="${i}">🚚 Delivery</button>
+        </div>
+      </div>
+    </section>`;
+      }
+
+      bindDays() {
+        // open rows
+        document.querySelectorAll('.meal').forEach(el => {
+          el.onclick = () => {
+            const day = +el.dataset.day;
+            const t = el.dataset.meal;
+            if (t === 'breakfast') this.openBreakfast(day);
+            else if (t === 'lunch') this.openLunch(day);
+            else this.openDinner(day);
+          };
+        });
+        // inline dinner toggles
+        document.querySelectorAll('.tag').forEach(btn => {
+          btn.onclick = (e) => {
+            e.stopPropagation();
+            const day = +btn.dataset.day;
+            const type = btn.dataset.toggle;
+            const d = this.state.days[day];
+
+            d.dinnerType = (d.dinnerType === type) ? 'regular' : type;
+
+            if (d.dinnerType === 'quick' || d.dinnerType === 'delivery') {
+              d.dinner = null;
+              d.customDinner = null;
             }
-        };
-
-        // Optimized Navigation
-        const Navigation = {
-            init() {
-                this.setupSmoothScrolling();
-                this.setupActiveStates();
-                this.setupHeaderScroll();
-            },
-
-            setupSmoothScrolling() {
-                document.addEventListener('click', (e) => {
-                    const link = e.target.closest('a[href^="#"]');
-                    if (!link) return;
-
-                    e.preventDefault();
-                    const target = document.querySelector(link.getAttribute('href'));
-                    if (!target) return;
-
-                    const headerHeight = 80;
-                    const targetPosition = target.offsetTop - headerHeight;
-
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-
-                    // Close mobile nav if open
-                    const mobileNav = document.getElementById('mobileNav');
-                    if (mobileNav?.classList.contains('open')) {
-                        this.toggleMobile();
-                    }
-                });
-            },
-
-            setupActiveStates() {
-                const sections = document.querySelectorAll('section[id]');
-                const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
-
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            navLinks.forEach(link => {
-                                link.classList.remove('active');
-                                if (link.getAttribute('href') === `#${entry.target.id}`) {
-                                    link.classList.add('active');
-                                }
-                            });
-                        }
-                    });
-                }, {
-                    rootMargin: '-100px 0px -60%',
-                    threshold: 0
-                });
-
-                sections.forEach(section => observer.observe(section));
-            },
-
-            setupHeaderScroll() {
-                const header = document.querySelector('.header');
-                let ticking = false;
-
-                const updateHeader = () => {
-                    const scrolled = window.pageYOffset > 100;
-                    header.classList.toggle('scrolled', scrolled);
-                    ticking = false;
-                };
-
-                window.addEventListener('scroll', () => {
-                    if (!ticking) {
-                        requestAnimationFrame(updateHeader);
-                        ticking = true;
-                    }
-                }, { passive: true });
-            },
-
-            toggleMobile() {
-                const nav = document.getElementById('mobileNav');
-                const overlay = document.getElementById('mobileOverlay');
-                const isOpen = nav.classList.contains('open');
-
-                nav.classList.toggle('open');
-                overlay.classList.toggle('open');
-                document.body.style.overflow = isOpen ? '' : 'hidden';
+            if (d.dinnerType === 'delivery') {
+              d.side = [];
+              d.customSide = [];
             }
-        };
 
-        // Optimized Animations
-        const Animations = {
-            init() {
-                const elements = document.querySelectorAll('.fade-in');
+            this.save();
+            this.render();
+          };
+        });
+        // bread pill
+        document.querySelectorAll('.pill.bread').forEach(btn => {
+          btn.onclick = (e) => {
+            e.stopPropagation();
+            const day = +btn.dataset.day;
+            const d = this.state.days[day];
+            d.breadFlag = !d.breadFlag;
+            this.save(); this.render();
+          };
+        });
+        // weekend toggle
+        const wt = document.getElementById('weekendToggle');
+        if (wt) wt.onclick = () => { this.state.showWeekend = !this.state.showWeekend; this.save(); this.render(); };
+      }
 
-                const observer = new IntersectionObserver((entries) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            entry.target.classList.add('visible');
-                            observer.unobserve(entry.target);
-                        }
-                    });
-                }, {
-                    threshold: 0.1,
-                    rootMargin: '0px 0px -50px 0px'
-                });
+      dinnerOptions(d) {
+        const w = (d.name === 'Saturday' || d.name === 'Sunday');
+        if (d.dinnerType === 'quick') return CATS.dinnerQuick;
+        if (d.dinnerType === 'delivery') return CATS.delivery;
+        if (w) return CATS.dinnerWeekend;
+        return CATS.dinnerRegular;
+      }
 
-                elements.forEach(el => observer.observe(el));
+      grid(type, selected, options) {
+        return `<div class="grid" data-type="${type}">
+      ${options.map(name => `
+        <div class="tile ${selected === name ? 'selected' : ''}" data-meal="${name}" data-type="${type}">
+          <div class="emo">${MEAL_EMOJI[name] || '❓'}</div>
+          <div>${name}</div>
+        </div>`).join('')}
+    </div>`;
+      }
+
+      openBreakfast(i) {
+        const d = this.state.days[i];
+        if (!(d.name === 'Saturday' || d.name === 'Sunday')) return;
+        this.idx = i;
+        let body = this.grid('breakfast', d.breakfast, CATS.breakfast);
+        if (d.breakfast === 'Custom') {
+          body += `<div class="field"><div class="label">Custom Breakfast</div><input class="input" id="customBreakfastInput" value="${d.customBreakfast || ''}" placeholder="Enter custom breakfast"/></div>`;
+        }
+        this.showSheet({
+          title: `Breakfast — ${d.name}`,
+          sub: this.fmtDate(d.date),
+          body,
+          footer: [
+            { label: '🎲 Random', cb: () => this.randomize('breakfast', i) },
+            { label: '❌ Cancel', cb: () => this.hideSheet() },
+            { label: '✅ Save', cb: () => this.saveBreakfast(i) }
+          ]
+        });
+      }
+      saveBreakfast(i) {
+        const d = this.state.days[i];
+        if (d.breakfast === 'Custom') { const el = document.getElementById('customBreakfastInput'); if (el) d.customBreakfast = el.value; }
+        this.save(); this.render(); this.hideSheet(); this.toast('Saved! ✓');
+      }
+
+      openLunch(i) {
+        const d = this.state.days[i]; this.idx = i;
+        let body = this.grid('lunch', d.lunch, CATS.lunch);
+        if (d.lunch === 'Custom') {
+          body += `<div class="field"><div class="label">Custom Lunch</div><input class="input" id="customLunchInput" value="${d.customLunch || ''}" placeholder="Enter custom meal"/></div>`;
+        }
+        this.showSheet({
+          title: `Lunch — ${d.name}`,
+          sub: this.fmtDate(d.date),
+          body,
+          footer: [
+            { label: '🎲 Random', cb: () => this.randomize('lunch', i) },
+            { label: '❌ Cancel', cb: () => this.hideSheet() },
+            { label: '✅ Save', cb: () => this.saveLunch(i) }
+          ]
+        });
+      }
+      saveLunch(i) {
+        const d = this.state.days[i];
+        if (d.lunch === 'Custom') { const el = document.getElementById('customLunchInput'); if (el) d.customLunch = el.value; }
+        this.save(); this.render(); this.hideSheet(); this.toast('Saved! ✓');
+      }
+
+      openDinner(i) {
+        const d = this.state.days[i]; this.idx = i;
+        let body = `
+      <div class="control-row">
+        <div class="kbd">Dinner Type</div>
+        <div>
+          <button class="pill bread ${d.breadFlag ? 'is-on' : ''}" id="modalBread" data-day="${i}">
+            ${d.breadFlag ? '🍞 Bread' : '🚫 No Bread'}
+          </button>
+          <button class="tag ${d.dinnerType === 'quick' ? 'active quick' : ''}" id="modalQuick">⚡ Quick</button>
+          <button class="tag ${d.dinnerType === 'delivery' ? 'active delivery' : ''}" id="modalDelivery">🚚 Delivery</button>
+        </div>
+      </div>`;
+        body += this.grid('dinner', d.dinner, this.dinnerOptions(d));
+        if (d.dinner === 'Custom') {
+          body += `<div class="field"><div class="label">Custom Dinner</div><input class="input" id="customDinnerInput" value="${d.customDinner || ''}" placeholder="Enter custom meal"/></div>`;
+        }
+        body += `<div class="field"><div class="label">Side Dishes</div></div>`;
+        body += this.multiGrid('side', d.side, CATS.side);
+        if (d.side.includes('Custom')) {
+          body += `<div class="field"><input class="input" id="customSideInput" value="${d.customSide.join(', ') || ''}" placeholder="Enter custom sides (comma-separated)"/></div>`;
+        }
+
+        this.showSheet({
+          title: `Dinner — ${d.name}`,
+          sub: this.fmtDate(d.date),
+          body,
+          footer: [
+            { label: '🎲 Random', cb: () => this.randomize('dinner', i) },
+            { label: '❌ Cancel', cb: () => this.hideSheet() },
+            { label: '✅ Save', cb: () => this.saveDinner(i) }
+          ],
+          after: () => {
+            // Fix: Add click handler for the bread button in modal
+            const breadBtn = document.getElementById('modalBread');
+            if (breadBtn) {
+              breadBtn.onclick = () => {
+                d.breadFlag = !d.breadFlag;
+                this.openDinner(i); // Refresh the modal to show updated state
+              };
             }
-        };
 
-        // Optimized Floating CTA
-        const FloatingCTA = {
-            init() {
-                const cta = document.querySelector('.floating-cta');
-                const heroSection = document.querySelector('.hero');
-                if (!cta || !heroSection) return;
+            const q = document.getElementById('modalQuick');
+            const dl = document.getElementById('modalDelivery');
+            if (q) q.onclick = () => {
+              d.dinnerType = (d.dinnerType === 'quick' ? 'regular' : 'quick');
+              d.dinner = null;
+              d.customDinner = null;
+              this.openDinner(i);
+            };
+            if (dl) dl.onclick = () => {
+              d.dinnerType = (d.dinnerType === 'delivery' ? 'regular' : 'delivery');
+              d.dinner = null;
+              d.customDinner = null;
+              if (d.dinnerType === 'delivery') { d.side = []; d.customSide = []; }
+              this.openDinner(i);
+            };
+          }
+        });
+      }
 
-                let ticking = false;
+      multiGrid(type, selectedArr, options) {
+        return `<div class="grid" data-type="${type}">
+    ${options.map(name => `
+      <div class="tile ${selectedArr.includes(name) ? 'selected' : ''}" data-meal="${name}" data-type="${type}">
+        <div class="emo">${MEAL_EMOJI[name] || '❓'}</div>
+        <div>${name}</div>
+      </div>`).join('')}
+  </div>`;
+      }
 
-                const updateCTA = () => {
-                    const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
-                    const visible = window.pageYOffset > heroBottom;
-                    cta.classList.toggle('visible', visible);
-                    ticking = false;
-                };
+      saveDinner(i) {
+        const d = this.state.days[i];
+        if (d.dinner === 'Custom') { const el = document.getElementById('customDinnerInput'); if (el) d.customDinner = el.value; }
+        if (d.side === 'Custom') { const el = document.getElementById('customSideInput'); if (el) d.customSide = el.value; }
+        if (d.side.includes('Custom')) {
+          const el = document.getElementById('customSideInput');
+          if (el) d.customSide = el.value.split(',').map(s => s.trim()).filter(Boolean);
+        }
+        this.save(); this.render(); this.hideSheet(); this.toast('Saved! ✓');
+      }
 
-                window.addEventListener('scroll', () => {
-                    if (!ticking) {
-                        requestAnimationFrame(updateCTA);
-                        ticking = true;
-                    }
-                }, { passive: true });
-            }
-        };
+      showSheet({ title, sub, body, footer, after }) {
+        const ov = document.getElementById('modalOverlay');
+        const sh = document.getElementById('sheet');
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalSubtitle').textContent = sub || '';
+        document.getElementById('modalBody').innerHTML = body;
+        const foot = document.getElementById('modalFooter'); foot.innerHTML = '';
+        (footer || []).forEach(f => {
+          const b = document.createElement('button');
+          b.className = 'btn';
+          if (f.className) b.classList.add(f.className);
+          b.textContent = f.label; b.onclick = f.cb; foot.appendChild(b);
+        });
+        ov.classList.add('show');
+        // bind tiles
+        setTimeout(() => {
+          document.querySelectorAll('.tile').forEach(t => {
+            t.onclick = () => {
+              const type = t.dataset.type, val = t.dataset.meal;
+              const d = this.state.days[this.idx];
 
-        // Optimized Form Handling
-        const ContactForm = {
-            init() {
-                const form = document.getElementById('contactForm');
-                if (!form) return;
-
-                form.addEventListener('submit', this.handleSubmit.bind(this));
-            },
-
-            async handleSubmit(e) {
-                e.preventDefault();
-
-                const form = e.target;
-                const formData = new FormData(form);
-                const data = Object.fromEntries(formData);
-
-                // Clear previous errors
-                this.clearErrors();
-
-                // Validate
-                if (!this.validate(data)) return;
-
-                try {
-                    const response = await fetch(form.action, {
-                        method: form.method,
-                        body: formData,
-                        headers: { 'Accept': 'application/json' }
-                    });
-
-                    if (response.ok) {
-                        this.showSuccess();
-                        form.reset();
-                    } else {
-                        throw new Error('Form submission failed');
-                    }
-                } catch (error) {
-                    console.error('Form submission error:', error);
+              if (type === 'side') {
+                if (!d.side) d.side = [];
+                if (d.side.includes(val)) {
+                  d.side = d.side.filter(x => x !== val);
+                } else {
+                  d.side.push(val);
                 }
-            },
-
-            validate(data) {
-                let isValid = true;
-
-                if (!data.name?.trim()) {
-                    this.showError('name', 'Please enter your name');
-                    isValid = false;
+                if (val === 'Custom' && !d.customSide.includes(val)) {
+                  this.openDinner(this.idx);
+                } else {
+                  t.classList.toggle('selected');
                 }
-
-                if (!data.email?.trim() || !this.isValidEmail(data.email)) {
-                    this.showError('email', 'Please enter a valid email');
-                    isValid = false;
+              } else {
+                if (d[type] === val) {
+                  d[type] = null;
+                  t.classList.remove('selected');
+                } else {
+                  document.querySelectorAll(`.grid[data-type="${type}"] .tile`).forEach(x => x.classList.remove('selected'));
+                  t.classList.add('selected');
+                  d[type] = val;
+                  if (val === 'Custom') {
+                    if (type === 'breakfast') this.openBreakfast(this.idx);
+                    else if (type === 'lunch') this.openLunch(this.idx);
+                    else this.openDinner(this.idx);
+                  } else {
+                    if (type === 'breakfast') this.openBreakfast(this.idx);
+                    else if (type === 'lunch') this.openLunch(this.idx);
+                    else this.openDinner(this.idx);
+                  }
                 }
+              }
+            };
+          });
+          after && after();
+        }, 0);
+      }
+      hideSheet() { document.getElementById('modalOverlay').classList.remove('show'); }
 
-                if (!data.message?.trim()) {
-                    this.showError('message', 'Please provide details');
-                    isValid = false;
-                }
+      clear(type, i) {
+        const d = this.state.days[i];
+        d[type] = null; d[`custom${type[0].toUpperCase() + type.slice(1)}`] = null;
+        if (type === 'dinner') { d.side = []; d.customSide = []; }
+        (type === 'breakfast') ? this.openBreakfast(i) : (type === 'lunch') ? this.openLunch(i) : this.openDinner(i);
+      }
 
-                return isValid;
-            },
+      randomize(type, i) {
+        const d = this.state.days[i];
+        let opts = [];
+        if (type === 'breakfast') opts = CATS.breakfast;
+        else if (type === 'lunch') opts = CATS.lunch;
+        else opts = this.dinnerOptions(d);
+        opts = opts.filter(x => x !== 'Custom');
+        if (opts.length) d[type] = opts[Math.floor(Math.random() * opts.length)];
+        if (type === 'dinner' && d.dinnerType !== 'delivery') {
+          const so = CATS.side.filter(x => x !== 'Custom');
+          d.side = [so[Math.floor(Math.random() * so.length)]];
+        }
+        (type === 'breakfast') ? this.openBreakfast(i) : (type === 'lunch') ? this.openLunch(i) : this.openDinner(i);
+      }
 
-            isValidEmail(email) {
-                return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-            },
+      randomizeWeek() {
+        const lo = CATS.lunch.filter(x => x !== 'Custom');
+        const so = CATS.side.filter(x => x !== 'Custom');
+        const bo = CATS.breakfast.filter(x => x !== 'Custom');
+        this.state.days.forEach(d => {
+          if (d.name === 'Saturday' || d.name === 'Sunday') { d.breakfast = bo[Math.floor(Math.random() * bo.length)]; }
+          else { d.breakfast = null; d.customBreakfast = null; }
+          const do_ = this.dinnerOptions(d).filter(x => x !== 'Custom');
+          d.lunch = lo[Math.floor(Math.random() * lo.length)];
+          d.dinner = do_[Math.floor(Math.random() * do_.length)];
+          if (d.dinnerType !== 'delivery') {
+            d.side = [so[Math.floor(Math.random() * so.length)]];
+          }
+        });
+        this.save(); this.render(); this.toast('Week randomized! 🎲');
+      }
 
-            showError(fieldName, message) {
-                const field = document.getElementById(fieldName);
-                const group = field?.closest('.form-group');
-                const error = group?.querySelector('.form-error');
+      clearWeek() {
+        if (confirm('Clear all meals for this week?')) {
+          this.state.days.forEach(d => {
+            d.breakfast = d.lunch = d.dinner = null;
+            d.customBreakfast = d.customLunch = d.customDinner = null;
+            d.side = d.customSide = [];
+            d.dinnerType = 'regular'; d.breadFlag = false;
+          });
+          this.save(); this.render(); this.toast('Week cleared');
+        }
+      }
 
-                if (group && error) {
-                    group.classList.add('error');
-                    error.textContent = message;
-                }
-            },
+      groceries() {
+        const map = {}; const add = (s, i) => { if (!map[s]) map[s] = []; if (!map[s].includes(i)) map[s].push(i); };
+        this.state.days.forEach(d => {
+          const list = [];
+          if ((d.name === 'Saturday' || d.name === 'Sunday') && d.breakfast && d.breakfast !== 'Custom') list.push(d.breakfast);
+          ['lunch', 'dinner'].forEach(t => { if (d[t] && d[t] !== 'Custom') list.push(d[t]); });
+          (d.side || []).forEach(s => { if (s && s !== 'Custom') list.push(s); });
+          if (d.breadFlag) list.push('Bread');
+          list.forEach(m => {
+            const ings = MEAL_ING[m] || [];
+            ings.forEach(ing => {
+              const store = this.storeFor(ing); add(store, ing);
+            });
+          });
+        });
+        return map;
+      }
+      storeFor(ing) { for (const [s, items] of Object.entries(STORES)) if (items.includes(ing)) return s; return 'Other' }
 
-            clearErrors() {
-                document.querySelectorAll('.form-group.error').forEach(group => {
-                    group.classList.remove('error');
-                });
-            },
+      openShopping() {
+        const g = this.groceries(), stores = Object.keys(g).sort();
+        let body = '';
+        stores.forEach(s => {
+          body += `<div class="field"><div class="label" style="margin-bottom:8px;font-size:13px;font-weight:900">${s}</div></div>`;
+          body += `<div class="grid" style="grid-template-columns:1fr">` +
+            g[s].map(it => `<div class="tile" style="justify-content:flex-start;flex-direction:row;gap:10px">
+          <div class="emo">${ING_EMOJI[it] || '🛒'}</div><div style="font-weight:700">${it}</div>
+        </div>`).join('') + `</div>`;
+        });
+        this.showSheet({
+          title: 'Shopping List',
+          sub: 'Check off items as you shop',
+          body,
+          footer: [
+            { label: 'Close', cb: () => this.hideSheet() },
+            { label: 'Share', cb: () => this.shareShopping(g) }
+          ]
+        });
+      }
+      shareShopping(g) {
+        let t = '🛒 Shopping List\n\n';
+        Object.keys(g).sort().forEach(s => {
+          t += `${s}:\n`; g[s].forEach(i => t += `• ${ING_EMOJI[i] || ''} ${i}\n`); t += '\n';
+        });
+        this.share('Shopping List', t);
+      }
 
-            showSuccess() {
-                const success = document.getElementById('formSuccess');
-                if (success) {
-                    success.classList.add('show');
-                    setTimeout(() => success.classList.remove('show'), 5000);
-                }
-            }
-        };
+      shareWeek() {
+        let t = '🗓️ Weekly Meal Plan\n\n';
+        this.state.days.forEach(d => {
+          t += `${d.name} (${this.fmtDate(d.date)})\n`;
 
-        // Global functions for inline handlers
-        window.toggleTheme = () => Theme.toggle();
-        window.toggleMobileNav = () => Navigation.toggleMobile();
+          const b = d.breakfast === 'Custom' ? d.customBreakfast : d.breakfast;
+          const l = d.lunch === 'Custom' ? d.customLunch : d.lunch;
+          const dn = d.dinner === 'Custom' ? d.customDinner : d.dinner;
 
-        // Initialize everything
-        document.addEventListener('DOMContentLoaded', () => {
-            Theme.init();
-            Navigation.init();
-            Animations.init();
-            FloatingCTA.init();
-            ContactForm.init();
+          const be = b ? (MEAL_EMOJI[b] || '❓') + ' ' + b : '—';
+          const le = l ? (MEAL_EMOJI[l] || '❓') + ' ' + l : '—';
+          const de = dn ? (MEAL_EMOJI[dn] || '❓') + ' ' + dn : '—';
+
+          if (d.name === 'Saturday' || d.name === 'Sunday') {
+            t += `  Breakfast: ${be}\n`;
+          }
+          t += `  Lunch: ${le}\n  Dinner: ${de}`;
+          if (d.dinnerType === 'delivery') t += ' [Delivery]';
+          else if (d.dinnerType === 'quick') t += ' [Quick]';
+
+          // Sides con emoji
+          if (d.side?.length) {
+            const sides = d.side.map(s =>
+              s === 'Custom'
+                ? d.customSide.map(cs => (MEAL_EMOJI[cs] || '❓') + ' ' + cs).join(', ')
+                : (MEAL_EMOJI[s] || '❓') + ' ' + s
+            );
+            t += `\n  Sides: ${sides.join(', ')}`;
+          }
+
+          if (d.breadFlag) t += `\n  Bread: yes`;
+          t += '\n\n';
         });
 
-        // Performance optimizations
-        // Preload critical resources
-        const preloadCriticalResources = () => {
-            const heroImage = document.querySelector('.hero-image');
-            if (heroImage && heroImage.src) {
-                const link = document.createElement('link');
-                link.rel = 'preload';
-                link.href = heroImage.src;
-                link.as = 'image';
-                document.head.appendChild(link);
-            }
+        const g = this.groceries();
+        t += '\n🛒 Shopping List\n\n';
+        Object.keys(g).sort().forEach(s => {
+          t += `${s}:\n`;
+          g[s].forEach(i => t += `• ${ING_EMOJI[i] || ''} ${i}\n`);
+          t += '\n';
+        });
+
+        this.share('Meal Plan & Shopping', t);
+      }
+
+      shareRecap() {
+        let recap = '🗓️ Weekly Meal Plan\n\n';
+        this.state.days.forEach(d => {
+          recap += `${d.name} (${this.fmtDate(d.date)})\n`;
+
+          const b = d.breakfast === 'Custom' ? d.customBreakfast : d.breakfast;
+          const l = d.lunch === 'Custom' ? d.customLunch : d.lunch;
+          const dn = d.dinner === 'Custom' ? d.customDinner : d.dinner;
+
+          const be = b ? (MEAL_EMOJI[b] || '❓') + ' ' + b : '—';
+          const le = l ? (MEAL_EMOJI[l] || '❓') + ' ' + l : '—';
+          const de = dn ? (MEAL_EMOJI[dn] || '❓') + ' ' + dn : '—';
+
+          if (d.name === 'Saturday' || d.name === 'Sunday') {
+            recap += `  Breakfast: ${be}\n`;
+          }
+          recap += `  Lunch: ${le}\n  Dinner: ${de}`;
+          if (d.dinnerType === 'delivery') recap += ' [Delivery]';
+          else if (d.dinnerType === 'quick') recap += ' [Quick]';
+
+          // Sides con emoji
+          if (d.side?.length) {
+            const sides = d.side.map(s =>
+              s === 'Custom'
+                ? d.customSide.map(cs => (MEAL_EMOJI[cs] || '❓') + ' ' + cs).join(', ')
+                : (MEAL_EMOJI[s] || '❓') + ' ' + s
+            );
+            recap += `\n  Sides: ${sides.join(', ')}`;
+          }
+
+          if (d.breadFlag) recap += `\n  Bread: yes`;
+          recap += '\n\n';
+        });
+
+        const g = this.groceries();
+        recap += '\n🛒 Shopping List\n\n';
+        Object.keys(g).sort().forEach(s => {
+          recap += `${s}:\n`;
+          g[s].forEach(i => recap += `• ${ING_EMOJI[i] || ''} ${i}\n`);
+          recap += '\n';
+        });
+
+        let body = `<pre style="white-space:pre-wrap;font-size:13px;line-height:1.4em;padding:12px">${recap}</pre>`;
+
+        this.showSheet({
+          title: 'Share Meal Plan',
+          sub: 'Weekly recap + shopping list',
+          body,
+          footer: [
+            { label: 'Close', cb: () => this.hideSheet() },
+            { label: 'Export', cb: () => this.exportICS() },
+            { label: 'Send', cb: () => this.share('Meal Plan & Shopping', recap) }
+          ]
+        });
+      }
+
+      share(title, text) { if (navigator.share) navigator.share({ title, text }); else if (navigator.clipboard) { navigator.clipboard.writeText(text); this.toast('Copied to clipboard! 📋'); } }
+      toast(msg) { const el = document.getElementById('toast'); el.textContent = msg; el.classList.add('show'); setTimeout(() => el.classList.remove('show'), 1800); }
+
+exportICS() {
+  function fmtDateTime(date, hour, min = 0) {
+    const d = new Date(date);
+    d.setHours(hour, min, 0, 0);
+    return d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+  }
+  function fmtDate(date) {
+    const d = new Date(date);
+    d.setHours(0, 0, 0, 0);
+    return d.toISOString().replace(/[-:]/g, "").split("T")[0].replace(/-/g, "");
+  }
+
+  let ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//MealPlanner//EN\n";
+
+  this.state.days.forEach(d => {
+    const dayName = new Date(d.date).toLocaleDateString("en-US", { weekday: "long" });
+
+    // ✅ Breakfast (solo se esiste)
+    if (d.breakfast) {
+      const title = "Breakfast: " + (d.breakfast === "Custom" ? d.customBreakfast : d.breakfast);
+      ics += "BEGIN:VEVENT\n";
+      ics += "SUMMARY:" + title + "\n";
+      // esempio: 8:00 - 9:00
+      ics += "DTSTART:" + fmtDateTime(d.date, 8, 0) + "\n";
+      ics += "DTEND:" + fmtDateTime(d.date, 9, 0) + "\n";
+      ics += "END:VEVENT\n";
+    }
+
+    // Lunch
+    if (d.lunch) {
+      const title = "Lunch: " + (d.lunch === "Custom" ? d.customLunch : d.lunch);
+      ics += "BEGIN:VEVENT\n";
+      ics += "SUMMARY:" + title + "\n";
+      ics += "DTSTART:" + fmtDateTime(d.date, 13, 0) + "\n";
+      ics += "DTEND:" + fmtDateTime(d.date, 14, 0) + "\n";
+      ics += "END:VEVENT\n";
+    }
+
+    // Dinner
+    if (d.dinner) {
+      let title = "Dinner: " + (d.dinner === "Custom" ? d.customDinner : d.dinner);
+      if (d.side && d.side.length) {
+        const sides = d.side.map(s => s === "Custom" ? d.customSide.join(", ") : s);
+        title += " + " + sides.join(", ");
+      }
+      ics += "BEGIN:VEVENT\n";
+      ics += "SUMMARY:" + title + "\n";
+      ics += "DTSTART:" + fmtDateTime(d.date, 20, 0) + "\n";
+      ics += "DTEND:" + fmtDateTime(d.date, 21, 0) + "\n";
+      ics += "END:VEVENT\n";
+    }
+
+    // Bread (all day)
+    if (d.breadFlag) {
+      ics += "BEGIN:VEVENT\n";
+      ics += "SUMMARY:Bread\n";
+      ics += "DTSTART;VALUE=DATE:" + fmtDate(d.date) + "\n";
+      ics += "DTEND;VALUE=DATE:" + fmtDate(new Date(new Date(d.date).getTime() + 86400000)) + "\n";
+      ics += "END:VEVENT\n";
+    }
+  });
+
+  ics += "END:VCALENDAR";
+
+  // download
+  const blob = new Blob([ics], { type: "text/calendar" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "mealplan.ics";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+      bindGlobal() {
+        const on = (id, fn) => document.getElementById(id).onclick = fn;
+        on('themeToggle', () => this.toggleTheme());
+        on('prevWeek', () => this.nav('prev'));
+        on('nextWeek', () => this.nav('next'));
+        on('randomizeBtn', () => this.randomizeWeek());
+        on('shareBtn', () => this.shareRecap());
+        on('clearBtn', () => this.clearWeek());
+        // overlay close
+        document.getElementById('modalOverlay').onclick = (e) => {
+          if (e.target.id === 'modalOverlay') this.hideSheet();
         };
+        // keys
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') this.hideSheet();
+          const open = document.getElementById('modalOverlay').classList.contains('show');
+          if (e.key === 'ArrowLeft' && !open) this.nav('prev');
+          if (e.key === 'ArrowRight' && !open) this.nav('next');
+        });
+      }
+    }
 
-        // Debounced resize handler
-        let resizeTimeout;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimeout);
-            resizeTimeout = setTimeout(() => {
-                // Handle any resize-specific logic here
-                document.dispatchEvent(new CustomEvent('optimizedResize'));
-            }, 150);
-        }, { passive: true });
-
-        // Initialize performance optimizations
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', preloadCriticalResources);
-        } else {
-            preloadCriticalResources();
-        }
-
-        // Service Worker registration for enhanced performance (optional)
-        if ('serviceWorker' in navigator && window.location.protocol === 'https:') {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js').catch(() => {
-                    // Service worker registration failed, but continue normally
-                });
-            });
-        }
-    </script>
-
-    <!-- Analytics and Performance Monitoring (placeholder) -->
-    <script>
-        // Add your analytics code here (Google Analytics, etc.)
-        // Example:
-        // gtag('config', 'GA_MEASUREMENT_ID');
-    </script>
+    document.addEventListener('DOMContentLoaded', () => { window.app = new MealPlanner(); });
+  </script>
 </body>
+
 </html>
