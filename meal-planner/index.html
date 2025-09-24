@@ -645,24 +645,19 @@
       background: var(--bg-soft);
     }
 
-    .pill.bread {
-      font-size: 12px;
-      font-weight: 700;
-      padding: 6px 12px;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--bg-soft);
-      color: var(--muted);
-      /* grigio quando off */
-      cursor: pointer;
-    }
+.pill.bread {
+  border: 1px dashed #aaa;
+  background: transparent;
+  color: #bbb;
+  opacity: 0.4;
+}
 
-    .pill.bread.is-on {
-      background: var(--tint-2);
-      color: #fff;
-      /* bianco su verde quando on */
-      border-color: transparent;
-    }
+.pill.bread.is-on {
+  background: var(--tint-2);
+  color: #fff;
+  border: none;
+  opacity: 1;
+}
 
     #modalDinnerType {
       font-weight: 700;
@@ -700,7 +695,7 @@
     </div>
   </div>
 
-  <!-- Bottom Sheet Modal -->
+  
   <div id="modalOverlay" class="modal-overlay"></div>
   <section id="sheet" class="sheet" aria-modal="true" role="dialog">
     <div class="sheet-head">
@@ -712,7 +707,6 @@
         <div id="modalBreadWrap"></div>
       </div>
     </div>
-
 
     <div class="sheet-body" id="modalBody"></div>
     <div class="sheet-foot" id="modalFooter"></div>
@@ -970,7 +964,7 @@
       init() { this.applyTheme(); this.render(); this.bindGlobal(); }
 
       applyTheme() {
-        // Use class-based theme switching
+        
         if (this.state.theme === 'dark') {
           document.body.classList.add('dark');
         } else {
@@ -1037,12 +1031,10 @@
         const lSides = (d.side && d.lunch?.length) ? ` • ${sides}` : '';
         const dSides = (d.side && d.dinner?.length) ? ` • ${sides}` : '';
 
-
-        // pick first emoji just for the icon
+        
         const be = d.breakfast?.length ? MEAL_EMOJI[d.breakfast[0]] || '❓' : '❓';
         const le = d.lunch?.length ? MEAL_EMOJI[d.lunch[0]] || '❓' : '❓';
         const de = d.dinner?.length ? MEAL_EMOJI[d.dinner[0]] || '❓' : '❓';
-
 
         const need = (d.dinnerType === 'delivery' ? 2 : 3) + (w ? 1 : 0);
         const comp = (w && d.breakfast ? 1 : 0) + (d.lunch ? 1 : 0) + (d.dinner ? 1 : 0) + (d.dinnerType !== 'delivery' && d.side ? 1 : 0);
@@ -1094,7 +1086,7 @@
       }
 
       bindDays() {
-        // open rows
+        
         document.querySelectorAll('.meal').forEach(el => {
           el.onclick = () => {
             const day = +el.dataset.day;
@@ -1105,7 +1097,7 @@
           };
         });
 
-        // bread pill
+        
         document.querySelectorAll('.pill.bread').forEach(btn => {
           btn.onclick = (e) => {
             e.stopPropagation();
@@ -1115,16 +1107,16 @@
             this.save(); this.render();
           };
         });
-        // dinner mode popover
+        
         document.querySelectorAll('.mode-btn').forEach(btn => {
           btn.onclick = (e) => {
             e.stopPropagation();
             const day = +btn.dataset.day;
 
-            // rimuovi eventuale popover già aperto
+            
             document.querySelectorAll('.popover').forEach(p => p.remove());
 
-            // crea nuovo popover
+            
             const pop = document.createElement('div');
             pop.className = 'popover';
             pop.innerHTML = `
@@ -1134,13 +1126,13 @@
     `;
             document.body.appendChild(pop);
 
-            // posizione accanto al bottone
+            
             const rect = btn.getBoundingClientRect();
             pop.style.top = (rect.bottom + window.scrollY + 4) + 'px';
             pop.style.left = (rect.left + window.scrollX) + 'px';
             pop.style.display = 'block';
 
-            // click sulle opzioni
+            
             pop.querySelectorAll('button').forEach(opt => {
               opt.onclick = () => {
                 const type = opt.dataset.type;
@@ -1156,7 +1148,7 @@
               };
             });
 
-            // chiudi se clicchi fuori
+            
             document.addEventListener('click', (ev) => {
               if (!pop.contains(ev.target) && ev.target !== btn) {
                 pop.remove();
@@ -1165,7 +1157,7 @@
           };
         });
 
-        // weekend toggle
+        
         const wt = document.getElementById('weekendToggle');
         if (wt) wt.onclick = () => { this.state.showWeekend = !this.state.showWeekend; this.save(); this.render(); };
       }
@@ -1215,7 +1207,7 @@
       saveBreakfast(i) {
         const d = this.state.days[i];
 
-        // se Custom selezionato ma campo vuoto → togli Custom
+        
         if (d.breakfast.includes('Custom')) {
           const el = document.getElementById('customBreakfastInput');
           if (!el || !el.value.trim()) {
@@ -1260,7 +1252,7 @@
           }
         }
 
-        // ⚠️ se contorni selezionati ma nessun piatto principale
+        
         if (!d.lunch.length && d.side.length) {
           alert('Please select a main dish before adding side dishes.');
           return;
@@ -1273,7 +1265,7 @@
         const d = this.state.days[i]; this.idx = i;
         this.idx = i;
 
-        // aggiorna il pulsante bread nell’header
+        
         const wrap = document.getElementById('modalBreadWrap');
         if (wrap) {
           wrap.innerHTML = `
@@ -1318,7 +1310,7 @@
             if (breadBtn) {
               breadBtn.onclick = () => {
                 d.breadFlag = !d.breadFlag;
-                this.openDinner(i); // ricarica la modale con stato aggiornato
+                this.openDinner(i); 
               };
             }
 
@@ -1328,7 +1320,7 @@
                 d.dinnerType = typeSel.value;
                 d.dinner = [];
                 d.customDinner = [];
-                this.openDinner(i); // ricarica la modale con la nuova categoria
+                this.openDinner(i); 
               };
             }
           }
@@ -1358,7 +1350,7 @@
           }
         }
 
-        // ⚠️ se contorni selezionati ma nessun piatto principale
+        
         if (!d.dinner.length && d.side.length) {
           alert('Please select a main dish before adding side dishes.');
           return;
@@ -1372,6 +1364,10 @@
         document.getElementById('modalTitle').textContent = title;
         document.getElementById('modalSubtitle').textContent = sub || '';
         document.getElementById('modalBody').innerHTML = body;
+        const bw = document.getElementById('modalBreadWrap');
+        if (bw && !title.startsWith('Dinner')) {
+          bw.innerHTML = '';
+        }
         const foot = document.getElementById('modalFooter');
         foot.innerHTML = '';
         (footer || []).forEach(f => {
@@ -1384,7 +1380,7 @@
         });
         ov.classList.add('show');
 
-        // bind tiles
+        
         setTimeout(() => {
           document.querySelectorAll('.tile').forEach(t => {
             t.onclick = () => {
@@ -1394,23 +1390,23 @@
               if (!Array.isArray(d[type])) d[type] = [];
 
               if (d[type].includes(val)) {
-                // remove selection
+                
                 d[type] = d[type].filter(x => x !== val);
                 t.classList.remove('selected');
 
                 if (val === 'Custom') {
-                  // 🔴 remove custom input if Custom was deselected
+                  
                   const field = document.getElementById(`custom${type}Field`);
                   if (field) field.remove();
                   d[`custom${type[0].toUpperCase() + type.slice(1)}`] = null;
                 }
               } else {
-                // add selection
+                
                 d[type].push(val);
                 t.classList.add('selected');
 
                 if (val === 'Custom') {
-                  // 🟢 inject input field
+                  
                   const container = document.getElementById('modalBody');
                   const field = document.createElement('div');
                   field.className = 'field';
@@ -1557,7 +1553,7 @@
           if (d.dinnerType === 'delivery') t += ' [Delivery]';
           else if (d.dinnerType === 'quick') t += ' [Quick]';
 
-          // Sides con emoji
+          
           if (d.side?.length) {
             const sides = d.side.map(s =>
               s === 'Custom'
@@ -1602,7 +1598,7 @@
           if (d.dinnerType === 'delivery') recap += ' [Delivery]';
           else if (d.dinnerType === 'quick') recap += ' [Quick]';
 
-          // Sides con emoji
+          
           if (d.side?.length) {
             const sides = d.side.map(s =>
               s === 'Custom'
@@ -1653,34 +1649,34 @@
           return d.toISOString().replace(/[-:]/g, "").split("T")[0].replace(/-/g, "");
         }
 
-        let ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//MealPlanner//EN\n";
+        let ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-
 
         this.state.days.forEach(d => {
           const dayName = new Date(d.date).toLocaleDateString("en-US", { weekday: "long" });
 
-          // ✅ Breakfast (solo se esiste)
+          
           if (d.breakfast) {
             const title = "Breakfast: " + (d.breakfast === "Custom" ? d.customBreakfast : d.breakfast);
             ics += "BEGIN:VEVENT\n";
             ics += "SUMMARY:" + title + "\n";
-            // Breakfast → 8:00–9:00
+            
             ics += "DTSTART:" + fmtDateTime(d.date, 8, 0) + "\n";
             ics += "DTEND:" + fmtDateTime(d.date, 9, 0) + "\n";
             ics += "END:VEVENT\n";
           }
 
-          // Lunch
+          
           if (d.lunch) {
             const title = "Lunch: " + (d.lunch === "Custom" ? d.customLunch : d.lunch);
             ics += "BEGIN:VEVENT\n";
             ics += "SUMMARY:" + title + "\n";
-            // Lunch → 13:00–13:45
+            
             ics += "DTSTART:" + fmtDateTime(d.date, 13, 0) + "\n";
             ics += "DTEND:" + fmtDateTime(d.date, 13, 45) + "\n";
             ics += "END:VEVENT\n";
           }
 
-          // Dinner
+          
           if (d.dinner) {
             let title = "Dinner: " + (d.dinner === "Custom" ? d.customDinner : d.dinner);
             if (d.side && d.side.length) {
@@ -1689,13 +1685,13 @@
             }
             ics += "BEGIN:VEVENT\n";
             ics += "SUMMARY:" + title + "\n";
-            // Dinner → 19:00–20:00
+            
             ics += "DTSTART:" + fmtDateTime(d.date, 19, 0) + "\n";
             ics += "DTEND:" + fmtDateTime(d.date, 20, 0) + "\n";
             ics += "END:VEVENT\n";
           }
 
-          // Bread (all day)
+          
           if (d.breadFlag) {
             ics += "BEGIN:VEVENT\n";
             ics += "SUMMARY:Bread\n";
@@ -1707,7 +1703,7 @@
 
         ics += "END:VCALENDAR";
 
-        // download
+        
         const blob = new Blob([ics], { type: "text/calendar" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
@@ -1725,11 +1721,11 @@
         on('randomizeBtn', () => this.randomizeWeek());
         on('shareBtn', () => this.shareRecap());
         on('clearBtn', () => this.clearWeek());
-        // overlay close
+        
         document.getElementById('modalOverlay').onclick = (e) => {
           if (e.target.id === 'modalOverlay') this.hideSheet();
         };
-        // keys
+        
         document.addEventListener('keydown', (e) => {
           if (e.key === 'Escape') this.hideSheet();
           const open = document.getElementById('modalOverlay').classList.contains('show');
