@@ -964,10 +964,12 @@
         const dnTx = (d.dinner || []).map(m =>
           m === 'Custom' ? (d.customDinner?.join(', ') || 'Custom') : m
         ).join(' • ') || 'Select dinner';
-
         const sides = (d.side || []).map(s =>
           s === 'Custom' ? (d.customSide?.join(', ') || 'Custom') : s
         ).join(' • ');
+        const lSides = (d.side && d.lunch?.length) ? ` • ${sides}` : '';
+        const dSides = (d.side && d.dinner?.length) ? ` • ${sides}` : '';
+
 
         // pick first emoji just for the icon
         const be = d.breakfast?.length ? MEAL_EMOJI[d.breakfast[0]] || '❓' : '❓';
@@ -1004,7 +1006,7 @@
         <div class="icon lunch">${le}</div>
         <div class="content">
           <div class="title">Lunch</div>
-          <div class="desc">${lTx}</div>
+          <div class="desc">${lTx}${lSides ? ` • ${lSides}` : ''}</div>
         </div>
       </div>
 
@@ -1046,10 +1048,6 @@
             if (d.dinnerType === 'quick' || d.dinnerType === 'delivery') {
               d.dinner = [];
               d.customDinner = null;
-            }
-            if (d.dinnerType === 'delivery') {
-              d.side = [];
-              d.customSide = [];
             }
 
             this.save();
@@ -1204,7 +1202,6 @@
               d.dinnerType = (d.dinnerType === 'delivery' ? 'regular' : 'delivery');
               d.dinner = [];
               d.customDinner = null;
-              if (d.dinnerType === 'delivery') { d.side = []; d.customSide = []; }
               this.openDinner(i);
             };
           }
@@ -1303,7 +1300,7 @@
         else opts = this.dinnerOptions(d);
         opts = opts.filter(x => x !== 'Custom');
         if (opts.length) d[type] = [opts[Math.floor(Math.random() * opts.length)]];
-        if (type === 'dinner' && d.dinnerType !== 'delivery') {
+        if ((type === 'lunch' || type === 'dinner')) {
           const so = CATS.side.filter(x => x !== 'Custom');
           d.side = [so[Math.floor(Math.random() * so.length)]];
         }
@@ -1314,6 +1311,7 @@
         const lo = CATS.lunch.filter(x => x !== 'Custom');
         const so = CATS.side.filter(x => x !== 'Custom');
         const bo = CATS.breakfast.filter(x => x !== 'Custom');
+        const do_ = CATS.dinnerRegular.filter(x => x !== 'Custom');
         this.state.days.forEach(d => {
           if (d.name === 'Saturday' || d.name === 'Sunday') {
             d.breakfast = [bo[Math.floor(Math.random() * bo.length)]];
@@ -1323,9 +1321,7 @@
           }
           d.lunch = [lo[Math.floor(Math.random() * lo.length)]];
           d.dinner = [do_[Math.floor(Math.random() * do_.length)]];
-          if (d.dinnerType !== 'delivery') {
-            d.side = [so[Math.floor(Math.random() * so.length)]];
-          }
+          d.side = [so[Math.floor(Math.random() * so.length)]];
         });
         this.save(); this.render(); this.toast('Week randomized! 🎲');
       }
