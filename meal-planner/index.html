@@ -663,6 +663,13 @@
       /* bianco su verde quando on */
       border-color: transparent;
     }
+
+    #modalDinnerType {
+      font-weight: 700;
+      font-size: 14px;
+      padding-right: 28px;
+      width: 100%;
+    }
   </style>
 </head>
 
@@ -1277,13 +1284,15 @@
         }
 
         let body = `
-    <div class="control-row">
+    <div class="control-row" style="flex-direction:column;align-items:flex-start;gap:6px">
       <div class="kbd">Dinner Type</div>
-      <div>
-        <button class="tag ${d.dinnerType === 'quick' ? 'active quick' : ''}" id="modalQuick">⚡ Quick</button>
-        <button class="tag ${d.dinnerType === 'delivery' ? 'active delivery' : ''}" id="modalDelivery">🚚 Delivery</button>
-      </div>
+      <select id="modalDinnerType" class="input">
+        <option value="regular" ${d.dinnerType === 'regular' ? 'selected' : ''}>🍽️ Regular</option>
+        <option value="quick" ${d.dinnerType === 'quick' ? 'selected' : ''}>⚡ Quick</option>
+        <option value="delivery" ${d.dinnerType === 'delivery' ? 'selected' : ''}>🚚 Delivery</option>
+      </select>
     </div>`;
+
         body += this.multiGrid('dinner', d.dinner, this.dinnerOptions(d));
         if (d.dinner.includes('Custom')) {
           body += `<div class="field"><div class="label">Custom Dinner</div>
@@ -1313,20 +1322,15 @@
               };
             }
 
-            const q = document.getElementById('modalQuick');
-            const dl = document.getElementById('modalDelivery');
-            if (q) q.onclick = () => {
-              d.dinnerType = (d.dinnerType === 'quick' ? 'regular' : 'quick');
-              d.dinner = [];
-              d.customDinner = null;
-              this.openDinner(i);
-            };
-            if (dl) dl.onclick = () => {
-              d.dinnerType = (d.dinnerType === 'delivery' ? 'regular' : 'delivery');
-              d.dinner = [];
-              d.customDinner = null;
-              this.openDinner(i);
-            };
+            const typeSel = document.getElementById('modalDinnerType');
+            if (typeSel) {
+              typeSel.onchange = () => {
+                d.dinnerType = typeSel.value;
+                d.dinner = [];
+                d.customDinner = [];
+                this.openDinner(i); // ricarica la modale con la nuova categoria
+              };
+            }
           }
         });
       }
