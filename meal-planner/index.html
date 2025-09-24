@@ -611,6 +611,39 @@
     .hide {
       display: none
     }
+
+    .mode-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      margin-left: 4px;
+    }
+
+    .popover {
+      position: absolute;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      box-shadow: var(--shadow-2);
+      padding: 4px 0;
+      display: none;
+      z-index: 100;
+    }
+
+    .popover button {
+      background: none;
+      border: none;
+      padding: 6px 12px;
+      font-size: 14px;
+      width: 100%;
+      text-align: left;
+      cursor: pointer;
+    }
+
+    .popover button:hover {
+      background: var(--bg-soft);
+    }
   </style>
 </head>
 
@@ -1014,10 +1047,14 @@
       <div class="meal ${!d.dinner ? 'empty' : ''}" data-meal="dinner" data-day="${i}">
         <div class="icon dinner">${de}</div>
         <div class="content">
-          <div class="title">Dinner</div>
+          <div class="title">
+  Dinner
+  <button class="mode-btn" data-day="${i}" title="Change dinner type">
+    ${d.dinnerType === 'quick' ? '⚡' : d.dinnerType === 'delivery' ? '🚚' : '🍽️'}
+  </button>
+</div>
 <div class="desc">${dnTx}${sides ? ` • ${sides}` : ''}</div>
-        </div>
-        <div class="inline-toggles">
+
           <button class="tag ${d.dinnerType === 'quick' ? 'active' : ''}" data-toggle="quick" data-day="${i}">⚡ Quick</button>
           <button class="tag ${d.dinnerType === 'delivery' ? 'active' : ''}" data-toggle="delivery" data-day="${i}">🚚 Delivery</button>
         </div>
@@ -1065,6 +1102,56 @@
             this.save(); this.render();
           };
         });
+        // dinner mode popover
+        document.querySelectorAll('.mode-btn').forEach(btn => {
+          btn.onclick = (e) => {
+            e.stopPropagation();
+            const day = +btn.dataset.day;
+
+            // rimuovi eventuale popover già aperto
+            document.querySelectorAll('.popover').forEach(p => p.remove());
+
+            // crea nuovo popover
+            const pop = document.createElement('div');
+            pop.className = 'popover';
+            pop.innerHTML = `
+      <button data-type="regular">🍽️ Regular</button>
+      <button data-type="quick">⚡ Quick</button>
+      <button data-type="delivery">🚚 Delivery</button>
+    `;
+            document.body.appendChild(pop);
+
+            // posizione accanto al bottone
+            const rect = btn.getBoundingClientRect();
+            pop.style.top = (rect.bottom + window.scrollY + 4) + 'px';
+            pop.style.left = (rect.left + window.scrollX) + 'px';
+            pop.style.display = 'block';
+
+            // click sulle opzioni
+            pop.querySelectorAll('button').forEach(opt => {
+              opt.onclick = () => {
+                const type = opt.dataset.type;
+                const d = this.state.days[day];
+                d.dinnerType = type;
+                if (type !== 'regular') {
+                  d.dinner = [];
+                  d.customDinner = [];
+                }
+                this.save();
+                this.render();
+                pop.remove();
+              };
+            });
+
+            // chiudi se clicchi fuori
+            document.addEventListener('click', (ev) => {
+              if (!pop.contains(ev.target) && ev.target !== btn) {
+                pop.remove();
+              }
+            }, { once: true });
+          };
+        });
+
         // weekend toggle
         const wt = document.getElementById('weekendToggle');
         if (wt) wt.onclick = () => { this.state.showWeekend = !this.state.showWeekend; this.save(); this.render(); };
