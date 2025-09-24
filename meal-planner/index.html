@@ -653,12 +653,14 @@
       border: 1px solid var(--border);
       background: var(--bg-soft);
       color: var(--muted);
+      /* grigio quando off */
       cursor: pointer;
     }
 
     .pill.bread.is-on {
       background: var(--tint-2);
       color: #fff;
+      /* bianco su verde quando on */
       border-color: transparent;
     }
   </style>
@@ -700,11 +702,10 @@
           <div class="sheet-title" id="modalTitle"></div>
           <div class="sheet-sub" id="modalSubtitle"></div>
         </div>
-        <button class="pill bread ${d.breadFlag ? 'is-on' : ''}" id="modalBread" data-day="${i}">
-          🍞 Bread
-        </button>
+        <div id="modalBreadWrap"></div>
       </div>
     </div>
+
 
     <div class="sheet-body" id="modalBody"></div>
     <div class="sheet-foot" id="modalFooter"></div>
@@ -1046,9 +1047,9 @@
           <div class="day-title">${d.name}, ${this.fmtDate(d.date)}</div>
         </div>
         <div class="day-actions">
-          <button class="pill bread ${d.breadFlag ? 'is-on' : ''}" data-day="${i}">
-            ${d.breadFlag ? '🍞 Bread' : '🚫 No Bread'}
-          </button>
+<button class="pill bread ${d.breadFlag ? 'is-on' : ''}" data-day="${i}">
+  🍞 Bread
+</button>
         </div>
       </div>
 
@@ -1263,17 +1264,26 @@
 
       openDinner(i) {
         const d = this.state.days[i]; this.idx = i;
+        this.idx = i;
+
+        // aggiorna il pulsante bread nell’header
+        const wrap = document.getElementById('modalBreadWrap');
+        if (wrap) {
+          wrap.innerHTML = `
+      <button class="pill bread ${d.breadFlag ? 'is-on' : ''}" id="modalBread" data-day="${i}">
+        🍞 Bread
+      </button>
+    `;
+        }
+
         let body = `
-      <div class="control-row">
-        <div class="kbd">Dinner Type</div>
-        <div>
-          <button class="pill bread ${d.breadFlag ? 'is-on' : ''}" id="modalBread" data-day="${i}">
-            ${d.breadFlag ? '🍞 Bread' : '🚫 No Bread'}
-          </button>
-          <button class="tag ${d.dinnerType === 'quick' ? 'active quick' : ''}" id="modalQuick">⚡ Quick</button>
-          <button class="tag ${d.dinnerType === 'delivery' ? 'active delivery' : ''}" id="modalDelivery">🚚 Delivery</button>
-        </div>
-      </div>`;
+    <div class="control-row">
+      <div class="kbd">Dinner Type</div>
+      <div>
+        <button class="tag ${d.dinnerType === 'quick' ? 'active quick' : ''}" id="modalQuick">⚡ Quick</button>
+        <button class="tag ${d.dinnerType === 'delivery' ? 'active delivery' : ''}" id="modalDelivery">🚚 Delivery</button>
+      </div>
+    </div>`;
         body += this.multiGrid('dinner', d.dinner, this.dinnerOptions(d));
         if (d.dinner.includes('Custom')) {
           body += `<div class="field"><div class="label">Custom Dinner</div>
