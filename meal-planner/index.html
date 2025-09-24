@@ -859,16 +859,18 @@
       }
       migrate() {
         this.state.days.forEach(d => {
-          d.breakfast ??= null;
-          d.customBreakfast ??= null;
+          if (!Array.isArray(d.breakfast)) d.breakfast = d.breakfast ? [d.breakfast] : [];
+          if (!Array.isArray(d.lunch)) d.lunch = d.lunch ? [d.lunch] : [];
+          if (!Array.isArray(d.dinner)) d.dinner = d.dinner ? [d.dinner] : [];
           if (!Array.isArray(d.side)) d.side = d.side ? [d.side] : [];
+
+          d.customBreakfast ??= null;
+          d.customLunch ??= null;
+          d.customDinner ??= null;
           d.customSide ??= [];
           d.breadFlag ??= false;
         });
-        // Ensure theme is set
-        if (!this.state.theme) {
-          this.state.theme = 'dark';
-        }
+        this.state.theme ??= 'dark';
       }
       initialState() {
         const start = this.weekStart(new Date());
@@ -880,9 +882,9 @@
           days: names.map((n, i) => ({
             name: n,
             date: new Date(start.getTime() + i * 86400000).toISOString(),
-            breakfast: null,
-            lunch: null,
-            dinner: null,
+            breakfast: [],
+            lunch: [],
+            dinner: [],
             side: [],
             dinnerType: 'regular',
             customBreakfast: null,
@@ -951,17 +953,27 @@
 
       dayCard(d, i) {
         const w = (d.name === 'Saturday' || d.name === 'Sunday');
-        const bTx = d.breakfast === 'Custom'
-          ? (d.customBreakfast || 'Custom')
-          : (d.breakfast || 'Select breakfast');
-        const lTx = d.lunch === 'Custom' ? (d.customLunch || 'Custom') : d.lunch ? d.lunch : 'Select lunch';
-        const dnTx = d.dinner === 'Custom' ? (d.customDinner || 'Custom') : d.dinner ? d.dinner : 'Select dinner';
+        const bTx = (d.breakfast || []).map(m =>
+          m === 'Custom' ? (d.customBreakfast || 'Custom') : m
+        ).join(' • ') || 'Select breakfast';
+
+        const lTx = (d.lunch || []).map(m =>
+          m === 'Custom' ? (d.customLunch || 'Custom') : m
+        ).join(' • ') || 'Select lunch';
+
+        const dnTx = (d.dinner || []).map(m =>
+          m === 'Custom' ? (d.customDinner || 'Custom') : m
+        ).join(' • ') || 'Select dinner';
+
         const sides = (d.side || []).map(s =>
           s === 'Custom' ? (d.customSide?.join(', ') || 'Custom') : s
         ).join(' • ');
-        const be = MEAL_EMOJI[d.breakfast] || '❓';
-        const le = MEAL_EMOJI[d.lunch] || '❓';
-        const de = MEAL_EMOJI[d.dinner] || '❓';
+
+        // pick first emoji just for the icon
+        const be = d.breakfast?.length ? MEAL_EMOJI[d.breakfast[0]] || '❓' : '❓';
+        const le = d.lunch?.length ? MEAL_EMOJI[d.lunch[0]] || '❓' : '❓';
+        const de = d.dinner?.length ? MEAL_EMOJI[d.dinner[0]] || '❓' : '❓';
+
 
         const need = (d.dinnerType === 'delivery' ? 2 : 3) + (w ? 1 : 0);
         const comp = (w && d.breakfast ? 1 : 0) + (d.lunch ? 1 : 0) + (d.dinner ? 1 : 0) + (d.dinnerType !== 'delivery' && d.side ? 1 : 0);
@@ -1082,9 +1094,11 @@
         if (!(d.name === 'Saturday' || d.name === 'Sunday')) return;
         this.idx = i;
         let body = this.multiGrid('breakfast', d.breakfast, CATS.breakfast);
-        if (d.breakfast === 'Custom') {
-          body += `<div class="field"><div class="label">Custom Breakfast</div><input class="input" id="customBreakfastInput" value="${d.customBreakfast || ''}" placeholder="Enter custom breakfast"/></div>`;
+        if (d.breakfast.includes('Custom')) {
+          body += `<div class="field"><div class="label">Custom Breakfast</div>
+            <input class="input" id="customBreakfastInput" value="${d.customBreakfast || ''}" placeholder="Enter custom breakfast"/></div>`;
         }
+
         this.showSheet({
           title: `Breakfast — ${d.name}`,
           sub: this.fmtDate(d.date),
@@ -1105,8 +1119,9 @@
       openLunch(i) {
         const d = this.state.days[i]; this.idx = i;
         let body = this.multiGrid('lunch', d.lunch, CATS.lunch);
-        if (d.lunch === 'Custom') {
-          body += `<div class="field"><div class="label">Custom Lunch</div><input class="input" id="customLunchInput" value="${d.customLunch || ''}" placeholder="Enter custom meal"/></div>`;
+        if (d.lunch.includes('Custom')) {
+          body += `<div class="field"><div class="label">Custom Lunch</div>
+            <input class="input" id="customLunchInput" value="${d.customLunch || ''}" placeholder="Enter custom meal"/></div>`;
         }
         this.showSheet({
           title: `Lunch — ${d.name}`,
@@ -1139,8 +1154,9 @@
         </div>
       </div>`;
         body += this.multiGrid('dinner', d.dinner, this.dinnerOptions(d));
-        if (d.dinner === 'Custom') {
-          body += `<div class="field"><div class="label">Custom Dinner</div><input class="input" id="customDinnerInput" value="${d.customDinner || ''}" placeholder="Enter custom meal"/></div>`;
+        if (d.dinner.includes('Custom')) {
+          body += `<div class="field"><div class="label">Custom Dinner</div>
+            <input class="input" id="customDinnerInput" value="${d.customDinner || ''}" placeholder="Enter custom meal"/></div>`;
         }
         body += `<div class="field"><div class="label">Side Dishes</div></div>`;
         body += this.multimultiGrid('side', d.side, CATS.side);
