@@ -1270,16 +1270,15 @@ renderDayCard(day, index) {
         </div>
       ` : ''}
 
-      <div class="meal ${!day.lunch?.length ? 'empty' : ''}" data-meal="lunch" data-day="${index}">
-        <div class="icon lunch">${lunchEmoji}</div>
-        <div class="content">
-          <div class="title">Lunch</div>
-          <div class="desc">
-            ${lunchText}
-            ${sidesText && day.lunch?.length ? `<br>${sidesText}` : ''}
-          </div>
-        </div>
-      </div>
+<div class="meal ${!day.lunch?.length ? 'empty' : ''}" data-meal="lunch" data-day="${index}">
+  <div class="icon lunch">${lunchEmoji}</div>
+  <div class="content">
+    <div class="title">Lunch</div>
+    <div class="desc">
+      ${lunchText}
+    </div>
+  </div>
+</div>
 
       <div class="meal ${!day.dinner?.length ? 'empty' : ''}" data-meal="dinner" data-day="${index}">
         <div class="icon dinner">${dinnerEmoji}</div>
