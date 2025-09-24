@@ -1219,34 +1219,22 @@
               const type = t.dataset.type, val = t.dataset.meal;
               const d = this.state.days[this.idx];
 
-              if (type === 'side') {
-                if (!d.side) d.side = [];
-                if (d.side.includes(val)) {
-                  d.side = d.side.filter(x => x !== val);
-                } else {
-                  d.side.push(val);
-                }
-                if (val === 'Custom' && !d.customSide.includes(val)) {
-                  this.openDinner(this.idx);
-                } else {
-                  t.classList.toggle('selected');
-                }
-              } else {
-                if (d[type] === val) {
-                  d[type] = null;
+              if (['breakfast', 'lunch', 'dinner', 'side'].includes(type)) {
+                if (!Array.isArray(d[type])) d[type] = [];
+
+                if (d[type].includes(val)) {
+                  // remove selection
+                  d[type] = d[type].filter(x => x !== val);
                   t.classList.remove('selected');
                 } else {
-                  document.querySelectorAll(`.grid[data-type="${type}"] .tile`).forEach(x => x.classList.remove('selected'));
+                  // add selection
+                  d[type].push(val);
                   t.classList.add('selected');
-                  d[type] = val;
+
                   if (val === 'Custom') {
                     if (type === 'breakfast') this.openBreakfast(this.idx);
                     else if (type === 'lunch') this.openLunch(this.idx);
-                    else this.openDinner(this.idx);
-                  } else {
-                    if (type === 'breakfast') this.openBreakfast(this.idx);
-                    else if (type === 'lunch') this.openLunch(this.idx);
-                    else this.openDinner(this.idx);
+                    else if (type === 'dinner') this.openDinner(this.idx);
                   }
                 }
               }
