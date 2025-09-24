@@ -2,1237 +2,1252 @@
 <html lang="it">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
-  <title>Meal Planner</title>
-
-  <style>
-    :root {
-      --bg: #fff5f0;
-      --bg-soft: #fff9f5;
-      --card: #ffffff;
-      --muted: #8c7569;
-      --text: #362420;
-      --border: #f2d6c9;
-      --tint: #ff7b4a;
-      --tint-2: #4caf50;
-      --ok: #10b981;
-      --info: #06b6d4;
-      --warn: #f59e0b;
-      --radius-8: 12px;
-      --radius-12: 16px;
-      --shadow-1: 0 8px 24px rgba(0, 0, 0, .08);
-      --shadow-2: 0 12px 28px rgba(0, 0, 0, .12);
-      
-      /* Enhanced mobile-first sizing */
-      --tap: max(44px, 11vw);
-      --tap-sm: max(32px, 8vw);
-      --h1: clamp(18px, 4.5vw, 26px);
-      --h2: clamp(16px, 4vw, 22px);
-      --body: clamp(14px, 3.5vw, 18px);
-      --small: clamp(12px, 3vw, 14px);
-      
-      /* Mobile-optimized spacing */
-      --spacing-xs: clamp(4px, 1vw, 6px);
-      --spacing-sm: clamp(8px, 2vw, 12px);
-      --spacing-md: clamp(12px, 3vw, 16px);
-      --spacing-lg: clamp(16px, 4vw, 24px);
-      --spacing-xl: clamp(24px, 6vw, 32px);
-    }
-
-    body.dark {
-      --bg: #000000;
-      --bg-soft: #111111;
-      --card: #1a1a1a;
-      --muted: #a0a0a0;
-      --text: #f5f5f5;
-      --border: #333333;
-      --shadow-1: 0 8px 24px rgba(0, 0, 0, .6);
-      --shadow-2: 0 20px 32px rgba(0, 0, 0, .75);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html, body {
-      height: 100%;
-      overflow-x: hidden;
-    }
-
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
-      background: radial-gradient(1200px 800px at 20% -10%, rgba(255, 123, 74, .12), transparent 45%), 
-                  radial-gradient(1200px 900px at 110% 10%, rgba(76, 175, 80, .08), transparent 50%), 
-                  var(--bg);
-      color: var(--text);
-      -webkit-tap-highlight-color: transparent;
-      touch-action: manipulation;
-      font-size: var(--body);
-      line-height: 1.5;
-    }
-
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-md);
-      padding-bottom: calc(80px + env(safe-area-inset-bottom));
-    }
-
-    .header {
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: var(--spacing-md);
-      background: color-mix(in oklab, var(--bg) 70%, var(--bg-soft) 30%);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: saturate(120%) blur(6px);
-      -webkit-backdrop-filter: saturate(120%) blur(6px);
-    }
-
-    .header h1 {
-      font-size: var(--h1);
-      font-weight: 800;
-      letter-spacing: 0.2px;
-      color: var(--tint);
-    }
-
-    .btn-icon {
-      width: var(--tap);
-      height: var(--tap);
-      min-width: 44px;
-      min-height: 44px;
-      display: grid;
-      place-items: center;
-      border-radius: var(--radius-8);
-      border: 1px solid var(--border);
-      background: var(--bg-soft);
-      color: var(--text);
-      box-shadow: var(--shadow-1);
-      cursor: pointer;
-      transition: transform 0.15s ease, background 0.2s ease;
-      font-size: var(--body);
-      user-select: none;
-    }
-
-    .btn-icon:active {
-      transform: scale(0.95);
-    }
-
-    @media (hover: hover) {
-      .btn-icon:hover {
-        background: var(--border);
-      }
-    }
-
-    .week-nav {
-      margin: var(--spacing-md) 0;
-      padding: var(--spacing-md);
-      text-align: center;
-      font-weight: 700;
-      font-size: var(--body);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-12);
-      background: var(--bg-soft);
-    }
-
-    .day-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-12);
-      margin: var(--spacing-sm) 0;
-      padding: var(--spacing-md);
-      box-shadow: var(--shadow-1);
-      transition: transform 0.1s ease;
-    }
-
-    .day-card.incomplete {
-      border-style: dashed;
-      opacity: 0.95;
-    }
-
-    .day-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: var(--spacing-xs);
-      gap: var(--spacing-sm);
-    }
-
-    .day-title {
-      font-size: var(--small);
-      font-weight: 800;
-      letter-spacing: 0.2px;
-    }
-
-    .day-date {
-      font-size: var(--small);
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .day-actions {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-xs);
-      flex-shrink: 0;
-    }
-
-    .pill {
-      height: var(--tap-sm);
-      min-height: 32px;
-      padding: 0 var(--spacing-sm);
-      display: inline-flex;
-      align-items: center;
-      gap: var(--spacing-xs);
-      font-size: var(--small);
-      font-weight: 700;
-      border-radius: 999px;
-      border: 1px solid var(--border);
-      background: var(--bg-soft);
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.15s ease;
-      white-space: nowrap;
-      user-select: none;
-    }
-
-    .pill:active {
-      transform: scale(0.95);
-    }
-
-    .pill.is-on {
-      color: #fff;
-      border-color: transparent;
-      background: var(--tint-2);
-    }
-
-    .pill.bread {
-      border: 1px dashed #aaa;
-      background: transparent;
-      color: #bbb;
-      opacity: 0.4;
-    }
-
-    .pill.bread.is-on {
-      background: var(--tint-2);
-      color: #fff;
-      border: 1px solid var(--tint-2);
-      opacity: 1;
-    }
-
-    .meal {
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-md);
-      padding: var(--spacing-sm);
-      margin-top: var(--spacing-sm);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-12);
-      background: var(--bg-soft);
-      min-height: 64px;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      user-select: none;
-    }
-
-    .meal:active {
-      transform: translateY(1px);
-    }
-
-    .meal.empty {
-      opacity: 0.65;
-    }
-
-    @media (hover: hover) {
-      .meal:hover {
-        background: var(--border);
-      }
-    }
-
-    .meal .icon {
-      width: 44px;
-      height: 44px;
-      min-width: 44px;
-      min-height: 44px;
-      display: grid;
-      place-items: center;
-      border-radius: var(--radius-8);
-      font-size: 22px;
-      text-shadow: 0 0 3px rgba(0, 0, 0, 0.8), 0 0 4px rgba(0, 0, 0, 0.6);
-    }
-
-    .icon.breakfast {
-      background: linear-gradient(135deg, #00A6FF, #FFFFFF);
-    }
-
-    .icon.lunch {
-      background: linear-gradient(135deg, #FA8607, #FFF57B);
-    }
-
-    .icon.dinner {
-      background: linear-gradient(135deg, #01426D, #01162E);
-    }
-
-    .meal .content {
-      flex: 1;
-      min-width: 0;
-      overflow: hidden;
-    }
-
-    .meal .title {
-      font-weight: 800;
-      font-size: var(--small);
-      display: flex;
-      align-items: center;
-      gap: var(--spacing-xs);
-    }
-
-    .meal .desc {
-      margin-top: 2px;
-      font-size: var(--small);
-      color: var(--muted);
-      line-height: 1.4;
-      word-wrap: break-word;
-      overflow-wrap: break-word;
-    }
-
-    .mode-btn {
-      background: none;
-      border: none;
-      cursor: pointer;
-      font-size: 14px;
-      padding: var(--spacing-xs);
-      border-radius: 4px;
-      transition: background 0.15s ease;
-      min-width: var(--tap-sm);
-      min-height: var(--tap-sm);
-    }
-
-    @media (hover: hover) {
-      .mode-btn:hover {
-        background: var(--border);
-      }
-    }
-
-    .weekend-card {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      background: var(--bg-soft);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-12);
-      padding: var(--spacing-md);
-      margin: var(--spacing-md) 0 var(--spacing-xs);
-    }
-
-    .switch {
-      position: relative;
-      width: 54px;
-      height: 30px;
-      min-width: 54px;
-      min-height: 30px;
-      border-radius: 999px;
-      cursor: pointer;
-      border: 1px solid var(--border);
-      background: #e8d5c9;
-      transition: all 0.2s ease;
-    }
-
-    .switch .knob {
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #fff;
-      transition: transform 0.2s ease;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    }
-
-    .switch.on {
-      background: var(--tint);
-      border-color: transparent;
-    }
-
-    .switch.on .knob {
-      transform: translateX(24px);
-    }
-
-    .bottom-bar {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 60;
-      background: var(--bg);
-      border-top: 1px solid var(--border);
-      padding: var(--spacing-sm);
-      padding-bottom: calc(var(--spacing-sm) + env(safe-area-inset-bottom));
-      backdrop-filter: blur(6px);
-      -webkit-backdrop-filter: blur(6px);
-    }
-
-    .actions {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--spacing-sm);
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);
-    }
-
-    .bar-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 56px;
-      min-height: 56px;
-      border-radius: var(--radius-12);
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--text);
-      font-size: var(--small);
-      font-weight: 800;
-      gap: 4px;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      user-select: none;
-    }
-
-    .bar-btn:active {
-      transform: scale(0.95);
-      background: var(--bg-soft);
-    }
-
-    .bar-btn span {
-      opacity: 0.85;
-    }
-
-    .bar-ico {
-      font-size: 18px;
-    }
-
-    .nav {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 40px;
-      height: 80px;
-      min-width: 40px;
-      min-height: 80px;
-      display: grid;
-      place-items: center;
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      border-radius: var(--radius-8);
-      z-index: 40;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      user-select: none;
-    }
-
-    .nav:active {
-      transform: translateY(-50%) scale(0.95);
-    }
-
-    .nav.left {
-      left: var(--spacing-xs);
-    }
-
-    .nav.right {
-      right: var(--spacing-xs);
-    }
-
-    /* Enhanced Modal Styles */
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-      background: rgba(8, 10, 20, 0.6);
-      display: none;
-      z-index: 70;
-      backdrop-filter: blur(2px);
-      -webkit-backdrop-filter: blur(2px);
-    }
-
-    .modal-overlay.show {
-      display: block;
-    }
-
-    .sheet {
-      position: fixed;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      z-index: 80;
-      background: var(--card);
-      border-top-left-radius: 20px;
-      border-top-right-radius: 20px;
-      border: 1px solid var(--border);
-      box-shadow: var(--shadow-2);
-      transform: translateY(100%);
-      transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
-      overflow: hidden;
-      max-height: 90vh;
-      max-height: 90dvh;
-    }
-
-    .modal-overlay.show + .sheet {
-      transform: translateY(0);
-    }
-
-    .sheet-head {
-      padding: var(--spacing-md);
-      border-bottom: 1px solid var(--border);
-      background: var(--bg-soft);
-    }
-
-    .sheet-title {
-      font-size: var(--h2);
-      font-weight: 800;
-    }
-
-    .sheet-sub {
-      font-size: var(--small);
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .sheet-body {
-      max-height: calc(70vh - 120px);
-      max-height: calc(70dvh - 120px);
-      overflow-y: auto;
-      -webkit-overflow-scrolling: touch;
-    }
-
-    /* Enhanced Grid */
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-      gap: var(--spacing-sm);
-      padding: var(--spacing-md);
-    }
-
-    @media (max-width: 480px) {
-      .grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-    }
-
-    .tile {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--spacing-xs);
-      padding: var(--spacing-md) var(--spacing-sm);
-      min-height: 80px;
-      border: 2px solid var(--border);
-      border-radius: var(--radius-12);
-      background: var(--bg-soft);
-      cursor: pointer;
-      text-align: center;
-      font-size: var(--small);
-      font-weight: 600;
-      transition: all 0.2s ease;
-      user-select: none;
-    }
-
-    .tile:active {
-      transform: scale(0.95);
-    }
-
-    .tile.selected {
-      border-color: var(--tint);
-      background: color-mix(in oklab, var(--tint) 20%, var(--bg-soft) 80%);
-      color: var(--tint);
-    }
-
-    .tile .emo {
-      font-size: 28px;
-      line-height: 1;
-    }
-
-    /* Enhanced Form Controls */
-    .control-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--spacing-sm);
-      padding: var(--spacing-md);
-    }
-
-    .field {
-      padding: var(--spacing-sm) var(--spacing-md);
-      margin: var(--spacing-sm) 0;
-    }
-
-    .label {
-      font-size: var(--small);
-      color: var(--muted);
-      font-weight: 800;
-      margin-bottom: var(--spacing-xs);
-    }
-
-    .input {
-      width: 100%;
-      height: 48px;
-      min-height: 48px;
-      padding: var(--spacing-sm) var(--spacing-md);
-      border-radius: var(--radius-8);
-      border: 2px solid var(--border);
-      background: var(--bg-soft);
-      color: var(--text);
-      font-size: var(--body);
-      outline: none;
-      transition: border-color 0.2s ease;
-      -webkit-appearance: none;
-      appearance: none;
-    }
-
-    .input:focus {
-      border-color: var(--tint);
-    }
-
-    select.input {
-      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
-      background-position: right 12px center;
-      background-repeat: no-repeat;
-      background-size: 16px;
-      padding-right: 40px;
-    }
-
-    .sheet-foot {
-      display: flex;
-      gap: var(--spacing-sm);
-      padding: var(--spacing-md);
-      border-top: 1px solid var(--border);
-      background: var(--bg-soft);
-    }
-
-    .btn {
-      height: 48px;
-      min-height: 48px;
-      flex: 1;
-      border-radius: var(--radius-8);
-      border: 2px solid var(--border);
-      background: var(--card);
-      color: var(--text);
-      font-weight: 800;
-      font-size: var(--body);
-      cursor: pointer;
-      transition: all 0.15s ease;
-      user-select: none;
-    }
-
-    .btn:active {
-      transform: scale(0.98);
-    }
-
-    .btn.cancel {
-      background: var(--bg-soft);
-      border-color: #e05a5a;
-      color: #e05a5a;
-    }
-
-    /* Toast */
-    .toast {
-      position: fixed;
-      left: 50%;
-      bottom: calc(90px + env(safe-area-inset-bottom));
-      transform: translateX(-50%);
-      background: var(--card);
-      color: var(--text);
-      border: 1px solid var(--border);
-      padding: var(--spacing-sm) var(--spacing-md);
-      border-radius: 999px;
-      box-shadow: var(--shadow-1);
-      opacity: 0;
-      visibility: hidden;
-      transition: all 0.25s ease;
-      z-index: 90;
-      font-weight: 800;
-      font-size: var(--small);
-      white-space: nowrap;
-    }
-
-    .toast.show {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    /* Popover */
-    .popover {
-      position: absolute;
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-8);
-      box-shadow: var(--shadow-2);
-      padding: var(--spacing-xs) 0;
-      display: none;
-      z-index: 100;
-      min-width: 120px;
-    }
-
-    .popover button {
-      background: none;
-      border: none;
-      padding: var(--spacing-sm) var(--spacing-md);
-      font-size: var(--body);
-      width: 100%;
-      text-align: left;
-      cursor: pointer;
-      transition: background 0.15s ease;
-      color: var(--text);
-    }
-
-    .popover button:active {
-      background: var(--bg-soft);
-    }
-
-    @media (hover: hover) {
-      .popover button:hover {
-        background: var(--bg-soft);
-      }
-    }
-
-    /* Utility classes */
-    .hide {
-      display: none !important;
-    }
-
-    .visually-hidden {
-      position: absolute !important;
-      width: 1px !important;
-      height: 1px !important;
-      padding: 0 !important;
-      margin: -1px !important;
-      overflow: hidden !important;
-      clip: rect(0, 0, 0, 0) !important;
-      white-space: nowrap !important;
-      border: 0 !important;
-    }
-
-    /* Small device optimizations */
-    @media (max-width: 480px) {
-      :root {
-        --tap: 44px;
-        --tap-sm: 36px;
-      }
-      
-      .header {
-        padding: var(--spacing-sm) var(--spacing-md);
-      }
-      
-      .day-header {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: var(--spacing-sm);
-      }
-      
-      .meal {
-        gap: var(--spacing-sm);
-      }
-      
-      .actions {
-        gap: var(--spacing-xs);
-      }
-    }
-
-    /* Very small screens */
-    @media (max-width: 360px) {
-      .container {
-        padding: 0 var(--spacing-sm);
-      }
-      
-      .nav {
-        width: 36px;
-        height: 60px;
-      }
-    }
-
-    /* Landscape phone optimizations */
-    @media (max-height: 500px) and (orientation: landscape) {
-      .sheet {
-        max-height: 80vh;
-      }
-      
-      .sheet-body {
-        max-height: calc(60vh - 100px);
-      }
-    }
-
-    /* Prevent zoom on iOS */
-    @supports (-webkit-touch-callout: none) {
-      .input, select.input {
-        font-size: max(16px, var(--body));
-      }
-    }
-  </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no" />
+    <title>Meal Planner</title>
+
+    <style>
+        :root {
+            --bg: #fff5f0;
+            --bg-soft: #fff9f5;
+            --card: #ffffff;
+            --muted: #8c7569;
+            --text: #362420;
+            --border: #f2d6c9;
+            --tint: #ff7b4a;
+            --tint-2: #4caf50;
+            --ok: #10b981;
+            --info: #06b6d4;
+            --warn: #f59e0b;
+            --radius-8: 12px;
+            --radius-12: 16px;
+            --shadow-1: 0 8px 24px rgba(0, 0, 0, .08);
+            --shadow-2: 0 12px 28px rgba(0, 0, 0, .12);
+
+            /* Enhanced mobile-first sizing */
+            --tap: max(44px, 11vw);
+            --tap-sm: max(32px, 8vw);
+            --h1: clamp(18px, 4.5vw, 26px);
+            --h2: clamp(16px, 4vw, 22px);
+            --body: clamp(14px, 3.5vw, 18px);
+            --small: clamp(12px, 3vw, 14px);
+
+            /* Mobile-optimized spacing */
+            --spacing-xs: clamp(4px, 1vw, 6px);
+            --spacing-sm: clamp(8px, 2vw, 12px);
+            --spacing-md: clamp(12px, 3vw, 16px);
+            --spacing-lg: clamp(16px, 4vw, 24px);
+            --spacing-xl: clamp(24px, 6vw, 32px);
+        }
+
+        body.dark {
+            --bg: #000000;
+            --bg-soft: #111111;
+            --card: #1a1a1a;
+            --muted: #a0a0a0;
+            --text: #f5f5f5;
+            --border: #333333;
+            --shadow-1: 0 8px 24px rgba(0, 0, 0, .6);
+            --shadow-2: 0 20px 32px rgba(0, 0, 0, .75);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, system-ui, sans-serif;
+            background: radial-gradient(1200px 800px at 20% -10%, rgba(255, 123, 74, .12), transparent 45%),
+                radial-gradient(1200px 900px at 110% 10%, rgba(76, 175, 80, .08), transparent 50%),
+                var(--bg);
+            color: var(--text);
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            font-size: var(--body);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+            padding-bottom: calc(80px + env(safe-area-inset-bottom));
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-md);
+            background: color-mix(in oklab, var(--bg) 70%, var(--bg-soft) 30%);
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: saturate(120%) blur(6px);
+            -webkit-backdrop-filter: saturate(120%) blur(6px);
+        }
+
+        .header h1 {
+            font-size: var(--h1);
+            font-weight: 800;
+            letter-spacing: 0.2px;
+            color: var(--tint);
+        }
+
+        .btn-icon {
+            width: var(--tap);
+            height: var(--tap);
+            min-width: 44px;
+            min-height: 44px;
+            display: grid;
+            place-items: center;
+            border-radius: var(--radius-8);
+            border: 1px solid var(--border);
+            background: var(--bg-soft);
+            color: var(--text);
+            box-shadow: var(--shadow-1);
+            cursor: pointer;
+            transition: transform 0.15s ease, background 0.2s ease;
+            font-size: var(--body);
+            user-select: none;
+        }
+
+        .btn-icon:active {
+            transform: scale(0.95);
+        }
+
+        @media (hover: hover) {
+            .btn-icon:hover {
+                background: var(--border);
+            }
+        }
+
+        .week-nav {
+            margin: var(--spacing-md) 0;
+            padding: var(--spacing-md);
+            text-align: center;
+            font-weight: 700;
+            font-size: var(--body);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-12);
+            background: var(--bg-soft);
+        }
+
+        .day-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-12);
+            margin: var(--spacing-sm) 0;
+            padding: var(--spacing-md);
+            box-shadow: var(--shadow-1);
+            transition: transform 0.1s ease;
+        }
+
+        .day-card.incomplete {
+            border-style: dashed;
+            opacity: 0.95;
+        }
+
+        .day-header {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-xs);
+            gap: var(--spacing-sm);
+        }
+
+        .day-title {
+            font-size: var(--small);
+            font-weight: 800;
+            letter-spacing: 0.2px;
+        }
+
+        .day-date {
+            font-size: var(--small);
+            color: var(--muted);
+            margin-top: 2px;
+        }
+
+        .day-actions {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            flex-shrink: 0;
+        }
+
+        .pill {
+            height: var(--tap-sm);
+            min-height: 32px;
+            padding: 0 var(--spacing-sm);
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            font-size: var(--small);
+            font-weight: 700;
+            border-radius: 999px;
+            border: 1px solid var(--border);
+            background: var(--bg-soft);
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            white-space: nowrap;
+            user-select: none;
+        }
+
+        .pill:active {
+            transform: scale(0.95);
+        }
+
+        .pill.is-on {
+            color: #fff;
+            border-color: transparent;
+            background: var(--tint-2);
+        }
+
+        .pill.bread {
+            border: 1px dashed #aaa;
+            background: transparent;
+            color: #bbb;
+            opacity: 0.4;
+        }
+
+        .pill.bread.is-on {
+            background: var(--tint-2);
+            color: #fff;
+            border: 1px solid var(--tint-2);
+            opacity: 1;
+        }
+
+        .meal {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-sm);
+            margin-top: var(--spacing-sm);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-12);
+            background: var(--bg-soft);
+            min-height: 64px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .meal:active {
+            transform: translateY(1px);
+        }
+
+        .meal.empty {
+            opacity: 0.65;
+        }
+
+        @media (hover: hover) {
+            .meal:hover {
+                background: var(--border);
+            }
+        }
+
+        .meal .icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            min-height: 44px;
+            display: grid;
+            place-items: center;
+            border-radius: var(--radius-8);
+            font-size: 22px;
+            text-shadow: 0 0 3px rgba(0, 0, 0, 0.8), 0 0 4px rgba(0, 0, 0, 0.6);
+        }
+
+        .icon.breakfast {
+            background: linear-gradient(135deg, #00A6FF, #FFFFFF);
+        }
+
+        .icon.lunch {
+            background: linear-gradient(135deg, #FA8607, #FFF57B);
+        }
+
+        .icon.dinner {
+            background: linear-gradient(135deg, #01426D, #01162E);
+        }
+
+        .meal .content {
+            flex: 1;
+            min-width: 0;
+            overflow: hidden;
+        }
+
+        .meal .title {
+            font-weight: 800;
+            font-size: var(--small);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+        }
+
+        .meal .desc {
+            margin-top: 2px;
+            font-size: var(--small);
+            color: var(--muted);
+            line-height: 1.4;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .mode-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 4px 10px;
+            margin-left: 6px;
+            font-size: var(--small);
+            font-weight: 700;
+            border-radius: 999px;
+            /* pill style */
+            border: 1px solid var(--border);
+            background: var(--bg-soft);
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .mode-btn:active {
+            transform: scale(0.95);
+        }
+
+        @media (hover: hover) {
+            .mode-btn:hover {
+                background: var(--border);
+            }
+        }
+
+        .weekend-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-soft);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-12);
+            padding: var(--spacing-md);
+            margin: var(--spacing-md) 0 var(--spacing-xs);
+        }
+
+        .switch {
+            position: relative;
+            width: 54px;
+            height: 30px;
+            min-width: 54px;
+            min-height: 30px;
+            border-radius: 999px;
+            cursor: pointer;
+            border: 1px solid var(--border);
+            background: #e8d5c9;
+            transition: all 0.2s ease;
+        }
+
+        .switch .knob {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            background: #fff;
+            transition: transform 0.2s ease;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .switch.on {
+            background: var(--tint);
+            border-color: transparent;
+        }
+
+        .switch.on .knob {
+            transform: translateX(24px);
+        }
+
+        .bottom-bar {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 60;
+            background: var(--bg);
+            border-top: 1px solid var(--border);
+            padding: var(--spacing-sm);
+            padding-bottom: calc(var(--spacing-sm) + env(safe-area-inset-bottom));
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+        }
+
+        .actions {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-sm);
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);
+        }
+
+        .bar-btn {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 56px;
+            min-height: 56px;
+            border-radius: var(--radius-12);
+            border: 1px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            font-size: var(--small);
+            font-weight: 800;
+            gap: 4px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .bar-btn:active {
+            transform: scale(0.95);
+            background: var(--bg-soft);
+        }
+
+        .bar-btn span {
+            opacity: 0.85;
+        }
+
+        .bar-ico {
+            font-size: 18px;
+        }
+
+        .nav {
+            position: fixed;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 40px;
+            height: 80px;
+            min-width: 40px;
+            min-height: 80px;
+            display: grid;
+            place-items: center;
+            background: var(--card);
+            border: 1px solid var(--border);
+            color: var(--muted);
+            border-radius: var(--radius-8);
+            z-index: 40;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .nav:active {
+            transform: translateY(-50%) scale(0.95);
+        }
+
+        .nav.left {
+            left: var(--spacing-xs);
+        }
+
+        .nav.right {
+            right: var(--spacing-xs);
+        }
+
+        /* Enhanced Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(8, 10, 20, 0.6);
+            display: none;
+            z-index: 70;
+            backdrop-filter: blur(2px);
+            -webkit-backdrop-filter: blur(2px);
+        }
+
+        .modal-overlay.show {
+            display: block;
+        }
+
+        .sheet {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 80;
+            background: var(--card);
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-2);
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+            overflow: hidden;
+            max-height: 90vh;
+            max-height: 90dvh;
+        }
+
+        .modal-overlay.show+.sheet {
+            transform: translateY(0);
+        }
+
+        .sheet-head {
+            padding: var(--spacing-md);
+            border-bottom: 1px solid var(--border);
+            background: var(--bg-soft);
+        }
+
+        .sheet-title {
+            font-size: var(--h2);
+            font-weight: 800;
+        }
+
+        .sheet-sub {
+            font-size: var(--small);
+            color: var(--muted);
+            margin-top: 4px;
+        }
+
+        .sheet-body {
+            max-height: calc(70vh - 120px);
+            max-height: calc(70dvh - 120px);
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* Enhanced Grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md);
+        }
+
+        @media (max-width: 480px) {
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        .tile {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-md) var(--spacing-sm);
+            min-height: 80px;
+            border: 2px solid var(--border);
+            border-radius: var(--radius-12);
+            background: var(--bg-soft);
+            cursor: pointer;
+            text-align: center;
+            font-size: var(--small);
+            font-weight: 600;
+            transition: all 0.2s ease;
+            user-select: none;
+        }
+
+        .tile:active {
+            transform: scale(0.95);
+        }
+
+        .tile.selected {
+            border-color: var(--tint);
+            background: color-mix(in oklab, var(--tint) 20%, var(--bg-soft) 80%);
+            color: var(--tint);
+        }
+
+        .tile .emo {
+            font-size: 28px;
+            line-height: 1;
+        }
+
+        /* Enhanced Form Controls */
+        .control-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md);
+        }
+
+        .field {
+            padding: var(--spacing-sm) var(--spacing-md);
+            margin: var(--spacing-sm) 0;
+        }
+
+        .label {
+            font-size: var(--small);
+            color: var(--muted);
+            font-weight: 800;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .input {
+            width: 100%;
+            height: 48px;
+            min-height: 48px;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--radius-8);
+            border: 2px solid var(--border);
+            background: var(--bg-soft);
+            color: var(--text);
+            font-size: var(--body);
+            outline: none;
+            transition: border-color 0.2s ease;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .input:focus {
+            border-color: var(--tint);
+        }
+
+        select.input {
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%236b7280' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 12px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-right: 40px;
+        }
+
+        .sheet-foot {
+            display: flex;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md);
+            border-top: 1px solid var(--border);
+            background: var(--bg-soft);
+        }
+
+        .btn {
+            height: 48px;
+            min-height: 48px;
+            flex: 1;
+            border-radius: var(--radius-8);
+            border: 2px solid var(--border);
+            background: var(--card);
+            color: var(--text);
+            font-weight: 800;
+            font-size: var(--body);
+            cursor: pointer;
+            transition: all 0.15s ease;
+            user-select: none;
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn.cancel {
+            background: var(--bg-soft);
+            border-color: #e05a5a;
+            color: #e05a5a;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: calc(90px + env(safe-area-inset-bottom));
+            transform: translateX(-50%);
+            background: var(--card);
+            color: var(--text);
+            border: 1px solid var(--border);
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: 999px;
+            box-shadow: var(--shadow-1);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.25s ease;
+            z-index: 90;
+            font-weight: 800;
+            font-size: var(--small);
+            white-space: nowrap;
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Popover */
+        .popover {
+            position: absolute;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-8);
+            box-shadow: var(--shadow-2);
+            padding: var(--spacing-xs) 0;
+            display: none;
+            z-index: 100;
+            min-width: 120px;
+        }
+
+        .popover button {
+            background: none;
+            border: none;
+            padding: var(--spacing-sm) var(--spacing-md);
+            font-size: var(--body);
+            width: 100%;
+            text-align: left;
+            cursor: pointer;
+            transition: background 0.15s ease;
+            color: var(--text);
+        }
+
+        .popover button:active {
+            background: var(--bg-soft);
+        }
+
+        @media (hover: hover) {
+            .popover button:hover {
+                background: var(--bg-soft);
+            }
+        }
+
+        /* Utility classes */
+        .hide {
+            display: none !important;
+        }
+
+        .visually-hidden {
+            position: absolute !important;
+            width: 1px !important;
+            height: 1px !important;
+            padding: 0 !important;
+            margin: -1px !important;
+            overflow: hidden !important;
+            clip: rect(0, 0, 0, 0) !important;
+            white-space: nowrap !important;
+            border: 0 !important;
+        }
+
+        /* Small device optimizations */
+        @media (max-width: 480px) {
+            :root {
+                --tap: 44px;
+                --tap-sm: 36px;
+            }
+
+            .header {
+                padding: var(--spacing-sm) var(--spacing-md);
+            }
+
+            .day-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: var(--spacing-sm);
+            }
+
+            .meal {
+                gap: var(--spacing-sm);
+            }
+
+            .actions {
+                gap: var(--spacing-xs);
+            }
+        }
+
+        /* Very small screens */
+        @media (max-width: 360px) {
+            .container {
+                padding: 0 var(--spacing-sm);
+            }
+
+            .nav {
+                width: 36px;
+                height: 60px;
+            }
+        }
+
+        /* Landscape phone optimizations */
+        @media (max-height: 500px) and (orientation: landscape) {
+            .sheet {
+                max-height: 80vh;
+            }
+
+            .sheet-body {
+                max-height: calc(60vh - 100px);
+            }
+        }
+
+        /* Prevent zoom on iOS */
+        @supports (-webkit-touch-callout: none) {
+
+            .input,
+            select.input {
+                font-size: max(16px, var(--body));
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <header class="header">
-    <h1>Meal Planner</h1>
-    <button id="themeToggle" class="btn-icon" aria-label="Toggle theme">🌙</button>
-  </header>
+    <header class="header">
+        <h1>Meal Planner</h1>
+        <button id="themeToggle" class="btn-icon" aria-label="Toggle theme">🌙</button>
+    </header>
 
-  <div class="container">
-    <div id="daysList"></div>
-  </div>
-
-  <button class="nav left" id="prevWeek" aria-label="Previous week">◄</button>
-  <button class="nav right" id="nextWeek" aria-label="Next week">►</button>
-
-  <div class="bottom-bar">
-    <div class="actions">
-      <button class="bar-btn" id="randomizeBtn">
-        <div class="bar-ico">🎲</div><span>Random</span>
-      </button>
-      <button class="bar-btn" id="clearBtn">
-        <div class="bar-ico">🗑️</div><span>Clear</span>
-      </button>
-      <button class="bar-btn" id="shareBtn">
-        <div class="bar-ico">▶️</div><span>Send</span>
-      </button>
+    <div class="container">
+        <div id="daysList"></div>
     </div>
-  </div>
 
-  <div id="modalOverlay" class="modal-overlay"></div>
-  <section id="sheet" class="sheet" aria-modal="true" role="dialog">
-    <div class="sheet-head">
-      <div style="display:flex;align-items:center;justify-content:space-between;gap:var(--spacing-sm)">
-        <div>
-          <div class="sheet-title" id="modalTitle"></div>
-          <div class="sheet-sub" id="modalSubtitle"></div>
+    <button class="nav left" id="prevWeek" aria-label="Previous week">◄</button>
+    <button class="nav right" id="nextWeek" aria-label="Next week">►</button>
+
+    <div class="bottom-bar">
+        <div class="actions">
+            <button class="bar-btn" id="randomizeBtn">
+                <div class="bar-ico">🎲</div><span>Random</span>
+            </button>
+            <button class="bar-btn" id="clearBtn">
+                <div class="bar-ico">🗑️</div><span>Clear</span>
+            </button>
+            <button class="bar-btn" id="shareBtn">
+                <div class="bar-ico">▶️</div><span>Send</span>
+            </button>
         </div>
-        <div id="modalBreadWrap"></div>
-      </div>
     </div>
 
-    <div class="sheet-body" id="modalBody"></div>
-    <div class="sheet-foot" id="modalFooter"></div>
-  </section>
+    <div id="modalOverlay" class="modal-overlay"></div>
+    <section id="sheet" class="sheet" aria-modal="true" role="dialog">
+        <div class="sheet-head">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:var(--spacing-sm)">
+                <div>
+                    <div class="sheet-title" id="modalTitle"></div>
+                    <div class="sheet-sub" id="modalSubtitle"></div>
+                </div>
+                <div id="modalBreadWrap"></div>
+            </div>
+        </div>
 
-  <div id="toast" class="toast">Saved! ✓</div>
+        <div class="sheet-body" id="modalBody"></div>
+        <div class="sheet-foot" id="modalFooter"></div>
+    </section>
 
-  <script>
-    // Enhanced modular structure
-    
-    // Data Management Module
-    class DataManager {
-      static DATA = {
-        "ingredients": {
-          "ravioli": { "name": "Ravioli", "emoji": "🥟" },
-          "sage": { "name": "Sage", "emoji": "🌿" },
-          "spaghetti": { "name": "Spaghetti", "emoji": "🍝" },
-          "lemons": { "name": "Lemons", "emoji": "🍋" },
-          "ditalini": { "name": "Ditalini", "emoji": "🍝" },
-          "chickpeas": { "name": "Chickpeas", "emoji": "🫘" },
-          "tuna": { "name": "Tuna", "emoji": "🐟" },
-          "pasta": { "name": "Pasta", "emoji": "🍝" },
-          "tomato_sauce": { "name": "Tomato sauce", "emoji": "🍅" },
-          "flatbreads": { "name": "Flatbreads", "emoji": "🫓" },
-          "prosciutto": { "name": "Prosciutto", "emoji": "🥩" },
-          "provolone_cheese": { "name": "Provolone cheese", "emoji": "🧀" },
-          "eggs": { "name": "Eggs", "emoji": "🥚" },
-          "pesto": { "name": "Pesto", "emoji": "🌿" },
-          "cherry_tomatoes": { "name": "Cherry tomatoes", "emoji": "🍅" },
-          "lentils": { "name": "Lentils", "emoji": "🫘" },
-          "croutons": { "name": "Croutons", "emoji": "🍞" },
-          "bacon": { "name": "Bacon", "emoji": "🥓" },
-          "beans": { "name": "Beans", "emoji": "🫘" },
-          "salmon": { "name": "Salmon", "emoji": "🍣" },
-          "rice": { "name": "Rice", "emoji": "🍚" },
-          "zucchini": { "name": "Zucchini", "emoji": "🥒" },
-          "ground_beef": { "name": "Ground beef", "emoji": "🥩" },
-          "bread": { "name": "Bread", "emoji": "🍞" },
-          "breadcrumbs": { "name": "Breadcrumbs", "emoji": "🍞" },
-          "chicken_breast": { "name": "Chicken breast", "emoji": "🍗" },
-          "cod": { "name": "Cod", "emoji": "🐟" },
-          "hamburger_buns": { "name": "Hamburger buns", "emoji": "🍔" },
-          "american_cheese_slices": { "name": "American cheese slices", "emoji": "🧀" },
-          "lettuce": { "name": "Lettuce", "emoji": "🥬" },
-          "tomatoes": { "name": "Tomatoes", "emoji": "🍅" },
-          "breaded_cutlets": { "name": "Breaded cutlets", "emoji": "🥩" },
-          "sausages": { "name": "Sausages", "emoji": "🌭" },
-          "vegetable_soup_mix": { "name": "Vegetable soup mix", "emoji": "🥕" },
-          "chicken_thighs": { "name": "Chicken thighs", "emoji": "🍗" },
-          "veal_cutlets": { "name": "Veal cutlets", "emoji": "🥩" },
-          "fresh_mozzarella": { "name": "Fresh mozzarella", "emoji": "🧀" },
-          "cordon_bleu": { "name": "Cordon bleu", "emoji": "🥩" },
-          "hot_dogs": { "name": "Hot dogs", "emoji": "🌭" },
-          "dumplings": { "name": "Dumplings", "emoji": "🥟" },
-          "fish_sticks": { "name": "Fish sticks", "emoji": "🐟" },
-          "whole_chicken": { "name": "Whole chicken", "emoji": "🍗" },
-          "shredded_mozzarella": { "name": "Shredded mozzarella", "emoji": "🧀" },
-          "eggplant": { "name": "Eggplant", "emoji": "🍆" },
-          "beef": { "name": "Beef", "emoji": "🥩" },
-          "potatoes": { "name": "Potatoes", "emoji": "🥔" },
-          "onion": { "name": "Onion", "emoji": "🧅" },
-          "carrots": { "name": "Carrots", "emoji": "🥕" },
-          "tortellini": { "name": "Tortellini", "emoji": "🥟" },
-          "cream": { "name": "Cream", "emoji": "🥛" },
-          "meat_sauce": { "name": "Meat sauce", "emoji": "🍖" },
-          "flour": { "name": "Flour", "emoji": "🌾" },
-          "milk": { "name": "Milk", "emoji": "🥛" },
-          "broth": { "name": "Broth", "emoji": "🍲" },
-          "polenta": { "name": "Polenta", "emoji": "🌽" },
-          "ricotta": { "name": "Ricotta", "emoji": "🧀" },
-          "spinach": { "name": "Spinach", "emoji": "🥬" },
-          "lasagna_noodles": { "name": "Lasagna noodles", "emoji": "🍝" },
-          "steak": { "name": "Steak", "emoji": "🥩" },
-          "broccoli": { "name": "Broccoli", "emoji": "🥦" },
-          "tater_tots": { "name": "Tater tots", "emoji": "🥔" },
-          "beets": { "name": "Beets", "emoji": "🥬" },
-          "corn": { "name": "Corn", "emoji": "🌽" },
-          "cucumbers": { "name": "Cucumbers", "emoji": "🥒" },
-          "butter": { "name": "Butter", "emoji": "🧈" },
-          "pesto_sauce": { "name": "Pesto sauce", "emoji": "🌿" }
-        },
-        "meals": {
-          "custom": { "name": "Custom", "emoji": "🍽️", "ingredients": [], "type": "other" },
-          "ravioli_burro_e_salvia": { "name": "Ravioli burro e salvia", "emoji": "🥟", "ingredients": ["ravioli", "sage"], "type": "vegetarian" },
-          "spaghetti_al_limone": { "name": "Spaghetti al limone", "emoji": "🍝", "ingredients": ["spaghetti", "lemons"], "type": "vegetarian" },
-          "pasta_e_ceci": { "name": "Pasta e ceci", "emoji": "🍝", "ingredients": ["ditalini", "chickpeas"], "type": "vegetarian" },
-          "pasta_col_tonno": { "name": "Pasta col tonno", "emoji": "🐟", "ingredients": ["spaghetti", "tuna"], "type": "fish" },
-          "pasta_sugo_tonno": { "name": "Pasta sugo tonno", "emoji": "🐟", "ingredients": ["pasta", "tuna", "tomato_sauce"], "type": "fish" },
-          "piadine_prosciutto_provolone": { "name": "Piadine prosciutto provolone", "emoji": "🥪", "ingredients": ["flatbreads", "prosciutto", "provolone_cheese"], "type": "meat" },
-          "uova_fritte": { "name": "Uova fritte", "emoji": "🍳", "ingredients": ["eggs"], "type": "vegetarian" },
-          "pasta_al_pesto": { "name": "Pasta al pesto", "emoji": "🌿", "ingredients": ["pasta", "pesto_sauce"], "type": "vegetarian" },
-          "pasta_coi_pomodorini": { "name": "Pasta coi pomodorini", "emoji": "🍅", "ingredients": ["pasta", "cherry_tomatoes"], "type": "vegetarian" },
-          "lenticchie": { "name": "Lenticchie", "emoji": "🥘", "ingredients": ["lentils", "croutons"], "type": "vegetarian" },
-          "spaghetti_aglio_e_olio": { "name": "Spaghetti aglio e olio", "emoji": "🧄", "ingredients": ["spaghetti"], "type": "vegetarian" },
-          "carbonara": { "name": "Carbonara", "emoji": "🥓", "ingredients": ["spaghetti", "eggs", "bacon"], "type": "meat" },
-          "frittata_di_pasta": { "name": "Frittata di pasta", "emoji": "🍳", "ingredients": ["eggs"], "type": "vegetarian" },
-          "pasta_e_fagioli": { "name": "Pasta e fagioli", "emoji": "🫘", "ingredients": ["pasta", "beans"], "type": "vegetarian" },
-          "salmone_col_riso": { "name": "Salmone col riso", "emoji": "🍣", "ingredients": ["salmon", "rice"], "type": "fish" },
-          "frittata_di_zucchine": { "name": "Frittata di zucchine", "emoji": "🥒", "ingredients": ["eggs", "zucchini"], "type": "vegetarian" },
-          "polpette": { "name": "Polpette", "emoji": "🧆", "ingredients": ["ground_beef", "eggs", "bread", "breadcrumbs"], "type": "meat" },
-          "pollo_al_limone": { "name": "Pollo al limone", "emoji": "🍗", "ingredients": ["chicken_breast", "lemons"], "type": "meat" },
-          "merluzzo": { "name": "Merluzzo", "emoji": "🐟", "ingredients": ["cod"], "type": "fish" },
-          "hamburger": { "name": "Hamburger", "emoji": "🍔", "ingredients": ["hamburger_buns", "ground_beef", "american_cheese_slices", "lettuce", "tomatoes"], "type": "meat" },
-          "cotolette": { "name": "Cotolette", "emoji": "🥩", "ingredients": ["breaded_cutlets", "breadcrumbs", "eggs"], "type": "meat" },
-          "salsicce": { "name": "Salsicce", "emoji": "🌭", "ingredients": ["sausages"], "type": "meat" },
-          "minestrone": { "name": "Minestrone", "emoji": "🍲", "ingredients": ["vegetable_soup_mix", "pasta", "beans"], "type": "vegetarian" },
-          "pollo_al_forno": { "name": "Pollo al forno", "emoji": "🍗", "ingredients": ["chicken_thighs"], "type": "meat" },
-          "scaloppine_al_limone": { "name": "Scaloppine al limone", "emoji": "🥩", "ingredients": ["veal_cutlets", "lemons"], "type": "meat" },
-          "caprese": { "name": "Caprese", "emoji": "🧀", "ingredients": ["fresh_mozzarella", "tomatoes"], "type": "vegetarian" },
-          "cordon_bleu": { "name": "Cordon bleu", "emoji": "🥩", "ingredients": ["cordon_bleu"], "type": "meat" },
-          "würstel": { "name": "Würstel", "emoji": "🌭", "ingredients": ["hot_dogs"], "type": "meat" },
-          "dumplings": { "name": "Dumplings", "emoji": "🥟", "ingredients": ["dumplings"], "type": "meat" },
-          "fish_sticks": { "name": "Fish sticks", "emoji": "🐟", "ingredients": ["fish_sticks"], "type": "fish" },
-          "pollo_allo_spiedo": { "name": "Pollo allo spiedo", "emoji": "🍗", "ingredients": ["whole_chicken"], "type": "meat" },
-          "pasta_al_forno": { "name": "Pasta al forno", "emoji": "🍝", "ingredients": ["pasta", "tomato_sauce", "shredded_mozzarella"], "type": "vegetarian" },
-          "parmigiana_di_melanzane": { "name": "Parmigiana di melanzane", "emoji": "🍆", "ingredients": ["eggplant", "tomato_sauce", "shredded_mozzarella"], "type": "vegetarian" },
-          "zucchine_ripiene": { "name": "Zucchine ripiene", "emoji": "🥒", "ingredients": ["zucchini", "ground_beef", "bread"], "type": "meat" },
-          "lasagna": { "name": "Lasagna", "emoji": "🍝", "ingredients": ["lasagna_noodles", "meat_sauce"], "type": "meat" },
-          "spezzatino_con_patate": { "name": "Spezzatino con patate", "emoji": "🥘", "ingredients": ["beef", "potatoes", "onion", "carrots"], "type": "meat" },
-          "tortellini_con_la_panna": { "name": "Tortellini con la panna", "emoji": "🥟", "ingredients": ["tortellini", "cream"], "type": "vegetarian" },
-          "tortellini_col_sugo": { "name": "Tortellini col sugo", "emoji": "🥟", "ingredients": ["tortellini", "tomato_sauce"], "type": "vegetarian" },
-          "pasta_col_ragù": { "name": "Pasta col ragù", "emoji": "🍝", "ingredients": ["pasta", "meat_sauce"], "type": "meat" },
-          "polpettone": { "name": "Polpettone", "emoji": "🥩", "ingredients": ["ground_beef", "eggs", "bacon", "bread"], "type": "meat" },
-          "scrimpelle_mbuss": { "name": "Scrimpelle mbuss", "emoji": "🥞", "ingredients": ["eggs", "flour", "milk", "broth"], "type": "vegetarian" },
-          "polenta_col_sugo": { "name": "Polenta col sugo", "emoji": "🌽", "ingredients": ["polenta", "tomato_sauce", "sausages"], "type": "meat" },
-          "cannelloni": { "name": "Cannelloni", "emoji": "🥟", "ingredients": ["cannelloni", "ricotta", "spinach"], "type": "vegetarian" },
-          "bistecca": { "name": "Bistecca", "emoji": "🥩", "ingredients": ["steak"], "type": "meat" },
-          "pizza_delivery": { "name": "Pizza", "emoji": "🍕", "ingredients": [], "type": "other" },
-          "greco_delivery": { "name": "Greek", "emoji": "🥙", "ingredients": [], "type": "other" },
-          "chinese_delivery": { "name": "Dumplings", "emoji": "🥡", "ingredients": [], "type": "other" },
-          "vietnamese_delivery": { "name": "Pho", "emoji": "🍜", "ingredients": [], "type": "other" },
-          "ramen_delivery": { "name": "Ramen", "emoji": "🍜", "ingredients": [], "type": "other" },
-          "georgian_delivery": { "name": "Khinkali", "emoji": "🥟", "ingredients": [], "type": "other" },
-          "hamburger_delivery": { "name": "Hamburger", "emoji": "🍔", "ingredients": [], "type": "other" },
-          "purè_di_patate": { "name": "Purè di patate", "emoji": "🥔", "ingredients": ["potatoes"], "type": "vegetarian" },
-          "broccoli_al_vapore": { "name": "Broccoli al vapore", "emoji": "🥦", "ingredients": ["broccoli"], "type": "vegetarian" },
-          "insalata_di_pomodori": { "name": "Insalata di pomodori", "emoji": "🍅", "ingredients": ["tomatoes"], "type": "vegetarian" },
-          "tater_tots": { "name": "Tater tots", "emoji": "🥔", "ingredients": ["tater_tots"], "type": "vegetarian" },
-          "barbabietole": { "name": "Barbabietole", "emoji": "🥬", "ingredients": ["beets"], "type": "vegetarian" },
-          "insalata_di_mais": { "name": "Insalata di mais", "emoji": "🌽", "ingredients": ["canned_corn"], "type": "vegetarian" },
-          "patate_lesse": { "name": "Patate lesse", "emoji": "🥔", "ingredients": ["potatoes"], "type": "vegetarian" },
-          "carote_al_forno": { "name": "Carote al forno", "emoji": "🥕", "ingredients": ["carrots"], "type": "vegetarian" },
-          "carote_a_insalata": { "name": "Carote a insalata", "emoji": "🥕", "ingredients": ["carrots"], "type": "vegetarian" },
-          "zucchine_trifolate": { "name": "Zucchine trifolate", "emoji": "🥒", "ingredients": ["zucchini"], "type": "vegetarian" },
-          "insalata_di_cetrioli": { "name": "Insalata di cetrioli", "emoji": "🥒", "ingredients": ["cucumbers"], "type": "vegetarian" },
-          "insalata": { "name": "Insalata", "emoji": "🥗", "ingredients": ["lettuce"], "type": "vegetarian" },
-          "corn_on_the_cob": { "name": "Corn on the Cob", "emoji": "🌽", "ingredients": ["corn"], "type": "vegetarian" }
-        },
-        "mealCategories": {
-          "lunch": ["ravioli_burro_e_salvia", "spaghetti_al_limone", "pasta_e_ceci", "pasta_col_tonno", "pasta_sugo_tonno", "piadine_prosciutto_provolone", "uova_fritte", "pasta_al_pesto", "pasta_coi_pomodorini", "lenticchie", "spaghetti_aglio_e_olio", "carbonara", "frittata_di_pasta", "pasta_e_fagioli", "custom"],
-          "dinnerRegular": ["salmone_col_riso", "frittata_di_zucchine", "polpette", "pollo_al_limone", "merluzzo", "hamburger", "cotolette", "salsicce", "minestrone", "pollo_al_forno", "scaloppine_al_limone", "caprese", "custom"],
-          "dinnerQuick": ["cordon_bleu", "würstel", "dumplings", "fish_sticks", "pollo_allo_spiedo", "custom"],
-          "delivery": ["pizza_delivery", "chinese_delivery", "greco_delivery", "vietnamese_delivery", "georgian_delivery", "hamburger_delivery", "ramen_delivery", "custom"],
-          "dinnerWeekend": ["pasta_al_forno", "parmigiana_di_melanzane", "zucchine_ripiene", "lasagna", "spezzatino_con_patate", "tortellini_con_la_panna", "tortellini_col_sugo", "pasta_col_ragù", "polpettone", "scrimpelle_mbuss", "polenta_col_sugo", "cannelloni", "bistecca", "custom"],
-          "side": ["purè_di_patate", "broccoli_al_vapore", "insalata_di_pomodori", "tater_tots", "barbabietole", "insalata_di_mais", "patate_lesse", "carote_al_forno", "carote_a_insalata", "zucchine_trifolate", "insalata_di_cetrioli", "insalata", "corn_on_the_cob", "custom"],
-          "breakfast": ["croissants", "pancakes", "french_toast", "biscuits", "custom"]
-        },
-        "stores": {
-          "Aldi": ["bacon", "beets", "cannelloni", "carrots", "chicken_thighs", "breaded_cutlets", "croutons", "dumplings", "beans", "fish_sticks", "lemons", "corn", "shredded_mozzarella", "potatoes", "chicken_breast", "flatbreads", "tomatoes", "cherry_tomatoes", "provolone_cheese", "prosciutto", "ravioli", "sausages", "american_cheese_slices", "spinach", "tater_tots", "tortellini", "eggs", "hot_dogs", "zucchini", "ground_beef", "ricotta", "milk", "pesto_sauce", "canned_corn"],
-          "Wegmans": ["steak", "broccoli", "cucumbers", "onion", "hamburger_buns", "butter", "lettuce", "lentils", "eggplant", "cod", "whole_chicken", "sage", "salmon", "bread", "tomato_sauce"],
-          "Amazon": ["pasta", "tuna", "breadcrumbs", "rice"],
-          "Other": []
-        }
-      };
+    <div id="toast" class="toast">Saved! ✓</div>
 
-      static initialize() {
-        this.MEALS_BY_NAME = {};
-        this.MEAL_EMOJI = {};
-        this.MEAL_ING = {};
-        this.MEAL_TYPE = {};
-        this.ING_EMOJI = {};
-        this.CATS = {};
-        this.STORES = {};
+    <script>
+        // Enhanced modular structure
 
-        // Process ingredients
-        Object.values(this.DATA.ingredients).forEach(i => {
-          this.ING_EMOJI[i.name] = i.emoji;
-        });
+        // Data Management Module
+        class DataManager {
+            static DATA = {
+                "ingredients": {
+                    "ravioli": { "name": "Ravioli", "emoji": "🥟" },
+                    "sage": { "name": "Sage", "emoji": "🌿" },
+                    "spaghetti": { "name": "Spaghetti", "emoji": "🍝" },
+                    "lemons": { "name": "Lemons", "emoji": "🍋" },
+                    "ditalini": { "name": "Ditalini", "emoji": "🍝" },
+                    "chickpeas": { "name": "Chickpeas", "emoji": "🫘" },
+                    "tuna": { "name": "Tuna", "emoji": "🐟" },
+                    "pasta": { "name": "Pasta", "emoji": "🍝" },
+                    "tomato_sauce": { "name": "Tomato sauce", "emoji": "🍅" },
+                    "flatbreads": { "name": "Flatbreads", "emoji": "🫓" },
+                    "prosciutto": { "name": "Prosciutto", "emoji": "🥩" },
+                    "provolone_cheese": { "name": "Provolone cheese", "emoji": "🧀" },
+                    "eggs": { "name": "Eggs", "emoji": "🥚" },
+                    "pesto": { "name": "Pesto", "emoji": "🌿" },
+                    "cherry_tomatoes": { "name": "Cherry tomatoes", "emoji": "🍅" },
+                    "lentils": { "name": "Lentils", "emoji": "🫘" },
+                    "croutons": { "name": "Croutons", "emoji": "🍞" },
+                    "bacon": { "name": "Bacon", "emoji": "🥓" },
+                    "beans": { "name": "Beans", "emoji": "🫘" },
+                    "salmon": { "name": "Salmon", "emoji": "🍣" },
+                    "rice": { "name": "Rice", "emoji": "🍚" },
+                    "zucchini": { "name": "Zucchini", "emoji": "🥒" },
+                    "ground_beef": { "name": "Ground beef", "emoji": "🥩" },
+                    "bread": { "name": "Bread", "emoji": "🍞" },
+                    "breadcrumbs": { "name": "Breadcrumbs", "emoji": "🍞" },
+                    "chicken_breast": { "name": "Chicken breast", "emoji": "🍗" },
+                    "cod": { "name": "Cod", "emoji": "🐟" },
+                    "hamburger_buns": { "name": "Hamburger buns", "emoji": "🍔" },
+                    "american_cheese_slices": { "name": "American cheese slices", "emoji": "🧀" },
+                    "lettuce": { "name": "Lettuce", "emoji": "🥬" },
+                    "tomatoes": { "name": "Tomatoes", "emoji": "🍅" },
+                    "breaded_cutlets": { "name": "Breaded cutlets", "emoji": "🥩" },
+                    "sausages": { "name": "Sausages", "emoji": "🌭" },
+                    "vegetable_soup_mix": { "name": "Vegetable soup mix", "emoji": "🥕" },
+                    "chicken_thighs": { "name": "Chicken thighs", "emoji": "🍗" },
+                    "veal_cutlets": { "name": "Veal cutlets", "emoji": "🥩" },
+                    "fresh_mozzarella": { "name": "Fresh mozzarella", "emoji": "🧀" },
+                    "cordon_bleu": { "name": "Cordon bleu", "emoji": "🥩" },
+                    "hot_dogs": { "name": "Hot dogs", "emoji": "🌭" },
+                    "dumplings": { "name": "Dumplings", "emoji": "🥟" },
+                    "fish_sticks": { "name": "Fish sticks", "emoji": "🐟" },
+                    "whole_chicken": { "name": "Whole chicken", "emoji": "🍗" },
+                    "shredded_mozzarella": { "name": "Shredded mozzarella", "emoji": "🧀" },
+                    "eggplant": { "name": "Eggplant", "emoji": "🍆" },
+                    "beef": { "name": "Beef", "emoji": "🥩" },
+                    "potatoes": { "name": "Potatoes", "emoji": "🥔" },
+                    "onion": { "name": "Onion", "emoji": "🧅" },
+                    "carrots": { "name": "Carrots", "emoji": "🥕" },
+                    "tortellini": { "name": "Tortellini", "emoji": "🥟" },
+                    "cream": { "name": "Cream", "emoji": "🥛" },
+                    "meat_sauce": { "name": "Meat sauce", "emoji": "🍖" },
+                    "flour": { "name": "Flour", "emoji": "🌾" },
+                    "milk": { "name": "Milk", "emoji": "🥛" },
+                    "broth": { "name": "Broth", "emoji": "🍲" },
+                    "polenta": { "name": "Polenta", "emoji": "🌽" },
+                    "ricotta": { "name": "Ricotta", "emoji": "🧀" },
+                    "spinach": { "name": "Spinach", "emoji": "🥬" },
+                    "lasagna_noodles": { "name": "Lasagna noodles", "emoji": "🍝" },
+                    "steak": { "name": "Steak", "emoji": "🥩" },
+                    "broccoli": { "name": "Broccoli", "emoji": "🥦" },
+                    "tater_tots": { "name": "Tater tots", "emoji": "🥔" },
+                    "beets": { "name": "Beets", "emoji": "🥬" },
+                    "corn": { "name": "Corn", "emoji": "🌽" },
+                    "cucumbers": { "name": "Cucumbers", "emoji": "🥒" },
+                    "butter": { "name": "Butter", "emoji": "🧈" },
+                    "pesto_sauce": { "name": "Pesto sauce", "emoji": "🌿" }
+                },
+                "meals": {
+                    "custom": { "name": "Custom", "emoji": "🍽️", "ingredients": [], "type": "other" },
+                    "ravioli_burro_e_salvia": { "name": "Ravioli burro e salvia", "emoji": "🥟", "ingredients": ["ravioli", "sage"], "type": "vegetarian" },
+                    "spaghetti_al_limone": { "name": "Spaghetti al limone", "emoji": "🍝", "ingredients": ["spaghetti", "lemons"], "type": "vegetarian" },
+                    "pasta_e_ceci": { "name": "Pasta e ceci", "emoji": "🍝", "ingredients": ["ditalini", "chickpeas"], "type": "vegetarian" },
+                    "pasta_col_tonno": { "name": "Pasta col tonno", "emoji": "🐟", "ingredients": ["spaghetti", "tuna"], "type": "fish" },
+                    "pasta_sugo_tonno": { "name": "Pasta sugo tonno", "emoji": "🐟", "ingredients": ["pasta", "tuna", "tomato_sauce"], "type": "fish" },
+                    "piadine_prosciutto_provolone": { "name": "Piadine prosciutto provolone", "emoji": "🥪", "ingredients": ["flatbreads", "prosciutto", "provolone_cheese"], "type": "meat" },
+                    "uova_fritte": { "name": "Uova fritte", "emoji": "🍳", "ingredients": ["eggs"], "type": "vegetarian" },
+                    "pasta_al_pesto": { "name": "Pasta al pesto", "emoji": "🌿", "ingredients": ["pasta", "pesto_sauce"], "type": "vegetarian" },
+                    "pasta_coi_pomodorini": { "name": "Pasta coi pomodorini", "emoji": "🍅", "ingredients": ["pasta", "cherry_tomatoes"], "type": "vegetarian" },
+                    "lenticchie": { "name": "Lenticchie", "emoji": "🥘", "ingredients": ["lentils", "croutons"], "type": "vegetarian" },
+                    "spaghetti_aglio_e_olio": { "name": "Spaghetti aglio e olio", "emoji": "🧄", "ingredients": ["spaghetti"], "type": "vegetarian" },
+                    "carbonara": { "name": "Carbonara", "emoji": "🥓", "ingredients": ["spaghetti", "eggs", "bacon"], "type": "meat" },
+                    "frittata_di_pasta": { "name": "Frittata di pasta", "emoji": "🍳", "ingredients": ["eggs"], "type": "vegetarian" },
+                    "pasta_e_fagioli": { "name": "Pasta e fagioli", "emoji": "🫘", "ingredients": ["pasta", "beans"], "type": "vegetarian" },
+                    "salmone_col_riso": { "name": "Salmone col riso", "emoji": "🍣", "ingredients": ["salmon", "rice"], "type": "fish" },
+                    "frittata_di_zucchine": { "name": "Frittata di zucchine", "emoji": "🥒", "ingredients": ["eggs", "zucchini"], "type": "vegetarian" },
+                    "polpette": { "name": "Polpette", "emoji": "🧆", "ingredients": ["ground_beef", "eggs", "bread", "breadcrumbs"], "type": "meat" },
+                    "pollo_al_limone": { "name": "Pollo al limone", "emoji": "🍗", "ingredients": ["chicken_breast", "lemons"], "type": "meat" },
+                    "merluzzo": { "name": "Merluzzo", "emoji": "🐟", "ingredients": ["cod"], "type": "fish" },
+                    "hamburger": { "name": "Hamburger", "emoji": "🍔", "ingredients": ["hamburger_buns", "ground_beef", "american_cheese_slices", "lettuce", "tomatoes"], "type": "meat" },
+                    "cotolette": { "name": "Cotolette", "emoji": "🥩", "ingredients": ["breaded_cutlets", "breadcrumbs", "eggs"], "type": "meat" },
+                    "salsicce": { "name": "Salsicce", "emoji": "🌭", "ingredients": ["sausages"], "type": "meat" },
+                    "minestrone": { "name": "Minestrone", "emoji": "🍲", "ingredients": ["vegetable_soup_mix", "pasta", "beans"], "type": "vegetarian" },
+                    "pollo_al_forno": { "name": "Pollo al forno", "emoji": "🍗", "ingredients": ["chicken_thighs"], "type": "meat" },
+                    "scaloppine_al_limone": { "name": "Scaloppine al limone", "emoji": "🥩", "ingredients": ["veal_cutlets", "lemons"], "type": "meat" },
+                    "caprese": { "name": "Caprese", "emoji": "🧀", "ingredients": ["fresh_mozzarella", "tomatoes"], "type": "vegetarian" },
+                    "cordon_bleu": { "name": "Cordon bleu", "emoji": "🥩", "ingredients": ["cordon_bleu"], "type": "meat" },
+                    "würstel": { "name": "Würstel", "emoji": "🌭", "ingredients": ["hot_dogs"], "type": "meat" },
+                    "dumplings": { "name": "Dumplings", "emoji": "🥟", "ingredients": ["dumplings"], "type": "meat" },
+                    "fish_sticks": { "name": "Fish sticks", "emoji": "🐟", "ingredients": ["fish_sticks"], "type": "fish" },
+                    "pollo_allo_spiedo": { "name": "Pollo allo spiedo", "emoji": "🍗", "ingredients": ["whole_chicken"], "type": "meat" },
+                    "pasta_al_forno": { "name": "Pasta al forno", "emoji": "🍝", "ingredients": ["pasta", "tomato_sauce", "shredded_mozzarella"], "type": "vegetarian" },
+                    "parmigiana_di_melanzane": { "name": "Parmigiana di melanzane", "emoji": "🍆", "ingredients": ["eggplant", "tomato_sauce", "shredded_mozzarella"], "type": "vegetarian" },
+                    "zucchine_ripiene": { "name": "Zucchine ripiene", "emoji": "🥒", "ingredients": ["zucchini", "ground_beef", "bread"], "type": "meat" },
+                    "lasagna": { "name": "Lasagna", "emoji": "🍝", "ingredients": ["lasagna_noodles", "meat_sauce"], "type": "meat" },
+                    "spezzatino_con_patate": { "name": "Spezzatino con patate", "emoji": "🥘", "ingredients": ["beef", "potatoes", "onion", "carrots"], "type": "meat" },
+                    "tortellini_con_la_panna": { "name": "Tortellini con la panna", "emoji": "🥟", "ingredients": ["tortellini", "cream"], "type": "vegetarian" },
+                    "tortellini_col_sugo": { "name": "Tortellini col sugo", "emoji": "🥟", "ingredients": ["tortellini", "tomato_sauce"], "type": "vegetarian" },
+                    "pasta_col_ragù": { "name": "Pasta col ragù", "emoji": "🍝", "ingredients": ["pasta", "meat_sauce"], "type": "meat" },
+                    "polpettone": { "name": "Polpettone", "emoji": "🥩", "ingredients": ["ground_beef", "eggs", "bacon", "bread"], "type": "meat" },
+                    "scrimpelle_mbuss": { "name": "Scrimpelle mbuss", "emoji": "🥞", "ingredients": ["eggs", "flour", "milk", "broth"], "type": "vegetarian" },
+                    "polenta_col_sugo": { "name": "Polenta col sugo", "emoji": "🌽", "ingredients": ["polenta", "tomato_sauce", "sausages"], "type": "meat" },
+                    "cannelloni": { "name": "Cannelloni", "emoji": "🥟", "ingredients": ["cannelloni", "ricotta", "spinach"], "type": "vegetarian" },
+                    "bistecca": { "name": "Bistecca", "emoji": "🥩", "ingredients": ["steak"], "type": "meat" },
+                    "pizza_delivery": { "name": "Pizza", "emoji": "🍕", "ingredients": [], "type": "other" },
+                    "greco_delivery": { "name": "Greek", "emoji": "🥙", "ingredients": [], "type": "other" },
+                    "chinese_delivery": { "name": "Dumplings", "emoji": "🥡", "ingredients": [], "type": "other" },
+                    "vietnamese_delivery": { "name": "Pho", "emoji": "🍜", "ingredients": [], "type": "other" },
+                    "ramen_delivery": { "name": "Ramen", "emoji": "🍜", "ingredients": [], "type": "other" },
+                    "georgian_delivery": { "name": "Khinkali", "emoji": "🥟", "ingredients": [], "type": "other" },
+                    "hamburger_delivery": { "name": "Hamburger", "emoji": "🍔", "ingredients": [], "type": "other" },
+                    "purè_di_patate": { "name": "Purè di patate", "emoji": "🥔", "ingredients": ["potatoes"], "type": "vegetarian" },
+                    "broccoli_al_vapore": { "name": "Broccoli al vapore", "emoji": "🥦", "ingredients": ["broccoli"], "type": "vegetarian" },
+                    "insalata_di_pomodori": { "name": "Insalata di pomodori", "emoji": "🍅", "ingredients": ["tomatoes"], "type": "vegetarian" },
+                    "tater_tots": { "name": "Tater tots", "emoji": "🥔", "ingredients": ["tater_tots"], "type": "vegetarian" },
+                    "barbabietole": { "name": "Barbabietole", "emoji": "🥬", "ingredients": ["beets"], "type": "vegetarian" },
+                    "insalata_di_mais": { "name": "Insalata di mais", "emoji": "🌽", "ingredients": ["canned_corn"], "type": "vegetarian" },
+                    "patate_lesse": { "name": "Patate lesse", "emoji": "🥔", "ingredients": ["potatoes"], "type": "vegetarian" },
+                    "carote_al_forno": { "name": "Carote al forno", "emoji": "🥕", "ingredients": ["carrots"], "type": "vegetarian" },
+                    "carote_a_insalata": { "name": "Carote a insalata", "emoji": "🥕", "ingredients": ["carrots"], "type": "vegetarian" },
+                    "zucchine_trifolate": { "name": "Zucchine trifolate", "emoji": "🥒", "ingredients": ["zucchini"], "type": "vegetarian" },
+                    "insalata_di_cetrioli": { "name": "Insalata di cetrioli", "emoji": "🥒", "ingredients": ["cucumbers"], "type": "vegetarian" },
+                    "insalata": { "name": "Insalata", "emoji": "🥗", "ingredients": ["lettuce"], "type": "vegetarian" },
+                    "corn_on_the_cob": { "name": "Corn on the Cob", "emoji": "🌽", "ingredients": ["corn"], "type": "vegetarian" }
+                },
+                "mealCategories": {
+                    "lunch": ["ravioli_burro_e_salvia", "spaghetti_al_limone", "pasta_e_ceci", "pasta_col_tonno", "pasta_sugo_tonno", "piadine_prosciutto_provolone", "uova_fritte", "pasta_al_pesto", "pasta_coi_pomodorini", "lenticchie", "spaghetti_aglio_e_olio", "carbonara", "frittata_di_pasta", "pasta_e_fagioli", "custom"],
+                    "dinnerRegular": ["salmone_col_riso", "frittata_di_zucchine", "polpette", "pollo_al_limone", "merluzzo", "hamburger", "cotolette", "salsicce", "minestrone", "pollo_al_forno", "scaloppine_al_limone", "caprese", "custom"],
+                    "dinnerQuick": ["cordon_bleu", "würstel", "dumplings", "fish_sticks", "pollo_allo_spiedo", "custom"],
+                    "delivery": ["pizza_delivery", "chinese_delivery", "greco_delivery", "vietnamese_delivery", "georgian_delivery", "hamburger_delivery", "ramen_delivery", "custom"],
+                    "dinnerWeekend": ["pasta_al_forno", "parmigiana_di_melanzane", "zucchine_ripiene", "lasagna", "spezzatino_con_patate", "tortellini_con_la_panna", "tortellini_col_sugo", "pasta_col_ragù", "polpettone", "scrimpelle_mbuss", "polenta_col_sugo", "cannelloni", "bistecca", "custom"],
+                    "side": ["purè_di_patate", "broccoli_al_vapore", "insalata_di_pomodori", "tater_tots", "barbabietole", "insalata_di_mais", "patate_lesse", "carote_al_forno", "carote_a_insalata", "zucchine_trifolate", "insalata_di_cetrioli", "insalata", "corn_on_the_cob", "custom"],
+                    "breakfast": ["croissants", "pancakes", "french_toast", "biscuits", "custom"]
+                },
+                "stores": {
+                    "Aldi": ["bacon", "beets", "cannelloni", "carrots", "chicken_thighs", "breaded_cutlets", "croutons", "dumplings", "beans", "fish_sticks", "lemons", "corn", "shredded_mozzarella", "potatoes", "chicken_breast", "flatbreads", "tomatoes", "cherry_tomatoes", "provolone_cheese", "prosciutto", "ravioli", "sausages", "american_cheese_slices", "spinach", "tater_tots", "tortellini", "eggs", "hot_dogs", "zucchini", "ground_beef", "ricotta", "milk", "pesto_sauce", "canned_corn"],
+                    "Wegmans": ["steak", "broccoli", "cucumbers", "onion", "hamburger_buns", "butter", "lettuce", "lentils", "eggplant", "cod", "whole_chicken", "sage", "salmon", "bread", "tomato_sauce"],
+                    "Amazon": ["pasta", "tuna", "breadcrumbs", "rice"],
+                    "Other": []
+                }
+            };
 
-        // Process meals
-        Object.entries(this.DATA.meals).forEach(([k, m]) => {
-          this.MEALS_BY_NAME[m.name] = m;
-          this.MEAL_EMOJI[m.name] = m.emoji || '❓';
-          this.MEAL_ING[m.name] = (m.ingredients || []).map(id => this.DATA.ingredients[id]?.name || id);
-          this.MEAL_TYPE[m.name] = m.type || 'other';
-        });
+            static initialize() {
+                this.MEALS_BY_NAME = {};
+                this.MEAL_EMOJI = {};
+                this.MEAL_ING = {};
+                this.MEAL_TYPE = {};
+                this.ING_EMOJI = {};
+                this.CATS = {};
+                this.STORES = {};
 
-        // Add breakfast fallbacks
-        const BF_FALLBACK = {
-          croissants: { name: 'Croissants', emoji: '🥐', ingredients: [] },
-          pancakes: { name: 'Pancakes', emoji: '🥞', ingredients: ['flour', 'milk', 'eggs', 'butter'] },
-          french_toast: { name: 'French toast', emoji: '🍞', ingredients: ['bread', 'eggs', 'milk', 'butter'] },
-          biscuits: { name: 'Biscuits', emoji: '🥯', ingredients: ['flour', 'milk', 'butter'] }
-        };
+                // Process ingredients
+                Object.values(this.DATA.ingredients).forEach(i => {
+                    this.ING_EMOJI[i.name] = i.emoji;
+                });
 
-        const ID2NAME = (id) => {
-          if (this.DATA.meals[id]) return this.DATA.meals[id].name;
-          return ({ croissants: 'Croissants', pancakes: 'Pancakes', french_toast: 'French toast', biscuits: 'Biscuits', custom: 'Custom' })[id] || id;
-        };
+                // Process meals
+                Object.entries(this.DATA.meals).forEach(([k, m]) => {
+                    this.MEALS_BY_NAME[m.name] = m;
+                    this.MEAL_EMOJI[m.name] = m.emoji || '❓';
+                    this.MEAL_ING[m.name] = (m.ingredients || []).map(id => this.DATA.ingredients[id]?.name || id);
+                    this.MEAL_TYPE[m.name] = m.type || 'other';
+                });
 
-        // Process categories
-        Object.entries(this.DATA.mealCategories).forEach(([cat, ids]) => {
-          this.CATS[cat] = ids.map(ID2NAME);
-          if (cat === 'breakfast') {
-            ids.forEach(id => {
-              if (id === 'custom') return;
-              const nm = ID2NAME(id);
-              if (!this.MEALS_BY_NAME[nm] && BF_FALLBACK[id]) {
-                const m = BF_FALLBACK[id];
-                this.MEALS_BY_NAME[m.name] = m;
-                this.MEAL_EMOJI[m.name] = m.emoji;
-                this.MEAL_ING[m.name] = (m.ingredients || []).map(x => this.DATA.ingredients[x]?.name || x);
-              }
-            });
-          }
-        });
+                // Add breakfast fallbacks
+                const BF_FALLBACK = {
+                    croissants: { name: 'Croissants', emoji: '🥐', ingredients: [] },
+                    pancakes: { name: 'Pancakes', emoji: '🥞', ingredients: ['flour', 'milk', 'eggs', 'butter'] },
+                    french_toast: { name: 'French toast', emoji: '🍞', ingredients: ['bread', 'eggs', 'milk', 'butter'] },
+                    biscuits: { name: 'Biscuits', emoji: '🥯', ingredients: ['flour', 'milk', 'butter'] }
+                };
 
-        // Process stores
-        Object.entries(this.DATA.stores).forEach(([s, ids]) => {
-          this.STORES[s] = ids.map(id => this.DATA.ingredients[id]?.name || id);
-        });
-      }
+                const ID2NAME = (id) => {
+                    if (this.DATA.meals[id]) return this.DATA.meals[id].name;
+                    return ({ croissants: 'Croissants', pancakes: 'Pancakes', french_toast: 'French toast', biscuits: 'Biscuits', custom: 'Custom' })[id] || id;
+                };
 
-      static getMealEmoji(name) {
-        return this.MEAL_EMOJI[name] || '❓';
-      }
+                // Process categories
+                Object.entries(this.DATA.mealCategories).forEach(([cat, ids]) => {
+                    this.CATS[cat] = ids.map(ID2NAME);
+                    if (cat === 'breakfast') {
+                        ids.forEach(id => {
+                            if (id === 'custom') return;
+                            const nm = ID2NAME(id);
+                            if (!this.MEALS_BY_NAME[nm] && BF_FALLBACK[id]) {
+                                const m = BF_FALLBACK[id];
+                                this.MEALS_BY_NAME[m.name] = m;
+                                this.MEAL_EMOJI[m.name] = m.emoji;
+                                this.MEAL_ING[m.name] = (m.ingredients || []).map(x => this.DATA.ingredients[x]?.name || x);
+                            }
+                        });
+                    }
+                });
 
-      static getMealIngredients(name) {
-        return this.MEAL_ING[name] || [];
-      }
-
-      static getStoreForIngredient(ingredient) {
-        for (const [store, items] of Object.entries(this.STORES)) {
-          if (items.includes(ingredient)) return store;
-        }
-        return 'Other';
-      }
-
-      static getIngredientEmoji(name) {
-        return this.ING_EMOJI[name] || '🛒';
-      }
-
-      static getCategory(cat) {
-        return this.CATS[cat] || [];
-      }
-    }
-
-    // State Management Module
-    class StateManager {
-      constructor() {
-        this.state = this.loadState() || this.createInitialState();
-        this.migrate();
-      }
-
-      createInitialState() {
-        const start = this.getWeekStart(new Date());
-        const names = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
-        return {
-          weekStart: start.toISOString(),
-          showWeekend: true,
-          theme: 'dark',
-          days: names.map((n, i) => ({
-            name: n,
-            date: new Date(start.getTime() + i * 86400000).toISOString(),
-            breakfast: [],
-            lunch: [],
-            dinner: [],
-            side: [],
-            dinnerType: 'regular',
-            customBreakfast: [],
-            customLunch: [],
-            customDinner: [],
-            customSide: [],
-            breadFlag: false
-          }))
-        };
-      }
-
-      migrate() {
-        this.state.days.forEach(d => {
-          // Ensure arrays
-          ['breakfast', 'lunch', 'dinner', 'side', 'customBreakfast', 'customLunch', 'customDinner', 'customSide'].forEach(prop => {
-            if (!Array.isArray(d[prop])) {
-              d[prop] = d[prop] ? [d[prop]] : [];
+                // Process stores
+                Object.entries(this.DATA.stores).forEach(([s, ids]) => {
+                    this.STORES[s] = ids.map(id => this.DATA.ingredients[id]?.name || id);
+                });
             }
-          });
-          d.breadFlag ??= false;
-        });
-        this.state.theme ??= 'dark';
-      }
 
-      getWeekStart(date) {
-        const dt = new Date(date);
-        const day = dt.getDay();
-        const diff = dt.getDate() - day + (day === 0 ? -6 : 1);
-        const monday = new Date(dt.setDate(diff));
-        monday.setHours(0, 0, 0, 0);
-        return monday;
-      }
+            static getMealEmoji(name) {
+                return this.MEAL_EMOJI[name] || '❓';
+            }
 
-      getStorageKey(date) {
-        return `meal_plan_${this.getWeekStart(date).toISOString().slice(0, 10)}`;
-      }
+            static getMealIngredients(name) {
+                return this.MEAL_ING[name] || [];
+            }
 
-      loadState() {
-        try {
-          const key = this.getStorageKey(new Date());
-          const json = localStorage.getItem(key);
-          return json ? JSON.parse(json) : null;
-        } catch {
-          return null;
+            static getStoreForIngredient(ingredient) {
+                for (const [store, items] of Object.entries(this.STORES)) {
+                    if (items.includes(ingredient)) return store;
+                }
+                return 'Other';
+            }
+
+            static getIngredientEmoji(name) {
+                return this.ING_EMOJI[name] || '🛒';
+            }
+
+            static getCategory(cat) {
+                return this.CATS[cat] || [];
+            }
         }
-      }
 
-      save() {
-        try {
-          const key = this.getStorageKey(new Date(this.state.weekStart));
-          localStorage.setItem(key, JSON.stringify(this.state));
-        } catch {
-          // Silently fail if localStorage is not available
+        // State Management Module
+        class StateManager {
+            constructor() {
+                this.state = this.loadState() || this.createInitialState();
+                this.migrate();
+            }
+
+            createInitialState() {
+                const start = this.getWeekStart(new Date());
+                const names = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+                return {
+                    weekStart: start.toISOString(),
+                    showWeekend: true,
+                    theme: 'dark',
+                    days: names.map((n, i) => ({
+                        name: n,
+                        date: new Date(start.getTime() + i * 86400000).toISOString(),
+                        breakfast: [],
+                        lunch: [],
+                        dinner: [],
+                        side: [],
+                        dinnerType: 'regular',
+                        customBreakfast: [],
+                        customLunch: [],
+                        customDinner: [],
+                        customSide: [],
+                        breadFlag: false
+                    }))
+                };
+            }
+
+            migrate() {
+                this.state.days.forEach(d => {
+                    // Ensure arrays
+                    ['breakfast', 'lunch', 'dinner', 'side', 'customBreakfast', 'customLunch', 'customDinner', 'customSide'].forEach(prop => {
+                        if (!Array.isArray(d[prop])) {
+                            d[prop] = d[prop] ? [d[prop]] : [];
+                        }
+                    });
+                    d.breadFlag ??= false;
+                });
+                this.state.theme ??= 'dark';
+            }
+
+            getWeekStart(date) {
+                const dt = new Date(date);
+                const day = dt.getDay();
+                const diff = dt.getDate() - day + (day === 0 ? -6 : 1);
+                const monday = new Date(dt.setDate(diff));
+                monday.setHours(0, 0, 0, 0);
+                return monday;
+            }
+
+            getStorageKey(date) {
+                return `meal_plan_${this.getWeekStart(date).toISOString().slice(0, 10)}`;
+            }
+
+            loadState() {
+                try {
+                    const key = this.getStorageKey(new Date());
+                    const json = localStorage.getItem(key);
+                    return json ? JSON.parse(json) : null;
+                } catch {
+                    return null;
+                }
+            }
+
+            save() {
+                try {
+                    const key = this.getStorageKey(new Date(this.state.weekStart));
+                    localStorage.setItem(key, JSON.stringify(this.state));
+                } catch {
+                    // Silently fail if localStorage is not available
+                }
+            }
+
+            navigateWeek(direction) {
+                const current = new Date(this.state.weekStart);
+                const next = new Date(current.getTime() + (direction === 'next' ? 7 : -7) * 86400000);
+                next.setHours(0, 0, 0, 0);
+
+                const key = this.getStorageKey(next);
+                const existing = localStorage.getItem(key);
+
+                if (existing) {
+                    this.state = JSON.parse(existing);
+                } else {
+                    this.state = this.createInitialState();
+                    this.state.weekStart = next.toISOString();
+                    this.state.days.forEach((d, i) => {
+                        d.date = new Date(next.getTime() + i * 86400000).toISOString();
+                    });
+                }
+
+                this.migrate();
+                return this.state;
+            }
         }
-      }
 
-      navigateWeek(direction) {
-        const current = new Date(this.state.weekStart);
-        const next = new Date(current.getTime() + (direction === 'next' ? 7 : -7) * 86400000);
-        next.setHours(0, 0, 0, 0);
-        
-        const key = this.getStorageKey(next);
-        const existing = localStorage.getItem(key);
-        
-        if (existing) {
-          this.state = JSON.parse(existing);
-        } else {
-          this.state = this.createInitialState();
-          this.state.weekStart = next.toISOString();
-          this.state.days.forEach((d, i) => {
-            d.date = new Date(next.getTime() + i * 86400000).toISOString();
-          });
-        }
-        
-        this.migrate();
-        return this.state;
-      }
-    }
+        // UI Module
+        class UIManager {
+            constructor(stateManager) {
+                this.stateManager = stateManager;
+                this.activeModal = null;
+                this.currentDayIndex = null;
+            }
 
-    // UI Module
-    class UIManager {
-      constructor(stateManager) {
-        this.stateManager = stateManager;
-        this.activeModal = null;
-        this.currentDayIndex = null;
-      }
+            formatWeek() {
+                const start = new Date(this.stateManager.state.weekStart);
+                const end = new Date(start.getTime() + 6 * 86400000);
+                const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+                return `${months[start.getMonth()]} ${start.getDate()} - ${end.getDate()}, ${start.getFullYear()}`;
+            }
 
-      formatWeek() {
-        const start = new Date(this.stateManager.state.weekStart);
-        const end = new Date(start.getTime() + 6 * 86400000);
-        const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        return `${months[start.getMonth()]} ${start.getDate()} - ${end.getDate()}, ${start.getFullYear()}`;
-      }
+            formatDate(dateStr) {
+                const date = new Date(dateStr);
+                const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                return `${months[date.getMonth()]} ${date.getDate()}`;
+            }
 
-      formatDate(dateStr) {
-        const date = new Date(dateStr);
-        const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-        return `${months[date.getMonth()]} ${date.getDate()}`;
-      }
+            renderDays() {
+                const { days, showWeekend } = this.stateManager.state;
+                const weekdays = days.slice(0, 5);
+                const weekend = days.slice(5);
 
-      renderDays() {
-        const { days, showWeekend } = this.stateManager.state;
-        const weekdays = days.slice(0, 5);
-        const weekend = days.slice(5);
-        
-        const html = [
-          ...weekdays.map((d, i) => this.renderDayCard(d, i)),
-          this.renderWeekendToggle(),
-          ...(showWeekend ? weekend.map((d, i) => this.renderDayCard(d, i + 5)) : [])
-        ].join('');
-        
-        document.getElementById('daysList').innerHTML = html;
-        this.bindDayEvents();
-      }
+                const html = [
+                    ...weekdays.map((d, i) => this.renderDayCard(d, i)),
+                    this.renderWeekendToggle(),
+                    ...(showWeekend ? weekend.map((d, i) => this.renderDayCard(d, i + 5)) : [])
+                ].join('');
 
-      renderDayCard(day, index) {
-        const isWeekend = day.name === 'Saturday' || day.name === 'Sunday';
-        
-        const formatMealText = (meals, customMeals, defaultText) => {
-          if (!meals?.length) return defaultText;
-          return meals.map(meal => 
-            meal === 'Custom' ? (customMeals?.join(', ') || 'Custom') : meal
-          ).join(' • ');
-        };
+                document.getElementById('daysList').innerHTML = html;
+                this.bindDayEvents();
+            }
 
-        const breakfastText = formatMealText(day.breakfast, day.customBreakfast, 'Select breakfast');
-        const lunchText = formatMealText(day.lunch, day.customLunch, 'Select lunch');
-        const dinnerText = formatMealText(day.dinner, day.customDinner, 'Select dinner');
-        
-        const sidesText = day.side?.length 
-          ? day.side.map(s => s === 'Custom' ? (day.customSide?.join(', ') || 'Custom') : s).join(' • ')
-          : '';
+            renderDayCard(day, index) {
+                const isWeekend = day.name === 'Saturday' || day.name === 'Sunday';
 
-        const breakfastEmoji = day.breakfast?.length ? DataManager.getMealEmoji(day.breakfast[0]) : '❓';
-        const lunchEmoji = day.lunch?.length ? DataManager.getMealEmoji(day.lunch[0]) : '❓';
-        const dinnerEmoji = day.dinner?.length ? DataManager.getMealEmoji(day.dinner[0]) : '❓';
+                const formatMealText = (meals, customMeals, defaultText) => {
+                    if (!meals?.length) return defaultText;
+                    return meals.map(meal => {
+                        if (meal === 'Custom') {
+                            return (customMeals?.map(c => `${DataManager.getIngredientEmoji(c) || '❓'} ${c}`).join(' • ')
+                                || 'Custom');
+                        }
+                        return `${DataManager.getMealEmoji(meal)} ${meal}`;
+                    }).join(' • ');
+                };
 
-        const requiredMeals = (day.dinnerType === 'delivery' ? 2 : 3) + (isWeekend ? 1 : 0);
-        const completedMeals = (isWeekend && day.breakfast?.length ? 1 : 0) + 
-                              (day.lunch?.length ? 1 : 0) + 
-                              (day.dinner?.length ? 1 : 0) + 
-                              (day.dinnerType !== 'delivery' && day.side?.length ? 1 : 0);
+                const breakfastText = formatMealText(day.breakfast, day.customBreakfast, 'Select breakfast');
+                const lunchText = formatMealText(day.lunch, day.customLunch, 'Select lunch');
+                const dinnerText = formatMealText(day.dinner, day.customDinner, 'Select dinner');
 
-        const dinnerTypeIcon = {
-          'quick': '⚡',
-          'delivery': '🚚',
-          'regular': '🍽️'
-        }[day.dinnerType] || '🍽️';
+                const sidesText = day.side?.length
+                    ? day.side.map(s => s === 'Custom' ? (day.customSide?.join(', ') || 'Custom') : s).join(' • ')
+                    : '';
 
-        return `
+                const breakfastEmoji = day.breakfast?.length ? DataManager.getMealEmoji(day.breakfast[0]) : '❓';
+                const lunchEmoji = day.lunch?.length ? DataManager.getMealEmoji(day.lunch[0]) : '❓';
+                const dinnerEmoji = day.dinner?.length ? DataManager.getMealEmoji(day.dinner[0]) : '❓';
+
+                const requiredMeals = (day.dinnerType === 'delivery' ? 2 : 3) + (isWeekend ? 1 : 0);
+                const completedMeals = (isWeekend && day.breakfast?.length ? 1 : 0) +
+                    (day.lunch?.length ? 1 : 0) +
+                    (day.dinner?.length ? 1 : 0) +
+                    (day.dinnerType !== 'delivery' && day.side?.length ? 1 : 0);
+
+                const dinnerTypeIcon = {
+                    'quick': '⚡',
+                    'delivery': '🚚',
+                    'regular': '🍽️'
+                }[day.dinnerType] || '🍽️';
+
+                return `
           <section class="day-card ${completedMeals < requiredMeals ? 'incomplete' : ''}" data-day="${index}">
             <div class="day-header">
               <div>
@@ -1277,10 +1292,10 @@
             </div>
           </section>
         `;
-      }
+            }
 
-      renderWeekendToggle() {
-        return `
+            renderWeekendToggle() {
+                return `
           <div class="weekend-card">
             <div style="font-weight:800">Show weekends</div>
             <div id="weekendToggle" class="switch ${this.stateManager.state.showWeekend ? 'on' : ''}" role="switch" aria-checked="${this.stateManager.state.showWeekend}">
@@ -1288,211 +1303,211 @@
             </div>
           </div>
         `;
-      }
+            }
 
-      showModal({ title, subtitle, body, footer, onShow }) {
-        const titleEl = document.getElementById('modalTitle');
-        const subtitleEl = document.getElementById('modalSubtitle');
-        const bodyEl = document.getElementById('modalBody');
-        const footerEl = document.getElementById('modalFooter');
-        const overlay = document.getElementById('modalOverlay');
+            showModal({ title, subtitle, body, footer, onShow }) {
+                const titleEl = document.getElementById('modalTitle');
+                const subtitleEl = document.getElementById('modalSubtitle');
+                const bodyEl = document.getElementById('modalBody');
+                const footerEl = document.getElementById('modalFooter');
+                const overlay = document.getElementById('modalOverlay');
 
-        titleEl.textContent = title;
-        subtitleEl.textContent = subtitle || '';
-        bodyEl.innerHTML = body;
-        
-        footerEl.innerHTML = '';
-        (footer || []).forEach(btn => {
-          const button = document.createElement('button');
-          button.className = `btn ${btn.className || ''}`;
-          button.textContent = btn.label;
-          button.onclick = btn.onClick;
-          footerEl.appendChild(button);
-        });
+                titleEl.textContent = title;
+                subtitleEl.textContent = subtitle || '';
+                bodyEl.innerHTML = body;
 
-        overlay.classList.add('show');
-        this.activeModal = { title, subtitle, body, footer, onShow };
-        
-        // Call onShow callback after DOM updates
-        requestAnimationFrame(() => {
-          onShow?.();
-        });
-      }
+                footerEl.innerHTML = '';
+                (footer || []).forEach(btn => {
+                    const button = document.createElement('button');
+                    button.className = `btn ${btn.className || ''}`;
+                    button.textContent = btn.label;
+                    button.onclick = btn.onClick;
+                    footerEl.appendChild(button);
+                });
 
-      hideModal() {
-        document.getElementById('modalOverlay').classList.remove('show');
-        this.activeModal = null;
-        this.currentDayIndex = null;
-      }
+                overlay.classList.add('show');
+                this.activeModal = { title, subtitle, body, footer, onShow };
 
-      showToast(message, duration = 1800) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), duration);
-      }
+                // Call onShow callback after DOM updates
+                requestAnimationFrame(() => {
+                    onShow?.();
+                });
+            }
 
-      bindDayEvents() {
-        // Meal selection events
-        document.querySelectorAll('.meal').forEach(el => {
-          el.addEventListener('click', () => {
-            const dayIndex = parseInt(el.dataset.day);
-            const mealType = el.dataset.meal;
-            this.openMealModal(dayIndex, mealType);
-          });
-        });
+            hideModal() {
+                document.getElementById('modalOverlay').classList.remove('show');
+                this.activeModal = null;
+                this.currentDayIndex = null;
+            }
 
-        // Bread toggle events
-        document.querySelectorAll('.pill.bread').forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            const dayIndex = parseInt(btn.dataset.day);
-            const day = this.stateManager.state.days[dayIndex];
-            day.breadFlag = !day.breadFlag;
-            this.stateManager.save();
-            this.renderDays();
-          });
-        });
+            showToast(message, duration = 1800) {
+                const toast = document.getElementById('toast');
+                toast.textContent = message;
+                toast.classList.add('show');
+                setTimeout(() => toast.classList.remove('show'), duration);
+            }
 
-        // Dinner type mode buttons
-        document.querySelectorAll('.mode-btn').forEach(btn => {
-          btn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.showDinnerTypePopover(btn, parseInt(btn.dataset.day));
-          });
-        });
+            bindDayEvents() {
+                // Meal selection events
+                document.querySelectorAll('.meal').forEach(el => {
+                    el.addEventListener('click', () => {
+                        const dayIndex = parseInt(el.dataset.day);
+                        const mealType = el.dataset.meal;
+                        this.openMealModal(dayIndex, mealType);
+                    });
+                });
 
-        // Weekend toggle
-        const weekendToggle = document.getElementById('weekendToggle');
-        if (weekendToggle) {
-          weekendToggle.addEventListener('click', () => {
-            this.stateManager.state.showWeekend = !this.stateManager.state.showWeekend;
-            this.stateManager.save();
-            this.renderDays();
-          });
-        }
-      }
+                // Bread toggle events
+                document.querySelectorAll('.pill.bread').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        const dayIndex = parseInt(btn.dataset.day);
+                        const day = this.stateManager.state.days[dayIndex];
+                        day.breadFlag = !day.breadFlag;
+                        this.stateManager.save();
+                        this.renderDays();
+                    });
+                });
 
-      showDinnerTypePopover(button, dayIndex) {
-        // Remove existing popovers
-        document.querySelectorAll('.popover').forEach(p => p.remove());
+                // Dinner type mode buttons
+                document.querySelectorAll('.mode-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        e.stopPropagation();
+                        this.showDinnerTypePopover(btn, parseInt(btn.dataset.day));
+                    });
+                });
 
-        const popover = document.createElement('div');
-        popover.className = 'popover';
-        popover.innerHTML = `
+                // Weekend toggle
+                const weekendToggle = document.getElementById('weekendToggle');
+                if (weekendToggle) {
+                    weekendToggle.addEventListener('click', () => {
+                        this.stateManager.state.showWeekend = !this.stateManager.state.showWeekend;
+                        this.stateManager.save();
+                        this.renderDays();
+                    });
+                }
+            }
+
+            showDinnerTypePopover(button, dayIndex) {
+                // Remove existing popovers
+                document.querySelectorAll('.popover').forEach(p => p.remove());
+
+                const popover = document.createElement('div');
+                popover.className = 'popover';
+                popover.innerHTML = `
           <button data-type="regular">🍽️ Regular</button>
           <button data-type="quick">⚡ Quick</button>
           <button data-type="delivery">🚚 Delivery</button>
         `;
-        
-        document.body.appendChild(popover);
 
-        const rect = button.getBoundingClientRect();
-        popover.style.top = `${rect.bottom + window.scrollY + 4}px`;
-        popover.style.left = `${rect.left + window.scrollX}px`;
-        popover.style.display = 'block';
+                document.body.appendChild(popover);
 
-        popover.querySelectorAll('button').forEach(opt => {
-          opt.addEventListener('click', () => {
-            const day = this.stateManager.state.days[dayIndex];
-            day.dinnerType = opt.dataset.type;
-            if (opt.dataset.type !== 'regular') {
-              day.dinner = [];
-              day.customDinner = [];
+                const rect = button.getBoundingClientRect();
+                popover.style.top = `${rect.bottom + window.scrollY + 4}px`;
+                popover.style.left = `${rect.left + window.scrollX}px`;
+                popover.style.display = 'block';
+
+                popover.querySelectorAll('button').forEach(opt => {
+                    opt.addEventListener('click', () => {
+                        const day = this.stateManager.state.days[dayIndex];
+                        day.dinnerType = opt.dataset.type;
+                        if (opt.dataset.type !== 'regular') {
+                            day.dinner = [];
+                            day.customDinner = [];
+                        }
+                        this.stateManager.save();
+                        this.renderDays();
+                        popover.remove();
+                    });
+                });
+
+                // Close popover when clicking outside
+                const closePopover = (e) => {
+                    if (!popover.contains(e.target) && e.target !== button) {
+                        popover.remove();
+                        document.removeEventListener('click', closePopover);
+                    }
+                };
+                setTimeout(() => document.addEventListener('click', closePopover), 100);
             }
-            this.stateManager.save();
-            this.renderDays();
-            popover.remove();
-          });
-        });
 
-        // Close popover when clicking outside
-        const closePopover = (e) => {
-          if (!popover.contains(e.target) && e.target !== button) {
-            popover.remove();
-            document.removeEventListener('click', closePopover);
-          }
-        };
-        setTimeout(() => document.addEventListener('click', closePopover), 100);
-      }
+            openMealModal(dayIndex, mealType) {
+                this.currentDayIndex = dayIndex;
+                const day = this.stateManager.state.days[dayIndex];
 
-      openMealModal(dayIndex, mealType) {
-        this.currentDayIndex = dayIndex;
-        const day = this.stateManager.state.days[dayIndex];
-        
-        if (mealType === 'breakfast' && !['Saturday', 'Sunday'].includes(day.name)) {
-          return; // No breakfast for weekdays
-        }
+                if (mealType === 'breakfast' && !['Saturday', 'Sunday'].includes(day.name)) {
+                    return; // No breakfast for weekdays
+                }
 
-        const modalHandlers = {
-          breakfast: () => this.openBreakfastModal(dayIndex),
-          lunch: () => this.openLunchModal(dayIndex),
-          dinner: () => this.openDinnerModal(dayIndex)
-        };
+                const modalHandlers = {
+                    breakfast: () => this.openBreakfastModal(dayIndex),
+                    lunch: () => this.openLunchModal(dayIndex),
+                    dinner: () => this.openDinnerModal(dayIndex)
+                };
 
-        modalHandlers[mealType]?.();
-      }
+                modalHandlers[mealType]?.();
+            }
 
-      openBreakfastModal(dayIndex) {
-        const day = this.stateManager.state.days[dayIndex];
-        const options = DataManager.getCategory('breakfast');
-        
-        let body = this.renderMealGrid('breakfast', day.breakfast, options);
-        
-        if (day.breakfast?.includes('Custom')) {
-          body += this.renderCustomInput('breakfast', day.customBreakfast?.join(', ') || '');
-        }
+            openBreakfastModal(dayIndex) {
+                const day = this.stateManager.state.days[dayIndex];
+                const options = DataManager.getCategory('breakfast');
 
-        this.showModal({
-          title: `Breakfast — ${day.name}`,
-          subtitle: this.formatDate(day.date),
-          body,
-          footer: [
-            { label: '🎲 Random', onClick: () => this.randomizeMeal(dayIndex, 'breakfast') },
-            { label: '❌ Cancel', onClick: () => this.hideModal(), className: 'cancel' },
-            { label: '✅ Save', onClick: () => this.saveMeal(dayIndex, 'breakfast') }
-          ],
-          onShow: () => this.bindMealGridEvents()
-        });
-      }
+                let body = this.renderMealGrid('breakfast', day.breakfast, options);
 
-      openLunchModal(dayIndex) {
-        const day = this.stateManager.state.days[dayIndex];
-        const options = DataManager.getCategory('lunch');
-        
-        let body = this.renderMealGrid('lunch', day.lunch, options);
-        
-        if (day.lunch?.includes('Custom')) {
-          body += this.renderCustomInput('lunch', day.customLunch?.join(', ') || '');
-        }
+                if (day.breakfast?.includes('Custom')) {
+                    body += this.renderCustomInput('breakfast', day.customBreakfast?.join(', ') || '');
+                }
 
-        this.showModal({
-          title: `Lunch — ${day.name}`,
-          subtitle: this.formatDate(day.date),
-          body,
-          footer: [
-            { label: '🎲 Random', onClick: () => this.randomizeMeal(dayIndex, 'lunch') },
-            { label: '❌ Cancel', onClick: () => this.hideModal(), className: 'cancel' },
-            { label: '✅ Save', onClick: () => this.saveMeal(dayIndex, 'lunch') }
-          ],
-          onShow: () => this.bindMealGridEvents()
-        });
-      }
+                this.showModal({
+                    title: `Breakfast — ${day.name}`,
+                    subtitle: this.formatDate(day.date),
+                    body,
+                    footer: [
+                        { label: '🎲 Random', onClick: () => this.randomizeMeal(dayIndex, 'breakfast') },
+                        { label: '❌ Cancel', onClick: () => this.hideModal(), className: 'cancel' },
+                        { label: '✅ Save', onClick: () => this.saveMeal(dayIndex, 'breakfast') }
+                    ],
+                    onShow: () => this.bindMealGridEvents()
+                });
+            }
 
-      openDinnerModal(dayIndex) {
-        const day = this.stateManager.state.days[dayIndex];
-        
-        // Add bread toggle to modal header
-        const breadWrap = document.getElementById('modalBreadWrap');
-        if (breadWrap) {
-          breadWrap.innerHTML = `
+            openLunchModal(dayIndex) {
+                const day = this.stateManager.state.days[dayIndex];
+                const options = DataManager.getCategory('lunch');
+
+                let body = this.renderMealGrid('lunch', day.lunch, options);
+
+                if (day.lunch?.includes('Custom')) {
+                    body += this.renderCustomInput('lunch', day.customLunch?.join(', ') || '');
+                }
+
+                this.showModal({
+                    title: `Lunch — ${day.name}`,
+                    subtitle: this.formatDate(day.date),
+                    body,
+                    footer: [
+                        { label: '🎲 Random', onClick: () => this.randomizeMeal(dayIndex, 'lunch') },
+                        { label: '❌ Cancel', onClick: () => this.hideModal(), className: 'cancel' },
+                        { label: '✅ Save', onClick: () => this.saveMeal(dayIndex, 'lunch') }
+                    ],
+                    onShow: () => this.bindMealGridEvents()
+                });
+            }
+
+            openDinnerModal(dayIndex) {
+                const day = this.stateManager.state.days[dayIndex];
+
+                // Add bread toggle to modal header
+                const breadWrap = document.getElementById('modalBreadWrap');
+                if (breadWrap) {
+                    breadWrap.innerHTML = `
             <button class="pill bread ${day.breadFlag ? 'is-on' : ''}" id="modalBread" data-day="${dayIndex}">
               🍞 Bread
             </button>
           `;
-        }
+                }
 
-        let body = `
+                let body = `
           <div class="control-row" style="flex-direction:column;align-items:flex-start;gap:6px">
             <div style="font-size:var(--small);color:var(--muted);font-weight:800">Dinner Type</div>
             <select id="modalDinnerType" class="input">
@@ -1503,73 +1518,73 @@
           </div>
         `;
 
-        const dinnerOptions = this.getDinnerOptions(day);
-        body += this.renderMealGrid('dinner', day.dinner, dinnerOptions);
-        
-        if (day.dinner?.includes('Custom')) {
-          body += this.renderCustomInput('dinner', day.customDinner?.join(', ') || '');
-        }
+                const dinnerOptions = this.getDinnerOptions(day);
+                body += this.renderMealGrid('dinner', day.dinner, dinnerOptions);
 
-        body += `<div class="field"><div class="label">Side Dishes</div></div>`;
-        body += this.renderMealGrid('side', day.side, DataManager.getCategory('side'));
-        
-        if (day.side?.includes('Custom')) {
-          body += this.renderCustomInput('side', day.customSide?.join(', ') || '');
-        }
+                if (day.dinner?.includes('Custom')) {
+                    body += this.renderCustomInput('dinner', day.customDinner?.join(', ') || '');
+                }
 
-        this.showModal({
-          title: `Dinner — ${day.name}`,
-          subtitle: this.formatDate(day.date),
-          body,
-          footer: [
-            { label: '🎲 Random', onClick: () => this.randomizeMeal(dayIndex, 'dinner') },
-            { label: '❌ Cancel', onClick: () => this.hideModal(), className: 'cancel' },
-            { label: '✅ Save', onClick: () => this.saveMeal(dayIndex, 'dinner') }
-          ],
-          onShow: () => {
-            this.bindMealGridEvents();
-            this.bindDinnerModalEvents(dayIndex);
-          }
-        });
-      }
+                body += `<div class="field"><div class="label">Side Dishes</div></div>`;
+                body += this.renderMealGrid('side', day.side, DataManager.getCategory('side'));
 
-      bindDinnerModalEvents(dayIndex) {
-        const day = this.stateManager.state.days[dayIndex];
-        
-        // Bread toggle in modal
-        const breadBtn = document.getElementById('modalBread');
-        if (breadBtn) {
-          breadBtn.addEventListener('click', () => {
-            day.breadFlag = !day.breadFlag;
-            this.openDinnerModal(dayIndex); // Refresh modal
-          });
-        }
+                if (day.side?.includes('Custom')) {
+                    body += this.renderCustomInput('side', day.customSide?.join(', ') || '');
+                }
 
-        // Dinner type selector
-        const typeSelector = document.getElementById('modalDinnerType');
-        if (typeSelector) {
-          typeSelector.addEventListener('change', () => {
-            day.dinnerType = typeSelector.value;
-            day.dinner = [];
-            day.customDinner = [];
-            this.openDinnerModal(dayIndex); // Refresh modal
-          });
-        }
-      }
+                this.showModal({
+                    title: `Dinner — ${day.name}`,
+                    subtitle: this.formatDate(day.date),
+                    body,
+                    footer: [
+                        { label: '🎲 Random', onClick: () => this.randomizeMeal(dayIndex, 'dinner') },
+                        { label: '❌ Cancel', onClick: () => this.hideModal(), className: 'cancel' },
+                        { label: '✅ Save', onClick: () => this.saveMeal(dayIndex, 'dinner') }
+                    ],
+                    onShow: () => {
+                        this.bindMealGridEvents();
+                        this.bindDinnerModalEvents(dayIndex);
+                    }
+                });
+            }
 
-      getDinnerOptions(day) {
-        const isWeekend = day.name === 'Saturday' || day.name === 'Sunday';
-        const typeMap = {
-          'quick': 'dinnerQuick',
-          'delivery': 'delivery',
-          'regular': isWeekend ? 'dinnerWeekend' : 'dinnerRegular'
-        };
-        return DataManager.getCategory(typeMap[day.dinnerType] || 'dinnerRegular');
-      }
+            bindDinnerModalEvents(dayIndex) {
+                const day = this.stateManager.state.days[dayIndex];
 
-      renderMealGrid(type, selectedMeals, options) {
-        const selected = Array.isArray(selectedMeals) ? selectedMeals : [];
-        return `
+                // Bread toggle in modal
+                const breadBtn = document.getElementById('modalBread');
+                if (breadBtn) {
+                    breadBtn.addEventListener('click', () => {
+                        day.breadFlag = !day.breadFlag;
+                        this.openDinnerModal(dayIndex); // Refresh modal
+                    });
+                }
+
+                // Dinner type selector
+                const typeSelector = document.getElementById('modalDinnerType');
+                if (typeSelector) {
+                    typeSelector.addEventListener('change', () => {
+                        day.dinnerType = typeSelector.value;
+                        day.dinner = [];
+                        day.customDinner = [];
+                        this.openDinnerModal(dayIndex); // Refresh modal
+                    });
+                }
+            }
+
+            getDinnerOptions(day) {
+                const isWeekend = day.name === 'Saturday' || day.name === 'Sunday';
+                const typeMap = {
+                    'quick': 'dinnerQuick',
+                    'delivery': 'delivery',
+                    'regular': isWeekend ? 'dinnerWeekend' : 'dinnerRegular'
+                };
+                return DataManager.getCategory(typeMap[day.dinnerType] || 'dinnerRegular');
+            }
+
+            renderMealGrid(type, selectedMeals, options) {
+                const selected = Array.isArray(selectedMeals) ? selectedMeals : [];
+                return `
           <div class="grid" data-type="${type}">
             ${options.map(name => `
               <div class="tile ${selected.includes(name) ? 'selected' : ''}" data-meal="${name}" data-type="${type}">
@@ -1579,10 +1594,10 @@
             `).join('')}
           </div>
         `;
-      }
+            }
 
-      renderCustomInput(type, value) {
-        return `
+            renderCustomInput(type, value) {
+                return `
           <div class="field">
             <div class="label">Custom ${type}</div>
             <input class="input" id="custom${type}Input" 
@@ -1590,605 +1605,605 @@
                    placeholder="Enter custom ${type} (comma-separated)"/>
           </div>
         `;
-      }
+            }
 
-      bindMealGridEvents() {
-        document.querySelectorAll('.tile').forEach(tile => {
-          tile.addEventListener('click', () => {
-            const type = tile.dataset.type;
-            const mealName = tile.dataset.meal;
-            const day = this.stateManager.state.days[this.currentDayIndex];
-            
-            if (!Array.isArray(day[type])) day[type] = [];
-            
-            const isSelected = day[type].includes(mealName);
-            
-            if (isSelected) {
-              // Deselect
-              day[type] = day[type].filter(x => x !== mealName);
-              tile.classList.remove('selected');
-              
-              if (mealName === 'Custom') {
-                const customInput = document.getElementById(`custom${type}Input`);
-                if (customInput) {
-                  customInput.closest('.field').remove();
-                }
-                day[`custom${type[0].toUpperCase()}${type.slice(1)}`] = [];
-              }
-            } else {
-              // Select
-              day[type].push(mealName);
-              tile.classList.add('selected');
-              
-              if (mealName === 'Custom') {
-                const container = document.getElementById('modalBody');
-                const customField = document.createElement('div');
-                customField.className = 'field';
-                customField.innerHTML = `
+            bindMealGridEvents() {
+                document.querySelectorAll('.tile').forEach(tile => {
+                    tile.addEventListener('click', () => {
+                        const type = tile.dataset.type;
+                        const mealName = tile.dataset.meal;
+                        const day = this.stateManager.state.days[this.currentDayIndex];
+
+                        if (!Array.isArray(day[type])) day[type] = [];
+
+                        const isSelected = day[type].includes(mealName);
+
+                        if (isSelected) {
+                            // Deselect
+                            day[type] = day[type].filter(x => x !== mealName);
+                            tile.classList.remove('selected');
+
+                            if (mealName === 'Custom') {
+                                const customInput = document.getElementById(`custom${type}Input`);
+                                if (customInput) {
+                                    customInput.closest('.field').remove();
+                                }
+                                day[`custom${type[0].toUpperCase()}${type.slice(1)}`] = [];
+                            }
+                        } else {
+                            // Select
+                            day[type].push(mealName);
+                            tile.classList.add('selected');
+
+                            if (mealName === 'Custom') {
+                                const container = document.getElementById('modalBody');
+                                const customField = document.createElement('div');
+                                customField.className = 'field';
+                                customField.innerHTML = `
                   <div class="label">Custom ${type}</div>
                   <input class="input" id="custom${type}Input" 
                          value="${day[`custom${type[0].toUpperCase()}${type.slice(1)}`]?.join(', ') || ''}" 
                          placeholder="Enter custom ${type} (comma-separated)"/>
                 `;
-                container.appendChild(customField);
-              }
+                                container.appendChild(customField);
+                            }
+                        }
+                    });
+                });
             }
-          });
-        });
-      }
 
-      saveMeal(dayIndex, mealType) {
-        const day = this.stateManager.state.days[dayIndex];
-        const customKey = `custom${mealType[0].toUpperCase()}${mealType.slice(1)}`;
-        
-        if (day[mealType]?.includes('Custom')) {
-          const customInput = document.getElementById(`custom${mealType}Input`);
-          if (!customInput?.value.trim()) {
-            day[mealType] = day[mealType].filter(m => m !== 'Custom');
-            day[customKey] = [];
-          } else {
-            day[customKey] = customInput.value.split(',').map(s => s.trim()).filter(Boolean);
-          }
-        }
+            saveMeal(dayIndex, mealType) {
+                const day = this.stateManager.state.days[dayIndex];
+                const customKey = `custom${mealType[0].toUpperCase()}${mealType.slice(1)}`;
 
-        // Validation: main dishes required before sides
-        if ((mealType === 'lunch' || mealType === 'dinner') && !day[mealType]?.length && day.side?.length) {
-          this.showToast('Please select a main dish before adding side dishes.');
-          return;
-        }
+                if (day[mealType]?.includes('Custom')) {
+                    const customInput = document.getElementById(`custom${mealType}Input`);
+                    if (!customInput?.value.trim()) {
+                        day[mealType] = day[mealType].filter(m => m !== 'Custom');
+                        day[customKey] = [];
+                    } else {
+                        day[customKey] = customInput.value.split(',').map(s => s.trim()).filter(Boolean);
+                    }
+                }
 
-        this.stateManager.save();
-        this.renderDays();
-        this.hideModal();
-        this.showToast('Saved! ✓');
-      }
+                // Validation: main dishes required before sides
+                if ((mealType === 'lunch' || mealType === 'dinner') && !day[mealType]?.length && day.side?.length) {
+                    this.showToast('Please select a main dish before adding side dishes.');
+                    return;
+                }
 
-      randomizeMeal(dayIndex, mealType) {
-        const day = this.stateManager.state.days[dayIndex];
-        let options = [];
-        
-        if (mealType === 'breakfast') {
-          options = DataManager.getCategory('breakfast');
-        } else if (mealType === 'lunch') {
-          options = DataManager.getCategory('lunch');
-        } else if (mealType === 'dinner') {
-          options = this.getDinnerOptions(day);
-        }
-        
-        options = options.filter(x => x !== 'Custom');
-        
-        if (options.length) {
-          day[mealType] = [options[Math.floor(Math.random() * options.length)]];
-          
-          if (mealType === 'lunch' || mealType === 'dinner') {
-            const sideOptions = DataManager.getCategory('side').filter(x => x !== 'Custom');
-            if (sideOptions.length) {
-              day.side = [sideOptions[Math.floor(Math.random() * sideOptions.length)]];
+                this.stateManager.save();
+                this.renderDays();
+                this.hideModal();
+                this.showToast('Saved! ✓');
             }
-          }
-        }
-        
-        // Reopen the modal to show changes
-        this.openMealModal(dayIndex, mealType);
-      }
-    }
 
-    // Application Controller
-    class MealPlanner {
-      constructor() {
-        DataManager.initialize();
-        this.stateManager = new StateManager();
-        this.uiManager = new UIManager(this.stateManager);
-        this.init();
-      }
+            randomizeMeal(dayIndex, mealType) {
+                const day = this.stateManager.state.days[dayIndex];
+                let options = [];
 
-      init() {
-        this.applyTheme();
-        this.uiManager.renderDays();
-        this.bindGlobalEvents();
-      }
+                if (mealType === 'breakfast') {
+                    options = DataManager.getCategory('breakfast');
+                } else if (mealType === 'lunch') {
+                    options = DataManager.getCategory('lunch');
+                } else if (mealType === 'dinner') {
+                    options = this.getDinnerOptions(day);
+                }
 
-      applyTheme() {
-        const { theme } = this.stateManager.state;
-        document.body.classList.toggle('dark', theme === 'dark');
-        document.getElementById('themeToggle').textContent = theme === 'dark' ? '🌙' : '☀️';
-      }
+                options = options.filter(x => x !== 'Custom');
 
-      toggleTheme() {
-        this.stateManager.state.theme = this.stateManager.state.theme === 'dark' ? 'light' : 'dark';
-        this.applyTheme();
-        this.stateManager.save();
-      }
+                if (options.length) {
+                    day[mealType] = [options[Math.floor(Math.random() * options.length)]];
 
-      navigateWeek(direction) {
-        this.stateManager.navigateWeek(direction);
-        this.applyTheme();
-        this.uiManager.renderDays();
-      }
+                    if (mealType === 'lunch' || mealType === 'dinner') {
+                        const sideOptions = DataManager.getCategory('side').filter(x => x !== 'Custom');
+                        if (sideOptions.length) {
+                            day.side = [sideOptions[Math.floor(Math.random() * sideOptions.length)]];
+                        }
+                    }
+                }
 
-      randomizeWeek() {
-        const { days } = this.stateManager.state;
-        const lunchOptions = DataManager.getCategory('lunch').filter(x => x !== 'Custom');
-        const sideOptions = DataManager.getCategory('side').filter(x => x !== 'Custom');
-        const breakfastOptions = DataManager.getCategory('breakfast').filter(x => x !== 'Custom');
-        const dinnerOptions = DataManager.getCategory('dinnerRegular').filter(x => x !== 'Custom');
-
-        days.forEach(day => {
-          if (day.name === 'Saturday' || day.name === 'Sunday') {
-            day.breakfast = [breakfastOptions[Math.floor(Math.random() * breakfastOptions.length)]];
-            day.customBreakfast = [];
-          } else {
-            day.breakfast = [];
-            day.customBreakfast = [];
-          }
-          
-          day.lunch = [lunchOptions[Math.floor(Math.random() * lunchOptions.length)]];
-          day.dinner = [dinnerOptions[Math.floor(Math.random() * dinnerOptions.length)]];
-          day.side = [sideOptions[Math.floor(Math.random() * sideOptions.length)]];
-          day.customLunch = [];
-          day.customDinner = [];
-          day.customSide = [];
-        });
-
-        this.stateManager.save();
-        this.uiManager.renderDays();
-        this.uiManager.showToast('Week randomized! 🎲');
-      }
-
-      clearWeek() {
-        if (confirm('Clear all meals for this week?')) {
-          this.stateManager.state.days.forEach(day => {
-            day.breakfast = [];
-            day.lunch = [];
-            day.dinner = [];
-            day.side = [];
-            day.customBreakfast = [];
-            day.customLunch = [];
-            day.customDinner = [];
-            day.customSide = [];
-            day.dinnerType = 'regular';
-            day.breadFlag = false;
-          });
-          
-          this.stateManager.save();
-          this.uiManager.renderDays();
-          this.uiManager.showToast('Week cleared');
-        }
-      }
-
-      generateGroceryList() {
-        const storeMap = {};
-        const { days } = this.stateManager.state;
-
-        const addToStore = (store, ingredient) => {
-          if (!storeMap[store]) storeMap[store] = [];
-          if (!storeMap[store].includes(ingredient)) {
-            storeMap[store].push(ingredient);
-          }
-        };
-
-        days.forEach(day => {
-          const mealList = [];
-          
-          // Collect all meals for the day
-          if ((day.name === 'Saturday' || day.name === 'Sunday') && day.breakfast?.length) {
-            day.breakfast.forEach(meal => {
-              if (meal === 'Custom') {
-                // Custom meals don't have predefined ingredients
-              } else {
-                mealList.push(meal);
-              }
-            });
-          }
-          
-          ['lunch', 'dinner'].forEach(mealType => {
-            if (day[mealType]?.length) {
-              day[mealType].forEach(meal => {
-                if (meal !== 'Custom') mealList.push(meal);
-              });
+                // Reopen the modal to show changes
+                this.openMealModal(dayIndex, mealType);
             }
-          });
-          
-          if (day.side?.length) {
-            day.side.forEach(side => {
-              if (side !== 'Custom') mealList.push(side);
-            });
-          }
-          
-          if (day.breadFlag) {
-            mealList.push('Bread');
-          }
-          
-          // Process ingredients for each meal
-          mealList.forEach(meal => {
-            const ingredients = DataManager.getMealIngredients(meal) || [];
-            ingredients.forEach(ingredient => {
-              const store = DataManager.getStoreForIngredient(ingredient);
-              addToStore(store, ingredient);
-            });
-          });
-        });
-
-        return storeMap;
-      }
-
-      shareWeekPlan() {
-        const { days } = this.stateManager.state;
-        let text = '🗓️ Weekly Meal Plan\n\n';
-        
-        days.forEach(day => {
-          text += `${day.name} (${this.uiManager.formatDate(day.date)})\n`;
-          
-          const formatMeals = (meals, customMeals) => {
-            if (!meals?.length) return '—';
-            return meals.map(meal => {
-              const emoji = DataManager.getMealEmoji(meal);
-              const name = meal === 'Custom' ? customMeals?.join(', ') || 'Custom' : meal;
-              return `${emoji} ${name}`;
-            }).join(', ');
-          };
-
-          if (day.name === 'Saturday' || day.name === 'Sunday') {
-            text += `  Breakfast: ${formatMeals(day.breakfast, day.customBreakfast)}\n`;
-          }
-          
-          text += `  Lunch: ${formatMeals(day.lunch, day.customLunch)}\n`;
-          text += `  Dinner: ${formatMeals(day.dinner, day.customDinner)}`;
-          
-          if (day.dinnerType === 'delivery') text += ' [Delivery]';
-          else if (day.dinnerType === 'quick') text += ' [Quick]';
-          
-          if (day.side?.length) {
-            const sides = day.side.map(s => {
-              if (s === 'Custom') {
-                return day.customSide?.map(cs => `${DataManager.getMealEmoji(cs)} ${cs}`).join(', ') || 'Custom';
-              }
-              return `${DataManager.getMealEmoji(s)} ${s}`;
-            });
-            text += `\n  Sides: ${sides.join(', ')}`;
-          }
-          
-          if (day.breadFlag) text += '\n  Bread: yes';
-          text += '\n\n';
-        });
-
-        const groceries = this.generateGroceryList();
-        text += '\n🛒 Shopping List\n\n';
-        Object.keys(groceries).sort().forEach(store => {
-          text += `${store}:\n`;
-          groceries[store].forEach(item => {
-            text += `• ${DataManager.getIngredientEmoji(item)} ${item}\n`;
-          });
-          text += '\n';
-        });
-
-        this.shareText('Meal Plan & Shopping', text);
-      }
-
-      showShareModal() {
-        const { days } = this.stateManager.state;
-        let recap = '🗓️ Weekly Meal Plan\n\n';
-        
-        days.forEach(day => {
-          recap += `${day.name} (${this.uiManager.formatDate(day.date)})\n`;
-          
-          const formatMeals = (meals, customMeals) => {
-            if (!meals?.length) return '—';
-            return meals.map(meal => {
-              const emoji = DataManager.getMealEmoji(meal);
-              const name = meal === 'Custom' ? customMeals?.join(', ') || 'Custom' : meal;
-              return `${emoji} ${name}`;
-            }).join(', ');
-          };
-
-          if (day.name === 'Saturday' || day.name === 'Sunday') {
-            recap += `  Breakfast: ${formatMeals(day.breakfast, day.customBreakfast)}\n`;
-          }
-          
-          recap += `  Lunch: ${formatMeals(day.lunch, day.customLunch)}\n`;
-          recap += `  Dinner: ${formatMeals(day.dinner, day.customDinner)}`;
-          
-          if (day.dinnerType === 'delivery') recap += ' [Delivery]';
-          else if (day.dinnerType === 'quick') recap += ' [Quick]';
-          
-          if (day.side?.length) {
-            const sides = day.side.map(s => {
-              if (s === 'Custom') {
-                return day.customSide?.map(cs => `${DataManager.getMealEmoji(cs)} ${cs}`).join(', ') || 'Custom';
-              }
-              return `${DataManager.getMealEmoji(s)} ${s}`;
-            });
-            recap += `\n  Sides: ${sides.join(', ')}`;
-          }
-          
-          if (day.breadFlag) recap += '\n  Bread: yes';
-          recap += '\n\n';
-        });
-
-        const groceries = this.generateGroceryList();
-        recap += '\n🛒 Shopping List\n\n';
-        Object.keys(groceries).sort().forEach(store => {
-          recap += `${store}:\n`;
-          groceries[store].forEach(item => {
-            recap += `• ${DataManager.getIngredientEmoji(item)} ${item}\n`;
-          });
-          recap += '\n';
-        });
-
-        const body = `<pre style="white-space:pre-wrap;font-size:var(--small);line-height:1.4em;padding:var(--spacing-md)">${recap}</pre>`;
-
-        this.uiManager.showModal({
-          title: 'Share Meal Plan',
-          subtitle: 'Weekly recap + shopping list',
-          body,
-          footer: [
-            { label: 'Close', onClick: () => this.uiManager.hideModal() },
-            { label: 'Calendar', onClick: () => this.exportCalendar() },
-            { label: 'Send', onClick: () => this.shareText('Meal Plan & Shopping', recap) }
-          ]
-        });
-      }
-
-      shareText(title, text) {
-        if (navigator.share) {
-          navigator.share({ title, text }).catch(() => {
-            // Fallback to clipboard
-            this.copyToClipboard(text);
-          });
-        } else {
-          this.copyToClipboard(text);
         }
-      }
 
-      copyToClipboard(text) {
-        if (navigator.clipboard) {
-          navigator.clipboard.writeText(text).then(() => {
-            this.uiManager.showToast('Copied to clipboard! 📋');
-          }).catch(() => {
-            this.fallbackCopy(text);
-          });
-        } else {
-          this.fallbackCopy(text);
+        // Application Controller
+        class MealPlanner {
+            constructor() {
+                DataManager.initialize();
+                this.stateManager = new StateManager();
+                this.uiManager = new UIManager(this.stateManager);
+                this.init();
+            }
+
+            init() {
+                this.applyTheme();
+                this.uiManager.renderDays();
+                this.bindGlobalEvents();
+            }
+
+            applyTheme() {
+                const { theme } = this.stateManager.state;
+                document.body.classList.toggle('dark', theme === 'dark');
+                document.getElementById('themeToggle').textContent = theme === 'dark' ? '🌙' : '☀️';
+            }
+
+            toggleTheme() {
+                this.stateManager.state.theme = this.stateManager.state.theme === 'dark' ? 'light' : 'dark';
+                this.applyTheme();
+                this.stateManager.save();
+            }
+
+            navigateWeek(direction) {
+                this.stateManager.navigateWeek(direction);
+                this.applyTheme();
+                this.uiManager.renderDays();
+            }
+
+            randomizeWeek() {
+                const { days } = this.stateManager.state;
+                const lunchOptions = DataManager.getCategory('lunch').filter(x => x !== 'Custom');
+                const sideOptions = DataManager.getCategory('side').filter(x => x !== 'Custom');
+                const breakfastOptions = DataManager.getCategory('breakfast').filter(x => x !== 'Custom');
+                const dinnerOptions = DataManager.getCategory('dinnerRegular').filter(x => x !== 'Custom');
+
+                days.forEach(day => {
+                    if (day.name === 'Saturday' || day.name === 'Sunday') {
+                        day.breakfast = [breakfastOptions[Math.floor(Math.random() * breakfastOptions.length)]];
+                        day.customBreakfast = [];
+                    } else {
+                        day.breakfast = [];
+                        day.customBreakfast = [];
+                    }
+
+                    day.lunch = [lunchOptions[Math.floor(Math.random() * lunchOptions.length)]];
+                    day.dinner = [dinnerOptions[Math.floor(Math.random() * dinnerOptions.length)]];
+                    day.side = [sideOptions[Math.floor(Math.random() * sideOptions.length)]];
+                    day.customLunch = [];
+                    day.customDinner = [];
+                    day.customSide = [];
+                });
+
+                this.stateManager.save();
+                this.uiManager.renderDays();
+                this.uiManager.showToast('Week randomized! 🎲');
+            }
+
+            clearWeek() {
+                if (confirm('Clear all meals for this week?')) {
+                    this.stateManager.state.days.forEach(day => {
+                        day.breakfast = [];
+                        day.lunch = [];
+                        day.dinner = [];
+                        day.side = [];
+                        day.customBreakfast = [];
+                        day.customLunch = [];
+                        day.customDinner = [];
+                        day.customSide = [];
+                        day.dinnerType = 'regular';
+                        day.breadFlag = false;
+                    });
+
+                    this.stateManager.save();
+                    this.uiManager.renderDays();
+                    this.uiManager.showToast('Week cleared');
+                }
+            }
+
+            generateGroceryList() {
+                const storeMap = {};
+                const { days } = this.stateManager.state;
+
+                const addToStore = (store, ingredient) => {
+                    if (!storeMap[store]) storeMap[store] = [];
+                    if (!storeMap[store].includes(ingredient)) {
+                        storeMap[store].push(ingredient);
+                    }
+                };
+
+                days.forEach(day => {
+                    const mealList = [];
+
+                    // Collect all meals for the day
+                    if ((day.name === 'Saturday' || day.name === 'Sunday') && day.breakfast?.length) {
+                        day.breakfast.forEach(meal => {
+                            if (meal === 'Custom') {
+                                // Custom meals don't have predefined ingredients
+                            } else {
+                                mealList.push(meal);
+                            }
+                        });
+                    }
+
+                    ['lunch', 'dinner'].forEach(mealType => {
+                        if (day[mealType]?.length) {
+                            day[mealType].forEach(meal => {
+                                if (meal !== 'Custom') mealList.push(meal);
+                            });
+                        }
+                    });
+
+                    if (day.side?.length) {
+                        day.side.forEach(side => {
+                            if (side !== 'Custom') mealList.push(side);
+                        });
+                    }
+
+                    if (day.breadFlag) {
+                        mealList.push('Bread');
+                    }
+
+                    // Process ingredients for each meal
+                    mealList.forEach(meal => {
+                        const ingredients = DataManager.getMealIngredients(meal) || [];
+                        ingredients.forEach(ingredient => {
+                            const store = DataManager.getStoreForIngredient(ingredient);
+                            addToStore(store, ingredient);
+                        });
+                    });
+                });
+
+                return storeMap;
+            }
+
+            shareWeekPlan() {
+                const { days } = this.stateManager.state;
+                let text = '🗓️ Weekly Meal Plan\n\n';
+
+                days.forEach(day => {
+                    text += `${day.name} (${this.uiManager.formatDate(day.date)})\n`;
+
+                    const formatMeals = (meals, customMeals) => {
+                        if (!meals?.length) return '—';
+                        return meals.map(meal => {
+                            const emoji = DataManager.getMealEmoji(meal);
+                            const name = meal === 'Custom' ? customMeals?.join(', ') || 'Custom' : meal;
+                            return `${emoji} ${name}`;
+                        }).join(', ');
+                    };
+
+                    if (day.name === 'Saturday' || day.name === 'Sunday') {
+                        text += `  Breakfast: ${formatMeals(day.breakfast, day.customBreakfast)}\n`;
+                    }
+
+                    text += `  Lunch: ${formatMeals(day.lunch, day.customLunch)}\n`;
+                    text += `  Dinner: ${formatMeals(day.dinner, day.customDinner)}`;
+
+                    if (day.dinnerType === 'delivery') text += ' [Delivery]';
+                    else if (day.dinnerType === 'quick') text += ' [Quick]';
+
+                    if (day.side?.length) {
+                        const sides = day.side.map(s => {
+                            if (s === 'Custom') {
+                                return day.customSide?.map(cs => `${DataManager.getMealEmoji(cs)} ${cs}`).join(', ') || 'Custom';
+                            }
+                            return `${DataManager.getMealEmoji(s)} ${s}`;
+                        });
+                        text += `\n  Sides: ${sides.join(', ')}`;
+                    }
+
+                    if (day.breadFlag) text += '\n  Bread: yes';
+                    text += '\n\n';
+                });
+
+                const groceries = this.generateGroceryList();
+                text += '\n🛒 Shopping List\n\n';
+                Object.keys(groceries).sort().forEach(store => {
+                    text += `${store}:\n`;
+                    groceries[store].forEach(item => {
+                        text += `• ${DataManager.getIngredientEmoji(item)} ${item}\n`;
+                    });
+                    text += '\n';
+                });
+
+                this.shareText('Meal Plan & Shopping', text);
+            }
+
+            showShareModal() {
+                const { days } = this.stateManager.state;
+                let recap = '🗓️ Weekly Meal Plan\n\n';
+
+                days.forEach(day => {
+                    recap += `${day.name} (${this.uiManager.formatDate(day.date)})\n`;
+
+                    const formatMeals = (meals, customMeals) => {
+                        if (!meals?.length) return '—';
+                        return meals.map(meal => {
+                            const emoji = DataManager.getMealEmoji(meal);
+                            const name = meal === 'Custom' ? customMeals?.join(', ') || 'Custom' : meal;
+                            return `${emoji} ${name}`;
+                        }).join(', ');
+                    };
+
+                    if (day.name === 'Saturday' || day.name === 'Sunday') {
+                        recap += `  Breakfast: ${formatMeals(day.breakfast, day.customBreakfast)}\n`;
+                    }
+
+                    recap += `  Lunch: ${formatMeals(day.lunch, day.customLunch)}\n`;
+                    recap += `  Dinner: ${formatMeals(day.dinner, day.customDinner)}`;
+
+                    if (day.dinnerType === 'delivery') recap += ' [Delivery]';
+                    else if (day.dinnerType === 'quick') recap += ' [Quick]';
+
+                    if (day.side?.length) {
+                        const sides = day.side.map(s => {
+                            if (s === 'Custom') {
+                                return day.customSide?.map(cs => `${DataManager.getMealEmoji(cs)} ${cs}`).join(', ') || 'Custom';
+                            }
+                            return `${DataManager.getMealEmoji(s)} ${s}`;
+                        });
+                        recap += `\n  Sides: ${sides.join(', ')}`;
+                    }
+
+                    if (day.breadFlag) recap += '\n  Bread: yes';
+                    recap += '\n\n';
+                });
+
+                const groceries = this.generateGroceryList();
+                recap += '\n🛒 Shopping List\n\n';
+                Object.keys(groceries).sort().forEach(store => {
+                    recap += `${store}:\n`;
+                    groceries[store].forEach(item => {
+                        recap += `• ${DataManager.getIngredientEmoji(item)} ${item}\n`;
+                    });
+                    recap += '\n';
+                });
+
+                const body = `<pre style="white-space:pre-wrap;font-size:var(--small);line-height:1.4em;padding:var(--spacing-md)">${recap}</pre>`;
+
+                this.uiManager.showModal({
+                    title: 'Share Meal Plan',
+                    subtitle: 'Weekly recap + shopping list',
+                    body,
+                    footer: [
+                        { label: 'Close', onClick: () => this.uiManager.hideModal() },
+                        { label: 'Calendar', onClick: () => this.exportCalendar() },
+                        { label: 'Send', onClick: () => this.shareText('Meal Plan & Shopping', recap) }
+                    ]
+                });
+            }
+
+            shareText(title, text) {
+                if (navigator.share) {
+                    navigator.share({ title, text }).catch(() => {
+                        // Fallback to clipboard
+                        this.copyToClipboard(text);
+                    });
+                } else {
+                    this.copyToClipboard(text);
+                }
+            }
+
+            copyToClipboard(text) {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(text).then(() => {
+                        this.uiManager.showToast('Copied to clipboard! 📋');
+                    }).catch(() => {
+                        this.fallbackCopy(text);
+                    });
+                } else {
+                    this.fallbackCopy(text);
+                }
+            }
+
+            fallbackCopy(text) {
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                textArea.style.position = 'fixed';
+                textArea.style.opacity = '0';
+                document.body.appendChild(textArea);
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    this.uiManager.showToast('Copied to clipboard! 📋');
+                } catch {
+                    this.uiManager.showToast('Could not copy to clipboard');
+                }
+                document.body.removeChild(textArea);
+            }
+
+            exportCalendar() {
+                const formatDateTime = (date, hour, min = 0) => {
+                    const d = new Date(date);
+                    d.setHours(hour, min, 0, 0);
+                    return d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
+                };
+
+                const formatDate = (date) => {
+                    const d = new Date(date);
+                    d.setHours(0, 0, 0, 0);
+                    return d.toISOString().replace(/[-:]/g, "").split("T")[0];
+                };
+
+                let ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//MealPlannerApp//EN\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\n";
+
+                this.stateManager.state.days.forEach(day => {
+                    // Breakfast events (weekends only)
+                    if ((day.name === 'Saturday' || day.name === 'Sunday') && day.breakfast?.length) {
+                        const title = "Breakfast: " + (day.breakfast.includes('Custom') ? day.customBreakfast?.join(', ') || 'Custom' : day.breakfast.join(', '));
+                        ics += "BEGIN:VEVENT\n";
+                        ics += `SUMMARY:${title}\n`;
+                        ics += `DTSTART:${formatDateTime(day.date, 8, 0)}\n`;
+                        ics += `DTEND:${formatDateTime(day.date, 9, 0)}\n`;
+                        ics += `UID:breakfast-${day.date}@mealplanner\n`;
+                        ics += "END:VEVENT\n";
+                    }
+
+                    // Lunch events
+                    if (day.lunch?.length) {
+                        const title = "Lunch: " + (day.lunch.includes('Custom') ? day.customLunch?.join(', ') || 'Custom' : day.lunch.join(', '));
+                        ics += "BEGIN:VEVENT\n";
+                        ics += `SUMMARY:${title}\n`;
+                        ics += `DTSTART:${formatDateTime(day.date, 13, 0)}\n`;
+                        ics += `DTEND:${formatDateTime(day.date, 13, 45)}\n`;
+                        ics += `UID:lunch-${day.date}@mealplanner\n`;
+                        ics += "END:VEVENT\n";
+                    }
+
+                    // Dinner events
+                    if (day.dinner?.length) {
+                        let title = "Dinner: " + (day.dinner.includes('Custom') ? day.customDinner?.join(', ') || 'Custom' : day.dinner.join(', '));
+                        if (day.side?.length) {
+                            const sides = day.side.map(s => s === 'Custom' ? day.customSide?.join(', ') || 'Custom' : s);
+                            title += " + " + sides.join(', ');
+                        }
+                        ics += "BEGIN:VEVENT\n";
+                        ics += `SUMMARY:${title}\n`;
+                        ics += `DTSTART:${formatDateTime(day.date, 19, 0)}\n`;
+                        ics += `DTEND:${formatDateTime(day.date, 20, 0)}\n`;
+                        ics += `UID:dinner-${day.date}@mealplanner\n`;
+                        ics += "END:VEVENT\n";
+                    }
+
+                    // Bread reminder (all-day event)
+                    if (day.breadFlag) {
+                        ics += "BEGIN:VEVENT\n";
+                        ics += "SUMMARY:Bread\n";
+                        ics += `DTSTART;VALUE=DATE:${formatDate(day.date)}\n`;
+                        ics += `DTEND;VALUE=DATE:${formatDate(new Date(new Date(day.date).getTime() + 86400000))}\n`;
+                        ics += `UID:bread-${day.date}@mealplanner\n`;
+                        ics += "END:VEVENT\n";
+                    }
+                });
+
+                ics += "END:VCALENDAR";
+
+                const blob = new Blob([ics], { type: "text/calendar" });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement("a");
+                a.href = url;
+                a.download = "mealplan.ics";
+                a.click();
+                URL.revokeObjectURL(url);
+
+                this.uiManager.showToast('Calendar exported! 📅');
+            }
+
+            bindGlobalEvents() {
+                // Theme toggle
+                document.getElementById('themeToggle').addEventListener('click', () => {
+                    this.toggleTheme();
+                });
+
+                // Navigation
+                document.getElementById('prevWeek').addEventListener('click', () => {
+                    this.navigateWeek('prev');
+                });
+
+                document.getElementById('nextWeek').addEventListener('click', () => {
+                    this.navigateWeek('next');
+                });
+
+                // Bottom bar actions
+                document.getElementById('randomizeBtn').addEventListener('click', () => {
+                    this.randomizeWeek();
+                });
+
+                document.getElementById('clearBtn').addEventListener('click', () => {
+                    this.clearWeek();
+                });
+
+                document.getElementById('shareBtn').addEventListener('click', () => {
+                    this.showShareModal();
+                });
+
+                // Modal overlay click to close
+                document.getElementById('modalOverlay').addEventListener('click', (e) => {
+                    if (e.target.id === 'modalOverlay') {
+                        this.uiManager.hideModal();
+                    }
+                });
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'Escape') {
+                        this.uiManager.hideModal();
+                    }
+
+                    const modalOpen = document.getElementById('modalOverlay').classList.contains('show');
+                    if (!modalOpen) {
+                        if (e.key === 'ArrowLeft') {
+                            e.preventDefault();
+                            this.navigateWeek('prev');
+                        }
+                        if (e.key === 'ArrowRight') {
+                            e.preventDefault();
+                            this.navigateWeek('next');
+                        }
+                    }
+                });
+
+                // Swipe gestures for mobile
+                this.bindSwipeGestures();
+
+                // Prevent zoom on double tap for iOS
+                let lastTouchEnd = 0;
+                document.addEventListener('touchend', (e) => {
+                    const now = Date.now();
+                    if (now - lastTouchEnd <= 300) {
+                        e.preventDefault();
+                    }
+                    lastTouchEnd = now;
+                }, false);
+            }
+
+            bindSwipeGestures() {
+                let touchStartX = null;
+                let touchStartY = null;
+                let touchEndX = null;
+                let touchEndY = null;
+
+                const handleTouchStart = (e) => {
+                    if (this.uiManager.activeModal) return; // Don't handle swipes when modal is open
+
+                    touchStartX = e.changedTouches[0].screenX;
+                    touchStartY = e.changedTouches[0].screenY;
+                };
+
+                const handleTouchEnd = (e) => {
+                    if (this.uiManager.activeModal) return;
+                    if (!touchStartX || !touchStartY) return;
+
+                    touchEndX = e.changedTouches[0].screenX;
+                    touchEndY = e.changedTouches[0].screenY;
+
+                    const deltaX = touchEndX - touchStartX;
+                    const deltaY = touchEndY - touchStartY;
+                    const absDeltaX = Math.abs(deltaX);
+                    const absDeltaY = Math.abs(deltaY);
+
+                    // Minimum swipe distance
+                    const minSwipeDistance = 50;
+
+                    // Horizontal swipe should be more significant than vertical
+                    if (absDeltaX > minSwipeDistance && absDeltaX > absDeltaY * 2) {
+                        if (deltaX > 0) {
+                            // Swipe right - previous week
+                            this.navigateWeek('prev');
+                        } else {
+                            // Swipe left - next week
+                            this.navigateWeek('next');
+                        }
+                    }
+
+                    // Reset
+                    touchStartX = null;
+                    touchStartY = null;
+                    touchEndX = null;
+                    touchEndY = null;
+                };
+
+                document.addEventListener('touchstart', handleTouchStart, { passive: true });
+                document.addEventListener('touchend', handleTouchEnd, { passive: true });
+            }
         }
-      }
 
-      fallbackCopy(text) {
-        const textArea = document.createElement('textarea');
-        textArea.value = text;
-        textArea.style.position = 'fixed';
-        textArea.style.opacity = '0';
-        document.body.appendChild(textArea);
-        textArea.select();
-        try {
-          document.execCommand('copy');
-          this.uiManager.showToast('Copied to clipboard! 📋');
-        } catch {
-          this.uiManager.showToast('Could not copy to clipboard');
-        }
-        document.body.removeChild(textArea);
-      }
-
-      exportCalendar() {
-        const formatDateTime = (date, hour, min = 0) => {
-          const d = new Date(date);
-          d.setHours(hour, min, 0, 0);
-          return d.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z";
-        };
-
-        const formatDate = (date) => {
-          const d = new Date(date);
-          d.setHours(0, 0, 0, 0);
-          return d.toISOString().replace(/[-:]/g, "").split("T")[0];
-        };
-
-        let ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//MealPlannerApp//EN\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\n";
-
-        this.stateManager.state.days.forEach(day => {
-          // Breakfast events (weekends only)
-          if ((day.name === 'Saturday' || day.name === 'Sunday') && day.breakfast?.length) {
-            const title = "Breakfast: " + (day.breakfast.includes('Custom') ? day.customBreakfast?.join(', ') || 'Custom' : day.breakfast.join(', '));
-            ics += "BEGIN:VEVENT\n";
-            ics += `SUMMARY:${title}\n`;
-            ics += `DTSTART:${formatDateTime(day.date, 8, 0)}\n`;
-            ics += `DTEND:${formatDateTime(day.date, 9, 0)}\n`;
-            ics += `UID:breakfast-${day.date}@mealplanner\n`;
-            ics += "END:VEVENT\n";
-          }
-
-          // Lunch events
-          if (day.lunch?.length) {
-            const title = "Lunch: " + (day.lunch.includes('Custom') ? day.customLunch?.join(', ') || 'Custom' : day.lunch.join(', '));
-            ics += "BEGIN:VEVENT\n";
-            ics += `SUMMARY:${title}\n`;
-            ics += `DTSTART:${formatDateTime(day.date, 13, 0)}\n`;
-            ics += `DTEND:${formatDateTime(day.date, 13, 45)}\n`;
-            ics += `UID:lunch-${day.date}@mealplanner\n`;
-            ics += "END:VEVENT\n";
-          }
-
-          // Dinner events
-          if (day.dinner?.length) {
-            let title = "Dinner: " + (day.dinner.includes('Custom') ? day.customDinner?.join(', ') || 'Custom' : day.dinner.join(', '));
-            if (day.side?.length) {
-              const sides = day.side.map(s => s === 'Custom' ? day.customSide?.join(', ') || 'Custom' : s);
-              title += " + " + sides.join(', ');
-            }
-            ics += "BEGIN:VEVENT\n";
-            ics += `SUMMARY:${title}\n`;
-            ics += `DTSTART:${formatDateTime(day.date, 19, 0)}\n`;
-            ics += `DTEND:${formatDateTime(day.date, 20, 0)}\n`;
-            ics += `UID:dinner-${day.date}@mealplanner\n`;
-            ics += "END:VEVENT\n";
-          }
-
-          // Bread reminder (all-day event)
-          if (day.breadFlag) {
-            ics += "BEGIN:VEVENT\n";
-            ics += "SUMMARY:Bread\n";
-            ics += `DTSTART;VALUE=DATE:${formatDate(day.date)}\n`;
-            ics += `DTEND;VALUE=DATE:${formatDate(new Date(new Date(day.date).getTime() + 86400000))}\n`;
-            ics += `UID:bread-${day.date}@mealplanner\n`;
-            ics += "END:VEVENT\n";
-          }
+        // Initialize the application when DOM is ready
+        document.addEventListener('DOMContentLoaded', () => {
+            window.mealPlanner = new MealPlanner();
         });
-
-        ics += "END:VCALENDAR";
-
-        const blob = new Blob([ics], { type: "text/calendar" });
-        const url = URL.createObjectURL(blob);
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "mealplan.ics";
-        a.click();
-        URL.revokeObjectURL(url);
-        
-        this.uiManager.showToast('Calendar exported! 📅');
-      }
-
-      bindGlobalEvents() {
-        // Theme toggle
-        document.getElementById('themeToggle').addEventListener('click', () => {
-          this.toggleTheme();
-        });
-
-        // Navigation
-        document.getElementById('prevWeek').addEventListener('click', () => {
-          this.navigateWeek('prev');
-        });
-
-        document.getElementById('nextWeek').addEventListener('click', () => {
-          this.navigateWeek('next');
-        });
-
-        // Bottom bar actions
-        document.getElementById('randomizeBtn').addEventListener('click', () => {
-          this.randomizeWeek();
-        });
-
-        document.getElementById('clearBtn').addEventListener('click', () => {
-          this.clearWeek();
-        });
-
-        document.getElementById('shareBtn').addEventListener('click', () => {
-          this.showShareModal();
-        });
-
-        // Modal overlay click to close
-        document.getElementById('modalOverlay').addEventListener('click', (e) => {
-          if (e.target.id === 'modalOverlay') {
-            this.uiManager.hideModal();
-          }
-        });
-
-        // Keyboard navigation
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape') {
-            this.uiManager.hideModal();
-          }
-          
-          const modalOpen = document.getElementById('modalOverlay').classList.contains('show');
-          if (!modalOpen) {
-            if (e.key === 'ArrowLeft') {
-              e.preventDefault();
-              this.navigateWeek('prev');
-            }
-            if (e.key === 'ArrowRight') {
-              e.preventDefault();
-              this.navigateWeek('next');
-            }
-          }
-        });
-
-        // Swipe gestures for mobile
-        this.bindSwipeGestures();
-
-        // Prevent zoom on double tap for iOS
-        let lastTouchEnd = 0;
-        document.addEventListener('touchend', (e) => {
-          const now = Date.now();
-          if (now - lastTouchEnd <= 300) {
-            e.preventDefault();
-          }
-          lastTouchEnd = now;
-        }, false);
-      }
-
-      bindSwipeGestures() {
-        let touchStartX = null;
-        let touchStartY = null;
-        let touchEndX = null;
-        let touchEndY = null;
-
-        const handleTouchStart = (e) => {
-          if (this.uiManager.activeModal) return; // Don't handle swipes when modal is open
-          
-          touchStartX = e.changedTouches[0].screenX;
-          touchStartY = e.changedTouches[0].screenY;
-        };
-
-        const handleTouchEnd = (e) => {
-          if (this.uiManager.activeModal) return;
-          if (!touchStartX || !touchStartY) return;
-
-          touchEndX = e.changedTouches[0].screenX;
-          touchEndY = e.changedTouches[0].screenY;
-
-          const deltaX = touchEndX - touchStartX;
-          const deltaY = touchEndY - touchStartY;
-          const absDeltaX = Math.abs(deltaX);
-          const absDeltaY = Math.abs(deltaY);
-
-          // Minimum swipe distance
-          const minSwipeDistance = 50;
-          
-          // Horizontal swipe should be more significant than vertical
-          if (absDeltaX > minSwipeDistance && absDeltaX > absDeltaY * 2) {
-            if (deltaX > 0) {
-              // Swipe right - previous week
-              this.navigateWeek('prev');
-            } else {
-              // Swipe left - next week
-              this.navigateWeek('next');
-            }
-          }
-
-          // Reset
-          touchStartX = null;
-          touchStartY = null;
-          touchEndX = null;
-          touchEndY = null;
-        };
-
-        document.addEventListener('touchstart', handleTouchStart, { passive: true });
-        document.addEventListener('touchend', handleTouchEnd, { passive: true });
-      }
-    }
-
-    // Initialize the application when DOM is ready
-    document.addEventListener('DOMContentLoaded', () => {
-      window.mealPlanner = new MealPlanner();
-    });
-  </script>
+    </script>
 </body>
 
 </html>
