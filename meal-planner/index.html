@@ -1080,13 +1080,14 @@
       }
 
       multiGrid(type, selectedArr, options) {
+        const sel = Array.isArray(selectedArr) ? selectedArr : (selectedArr ? [selectedArr] : []);
         return `<div class="grid" data-type="${type}">
-          ${options.map(name => `
-            <div class="tile ${selectedArr.includes(name) ? 'selected' : ''}" data-meal="${name}" data-type="${type}">
-              <div class="emo">${MEAL_EMOJI[name] || '❓'}</div>
-              <div>${name}</div>
-            </div>`).join('')}
-        </div>`;
+    ${options.map(name => `
+      <div class="tile ${sel.includes(name) ? 'selected' : ''}" data-meal="${name}" data-type="${type}">
+        <div class="emo">${MEAL_EMOJI[name] || '❓'}</div>
+        <div>${name}</div>
+      </div>`).join('')}
+  </div>`;
       }
 
       openBreakfast(i) {
@@ -1288,7 +1289,8 @@
 
       clear(type, i) {
         const d = this.state.days[i];
-        d[type] = null; d[`custom${type[0].toUpperCase() + type.slice(1)}`] = null;
+        d[type] = [];
+        d[`custom${type[0].toUpperCase() + type.slice(1)}`] = [];
         if (type === 'dinner') { d.side = []; d.customSide = []; }
         (type === 'breakfast') ? this.openBreakfast(i) : (type === 'lunch') ? this.openLunch(i) : this.openDinner(i);
       }
@@ -1300,7 +1302,7 @@
         else if (type === 'lunch') opts = CATS.lunch;
         else opts = this.dinnerOptions(d);
         opts = opts.filter(x => x !== 'Custom');
-        if (opts.length) d[type] = opts[Math.floor(Math.random() * opts.length)];
+        if (opts.length) d[type] = [opts[Math.floor(Math.random() * opts.length)]];
         if (type === 'dinner' && d.dinnerType !== 'delivery') {
           const so = CATS.side.filter(x => x !== 'Custom');
           d.side = [so[Math.floor(Math.random() * so.length)]];
@@ -1313,11 +1315,14 @@
         const so = CATS.side.filter(x => x !== 'Custom');
         const bo = CATS.breakfast.filter(x => x !== 'Custom');
         this.state.days.forEach(d => {
-          if (d.name === 'Saturday' || d.name === 'Sunday') { d.breakfast = bo[Math.floor(Math.random() * bo.length)]; }
-          else { d.breakfast = null; d.customBreakfast = null; }
-          const do_ = this.dinnerOptions(d).filter(x => x !== 'Custom');
-          d.lunch = lo[Math.floor(Math.random() * lo.length)];
-          d.dinner = do_[Math.floor(Math.random() * do_.length)];
+          if (d.name === 'Saturday' || d.name === 'Sunday') {
+            d.breakfast = [bo[Math.floor(Math.random() * bo.length)]];
+          } else {
+            d.breakfast = [];
+            d.customBreakfast = [];
+          }
+          d.lunch = [lo[Math.floor(Math.random() * lo.length)]];
+          d.dinner = [do_[Math.floor(Math.random() * do_.length)]];
           if (d.dinnerType !== 'delivery') {
             d.side = [so[Math.floor(Math.random() * so.length)]];
           }
@@ -1328,10 +1333,16 @@
       clearWeek() {
         if (confirm('Clear all meals for this week?')) {
           this.state.days.forEach(d => {
-            d.breakfast = d.lunch = d.dinner = null;
-            d.customBreakfast = d.customLunch = d.customDinner = null;
-            d.side = d.customSide = [];
-            d.dinnerType = 'regular'; d.breadFlag = false;
+            d.breakfast = [];
+            d.lunch = [];
+            d.dinner = [];
+            d.customBreakfast = [];
+            d.customLunch = [];
+            d.customDinner = [];
+            d.side = [];
+            d.customSide = [];
+            d.dinnerType = 'regular';
+            d.breadFlag = false;
           });
           this.save(); this.render(); this.toast('Week cleared');
         }
