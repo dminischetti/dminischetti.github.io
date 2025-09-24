@@ -14,29 +14,22 @@
       --muted: #8c7569;
       --text: #362420;
       --border: #f2d6c9;
-
       --tint: #ff7b4a;
       --tint-2: #4caf50;
       --ok: #10b981;
       --info: #06b6d4;
       --warn: #f59e0b;
-
       --radius-8: 12px;
       --radius-12: 16px;
-
       --shadow-1: 0 8px 24px rgba(0, 0, 0, .08);
       --shadow-2: 0 12px 28px rgba(0, 0, 0, .12);
-
       --tap: 48px;
-
-      /* typography */
       --h1: clamp(20px, 3.6vw, 24px);
       --h2: clamp(16px, 3.2vw, 20px);
       --body: clamp(14px, 3vw, 16px);
       --small: 12px;
     }
 
-    /* dark mode - class based instead of media query */
     body.dark {
       --bg: #000000;
       --bg-soft: #111111;
@@ -44,7 +37,6 @@
       --muted: #a0a0a0;
       --text: #f5f5f5;
       --border: #333333;
-
       --shadow-1: 0 8px 24px rgba(0, 0, 0, .6);
       --shadow-2: 0 20px 32px rgba(0, 0, 0, .75);
     }
@@ -62,9 +54,7 @@
 
     body {
       font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
-      background: radial-gradient(1200px 800px at 20% -10%, rgba(255, 123, 74, .12), transparent 45%),
-        radial-gradient(1200px 900px at 110% 10%, rgba(76, 175, 80, .08), transparent 50%),
-        var(--bg);
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(255, 123, 74, .12), transparent 45%), radial-gradient(1200px 900px at 110% 10%, rgba(76, 175, 80, .08), transparent 50%), var(--bg);
       color: var(--text);
       -webkit-tap-highlight-color: transparent;
     }
@@ -76,7 +66,6 @@
       padding-bottom: 80px;
     }
 
-    /* header */
     .header {
       position: sticky;
       top: 0;
@@ -115,7 +104,6 @@
       transform: scale(.98)
     }
 
-    /* week banner */
     .week-nav {
       margin: 16px 0 12px;
       padding: 12px 14px;
@@ -127,7 +115,6 @@
       background: var(--bg-soft);
     }
 
-    /* day card */
     .day-card {
       background: var(--card);
       border: 1px solid var(--border);
@@ -176,7 +163,6 @@
       background: var(--tint);
     }
 
-    /* day header right (bread) */
     .day-actions {
       display: flex;
       align-items: center;
@@ -209,7 +195,6 @@
       background: var(--tint-2)
     }
 
-    /* meal rows */
     .meal {
       display: flex;
       align-items: center;
@@ -239,9 +224,7 @@
       place-items: center;
       border-radius: 12px;
       font-size: 22px;
-      text-shadow:
-        0 0 3px rgba(0, 0, 0, 0.8),
-        0 0 4px rgba(0, 0, 0, 0.6);
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.8), 0 0 4px rgba(0, 0, 0, 0.6);
     }
 
     .icon.breakfast {
@@ -279,7 +262,6 @@
       line-height: 1.4;
     }
 
-    /* inline dinner toggles */
     .inline-toggles {
       display: flex;
       gap: 6px;
@@ -306,7 +288,6 @@
       border-color: transparent;
     }
 
-    /* weekend reveal block */
     .weekend-card {
       display: flex;
       align-items: center;
@@ -348,7 +329,6 @@
       transform: translateX(24px)
     }
 
-    /* bottom bar - optimized */
     .bottom-bar {
       position: fixed;
       left: 0;
@@ -400,7 +380,6 @@
       font-size: 18px
     }
 
-    /* modal (bottom sheet) */
     .modal-overlay {
       position: fixed;
       inset: 0;
@@ -555,7 +534,6 @@
       font-weight: 800;
     }
 
-    /* toast */
     .toast {
       position: fixed;
       left: 50%;
@@ -580,7 +558,6 @@
       visibility: visible
     }
 
-    /* week nav arrows */
     .nav {
       position: fixed;
       top: 50%;
@@ -607,7 +584,6 @@
       border-right: none
     }
 
-    /* helpers */
     .hide {
       display: none
     }
@@ -645,19 +621,19 @@
       background: var(--bg-soft);
     }
 
-.pill.bread {
-  border: 1px dashed #aaa;
-  background: transparent;
-  color: #bbb;
-  opacity: 0.4;
-}
+    .pill.bread {
+      border: 1px dashed #aaa;
+      background: transparent;
+      color: #bbb;
+      opacity: 0.4;
+    }
 
-.pill.bread.is-on {
-  background: var(--tint-2);
-  color: #fff;
-  border: none;
-  opacity: 1;
-}
+    .pill.bread.is-on {
+      background: var(--tint-2);
+      color: #fff;
+      border: none;
+      opacity: 1;
+    }
 
     #modalDinnerType {
       font-weight: 700;
@@ -695,7 +671,7 @@
     </div>
   </div>
 
-  
+
   <div id="modalOverlay" class="modal-overlay"></div>
   <section id="sheet" class="sheet" aria-modal="true" role="dialog">
     <div class="sheet-head">
@@ -715,7 +691,6 @@
   <div id="toast" class="toast">Saved! ✓</div>
 
   <script>
-    /* ========= DATA (your provided object) ========= */
     const DATA =
     {
       "ingredients": {
@@ -872,7 +847,6 @@
       }
     };
 
-    /* ========= Build lookups ========= */
     const MEALS_BY_NAME = {}, MEAL_EMOJI = {}, MEAL_ING = {}, MEAL_TYPE = {}, ING_EMOJI = {}, CATS = {}, STORES = {};
     Object.values(DATA.ingredients).forEach(i => { ING_EMOJI[i.name] = i.emoji; });
     Object.entries(DATA.meals).forEach(([k, m]) => {
@@ -882,7 +856,6 @@
       MEAL_TYPE[m.name] = m.type || 'other';
     });
 
-    /* breakfast IDs exist only in categories — create fallbacks */
     const BF_FALLBACK = {
       croissants: { name: 'Croissants', emoji: '🥐', ingredients: [] },
       pancakes: { name: 'Pancakes', emoji: '🥞', ingredients: ['flour', 'milk', 'eggs', 'butter'] },
@@ -910,7 +883,6 @@
     });
     Object.entries(DATA.stores).forEach(([s, ids]) => { STORES[s] = ids.map(id => DATA.ingredients[id]?.name || id) });
 
-    /* ========= App ========= */
     class MealPlanner {
       constructor() {
         this.state = this.loadState() || this.initialState();
@@ -964,7 +936,7 @@
       init() { this.applyTheme(); this.render(); this.bindGlobal(); }
 
       applyTheme() {
-        
+
         if (this.state.theme === 'dark') {
           document.body.classList.add('dark');
         } else {
@@ -1031,7 +1003,7 @@
         const lSides = (d.side && d.lunch?.length) ? ` • ${sides}` : '';
         const dSides = (d.side && d.dinner?.length) ? ` • ${sides}` : '';
 
-        
+
         const be = d.breakfast?.length ? MEAL_EMOJI[d.breakfast[0]] || '❓' : '❓';
         const le = d.lunch?.length ? MEAL_EMOJI[d.lunch[0]] || '❓' : '❓';
         const de = d.dinner?.length ? MEAL_EMOJI[d.dinner[0]] || '❓' : '❓';
@@ -1086,7 +1058,7 @@
       }
 
       bindDays() {
-        
+
         document.querySelectorAll('.meal').forEach(el => {
           el.onclick = () => {
             const day = +el.dataset.day;
@@ -1097,7 +1069,7 @@
           };
         });
 
-        
+
         document.querySelectorAll('.pill.bread').forEach(btn => {
           btn.onclick = (e) => {
             e.stopPropagation();
@@ -1107,16 +1079,16 @@
             this.save(); this.render();
           };
         });
-        
+
         document.querySelectorAll('.mode-btn').forEach(btn => {
           btn.onclick = (e) => {
             e.stopPropagation();
             const day = +btn.dataset.day;
 
-            
+
             document.querySelectorAll('.popover').forEach(p => p.remove());
 
-            
+
             const pop = document.createElement('div');
             pop.className = 'popover';
             pop.innerHTML = `
@@ -1126,13 +1098,13 @@
     `;
             document.body.appendChild(pop);
 
-            
+
             const rect = btn.getBoundingClientRect();
             pop.style.top = (rect.bottom + window.scrollY + 4) + 'px';
             pop.style.left = (rect.left + window.scrollX) + 'px';
             pop.style.display = 'block';
 
-            
+
             pop.querySelectorAll('button').forEach(opt => {
               opt.onclick = () => {
                 const type = opt.dataset.type;
@@ -1148,7 +1120,7 @@
               };
             });
 
-            
+
             document.addEventListener('click', (ev) => {
               if (!pop.contains(ev.target) && ev.target !== btn) {
                 pop.remove();
@@ -1157,7 +1129,7 @@
           };
         });
 
-        
+
         const wt = document.getElementById('weekendToggle');
         if (wt) wt.onclick = () => { this.state.showWeekend = !this.state.showWeekend; this.save(); this.render(); };
       }
@@ -1207,7 +1179,7 @@
       saveBreakfast(i) {
         const d = this.state.days[i];
 
-        
+
         if (d.breakfast.includes('Custom')) {
           const el = document.getElementById('customBreakfastInput');
           if (!el || !el.value.trim()) {
@@ -1252,7 +1224,7 @@
           }
         }
 
-        
+
         if (!d.lunch.length && d.side.length) {
           alert('Please select a main dish before adding side dishes.');
           return;
@@ -1265,7 +1237,7 @@
         const d = this.state.days[i]; this.idx = i;
         this.idx = i;
 
-        
+
         const wrap = document.getElementById('modalBreadWrap');
         if (wrap) {
           wrap.innerHTML = `
@@ -1310,7 +1282,7 @@
             if (breadBtn) {
               breadBtn.onclick = () => {
                 d.breadFlag = !d.breadFlag;
-                this.openDinner(i); 
+                this.openDinner(i);
               };
             }
 
@@ -1320,7 +1292,7 @@
                 d.dinnerType = typeSel.value;
                 d.dinner = [];
                 d.customDinner = [];
-                this.openDinner(i); 
+                this.openDinner(i);
               };
             }
           }
@@ -1350,7 +1322,7 @@
           }
         }
 
-        
+
         if (!d.dinner.length && d.side.length) {
           alert('Please select a main dish before adding side dishes.');
           return;
@@ -1380,7 +1352,7 @@
         });
         ov.classList.add('show');
 
-        
+
         setTimeout(() => {
           document.querySelectorAll('.tile').forEach(t => {
             t.onclick = () => {
@@ -1390,23 +1362,23 @@
               if (!Array.isArray(d[type])) d[type] = [];
 
               if (d[type].includes(val)) {
-                
+
                 d[type] = d[type].filter(x => x !== val);
                 t.classList.remove('selected');
 
                 if (val === 'Custom') {
-                  
+
                   const field = document.getElementById(`custom${type}Field`);
                   if (field) field.remove();
                   d[`custom${type[0].toUpperCase() + type.slice(1)}`] = null;
                 }
               } else {
-                
+
                 d[type].push(val);
                 t.classList.add('selected');
 
                 if (val === 'Custom') {
-                  
+
                   const container = document.getElementById('modalBody');
                   const field = document.createElement('div');
                   field.className = 'field';
@@ -1553,7 +1525,7 @@
           if (d.dinnerType === 'delivery') t += ' [Delivery]';
           else if (d.dinnerType === 'quick') t += ' [Quick]';
 
-          
+
           if (d.side?.length) {
             const sides = d.side.map(s =>
               s === 'Custom'
@@ -1598,7 +1570,7 @@
           if (d.dinnerType === 'delivery') recap += ' [Delivery]';
           else if (d.dinnerType === 'quick') recap += ' [Quick]';
 
-          
+
           if (d.side?.length) {
             const sides = d.side.map(s =>
               s === 'Custom'
@@ -1628,7 +1600,7 @@
           body,
           footer: [
             { label: 'Close', cb: () => this.hideSheet() },
-            { label: 'Export', cb: () => this.exportICS() },
+            { label: 'Calendar', cb: () => this.exportICS() },
             { label: 'Send', cb: () => this.share('Meal Plan & Shopping', recap) }
           ]
         });
@@ -1649,34 +1621,34 @@
           return d.toISOString().replace(/[-:]/g, "").split("T")[0].replace(/-/g, "");
         }
 
-        let ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-
+        let ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//MealPlannerApp//EN\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\n";
 
         this.state.days.forEach(d => {
           const dayName = new Date(d.date).toLocaleDateString("en-US", { weekday: "long" });
 
-          
+
           if (d.breakfast) {
             const title = "Breakfast: " + (d.breakfast === "Custom" ? d.customBreakfast : d.breakfast);
             ics += "BEGIN:VEVENT\n";
             ics += "SUMMARY:" + title + "\n";
-            
+
             ics += "DTSTART:" + fmtDateTime(d.date, 8, 0) + "\n";
             ics += "DTEND:" + fmtDateTime(d.date, 9, 0) + "\n";
             ics += "END:VEVENT\n";
           }
 
-          
+
           if (d.lunch) {
             const title = "Lunch: " + (d.lunch === "Custom" ? d.customLunch : d.lunch);
             ics += "BEGIN:VEVENT\n";
             ics += "SUMMARY:" + title + "\n";
-            
+
             ics += "DTSTART:" + fmtDateTime(d.date, 13, 0) + "\n";
             ics += "DTEND:" + fmtDateTime(d.date, 13, 45) + "\n";
             ics += "END:VEVENT\n";
           }
 
-          
+
           if (d.dinner) {
             let title = "Dinner: " + (d.dinner === "Custom" ? d.customDinner : d.dinner);
             if (d.side && d.side.length) {
@@ -1685,13 +1657,13 @@
             }
             ics += "BEGIN:VEVENT\n";
             ics += "SUMMARY:" + title + "\n";
-            
+
             ics += "DTSTART:" + fmtDateTime(d.date, 19, 0) + "\n";
             ics += "DTEND:" + fmtDateTime(d.date, 20, 0) + "\n";
             ics += "END:VEVENT\n";
           }
 
-          
+
           if (d.breadFlag) {
             ics += "BEGIN:VEVENT\n";
             ics += "SUMMARY:Bread\n";
@@ -1703,7 +1675,7 @@
 
         ics += "END:VCALENDAR";
 
-        
+
         const blob = new Blob([ics], { type: "text/calendar" });
         const url = URL.createObjectURL(blob);
         const a = document.createElement("a");
@@ -1721,11 +1693,11 @@
         on('randomizeBtn', () => this.randomizeWeek());
         on('shareBtn', () => this.shareRecap());
         on('clearBtn', () => this.clearWeek());
-        
+
         document.getElementById('modalOverlay').onclick = (e) => {
           if (e.target.id === 'modalOverlay') this.hideSheet();
         };
-        
+
         document.addEventListener('keydown', (e) => {
           if (e.key === 'Escape') this.hideSheet();
           const open = document.getElementById('modalOverlay').classList.contains('show');
