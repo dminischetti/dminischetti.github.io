@@ -38,15 +38,15 @@
 
     /* dark mode - class based instead of media query */
     body.dark {
-      --bg: #1a1817;
-      --bg-soft: #24201e;
-      --card: #2a2624;
-      --muted: #a3968f;
-      --text: #f0e6e0;
-      --border: #4a4039;
+      --bg: #000000;
+      --bg-soft: #111111;
+      --card: #1a1a1a;
+      --muted: #a0a0a0;
+      --text: #f5f5f5;
+      --border: #333333;
 
-      --shadow-1: 0 8px 24px rgba(0, 0, 0, .35);
-      --shadow-2: 0 20px 32px rgba(0, 0, 0, .40);
+      --shadow-1: 0 8px 24px rgba(0, 0, 0, .6);
+      --shadow-2: 0 20px 32px rgba(0, 0, 0, .75);
     }
 
     * {
@@ -1067,21 +1067,21 @@
         return CATS.dinnerRegular;
       }
 
-      grid(type, selected, options) {
+      multiGrid(type, selectedArr, options) {
         return `<div class="grid" data-type="${type}">
-      ${options.map(name => `
-        <div class="tile ${selected === name ? 'selected' : ''}" data-meal="${name}" data-type="${type}">
-          <div class="emo">${MEAL_EMOJI[name] || '❓'}</div>
-          <div>${name}</div>
-        </div>`).join('')}
-    </div>`;
+          ${options.map(name => `
+            <div class="tile ${selectedArr.includes(name) ? 'selected' : ''}" data-meal="${name}" data-type="${type}">
+              <div class="emo">${MEAL_EMOJI[name] || '❓'}</div>
+              <div>${name}</div>
+            </div>`).join('')}
+        </div>`;
       }
 
       openBreakfast(i) {
         const d = this.state.days[i];
         if (!(d.name === 'Saturday' || d.name === 'Sunday')) return;
         this.idx = i;
-        let body = this.grid('breakfast', d.breakfast, CATS.breakfast);
+        let body = this.multiGrid('breakfast', d.breakfast, CATS.breakfast);
         if (d.breakfast === 'Custom') {
           body += `<div class="field"><div class="label">Custom Breakfast</div><input class="input" id="customBreakfastInput" value="${d.customBreakfast || ''}" placeholder="Enter custom breakfast"/></div>`;
         }
@@ -1104,7 +1104,7 @@
 
       openLunch(i) {
         const d = this.state.days[i]; this.idx = i;
-        let body = this.grid('lunch', d.lunch, CATS.lunch);
+        let body = this.multiGrid('lunch', d.lunch, CATS.lunch);
         if (d.lunch === 'Custom') {
           body += `<div class="field"><div class="label">Custom Lunch</div><input class="input" id="customLunchInput" value="${d.customLunch || ''}" placeholder="Enter custom meal"/></div>`;
         }
@@ -1138,12 +1138,12 @@
           <button class="tag ${d.dinnerType === 'delivery' ? 'active delivery' : ''}" id="modalDelivery">🚚 Delivery</button>
         </div>
       </div>`;
-        body += this.grid('dinner', d.dinner, this.dinnerOptions(d));
+        body += this.multiGrid('dinner', d.dinner, this.dinnerOptions(d));
         if (d.dinner === 'Custom') {
           body += `<div class="field"><div class="label">Custom Dinner</div><input class="input" id="customDinnerInput" value="${d.customDinner || ''}" placeholder="Enter custom meal"/></div>`;
         }
         body += `<div class="field"><div class="label">Side Dishes</div></div>`;
-        body += this.multiGrid('side', d.side, CATS.side);
+        body += this.multimultiGrid('side', d.side, CATS.side);
         if (d.side.includes('Custom')) {
           body += `<div class="field"><input class="input" id="customSideInput" value="${d.customSide.join(', ') || ''}" placeholder="Enter custom sides (comma-separated)"/></div>`;
         }
@@ -1186,15 +1186,6 @@
         });
       }
 
-      multiGrid(type, selectedArr, options) {
-        return `<div class="grid" data-type="${type}">
-    ${options.map(name => `
-      <div class="tile ${selectedArr.includes(name) ? 'selected' : ''}" data-meal="${name}" data-type="${type}">
-        <div class="emo">${MEAL_EMOJI[name] || '❓'}</div>
-        <div>${name}</div>
-      </div>`).join('')}
-  </div>`;
-      }
 
       saveDinner(i) {
         const d = this.state.days[i];
@@ -1490,7 +1481,7 @@ exportICS() {
       const title = "Breakfast: " + (d.breakfast === "Custom" ? d.customBreakfast : d.breakfast);
       ics += "BEGIN:VEVENT\n";
       ics += "SUMMARY:" + title + "\n";
-      // esempio: 8:00 - 9:00
+      // Breakfast → 8:00–9:00
       ics += "DTSTART:" + fmtDateTime(d.date, 8, 0) + "\n";
       ics += "DTEND:" + fmtDateTime(d.date, 9, 0) + "\n";
       ics += "END:VEVENT\n";
@@ -1501,8 +1492,9 @@ exportICS() {
       const title = "Lunch: " + (d.lunch === "Custom" ? d.customLunch : d.lunch);
       ics += "BEGIN:VEVENT\n";
       ics += "SUMMARY:" + title + "\n";
+      // Lunch → 13:00–13:45
       ics += "DTSTART:" + fmtDateTime(d.date, 13, 0) + "\n";
-      ics += "DTEND:" + fmtDateTime(d.date, 14, 0) + "\n";
+      ics += "DTEND:" + fmtDateTime(d.date, 13, 45) + "\n";
       ics += "END:VEVENT\n";
     }
 
@@ -1515,8 +1507,9 @@ exportICS() {
       }
       ics += "BEGIN:VEVENT\n";
       ics += "SUMMARY:" + title + "\n";
-      ics += "DTSTART:" + fmtDateTime(d.date, 20, 0) + "\n";
-      ics += "DTEND:" + fmtDateTime(d.date, 21, 0) + "\n";
+      // Dinner → 19:00–20:00
+      ics += "DTSTART:" + fmtDateTime(d.date, 19, 0) + "\n";
+      ics += "DTEND:" + fmtDateTime(d.date, 20, 0) + "\n";
       ics += "END:VEVENT\n";
     }
 
