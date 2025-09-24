@@ -1,6 +1,0 @@
-[submodule "blog/blog/themes/LoveIt"]
-	path = blog/blog/themes/LoveIt
-	url = https://github.com/dillonzq/LoveIt.git
-[submodule "blog/themes/LoveIt"]
-	path = blog/themes/LoveIt
-	url = https://github.com/dillonzq/LoveIt.git
