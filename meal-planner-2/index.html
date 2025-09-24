@@ -1209,90 +1209,97 @@
                 this.bindDayEvents();
             }
 
-            renderDayCard(day, index) {
-                const isWeekend = day.name === 'Saturday' || day.name === 'Sunday';
+renderDayCard(day, index) {
+  const isWeekend = day.name === 'Saturday' || day.name === 'Sunday';
 
-                const formatMealText = (meals, customMeals, defaultText) => {
-                    if (!meals?.length) return defaultText;
-                    return meals.map(meal => {
-                        if (meal === 'Custom') {
-                            return (customMeals?.map(c => `${DataManager.getIngredientEmoji(c) || '❓'} ${c}`).join(' • ')
-                                || 'Custom');
-                        }
-                        return `${DataManager.getMealEmoji(meal)} ${meal}`;
-                    }).join(' • ');
-                };
+  // helper per formattare pasti/contorni con emoji
+  const formatMeals = (meals, customMeals) => {
+    if (!meals?.length) return '';
+    return meals.map(meal => {
+      if (meal === 'Custom') {
+        return (customMeals?.map(c => `${DataManager.getIngredientEmoji(c) || '❓'} ${c}`).join(' • ')
+                || 'Custom');
+      }
+      return `${DataManager.getMealEmoji(meal)} ${meal}`;
+    }).join(' • ');
+  };
 
-                const breakfastText = formatMealText(day.breakfast, day.customBreakfast, 'Select breakfast');
-                const lunchText = formatMealText(day.lunch, day.customLunch, 'Select lunch');
-                const dinnerText = formatMealText(day.dinner, day.customDinner, 'Select dinner');
+  const breakfastText = formatMeals(day.breakfast, day.customBreakfast);
+  const lunchText     = formatMeals(day.lunch, day.customLunch);
+  const dinnerText    = formatMeals(day.dinner, day.customDinner);
+  const sidesText     = formatMeals(day.side, day.customSide);
 
-                const sidesText = day.side?.length
-                    ? day.side.map(s => s === 'Custom' ? (day.customSide?.join(', ') || 'Custom') : s).join(' • ')
-                    : '';
+  const breakfastEmoji = day.breakfast?.length ? DataManager.getMealEmoji(day.breakfast[0]) : '❓';
+  const lunchEmoji     = day.lunch?.length ? DataManager.getMealEmoji(day.lunch[0]) : '❓';
+  const dinnerEmoji    = day.dinner?.length ? DataManager.getMealEmoji(day.dinner[0]) : '❓';
 
-                const breakfastEmoji = day.breakfast?.length ? DataManager.getMealEmoji(day.breakfast[0]) : '❓';
-                const lunchEmoji = day.lunch?.length ? DataManager.getMealEmoji(day.lunch[0]) : '❓';
-                const dinnerEmoji = day.dinner?.length ? DataManager.getMealEmoji(day.dinner[0]) : '❓';
+  const requiredMeals = (day.dinnerType === 'delivery' ? 2 : 3) + (isWeekend ? 1 : 0);
+  const completedMeals = (isWeekend && day.breakfast?.length ? 1 : 0) +
+                        (day.lunch?.length ? 1 : 0) +
+                        (day.dinner?.length ? 1 : 0) +
+                        (day.dinnerType !== 'delivery' && day.side?.length ? 1 : 0);
 
-                const requiredMeals = (day.dinnerType === 'delivery' ? 2 : 3) + (isWeekend ? 1 : 0);
-                const completedMeals = (isWeekend && day.breakfast?.length ? 1 : 0) +
-                    (day.lunch?.length ? 1 : 0) +
-                    (day.dinner?.length ? 1 : 0) +
-                    (day.dinnerType !== 'delivery' && day.side?.length ? 1 : 0);
+  const dinnerTypeIcon = {
+    'quick': '⚡',
+    'delivery': '🚚',
+    'regular': '🍽️'
+  }[day.dinnerType] || '🍽️';
 
-                const dinnerTypeIcon = {
-                    'quick': '⚡',
-                    'delivery': '🚚',
-                    'regular': '🍽️'
-                }[day.dinnerType] || '🍽️';
+  return `
+    <section class="day-card ${completedMeals < requiredMeals ? 'incomplete' : ''}" data-day="${index}">
+      <div class="day-header">
+        <div>
+          <div class="day-title">${day.name}, ${this.formatDate(day.date)}</div>
+        </div>
+        <div class="day-actions">
+          <button class="pill bread ${day.breadFlag ? 'is-on' : ''}" data-day="${index}" aria-label="Toggle bread for ${day.name}">
+            🍞 Bread
+          </button>
+        </div>
+      </div>
 
-                return `
-          <section class="day-card ${completedMeals < requiredMeals ? 'incomplete' : ''}" data-day="${index}">
-            <div class="day-header">
-              <div>
-                <div class="day-title">${day.name}, ${this.formatDate(day.date)}</div>
-              </div>
-              <div class="day-actions">
-                <button class="pill bread ${day.breadFlag ? 'is-on' : ''}" data-day="${index}" aria-label="Toggle bread for ${day.name}">
-                  🍞 Bread
-                </button>
-              </div>
+      ${isWeekend ? `
+        <div class="meal ${!day.breakfast?.length ? 'empty' : ''}" data-meal="breakfast" data-day="${index}">
+          <div class="icon breakfast">${breakfastEmoji}</div>
+          <div class="content">
+            <div class="title">Breakfast</div>
+            <div class="desc">
+              ${breakfastText}
             </div>
+          </div>
+        </div>
+      ` : ''}
 
-            ${isWeekend ? `
-              <div class="meal ${!day.breakfast?.length ? 'empty' : ''}" data-meal="breakfast" data-day="${index}">
-                <div class="icon breakfast">${breakfastEmoji}</div>
-                <div class="content">
-                  <div class="title">Breakfast</div>
-                  <div class="desc">${breakfastText}</div>
-                </div>
-              </div>
-            ` : ''}
+      <div class="meal ${!day.lunch?.length ? 'empty' : ''}" data-meal="lunch" data-day="${index}">
+        <div class="icon lunch">${lunchEmoji}</div>
+        <div class="content">
+          <div class="title">Lunch</div>
+          <div class="desc">
+            ${lunchText}
+            ${sidesText && day.lunch?.length ? `<br>${sidesText}` : ''}
+          </div>
+        </div>
+      </div>
 
-            <div class="meal ${!day.lunch?.length ? 'empty' : ''}" data-meal="lunch" data-day="${index}">
-              <div class="icon lunch">${lunchEmoji}</div>
-              <div class="content">
-                <div class="title">Lunch</div>
-                <div class="desc">${lunchText}${sidesText && day.lunch?.length ? ` • ${sidesText}` : ''}</div>
-              </div>
-            </div>
+      <div class="meal ${!day.dinner?.length ? 'empty' : ''}" data-meal="dinner" data-day="${index}">
+        <div class="icon dinner">${dinnerEmoji}</div>
+        <div class="content">
+          <div class="title">
+            Dinner
+            <button class="mode-btn" data-day="${index}" title="Change dinner type">
+              ${dinnerTypeIcon}
+            </button>
+          </div>
+          <div class="desc">
+            ${dinnerText}
+            ${sidesText && day.dinner?.length ? `<br>${sidesText}` : ''}
+          </div>
+        </div>
+      </div>
+    </section>
+  `;
+}
 
-            <div class="meal ${!day.dinner?.length ? 'empty' : ''}" data-meal="dinner" data-day="${index}">
-              <div class="icon dinner">${dinnerEmoji}</div>
-              <div class="content">
-                <div class="title">
-                  Dinner
-                  <button class="mode-btn" data-day="${index}" title="Change dinner type">
-                    ${dinnerTypeIcon}
-                  </button>
-                </div>
-                <div class="desc">${dinnerText}${sidesText && day.dinner?.length ? ` • ${sidesText}` : ''}</div>
-              </div>
-            </div>
-          </section>
-        `;
-            }
 
             renderWeekendToggle() {
                 return `
@@ -1847,58 +1854,55 @@
                 return storeMap;
             }
 
-            shareWeekPlan() {
-                const { days } = this.stateManager.state;
-                let text = '🗓️ Weekly Meal Plan\n\n';
+shareWeekPlan() {
+  const { days } = this.stateManager.state;
+  let text = '🗓️ Weekly Meal Plan\n\n';
 
-                days.forEach(day => {
-                    text += `${day.name} (${this.uiManager.formatDate(day.date)})\n`;
+  // helper per formattare pasti/contorni
+  const formatMeals = (meals, customMeals) => {
+    if (!meals?.length) return '—';
+    return meals.map(meal => {
+      if (meal === 'Custom') {
+        return (customMeals?.map(c => `${DataManager.getIngredientEmoji(c) || '❓'} ${c}`).join(', ')
+                || 'Custom');
+      }
+      return `${DataManager.getMealEmoji(meal)} ${meal}`;
+    }).join(', ');
+  };
 
-                    const formatMeals = (meals, customMeals) => {
-                        if (!meals?.length) return '—';
-                        return meals.map(meal => {
-                            const emoji = DataManager.getMealEmoji(meal);
-                            const name = meal === 'Custom' ? customMeals?.join(', ') || 'Custom' : meal;
-                            return `${emoji} ${name}`;
-                        }).join(', ');
-                    };
+  days.forEach(day => {
+    text += `${day.name} (${this.uiManager.formatDate(day.date)})\n`;
 
-                    if (day.name === 'Saturday' || day.name === 'Sunday') {
-                        text += `  Breakfast: ${formatMeals(day.breakfast, day.customBreakfast)}\n`;
-                    }
+    if (day.name === 'Saturday' || day.name === 'Sunday') {
+      text += `  Breakfast: ${formatMeals(day.breakfast, day.customBreakfast)}\n`;
+    }
 
-                    text += `  Lunch: ${formatMeals(day.lunch, day.customLunch)}\n`;
-                    text += `  Dinner: ${formatMeals(day.dinner, day.customDinner)}`;
+    text += `  Lunch: ${formatMeals(day.lunch, day.customLunch)}\n`;
+    text += `  Dinner: ${formatMeals(day.dinner, day.customDinner)}`;
 
-                    if (day.dinnerType === 'delivery') text += ' [Delivery]';
-                    else if (day.dinnerType === 'quick') text += ' [Quick]';
+    if (day.dinnerType === 'delivery') text += ' [Delivery]';
+    else if (day.dinnerType === 'quick') text += ' [Quick]';
 
-                    if (day.side?.length) {
-                        const sides = day.side.map(s => {
-                            if (s === 'Custom') {
-                                return day.customSide?.map(cs => `${DataManager.getMealEmoji(cs)} ${cs}`).join(', ') || 'Custom';
-                            }
-                            return `${DataManager.getMealEmoji(s)} ${s}`;
-                        });
-                        text += `\n  Sides: ${sides.join(', ')}`;
-                    }
+    if (day.side?.length) {
+      text += `\n  Sides: ${formatMeals(day.side, day.customSide)}`;
+    }
 
-                    if (day.breadFlag) text += '\n  Bread: yes';
-                    text += '\n\n';
-                });
+    if (day.breadFlag) text += '\n  Bread: yes';
+    text += '\n\n';
+  });
 
-                const groceries = this.generateGroceryList();
-                text += '\n🛒 Shopping List\n\n';
-                Object.keys(groceries).sort().forEach(store => {
-                    text += `${store}:\n`;
-                    groceries[store].forEach(item => {
-                        text += `• ${DataManager.getIngredientEmoji(item)} ${item}\n`;
-                    });
-                    text += '\n';
-                });
+  const groceries = this.generateGroceryList();
+  text += '\n🛒 Shopping List\n\n';
+  Object.keys(groceries).sort().forEach(store => {
+    text += `${store}:\n`;
+    groceries[store].forEach(item => {
+      text += `• ${DataManager.getIngredientEmoji(item)} ${item}\n`;
+    });
+    text += '\n';
+  });
 
-                this.shareText('Meal Plan & Shopping', text);
-            }
+  this.shareText('Meal Plan & Shopping', text);
+}
 
             showShareModal() {
                 const { days } = this.stateManager.state;
