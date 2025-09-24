@@ -1045,20 +1045,18 @@
       </div>
 
       <div class="meal ${!d.dinner ? 'empty' : ''}" data-meal="dinner" data-day="${i}">
-        <div class="icon dinner">${de}</div>
-        <div class="content">
-          <div class="title">
-  Dinner
-  <button class="mode-btn" data-day="${i}" title="Change dinner type">
-    ${d.dinnerType === 'quick' ? '⚡' : d.dinnerType === 'delivery' ? '🚚' : '🍽️'}
-  </button>
+  <div class="icon dinner">${de}</div>
+  <div class="content">
+    <div class="title">
+      Dinner
+      <button class="mode-btn" data-day="${i}" title="Change dinner type">
+        ${d.dinnerType === 'quick' ? '⚡' : d.dinnerType === 'delivery' ? '🚚' : '🍽️'}
+      </button>
+    </div>
+    <div class="desc">${dnTx}${sides ? ` • ${sides}` : ''}</div>
+  </div>
 </div>
-<div class="desc">${dnTx}${sides ? ` • ${sides}` : ''}</div>
 
-          <button class="tag ${d.dinnerType === 'quick' ? 'active' : ''}" data-toggle="quick" data-day="${i}">⚡ Quick</button>
-          <button class="tag ${d.dinnerType === 'delivery' ? 'active' : ''}" data-toggle="delivery" data-day="${i}">🚚 Delivery</button>
-        </div>
-      </div>
     </section>`;
       }
 
@@ -1073,25 +1071,7 @@
             else this.openDinner(day);
           };
         });
-        // inline dinner toggles
-        document.querySelectorAll('.tag').forEach(btn => {
-          btn.onclick = (e) => {
-            e.stopPropagation();
-            const day = +btn.dataset.day;
-            const type = btn.dataset.toggle;
-            const d = this.state.days[day];
 
-            d.dinnerType = (d.dinnerType === type) ? 'regular' : type;
-
-            if (d.dinnerType === 'quick' || d.dinnerType === 'delivery') {
-              d.dinner = [];
-              d.customDinner = null;
-            }
-
-            this.save();
-            this.render();
-          };
-        });
         // bread pill
         document.querySelectorAll('.pill.bread').forEach(btn => {
           btn.onclick = (e) => {
