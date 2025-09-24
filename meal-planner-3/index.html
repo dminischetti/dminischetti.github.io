@@ -1564,7 +1564,13 @@
                         {
                             label: 'Cancel',
                             className: 'danger',
-                            onClick: () => this.modal.close()
+                            onClick: () => {
+                                // Restore original state if user cancels
+                                if (this.originalDayState) {
+                                    this.state.updateDay(dayIndex, this.originalDayState);
+                                }
+                                this.modal.close();
+                            }
                         },
                         {
                             label: 'Save',
@@ -1604,7 +1610,13 @@
                         {
                             label: 'Cancel',
                             className: 'danger',
-                            onClick: () => this.modal.close()
+                            onClick: () => {
+                                // Restore original state if user cancels
+                                if (this.originalDayState) {
+                                    this.state.updateDay(dayIndex, this.originalDayState);
+                                }
+                                this.modal.close();
+                            }
                         },
                         {
                             label: 'Save',
@@ -1693,26 +1705,37 @@
 
                 // Bind dinner-specific controls
                 document.getElementById('modalBread')?.addEventListener('click', () => {
-                    day.breadFlag = !day.breadFlag;
-                    this.openDinnerSelector(day, dayIndex);
+                    const updatedDay = { ...day, breadFlag: !day.breadFlag };
+                    this.state.updateDay(dayIndex, updatedDay);
+                    this.openDinnerSelector(this.state.state.days[dayIndex], dayIndex);
                 });
 
                 document.getElementById('modalQuick')?.addEventListener('click', () => {
-                    day.dinnerType = day.dinnerType === 'quick' ? 'regular' : 'quick';
-                    day.dinner = null;
-                    day.customDinner = null;
-                    this.openDinnerSelector(day, dayIndex);
+                    const newDinnerType = day.dinnerType === 'quick' ? 'regular' : 'quick';
+                    const updatedDay = { 
+                        ...day, 
+                        dinnerType: newDinnerType,
+                        dinner: null,
+                        customDinner: null
+                    };
+                    this.state.updateDay(dayIndex, updatedDay);
+                    this.openDinnerSelector(this.state.state.days[dayIndex], dayIndex);
                 });
 
                 document.getElementById('modalDelivery')?.addEventListener('click', () => {
-                    day.dinnerType = day.dinnerType === 'delivery' ? 'regular' : 'delivery';
-                    day.dinner = null;
-                    day.customDinner = null;
-                    if (day.dinnerType === 'delivery') {
-                        day.side = [];
-                        day.customSide = [];
+                    const newDinnerType = day.dinnerType === 'delivery' ? 'regular' : 'delivery';
+                    const updatedDay = { 
+                        ...day, 
+                        dinnerType: newDinnerType,
+                        dinner: null,
+                        customDinner: null
+                    };
+                    if (newDinnerType === 'delivery') {
+                        updatedDay.side = [];
+                        updatedDay.customSide = [];
                     }
-                    this.openDinnerSelector(day, dayIndex);
+                    this.state.updateDay(dayIndex, updatedDay);
+                    this.openDinnerSelector(this.state.state.days[dayIndex], dayIndex);
                 });
 
                 this.bindMealTileEvents('dinner');
@@ -1728,26 +1751,41 @@
             }
 
             bindMealTileEvents(type, multiSelect = false) {
+                // Remove any existing event listeners by cloning and replacing nodes
+                document.querySelectorAll('.option-tile').forEach(tile => {
+                    const newTile = tile.cloneNode(true);
+                    tile.parentNode.replaceChild(newTile, tile);
+                });
+
+                // Add fresh event listeners
                 document.querySelectorAll('.option-tile').forEach(tile => {
                     tile.addEventListener('click', () => {
                         const value = tile.dataset.value;
-                        const day = this.state.state.days[this.currentDayIndex];
+                        const day = { ...this.state.state.days[this.currentDayIndex] };
 
                         if (multiSelect) {
                             if (day[type].includes(value)) {
                                 day[type] = day[type].filter(v => v !== value);
+                                tile.classList.remove('selected');
                             } else {
-                                day[type].push(value);
+                                day[type] = [...day[type], value];
+                                tile.classList.add('selected');
                             }
-                            tile.classList.toggle('selected');
+
+                            // Update the temporary day object for UI purposes
+                            this.state.state.days[this.currentDayIndex] = day;
 
                             if (value === 'Custom') {
                                 this.openDinnerSelector(day, this.currentDayIndex);
                             }
                         } else {
+                            // Single select
                             document.querySelectorAll('.option-tile').forEach(t => t.classList.remove('selected'));
                             tile.classList.add('selected');
                             day[type] = value;
+
+                            // Update the temporary day object for UI purposes
+                            this.state.state.days[this.currentDayIndex] = day;
 
                             if (value === 'Custom') {
                                 if (type === 'breakfast') {
@@ -1786,7 +1824,8 @@
             }
 
             saveDinner(dayIndex) {
-                const day = this.state.state.days[dayIndex];
+                // Get the current state of the day (which may have been modified in the UI)
+                const day = { ...this.state.state.days[dayIndex] };
                 const customDinnerInput = document.getElementById('customDinnerInput');
                 const customSideInput = document.getElementById('customSideInput');
 
@@ -1797,6 +1836,7 @@
                     day.customSide = customSideInput.value.split(',').map(s => s.trim()).filter(Boolean);
                 }
 
+                // Properly save the complete day state
                 this.state.updateDay(dayIndex, day);
                 this.modal.close();
                 UIComponents.showToast('Dinner saved! ✓');
