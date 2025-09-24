@@ -644,6 +644,23 @@
     .popover button:hover {
       background: var(--bg-soft);
     }
+
+    .pill.bread {
+      font-size: 12px;
+      font-weight: 700;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--muted);
+      cursor: pointer;
+    }
+
+    .pill.bread.is-on {
+      background: var(--tint-2);
+      color: #fff;
+      border-color: transparent;
+    }
   </style>
 </head>
 
@@ -678,9 +695,17 @@
   <div id="modalOverlay" class="modal-overlay"></div>
   <section id="sheet" class="sheet" aria-modal="true" role="dialog">
     <div class="sheet-head">
-      <div class="sheet-title" id="modalTitle"></div>
-      <div class="sheet-sub" id="modalSubtitle"></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+        <div>
+          <div class="sheet-title" id="modalTitle"></div>
+          <div class="sheet-sub" id="modalSubtitle"></div>
+        </div>
+        <button class="pill bread ${d.breadFlag ? 'is-on' : ''}" id="modalBread" data-day="${i}">
+          🍞 Bread
+        </button>
+      </div>
     </div>
+
     <div class="sheet-body" id="modalBody"></div>
     <div class="sheet-foot" id="modalFooter"></div>
   </section>
@@ -1270,12 +1295,11 @@
             { label: '✅ Save', cb: () => this.saveDinner(i) }
           ],
           after: () => {
-            // Fix: Add click handler for the bread button in modal
             const breadBtn = document.getElementById('modalBread');
             if (breadBtn) {
               breadBtn.onclick = () => {
                 d.breadFlag = !d.breadFlag;
-                this.openDinner(i); // Refresh the modal to show updated state
+                this.openDinner(i); // ricarica la modale con stato aggiornato
               };
             }
 
