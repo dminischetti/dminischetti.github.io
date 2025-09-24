@@ -864,10 +864,10 @@
           if (!Array.isArray(d.dinner)) d.dinner = d.dinner ? [d.dinner] : [];
           if (!Array.isArray(d.side)) d.side = d.side ? [d.side] : [];
 
-          d.customBreakfast ??= null;
-          d.customLunch ??= null;
-          d.customDinner ??= null;
-          d.customSide ??= [];
+          if (!Array.isArray(d.customBreakfast)) d.customBreakfast = d.customBreakfast ? [d.customBreakfast] : [];
+          if (!Array.isArray(d.customLunch)) d.customLunch = d.customLunch ? [d.customLunch] : [];
+          if (!Array.isArray(d.customDinner)) d.customDinner = d.customDinner ? [d.customDinner] : [];
+          if (!Array.isArray(d.customSide)) d.customSide = d.customSide ? d.customSide : [];
           d.breadFlag ??= false;
         });
         this.state.theme ??= 'dark';
@@ -954,15 +954,15 @@
       dayCard(d, i) {
         const w = (d.name === 'Saturday' || d.name === 'Sunday');
         const bTx = (d.breakfast || []).map(m =>
-          m === 'Custom' ? (d.customBreakfast || 'Custom') : m
+          m === 'Custom' ? (d.customBreakfast?.join(', ') || 'Custom') : m
         ).join(' • ') || 'Select breakfast';
 
         const lTx = (d.lunch || []).map(m =>
-          m === 'Custom' ? (d.customLunch || 'Custom') : m
+          m === 'Custom' ? (d.customLunch?.join(', ') || 'Custom') : m
         ).join(' • ') || 'Select lunch';
 
         const dnTx = (d.dinner || []).map(m =>
-          m === 'Custom' ? (d.customDinner || 'Custom') : m
+          m === 'Custom' ? (d.customDinner?.join(', ') || 'Custom') : m
         ).join(' • ') || 'Select dinner';
 
         const sides = (d.side || []).map(s =>
@@ -1044,7 +1044,7 @@
             d.dinnerType = (d.dinnerType === type) ? 'regular' : type;
 
             if (d.dinnerType === 'quick' || d.dinnerType === 'delivery') {
-              d.dinner = null;
+              d.dinner = [];
               d.customDinner = null;
             }
             if (d.dinnerType === 'delivery') {
@@ -1096,7 +1096,9 @@
         let body = this.multiGrid('breakfast', d.breakfast, CATS.breakfast);
         if (d.breakfast.includes('Custom')) {
           body += `<div class="field"><div class="label">Custom Breakfast</div>
-            <input class="input" id="customBreakfastInput" value="${d.customBreakfast || ''}" placeholder="Enter custom breakfast"/></div>`;
+            <input class="input" id="customBreakfastInput" 
+                  value="${d.customBreakfast.join(', ') || ''}" 
+                  placeholder="Enter custom breakfast (comma-separated)"/></div>`;
         }
 
         this.showSheet({
@@ -1113,8 +1115,8 @@
       saveBreakfast(i) {
         const d = this.state.days[i];
         if (d.breakfast.includes('Custom')) {
-          const el = document.getElementById('custombreakfastInput');
-          if (el) d.customBreakfast = el.value;
+          const el = document.getElementById('customBreakfastInput');
+          if (el) d.customBreakfast = el.value.split(',').map(s => s.trim()).filter(Boolean);
         }
         this.save(); this.render(); this.hideSheet(); this.toast('Saved! ✓');
       }
@@ -1124,7 +1126,7 @@
         let body = this.multiGrid('lunch', d.lunch, CATS.lunch);
         if (d.lunch.includes('Custom')) {
           body += `<div class="field"><div class="label">Custom Lunch</div>
-            <input class="input" id="customLunchInput" value="${d.customLunch || ''}" placeholder="Enter custom meal"/></div>`;
+            <input class="input" id="customLunchInput" value="${d.customLunch.join(', ') || ''}" placeholder="Enter custom lunch (comma-separated)"/></div>`;
         }
         this.showSheet({
           title: `Lunch — ${d.name}`,
@@ -1140,8 +1142,8 @@
       saveLunch(i) {
         const d = this.state.days[i];
         if (d.lunch.includes('Custom')) {
-          const el = document.getElementById('customlunchInput');
-          if (el) d.customLunch = el.value;
+          const el = document.getElementById('customLunchInput');
+          if (el) d.customLunch = el.value.split(',').map(s => s.trim()).filter(Boolean);
         }
         this.save(); this.render(); this.hideSheet(); this.toast('Saved! ✓');
       }
@@ -1162,7 +1164,7 @@
         body += this.multiGrid('dinner', d.dinner, this.dinnerOptions(d));
         if (d.dinner.includes('Custom')) {
           body += `<div class="field"><div class="label">Custom Dinner</div>
-            <input class="input" id="customDinnerInput" value="${d.customDinner || ''}" placeholder="Enter custom meal"/></div>`;
+            <input class="input" id="customDinnerInput" value="${d.customDinner.join(', ') || ''}" placeholder="Enter custom meal (comma-separated)"/></div>`;
         }
         body += `<div class="field"><div class="label">Side Dishes</div></div>`;
         body += this.multiGrid('side', d.side, CATS.side);
@@ -1193,13 +1195,13 @@
             const dl = document.getElementById('modalDelivery');
             if (q) q.onclick = () => {
               d.dinnerType = (d.dinnerType === 'quick' ? 'regular' : 'quick');
-              d.dinner = null;
+              d.dinner = [];
               d.customDinner = null;
               this.openDinner(i);
             };
             if (dl) dl.onclick = () => {
               d.dinnerType = (d.dinnerType === 'delivery' ? 'regular' : 'delivery');
-              d.dinner = null;
+              d.dinner = [];
               d.customDinner = null;
               if (d.dinnerType === 'delivery') { d.side = []; d.customSide = []; }
               this.openDinner(i);
@@ -1208,15 +1210,14 @@
         });
       }
 
-
       saveDinner(i) {
         const d = this.state.days[i];
         if (d.dinner.includes('Custom')) {
-          const el = document.getElementById('customdinnerInput');
-          if (el) d.customDinner = el.value;
+          const el = document.getElementById('customDinnerInput');
+          if (el) d.customDinner = el.value.split(',').map(s => s.trim()).filter(Boolean);
         }
         if (d.side.includes('Custom')) {
-          const el = document.getElementById('customsideInput');
+          const el = document.getElementById('customSideInput');
           if (el) d.customSide = el.value.split(',').map(s => s.trim()).filter(Boolean);
         }
         this.save(); this.render(); this.hideSheet(); this.toast('Saved! ✓');
