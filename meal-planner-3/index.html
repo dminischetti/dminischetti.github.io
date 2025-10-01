@@ -176,10 +176,16 @@
             border-radius: var(--radius-md);
             background: var(--color-bg-base);
             border: 1px solid var(--color-border-subtle);
-            font-size: 18px;
             flex-shrink: 0;
             transition: transform var(--transition-fast);
             touch-action: manipulation;
+            position: relative;
+        }
+
+        .week-bar-nav::before {
+            content: attr(data-icon);
+            font-size: 18px;
+            line-height: 1;
         }
 
         .week-bar-nav:active {
@@ -257,6 +263,41 @@
             color: #fff;
         }
 
+        .modal-toggle-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: var(--spacing-xs);
+        }
+
+        .modal-static-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-full);
+            border: 1px solid var(--color-border-medium);
+            background: transparent;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-tertiary);
+            opacity: 0.6;
+            user-select: none;
+            pointer-events: none;
+            cursor: default;
+        }
+
+        .modal-static-toggle.active {
+            opacity: 1;
+            border-color: var(--color-delivery);
+            background: color-mix(in srgb, var(--color-delivery) 12%, var(--color-bg-base));
+            color: var(--color-delivery);
+        }
+
+        .modal-static-toggle-icon {
+            font-size: 14px;
+        }
+
         .meal-row {
             display: flex;
             align-items: center;
@@ -266,7 +307,8 @@
             background: var(--color-bg-base);
             border: 1px solid var(--color-border-subtle);
             border-radius: var(--radius-md);
-            min-height: 64px;
+            height: 72px;
+            width: 100%;
             transition: transform var(--transition-fast);
             touch-action: manipulation;
         }
@@ -534,12 +576,12 @@
         }
 
         .tile.delivery {
-            border: 2px dashed var(--color-delivery);
+            border: 1px solid var(--color-delivery);
             background: color-mix(in srgb, var(--color-delivery) 8%, var(--color-bg-base));
         }
 
         .tile.delivery.selected {
-            border-style: solid;
+            border-color: var(--color-delivery);
             background: color-mix(in srgb, var(--color-delivery) 20%, var(--color-bg-base));
         }
 
@@ -723,7 +765,45 @@
             fmtDate(d) { const dt = new Date(d); return `${MONTHS_FULL[dt.getMonth()]} ${dt.getDate()}` }
             isWeekend(n) { return n === "Saturday" || n === "Sunday" }
             display(arr, custom) { if (!arr?.length) return null; return arr.map(m => m === "Custom" ? (custom?.join(", ") || "Custom") : m).join(" • ") }
-            checkBread(i) { const d = this.state.days[i], all = [...(d.lunch || []), ...(d.dinner || [])].filter(m => m && m !== "Custom"); if (all.some(m => DB.bread[m])) d.breadFlag = !0 }
+            defaultMealEmoji(type) { if (type === "breakfast") return "🍳"; if (type === "lunch") return "🥗"; return "🍽️" }
+            emojiFor(type, meals) { const first = meals?.[0]; if (first) return DB.emoji[first] || this.defaultMealEmoji(type); return this.defaultMealEmoji(type) }
+            customKey(type) { return "custom" + type[0].toUpperCase() + type.slice(1) }
+            dayHasBreadMeal(day) { return [...(day.lunch || []), ...(day.dinner || [])].some(m => m && m !== "Custom" && DB.bread[m]) }
+            dayHasFrozenMeal(day) { return (day.dinner || []).some(m => m && m !== "Custom" && DB.unfreeze[m]) }
+            renderCustomFields(day) {
+                const join = arr => Array.isArray(arr) ? arr.join(", ") : "";
+                const breakfastSlot = document.getElementById("customBreakfastSlot");
+                if (breakfastSlot) {
+                    if (day.breakfast?.includes("Custom")) {
+                        breakfastSlot.innerHTML = `<div class="field">\n<label class="field-label">Custom Breakfast</label>\n<input class="field-input" id="customBreakfastInput" value="${join(day.customBreakfast)}" placeholder="Enter custom breakfast"/>\n</div>`;
+                    } else breakfastSlot.innerHTML = "";
+                }
+                const lunchSlot = document.getElementById("customLunchSlot");
+                if (lunchSlot) {
+                    if (day.lunch?.includes("Custom")) {
+                        lunchSlot.innerHTML = `<div class="field">\n<label class="field-label">Custom Lunch</label>\n<input class="field-input" id="customLunchInput" value="${join(day.customLunch)}" placeholder="Enter custom lunch"/>\n</div>`;
+                    } else lunchSlot.innerHTML = "";
+                }
+                const dinnerSlot = document.getElementById("customDinnerSlot");
+                if (dinnerSlot) {
+                    if (day.dinner?.includes("Custom")) {
+                        dinnerSlot.innerHTML = `<div class="field">\n<label class="field-label">Custom Dinner</label>\n<input class="field-input" id="customDinnerInput" value="${join(day.customDinner)}" placeholder="Enter custom dinner"/>\n</div>`;
+                    } else dinnerSlot.innerHTML = "";
+                }
+                const sideSlot = document.getElementById("customSideSlot");
+                if (sideSlot) {
+                    if (day.side?.includes("Custom")) {
+                        sideSlot.innerHTML = `<div class="field">\n<input class="field-input" id="customSideInput" value="${join(day.customSide)}" placeholder="Enter custom sides"/>\n</div>`;
+                    } else sideSlot.innerHTML = "";
+                }
+            }
+            syncModalToggles(day) {
+                const breadBtn = document.getElementById("modalBread");
+                if (breadBtn) breadBtn.classList.toggle("active", !!day.breadFlag);
+                const frozenToggle = document.getElementById("modalFrozen");
+                if (frozenToggle) frozenToggle.classList.toggle("active", this.dayHasFrozenMeal(day));
+            }
+            checkBread(i) { const d = this.state.days[i]; if (this.dayHasBreadMeal(d)) d.breadFlag = !0 }
             render() {
                 this.cleanup.forEach(fn => fn()); this.cleanup = []; this.theme(); const app = document.getElementById("app"); app.innerHTML = `
 <header class="header">
@@ -732,12 +812,12 @@
 </header>
 <main class="main">
 <div class="week-bar">
-<button class="week-bar-nav" id="prevBtn">◄</button>
+<button class="week-bar-nav" id="prevBtn" aria-label="Previous week" data-icon="‹"></button>
 <div class="week-bar-content">
 <div class="week-label">${this.weekLabel()}</div>
 <div class="week-range">${this.fmtWeek()}</div>
 </div>
-<button class="week-bar-nav" id="nextBtn">►</button>
+<button class="week-bar-nav" id="nextBtn" aria-label="Next week" data-icon="›"></button>
 </div>
 ${this.state.days.slice(0, 5).map((d, i) => this.card(d, i)).join("")}
 <div class="weekend-card">
@@ -764,7 +844,7 @@ ${this.state.showWeekend ? this.state.days.slice(5).map((d, i) => this.card(d, i
                 this.bind()
             }
             card(d, i) {
-                const we = this.isWeekend(d.name), bT = this.display(d.breakfast, d.customBreakfast) || "Select breakfast", lT = this.display(d.lunch, d.customLunch) || "Select lunch", dT = this.display(d.dinner, d.customDinner) || "Select dinner", sT = this.display(d.side, d.customSide), bE = d.breakfast?.length ? DB.emoji[d.breakfast[0]] || "❓" : "❓", lE = d.lunch?.length ? DB.emoji[d.lunch[0]] || "❓" : "❓", dE = d.dinner?.length ? DB.emoji[d.dinner[0]] || "❓" : "❓", need = we ? 3 : 2, done = (we && d.breakfast?.length ? 1 : 0) + (d.lunch?.length ? 1 : 0) + (d.dinner?.length ? 1 : 0), inc = done < need; return `
+                const we = this.isWeekend(d.name), bT = this.display(d.breakfast, d.customBreakfast) || "Select breakfast", lT = this.display(d.lunch, d.customLunch) || "Select lunch", dT = this.display(d.dinner, d.customDinner) || "Select dinner", sT = this.display(d.side, d.customSide), bE = this.emojiFor("breakfast", d.breakfast), lE = this.emojiFor("lunch", d.lunch), dE = this.emojiFor("dinner", d.dinner), need = we ? 3 : 2, done = (we && d.breakfast?.length ? 1 : 0) + (d.lunch?.length ? 1 : 0) + (d.dinner?.length ? 1 : 0), inc = done < need; return `
 <div class="day-card${inc ? " incomplete" : ""}">
 <div class="day-card-header">
 <div class="day-title">${d.name}, ${this.fmtDate(d.date)}</div>
@@ -798,45 +878,54 @@ ${we ? `<button class="meal-row${!d.breakfast?.length ? " empty" : ""}" data-idx
 ${opts.map(name => {
                     const d = DB.delivery[name], sel = s.includes(name), b = DB.bread[name], u = DB.unfreeze[name]; let badges = ""; if (b || u) { badges = '<div class="tile-badges">'; if (b) badges += '<div class="tile-badge" title="Needs bread">🍞</div>'; if (u) badges += '<div class="tile-badge" title="Unfreeze">❄️</div>'; badges += "</div>" } return `<div class="tile${sel ? " selected" : ""}${d ? " delivery" : ""}" data-name="${name}" data-type="${type}">
 ${badges}
-<div class="tile-emoji">${DB.emoji[name] || "❓"}</div>
+<div class="tile-emoji">${DB.emoji[name] || this.defaultMealEmoji(type)}</div>
 <div>${name}</div>
 ${d ? '<div class="delivery-label">DELIVERY</div>' : ""}
 </div>`}).join("")}
 </div>`}
             openBreakfast(i) {
-                const d = this.state.days[i]; if (!this.isWeekend(d.name)) return; this.idx = i; let body = this.grid("breakfast", d.breakfast, DB.categories.breakfast); if (d.breakfast.includes("Custom")) body += `<div class="field">
-<label class="field-label">Custom Breakfast</label>
-<input class="field-input" id="customBreakfastInput" value="${d.customBreakfast.join(", ") || ""}" placeholder="Enter custom breakfast"/>
-</div>`; this.show({ title: `Breakfast — ${d.name}`, subtitle: this.fmtDate(d.date), body, footer: [{ label: "❌ Cancel", onClick: () => this.hide() }, { label: "✅ Save", onClick: () => this.saveBreakfast(i) }] })
+                const d = this.state.days[i]; if (!this.isWeekend(d.name)) return; this.idx = i; let body = this.grid("breakfast", d.breakfast, DB.categories.breakfast); body += '<div id="customBreakfastSlot"></div>'; this.show({ title: `Breakfast — ${d.name}`, subtitle: this.fmtDate(d.date), body, footer: [{ label: "❌ Cancel", onClick: () => this.hide() }, { label: "✅ Save", onClick: () => this.saveBreakfast(i) }], after: () => this.renderCustomFields(d) })
             }
             saveBreakfast(i) { const d = this.state.days[i]; if (d.breakfast.includes("Custom")) { const inp = document.getElementById("customBreakfastInput"); if (!inp || !inp.value.trim()) { d.breakfast = d.breakfast.filter(m => m !== "Custom"); d.customBreakfast = [] } else d.customBreakfast = inp.value.split(",").map(s => s.trim()).filter(Boolean) } this.save(); this.render(); this.hide(); this.toast("Saved! ✓") }
             openLunch(i) {
-                const d = this.state.days[i]; this.idx = i; let body = this.grid("lunch", d.lunch, DB.categories.lunch); if (d.lunch.includes("Custom")) body += `<div class="field">
-<label class="field-label">Custom Lunch</label>
-<input class="field-input" id="customLunchInput" value="${d.customLunch.join(", ") || ""}" placeholder="Enter custom lunch"/>
-</div>`; this.show({ title: `Lunch — ${d.name}`, subtitle: this.fmtDate(d.date), body, footer: [{ label: "❌ Cancel", onClick: () => this.hide() }, { label: "✅ Save", onClick: () => this.saveLunch(i) }] })
+                const d = this.state.days[i]; this.idx = i; let body = this.grid("lunch", d.lunch, DB.categories.lunch); body += '<div id="customLunchSlot"></div>'; this.show({ title: `Lunch — ${d.name}`, subtitle: this.fmtDate(d.date), body, footer: [{ label: "❌ Cancel", onClick: () => this.hide() }, { label: "✅ Save", onClick: () => this.saveLunch(i) }], after: () => this.renderCustomFields(d) })
             }
             saveLunch(i) { const d = this.state.days[i]; if (d.lunch.includes("Custom")) { const inp = document.getElementById("customLunchInput"); if (!inp || !inp.value.trim()) { d.lunch = d.lunch.filter(m => m !== "Custom"); d.customLunch = [] } else d.customLunch = inp.value.split(",").map(s => s.trim()).filter(Boolean) } if (!d.lunch.length && d.side?.length) { alert("Please select a main dish before adding side dishes"); return } this.checkBread(i); this.save(); this.render(); this.hide(); this.toast("Saved! ✓") }
             openDinner(i) {
-                const d = this.state.days[i]; this.idx = i; const slot = document.getElementById("modalBreadSlot"); if (slot) slot.innerHTML = `<button class="bread-toggle${d.breadFlag ? " active" : ""}" id="modalBread">🍞 Bread</button>`; let body = this.grid("dinner", d.dinner, DB.categories.dinner); body += '<div id="customDinnerSlot"></div>'; if (d.dinner.includes("Custom")) body = body.replace('<div id="customDinnerSlot"></div>', `<div id="customDinnerSlot"><div class="field">
-<label class="field-label">Custom Dinner</label>
-<input class="field-input" id="customDinnerInput" value="${d.customDinner.join(", ") || ""}" placeholder="Enter custom dinner"/>
-</div></div>`); body += '<div class="field"><div class="field-label">Side Dishes</div></div>'; body += this.grid("side", d.side, DB.categories.side); if (d.side.includes("Custom")) body += `<div class="field">
-<input class="field-input" id="customSideInput" value="${d.customSide.join(", ") || ""}" placeholder="Enter custom sides"/>
-</div>`; this.show({ title: `Dinner — ${d.name}`, subtitle: this.fmtDate(d.date), body, footer: [{ label: "❌ Cancel", onClick: () => this.hide() }, { label: "✅ Save", onClick: () => this.saveDinner(i) }], after: () => { const mb = document.getElementById("modalBread"); if (mb) mb.onclick = () => { d.breadFlag = !d.breadFlag; this.openDinner(i) } } })
+                const d = this.state.days[i]; this.idx = i; const slot = document.getElementById("modalBreadSlot"); if (slot) slot.innerHTML = `<div class="modal-toggle-wrapper">
+<button class="bread-toggle${d.breadFlag ? " active" : ""}" id="modalBread">🍞 Bread</button>
+<div class="modal-static-toggle${this.dayHasFrozenMeal(d) ? " active" : ""}" id="modalFrozen">
+<span class="modal-static-toggle-icon">❄️</span>
+<span>Frozen</span>
+</div>
+</div>`; let body = this.grid("dinner", d.dinner, DB.categories.dinner); body += '<div id="customDinnerSlot"></div>'; body += '<div class="field"><div class="field-label">Side Dishes</div></div>'; body += this.grid("side", d.side, DB.categories.side); body += '<div id="customSideSlot"></div>'; this.show({ title: `Dinner — ${d.name}`, subtitle: this.fmtDate(d.date), body, footer: [{ label: "❌ Cancel", onClick: () => this.hide() }, { label: "✅ Save", onClick: () => this.saveDinner(i) }], after: () => {
+                        const mb = document.getElementById("modalBread");
+                        if (mb) mb.onclick = () => { d.breadFlag = !d.breadFlag; this.syncModalToggles(d) };
+                        this.renderCustomFields(d);
+                        this.syncModalToggles(d);
+                    } })
             }
             saveDinner(i) { const d = this.state.days[i]; if (d.dinner.includes("Custom")) { const inp = document.getElementById("customDinnerInput"); if (!inp || !inp.value.trim()) { d.dinner = d.dinner.filter(m => m !== "Custom"); d.customDinner = [] } else d.customDinner = inp.value.split(",").map(s => s.trim()).filter(Boolean) } if (d.side.includes("Custom")) { const inp = document.getElementById("customSideInput"); if (!inp || !inp.value.trim()) { d.side = d.side.filter(s => s !== "Custom"); d.customSide = [] } else d.customSide = inp.value.split(",").map(s => s.trim()).filter(Boolean) } if (!d.dinner.length && d.side?.length) { alert("Please select a main dish before adding side dishes"); return } this.checkBread(i); this.save(); this.render(); this.hide(); this.toast("Saved! ✓") }
             show({ title, subtitle, body, footer, after }) { const ol = document.getElementById("overlay"), md = document.getElementById("modal"); document.getElementById("modalTitle").textContent = title; document.getElementById("modalSubtitle").textContent = subtitle || ""; document.getElementById("modalBody").innerHTML = body; const slot = document.getElementById("modalBreadSlot"); if (slot && !title.startsWith("Dinner")) slot.innerHTML = ""; const ft = document.getElementById("modalFooter"); ft.innerHTML = ""; (footer || []).forEach(f => { const btn = document.createElement("button"); btn.className = "modal-btn"; btn.textContent = f.label; btn.onclick = f.onClick; ft.appendChild(btn) }); ol.classList.add("show"); md.classList.add("show"); setTimeout(() => { this.bindTiles(); after && after() }, 0) }
             bindTiles() {
                 document.querySelectorAll(".tile").forEach(tile => {
                     tile.onclick = () => {
-                        const type = tile.dataset.type, name = tile.dataset.name, d = this.state.days[this.idx]; if (!Array.isArray(d[type])) d[type] = []; const has = d[type].includes(name); if (has) { d[type] = d[type].filter(m => m !== name); tile.classList.remove("selected"); if (name === "Custom") { const k = "custom" + type[0].toUpperCase() + type.slice(1); d[k] = []; if (type === "dinner") { const slot = document.getElementById("customDinnerSlot"); if (slot) slot.innerHTML = "" } } } else {
-                            d[type].push(name); tile.classList.add("selected"); if (name === "Custom" && type === "dinner") {
-                                const slot = document.getElementById("customDinnerSlot"); if (slot) slot.innerHTML = `<div class="field">
-<label class="field-label">Custom Dinner</label>
-<input class="field-input" id="customDinnerInput" value="${d.customDinner.join(", ") || ""}" placeholder="Enter custom dinner"/>
-</div>`}
+                        const type = tile.dataset.type, name = tile.dataset.name, day = this.state.days[this.idx];
+                        if (!Array.isArray(day[type])) day[type] = [];
+                        const has = day[type].includes(name);
+                        const customKey = this.customKey(type);
+                        if (has) {
+                            day[type] = day[type].filter(m => m !== name);
+                            tile.classList.remove("selected");
+                            if (name === "Custom") day[customKey] = [];
+                        } else {
+                            day[type].push(name);
+                            tile.classList.add("selected");
+                            if (name === "Custom" && !Array.isArray(day[customKey])) day[customKey] = [];
                         }
+                        if ((type === "lunch" || type === "dinner") && this.dayHasBreadMeal(day)) day.breadFlag = !0;
+                        this.renderCustomFields(day);
+                        this.syncModalToggles(day);
                     }
                 })
             }
@@ -855,7 +944,7 @@ ${g[s].map(item => `<div class="shopping-item">
 </div>`).join(""); this.show({ title: "Shopping List", subtitle: "Check off items as you shop", body, footer: [{ label: "Close", onClick: () => this.hide() }, { label: "Share", onClick: () => this.shareShop(g) }] })
             }
             shareShop(g) { let t = "🛒 Shopping List\n\n"; Object.keys(g).sort().forEach(s => { t += `${s}:\n`; g[s].forEach(i => t += `• ${i.emoji || ""} ${i.ingredient}\n`); t += "\n" }); this.share("Shopping List", t) }
-            recap() { let t = "🗓️ Weekly Meal Plan\n\n"; this.state.days.forEach(d => { t += `${d.name} (${this.fmtDate(d.date)})\n`; const bT = this.display(d.breakfast, d.customBreakfast), lT = this.display(d.lunch, d.customLunch), dT = this.display(d.dinner, d.customDinner), sT = this.display(d.side, d.customSide), bE = d.breakfast?.[0] ? DB.emoji[d.breakfast[0]] || "❓" : "❓", lE = d.lunch?.[0] ? DB.emoji[d.lunch[0]] || "❓" : "❓", dE = d.dinner?.[0] ? DB.emoji[d.dinner[0]] || "❓" : "❓"; if (this.isWeekend(d.name)) t += `  Breakfast: ${bE} ${bT || "—"}\n`; t += `  Lunch: ${lE} ${lT || "—"}\n  Dinner: ${dE} ${dT || "—"}`; if (sT) t += `\n  Sides: ${sT}`; if (d.breadFlag) t += "\n  Bread: yes"; t += "\n\n" }); const g = this.groceries(); t += "\n🛒 Shopping List\n\n"; Object.keys(g).sort().forEach(s => { t += `${s}:\n`; g[s].forEach(i => t += `• ${i.emoji || ""} ${i.ingredient}\n`); t += "\n" }); this.show({ title: "Share Meal Plan", subtitle: "Weekly recap + shopping list", body: `<div class="recap-text">${t}</div>`, footer: [{ label: "Close", onClick: () => this.hide() }, { label: "Calendar", onClick: () => this.ics() }, { label: "Send", onClick: () => this.share("Meal Plan", t) }] }) }
+            recap() { let t = "🗓️ Weekly Meal Plan\n\n"; this.state.days.forEach(d => { t += `${d.name}\n`; const bT = this.display(d.breakfast, d.customBreakfast), lT = this.display(d.lunch, d.customLunch), dT = this.display(d.dinner, d.customDinner), sT = this.display(d.side, d.customSide), bE = this.emojiFor("breakfast", d.breakfast), lE = this.emojiFor("lunch", d.lunch), dE = this.emojiFor("dinner", d.dinner); if (this.isWeekend(d.name)) t += `  Breakfast: ${bE} ${bT || "—"}\n`; t += `  Lunch: ${lE} ${lT || "—"}\n  Dinner: ${dE} ${dT || "—"}`; if (sT) t += `\n  Sides: ${sT}`; if (d.breadFlag) t += "\n  Bread: yes"; t += "\n\n" }); const g = this.groceries(); t += "\n🛒 Shopping List\n\n"; Object.keys(g).sort().forEach(s => { t += `${s}:\n`; g[s].forEach(i => t += `• ${i.emoji || ""} ${i.ingredient}\n`); t += "\n" }); this.show({ title: "Share Meal Plan", subtitle: "Weekly recap + shopping list", body: `<div class="recap-text">${t}</div>`, footer: [{ label: "Close", onClick: () => this.hide() }, { label: "Calendar", onClick: () => this.ics() }, { label: "Send", onClick: () => this.share("Meal Plan", t) }] }) }
             share(title, text) { if (navigator.share) navigator.share({ title, text }).catch(() => { }); else if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => this.toast("Copied! 📋")).catch(() => this.toast("Failed")) }
             toast(msg) { const el = document.getElementById("toast"); el.textContent = msg; el.classList.add("show"); setTimeout(() => el.classList.remove("show"), 1800) }
             ics() { const fd = (d, h, m = 0) => { const dt = new Date(d); dt.setHours(h, m, 0, 0); return dt.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z" }, fdt = d => { const dt = new Date(d); dt.setHours(0, 0, 0, 0); return dt.toISOString().split("T")[0].replace(/-/g, "") }; let ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//MealPlanner//EN\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\n"; this.state.days.forEach(d => { const all = [...(d.lunch || []), ...(d.dinner || [])].filter(m => m && m !== "Custom"), unf = all.filter(m => DB.unfreeze[m]); if (unf.length) { const prev = new Date(new Date(d.date).getTime() - MS_DAY); unf.forEach(m => { ics += "BEGIN:VEVENT\n"; ics += `SUMMARY:Unfreeze ${m}\n`; ics += "DTSTART;VALUE=DATE:" + fdt(prev) + "\n"; ics += "DTEND;VALUE=DATE:" + fdt(d.date) + "\n"; ics += "END:VEVENT\n" }) } if (d.breakfast?.length) { const m = d.breakfast.map(x => x === "Custom" ? d.customBreakfast?.join(", ") || "Custom" : x).join(", "); ics += "BEGIN:VEVENT\n"; ics += `SUMMARY:Breakfast: ${m}\n`; ics += "DTSTART:" + fd(d.date, 8, 0) + "\n"; ics += "DTEND:" + fd(d.date, 9, 0) + "\n"; ics += "END:VEVENT\n" } if (d.lunch?.length) { const m = d.lunch.map(x => x === "Custom" ? d.customLunch?.join(", ") || "Custom" : x).join(", "); ics += "BEGIN:VEVENT\n"; ics += `SUMMARY:Lunch: ${m}\n`; ics += "DTSTART:" + fd(d.date, 13, 0) + "\n"; ics += "DTEND:" + fd(d.date, 13, 45) + "\n"; ics += "END:VEVENT\n" } if (d.dinner?.length) { const m = d.dinner.map(x => x === "Custom" ? d.customDinner?.join(", ") || "Custom" : x).join(", "); let title = `Dinner: ${m}`; if (d.side?.length) { const s = d.side.map(x => x === "Custom" ? d.customSide?.join(", ") || "Custom" : x).join(", "); title += ` + ${s}` } ics += "BEGIN:VEVENT\n"; ics += "SUMMARY:" + title + "\n"; ics += "DTSTART:" + fd(d.date, 19, 0) + "\n"; ics += "DTEND:" + fd(d.date, 20, 0) + "\n"; ics += "END:VEVENT\n" } if (d.breadFlag) { ics += "BEGIN:VEVENT\n"; ics += "SUMMARY:Bread\n"; ics += "DTSTART;VALUE=DATE:" + fdt(d.date) + "\n"; ics += "DTEND;VALUE=DATE:" + fdt(new Date(new Date(d.date).getTime() + MS_DAY)) + "\n"; ics += "END:VEVENT\n" } }); ics += "END:VCALENDAR"; const blob = new Blob([ics], { type: "text/calendar" }), url = URL.createObjectURL(blob), a = document.createElement("a"); a.href = url; a.download = "mealplan.ics"; a.click(); URL.revokeObjectURL(url) }
