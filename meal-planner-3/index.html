@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Meal Planner</title>
+    <style>
+        :root {
+            --color-bg-base: #fef7f2;
+            --color-bg-elevated: #fff;
+            --color-bg-overlay: rgba(0, 0, 0, 0.4);
+            --color-text-primary: #2d1810;
+            --color-text-secondary: #8b6b5a;
+            --color-text-tertiary: #a89084;
+            --color-border-subtle: #f0ddd0;
+            --color-border-medium: #e5caba;
+            --color-accent-primary: #ff6b3d;
+            --color-accent-primary-hover: #ff5528;
+            --color-accent-secondary: #4caf50;
+            --color-surface-card: #fff;
+            --color-surface-modal: #fff;
+            --color-delivery: #3b82f6;
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 12px;
+            --spacing-lg: 16px;
+            --spacing-xl: 24px;
+            --spacing-2xl: 32px;
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-full: 9999px;
+            --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.12);
+            --font-size-xs: 11px;
+            --font-size-sm: 13px;
+            --font-size-base: 15px;
+            --font-size-lg: 17px;
+            --font-size-xl: 20px;
+            --font-weight-normal: 400;
+            --font-weight-medium: 500;
+            --font-weight-semibold: 600;
+            --font-weight-bold: 700;
+            --z-overlay: 100;
+            --z-modal: 200;
+            --z-toast: 300;
+            --transition-fast: 150ms ease;
+            --transition-normal: 250ms ease;
+        }
+
+        body.dark {
+            --color-bg-base: #0a0a0a;
+            --color-bg-elevated: #1a1a1a;
+            --color-bg-overlay: rgba(0, 0, 0, 0.7);
+            --color-text-primary: #f5f5f5;
+            --color-text-secondary: #a0a0a0;
+            --color-text-tertiary: #707070;
+            --color-border-subtle: #2a2a2a;
+            --color-border-medium: #404040;
+            --color-surface-card: #1a1a1a;
+            --color-surface-modal: #1f1f1f;
+        }
+
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            height: 100%;
+            -webkit-text-size-adjust: 100%;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            min-height: 100%;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: var(--font-size-base);
+            line-height: 1.5;
+            color: var(--color-text-primary);
+            background: var(--color-bg-base);
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        button {
+            font-family: inherit;
+            border: none;
+            background: none;
+            cursor: pointer;
+            -webkit-appearance: none;
+        }
+
+        input {
+            font-family: inherit;
+            -webkit-appearance: none;
+        }
+
+        .app {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-md) var(--spacing-lg);
+            background: var(--color-bg-elevated);
+            border-bottom: 1px solid var(--color-border-subtle);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .header-title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-accent-primary);
+            letter-spacing: -0.02em;
+        }
+
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            background: var(--color-bg-base);
+            border: 1px solid var(--color-border-subtle);
+            font-size: 20px;
+            transition: transform var(--transition-fast);
+            touch-action: manipulation;
+        }
+
+        .icon-btn:active {
+            transform: scale(0.95);
+        }
+
+        .main {
+            flex: 1;
+            padding: var(--spacing-lg);
+            padding-bottom: calc(80px + env(safe-area-inset-bottom));
+        }
+
+        .week-bar {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-lg);
+            background: var(--color-surface-card);
+            border: 2px solid var(--color-accent-primary);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-lg);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .week-bar-nav {
+            width: 44px;
+            height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            background: var(--color-bg-base);
+            border: 1px solid var(--color-border-subtle);
+            font-size: 18px;
+            flex-shrink: 0;
+            transition: transform var(--transition-fast);
+            touch-action: manipulation;
+        }
+
+        .week-bar-nav:active {
+            transform: scale(0.9);
+        }
+
+        .week-bar-content {
+            flex: 1;
+            text-align: center;
+        }
+
+        .week-label {
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .week-range {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+        }
+
+        .day-card {
+            background: var(--color-surface-card);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-md);
+            margin-bottom: var(--spacing-md);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow var(--transition-normal);
+        }
+
+        .day-card.incomplete {
+            border-style: dashed;
+            opacity: 0.9;
+        }
+
+        .day-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .day-title {
+            font-size: var(--font-size-base);
+            font-weight: var(--font-weight-bold);
+            letter-spacing: -0.01em;
+        }
+
+        .bread-toggle {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--radius-full);
+            border: 1px dashed var(--color-border-medium);
+            background: transparent;
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-tertiary);
+            opacity: 0.5;
+            transition: all var(--transition-fast);
+            touch-action: manipulation;
+        }
+
+        .bread-toggle.active {
+            opacity: 1;
+            border-style: solid;
+            border-color: var(--color-accent-secondary);
+            background: var(--color-accent-secondary);
+            color: #fff;
+        }
+
+        .meal-row {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            margin-top: var(--spacing-sm);
+            background: var(--color-bg-base);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-md);
+            min-height: 64px;
+            transition: transform var(--transition-fast);
+            touch-action: manipulation;
+        }
+
+        .meal-row:active {
+            transform: scale(0.98);
+        }
+
+        .meal-row.empty {
+            opacity: 0.6;
+        }
+
+        .meal-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .meal-icon.breakfast {
+            background: linear-gradient(135deg, #00a6ff, #fff);
+        }
+
+        .meal-icon.lunch {
+            background: linear-gradient(135deg, #fa8607, #fff57b);
+        }
+
+        .meal-icon.dinner {
+            background: linear-gradient(135deg, #01426d, #01162e);
+        }
+
+        .meal-content {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .meal-type {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: 2px;
+        }
+
+        .meal-desc {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            line-height: 1.4;
+        }
+
+        .weekend-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-md);
+            background: var(--color-surface-card);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-lg);
+            margin-bottom: var(--spacing-md);
+        }
+
+        .weekend-label {
+            font-weight: var(--font-weight-bold);
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 52px;
+            height: 30px;
+            border-radius: var(--radius-full);
+            background: var(--color-border-medium);
+            border: 1px solid var(--color-border-subtle);
+            transition: background var(--transition-normal);
+            touch-action: manipulation;
+        }
+
+        .toggle-switch.on {
+            background: var(--color-accent-primary);
+            border-color: var(--color-accent-primary);
+        }
+
+        .toggle-knob {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #fff;
+            transition: transform var(--transition-normal);
+        }
+
+        .toggle-switch.on .toggle-knob {
+            transform: translateX(22px);
+        }
+
+        .bottom-bar {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            z-index: 50;
+            background: var(--color-bg-elevated);
+            border-top: 1px solid var(--color-border-subtle);
+            padding: var(--spacing-sm) var(--spacing-lg) calc(var(--spacing-sm) + env(safe-area-inset-bottom));
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .bottom-actions {
+            display: flex;
+            gap: var(--spacing-sm);
+        }
+
+        .action-btn {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--spacing-xs);
+            height: 56px;
+            border-radius: var(--radius-md);
+            background: var(--color-surface-card);
+            border: 1px solid var(--color-border-subtle);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-primary);
+            transition: transform var(--transition-fast);
+            touch-action: manipulation;
+        }
+
+        .action-btn:active {
+            transform: scale(0.96);
+        }
+
+        .action-icon {
+            font-size: 20px;
+        }
+
+        .overlay {
+            position: fixed;
+            inset: 0;
+            z-index: var(--z-overlay);
+            background: var(--color-bg-overlay);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-normal), visibility var(--transition-normal);
+        }
+
+        .overlay.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: var(--z-modal);
+            max-height: 85vh;
+            background: var(--color-surface-modal);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            box-shadow: var(--shadow-lg);
+            transform: translateY(100%);
+            transition: transform var(--transition-normal);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .modal.show {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: var(--spacing-lg);
+            border-bottom: 1px solid var(--color-border-subtle);
+            flex-shrink: 0;
+        }
+
+        .modal-header-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: var(--spacing-md);
+        }
+
+        .modal-title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .modal-subtitle {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+        }
+
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .modal-footer {
+            flex-shrink: 0;
+            display: flex;
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md);
+            border-top: 1px solid var(--color-border-subtle);
+            background: var(--color-bg-base);
+        }
+
+        .modal-btn {
+            flex: 1;
+            height: 48px;
+            border-radius: var(--radius-md);
+            font-weight: var(--font-weight-bold);
+            font-size: var(--font-size-base);
+            border: 1px solid var(--color-border-subtle);
+            background: var(--color-surface-card);
+            color: var(--color-text-primary);
+            transition: transform var(--transition-fast);
+            touch-action: manipulation;
+        }
+
+        .modal-btn:active {
+            transform: scale(0.97);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--spacing-sm);
+            padding: var(--spacing-md);
+        }
+
+        .tile {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--spacing-xs);
+            padding: var(--spacing-md) var(--spacing-sm);
+            min-height: 80px;
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-md);
+            background: var(--color-bg-base);
+            font-size: var(--font-size-sm);
+            text-align: center;
+            transition: all var(--transition-fast);
+            touch-action: manipulation;
+        }
+
+        .tile:active {
+            transform: scale(0.96);
+        }
+
+        .tile.selected {
+            border-color: var(--color-accent-primary);
+            background: color-mix(in srgb, var(--color-accent-primary) 15%, var(--color-bg-base));
+        }
+
+        .tile.delivery {
+            border: 2px dashed var(--color-delivery);
+            background: color-mix(in srgb, var(--color-delivery) 8%, var(--color-bg-base));
+        }
+
+        .tile.delivery.selected {
+            border-style: solid;
+            background: color-mix(in srgb, var(--color-delivery) 20%, var(--color-bg-base));
+        }
+
+        .tile-emoji {
+            font-size: 28px;
+            line-height: 1;
+            position: relative;
+        }
+
+        .tile.delivery .tile-emoji::after {
+            content: '🚚';
+            position: absolute;
+            font-size: 14px;
+            bottom: -4px;
+            right: -10px;
+        }
+
+        .tile-badges {
+            position: absolute;
+            top: 4px;
+            right: 4px;
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .tile-badge {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            background: var(--color-surface-card);
+            border: 1px solid var(--color-border-subtle);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .delivery-label {
+            font-size: 10px;
+            font-weight: var(--font-weight-bold);
+            color: var(--color-delivery);
+            margin-top: -2px;
+        }
+
+        .field {
+            padding: var(--spacing-md);
+        }
+
+        .field-label {
+            display: block;
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-xs);
+        }
+
+        .field-input {
+            width: 100%;
+            height: 48px;
+            padding: 0 var(--spacing-md);
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-border-subtle);
+            background: var(--color-bg-base);
+            color: var(--color-text-primary);
+            font-size: var(--font-size-base);
+        }
+
+        .field-input:focus {
+            outline: 2px solid var(--color-accent-primary);
+            outline-offset: -1px;
+        }
+
+        .toast {
+            position: fixed;
+            left: 50%;
+            bottom: calc(80px + env(safe-area-inset-bottom));
+            transform: translateX(-50%);
+            z-index: var(--z-toast);
+            padding: var(--spacing-sm) var(--spacing-lg);
+            background: var(--color-surface-card);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-full);
+            box-shadow: var(--shadow-lg);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-semibold);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity var(--transition-normal), visibility var(--transition-normal);
+        }
+
+        .toast.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .recap-text {
+            white-space: pre-wrap;
+            font-family: ui-monospace, monospace;
+            font-size: var(--font-size-sm);
+            line-height: 1.5;
+            padding: var(--spacing-md);
+        }
+
+        .shopping-section {
+            padding: var(--spacing-md) 0;
+        }
+
+        .shopping-store {
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--spacing-sm);
+            padding: 0 var(--spacing-md);
+        }
+
+        .shopping-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-xs);
+            padding: 0 var(--spacing-md);
+        }
+
+        .shopping-item {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+            padding: var(--spacing-md);
+            background: var(--color-bg-base);
+            border: 1px solid var(--color-border-subtle);
+            border-radius: var(--radius-md);
+        }
+
+        .shopping-emoji {
+            font-size: 24px;
+        }
+
+        .shopping-name {
+            font-weight: var(--font-weight-medium);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="app" id="app"></div>
+    <div class="overlay" id="overlay"></div>
+    <div class="modal" id="modal">
+        <div class="modal-header">
+            <div class="modal-header-row">
+                <div>
+                    <div class="modal-title" id="modalTitle"></div>
+                    <div class="modal-subtitle" id="modalSubtitle"></div>
+                </div>
+                <div id="modalBreadSlot"></div>
+            </div>
+        </div>
+        <div class="modal-body" id="modalBody"></div>
+        <div class="modal-footer" id="modalFooter"></div>
+    </div>
+    <div class="toast" id="toast"></div>
+    <script>
+        const DATA = { meals: { custom: { name: "Custom", emoji: "🍽️", ingredients: [], categories: ["lunch", "dinner", "breakfast", "side"], diet: "other", bread: !1, unfreeze: !1, delivery: !1 }, ravioli_burro_e_salvia: { name: "Ravioli burro e salvia", emoji: "🥟", ingredients: [{ ingredient: "Ravioli", emoji: "🥟", store: "Aldi" }, { ingredient: "Sage", emoji: "🌿", store: "Wegmans" }], categories: ["lunch"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, spaghetti_al_limone: { name: "Spaghetti al limone", emoji: "🍝", ingredients: [{ ingredient: "Spaghetti", emoji: "🍝", store: "Amazon" }, { ingredient: "Lemons", emoji: "🍋", store: "Aldi" }], categories: ["lunch"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, pasta_e_ceci: { name: "Pasta e ceci", emoji: "🍝", ingredients: [{ ingredient: "Ditalini", emoji: "🍝", store: "Amazon" }, { ingredient: "Chickpeas", emoji: "🫘", store: "Aldi" }], categories: ["lunch"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, pasta_col_tonno: { name: "Pasta col tonno", emoji: "🐟", ingredients: [{ ingredient: "Spaghetti", emoji: "🍝", store: "Amazon" }, { ingredient: "Tuna", emoji: "🐟", store: "Amazon" }], categories: ["lunch"], diet: "fish", bread: !1, unfreeze: !1, delivery: !1 }, pasta_sugo_tonno: { name: "Pasta sugo tonno", emoji: "🐟", ingredients: [{ ingredient: "Pasta", emoji: "🍝", store: "Amazon" }, { ingredient: "Tuna", emoji: "🐟", store: "Amazon" }, { ingredient: "Tomato sauce", emoji: "🍅", store: "Wegmans" }], categories: ["lunch"], diet: "fish", bread: !1, unfreeze: !1, delivery: !1 }, piadine_prosciutto_provolone: { name: "Piadine prosciutto provolone", emoji: "🥪", ingredients: [{ ingredient: "Flatbreads", emoji: "🫓", store: "Aldi" }, { ingredient: "Prosciutto", emoji: "🥩", store: "Aldi" }, { ingredient: "Provolone cheese", emoji: "🧀", store: "Aldi" }], categories: ["lunch"], diet: "meat", bread: !1, unfreeze: !1, delivery: !1 }, uova_fritte: { name: "Uova fritte", emoji: "🍳", ingredients: [{ ingredient: "Eggs", emoji: "🥚", store: "Aldi" }], categories: ["lunch"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, pasta_al_pesto: { name: "Pasta al pesto", emoji: "🌿", ingredients: [{ ingredient: "Pasta", emoji: "🍝", store: "Amazon" }, { ingredient: "Pesto sauce", emoji: "🌿", store: "Aldi" }], categories: ["lunch"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, pasta_coi_pomodorini: { name: "Pasta coi pomodorini", emoji: "🍅", ingredients: [{ ingredient: "Pasta", emoji: "🍝", store: "Amazon" }, { ingredient: "Cherry tomatoes", emoji: "🍅", store: "Aldi" }], categories: ["lunch"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, lenticchie: { name: "Lenticchie", emoji: "🥘", ingredients: [{ ingredient: "Lentils", emoji: "🫘", store: "Wegmans" }], categories: ["lunch"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, lenticchie_e_crostini: { name: "Lenticchie e crostini", emoji: "🥘", ingredients: [{ ingredient: "Lentils", emoji: "🫘", store: "Wegmans" }, { ingredient: "Croutons", emoji: "🍞", store: "Aldi" }], categories: ["lunch"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, spaghetti_aglio_e_olio: { name: "Spaghetti aglio e olio", emoji: "🧄", ingredients: [{ ingredient: "Spaghetti", emoji: "🍝", store: "Amazon" }], categories: ["lunch"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, carbonara: { name: "Carbonara", emoji: "🥓", ingredients: [{ ingredient: "Spaghetti", emoji: "🍝", store: "Amazon" }, { ingredient: "Eggs", emoji: "🥚", store: "Aldi" }, { ingredient: "Bacon", emoji: "🥓", store: "Aldi" }], categories: ["lunch"], diet: "meat", bread: !1, unfreeze: !1, delivery: !1 }, frittata_di_pasta: { name: "Frittata di pasta", emoji: "🍳", ingredients: [{ ingredient: "Eggs", emoji: "🥚", store: "Aldi" }], categories: ["lunch"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, pasta_e_fagioli: { name: "Pasta e fagioli", emoji: "🫘", ingredients: [{ ingredient: "Pasta", emoji: "🍝", store: "Amazon" }, { ingredient: "Beans", emoji: "🫘", store: "Aldi" }], categories: ["lunch"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, salmone_col_riso: { name: "Salmone col riso", emoji: "🍣", ingredients: [{ ingredient: "Salmon", emoji: "🍣", store: "Wegmans" }, { ingredient: "Rice", emoji: "🍚", store: "Amazon" }], categories: ["dinner"], diet: "fish", bread: !1, unfreeze: !1, delivery: !1 }, frittata_di_zucchine: { name: "Frittata di zucchine", emoji: "🥒", ingredients: [{ ingredient: "Eggs", emoji: "🥚", store: "Aldi" }, { ingredient: "Zucchini", emoji: "🥒", store: "Aldi" }], categories: ["dinner"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, polpette: { name: "Polpette", emoji: "🧆", ingredients: [{ ingredient: "Ground beef", emoji: "🥩", store: "Aldi" }, { ingredient: "Eggs", emoji: "🥚", store: "Aldi" }, { ingredient: "Bread", emoji: "🍞", store: "Wegmans" }, { ingredient: "Breadcrumbs", emoji: "🍞", store: "Amazon" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !0, delivery: !1 }, pollo_al_limone: { name: "Pollo al limone", emoji: "🍗", ingredients: [{ ingredient: "Chicken breast", emoji: "🍗", store: "Aldi" }, { ingredient: "Lemons", emoji: "🍋", store: "Aldi" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !1, delivery: !1 }, merluzzo: { name: "Merluzzo", emoji: "🐟", ingredients: [{ ingredient: "Cod", emoji: "🐟", store: "Wegmans" }], categories: ["dinner"], diet: "fish", bread: !1, unfreeze: !0, delivery: !1 }, hamburger: { name: "Hamburger", emoji: "🍔", ingredients: [{ ingredient: "Hamburger buns", emoji: "🍔", store: "Wegmans" }, { ingredient: "Ground beef", emoji: "🥩", store: "Aldi" }, { ingredient: "American cheese slices", emoji: "🧀", store: "Aldi" }, { ingredient: "Lettuce", emoji: "🥬", store: "Wegmans" }, { ingredient: "Tomatoes", emoji: "🍅", store: "Aldi" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !1, delivery: !1 }, cotolette: { name: "Cotolette", emoji: "🥩", ingredients: [{ ingredient: "Breaded cutlets", emoji: "🥩", store: "Aldi" }, { ingredient: "Breadcrumbs", emoji: "🍞", store: "Amazon" }, { ingredient: "Eggs", emoji: "🥚", store: "Aldi" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !0, delivery: !1 }, salsicce: { name: "Salsicce", emoji: "🌭", ingredients: [{ ingredient: "Sausages", emoji: "🌭", store: "Aldi" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !1, delivery: !1 }, minestrone: { name: "Minestrone", emoji: "🍲", ingredients: [{ ingredient: "Vegetable soup mix", emoji: "🥕", store: "Aldi" }, { ingredient: "Pasta", emoji: "🍝", store: "Amazon" }, { ingredient: "Beans", emoji: "🫘", store: "Aldi" }], categories: ["dinner"], diet: "vegetarian", bread: !0, unfreeze: !1, delivery: !1 }, pollo_al_forno: { name: "Pollo al forno", emoji: "🍗", ingredients: [{ ingredient: "Chicken thighs", emoji: "🍗", store: "Aldi" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !1, delivery: !1 }, scaloppine_al_limone: { name: "Scaloppine al limone", emoji: "🥩", ingredients: [{ ingredient: "Veal cutlets", emoji: "🥩", store: "Aldi" }, { ingredient: "Lemons", emoji: "🍋", store: "Aldi" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !1, delivery: !1 }, caprese: { name: "Caprese", emoji: "🧀", ingredients: [{ ingredient: "Fresh mozzarella", emoji: "🧀", store: "Aldi" }, { ingredient: "Tomatoes", emoji: "🍅", store: "Aldi" }], categories: ["dinner"], diet: "vegetarian", bread: !0, unfreeze: !1, delivery: !1 }, cordon_bleu: { name: "Cordon bleu", emoji: "🥩", ingredients: [{ ingredient: "Cordon bleu", emoji: "🥩", store: "Aldi" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !0, delivery: !1 }, würstel: { name: "Würstel", emoji: "🌭", ingredients: [{ ingredient: "Hot dogs", emoji: "🌭", store: "Aldi" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !1, delivery: !1 }, dumplings: { name: "Dumplings", emoji: "🥟", ingredients: [{ ingredient: "Dumplings", emoji: "🥟", store: "Aldi" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !0, delivery: !1 }, fish_sticks: { name: "Fish sticks", emoji: "🐟", ingredients: [{ ingredient: "Fish sticks", emoji: "🐟", store: "Aldi" }], categories: ["dinner"], diet: "fish", bread: !1, unfreeze: !0, delivery: !1 }, pollo_allo_spiedo: { name: "Pollo allo spiedo", emoji: "🍗", ingredients: [{ ingredient: "Whole chicken", emoji: "🍗", store: "Wegmans" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !1, delivery: !1 }, pasta_al_forno: { name: "Pasta al forno", emoji: "🍝", ingredients: [{ ingredient: "Pasta", emoji: "🍝", store: "Amazon" }, { ingredient: "Tomato sauce", emoji: "🍅", store: "Wegmans" }, { ingredient: "Shredded mozzarella", emoji: "🧀", store: "Aldi" }], categories: ["dinner"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, parmigiana_di_melanzane: { name: "Parmigiana di melanzane", emoji: "🍆", ingredients: [{ ingredient: "Eggplant", emoji: "🍆", store: "Wegmans" }, { ingredient: "Tomato sauce", emoji: "🍅", store: "Wegmans" }, { ingredient: "Shredded mozzarella", emoji: "🧀", store: "Aldi" }], categories: ["dinner"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, zucchine_ripiene: { name: "Zucchine ripiene", emoji: "🥒", ingredients: [{ ingredient: "Zucchini", emoji: "🥒", store: "Aldi" }, { ingredient: "Ground beef", emoji: "🥩", store: "Aldi" }, { ingredient: "Bread", emoji: "🍞", store: "Wegmans" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !1, delivery: !1 }, lasagna: { name: "Lasagna", emoji: "🍝", ingredients: [{ ingredient: "Lasagna noodles", emoji: "🍝", store: "Amazon" }, { ingredient: "Meat sauce", emoji: "🍖", store: "Aldi" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !1, delivery: !1 }, spezzatino_con_patate: { name: "Spezzatino con patate", emoji: "🥘", ingredients: [{ ingredient: "Beef", emoji: "🥩", store: "Aldi" }, { ingredient: "Potatoes", emoji: "🥔", store: "Aldi" }, { ingredient: "Onion", emoji: "🧅", store: "Wegmans" }, { ingredient: "Carrots", emoji: "🥕", store: "Aldi" }], categories: ["dinner"], diet: "meat", bread: !0, unfreeze: !1, delivery: !1 }, tortellini_con_la_panna: { name: "Tortellini con la panna", emoji: "🥟", ingredients: [{ ingredient: "Tortellini", emoji: "🥟", store: "Aldi" }, { ingredient: "Cream", emoji: "🥛", store: "Aldi" }], categories: ["dinner"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, tortellini_col_sugo: { name: "Tortellini col sugo", emoji: "🥟", ingredients: [{ ingredient: "Tortellini", emoji: "🥟", store: "Aldi" }, { ingredient: "Tomato sauce", emoji: "🍅", store: "Wegmans" }], categories: ["dinner"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, pasta_col_ragù: { name: "Pasta col ragù", emoji: "🍝", ingredients: [{ ingredient: "Pasta", emoji: "🍝", store: "Amazon" }, { ingredient: "Meat sauce", emoji: "🍖", store: "Aldi" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !1, delivery: !1 }, polpettone: { name: "Polpettone", emoji: "🥩", ingredients: [{ ingredient: "Ground beef", emoji: "🥩", store: "Aldi" }, { ingredient: "Eggs", emoji: "🥚", store: "Aldi" }, { ingredient: "Bacon", emoji: "🥓", store: "Aldi" }, { ingredient: "Bread", emoji: "🍞", store: "Wegmans" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !0, delivery: !1 }, scrimpelle_mbuss: { name: "Scrimpelle mbuss", emoji: "🥞", ingredients: [{ ingredient: "Eggs", emoji: "🥚", store: "Aldi" }, { ingredient: "Flour", emoji: "🌾", store: "Aldi" }, { ingredient: "Milk", emoji: "🥛", store: "Aldi" }, { ingredient: "Broth", emoji: "🍲", store: "Aldi" }], categories: ["dinner"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, polenta_col_sugo: { name: "Polenta col sugo", emoji: "🌽", ingredients: [{ ingredient: "Polenta", emoji: "🌽", store: "Aldi" }, { ingredient: "Tomato sauce", emoji: "🍅", store: "Wegmans" }, { ingredient: "Sausages", emoji: "🌭", store: "Aldi" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !1, delivery: !1 }, cannelloni: { name: "Cannelloni", emoji: "🥟", ingredients: [{ ingredient: "Ricotta", emoji: "🧀", store: "Aldi" }, { ingredient: "Spinach", emoji: "🥬", store: "Aldi" }], categories: ["dinner"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, bistecca: { name: "Bistecca", emoji: "🥩", ingredients: [{ ingredient: "Steak", emoji: "🥩", store: "Wegmans" }], categories: ["dinner"], diet: "meat", bread: !1, unfreeze: !0, delivery: !1 }, riso_zucchine_gamberetti: { name: "Riso zucchine e gamberetti", emoji: "🍤", ingredients: [{ ingredient: "Rice", emoji: "🍚", store: "Amazon" }, { ingredient: "Zucchini", emoji: "🥒", store: "Aldi" }, { ingredient: "Prawns", emoji: "🦐", store: "Aldi" }], categories: ["dinner"], diet: "fish", bread: !1, unfreeze: !1, delivery: !1 }, riso_tropicale: { name: "Riso tropicale", emoji: "🍍", ingredients: [{ ingredient: "Rice", emoji: "🍚", store: "Amazon" }, { ingredient: "Pineapple", emoji: "🍍", store: "Aldi" }, { ingredient: "Prawns", emoji: "🦐", store: "Aldi" }], categories: ["dinner"], diet: "fish", bread: !1, unfreeze: !1, delivery: !1 }, pizza_delivery: { name: "Pizza", emoji: "🍕", ingredients: [], categories: ["dinner"], diet: "other", bread: !1, unfreeze: !1, delivery: !0 }, greco_delivery: { name: "Greek", emoji: "🥙", ingredients: [], categories: ["dinner"], diet: "other", bread: !1, unfreeze: !1, delivery: !0 }, chinese_delivery: { name: "Dumplings", emoji: "🥡", ingredients: [], categories: ["dinner"], diet: "other", bread: !1, unfreeze: !1, delivery: !0 }, vietnamese_delivery: { name: "Pho", emoji: "🍜", ingredients: [], categories: ["dinner"], diet: "other", bread: !1, unfreeze: !1, delivery: !0 }, ramen_delivery: { name: "Ramen", emoji: "🍜", ingredients: [], categories: ["dinner"], diet: "other", bread: !1, unfreeze: !1, delivery: !0 }, georgian_delivery: { name: "Khinkali", emoji: "🥟", ingredients: [], categories: ["dinner"], diet: "other", bread: !1, unfreeze: !1, delivery: !0 }, hamburger_delivery: { name: "Hamburger", emoji: "🍔", ingredients: [], categories: ["dinner"], diet: "other", bread: !1, unfreeze: !1, delivery: !0 }, purè_di_patate: { name: "Purè di patate", emoji: "🥔", ingredients: [{ ingredient: "Potatoes", emoji: "🥔", store: "Aldi" }], categories: ["side"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, broccoli_al_vapore: { name: "Broccoli al vapore", emoji: "🥦", ingredients: [{ ingredient: "Broccoli", emoji: "🥦", store: "Wegmans" }], categories: ["side"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, insalata_di_pomodori: { name: "Insalata di pomodori", emoji: "🍅", ingredients: [{ ingredient: "Tomatoes", emoji: "🍅", store: "Aldi" }], categories: ["side"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, tater_tots: { name: "Tater tots", emoji: "🥔", ingredients: [{ ingredient: "Tater tots", emoji: "🥔", store: "Aldi" }], categories: ["side"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, barbabietole: { name: "Barbabietole", emoji: "🥬", ingredients: [{ ingredient: "Beets", emoji: "🥬", store: "Aldi" }], categories: ["side"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, insalata_di_mais: { name: "Insalata di mais", emoji: "🌽", ingredients: [{ ingredient: "Corn", emoji: "🌽", store: "Aldi" }], categories: ["side"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, patate_lesse: { name: "Patate lesse", emoji: "🥔", ingredients: [{ ingredient: "Potatoes", emoji: "🥔", store: "Aldi" }], categories: ["side"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, carote_al_forno: { name: "Carote al forno", emoji: "🥕", ingredients: [{ ingredient: "Carrots", emoji: "🥕", store: "Aldi" }], categories: ["side"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, carote_a_insalata: { name: "Carote a insalata", emoji: "🥕", ingredients: [{ ingredient: "Carrots", emoji: "🥕", store: "Aldi" }], categories: ["side"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, zucchine_trifolate: { name: "Zucchine trifolate", emoji: "🥒", ingredients: [{ ingredient: "Zucchini", emoji: "🥒", store: "Aldi" }], categories: ["side"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, insalata_di_cetrioli: { name: "Insalata di cetrioli", emoji: "🥒", ingredients: [{ ingredient: "Cucumbers", emoji: "🥒", store: "Wegmans" }], categories: ["side"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, insalata: { name: "Insalata", emoji: "🥗", ingredients: [{ ingredient: "Lettuce", emoji: "🥬", store: "Wegmans" }], categories: ["side"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, corn_on_the_cob: { name: "Corn on the Cob", emoji: "🌽", ingredients: [{ ingredient: "Corn", emoji: "🌽", store: "Aldi" }], categories: ["side"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, croissants: { name: "Croissants", emoji: "🥐", ingredients: [], categories: ["breakfast"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, pancakes: { name: "Pancakes", emoji: "🥞", ingredients: [{ ingredient: "Flour", emoji: "🌾", store: "Aldi" }, { ingredient: "Milk", emoji: "🥛", store: "Aldi" }, { ingredient: "Eggs", emoji: "🥚", store: "Aldi" }, { ingredient: "Butter", emoji: "🧈", store: "Wegmans" }], categories: ["breakfast"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, french_toast: { name: "French toast", emoji: "🍞", ingredients: [{ ingredient: "Bread", emoji: "🍞", store: "Wegmans" }, { ingredient: "Eggs", emoji: "🥚", store: "Aldi" }, { ingredient: "Milk", emoji: "🥛", store: "Aldi" }, { ingredient: "Butter", emoji: "🧈", store: "Wegmans" }], categories: ["breakfast"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 }, biscuits: { name: "Biscuits", emoji: "🥯", ingredients: [{ ingredient: "Flour", emoji: "🌾", store: "Aldi" }, { ingredient: "Milk", emoji: "🥛", store: "Aldi" }, { ingredient: "Butter", emoji: "🧈", store: "Wegmans" }], categories: ["breakfast"], diet: "vegetarian", bread: !1, unfreeze: !1, delivery: !1 } } };
+        const MS_DAY = 864e5, MONTHS = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], MONTHS_FULL = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"], DAYS = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+        const DB = { emoji: {}, ingredients: {}, bread: {}, unfreeze: {}, delivery: {}, categories: { breakfast: [], lunch: [], dinner: [], side: [] } };
+        Object.values(DATA.meals).forEach(m => { DB.emoji[m.name] = m.emoji || "❓"; DB.ingredients[m.name] = m.ingredients || []; DB.bread[m.name] = !!m.bread; DB.unfreeze[m.name] = !!m.unfreeze; DB.delivery[m.name] = !!m.delivery; (m.categories || []).forEach(c => { if (DB.categories[c] && !DB.categories[c].includes(m.name)) DB.categories[c].push(m.name) }) });
+        Object.keys(DB.categories).forEach(cat => { DB.categories[cat].sort((a, b) => { if (a === "Custom") return 1; if (b === "Custom") return -1; const aD = DB.delivery[a], bD = DB.delivery[b]; if (aD && !bD) return 1; if (!aD && bD) return -1; return a.localeCompare(b) }) });
+        class App {
+            constructor() { this.state = this.load() || this.init(); this.migrate(); this.idx = null; this.cleanup = []; this.render() }
+            init() { const t = new Date, s = this.monday(t), n = new Date(s.getTime() + 7 * MS_DAY); return { weekStart: n.toISOString(), showWeekend: !0, theme: "dark", days: DAYS.map((name, i) => ({ name, date: new Date(n.getTime() + i * MS_DAY).toISOString(), breakfast: [], lunch: [], dinner: [], side: [], customBreakfast: [], customLunch: [], customDinner: [], customSide: [], breadFlag: !1 })) } }
+            migrate() { this.state.days.forEach(d => { ["breakfast", "lunch", "dinner", "side"].forEach(t => { if (!Array.isArray(d[t])) d[t] = d[t] ? [d[t]] : []; const k = "custom" + t[0].toUpperCase() + t.slice(1); if (!Array.isArray(d[k])) d[k] = d[k] ? [d[k]] : [] }); d.breadFlag = d.breadFlag ?? !1 }); this.state.theme = this.state.theme ?? "dark" }
+            monday(d) { const dt = new Date(d), day = dt.getDay(), diff = dt.getDate() - day + (day === 0 ? -6 : 1), m = new Date(dt.setDate(diff)); m.setHours(0, 0, 0, 0); return m }
+            key(d) { return `meal_plan_${this.monday(d).toISOString().slice(0, 10)}` }
+            load() { try { const k = this.key(new Date(Date.now() + 7 * MS_DAY)), j = localStorage.getItem(k); return j ? JSON.parse(j) : null } catch { return null } }
+            save() { try { localStorage.setItem(this.key(new Date(this.state.weekStart)), JSON.stringify(this.state)) } catch (e) { console.error(e) } }
+            theme() { document.body.classList.toggle("dark", this.state.theme === "dark") }
+            toggleTheme() { this.state.theme = this.state.theme === "dark" ? "light" : "dark"; this.theme(); this.save() }
+            nav(dir) { const cur = new Date(this.state.weekStart), off = dir === "next" ? 7 : -7, next = new Date(cur.getTime() + off * MS_DAY); next.setHours(0, 0, 0, 0); const k = this.key(next), ex = localStorage.getItem(k); if (ex) { this.state = JSON.parse(ex) } else { this.state = this.init(); this.state.weekStart = next.toISOString(); this.state.days.forEach((d, i) => d.date = new Date(next.getTime() + i * MS_DAY).toISOString()) } this.migrate(); this.theme(); this.render() }
+            fmtWeek() { const s = new Date(this.state.weekStart), e = new Date(s.getTime() + 6 * MS_DAY); return `${MONTHS[s.getMonth()]} ${s.getDate()} - ${e.getDate()}, ${s.getFullYear()}` }
+            weekLabel() { const t = new Date; t.setHours(0, 0, 0, 0); const cur = this.monday(t), st = new Date(this.state.weekStart); st.setHours(0, 0, 0, 0); const diff = Math.round((st - cur) / MS_DAY), w = Math.floor(Math.abs(diff) / 7); if (diff === 0) return "THIS WEEK"; if (diff === 7) return "NEXT WEEK"; if (diff === -7) return "LAST WEEK"; if (diff > 7) return `${w} WEEKS AHEAD`; if (diff < -7) return `${w} WEEKS AGO`; return "PLANNING WEEK" }
+            fmtDate(d) { const dt = new Date(d); return `${MONTHS_FULL[dt.getMonth()]} ${dt.getDate()}` }
+            isWeekend(n) { return n === "Saturday" || n === "Sunday" }
+            display(arr, custom) { if (!arr?.length) return null; return arr.map(m => m === "Custom" ? (custom?.join(", ") || "Custom") : m).join(" • ") }
+            checkBread(i) { const d = this.state.days[i], all = [...(d.lunch || []), ...(d.dinner || [])].filter(m => m && m !== "Custom"); if (all.some(m => DB.bread[m])) d.breadFlag = !0 }
+            render() {
+                this.cleanup.forEach(fn => fn()); this.cleanup = []; this.theme(); const app = document.getElementById("app"); app.innerHTML = `
+<header class="header">
+<h1 class="header-title">Meal Planner</h1>
+<button class="icon-btn" id="themeBtn">${this.state.theme === "dark" ? "🌙" : "☀️"}</button>
+</header>
+<main class="main">
+<div class="week-bar">
+<button class="week-bar-nav" id="prevBtn">◄</button>
+<div class="week-bar-content">
+<div class="week-label">${this.weekLabel()}</div>
+<div class="week-range">${this.fmtWeek()}</div>
+</div>
+<button class="week-bar-nav" id="nextBtn">►</button>
+</div>
+${this.state.days.slice(0, 5).map((d, i) => this.card(d, i)).join("")}
+<div class="weekend-card">
+<div class="weekend-label">Show weekends</div>
+<button class="toggle-switch${this.state.showWeekend ? " on" : ""}" id="weekendBtn">
+<div class="toggle-knob"></div>
+</button>
+</div>
+${this.state.showWeekend ? this.state.days.slice(5).map((d, i) => this.card(d, i + 5)).join("") : ""}
+</main>
+<div class="bottom-bar">
+<div class="bottom-actions">
+<button class="action-btn" id="clearBtn">
+<div class="action-icon">🗑️</div>
+<div>Clear</div>
+</button>
+<button class="action-btn" id="shareBtn">
+<div class="action-icon">▶️</div>
+<div>Send</div>
+</button>
+</div>
+</div>
+`;
+                this.bind()
+            }
+            card(d, i) {
+                const we = this.isWeekend(d.name), bT = this.display(d.breakfast, d.customBreakfast) || "Select breakfast", lT = this.display(d.lunch, d.customLunch) || "Select lunch", dT = this.display(d.dinner, d.customDinner) || "Select dinner", sT = this.display(d.side, d.customSide), bE = d.breakfast?.length ? DB.emoji[d.breakfast[0]] || "❓" : "❓", lE = d.lunch?.length ? DB.emoji[d.lunch[0]] || "❓" : "❓", dE = d.dinner?.length ? DB.emoji[d.dinner[0]] || "❓" : "❓", need = we ? 3 : 2, done = (we && d.breakfast?.length ? 1 : 0) + (d.lunch?.length ? 1 : 0) + (d.dinner?.length ? 1 : 0), inc = done < need; return `
+<div class="day-card${inc ? " incomplete" : ""}">
+<div class="day-card-header">
+<div class="day-title">${d.name}, ${this.fmtDate(d.date)}</div>
+<button class="bread-toggle${d.breadFlag ? " active" : ""}" data-idx="${i}">🍞 Bread</button>
+</div>
+${we ? `<button class="meal-row${!d.breakfast?.length ? " empty" : ""}" data-idx="${i}" data-type="breakfast">
+<div class="meal-icon breakfast">${bE}</div>
+<div class="meal-content">
+<div class="meal-type">Breakfast</div>
+<div class="meal-desc">${bT}</div>
+</div>
+</button>`: ""}
+<button class="meal-row${!d.lunch?.length ? " empty" : ""}" data-idx="${i}" data-type="lunch">
+<div class="meal-icon lunch">${lE}</div>
+<div class="meal-content">
+<div class="meal-type">Lunch</div>
+<div class="meal-desc">${lT}${sT ? " • " + sT : ""}</div>
+</div>
+</button>
+<button class="meal-row${!d.dinner?.length ? " empty" : ""}" data-idx="${i}" data-type="dinner">
+<div class="meal-icon dinner">${dE}</div>
+<div class="meal-content">
+<div class="meal-type">Dinner</div>
+<div class="meal-desc">${dT}${sT ? " • " + sT : ""}</div>
+</div>
+</button>
+</div>`}
+            bind() { const on = (id, fn) => { const el = document.getElementById(id); if (el) { el.onclick = fn; this.cleanup.push(() => el.onclick = null) } }; on("themeBtn", () => this.toggleTheme()); on("prevBtn", () => this.nav("prev")); on("nextBtn", () => this.nav("next")); on("weekendBtn", () => { this.state.showWeekend = !this.state.showWeekend; this.save(); this.render() }); on("clearBtn", () => this.clear()); on("shareBtn", () => this.recap()); document.querySelectorAll(".bread-toggle").forEach(btn => { const fn = e => { e.stopPropagation(); const i = +btn.dataset.idx; this.state.days[i].breadFlag = !this.state.days[i].breadFlag; this.save(); this.render() }; btn.onclick = fn; this.cleanup.push(() => btn.onclick = null) }); document.querySelectorAll(".meal-row").forEach(btn => { const fn = () => { const i = +btn.dataset.idx, t = btn.dataset.type; if (t === "breakfast") this.openBreakfast(i); else if (t === "lunch") this.openLunch(i); else this.openDinner(i) }; btn.onclick = fn; this.cleanup.push(() => btn.onclick = null) }); const ol = document.getElementById("overlay"); if (ol) { const fn = e => { if (e.target.id === "overlay") this.hide() }; ol.onclick = fn; this.cleanup.push(() => ol.onclick = null) } const kd = e => { if (e.key === "Escape") this.hide() }; document.addEventListener("keydown", kd); this.cleanup.push(() => document.removeEventListener("keydown", kd)) }
+            grid(type, sel, opts) {
+                const s = Array.isArray(sel) ? sel : (sel ? [sel] : []); return `<div class="grid">
+${opts.map(name => {
+                    const d = DB.delivery[name], sel = s.includes(name), b = DB.bread[name], u = DB.unfreeze[name]; let badges = ""; if (b || u) { badges = '<div class="tile-badges">'; if (b) badges += '<div class="tile-badge" title="Needs bread">🍞</div>'; if (u) badges += '<div class="tile-badge" title="Unfreeze">❄️</div>'; badges += "</div>" } return `<div class="tile${sel ? " selected" : ""}${d ? " delivery" : ""}" data-name="${name}" data-type="${type}">
+${badges}
+<div class="tile-emoji">${DB.emoji[name] || "❓"}</div>
+<div>${name}</div>
+${d ? '<div class="delivery-label">DELIVERY</div>' : ""}
+</div>`}).join("")}
+</div>`}
+            openBreakfast(i) {
+                const d = this.state.days[i]; if (!this.isWeekend(d.name)) return; this.idx = i; let body = this.grid("breakfast", d.breakfast, DB.categories.breakfast); if (d.breakfast.includes("Custom")) body += `<div class="field">
+<label class="field-label">Custom Breakfast</label>
+<input class="field-input" id="customBreakfastInput" value="${d.customBreakfast.join(", ") || ""}" placeholder="Enter custom breakfast"/>
+</div>`; this.show({ title: `Breakfast — ${d.name}`, subtitle: this.fmtDate(d.date), body, footer: [{ label: "❌ Cancel", onClick: () => this.hide() }, { label: "✅ Save", onClick: () => this.saveBreakfast(i) }] })
+            }
+            saveBreakfast(i) { const d = this.state.days[i]; if (d.breakfast.includes("Custom")) { const inp = document.getElementById("customBreakfastInput"); if (!inp || !inp.value.trim()) { d.breakfast = d.breakfast.filter(m => m !== "Custom"); d.customBreakfast = [] } else d.customBreakfast = inp.value.split(",").map(s => s.trim()).filter(Boolean) } this.save(); this.render(); this.hide(); this.toast("Saved! ✓") }
+            openLunch(i) {
+                const d = this.state.days[i]; this.idx = i; let body = this.grid("lunch", d.lunch, DB.categories.lunch); if (d.lunch.includes("Custom")) body += `<div class="field">
+<label class="field-label">Custom Lunch</label>
+<input class="field-input" id="customLunchInput" value="${d.customLunch.join(", ") || ""}" placeholder="Enter custom lunch"/>
+</div>`; this.show({ title: `Lunch — ${d.name}`, subtitle: this.fmtDate(d.date), body, footer: [{ label: "❌ Cancel", onClick: () => this.hide() }, { label: "✅ Save", onClick: () => this.saveLunch(i) }] })
+            }
+            saveLunch(i) { const d = this.state.days[i]; if (d.lunch.includes("Custom")) { const inp = document.getElementById("customLunchInput"); if (!inp || !inp.value.trim()) { d.lunch = d.lunch.filter(m => m !== "Custom"); d.customLunch = [] } else d.customLunch = inp.value.split(",").map(s => s.trim()).filter(Boolean) } if (!d.lunch.length && d.side?.length) { alert("Please select a main dish before adding side dishes"); return } this.checkBread(i); this.save(); this.render(); this.hide(); this.toast("Saved! ✓") }
+            openDinner(i) {
+                const d = this.state.days[i]; this.idx = i; const slot = document.getElementById("modalBreadSlot"); if (slot) slot.innerHTML = `<button class="bread-toggle${d.breadFlag ? " active" : ""}" id="modalBread">🍞 Bread</button>`; let body = this.grid("dinner", d.dinner, DB.categories.dinner); body += '<div id="customDinnerSlot"></div>'; if (d.dinner.includes("Custom")) body = body.replace('<div id="customDinnerSlot"></div>', `<div id="customDinnerSlot"><div class="field">
+<label class="field-label">Custom Dinner</label>
+<input class="field-input" id="customDinnerInput" value="${d.customDinner.join(", ") || ""}" placeholder="Enter custom dinner"/>
+</div></div>`); body += '<div class="field"><div class="field-label">Side Dishes</div></div>'; body += this.grid("side", d.side, DB.categories.side); if (d.side.includes("Custom")) body += `<div class="field">
+<input class="field-input" id="customSideInput" value="${d.customSide.join(", ") || ""}" placeholder="Enter custom sides"/>
+</div>`; this.show({ title: `Dinner — ${d.name}`, subtitle: this.fmtDate(d.date), body, footer: [{ label: "❌ Cancel", onClick: () => this.hide() }, { label: "✅ Save", onClick: () => this.saveDinner(i) }], after: () => { const mb = document.getElementById("modalBread"); if (mb) mb.onclick = () => { d.breadFlag = !d.breadFlag; this.openDinner(i) } } })
+            }
+            saveDinner(i) { const d = this.state.days[i]; if (d.dinner.includes("Custom")) { const inp = document.getElementById("customDinnerInput"); if (!inp || !inp.value.trim()) { d.dinner = d.dinner.filter(m => m !== "Custom"); d.customDinner = [] } else d.customDinner = inp.value.split(",").map(s => s.trim()).filter(Boolean) } if (d.side.includes("Custom")) { const inp = document.getElementById("customSideInput"); if (!inp || !inp.value.trim()) { d.side = d.side.filter(s => s !== "Custom"); d.customSide = [] } else d.customSide = inp.value.split(",").map(s => s.trim()).filter(Boolean) } if (!d.dinner.length && d.side?.length) { alert("Please select a main dish before adding side dishes"); return } this.checkBread(i); this.save(); this.render(); this.hide(); this.toast("Saved! ✓") }
+            show({ title, subtitle, body, footer, after }) { const ol = document.getElementById("overlay"), md = document.getElementById("modal"); document.getElementById("modalTitle").textContent = title; document.getElementById("modalSubtitle").textContent = subtitle || ""; document.getElementById("modalBody").innerHTML = body; const slot = document.getElementById("modalBreadSlot"); if (slot && !title.startsWith("Dinner")) slot.innerHTML = ""; const ft = document.getElementById("modalFooter"); ft.innerHTML = ""; (footer || []).forEach(f => { const btn = document.createElement("button"); btn.className = "modal-btn"; btn.textContent = f.label; btn.onclick = f.onClick; ft.appendChild(btn) }); ol.classList.add("show"); md.classList.add("show"); setTimeout(() => { this.bindTiles(); after && after() }, 0) }
+            bindTiles() {
+                document.querySelectorAll(".tile").forEach(tile => {
+                    tile.onclick = () => {
+                        const type = tile.dataset.type, name = tile.dataset.name, d = this.state.days[this.idx]; if (!Array.isArray(d[type])) d[type] = []; const has = d[type].includes(name); if (has) { d[type] = d[type].filter(m => m !== name); tile.classList.remove("selected"); if (name === "Custom") { const k = "custom" + type[0].toUpperCase() + type.slice(1); d[k] = []; if (type === "dinner") { const slot = document.getElementById("customDinnerSlot"); if (slot) slot.innerHTML = "" } } } else {
+                            d[type].push(name); tile.classList.add("selected"); if (name === "Custom" && type === "dinner") {
+                                const slot = document.getElementById("customDinnerSlot"); if (slot) slot.innerHTML = `<div class="field">
+<label class="field-label">Custom Dinner</label>
+<input class="field-input" id="customDinnerInput" value="${d.customDinner.join(", ") || ""}" placeholder="Enter custom dinner"/>
+</div>`}
+                        }
+                    }
+                })
+            }
+            hide() { document.getElementById("overlay").classList.remove("show"); document.getElementById("modal").classList.remove("show") }
+            clear() { if (!confirm("Clear all meals for this week?")) return; this.state.days.forEach(d => { d.breakfast = []; d.lunch = []; d.dinner = []; d.side = []; d.customBreakfast = []; d.customLunch = []; d.customDinner = []; d.customSide = []; d.breadFlag = !1 }); this.save(); this.render(); this.toast("Week cleared") }
+            groceries() { const g = {}; const add = (s, i, e) => { if (!g[s]) g[s] = []; if (!g[s].find(x => x.ingredient === i)) g[s].push({ ingredient: i, emoji: e }) }; this.state.days.forEach(d => { const all = [...(this.isWeekend(d.name) ? d.breakfast || [] : []), ...(d.lunch || []), ...(d.dinner || []), ...(d.side || [])].filter(m => m && m !== "Custom"); if (d.breadFlag) add("Wegmans", "Bread", "🍞"); all.forEach(name => { (DB.ingredients[name] || []).forEach(ing => add(ing.store, ing.ingredient, ing.emoji)) }) }); return g }
+            shopping() {
+                const g = this.groceries(), stores = Object.keys(g).sort(); let body = stores.map(s => `<div class="shopping-section">
+<div class="shopping-store">${s}</div>
+<div class="shopping-list">
+${g[s].map(item => `<div class="shopping-item">
+<div class="shopping-emoji">${item.emoji || "🛒"}</div>
+<div class="shopping-name">${item.ingredient}</div>
+</div>`).join("")}
+</div>
+</div>`).join(""); this.show({ title: "Shopping List", subtitle: "Check off items as you shop", body, footer: [{ label: "Close", onClick: () => this.hide() }, { label: "Share", onClick: () => this.shareShop(g) }] })
+            }
+            shareShop(g) { let t = "🛒 Shopping List\n\n"; Object.keys(g).sort().forEach(s => { t += `${s}:\n`; g[s].forEach(i => t += `• ${i.emoji || ""} ${i.ingredient}\n`); t += "\n" }); this.share("Shopping List", t) }
+            recap() { let t = "🗓️ Weekly Meal Plan\n\n"; this.state.days.forEach(d => { t += `${d.name} (${this.fmtDate(d.date)})\n`; const bT = this.display(d.breakfast, d.customBreakfast), lT = this.display(d.lunch, d.customLunch), dT = this.display(d.dinner, d.customDinner), sT = this.display(d.side, d.customSide), bE = d.breakfast?.[0] ? DB.emoji[d.breakfast[0]] || "❓" : "❓", lE = d.lunch?.[0] ? DB.emoji[d.lunch[0]] || "❓" : "❓", dE = d.dinner?.[0] ? DB.emoji[d.dinner[0]] || "❓" : "❓"; if (this.isWeekend(d.name)) t += `  Breakfast: ${bE} ${bT || "—"}\n`; t += `  Lunch: ${lE} ${lT || "—"}\n  Dinner: ${dE} ${dT || "—"}`; if (sT) t += `\n  Sides: ${sT}`; if (d.breadFlag) t += "\n  Bread: yes"; t += "\n\n" }); const g = this.groceries(); t += "\n🛒 Shopping List\n\n"; Object.keys(g).sort().forEach(s => { t += `${s}:\n`; g[s].forEach(i => t += `• ${i.emoji || ""} ${i.ingredient}\n`); t += "\n" }); this.show({ title: "Share Meal Plan", subtitle: "Weekly recap + shopping list", body: `<div class="recap-text">${t}</div>`, footer: [{ label: "Close", onClick: () => this.hide() }, { label: "Calendar", onClick: () => this.ics() }, { label: "Send", onClick: () => this.share("Meal Plan", t) }] }) }
+            share(title, text) { if (navigator.share) navigator.share({ title, text }).catch(() => { }); else if (navigator.clipboard) navigator.clipboard.writeText(text).then(() => this.toast("Copied! 📋")).catch(() => this.toast("Failed")) }
+            toast(msg) { const el = document.getElementById("toast"); el.textContent = msg; el.classList.add("show"); setTimeout(() => el.classList.remove("show"), 1800) }
+            ics() { const fd = (d, h, m = 0) => { const dt = new Date(d); dt.setHours(h, m, 0, 0); return dt.toISOString().replace(/[-:]/g, "").split(".")[0] + "Z" }, fdt = d => { const dt = new Date(d); dt.setHours(0, 0, 0, 0); return dt.toISOString().split("T")[0].replace(/-/g, "") }; let ics = "BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//MealPlanner//EN\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\n"; this.state.days.forEach(d => { const all = [...(d.lunch || []), ...(d.dinner || [])].filter(m => m && m !== "Custom"), unf = all.filter(m => DB.unfreeze[m]); if (unf.length) { const prev = new Date(new Date(d.date).getTime() - MS_DAY); unf.forEach(m => { ics += "BEGIN:VEVENT\n"; ics += `SUMMARY:Unfreeze ${m}\n`; ics += "DTSTART;VALUE=DATE:" + fdt(prev) + "\n"; ics += "DTEND;VALUE=DATE:" + fdt(d.date) + "\n"; ics += "END:VEVENT\n" }) } if (d.breakfast?.length) { const m = d.breakfast.map(x => x === "Custom" ? d.customBreakfast?.join(", ") || "Custom" : x).join(", "); ics += "BEGIN:VEVENT\n"; ics += `SUMMARY:Breakfast: ${m}\n`; ics += "DTSTART:" + fd(d.date, 8, 0) + "\n"; ics += "DTEND:" + fd(d.date, 9, 0) + "\n"; ics += "END:VEVENT\n" } if (d.lunch?.length) { const m = d.lunch.map(x => x === "Custom" ? d.customLunch?.join(", ") || "Custom" : x).join(", "); ics += "BEGIN:VEVENT\n"; ics += `SUMMARY:Lunch: ${m}\n`; ics += "DTSTART:" + fd(d.date, 13, 0) + "\n"; ics += "DTEND:" + fd(d.date, 13, 45) + "\n"; ics += "END:VEVENT\n" } if (d.dinner?.length) { const m = d.dinner.map(x => x === "Custom" ? d.customDinner?.join(", ") || "Custom" : x).join(", "); let title = `Dinner: ${m}`; if (d.side?.length) { const s = d.side.map(x => x === "Custom" ? d.customSide?.join(", ") || "Custom" : x).join(", "); title += ` + ${s}` } ics += "BEGIN:VEVENT\n"; ics += "SUMMARY:" + title + "\n"; ics += "DTSTART:" + fd(d.date, 19, 0) + "\n"; ics += "DTEND:" + fd(d.date, 20, 0) + "\n"; ics += "END:VEVENT\n" } if (d.breadFlag) { ics += "BEGIN:VEVENT\n"; ics += "SUMMARY:Bread\n"; ics += "DTSTART;VALUE=DATE:" + fdt(d.date) + "\n"; ics += "DTEND;VALUE=DATE:" + fdt(new Date(new Date(d.date).getTime() + MS_DAY)) + "\n"; ics += "END:VEVENT\n" } }); ics += "END:VCALENDAR"; const blob = new Blob([ics], { type: "text/calendar" }), url = URL.createObjectURL(blob), a = document.createElement("a"); a.href = url; a.download = "mealplan.ics"; a.click(); URL.revokeObjectURL(url) }
+        }
+        new App();
+    </script>
+</body>
+
+</html>
