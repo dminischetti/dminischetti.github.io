@@ -760,9 +760,7 @@
 
       .hero-image {
       width: 100%;
-      max-width: 450px;
       height: auto;
-      aspect-ratio: 7/9;
       object-fit: cover;
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow-2xl);
@@ -770,6 +768,14 @@
       position: relative;
       z-index: 2;
       }
+
+    @media (max-width: 768px) {
+    .hero-image {
+        max-width: 450px;
+        aspect-ratio: 7/9;
+        margin-inline: auto;
+    }
+    }
 
       .hero-image:hover {
       transform: scale(1.02) rotate(1deg);
@@ -1360,7 +1366,8 @@
 
       .contact-info {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      /* grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); */
+      grid-template-columns: repeat(2, 1fr);
       gap: var(--space-md);
       max-width: 800px;
       margin-inline: auto;
