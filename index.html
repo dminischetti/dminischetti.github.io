@@ -669,7 +669,6 @@
       .hero-content {
       position: relative;
       z-index: 1;
-      max-width: 900px;
       }
 
       .hero-badge {
@@ -769,13 +768,12 @@
       z-index: 2;
       }
 
-    @media (max-width: 768px) {
-    .hero-image {
-        max-width: 450px;
-        aspect-ratio: 7/9;
-        margin-inline: auto;
-    }
-    }
+      @media (max-width: 400px) {
+        .hero-image {
+                width: 100%;
+          aspect-ratio: 7/9;
+        }
+      }
 
       .hero-image:hover {
       transform: scale(1.02) rotate(1deg);
