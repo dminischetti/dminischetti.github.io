@@ -4,7 +4,7 @@ date: 2025-03-21T12:00:00Z
 description: "A breakdown of why PNG is often the better choice over JPG—because nobody wants their images looking like they were printed on a potato."
 tags: ["images", "file formats", "PNG vs JPG"]
 cover:
-  image: "/images/posts/why-save-images-as-png-instead-of-jpg.png"
+  image: "/blog/images/posts/why-save-images-as-png-instead-of-jpg.png"
 ---
 
 So, you’re about to save an image, and that little dropdown asks: **PNG or JPG?** And suddenly, you pause. You squint at the screen, question all your life choices, and wonder why this is even a decision you have to make.  

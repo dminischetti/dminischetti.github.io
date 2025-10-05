@@ -6,7 +6,7 @@ author: "Dominic Minischetti"
 tags: ["privacy", "surveillance", "predictive algorithms", "smartphones", "smart devices"]
 categories: ["Tech", "Life"]
 cover:
-  image: "/images/posts/your-phone-truth-worse.png"
+  image: "/blog/images/posts/your-phone-truth-worse.png"
 ---
 
 At our place, conversations are small, everyday things.  

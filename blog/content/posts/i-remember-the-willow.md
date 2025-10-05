@@ -5,7 +5,7 @@ author: "Dominic Minischetti"
 tags: ["poetry", "focus", "minimalism", "relationships"]
 categories: ["Reflections"]
 cover:
-  image: "/images/posts/i-remember-the-willow.png"
+  image: "/blog/images/posts/i-remember-the-willow.png"
 ---
 **Note:**  
 I chose to take down this post because it held pieces of my story that feel better kept closer to heart.

@@ -9,7 +9,7 @@ keywords: ["old internet nostalgia", "geocities memories", "early web", "msn icq
 author: "Dominic Minischetti"
 draft: false
 cover:
-  image: "/images/posts/the-internet-was-once-a-place.png"
+  image: "/blog/images/posts/the-internet-was-once-a-place.png"
 ---
 Once, there was a door.  
 A real one. With a handle and a key.  

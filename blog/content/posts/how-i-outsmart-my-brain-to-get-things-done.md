@@ -4,7 +4,7 @@ date: 2024-11-29T00:00:00
 description: "Life feels like an action movie with no pause button. Here's how I handle the chaos and still get things done."
 tags: ["focus", "productivity", "mindset", "personal experience", "mental strategies"]
 cover:
-  image: "/images/posts/how-i-outsmart-my-brain-to-get-things-done.png"
+  image: "/blog/images/posts/how-i-outsmart-my-brain-to-get-things-done.png"
 ---
 My brain works like an **action movie with no pause button**. **No clear story, no control**, and just when things start to make sense—BAM! **A sudden cut to something completely different.**  
 

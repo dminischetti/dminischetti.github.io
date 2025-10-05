@@ -6,7 +6,7 @@ slug: "my-son-is-smarter-than-chatgpt"
 tags: ["parenting", "development", "science", "babies", "cognition"]
 categories: ["parenting"]
 cover:
-  image: "/images/posts/my-son-is-smarter-than-chatgpt.png"
+  image: "/blog/images/posts/my-son-is-smarter-than-chatgpt.png"
 ---
 I thought I was smart. I work in tech. I troubleshoot complex systems. I optimize databases. I write code that doesn’t crash on Fridays. But then I had a son.
 

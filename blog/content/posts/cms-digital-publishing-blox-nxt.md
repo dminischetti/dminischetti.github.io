@@ -5,7 +5,7 @@ summary: "A CMS isn't just a tool—it's the backbone of digital publishing. As 
 tags: ["CMS", "BLOX Digital", "BLOX NXT", "Publishing", "Tech"]
 description: "A look at why a great CMS is essential for digital publishing, how BLOX Digital is leading the way, and why I'm excited about BLOX NXT."
 cover:
-  image: "/images/posts/cms-digital-publishing-blox-nxt.png"
+  image: "/blog/images/posts/cms-digital-publishing-blox-nxt.png"
 ---
 
 Ever tried cooking a full meal with no kitchen tools? No knives, no stove, no pots—just your bare hands and sheer determination. Sounds impossible, right? That’s exactly what running a news website without a **Content Management System (CMS)** feels like.

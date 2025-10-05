@@ -4,7 +4,7 @@ date: 2024-12-06T00:00:00
 description: "Minimalism taken to the next level—finding the one perfect item for everything. Discover my quest for ultimate efficiency and portability."
 tags: ["efficiency", "lifestyle", "mindset", "minimalism", "personal philosophy", "productivity"]
 cover:
-  image: "/images/posts/pursuit-of-perfect-quest-for-ultimate-everything.png"
+  image: "/blog/images/posts/pursuit-of-perfect-quest-for-ultimate-everything.png"
 ---
 # **The Pursuit of the Perfect: My Quest for the Ultimate Everything**  
 

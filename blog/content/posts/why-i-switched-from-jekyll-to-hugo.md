@@ -4,7 +4,7 @@ date: 2025-03-03T00:00:00
 description: "Migrating from Jekyll to Hugo wasn’t as smooth as I expected, but it was worth it. Here’s what broke, what I learned, and why I’ll never go back."
 tags: ["blogging", "static site generators", "hugo", "jekyll", "web development", "self-hosting"]
 cover:
-  image: "/images/posts/why-i-switched-from-jekyll-to-hugo.png"
+  image: "/blog/images/posts/why-i-switched-from-jekyll-to-hugo.png"
 ---
 # **Why I Switched from Jekyll to Hugo (And Why You Might Too)**  
 

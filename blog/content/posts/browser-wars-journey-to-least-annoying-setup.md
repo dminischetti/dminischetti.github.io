@@ -4,7 +4,7 @@ date: 2024-11-22T00:00:00
 description: "Choosing a browser shouldn't be this hard. From Safari’s WebKit prison to Windows’ Chromium clones, here’s my exhausting browser journey."
 tags: ["browsers", "digital tools", "personal experience", "productivity", "tech", "web development"]
 cover:
-  image: "/images/posts/browser-wars-journey-to-least-annoying-setup.png"
+  image: "/blog/images/posts/browser-wars-journey-to-least-annoying-setup.png"
 ---
 I’m a software developer. I build things for the web. I write code.  
 I understand how browsers work.  

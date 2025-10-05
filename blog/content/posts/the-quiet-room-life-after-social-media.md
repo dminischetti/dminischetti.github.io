@@ -6,7 +6,7 @@ tags: ["reflection", "minimalism", "life offline"]
 aliases: ["/quiet"]
 draft: false
 cover:
-  image: "/images/posts/the-quiet-room-life-after-social-media.png"
+  image: "/blog/images/posts/the-quiet-room-life-after-social-media.png"
 ---
 
 After I closed the door on social media, I found myself in a **quiet room**.

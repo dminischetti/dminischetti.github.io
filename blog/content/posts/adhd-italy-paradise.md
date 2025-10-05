@@ -6,7 +6,7 @@ author: "Dominic Minischetti"
 tags: ["ADHD", "neurodivergence", "Italy", "culture", "mental health", "lifestyle"]
 categories: ["Life", "Culture", "ADHD"]
 cover:
-  image: "/images/posts/adhd-italy-paradise.png"
+  image: "/blog/images/posts/adhd-italy-paradise.png"
 ---
 If ADHD were a country, it would sound like an Italian piazza at aperitivo hour: voices overlapping, kids running wild, someone shouting "Scusa!"—and nobody really listening.
 

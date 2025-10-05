@@ -6,7 +6,7 @@ tags: ["minimalism", "desk setup", "productivity", "remote work", "workspace"]
 categories: ["Workspaces", "Productivity"]
 draft: false
 cover:
-  image: "/images/posts/minimalist-desk-setup-productivity-2025.png"
+  image: "/blog/images/posts/minimalist-desk-setup-productivity-2025.png"
 ---
 Looking to summon laser-sharp focus, deep work, and maybe even impress your cat with your organizational skills? This minimalist desk setup guide might not get you a promotion (no promises), but it *will* help you build a distraction-free workspace so intentional that your brain has no choice but to show up and do the work.
 

@@ -4,7 +4,7 @@ date: 2024-11-01T00:00:00
 description: "Changing your mind isn’t a weakness—it’s growth. Discover why evolving your perspective makes you smarter and more adaptable."
 tags: ["critical thinking", "mental agility", "mindset", "personal growth", "self-awareness"]
 cover:
-  image: "/images/posts/why-changing-your-mind-is-a-sign-of-intelligence.png"
+  image: "/blog/images/posts/why-changing-your-mind-is-a-sign-of-intelligence.png"
 ---
 Some people think **changing your mind is a weakness**—that once you take a stance, you have to defend it forever. That **certainty equals strength** and doubt makes you unreliable.  
 

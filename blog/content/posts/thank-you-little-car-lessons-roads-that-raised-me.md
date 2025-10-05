@@ -4,7 +4,7 @@ date: 2025-04-04T00:00:00
 description: "A heartfelt reflection on how everyday drives during college shaped a life of gratitude, curiosity, and personal growth."
 tags: ["Gratitude", "Personal Growth", "Life Lessons", "Reflection", "Self-Discovery"]
 cover:
-  image: "/images/posts/thank-you-little-car-lessons-roads-that-raised-me.png"
+  image: "/blog/images/posts/thank-you-little-car-lessons-roads-that-raised-me.png"
 ---
 There was a time in life when **possibility felt limitless** — when each day offered a chance to learn something new, and every small adventure carried meaning. I look back on that chapter with *deep appreciation*. With a little car and a big sense of curiosity, I explored not just classrooms but entire neighborhoods, local parks, buzzing malls, and quiet stretches of beach.
 

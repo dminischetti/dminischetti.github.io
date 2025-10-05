@@ -4,7 +4,7 @@ date: 2025-03-13T00:00:00
 description: "Social media was supposed to keep me connected with friends. Instead, it's just ads, strangers, and reminders of things I can't have anymore."
 tags: ["social media", "digital detox", "personal reflections"]
 cover:
-  image: "/images/posts/logging-out-for-good-why-i-m-leaving-facebook-and-instagram.png"
+  image: "/blog/images/posts/logging-out-for-good-why-i-m-leaving-facebook-and-instagram.png"
 aliases:
 - "/exit"
 ---

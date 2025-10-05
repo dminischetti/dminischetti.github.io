@@ -4,7 +4,7 @@ date: 2025-01-24T00:00:00
 description: "Multitasking is a lie. Discover why single-tasking is the real productivity superpower and how it’s transforming my focus and life."
 tags: ["efficiency", "focus", "mindset", "personal growth", "productivity", "single-tasking"]
 cover:
-  image: "/images/posts/multitasking-myth-why-doing-less-boosts-productivity.png"
+  image: "/blog/images/posts/multitasking-myth-why-doing-less-boosts-productivity.png"
 ---
 # **The Multitasking Myth: Why Doing Less Makes You More Productive**  
 

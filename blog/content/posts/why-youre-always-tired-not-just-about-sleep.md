@@ -4,7 +4,7 @@ date: 2024-10-18T00:00:00
 description: "Tired all the time? It’s not just about sleep. Discover the 5 types of exhaustion and how to truly recharge."
 tags: ["burnout", "exhaustion", "lifestyle", "mental health", "productivity", "self-care"]
 cover:
-  image: "/images/posts/why-youre-always-tired-not-just-about-sleep.png"
+  image: "/blog/images/posts/why-youre-always-tired-not-just-about-sleep.png"
 ---
 # **Why You’re Always Tired (And It’s Not Just About Sleep)**  
 

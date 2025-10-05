@@ -4,7 +4,7 @@ date: 2025-01-03T00:00:00
 description: "Productivity isn’t about doing more—it’s about doing what matters. Discover how to escape the productivity trap and find real progress."
 tags: ["efficiency", "focus", "mindset", "minimalism", "personal growth", "productivity"]
 cover:
-  image: "/images/posts/productivity-trap-why-doing-more-keeps-you-stuck.png"
+  image: "/blog/images/posts/productivity-trap-why-doing-more-keeps-you-stuck.png"
 ---
 # **The Productivity Trap: Why Doing More Is Keeping You Stuck**  
 

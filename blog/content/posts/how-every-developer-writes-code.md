@@ -4,7 +4,7 @@ date: 2025-01-10T00:00:00
 description: "Coding isn’t as glamorous as it seems. Discover the hilariously relatable stages every developer goes through while writing code."
 tags: ["coding humor", "developer life", "personal experience", "programming", "software development", "tech"]
 cover:
-  image: "/images/posts/how-every-developer-writes-code.png"
+  image: "/blog/images/posts/how-every-developer-writes-code.png"
 ---
 People think developers write code in a smooth, structured way—like some kind of **elegant digital architect**.
 

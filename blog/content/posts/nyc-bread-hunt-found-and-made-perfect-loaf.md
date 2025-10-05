@@ -4,7 +4,7 @@ date: 2025-03-07T00:00:00
 description: "My personal journey from bakery-hopping frustration to homemade bread perfection, thanks to a surprise Christmas gift and a little Italian know-how."
 tags: ["homemade bread", "Italian baking", "bread machine", "artisan bread", "foodie NYC", "Italian traditions", "semolina bread"]
 cover:
-  image: "/images/posts/nyc-bread-hunt-found-and-made-perfect-loaf.png"
+  image: "/blog/images/posts/nyc-bread-hunt-found-and-made-perfect-loaf.png"
 ---
 # **The NYC Bread Hunt: How I Finally Found (and Made) the Perfect Loaf**  
 
