@@ -2,19 +2,25 @@ baseURL: https://minischetti.org/blog/
 languageCode: en-us
 title: Dominic Minischetti • Engineering Notes
 theme: PaperMod
+
 pagination:
   pagerSize: 10
+
 permalinks:
   posts: /posts/:slug/
+
 outputs:
   home:
     - HTML
     - RSS
+
 params:
   env: production
   title: Dominic Minischetti • Engineering Notes
   author: Dominic Minischetti
-  description: Senior PHP backend engineer documenting performance wins, architecture decisions, and reliable delivery practices.
+  description: >-
+    Senior PHP backend engineer documenting performance wins, architecture decisions,
+    and reliable delivery practices.
   keywords:
     - PHP performance
     - Laravel
@@ -28,7 +34,7 @@ params:
   ShowPostNavLinks: true
   ShowBreadCrumbs: true
   ShowCodeCopyButtons: true
-  DateFormat: 'Jan 2, 2006'
+  DateFormat: "Jan 2, 2006"
   label:
     text: Dominic Minischetti
     icon: images/dm-logo.svg
@@ -136,6 +142,7 @@ params:
       secondaryCTA:
         label: Email Dominic
         url: mailto:dominic.minischetti@gmail.com
+
 menu:
   main:
     - identifier: posts
@@ -152,6 +159,7 @@ menu:
       weight: 30
       params:
         external: true
+
 taxonomies:
   tag: tags
   category: categories
