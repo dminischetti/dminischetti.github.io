@@ -1,13 +1,16 @@
 ---
 title: "Dominic Minischetti"
-description: "Developer, problem solver, and lifelong learner. Welcome to my sandbox."
+description: "Engineering notes on performance optimization, scalable architecture, and reliable delivery."
 ---
 
-# **Welcome to My Sandbox**  
+## Purpose of these notes
 
-A **sandbox** is a place to **experiment, build, and explore**—and that’s exactly what this site is. Here, I share my journey as a developer, my thoughts on tech, and the occasional life insight. Expect a mix of **coding, problem-solving, and everyday adventures.**  
+This space extends the work I do for product teams every day—refining PHP codebases, unlocking database performance, and building systems that can handle the next wave of traffic. Writing forces clarity, and these articles document the trade-offs, tooling, and practices that keep platforms dependable.
 
-*(Why "sandbox"? In programming, a sandbox is a space to test ideas safely. This site is my personal sandbox—where I tinker, learn, and have fun! My daughter even drew a sandbox just for me. ❤️)*  
+### What to expect
 
-{{< figure src="/blog/images/sandbox.png" alt="Dominic's Sandbox" width="100%" style="display: block; margin: 0 auto;" align="center" >}}  
-*My family's custom-built sandbox!*
+- Deep dives on query tuning, observability, and benchmarking efforts from real projects.
+- Architecture discussions that balance clean code with pragmatic delivery.
+- Team practices that keep engineers shipping quickly without burning out.
+
+If any post sparks an idea for your own platform, [reach out](mailto:dominic.minischetti@gmail.com)—I'd love to hear about it.
