@@ -10,11 +10,7 @@
   --dm-text: #0f172a;
   --dm-text-muted: #64748b;
   --dm-border: #e2e8f0;
-  --dm-radius: 0.75rem;
-  --dm-radius-lg: 1.25rem;
-  --dm-shadow-sm: 0 12px 35px -20px rgba(15, 23, 42, 0.45);
-  --dm-shadow: 0 25px 55px -30px rgba(30, 64, 175, 0.45);
-  --dm-shadow-lg: 0 35px 80px -40px rgba(15, 23, 42, 0.45);
+
   --dm-font-sans: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', system-ui, sans-serif;
   --dm-font-mono: 'SF Mono', 'Cascadia Code', 'Fira Code', monospace;
 }
