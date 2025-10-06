@@ -6,40 +6,6 @@ pagination:
   pagerSize: 10
 permalinks:
   posts: /posts/:slug/
-outputs:
-  home:
-    - HTML
-    - RSS
-params:
-  env: production
-  title: Dominic Minischetti • Engineering Notes
-  author: Dominic Minischetti
-  description: Senior PHP backend engineer documenting performance wins, architecture decisions, and reliable delivery practices.
-  keywords:
-    - PHP performance
-    - Laravel
-    - MySQL optimization
-    - Backend engineering
-    - API architecture
-  defaultTheme: auto
-  disableThemeToggle: false
-  disableLangToggle: true
-  ShowReadingTime: true
-  ShowPostNavLinks: true
-  ShowBreadCrumbs: true
-  ShowCodeCopyButtons: true
-  DateFormat: 'Jan 2, 2006'
-  label:
-    text: Dominic Minischetti
-    icon: images/dm-logo.svg
-    iconHeight: 36
-  assets:
-    favicon: favicons/favicon.ico
-    favicon16x16: favicons/favicon-16x16.png
-    favicon32x32: favicons/favicon-32x32.png
-    apple_touch_icon: favicons/apple-touch-icon.png
-    androidChrome192x192: favicons/android-chrome-192x192.png
-    androidChrome512x512: favicons/android-chrome-512x512.png
 taxonomies:
   tag: tags
   category: categories
