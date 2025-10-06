@@ -1,4 +1,157 @@
-baseURL: http://minischetti.org/blog
+baseURL: https://minischetti.org/blog/
 languageCode: en-us
-title: My New Hugo Site
+title: Dominic Minischetti • Engineering Notes
 theme: PaperMod
+pagination:
+  pagerSize: 10
+permalinks:
+  posts: /posts/:slug/
+outputs:
+  home:
+    - HTML
+    - RSS
+params:
+  env: production
+  title: Dominic Minischetti • Engineering Notes
+  author: Dominic Minischetti
+  description: Senior PHP backend engineer documenting performance wins, architecture decisions, and reliable delivery practices.
+  keywords:
+    - PHP performance
+    - Laravel
+    - MySQL optimization
+    - Backend engineering
+    - API architecture
+  defaultTheme: auto
+  disableThemeToggle: false
+  disableLangToggle: true
+  ShowReadingTime: true
+  ShowPostNavLinks: true
+  ShowBreadCrumbs: true
+  ShowCodeCopyButtons: true
+  DateFormat: 'Jan 2, 2006'
+  label:
+    text: Dominic Minischetti
+    icon: images/dm-logo.svg
+    iconHeight: 36
+  assets:
+    favicon: favicons/favicon.ico
+    favicon16x16: favicons/favicon-16x16.png
+    favicon32x32: favicons/favicon-32x32.png
+    apple_touch_icon: favicons/apple-touch-icon.png
+    androidChrome192x192: favicons/android-chrome-192x192.png
+    androidChrome512x512: favicons/android-chrome-512x512.png
+  socialIcons:
+    - name: linkedin
+      title: Connect on LinkedIn
+      url: https://linkedin.com/in/dminischetti/
+    - name: github
+      title: Explore GitHub
+      url: https://github.com/dminischetti
+    - name: email
+      title: Email Dominic
+      url: mailto:dominic.minischetti@gmail.com
+  hero:
+    badge: Open to new opportunities
+    title: Engineering notes on scalable PHP systems
+    subtitle: >-
+      Insights from architecting and optimizing PHP, MySQL, and API platforms for high-growth teams.
+    experience:
+      - BLOX Digital
+      - Appliances Connection
+      - Kingsleague
+    image: images/dominic_photo.png
+    imageAlt: Dominic Minischetti portrait
+    primaryCTA:
+      label: Schedule a Call
+      url: https://calendly.com/minischetti/meeting
+    secondaryCTA:
+      label: Browse Articles
+      url: /posts/
+  sections:
+    about:
+      title: Pragmatic backend engineering, documented
+      description: >-
+        I help teams modernize legacy platforms, squeeze more performance out of MySQL, and deliver reliable APIs.
+      body: |-
+        Each article distills the lessons I learn while building and optimizing production systems. Expect deep dives on performance tuning, clean architecture, resilient infrastructure, and the occasional story about shipping under pressure.
+    focus:
+      title: What you'll find here
+      description: Stories from production systems that keep revenue flowing and teams calm under pressure.
+      cards:
+        - title: Performance & Observability
+          description: Practical tactics for understanding system behavior, tightening feedback loops, and eliminating bottlenecks.
+          topics:
+            - Query optimization stories
+            - Observability playbooks
+            - Real-world benchmarks
+        - title: Scalable Architecture
+          description: Field notes on designing services that stay maintainable and fast as traffic grows.
+          topics:
+            - API design decisions
+            - Modular PHP patterns
+            - Deployment workflows
+        - title: Team Enablement
+          description: Processes and habits that help engineering teams move quickly without breaking things.
+          topics:
+            - Code review frameworks
+            - Documentation habits
+            - Tooling for focus
+    articles:
+      eyebrow: Latest writing
+      title: Fresh from the engineering desk
+      description: Notes on squeezing more performance from PHP and MySQL, designing resilient APIs, and supporting healthy engineering teams.
+      moreLabel: View all articles
+      moreURL: /posts/
+    projects:
+      eyebrow: Case studies
+      title: Featured case studies
+      description: Highlights from platforms I've led and optimized for growth-focused teams.
+      items:
+        - name: Warehouse Management System Rebuild
+          summary: Re-architected a warehouse platform around handheld workflows, real-time inventory accuracy, and measurable KPIs.
+          tags:
+            - PHP
+            - MySQL
+            - Bootstrap
+            - Process Automation
+          link:
+            label: Request a walkthrough
+            url: https://calendly.com/minischetti/meeting
+        - name: Unified REST API Platform
+          summary: Standardized authentication, documentation, and rate-limiting to align multiple partner integrations behind a single contract.
+          tags:
+            - REST
+            - JWT
+            - Swagger
+            - Monitoring
+          link:
+            label: Explore integration options
+            url: mailto:dominic.minischetti@gmail.com
+    contact:
+      title: Let's build something reliable
+      message: Tell me about the platform you're improving and I'll respond within one business day.
+      primaryCTA:
+        label: Book a call
+        url: https://calendly.com/minischetti/meeting
+      secondaryCTA:
+        label: Email Dominic
+        url: mailto:dominic.minischetti@gmail.com
+menu:
+  main:
+    - identifier: posts
+      name: Articles
+      url: /posts/
+      weight: 10
+    - identifier: projects
+      name: Projects
+      url: /#projects
+      weight: 20
+    - identifier: contact
+      name: Contact
+      url: https://calendly.com/minischetti/meeting
+      weight: 30
+      params:
+        external: true
+taxonomies:
+  tag: tags
+  category: categories
