@@ -1,6 +1,6 @@
 baseURL: https://minischetti.org/blog/
 languageCode: en-us
-title: Dominic Minischetti • Engineering Notes
+title: Dominic Minischetti
 theme: PaperMod
 pagination:
   pagerSize: 10
@@ -9,3 +9,9 @@ permalinks:
 taxonomies:
   tag: tags
   category: categories
+params:
+  homeInfoParams: false
+  label:
+    text: "← Back to Home"
+    url: "/"
+
