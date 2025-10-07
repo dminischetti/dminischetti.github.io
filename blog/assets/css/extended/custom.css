@@ -721,3 +721,58 @@ main {
     padding: 3rem 1.25rem 4rem;
   }
 }
+
+/* Root variables — light mode */
+:root {
+  --theme-bg: #ffffff;
+  --theme-text: #0f172a;
+  --theme-border: #e2e8f0;
+  --theme-primary: #1e40af;
+}
+
+/* Dark overrides */
+.dark {
+  --theme-bg: #0f172a;
+  --theme-text: #e2e8f0;
+  --theme-border: #334155;
+  --theme-primary: #3b82f6;
+}
+
+/* Page general */
+body {
+  background: var(--theme-bg);
+  color: var(--theme-text);
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Header */
+.header {
+  background: rgba(var(--theme-bg-rgb, 255,255,255), 0.85);
+  border-bottom: 1px solid var(--theme-border);
+  /* note: you might extract the RGB of var(--theme-bg) for color-mix etc if you want blur + transparency */
+}
+
+/* Toggle button */
+.theme-toggle {
+  background: var(--theme-bg);
+  border: 1px solid var(--theme-border);
+  border-radius: 9999px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.theme-toggle .moon-icon {
+  display: none;
+}
+.dark .theme-toggle .sun-icon {
+  display: none;
+}
+.dark .theme-toggle .moon-icon {
+  display: block;
+}
+
+/* Back link, logo, etc use var(--theme-primary), var(--theme-text) etc. */
