@@ -1,3 +1,6 @@
+{{- $defaultTheme := site.Params.defaultTheme | default "auto" -}}
+{{- $disableToggle := site.Params.disableThemeToggle | default false -}}
+
 <header class="header" role="banner">
   <div class="header-inner">
     <div class="header-content">
@@ -19,61 +22,176 @@
     </div>
   </div>
 
+  {{ if not $disableToggle }}
   <!-- Theme Toggle Button -->
-   <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
-    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+  <button
+    id="theme-toggle"
+    class="theme-toggle"
+    type="button"
+    aria-label="Toggle theme"
+    aria-pressed="false"
+    accesskey="t"
+    title="(Alt + T)"
+  >
+    <svg
+      id="sun"
+      class="sun-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
       <circle cx="12" cy="12" r="5"></circle>
-      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
+      <path
+        d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"
+      ></path>
     </svg>
-    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg
+      id="moon"
+      class="moon-icon"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+    >
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
     </svg>
   </button>
+  {{ end }}
 </header>
 
 <script>
 (function () {
-  const btn = document.getElementById("theme-toggle");
-  if (!btn) return console.warn("Theme toggle button not found");
-
-  // PaperMod toggles .dark on body, not always on html
-  const target = document.body || document.documentElement;
-  const storageKey = "pref-theme";
-
-  // Initialize theme (respect PaperMod + system preference)
-  const stored = localStorage.getItem(storageKey);
-  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  if (stored === "dark" || (!stored && systemPrefersDark)) {
-    target.classList.add("dark");
-  } else {
-    target.classList.remove("dark");
-  }
-
-  // Optional: sync theme color meta for mobile browsers
-  const themeMeta = document.querySelector('meta[name="theme-color"]');
-  const updateMeta = (isDark) => {
-    if (!themeMeta) return;
-    themeMeta.setAttribute("content", isDark ? "#0f172a" : "#ffffff");
+  const config = {
+    storageKey: "pref-theme",
+    defaultTheme: "{{ $defaultTheme }}",
+    disableToggle: {{ if $disableToggle }}true{{ else }}false{{ end }},
+    colors: {
+      light: "#ffffff",
+      dark: "#0f172a",
+    },
   };
-  updateMeta(target.classList.contains("dark"));
 
-  // Add toggle listener
-  btn.addEventListener("click", () => {
-    const isDark = target.classList.toggle("dark");
-    localStorage.setItem(storageKey, isDark ? "dark" : "light");
-    updateMeta(isDark);
+  const prefersDark =
+    typeof window !== "undefined" &&
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)");
 
-    // Optional subtle haptic feedback
-    if (navigator.vibrate) navigator.vibrate(10);
-  });
+  const run = () => {
+    const body = document.body;
+    if (!body) {
+      return;
+    }
 
-  // Listen to system theme changes
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-    const newTheme = e.matches ? "dark" : "light";
-    target.classList.toggle("dark", newTheme === "dark");
-    localStorage.setItem(storageKey, newTheme);
-    updateMeta(newTheme === "dark");
-  });
+    const button = document.getElementById("theme-toggle");
+    const themeMeta = document.querySelector('meta[name="theme-color"]');
+
+    const setMeta = (mode) => {
+      if (!themeMeta) return;
+      const color = mode === "dark" ? config.colors.dark : config.colors.light;
+      themeMeta.setAttribute("content", color);
+    };
+
+    const setButtonState = (isDark) => {
+      if (!button) return;
+      button.setAttribute("aria-pressed", String(isDark));
+    };
+
+    const setDataset = (isDark) => {
+      body.dataset.theme = isDark ? "dark" : "light";
+    };
+
+    const setState = (isDark) => {
+      body.classList.toggle("dark", isDark);
+      setDataset(isDark);
+      setButtonState(isDark);
+      setMeta(isDark ? "dark" : "light");
+    };
+
+    const applyMode = (mode) => {
+      setState(mode === "dark");
+    };
+
+    const reflectState = () => {
+      setState(body.classList.contains("dark"));
+    };
+
+    const readStorage = () => {
+      if (config.disableToggle) {
+        return null;
+      }
+      try {
+        return localStorage.getItem(config.storageKey);
+      } catch (error) {
+        return null;
+      }
+    };
+
+    const storedTheme = () => {
+      const value = readStorage();
+      return value === "dark" || value === "light" ? value : null;
+    };
+
+    const resolveInitial = () => {
+      const stored = storedTheme();
+      if (stored) {
+        return stored;
+      }
+      if (config.defaultTheme === "dark" || config.defaultTheme === "light") {
+        return config.defaultTheme;
+      }
+      return prefersDark && prefersDark.matches ? "dark" : "light";
+    };
+
+    applyMode(resolveInitial());
+
+    if (button && !config.disableToggle) {
+      button.addEventListener("click", () => {
+        window.requestAnimationFrame(() => {
+          const stored = storedTheme();
+          if (stored) {
+            applyMode(stored);
+          } else {
+            reflectState();
+          }
+        });
+      });
+    }
+
+    if (!config.disableToggle) {
+      window.addEventListener("storage", (event) => {
+        if (event.key === config.storageKey) {
+          const theme = storedTheme();
+          if (theme) {
+            applyMode(theme);
+          }
+        }
+      });
+    }
+
+    if (prefersDark) {
+      const listener = (event) => {
+        if (!config.disableToggle && storedTheme()) {
+          return;
+        }
+        applyMode(event.matches ? "dark" : "light");
+      };
+      if (typeof prefersDark.addEventListener === "function") {
+        prefersDark.addEventListener("change", listener);
+      } else if (typeof prefersDark.addListener === "function") {
+        prefersDark.addListener(listener);
+      }
+    }
+  };
+
+  if (document.body) {
+    run();
+  } else {
+    document.addEventListener("DOMContentLoaded", run, { once: true });
+  }
 })();
 </script>
-
