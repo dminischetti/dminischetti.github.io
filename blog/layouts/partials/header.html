@@ -1,18 +1,20 @@
 {{- $defaultTheme := site.Params.defaultTheme | default "auto" -}}
 {{- $disableToggle := site.Params.disableThemeToggle | default false -}}
 
+<!-- initial script: set mode ASAP -->
 {{- if not $disableToggle }}
 <script>
   (function () {
     const storageKey = "pref-theme";
     const defaultTheme = "{{ $defaultTheme }}";
-    const storedTheme = localStorage.getItem(storageKey);
-    const supportsDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const stored = localStorage.getItem(storageKey);
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-    if (storedTheme === "dark" || (!storedTheme && (defaultTheme === "dark" || (defaultTheme === "auto" && supportsDark)))) {
-      document.body.classList.add("dark");
+    if (stored === "dark" ||
+        (!stored && (defaultTheme === "dark" || (defaultTheme === "auto" && prefersDark)))) {
+      document.documentElement.classList.add("dark");
     } else {
-      document.body.classList.remove("dark");
+      document.documentElement.classList.remove("dark");
     }
   })();
 </script>
@@ -20,15 +22,15 @@
 
 <header class="header" role="banner">
   <div class="container header-inner">
-    <a href="/" class="logo" aria-label="Torna alla Homepage">
+    <a href="/" class="logo" aria-label="Home">
       <span class="logo-icon">DM</span>
       <span class="logo-text">Dominic Minischetti</span>
     </a>
 
     <div class="header-controls">
       {{- if .IsPage }}
-      <a href="/blog" class="back-link" aria-label="Torna al Blog">
-        <svg class="back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <a href="/blog" class="back-link" aria-label="Back to Blog">
+        <svg class="back-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M19 12H5M12 19l-7-7 7-7" />
         </svg>
         <span>Blog</span>
@@ -36,11 +38,8 @@
       {{- end }}
 
       {{- if not $disableToggle }}
-      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" type="button">
-        <svg class="moon-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-        </svg>
-        <svg class="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" type="button" aria-pressed="false">
+        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="5"></circle>
           <line x1="12" y1="1" x2="12" y2="3"></line>
           <line x1="12" y1="21" x2="12" y2="23"></line>
@@ -51,82 +50,56 @@
           <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
           <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
         </svg>
+        <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
       </button>
       {{- end }}
     </div>
   </div>
-
-  {{- if not $disableToggle }}
-  <!-- Theme Toggle Button -->
-  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" type="button">
-    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="12" cy="12" r="5"></circle>
-      <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
-    </svg>
-    <svg class="moon-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-    </svg>
-  </button>
-  {{- end }}
 </header>
 
 {{- if not $disableToggle }}
 <script>
-(function () {
-  const storageKey = "pref-theme";
-  const defaultTheme = "{{ $defaultTheme }}";
-  const button = document.getElementById("theme-toggle");
-  const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
-  const root = document.body;
-  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  (function () {
+    const storageKey = "pref-theme";
+    const defaultTheme = "{{ $defaultTheme }}";
+    const button = document.getElementById("theme-toggle");
+    const prefersDarkMedia = window.matchMedia("(prefers-color-scheme: dark)");
+    const htmlEl = document.documentElement;
 
-  if (!root || !button) {
-    return;
-  }
+    if (!button) return;
 
-  const updateMeta = (theme) => {
-    if (!themeMeta) return;
-    themeMeta.setAttribute("content", theme === "dark" ? "#0f172a" : "#ffffff");
-  };
-
-  const applyTheme = (theme) => {
-    const isDark = theme === "dark";
-    root.classList.toggle("dark", isDark);
-    button.setAttribute("aria-pressed", String(isDark));
-    updateMeta(theme);
-  };
-
-  const storedTheme = localStorage.getItem(storageKey);
-
-  const getPreferredTheme = () => {
-    if (storedTheme === "dark" || storedTheme === "light") {
-      return storedTheme;
-    }
-    if (defaultTheme === "dark" || defaultTheme === "light") {
-      return defaultTheme;
-    }
-    return prefersDark && prefersDark.matches ? "dark" : "light";
-  };
-
-  applyTheme(getPreferredTheme());
-
-  if (!storedTheme && defaultTheme === "auto" && prefersDark) {
-    const listener = (event) => {
-      applyTheme(event.matches ? "dark" : "light");
+    const apply = (theme) => {
+      const isDark = theme === "dark";
+      htmlEl.classList.toggle("dark", isDark);
+      button.setAttribute("aria-pressed", isDark ? "true" : "false");
     };
-    if (typeof prefersDark.addEventListener === "function") {
-      prefersDark.addEventListener("change", listener);
-    } else if (typeof prefersDark.addListener === "function") {
-      prefersDark.addListener(listener);
-    }
-  }
 
-  button.addEventListener("click", () => {
-    const nextTheme = root.classList.contains("dark") ? "light" : "dark";
-    applyTheme(nextTheme);
-    localStorage.setItem(storageKey, nextTheme);
-  });
-})();
+    const stored = localStorage.getItem(storageKey);
+    const getPreferred = () => {
+      if (stored === "dark" || stored === "light") {
+        return stored;
+      }
+      if (defaultTheme === "dark" || defaultTheme === "light") {
+        return defaultTheme;
+      }
+      return prefersDarkMedia.matches ? "dark" : "light";
+    };
+
+    apply(getPreferred());
+
+    if (!stored && defaultTheme === "auto") {
+      prefersDarkMedia.addEventListener("change", (e) => {
+        apply(e.matches ? "dark" : "light");
+      });
+    }
+
+    button.addEventListener("click", () => {
+      const next = htmlEl.classList.contains("dark") ? "light" : "dark";
+      apply(next);
+      localStorage.setItem(storageKey, next);
+    });
+  })();
 </script>
 {{- end }}
-
