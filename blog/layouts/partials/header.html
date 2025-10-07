@@ -1,32 +1,39 @@
 {{- $defaultTheme := site.Params.defaultTheme | default "auto" -}}
 {{- $disableToggle := site.Params.disableThemeToggle | default false -}}
 
-<!-- initial script: set mode ASAP -->
+<!-- ===============================================
+     INITIAL THEME SETUP — executes immediately
+     =============================================== -->
 {{- if not $disableToggle }}
 <script>
   (function () {
-    const storageKey = "pref-theme";
+    const key = "pref-theme";
     const defaultTheme = "{{ $defaultTheme }}";
-    const stored = localStorage.getItem(storageKey);
+    const stored = localStorage.getItem(key);
     const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const html = document.documentElement;
 
-    if (stored === "dark" ||
-        (!stored && (defaultTheme === "dark" || (defaultTheme === "auto" && prefersDark)))) {
-      document.documentElement.classList.add("dark");
-    } else {
-      document.documentElement.classList.remove("dark");
-    }
+    const shouldDark =
+      stored === "dark" ||
+      (!stored && (defaultTheme === "dark" || (defaultTheme === "auto" && prefersDark)));
+
+    html.classList.toggle("dark", shouldDark);
   })();
 </script>
 {{- end }}
 
+<!-- ===============================================
+     HEADER COMPONENT — clean, accessible, responsive
+     =============================================== -->
 <header class="header" role="banner">
-  <div class="container header-inner">
-    <a href="/" class="logo" aria-label="Home">
+  <div class="header-inner">
+    <!-- Logo -->
+    <a href="/" class="logo" aria-label="Back to Home">
       <span class="logo-icon">DM</span>
       <span class="logo-text">Dominic Minischetti</span>
     </a>
 
+    <!-- Controls -->
     <div class="header-controls">
       {{- if .IsPage }}
       <a href="/blog" class="back-link" aria-label="Back to Blog">
@@ -38,7 +45,7 @@
       {{- end }}
 
       {{- if not $disableToggle }}
-      <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" type="button" aria-pressed="false">
+      <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Toggle theme" aria-pressed="false">
         <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <circle cx="12" cy="12" r="5"></circle>
           <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -59,46 +66,43 @@
   </div>
 </header>
 
+<!-- ===============================================
+     THEME TOGGLE SCRIPT — accessible, lightweight
+     =============================================== -->
 {{- if not $disableToggle }}
 <script>
   (function () {
-    const storageKey = "pref-theme";
+    const key = "pref-theme";
     const defaultTheme = "{{ $defaultTheme }}";
-    const button = document.getElementById("theme-toggle");
-    const prefersDarkMedia = window.matchMedia("(prefers-color-scheme: dark)");
-    const htmlEl = document.documentElement;
+    const btn = document.getElementById("theme-toggle");
+    const html = document.documentElement;
+    const media = window.matchMedia("(prefers-color-scheme: dark)");
 
-    if (!button) return;
+    if (!btn) return;
 
-    const apply = (theme) => {
-      const isDark = theme === "dark";
-      htmlEl.classList.toggle("dark", isDark);
-      button.setAttribute("aria-pressed", isDark ? "true" : "false");
+    const setTheme = (mode) => {
+      const dark = mode === "dark";
+      html.classList.toggle("dark", dark);
+      btn.setAttribute("aria-pressed", dark ? "true" : "false");
     };
 
-    const stored = localStorage.getItem(storageKey);
-    const getPreferred = () => {
-      if (stored === "dark" || stored === "light") {
-        return stored;
-      }
-      if (defaultTheme === "dark" || defaultTheme === "light") {
-        return defaultTheme;
-      }
-      return prefersDarkMedia.matches ? "dark" : "light";
+    const stored = localStorage.getItem(key);
+    const getPref = () => {
+      if (stored === "dark" || stored === "light") return stored;
+      if (defaultTheme === "dark" || defaultTheme === "light") return defaultTheme;
+      return media.matches ? "dark" : "light";
     };
 
-    apply(getPreferred());
+    setTheme(getPref());
 
     if (!stored && defaultTheme === "auto") {
-      prefersDarkMedia.addEventListener("change", (e) => {
-        apply(e.matches ? "dark" : "light");
-      });
+      media.addEventListener("change", (e) => setTheme(e.matches ? "dark" : "light"));
     }
 
-    button.addEventListener("click", () => {
-      const next = htmlEl.classList.contains("dark") ? "light" : "dark";
-      apply(next);
-      localStorage.setItem(storageKey, next);
+    btn.addEventListener("click", () => {
+      const next = html.classList.contains("dark") ? "light" : "dark";
+      setTheme(next);
+      localStorage.setItem(key, next);
     });
   })();
 </script>
