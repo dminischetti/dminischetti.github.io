@@ -1,3 +1,6 @@
+{{- $defaultTheme := site.Params.defaultTheme | default "auto" -}}
+{{- $disableToggle := site.Params.disableThemeToggle | default false -}}
+
 <header class="header" role="banner">
   <div class="header-inner">
     <div class="header-content">
@@ -19,8 +22,9 @@
     </div>
   </div>
 
+  {{ if not $disableToggle }}
   <!-- Theme Toggle Button -->
-   <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" type="button">
     <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="5"></circle>
       <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
@@ -29,51 +33,76 @@
       <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
     </svg>
   </button>
+  {{ end }}
 </header>
 
+{{ if not $disableToggle }}
 <script>
 (function () {
-  const btn = document.getElementById("theme-toggle");
-  if (!btn) return console.warn("Theme toggle button not found");
-
-  // PaperMod toggles .dark on body, not always on html
-  const target = document.body || document.documentElement;
   const storageKey = "pref-theme";
+  const defaultTheme = "{{ $defaultTheme }}";
+  const button = document.getElementById("theme-toggle");
+  const prefersDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
+  const root = document.body || document.documentElement;
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
 
-  // Initialize theme (respect PaperMod + system preference)
-  const stored = localStorage.getItem(storageKey);
-  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  if (stored === "dark" || (!stored && systemPrefersDark)) {
-    target.classList.add("dark");
-  } else {
-    target.classList.remove("dark");
+  if (!root || !button) {
+    return;
   }
 
-  // Optional: sync theme color meta for mobile browsers
-  const themeMeta = document.querySelector('meta[name="theme-color"]');
-  const updateMeta = (isDark) => {
+  const updateMeta = (theme) => {
     if (!themeMeta) return;
-    themeMeta.setAttribute("content", isDark ? "#0f172a" : "#ffffff");
+    themeMeta.setAttribute("content", theme === "dark" ? "#0f172a" : "#ffffff");
   };
-  updateMeta(target.classList.contains("dark"));
 
-  // Add toggle listener
-  btn.addEventListener("click", () => {
-    const isDark = target.classList.toggle("dark");
-    localStorage.setItem(storageKey, isDark ? "dark" : "light");
-    updateMeta(isDark);
+  const applyTheme = (theme) => {
+    const isDark = theme === "dark";
+    root.classList.toggle("dark", isDark);
+    root.dataset.theme = isDark ? "dark" : "light";
+    button.setAttribute("aria-pressed", String(isDark));
+    updateMeta(isDark ? "dark" : "light");
+    return isDark ? "dark" : "light";
+  };
 
-    // Optional subtle haptic feedback
-    if (navigator.vibrate) navigator.vibrate(10);
+  const storedTheme = localStorage.getItem(storageKey);
+
+  const initialTheme = (() => {
+    if (storedTheme === "dark" || storedTheme === "light") {
+      return storedTheme;
+    }
+    switch (defaultTheme) {
+      case "dark":
+        return "dark";
+      case "light":
+        return "light";
+      default:
+        return prefersDark && prefersDark.matches ? "dark" : "light";
+    }
+  })();
+
+  applyTheme(initialTheme);
+
+  button.addEventListener("click", () => {
+    const nextTheme = root.classList.contains("dark") ? "light" : "dark";
+    applyTheme(nextTheme);
+    localStorage.setItem(storageKey, nextTheme);
+    if (typeof navigator !== "undefined" && typeof navigator.vibrate === "function") {
+      navigator.vibrate(10);
+    }
   });
 
-  // Listen to system theme changes
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-    const newTheme = e.matches ? "dark" : "light";
-    target.classList.toggle("dark", newTheme === "dark");
-    localStorage.setItem(storageKey, newTheme);
-    updateMeta(newTheme === "dark");
-  });
+  if (!storedTheme && defaultTheme === "auto" && prefersDark) {
+    const listener = (event) => {
+      const newTheme = event.matches ? "dark" : "light";
+      applyTheme(newTheme);
+    };
+    if (typeof prefersDark.addEventListener === "function") {
+      prefersDark.addEventListener("change", listener);
+    } else if (typeof prefersDark.addListener === "function") {
+      prefersDark.addListener(listener);
+    }
+  }
 })();
 </script>
+{{ end }}
 
