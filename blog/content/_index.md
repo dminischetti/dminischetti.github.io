@@ -1,3 +1,0 @@
----
-title: "Dominic's blog"
----
