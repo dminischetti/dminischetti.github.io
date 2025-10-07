@@ -1060,9 +1060,23 @@
       }
 
       .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
-      gap: var(--space-xl);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(min(350px, 100%), 1fr));
+        gap: var(--space-xl);
+      }
+
+      /* Desktop: 2 columns for optimal readability */
+      @media (min-width: 1024px) {
+        .projects-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      /* Tablet: 2 columns */
+      @media (min-width: 768px) and (max-width: 1023px) {
+        .projects-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
       }
 
       .project-card {
