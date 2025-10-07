@@ -1,3 +1,68 @@
+{{- $defaultTheme := site.Params.defaultTheme | default "auto" -}}
+{{- $disableThemeToggle := site.Params.disableThemeToggle | default false -}}
+{{- $isAuto := and (ne $defaultTheme "light") (ne $defaultTheme "dark") -}}
+
+{{- if or (not $disableThemeToggle) $isAuto }}
+<script>
+(function () {
+  const body = document.body;
+  if (!body) return;
+
+  const storageKey = "pref-theme";
+  const themeMeta = document.querySelector('meta[name="theme-color"]');
+  const updateMeta = (isDark) => {
+    if (!themeMeta) return;
+    themeMeta.setAttribute("content", isDark ? "#0f172a" : "#ffffff");
+  };
+  const applyTheme = (isDark) => {
+    body.classList.toggle("dark", Boolean(isDark));
+    updateMeta(Boolean(isDark));
+  };
+
+  const stored = localStorage.getItem(storageKey);
+
+  {{- if eq $defaultTheme "light" }}
+  applyTheme(stored === "dark");
+  {{- else if eq $defaultTheme "dark" }}
+  applyTheme(!(stored === "light"));
+  {{- else }}
+  if (stored === "dark") {
+    applyTheme(true);
+  } else if (stored === "light") {
+    applyTheme(false);
+  } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    applyTheme(true);
+  } else {
+    applyTheme(false);
+  }
+  {{- end }}
+
+  if (window.matchMedia) {
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    media.addEventListener('change', (event) => {
+      const pref = localStorage.getItem(storageKey);
+      if (!pref) {
+        applyTheme(event.matches);
+      } else {
+        updateMeta(event.matches);
+      }
+    });
+  }
+
+  const btn = document.getElementById("theme-toggle");
+  if (btn) {
+    btn.addEventListener("click", () => {
+      window.setTimeout(() => {
+        const isDark = body.classList.contains("dark");
+        updateMeta(isDark);
+        if (navigator.vibrate) navigator.vibrate(10);
+      }, 0);
+    });
+  }
+})();
+</script>
+{{- end }}
+
 <header class="header" role="banner">
   <div class="header-inner">
     <div class="header-content">
@@ -20,7 +85,7 @@
   </div>
 
   <!-- Theme Toggle Button -->
-   <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle Theme">
     <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <circle cx="12" cy="12" r="5"></circle>
       <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path>
@@ -30,50 +95,4 @@
     </svg>
   </button>
 </header>
-
-<script>
-(function () {
-  const btn = document.getElementById("theme-toggle");
-  if (!btn) return console.warn("Theme toggle button not found");
-
-  // PaperMod toggles .dark on body, not always on html
-  const target = document.body || document.documentElement;
-  const storageKey = "pref-theme";
-
-  // Initialize theme (respect PaperMod + system preference)
-  const stored = localStorage.getItem(storageKey);
-  const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  if (stored === "dark" || (!stored && systemPrefersDark)) {
-    target.classList.add("dark");
-  } else {
-    target.classList.remove("dark");
-  }
-
-  // Optional: sync theme color meta for mobile browsers
-  const themeMeta = document.querySelector('meta[name="theme-color"]');
-  const updateMeta = (isDark) => {
-    if (!themeMeta) return;
-    themeMeta.setAttribute("content", isDark ? "#0f172a" : "#ffffff");
-  };
-  updateMeta(target.classList.contains("dark"));
-
-  // Add toggle listener
-  btn.addEventListener("click", () => {
-    const isDark = target.classList.toggle("dark");
-    localStorage.setItem(storageKey, isDark ? "dark" : "light");
-    updateMeta(isDark);
-
-    // Optional subtle haptic feedback
-    if (navigator.vibrate) navigator.vibrate(10);
-  });
-
-  // Listen to system theme changes
-  window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-    const newTheme = e.matches ? "dark" : "light";
-    target.classList.toggle("dark", newTheme === "dark");
-    localStorage.setItem(storageKey, newTheme);
-    updateMeta(newTheme === "dark");
-  });
-})();
-</script>
 
