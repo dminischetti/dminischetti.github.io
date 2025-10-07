@@ -5,7 +5,7 @@ theme: "PaperMod"
 
 # Pagination
 pagination:
-  pagerSize: 10
+  pagerSize: 6
 
 # URL Structure
 permalinks:
@@ -43,7 +43,7 @@ params:
   ShowReadingTime: false
   ShowShareButtons: false
   ShowPostNavLinks: true
-  ShowBreadCrumbs: true
+  ShowBreadCrumbs: false
   ShowCodeCopyButtons: true
   UseHugoToc: false
   ShowRssButtonInSectionTermList: false
