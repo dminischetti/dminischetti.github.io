@@ -987,6 +987,27 @@
       margin-bottom: var(--space-3xl);
       }
 
+      /* Limit to 4 columns maximum on large screens */
+      @media (min-width: 1400px) {
+        .skills-matrix {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      /* 3 columns on medium-large screens */
+      @media (min-width: 1024px) and (max-width: 1399px) {
+        .skills-matrix {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* 2 columns on tablets */
+      @media (min-width: 768px) and (max-width: 1023px) {
+        .skills-matrix {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
       .skill-category {
       background: var(--c-bg);
       border-radius: var(--radius-lg);
@@ -1352,7 +1373,7 @@
       .contact-info {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: repeat(3, 1fr);
       gap: var(--space-md);
       max-width: 800px;
       margin-inline: auto;
@@ -2024,11 +2045,11 @@
               </div>
             </article>
             <article class="project-card fade-in">
-              <h3 class="project-title">Data Analytics Tools for Call Center Operations</h3>
+              <h3 class="project-title">Data Analytics for Call Center Operations</h3>
               <p class="project-desc">
-                Developed a suite of analytics tools and custom reports integrating <strong>MS SQL</strong>, <strong>VB code</strong>, <strong>Excel</strong>, <strong>Power BI</strong>, and <strong>Python</strong> to monitor productivity and campaign performance in real time.  
-                Worked with diverse and constantly evolving datasets to uncover trends, optimize workflows, and support management decisions on both business strategy and employee performance.  
-                Built dynamic dashboards and automated data pipelines that transformed fragmented data into clear, actionable insights.
+                Developed a suite of analytics tools and custom reports integrating <strong>MS SQL</strong>, <strong>VB code</strong>, <strong>Excel</strong> and <strong>Power BI</strong> to monitor productivity and campaign performance in real time.  
+                Worked with diverse datasets to uncover trends, optimize workflows, and support management decisions on both business strategy and employee performance.  
+                Built dynamic dashboards that transformed fragmented data into clear, actionable insights.
               </p>
               <div class="project-tech">
                 <span class="tech-tag">MS SQL</span>
@@ -2273,17 +2294,20 @@
               </div>
               <div class="contact-info-item">
                 <div class="contact-info-icon" aria-hidden="true">
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                  >
-                    <path
-                      d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"
-                    />
-                    <rect x="8" y="2" width="8" height="4" rx="1" ry="1" />
-                  </svg>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                  <polyline points="14 2 14 8 20 8"/>
+                  <line x1="16" y1="13" x2="8" y2="13"/>
+                  <line x1="16" y1="17" x2="8" y2="17"/>
+                  <polyline points="10 9 9 9 8 9"/>
+                </svg>
                 </div>
                 <div class="contact-info-details">
                   <h4>My Resume</h4>
