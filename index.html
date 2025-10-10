@@ -1999,7 +1999,7 @@
               problem-solving abilities
             </p>
           </div>
-          <div class="projects-grid">
+          <!-- <div class="projects-grid">
             <article class="project-card fade-in">
               <h3 class="project-title">Warehouse Management System</h3>
               <p class="project-desc">
@@ -2075,6 +2075,71 @@
               </div>
               <div class="project-links">
                 <a href="#contact" class="project-link">Contact for Details</a>
+              </div>
+            </article>
+          </div> -->
+          <div class="projects-grid">
+            <!-- DevToolbox -->
+            <article class="project-card fade-in">
+              <h3 class="project-title">DevToolbox — A Developer’s Personal Lab</h3>
+              <p class="project-desc">
+                14 offline-first micro-apps (Regex Explorer, JSON Doctor, JWT Lens, Cron Poet, Contrast Lab…)
+                built with vanilla ES modules, service-worker caching, and WCAG-first UI. Calm motion, consistent UX,
+                zero telemetry — everything runs locally in the browser.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">Vanilla JS (ESM)</span>
+                <span class="tech-tag">Service Worker</span>
+                <span class="tech-tag">Tailwind + CSS</span>
+                <span class="tech-tag">Accessibility</span>
+              </div>
+              <div class="project-links">
+                <a class="project-link" href="https://minischetti.org/devtoolbox/" target="_blank" rel="noopener" aria-label="Open DevToolbox project">
+                  View Project →
+                </a>
+              </div>
+            </article>
+
+            <!-- EchoDB -->
+            <article class="project-card fade-in">
+              <h3 class="project-title">EchoDB — The Sound of Change</h3>
+              <p class="project-desc">
+                A PHP&nbsp;8.3 demo that turns database mutations into live visuals, stats, and audio.
+                Pure PHP + PDO + Monolog on the server; vanilla JS + Web Audio API on the client; realtime via SSE
+                with heartbeat and auto-reconnect. Clean, PSR-12, and dependency-light.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">PHP 8.3</span>
+                <span class="tech-tag">Server-Sent Events</span>
+                <span class="tech-tag">MySQL + PDO</span>
+                <span class="tech-tag">Monolog</span>
+                <span class="tech-tag">Web Audio API</span>
+              </div>
+              <div class="project-links">
+                <a class="project-link" href="https://minischetti.org/echodb/" target="_blank" rel="noopener" aria-label="Open EchoDB project">
+                  View Project →
+                </a>
+              </div>
+            </article>
+
+            <!-- InsightLab -->
+            <article class="project-card fade-in">
+              <h3 class="project-title">InsightLab — NYC Housing Dynamics</h3>
+              <p class="project-desc">
+                A reproducible Python + DuckDB case study (2010–2024) with OLS, diagnostics, and nightly CI rebuilds.
+                JSON-driven charts, Makefile automation, and a static GitHub Pages deploy that stays fully auditable.
+              </p>
+              <div class="project-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">DuckDB</span>
+                <span class="tech-tag">Chart.js</span>
+                <span class="tech-tag">Make + CI/CD</span>
+                <span class="tech-tag">Reproducible Analytics</span>
+              </div>
+              <div class="project-links">
+                <a class="project-link" href="https://minischetti.org/insightlab/" target="_blank" rel="noopener" aria-label="Open InsightLab project">
+                  View Project →
+                </a>
               </div>
             </article>
           </div>
@@ -2359,3 +2424,45 @@
     </script>
   </body>
 </html>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "name": "Featured Projects",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "item": {
+        "@type": "SoftwareApplication",
+        "name": "DevToolbox — A Developer’s Personal Lab",
+        "url": "https://minischetti.org/devtoolbox/",
+        "applicationCategory": "DeveloperTool",
+        "operatingSystem": "Web"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "item": {
+        "@type": "SoftwareApplication",
+        "name": "EchoDB — The Sound of Change",
+        "url": "https://minischetti.org/echodb/",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "Web"
+      }
+    },
+    {
+      "@type": "ListItem",
+      "position": 3,
+      "item": {
+        "@type": "CreativeWork",
+        "name": "InsightLab — NYC Housing Dynamics",
+        "url": "https://minischetti.org/insightlab/"
+      }
+    }
+  ]
+}
+</script>
+
