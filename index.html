@@ -1049,13 +1049,6 @@
       border: none;
       }
 
-      .skill-tag:not(.primary):hover {
-      background: var(--c-primary);
-      color: white;
-      border-color: transparent;
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-sm);
-      }
 
       .projects-grid {
         display: grid;
@@ -1391,55 +1384,72 @@
       margin-inline: auto;
       }
 
-      .contact-info-item {
-      display: flex;
-      align-items: center;
-      gap: var(--space-md);
-      padding: var(--space-md);
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: var(--radius);
-      transition: all var(--trans-fast);
-      backdrop-filter: blur(10px);
-      }
-
-      .contact-info-item:hover {
-      transform: translateY(-2px);
-      background: rgba(255, 255, 255, 0.2);
-      }
-
-      .contact-info-icon {
-      width: 44px;
-      height: 44px;
-      background: rgba(255, 255, 255, 0.2);
-      color: white;
-      border-radius: var(--radius);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      }
-
+.contact-info-item {
+  display: flex;
+  align-items: stretch; /* Let children fill full height for centering */
+  gap: var(--space-md);
+  padding: var(--space-md);
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius);
+  transition: all var(--trans-fast);
+  backdrop-filter: blur(10px);
+  height: 100%; /* Helps equalize cards in grid layout */
+}
       .contact-info-icon svg {
       width: 20px;
       height: 20px;
       }
 
-      .contact-info-details h4 {
-      font-weight: 700;
-      margin-bottom: 2px;
-      font-size: var(--fs-sm);
-      }
-
-      .contact-info-details a {
-      color: rgba(255, 255, 255, 0.9);
-      text-decoration: none;
-      font-size: var(--fs-sm);
-      }
-
-      .contact-info-details a:hover {
+.contact-info-item:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.2);
+        border-color: transparent;
+        background: var(--c-primary);
       color: white;
-      text-decoration: underline;
-      }
+}
+
+/* Left icon stays fixed */
+.contact-info-icon {
+  width: 44px;
+  height: 44px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Details area takes remaining space and centers text inside it */
+.contact-info-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* vertical centering */
+  align-items: center; /* horizontal centering */
+  text-align: center;
+}
+
+/* Optional: keep consistent spacing for title/link */
+.contact-info-details h4 {
+  font-weight: 700;
+  margin-bottom: 4px;
+  font-size: var(--fs-sm);
+}
+
+.contact-info-details a {
+  color: rgba(255, 255, 255, 0.9);
+  text-decoration: none;
+  font-size: var(--fs-sm);
+  transition: color var(--trans-fast);
+}
+
+.contact-info-details a:hover {
+  color: white;
+  text-decoration: underline;
+}
+
 
       .availability-notice {
       grid-column: 1 / -1;
