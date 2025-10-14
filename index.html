@@ -1699,7 +1699,22 @@
   }
 }
 
+@media (max-width: 768px) {
+  .nav {
+    display: none;
+  }
 
+  .mobile-toggle {
+    display: block;
+  }
+
+  .theme-toggle {
+    top: calc(70px + var(--safe-area-top) + var(--space-xs));
+    right: max(var(--space-md), var(--safe-area-right));
+    width: 48px;
+    height: 48px;
+    z-index: 99;
+  }
 
     </style>
   </head>
