@@ -1566,6 +1566,131 @@
       display: none;
       }
       }
+
+/* === SHARED BASE STYLES === */
+.skills-matrix,
+.projects-grid,
+.contact-info {
+  display: grid;
+  gap: var(--space-xl);
+  align-items: stretch;
+  justify-content: center;
+  margin-inline: auto;
+  width: 100%;
+}
+
+/* === SKILLS MATRIX === */
+.skills-matrix {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  max-width: 1200px;
+}
+
+@media (min-width: 1024px) {
+  .skills-matrix {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .skill-category {
+    grid-column: span 2;
+  }
+
+  .skill-category:nth-child(4),
+  .skill-category:nth-child(5),
+  .skill-category:nth-child(6),
+  .skill-category:nth-child(7) {
+    grid-column: span 3;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .skills-matrix {
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 800px;
+  }
+
+  .skill-category:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Phones: stack 1 column */
+@media (max-width: 767px) {
+  .skills-matrix {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* === PROJECTS GRID === */
+.projects-grid {
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  max-width: 1100px;
+}
+
+@media (min-width: 1024px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .project-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .project-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+/* 1 column for mobile */
+@media (max-width: 767px) {
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* === CONTACT INFO GRID === */
+.contact-info {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  max-width: 900px;
+  justify-items: stretch;
+  align-items: stretch;
+}
+
+@media (min-width: 768px) {
+  .contact-info {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-info-item:last-child:nth-child(odd) {
+    grid-column: span 3;
+  }
+}
+
+@media (min-width: 600px) and (max-width: 767px) {
+  .contact-info {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .contact-info-item:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 599px) {
+  .contact-info {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+
     </style>
   </head>
   <body>
@@ -1831,10 +1956,10 @@
                 stability.
               </p>
               <div class="timeline-tech">
-                <span class="tech-tag">PHP</span>
-                <span class="tech-tag">MySQL</span>
-                <span class="tech-tag">CMS Development</span>
-                <span class="tech-tag">Agile</span>
+                <span class="skill-tag">PHP</span>
+                <span class="skill-tag">MySQL</span>
+                <span class="skill-tag">CMS Development</span>
+                <span class="skill-tag">Agile</span>
               </div>
             </div>
             <div class="timeline-item fade-in">
@@ -1851,11 +1976,11 @@
                 solutions.
               </p>
               <div class="timeline-tech">
-                <span class="tech-tag">PHP</span>
-                <span class="tech-tag">MariaDB</span>
-                <span class="tech-tag">Bootstrap</span>
-                <span class="tech-tag">REST APIs</span>
-                <span class="tech-tag">Performance Optimization</span>
+                <span class="skill-tag">PHP</span>
+                <span class="skill-tag">MariaDB</span>
+                <span class="skill-tag">Bootstrap</span>
+                <span class="skill-tag">REST APIs</span>
+                <span class="skill-tag">Performance Optimization</span>
               </div>
             </div>
             <div class="timeline-item fade-in">
@@ -1870,13 +1995,13 @@
                 deployment environments.
               </p>
               <div class="timeline-tech">
-                <span class="tech-tag">PHP</span>
-                <span class="tech-tag">MySQL</span>
-                <span class="tech-tag">Firebase</span>
-                <span class="tech-tag">Docker</span>
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Selenium</span>
-                <span class="tech-tag">Performance Optimization</span>
+                <span class="skill-tag">PHP</span>
+                <span class="skill-tag">MySQL</span>
+                <span class="skill-tag">Firebase</span>
+                <span class="skill-tag">Docker</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">Selenium</span>
+                <span class="skill-tag">Performance Optimization</span>
               </div>
             </div>
             <div class="timeline-item fade-in">
@@ -1890,10 +2015,10 @@
                 decision-making across logistics and sales teams.
               </p>
               <div class="timeline-tech">
-                <span class="tech-tag">Database Administration</span>
-                <span class="tech-tag">T-SQL</span>
-                <span class="tech-tag">Data Analysis</span>
-                <span class="tech-tag">System Administration</span>
+                <span class="skill-tag">Database Administration</span>
+                <span class="skill-tag">T-SQL</span>
+                <span class="skill-tag">Data Analysis</span>
+                <span class="skill-tag">System Administration</span>
               </div>
             </div>
           </div>
@@ -2086,10 +2211,10 @@
                 zero telemetry — everything runs locally in the browser.
               </p>
               <div class="project-tech">
-                <span class="tech-tag">Vanilla JS (ESM)</span>
-                <span class="tech-tag">Service Worker</span>
-                <span class="tech-tag">Tailwind + CSS</span>
-                <span class="tech-tag">Accessibility</span>
+                <span class="skill-tag">Vanilla JS (ESM)</span>
+                <span class="skill-tag">Service Worker</span>
+                <span class="skill-tag">Tailwind + CSS</span>
+                <span class="skill-tag">Accessibility</span>
               </div>
               <div class="project-links">
                 <a class="project-link" href="https://minischetti.org/devtoolbox/" target="_blank" rel="noopener" aria-label="Open DevToolbox project">
@@ -2107,11 +2232,11 @@
                 with heartbeat and auto-reconnect. Clean, PSR-12, and dependency-light.
               </p>
               <div class="project-tech">
-                <span class="tech-tag">PHP 8.3</span>
-                <span class="tech-tag">Server-Sent Events</span>
-                <span class="tech-tag">MySQL + PDO</span>
-                <span class="tech-tag">Monolog</span>
-                <span class="tech-tag">Web Audio API</span>
+                <span class="skill-tag">PHP 8.3</span>
+                <span class="skill-tag">Server-Sent Events</span>
+                <span class="skill-tag">MySQL + PDO</span>
+                <span class="skill-tag">Monolog</span>
+                <span class="skill-tag">Web Audio API</span>
               </div>
               <div class="project-links">
                 <a class="project-link" href="https://minischetti.org/echodb/" target="_blank" rel="noopener" aria-label="Open EchoDB project">
@@ -2128,11 +2253,11 @@
                 JSON-driven charts, Makefile automation, and a static GitHub Pages deploy that stays fully auditable.
               </p>
               <div class="project-tech">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">DuckDB</span>
-                <span class="tech-tag">Chart.js</span>
-                <span class="tech-tag">Make + CI/CD</span>
-                <span class="tech-tag">Reproducible Analytics</span>
+                <span class="skill-tag">Python</span>
+                <span class="skill-tag">DuckDB</span>
+                <span class="skill-tag">Chart.js</span>
+                <span class="skill-tag">Make + CI/CD</span>
+                <span class="skill-tag">Reproducible Analytics</span>
               </div>
               <div class="project-links">
                 <a class="project-link" href="https://minischetti.org/insightlab/" target="_blank" rel="noopener" aria-label="Open InsightLab project">
