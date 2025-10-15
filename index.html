@@ -1601,14 +1601,6 @@
         display: block;
       }
 
-      .theme-toggle {
-        height: 48px;
-        right: max(var(--space-md), var(--safe-area-right));
-        top: calc(70px + var(--safe-area-top) + var(--space-xs));
-        width: 48px;
-        z-index: 99;
-      }
-
       .hero {
         padding-top: calc(80px + var(--safe-area-top));
       }
@@ -1682,12 +1674,17 @@
       }
     }
 
-    @media (min-width: 768px) {
+    @media (min-width: 768px) and (max-width: 1310px) {
+      .theme-toggle {
+                top: calc(80px + var(--safe-area-top) + var(--space-xs));
+      }
+    }
+
+    @media (max-width: 768px) {
       .theme-toggle {
         display: none;
       }
     }
-
     /* ============================================
        RESPONSIVE: SMALL MOBILE (max-width: 480px)
        ============================================ */
@@ -1834,7 +1831,7 @@
     <a href="#testimonials" class="mobile-nav-link" onclick="toggleMobileNav()">Testimonials</a>
     <a href="#contact" class="mobile-nav-link" onclick="toggleMobileNav()">Contact</a>
     <a href="/blog" class="mobile-nav-link" onclick="toggleMobileNav()">Blog</a>
-    <a href="#" class="theme-toggle" onclick="toggleTheme()">Toggle dark mode</a>
+    <a href="#" class="mobile-nav-link" onclick="toggleTheme()">Toggle dark mode</a>
   </nav>
   <a href="#" class="floating-cta" aria-label="Schedule a Call"
     onclick="Calendly.initPopupWidget({url: 'https://calendly.com/minischetti/meeting'}); return false;">
