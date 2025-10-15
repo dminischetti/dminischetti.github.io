@@ -526,10 +526,9 @@
       }
 
       .mobile-nav {
-      display: none;
       position: fixed;
       top: 0;
-      right: -100%;
+      right: 0;
       width: 85%;
       max-width: 350px;
       height: 100vh;
@@ -537,13 +536,18 @@
       background: var(--c-bg);
       box-shadow: var(--shadow-2xl);
       z-index: 1000;
-      transition: right var(--trans);
+      transform: translateX(100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform var(--trans), opacity var(--trans);
       padding: var(--space-xl);
       overflow-y: auto;
       }
 
       .mobile-nav.open {
-      right: 0;
+      transform: translateX(0);
+      opacity: 1;
+      pointer-events: auto;
       }
 
       .mobile-overlay {
@@ -1767,6 +1771,7 @@
             class="mobile-toggle"
             onclick="toggleMobileNav()"
             aria-label="Toggle navigation menu"
+            aria-expanded="false"
           >
             <svg
               viewBox="0 0 24 24"
@@ -1787,12 +1792,14 @@
       class="mobile-overlay"
       id="mobileOverlay"
       onclick="toggleMobileNav()"
+      aria-hidden="true"
     ></div>
     <nav
       class="mobile-nav"
       id="mobileNav"
       role="navigation"
       aria-label="Mobile navigation"
+      aria-hidden="true"
     >
       <div class="mobile-nav-header">
         <span class="logo">Menu</span>
@@ -2568,7 +2575,7 @@
       </div>
     </footer>
     <script>
-      const Theme={init(){const e=localStorage.getItem("theme"),t=window.matchMedia("(prefers-color-scheme: dark)").matches,a=e||(t?"dark":"light");document.documentElement.setAttribute("data-theme",a)},toggle(){const e=document.documentElement.getAttribute("data-theme")||"light",t="dark"===e?"light":"dark";document.documentElement.setAttribute("data-theme",t),localStorage.setItem("theme",t)}},Navigation={init(){this.setupSmoothScrolling(),this.setupActiveStates(),this.setupHeaderScroll()},setupSmoothScrolling(){document.addEventListener("click",e=>{const t=e.target.closest('a[href^="#"]');if(!t)return;e.preventDefault();const a=document.querySelector(t.getAttribute("href"));if(!a)return;const n=a.offsetTop-80;window.scrollTo({top:n,behavior:"smooth"});const r=document.getElementById("mobileNav");r?.classList.contains("open")&&this.toggleMobile()})},setupActiveStates(){const e=document.querySelectorAll("section[id]"),t=document.querySelectorAll(".nav-link, .mobile-nav-link"),a=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){t.forEach(t=>{t.classList.remove("active"),t.getAttribute("href")===`#${e.target.id}`&&t.classList.add("active")})}})},{rootMargin:"-100px 0px -60%",threshold:0});e.forEach(e=>a.observe(e))},setupHeaderScroll(){const e=document.querySelector(".header");let t=!1;window.addEventListener("scroll",()=>{t||(requestAnimationFrame(()=>{e.classList.toggle("scrolled",window.pageYOffset>100),t=!1}),t=!0)},{passive:!0})},toggleMobile(){const e=document.getElementById("mobileNav"),t=document.getElementById("mobileOverlay"),a=e.classList.contains("open");e.classList.toggle("open"),t.classList.toggle("open"),document.body.style.overflow=a?"":"hidden"}},Animations={init(){const e=document.querySelectorAll(".fade-in"),t=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&(e.target.classList.add("visible"),t.unobserve(e.target))})},{threshold:.1,rootMargin:"0px 0px -50px 0px"});e.forEach(e=>t.observe(e))}},FloatingCTA={init(){const e=document.querySelector(".floating-cta"),t=document.querySelector(".hero");if(!e||!t)return;let a=!1;window.addEventListener("scroll",()=>{a||(requestAnimationFrame(()=>{const a=t.offsetTop+t.offsetHeight;e.classList.toggle("visible",window.pageYOffset>a),a=!1}),a=!0)},{passive:!0})}},ContactForm={init(){const e=document.getElementById("contactForm");e&&e.addEventListener("submit",this.handleSubmit.bind(this))},async handleSubmit(e){e.preventDefault();const t=e.target,a=new FormData(t),n=Object.fromEntries(a);if(this.clearErrors(),!this.validate(n))return;try{const e=await fetch(t.action,{method:t.method,body:a,headers:{Accept:"application/json"}});if(e.ok)this.showSuccess(),t.reset();else throw new Error("Form submission failed")}catch(e){console.error("Form submission error:",e)}},validate(e){let t=!0;return e.name?.trim()||(this.showError("name","Please enter your name"),t=!1),e.email?.trim()&&this.isValidEmail(e.email)||(this.showError("email","Please enter a valid email"),t=!1),e.message?.trim()||(this.showError("message","Please provide details"),t=!1),t},isValidEmail:e=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e),showError(e,t){const a=document.getElementById(e),n=a?.closest(".form-group"),r=n?.querySelector(".form-error");n&&r&&(n.classList.add("error"),r.textContent=t)},clearErrors(){document.querySelectorAll(".form-group.error").forEach(e=>{e.classList.remove("error")})},showSuccess(){const e=document.getElementById("formSuccess");e&&(e.classList.add("show"),setTimeout(()=>e.classList.remove("show"),5e3))}};window.toggleTheme=()=>Theme.toggle(),window.toggleMobileNav=()=>Navigation.toggleMobile(),document.addEventListener("DOMContentLoaded",()=>{Theme.init(),Navigation.init(),Animations.init(),FloatingCTA.init(),ContactForm.init()});const preloadCriticalResources=()=>{const e=document.querySelector(".hero-image");if(e&&e.src){const t=document.createElement("link");t.rel="preload",t.href=e.src,t.as="image",document.head.appendChild(t)}};let resizeTimeout;window.addEventListener("resize",()=>{clearTimeout(resizeTimeout),resizeTimeout=setTimeout(()=>{document.dispatchEvent(new CustomEvent("optimizedResize"))},150)},{passive:!0}),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",preloadCriticalResources):preloadCriticalResources();
+      const Theme={init(){const e=localStorage.getItem("theme"),t=window.matchMedia("(prefers-color-scheme: dark)").matches,a=e||(t?"dark":"light");document.documentElement.setAttribute("data-theme",a)},toggle(){const e=document.documentElement.getAttribute("data-theme")||"light",t="dark"===e?"light":"dark";document.documentElement.setAttribute("data-theme",t),localStorage.setItem("theme",t)}},Navigation={init(){this.setupSmoothScrolling(),this.setupActiveStates(),this.setupHeaderScroll()},setupSmoothScrolling(){document.addEventListener("click",e=>{const t=e.target.closest('a[href^="#"]');if(!t)return;e.preventDefault();const a=document.querySelector(t.getAttribute("href"));if(!a)return;const n=a.offsetTop-80;window.scrollTo({top:n,behavior:"smooth"});const r=document.getElementById("mobileNav");r?.classList.contains("open")&&this.toggleMobile()})},setupActiveStates(){const e=document.querySelectorAll("section[id]"),t=document.querySelectorAll(".nav-link, .mobile-nav-link"),a=new IntersectionObserver(e=>{e.forEach(e=>{if(e.isIntersecting){t.forEach(t=>{t.classList.remove("active"),t.getAttribute("href")===`#${e.target.id}`&&t.classList.add("active")})}})},{rootMargin:"-100px 0px -60%",threshold:0});e.forEach(e=>a.observe(e))},setupHeaderScroll(){const e=document.querySelector(".header");let t=!1;window.addEventListener("scroll",()=>{t||(requestAnimationFrame(()=>{e.classList.toggle("scrolled",window.pageYOffset>100),t=!1}),t=!0)},{passive:!0})},toggleMobile(){const e=document.getElementById("mobileNav"),t=document.getElementById("mobileOverlay"),a=document.querySelector(".mobile-toggle"),n=e.classList.contains("open"),o=!n;e.classList.toggle("open"),t.classList.toggle("open"),document.body.style.overflow=o?"hidden":"",e?.setAttribute("aria-hidden",o?"false":"true"),t?.setAttribute("aria-hidden",o?"false":"true"),a?.setAttribute("aria-expanded",o?"true":"false")}},Animations={init(){const e=document.querySelectorAll(".fade-in"),t=new IntersectionObserver(e=>{e.forEach(e=>{e.isIntersecting&&(e.target.classList.add("visible"),t.unobserve(e.target))})},{threshold:.1,rootMargin:"0px 0px -50px 0px"});e.forEach(e=>t.observe(e))}},FloatingCTA={init(){const e=document.querySelector(".floating-cta"),t=document.querySelector(".hero");if(!e||!t)return;let a=!1;window.addEventListener("scroll",()=>{a||(requestAnimationFrame(()=>{const a=t.offsetTop+t.offsetHeight;e.classList.toggle("visible",window.pageYOffset>a),a=!1}),a=!0)},{passive:!0})}},ContactForm={init(){const e=document.getElementById("contactForm");e&&e.addEventListener("submit",this.handleSubmit.bind(this))},async handleSubmit(e){e.preventDefault();const t=e.target,a=new FormData(t),n=Object.fromEntries(a);if(this.clearErrors(),!this.validate(n))return;try{const e=await fetch(t.action,{method:t.method,body:a,headers:{Accept:"application/json"}});if(e.ok)this.showSuccess(),t.reset();else throw new Error("Form submission failed")}catch(e){console.error("Form submission error:",e)}},validate(e){let t=!0;return e.name?.trim()||(this.showError("name","Please enter your name"),t=!1),e.email?.trim()&&this.isValidEmail(e.email)||(this.showError("email","Please enter a valid email"),t=!1),e.message?.trim()||(this.showError("message","Please provide details"),t=!1),t},isValidEmail:e=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e),showError(e,t){const a=document.getElementById(e),n=a?.closest(".form-group"),r=n?.querySelector(".form-error");n&&r&&(n.classList.add("error"),r.textContent=t)},clearErrors(){document.querySelectorAll(".form-group.error").forEach(e=>{e.classList.remove("error")})},showSuccess(){const e=document.getElementById("formSuccess");e&&(e.classList.add("show"),setTimeout(()=>e.classList.remove("show"),5e3))}};window.toggleTheme=()=>Theme.toggle(),window.toggleMobileNav=()=>Navigation.toggleMobile(),document.addEventListener("DOMContentLoaded",()=>{Theme.init(),Navigation.init(),Animations.init(),FloatingCTA.init(),ContactForm.init()});const preloadCriticalResources=()=>{const e=document.querySelector(".hero-image");if(e&&e.src){const t=document.createElement("link");t.rel="preload",t.href=e.src,t.as="image",document.head.appendChild(t)}};let resizeTimeout;window.addEventListener("resize",()=>{clearTimeout(resizeTimeout),resizeTimeout=setTimeout(()=>{document.dispatchEvent(new CustomEvent("optimizedResize"))},150)},{passive:!0}),"loading"===document.readyState?document.addEventListener("DOMContentLoaded",preloadCriticalResources):preloadCriticalResources();
     </script>
   </body>
 </html>
