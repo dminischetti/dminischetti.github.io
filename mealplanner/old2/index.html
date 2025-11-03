@@ -1,0 +1,2557 @@
+<!DOCTYPE html>
+
+<html lang="it">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <title>Meal Planner</title>
+
+  <style>
+    :root {
+      --bg: #fff5f0;
+      --bg-soft: #fff9f5;
+      --card: #ffffff;
+      --muted: #8c7569;
+      --text: #362420;
+      --border: #f2d6c9;
+      --tint: #ff7b4a;
+      --tint-2: #4caf50;
+      --ok: #10b981;
+      --info: #06b6d4;
+      --warn: #f59e0b;
+      --radius-8: 12px;
+      --radius-12: 16px;
+      --shadow-1: 0 8px 24px rgba(0, 0, 0, .08);
+      --shadow-2: 0 12px 28px rgba(0, 0, 0, .12);
+      --tap: 48px;
+      --h1: clamp(20px, 3.6vw, 24px);
+      --h2: clamp(16px, 3.2vw, 20px);
+      --body: clamp(14px, 3vw, 16px);
+      --small: 12px;
+    }
+
+    body.dark {
+      --bg: #000000;
+      --bg-soft: #111111;
+      --card: #1a1a1a;
+      --muted: #a0a0a0;
+      --text: #f5f5f5;
+      --border: #333333;
+      --shadow-1: 0 8px 24px rgba(0, 0, 0, .6);
+      --shadow-2: 0 20px 32px rgba(0, 0, 0, .75);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0
+    }
+
+    html,
+    body {
+      height: 100%
+    }
+
+    body {
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(255, 123, 74, .12), transparent 45%), radial-gradient(1200px 900px at 110% 10%, rgba(76, 175, 80, .08), transparent 50%), var(--bg);
+      color: var(--text);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 0 16px 80px;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 16px;
+      background: color-mix(in oklab, var(--bg) 70%, var(--bg-soft) 30%);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: saturate(120%) blur(6px);
+    }
+
+    .header h1 {
+      font-size: var(--h1);
+      font-weight: 800;
+      letter-spacing: .2px;
+      color: var(--tint);
+    }
+
+    .btn-icon {
+      width: var(--tap);
+      height: var(--tap);
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--text);
+      box-shadow: var(--shadow-1);
+      cursor: pointer;
+      transition: transform .08s ease, background .2s ease;
+    }
+
+    .btn-icon:active {
+      transform: scale(.98)
+    }
+
+    .week-nav {
+      margin: 16px 0 12px;
+      padding: 16px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      border: 2px solid var(--tint);
+      border-radius: var(--radius-12);
+      background: var(--bg-soft);
+      box-shadow: var(--shadow-1);
+    }
+
+    .week-nav-center {
+      flex: 1;
+      text-align: center;
+      font-weight: 800;
+      font-size: 18px;
+    }
+
+    .week-nav .week-label {
+      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .week-nav-btn {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      cursor: pointer;
+      font-size: 16px;
+      flex-shrink: 0;
+      transition: transform .08s ease, background .15s ease;
+    }
+
+    .week-nav-btn:active {
+      transform: scale(.95);
+      background: var(--bg-soft);
+    }
+
+    .day-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-12);
+      margin: 10px 0;
+      padding: 12px;
+      box-shadow: var(--shadow-1);
+    }
+
+    .day-card.incomplete {
+      border-style: dashed;
+      opacity: .95
+    }
+
+    .day-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 6px;
+    }
+
+    .day-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: .2px
+    }
+
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 2px 8px;
+      font-size: 11px;
+      font-weight: 800;
+      border-radius: 999px;
+      color: #fff;
+      background: var(--tint);
+    }
+
+    .day-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px
+    }
+
+    .pill {
+      height: 32px;
+      padding: 0 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--muted);
+      cursor: pointer;
+      transition: filter .15s ease, transform .08s ease;
+    }
+
+    .pill:active {
+      transform: scale(.98)
+    }
+
+    .pill.is-on {
+      color: #fff;
+      border-color: transparent;
+      background: var(--tint-2)
+    }
+
+    .pill.bread {
+      border: 1px dashed #aaa;
+      background: transparent;
+      color: #bbb;
+      opacity: 0.4;
+    }
+
+    .pill.bread.is-on {
+      background: var(--tint-2);
+      color: #fff;
+      border: 1px solid var(--border);
+      opacity: 1;
+    }
+
+    .meal {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px;
+      margin-top: 8px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg-soft);
+      min-height: 64px;
+      cursor: pointer;
+      transition: background .2s ease, transform .08s ease;
+    }
+
+    .meal:active {
+      transform: translateY(1px)
+    }
+
+    .meal.empty {
+      opacity: .65
+    }
+
+    .meal .icon {
+      width: 44px;
+      height: 44px;
+      display: grid;
+      place-items: center;
+      border-radius: 12px;
+      font-size: 22px;
+      text-shadow: 0 0 3px rgba(0, 0, 0, 0.8), 0 0 4px rgba(0, 0, 0, 0.6);
+    }
+
+    .icon.breakfast {
+      background: linear-gradient(135deg, #00A6FF, #FFFFFF);
+    }
+
+    .icon.lunch {
+      background: linear-gradient(135deg, #FA8607, #FFF57B);
+    }
+
+    .icon.dinner {
+      background: linear-gradient(135deg, #01426D, #01162E);
+    }
+
+    .meal .content {
+      flex: 1;
+      min-width: 0
+    }
+
+    .meal .title {
+      font-weight: 800;
+      font-size: 13px;
+      display: flex;
+      align-items: center;
+      gap: 6px
+    }
+
+    .meal .desc {
+      margin-top: 2px;
+      font-size: 12px;
+      color: var(--muted);
+      white-space: normal;
+      line-height: 1.4;
+    }
+
+    .weekend-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-soft);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-12);
+      padding: 12px;
+      margin: 12px 0 6px;
+    }
+
+    .switch {
+      position: relative;
+      width: 54px;
+      height: 30px;
+      border-radius: 999px;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: #e8d5c9
+    }
+
+    .switch .knob {
+      position: absolute;
+      top: 3px;
+      left: 3px;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #fff;
+      transition: transform .18s ease
+    }
+
+    .switch.on {
+      background: var(--tint);
+      border-color: transparent
+    }
+
+    .switch.on .knob {
+      transform: translateX(24px)
+    }
+
+    .bottom-bar {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 60;
+      background: var(--bg);
+      border-top: 1px solid var(--border);
+      padding: 8px;
+      backdrop-filter: blur(6px);
+    }
+
+    .actions {
+      display: flex;
+      gap: 8px;
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 0 env(safe-area-inset-right) 0 env(safe-area-inset-left);
+    }
+
+    .bar-btn {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 56px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font-size: 11px;
+      font-weight: 800;
+      gap: 4px;
+      cursor: pointer;
+      transition: transform .08s ease, background .15s ease;
+    }
+
+    .bar-btn:active {
+      transform: scale(.96);
+      background: var(--bg-soft);
+    }
+
+    .bar-btn span {
+      opacity: .85
+    }
+
+    .bar-ico {
+      font-size: 18px
+    }
+
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(8, 10, 20, .6);
+      display: none;
+      z-index: 70
+    }
+
+    .modal-overlay.show {
+      display: block
+    }
+
+    .sheet {
+      position: fixed;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 80;
+      background: var(--card);
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-2);
+      transform: translateY(100%);
+      transition: transform .24s ease-out;
+      overflow: hidden;
+    }
+
+    .modal-overlay.show+.sheet {
+      transform: translateY(0)
+    }
+
+    .sheet-head {
+      padding: 14px;
+      border-bottom: 1px solid var(--border);
+      text-align: center
+    }
+
+    .sheet-head-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .sheet-title {
+      font-size: var(--h2);
+      font-weight: 800
+    }
+
+    .sheet-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px
+    }
+
+    .sheet-body {
+      max-height: calc(82vh - 112px);
+      overflow: auto
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+      padding: 12px
+    }
+
+    .tile {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 8px;
+      min-height: 72px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg-soft);
+      cursor: pointer;
+      text-align: center;
+      font-size: 13px;
+      transition: transform .08s ease, background .15s ease;
+    }
+
+    .tile:active {
+      transform: scale(.98)
+    }
+
+    .tile.selected {
+      border-color: transparent;
+      background: color-mix(in oklab, var(--tint) 22%, var(--bg-soft) 78%)
+    }
+
+    .tile.delivery {
+      border: 2px dashed #9ca3af;
+      background: color-mix(in oklab, #3b82f6 8%, var(--bg-soft) 92%);
+    }
+
+    .tile.delivery.selected {
+      border: 2px solid #3b82f6;
+      background: color-mix(in oklab, #3b82f6 18%, var(--bg-soft) 82%);
+    }
+
+    .tile .emo {
+      font-size: 22px;
+      position: relative;
+    }
+
+    .tile.delivery .emo::after {
+      content: '🚚';
+      position: absolute;
+      font-size: 14px;
+      bottom: -6px;
+      right: -8px;
+    }
+
+    .tile .delivery-label {
+      font-size: 10px;
+      color: #3b82f6;
+      font-weight: 800;
+      margin-top: -2px;
+    }
+
+    .tile-badges {
+      position: absolute;
+      top: 4px;
+      right: 4px;
+      display: flex;
+      gap: 2px;
+      flex-direction: column;
+    }
+
+    .tile-badge {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      font-size: 11px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .tile {
+      position: relative;
+    }
+
+    body.dark .tile.delivery {
+      background: color-mix(in oklab, #3b82f6 12%, var(--bg-soft) 88%);
+    }
+
+    body.dark .tile.delivery.selected {
+      background: color-mix(in oklab, #3b82f6 22%, var(--bg-soft) 78%);
+    }
+
+    .field {
+      padding: 10px 12px;
+      margin: 8px 12px 0
+    }
+
+    .label {
+      font-size: 12px;
+      color: var(--muted);
+      font-weight: 800;
+      margin-bottom: 6px
+    }
+
+    .input {
+      width: 100%;
+      height: 44px;
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--bg-soft);
+      color: var(--text);
+      font-size: 14px;
+      outline: none;
+    }
+
+    .sheet-foot {
+      display: flex;
+      gap: 8px;
+      padding: 10px;
+      border-top: 1px solid var(--border);
+      background: var(--bg-soft)
+    }
+
+    .btn {
+      height: 44px;
+      flex: 1;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: var(--card);
+      color: var(--text);
+      font-weight: 800;
+      cursor: pointer
+    }
+
+    .toast {
+      position: fixed;
+      left: 50%;
+      bottom: 90px;
+      transform: translateX(-50%);
+      background: var(--card);
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 10px 16px;
+      border-radius: 999px;
+      box-shadow: var(--shadow-1);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .18s ease, visibility .18s ease;
+      z-index: 90;
+      font-weight: 800;
+      font-size: 12px;
+    }
+
+    .toast.show {
+      opacity: 1;
+      visibility: visible
+    }
+
+    .recap-pre {
+      white-space: pre-wrap;
+      font-size: 13px;
+      line-height: 1.4em;
+      padding: 12px;
+    }
+
+    .shopping-store {
+      margin-bottom: 8px;
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .shopping-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      padding: 12px;
+    }
+
+    .shopping-item {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: row;
+      gap: 10px;
+      padding: 12px 8px;
+      min-height: 72px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: var(--bg-soft);
+      cursor: pointer;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .shopping-item .emo {
+      font-size: 22px;
+    }
+
+    .shopping-item .name {
+      font-weight: 700;
+    }
+  </style>
+
+</head>
+
+<body>
+  <header class="header">
+    <h1>Meal Planner</h1>
+    <button id="themeToggle" class="btn-icon" aria-label="Toggle theme">🌙</button>
+  </header>
+
+  <div class="container">
+    <div class="week-nav">
+      <button class="week-nav-btn" id="prevWeek" aria-label="Previous week">◄</button>
+      <div class="week-nav-center">
+        <div class="week-label" id="weekLabel">PLANNING WEEK</div>
+        <div id="weekRange"></div>
+      </div>
+      <button class="week-nav-btn" id="nextWeek" aria-label="Next week">►</button>
+    </div>
+    <div id="daysList"></div>
+  </div>
+
+  <div class="bottom-bar">
+    <div class="actions">
+      <button class="bar-btn" id="clearBtn">
+        <div class="bar-ico">🗑️</div><span>Clear</span>
+      </button>
+      <button class="bar-btn" id="shareBtn">
+        <div class="bar-ico">▶️</div><span>Send</span>
+      </button>
+    </div>
+  </div>
+
+  <div id="modalOverlay" class="modal-overlay"></div>
+  <section id="sheet" class="sheet" aria-modal="true" role="dialog">
+    <div class="sheet-head">
+      <div class="sheet-head-inner">
+        <div>
+          <div class="sheet-title" id="modalTitle"></div>
+          <div class="sheet-sub" id="modalSubtitle"></div>
+        </div>
+        <div id="modalBreadWrap"></div>
+      </div>
+    </div>
+    <div class="sheet-body" id="modalBody"></div>
+    <div class="sheet-foot" id="modalFooter"></div>
+  </section>
+
+  <div id="toast" class="toast">Saved! ✓</div>
+
+  <script>
+    const DATA = {
+      "meals": {
+        "custom": { 
+          "name": "Custom", 
+          "emoji": "🍽️", 
+          "ingredients": [], 
+          "categories": ["lunch", "dinner", "breakfast", "side"],
+          "diet": "other",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "ravioli_burro_e_salvia": { 
+          "name": "Ravioli burro e salvia", 
+          "emoji": "🥟", 
+          "ingredients": [
+            {"ingredient": "Ravioli", "emoji": "🥟", "store": "Aldi"},
+            {"ingredient": "Sage", "emoji": "🌿", "store": "Wegmans"}
+          ],
+          "categories": ["lunch"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "spaghetti_al_limone": { 
+          "name": "Spaghetti al limone", 
+          "emoji": "🍝", 
+          "ingredients": [
+            {"ingredient": "Spaghetti", "emoji": "🍝", "store": "Amazon"},
+            {"ingredient": "Lemons", "emoji": "🍋", "store": "Aldi"}
+          ],
+          "categories": ["lunch"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "pasta_e_ceci": { 
+          "name": "Pasta e ceci", 
+          "emoji": "🍝", 
+          "ingredients": [
+            {"ingredient": "Ditalini", "emoji": "🍝", "store": "Amazon"},
+            {"ingredient": "Chickpeas", "emoji": "🫘", "store": "Aldi"}
+          ],
+          "categories": ["lunch"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "pasta_col_tonno": { 
+          "name": "Pasta col tonno", 
+          "emoji": "🐟", 
+          "ingredients": [
+            {"ingredient": "Spaghetti", "emoji": "🍝", "store": "Amazon"},
+            {"ingredient": "Tuna", "emoji": "🐟", "store": "Amazon"}
+          ],
+          "categories": ["lunch"],
+          "diet": "fish",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "pasta_sugo_tonno": { 
+          "name": "Pasta sugo tonno", 
+          "emoji": "🐟", 
+          "ingredients": [
+            {"ingredient": "Pasta", "emoji": "🍝", "store": "Amazon"},
+            {"ingredient": "Tuna", "emoji": "🐟", "store": "Amazon"},
+            {"ingredient": "Tomato sauce", "emoji": "🍅", "store": "Wegmans"}
+          ],
+          "categories": ["lunch"],
+          "diet": "fish",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "piadine_prosciutto_provolone": { 
+          "name": "Piadine prosciutto provolone", 
+          "emoji": "🥪", 
+          "ingredients": [
+            {"ingredient": "Flatbreads", "emoji": "🫓", "store": "Aldi"},
+            {"ingredient": "Prosciutto", "emoji": "🥩", "store": "Aldi"},
+            {"ingredient": "Provolone cheese", "emoji": "🧀", "store": "Aldi"}
+          ],
+          "categories": ["lunch"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "uova_fritte": { 
+          "name": "Uova fritte", 
+          "emoji": "🍳", 
+          "ingredients": [
+            {"ingredient": "Eggs", "emoji": "🥚", "store": "Aldi"}
+          ],
+          "categories": ["lunch"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "pasta_al_pesto": { 
+          "name": "Pasta al pesto", 
+          "emoji": "🌿", 
+          "ingredients": [
+            {"ingredient": "Pasta", "emoji": "🍝", "store": "Amazon"},
+            {"ingredient": "Pesto sauce", "emoji": "🌿", "store": "Aldi"}
+          ],
+          "categories": ["lunch"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "pasta_coi_pomodorini": { 
+          "name": "Pasta coi pomodorini", 
+          "emoji": "🍅", 
+          "ingredients": [
+            {"ingredient": "Pasta", "emoji": "🍝", "store": "Amazon"},
+            {"ingredient": "Cherry tomatoes", "emoji": "🍅", "store": "Aldi"}
+          ],
+          "categories": ["lunch"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "lenticchie": { 
+          "name": "Lenticchie", 
+          "emoji": "🥘", 
+          "ingredients": [
+            {"ingredient": "Lentils", "emoji": "🫘", "store": "Wegmans"}
+          ],
+          "categories": ["lunch"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "lenticchie_e_crostini": { 
+          "name": "Lenticchie e crostini", 
+          "emoji": "🥘", 
+          "ingredients": [
+            {"ingredient": "Lentils", "emoji": "🫘", "store": "Wegmans"},
+            {"ingredient": "Croutons", "emoji": "🍞", "store": "Aldi"}
+          ],
+          "categories": ["lunch"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "spaghetti_aglio_e_olio": { 
+          "name": "Spaghetti aglio e olio", 
+          "emoji": "🧄", 
+          "ingredients": [
+            {"ingredient": "Spaghetti", "emoji": "🍝", "store": "Amazon"}
+          ],
+          "categories": ["lunch"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "carbonara": { 
+          "name": "Carbonara", 
+          "emoji": "🥓", 
+          "ingredients": [
+            {"ingredient": "Spaghetti", "emoji": "🍝", "store": "Amazon"},
+            {"ingredient": "Eggs", "emoji": "🥚", "store": "Aldi"},
+            {"ingredient": "Bacon", "emoji": "🥓", "store": "Aldi"}
+          ],
+          "categories": ["lunch"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "frittata_di_pasta": { 
+          "name": "Frittata di pasta", 
+          "emoji": "🍳", 
+          "ingredients": [
+            {"ingredient": "Eggs", "emoji": "🥚", "store": "Aldi"}
+          ],
+          "categories": ["lunch"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "pasta_e_fagioli": { 
+          "name": "Pasta e fagioli", 
+          "emoji": "🫘", 
+          "ingredients": [
+            {"ingredient": "Pasta", "emoji": "🍝", "store": "Amazon"},
+            {"ingredient": "Beans", "emoji": "🫘", "store": "Aldi"}
+          ],
+          "categories": ["lunch"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "salmone_col_riso": { 
+          "name": "Salmone col riso", 
+          "emoji": "🍣", 
+          "ingredients": [
+            {"ingredient": "Salmon", "emoji": "🍣", "store": "Wegmans"},
+            {"ingredient": "Rice", "emoji": "🍚", "store": "Amazon"}
+          ],
+          "categories": ["dinner"],
+          "diet": "fish",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "frittata_di_zucchine": { 
+          "name": "Frittata di zucchine", 
+          "emoji": "🥒", 
+          "ingredients": [
+            {"ingredient": "Eggs", "emoji": "🥚", "store": "Aldi"},
+            {"ingredient": "Zucchini", "emoji": "🥒", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "polpette": { 
+          "name": "Polpette", 
+          "emoji": "🧆", 
+          "ingredients": [
+            {"ingredient": "Ground beef", "emoji": "🥩", "store": "Aldi"},
+            {"ingredient": "Eggs", "emoji": "🥚", "store": "Aldi"},
+            {"ingredient": "Bread", "emoji": "🍞", "store": "Wegmans"},
+            {"ingredient": "Breadcrumbs", "emoji": "🍞", "store": "Amazon"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": true,
+          "delivery": false
+        },
+        "pollo_al_limone": { 
+          "name": "Pollo al limone", 
+          "emoji": "🍗", 
+          "ingredients": [
+            {"ingredient": "Chicken breast", "emoji": "🍗", "store": "Aldi"},
+            {"ingredient": "Lemons", "emoji": "🍋", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "merluzzo": { 
+          "name": "Merluzzo", 
+          "emoji": "🐟", 
+          "ingredients": [
+            {"ingredient": "Cod", "emoji": "🐟", "store": "Wegmans"}
+          ],
+          "categories": ["dinner"],
+          "diet": "fish",
+          "bread": false,
+          "unfreeze": true,
+          "delivery": false
+        },
+        "hamburger": { 
+          "name": "Hamburger", 
+          "emoji": "🍔", 
+          "ingredients": [
+            {"ingredient": "Hamburger buns", "emoji": "🍔", "store": "Wegmans"},
+            {"ingredient": "Ground beef", "emoji": "🥩", "store": "Aldi"},
+            {"ingredient": "American cheese slices", "emoji": "🧀", "store": "Aldi"},
+            {"ingredient": "Lettuce", "emoji": "🥬", "store": "Wegmans"},
+            {"ingredient": "Tomatoes", "emoji": "🍅", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "cotolette": { 
+          "name": "Cotolette", 
+          "emoji": "🥩", 
+          "ingredients": [
+            {"ingredient": "Breaded cutlets", "emoji": "🥩", "store": "Aldi"},
+            {"ingredient": "Breadcrumbs", "emoji": "🍞", "store": "Amazon"},
+            {"ingredient": "Eggs", "emoji": "🥚", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": true,
+          "delivery": false
+        },
+        "salsicce": { 
+          "name": "Salsicce", 
+          "emoji": "🌭", 
+          "ingredients": [
+            {"ingredient": "Sausages", "emoji": "🌭", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "minestrone": { 
+          "name": "Minestrone", 
+          "emoji": "🍲", 
+          "ingredients": [
+            {"ingredient": "Vegetable soup mix", "emoji": "🥕", "store": "Aldi"},
+            {"ingredient": "Pasta", "emoji": "🍝", "store": "Amazon"},
+            {"ingredient": "Beans", "emoji": "🫘", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "vegetarian",
+          "bread": true,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "pollo_al_forno": { 
+          "name": "Pollo al forno", 
+          "emoji": "🍗", 
+          "ingredients": [
+            {"ingredient": "Chicken thighs", "emoji": "🍗", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "scaloppine_al_limone": { 
+          "name": "Scaloppine al limone", 
+          "emoji": "🥩", 
+          "ingredients": [
+            {"ingredient": "Veal cutlets", "emoji": "🥩", "store": "Aldi"},
+            {"ingredient": "Lemons", "emoji": "🍋", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "caprese": { 
+          "name": "Caprese", 
+          "emoji": "🧀", 
+          "ingredients": [
+            {"ingredient": "Fresh mozzarella", "emoji": "🧀", "store": "Aldi"},
+            {"ingredient": "Tomatoes", "emoji": "🍅", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "vegetarian",
+          "bread": true,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "cordon_bleu": { 
+          "name": "Cordon bleu", 
+          "emoji": "🥩", 
+          "ingredients": [
+            {"ingredient": "Cordon bleu", "emoji": "🥩", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": true,
+          "delivery": false
+        },
+        "würstel": { 
+          "name": "Würstel", 
+          "emoji": "🌭", 
+          "ingredients": [
+            {"ingredient": "Hot dogs", "emoji": "🌭", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "dumplings": { 
+          "name": "Dumplings", 
+          "emoji": "🥟", 
+          "ingredients": [
+            {"ingredient": "Dumplings", "emoji": "🥟", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": true,
+          "delivery": false
+        },
+        "fish_sticks": { 
+          "name": "Fish sticks", 
+          "emoji": "🐟", 
+          "ingredients": [
+            {"ingredient": "Fish sticks", "emoji": "🐟", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "fish",
+          "bread": false,
+          "unfreeze": true,
+          "delivery": false
+        },
+        "pollo_allo_spiedo": { 
+          "name": "Pollo allo spiedo", 
+          "emoji": "🍗", 
+          "ingredients": [
+            {"ingredient": "Whole chicken", "emoji": "🍗", "store": "Wegmans"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "pasta_al_forno": { 
+          "name": "Pasta al forno", 
+          "emoji": "🍝", 
+          "ingredients": [
+            {"ingredient": "Pasta", "emoji": "🍝", "store": "Amazon"},
+            {"ingredient": "Tomato sauce", "emoji": "🍅", "store": "Wegmans"},
+            {"ingredient": "Shredded mozzarella", "emoji": "🧀", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "parmigiana_di_melanzane": { 
+          "name": "Parmigiana di melanzane", 
+          "emoji": "🍆", 
+          "ingredients": [
+            {"ingredient": "Eggplant", "emoji": "🍆", "store": "Wegmans"},
+            {"ingredient": "Tomato sauce", "emoji": "🍅", "store": "Wegmans"},
+            {"ingredient": "Shredded mozzarella", "emoji": "🧀", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "zucchine_ripiene": { 
+          "name": "Zucchine ripiene", 
+          "emoji": "🥒", 
+          "ingredients": [
+            {"ingredient": "Zucchini", "emoji": "🥒", "store": "Aldi"},
+            {"ingredient": "Ground beef", "emoji": "🥩", "store": "Aldi"},
+            {"ingredient": "Bread", "emoji": "🍞", "store": "Wegmans"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "lasagna": { 
+          "name": "Lasagna", 
+          "emoji": "🍝", 
+          "ingredients": [
+            {"ingredient": "Lasagna noodles", "emoji": "🍝", "store": "Amazon"},
+            {"ingredient": "Meat sauce", "emoji": "🍖", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "spezzatino_con_patate": { 
+          "name": "Spezzatino con patate", 
+          "emoji": "🥘", 
+          "ingredients": [
+            {"ingredient": "Beef", "emoji": "🥩", "store": "Aldi"},
+            {"ingredient": "Potatoes", "emoji": "🥔", "store": "Aldi"},
+            {"ingredient": "Onion", "emoji": "🧅", "store": "Wegmans"},
+            {"ingredient": "Carrots", "emoji": "🥕", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": true,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "tortellini_con_la_panna": { 
+          "name": "Tortellini con la panna", 
+          "emoji": "🥟", 
+          "ingredients": [
+            {"ingredient": "Tortellini", "emoji": "🥟", "store": "Aldi"},
+            {"ingredient": "Cream", "emoji": "🥛", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "tortellini_col_sugo": { 
+          "name": "Tortellini col sugo", 
+          "emoji": "🥟", 
+          "ingredients": [
+            {"ingredient": "Tortellini", "emoji": "🥟", "store": "Aldi"},
+            {"ingredient": "Tomato sauce", "emoji": "🍅", "store": "Wegmans"}
+          ],
+          "categories": ["dinner"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "pasta_col_ragù": { 
+          "name": "Pasta col ragù", 
+          "emoji": "🍝", 
+          "ingredients": [
+            {"ingredient": "Pasta", "emoji": "🍝", "store": "Amazon"},
+            {"ingredient": "Meat sauce", "emoji": "🍖", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "polpettone": { 
+          "name": "Polpettone", 
+          "emoji": "🥩", 
+          "ingredients": [
+            {"ingredient": "Ground beef", "emoji": "🥩", "store": "Aldi"},
+            {"ingredient": "Eggs", "emoji": "🥚", "store": "Aldi"},
+            {"ingredient": "Bacon", "emoji": "🥓", "store": "Aldi"},
+            {"ingredient": "Bread", "emoji": "🍞", "store": "Wegmans"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": true,
+          "delivery": false
+        },
+        "scrimpelle_mbuss": { 
+          "name": "Scrimpelle mbuss", 
+          "emoji": "🥞", 
+          "ingredients": [
+            {"ingredient": "Eggs", "emoji": "🥚", "store": "Aldi"},
+            {"ingredient": "Flour", "emoji": "🌾", "store": "Aldi"},
+            {"ingredient": "Milk", "emoji": "🥛", "store": "Aldi"},
+            {"ingredient": "Broth", "emoji": "🍲", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "polenta_col_sugo": { 
+          "name": "Polenta col sugo", 
+          "emoji": "🌽", 
+          "ingredients": [
+            {"ingredient": "Polenta", "emoji": "🌽", "store": "Aldi"},
+            {"ingredient": "Tomato sauce", "emoji": "🍅", "store": "Wegmans"},
+            {"ingredient": "Sausages", "emoji": "🌭", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "cannelloni": { 
+          "name": "Cannelloni", 
+          "emoji": "🥟", 
+          "ingredients": [
+            {"ingredient": "Ricotta", "emoji": "🧀", "store": "Aldi"},
+            {"ingredient": "Spinach", "emoji": "🥬", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "bistecca": { 
+          "name": "Bistecca", 
+          "emoji": "🥩", 
+          "ingredients": [
+            {"ingredient": "Steak", "emoji": "🥩", "store": "Wegmans"}
+          ],
+          "categories": ["dinner"],
+          "diet": "meat",
+          "bread": false,
+          "unfreeze": true,
+          "delivery": false
+        },
+        "riso_zucchine_gamberetti": { 
+          "name": "Riso zucchine e gamberetti", 
+          "emoji": "🍤", 
+          "ingredients": [
+            {"ingredient": "Rice", "emoji": "🍚", "store": "Amazon"},
+            {"ingredient": "Zucchini", "emoji": "🥒", "store": "Aldi"},
+            {"ingredient": "Prawns", "emoji": "🦐", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "fish",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "riso_tropicale": { 
+          "name": "Riso tropicale", 
+          "emoji": "🍍", 
+          "ingredients": [
+            {"ingredient": "Rice", "emoji": "🍚", "store": "Amazon"},
+            {"ingredient": "Pineapple", "emoji": "🍍", "store": "Aldi"},
+            {"ingredient": "Prawns", "emoji": "🦐", "store": "Aldi"}
+          ],
+          "categories": ["dinner"],
+          "diet": "fish",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "pizza_delivery": { 
+          "name": "Pizza", 
+          "emoji": "🍕", 
+          "ingredients": [], 
+          "categories": ["dinner"],
+          "diet": "other",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": true
+        },
+        "greco_delivery": { 
+          "name": "Greek", 
+          "emoji": "🥙", 
+          "ingredients": [], 
+          "categories": ["dinner"],
+          "diet": "other",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": true
+        },
+        "chinese_delivery": { 
+          "name": "Dumplings", 
+          "emoji": "🥡", 
+          "ingredients": [], 
+          "categories": ["dinner"],
+          "diet": "other",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": true
+        },
+        "vietnamese_delivery": { 
+          "name": "Pho", 
+          "emoji": "🍜", 
+          "ingredients": [], 
+          "categories": ["dinner"],
+          "diet": "other",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": true
+        },
+        "ramen_delivery": { 
+          "name": "Ramen", 
+          "emoji": "🍜", 
+          "ingredients": [], 
+          "categories": ["dinner"],
+          "diet": "other",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": true
+        },
+        "georgian_delivery": { 
+          "name": "Khinkali", 
+          "emoji": "🥟", 
+          "ingredients": [], 
+          "categories": ["dinner"],
+          "diet": "other",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": true
+        },
+        "hamburger_delivery": { 
+          "name": "Hamburger", 
+          "emoji": "🍔", 
+          "ingredients": [], 
+          "categories": ["dinner"],
+          "diet": "other",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": true
+        },
+        "purè_di_patate": { 
+          "name": "Purè di patate", 
+          "emoji": "🥔", 
+          "ingredients": [
+            {"ingredient": "Potatoes", "emoji": "🥔", "store": "Aldi"}
+          ],
+          "categories": ["side"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "broccoli_al_vapore": { 
+          "name": "Broccoli al vapore", 
+          "emoji": "🥦", 
+          "ingredients": [
+            {"ingredient": "Broccoli", "emoji": "🥦", "store": "Wegmans"}
+          ],
+          "categories": ["side"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "insalata_di_pomodori": { 
+          "name": "Insalata di pomodori", 
+          "emoji": "🍅", 
+          "ingredients": [
+            {"ingredient": "Tomatoes", "emoji": "🍅", "store": "Aldi"}
+          ],
+          "categories": ["side"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "tater_tots": { 
+          "name": "Tater tots", 
+          "emoji": "🥔", 
+          "ingredients": [
+            {"ingredient": "Tater tots", "emoji": "🥔", "store": "Aldi"}
+          ],
+          "categories": ["side"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "barbabietole": { 
+          "name": "Barbabietole", 
+          "emoji": "🥬", 
+          "ingredients": [
+            {"ingredient": "Beets", "emoji": "🥬", "store": "Aldi"}
+          ],
+          "categories": ["side"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "insalata_di_mais": { 
+          "name": "Insalata di mais", 
+          "emoji": "🌽", 
+          "ingredients": [
+            {"ingredient": "Corn", "emoji": "🌽", "store": "Aldi"}
+          ],
+          "categories": ["side"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "patate_lesse": { 
+          "name": "Patate lesse", 
+          "emoji": "🥔", 
+          "ingredients": [
+            {"ingredient": "Potatoes", "emoji": "🥔", "store": "Aldi"}
+          ],
+          "categories": ["side"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "carote_al_forno": { 
+          "name": "Carote al forno", 
+          "emoji": "🥕", 
+          "ingredients": [
+            {"ingredient": "Carrots", "emoji": "🥕", "store": "Aldi"}
+          ],
+          "categories": ["side"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "carote_a_insalata": { 
+          "name": "Carote a insalata", 
+          "emoji": "🥕", 
+          "ingredients": [
+            {"ingredient": "Carrots", "emoji": "🥕", "store": "Aldi"}
+          ],
+          "categories": ["side"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "zucchine_trifolate": { 
+          "name": "Zucchine trifolate", 
+          "emoji": "🥒", 
+          "ingredients": [
+            {"ingredient": "Zucchini", "emoji": "🥒", "store": "Aldi"}
+          ],
+          "categories": ["side"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "insalata_di_cetrioli": { 
+          "name": "Insalata di cetrioli", 
+          "emoji": "🥒", 
+          "ingredients": [
+            {"ingredient": "Cucumbers", "emoji": "🥒", "store": "Wegmans"}
+          ],
+          "categories": ["side"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "insalata": { 
+          "name": "Insalata", 
+          "emoji": "🥗", 
+          "ingredients": [
+            {"ingredient": "Lettuce", "emoji": "🥬", "store": "Wegmans"}
+          ],
+          "categories": ["side"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "corn_on_the_cob": { 
+          "name": "Corn on the Cob", 
+          "emoji": "🌽", 
+          "ingredients": [
+            {"ingredient": "Corn", "emoji": "🌽", "store": "Aldi"}
+          ],
+          "categories": ["side"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "croissants": { 
+          "name": "Croissants", 
+          "emoji": "🥐", 
+          "ingredients": [], 
+          "categories": ["breakfast"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "pancakes": { 
+          "name": "Pancakes", 
+          "emoji": "🥞", 
+          "ingredients": [
+            {"ingredient": "Flour", "emoji": "🌾", "store": "Aldi"},
+            {"ingredient": "Milk", "emoji": "🥛", "store": "Aldi"},
+            {"ingredient": "Eggs", "emoji": "🥚", "store": "Aldi"},
+            {"ingredient": "Butter", "emoji": "🧈", "store": "Wegmans"}
+          ],
+          "categories": ["breakfast"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "french_toast": { 
+          "name": "French toast", 
+          "emoji": "🍞", 
+          "ingredients": [
+            {"ingredient": "Bread", "emoji": "🍞", "store": "Wegmans"},
+            {"ingredient": "Eggs", "emoji": "🥚", "store": "Aldi"},
+            {"ingredient": "Milk", "emoji": "🥛", "store": "Aldi"},
+            {"ingredient": "Butter", "emoji": "🧈", "store": "Wegmans"}
+          ],
+          "categories": ["breakfast"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        },
+        "biscuits": { 
+          "name": "Biscuits", 
+          "emoji": "🥯", 
+          "ingredients": [
+            {"ingredient": "Flour", "emoji": "🌾", "store": "Aldi"},
+            {"ingredient": "Milk", "emoji": "🥛", "store": "Aldi"},
+            {"ingredient": "Butter", "emoji": "🧈", "store": "Wegmans"}
+          ],
+          "categories": ["breakfast"],
+          "diet": "vegetarian",
+          "bread": false,
+          "unfreeze": false,
+          "delivery": false
+        }
+      }
+    };
+
+    // Constants
+    const MS_PER_DAY = 86400000;
+    const MONTH_NAMES = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const MONTH_NAMES_FULL = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+    const DAY_NAMES = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
+
+    // Build lookup objects
+    const MEALS_BY_NAME = {};
+    const MEAL_EMOJI = {};
+    const MEAL_ING = {};
+    const MEAL_BREAD = {};
+    const MEAL_UNFREEZE = {};
+    const IS_DELIVERY = {};
+    const CATS = { breakfast: [], lunch: [], dinner: [], side: [] };
+
+    Object.entries(DATA.meals).forEach(([_, meal]) => {
+      MEALS_BY_NAME[meal.name] = meal;
+      MEAL_EMOJI[meal.name] = meal.emoji || '❓';
+      MEAL_ING[meal.name] = meal.ingredients || [];
+      MEAL_BREAD[meal.name] = meal.bread || false;
+      MEAL_UNFREEZE[meal.name] = meal.unfreeze || false;
+      IS_DELIVERY[meal.name] = meal.delivery || false;
+      
+      (meal.categories || []).forEach(cat => {
+        if (CATS[cat] && !CATS[cat].includes(meal.name)) {
+          CATS[cat].push(meal.name);
+        }
+      });
+    });
+
+    // Sort each category: regular meals first, then delivery, then Custom always last
+    Object.keys(CATS).forEach(category => {
+      CATS[category].sort((a, b) => {
+        // Custom always last
+        if (a === 'Custom') return 1;
+        if (b === 'Custom') return -1;
+        
+        // Delivery items after regular items
+        const aIsDelivery = IS_DELIVERY[a];
+        const bIsDelivery = IS_DELIVERY[b];
+        if (aIsDelivery && !bIsDelivery) return 1;
+        if (!aIsDelivery && bIsDelivery) return -1;
+        
+        // Otherwise alphabetical
+        return a.localeCompare(b);
+      });
+    });
+
+    class MealPlanner {
+      constructor() {
+        this.state = this.loadState() || this.initialState();
+        this.migrateState();
+        this.currentDayIndex = null;
+        this.init();
+      }
+      
+      migrateState() {
+        this.state.days.forEach(day => {
+          ['breakfast', 'lunch', 'dinner', 'side'].forEach(mealType => {
+            if (!Array.isArray(day[mealType])) {
+              day[mealType] = day[mealType] ? [day[mealType]] : [];
+            }
+            const customKey = `custom${mealType.charAt(0).toUpperCase() + mealType.slice(1)}`;
+            if (!Array.isArray(day[customKey])) {
+              day[customKey] = day[customKey] ? [day[customKey]] : [];
+            }
+          });
+          day.breadFlag = day.breadFlag ?? false;
+        });
+        this.state.theme = this.state.theme ?? 'dark';
+      }
+      
+      initialState() {
+        const today = new Date();
+        const start = this.getWeekStart(today);
+        const nextWeek = new Date(start.getTime() + 7 * MS_PER_DAY);
+        
+        return {
+          weekStart: nextWeek.toISOString(),
+          showWeekend: true,
+          theme: 'dark',
+          days: DAY_NAMES.map((name, i) => ({
+            name,
+            date: new Date(nextWeek.getTime() + i * MS_PER_DAY).toISOString(),
+            breakfast: [],
+            lunch: [],
+            dinner: [],
+            side: [],
+            customBreakfast: [],
+            customLunch: [],
+            customDinner: [],
+            customSide: [],
+            breadFlag: false
+          }))
+        };
+      }
+      
+      getWeekStart(date) { 
+        const dt = new Date(date);
+        const day = dt.getDay(); 
+        const diff = dt.getDate() - day + (day === 0 ? -6 : 1); 
+        const monday = new Date(dt.setDate(diff)); 
+        monday.setHours(0, 0, 0, 0); 
+        return monday; 
+      }
+      
+      getStorageKey(date) { 
+        return `meal_plan_${this.getWeekStart(date).toISOString().slice(0, 10)}`; 
+      }
+      
+      loadState() { 
+        try { 
+          const key = this.getStorageKey(new Date(Date.now() + 7 * MS_PER_DAY)); 
+          const json = localStorage.getItem(key); 
+          return json ? JSON.parse(json) : null;
+        } catch { 
+          return null;
+        } 
+      }
+      
+      saveState() { 
+        try { 
+          const key = this.getStorageKey(new Date(this.state.weekStart));
+          localStorage.setItem(key, JSON.stringify(this.state));
+        } catch (error) {
+          console.error('Failed to save state:', error);
+        } 
+      }
+
+      init() { 
+        this.applyTheme(); 
+        this.render(); 
+        this.bindGlobalEvents(); 
+      }
+
+      applyTheme() {
+        document.body.classList.toggle('dark', this.state.theme === 'dark');
+        document.getElementById('themeToggle').textContent = this.state.theme === 'dark' ? '🌙' : '☀️';
+      }
+
+      toggleTheme() {
+        this.state.theme = this.state.theme === 'dark' ? 'light' : 'dark';
+        this.applyTheme();
+        this.saveState();
+      }
+
+      navigateWeek(direction) {
+        const current = new Date(this.state.weekStart);
+        const offset = direction === 'next' ? 7 : -7;
+        const newStart = new Date(current.getTime() + offset * MS_PER_DAY);
+        newStart.setHours(0, 0, 0, 0);
+        
+        const key = this.getStorageKey(newStart); 
+        const existing = localStorage.getItem(key);
+        
+        if (existing) { 
+          this.state = JSON.parse(existing); 
+        } else {
+          this.state = this.initialState();
+          this.state.weekStart = newStart.toISOString();
+          this.state.days.forEach((day, i) => {
+            day.date = new Date(newStart.getTime() + i * MS_PER_DAY).toISOString();
+          });
+        }
+        
+        this.migrateState(); 
+        this.applyTheme(); 
+        this.render();
+      }
+
+      formatWeekRange() { 
+        const start = new Date(this.state.weekStart);
+        const end = new Date(start.getTime() + 6 * MS_PER_DAY);
+        return `${MONTH_NAMES[start.getMonth()]} ${start.getDate()} - ${end.getDate()}, ${start.getFullYear()}`;
+      }
+      
+      getWeekLabel() {
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        const currentWeekStart = this.getWeekStart(today);
+        const stateWeekStart = new Date(this.state.weekStart);
+        stateWeekStart.setHours(0, 0, 0, 0);
+        
+        const daysDiff = Math.round((stateWeekStart - currentWeekStart) / MS_PER_DAY);
+        const weeksDiff = Math.floor(Math.abs(daysDiff) / 7);
+        
+        if (daysDiff === 0) return 'THIS WEEK';
+        if (daysDiff === 7) return 'NEXT WEEK';
+        if (daysDiff === -7) return 'LAST WEEK';
+        if (daysDiff > 7) return `${weeksDiff} WEEKS AHEAD`;
+        if (daysDiff < -7) return `${weeksDiff} WEEKS AGO`;
+        return 'PLANNING WEEK';
+      }
+      
+      formatDate(dateStr) { 
+        const dt = new Date(dateStr); 
+        return `${MONTH_NAMES_FULL[dt.getMonth()]} ${dt.getDate()}`; 
+      }
+
+      render() { 
+        document.getElementById('weekLabel').textContent = this.getWeekLabel();
+        document.getElementById('weekRange').textContent = this.formatWeekRange();
+        this.renderDays(); 
+      }
+      
+      isWeekend(dayName) {
+        return dayName === 'Saturday' || dayName === 'Sunday';
+      }
+
+      getMealDisplay(mealArray, customArray) {
+        if (!mealArray?.length) return null;
+        return mealArray.map(meal => 
+          meal === 'Custom' ? customArray?.join(', ') || 'Custom' : meal
+        ).join(' • ');
+      }
+
+      renderDays() {
+        const weekdayCards = this.state.days.slice(0, 5).map((day, i) => 
+          this.createDayCard(day, i)
+        );
+        
+        const weekendToggle = `
+          <div class="weekend-card">
+            <div style="font-weight:800">Show weekends</div>
+            <div id="weekendToggle" class="switch ${this.state.showWeekend ? 'on' : ''}" 
+                 role="switch" aria-checked="${this.state.showWeekend}">
+              <div class="knob"></div>
+            </div>
+          </div>`;
+        
+        const weekendCards = this.state.showWeekend 
+          ? this.state.days.slice(5).map((day, i) => this.createDayCard(day, i + 5))
+          : [];
+
+        document.getElementById('daysList').innerHTML = [
+          ...weekdayCards,
+          weekendToggle,
+          ...weekendCards
+        ].join('');
+        
+        this.bindDayEvents();
+      }
+
+      createDayCard(day, index) {
+        const isWeekend = this.isWeekend(day.name);
+        
+        const breakfastDisplay = this.getMealDisplay(day.breakfast, day.customBreakfast) || 'Select breakfast';
+        const lunchDisplay = this.getMealDisplay(day.lunch, day.customLunch) || 'Select lunch';
+        const dinnerDisplay = this.getMealDisplay(day.dinner, day.customDinner) || 'Select dinner';
+        const sidesDisplay = this.getMealDisplay(day.side, day.customSide);
+
+        const breakfastEmoji = day.breakfast?.length ? (MEAL_EMOJI[day.breakfast[0]] || '❓') : '❓';
+        const lunchEmoji = day.lunch?.length ? (MEAL_EMOJI[day.lunch[0]] || '❓') : '❓';
+        const dinnerEmoji = day.dinner?.length ? (MEAL_EMOJI[day.dinner[0]] || '❓') : '❓';
+
+        const requiredMeals = isWeekend ? 3 : 2;
+        const completedMeals = (isWeekend && day.breakfast?.length ? 1 : 0) + 
+                               (day.lunch?.length ? 1 : 0) + 
+                               (day.dinner?.length ? 1 : 0);
+        const isIncomplete = completedMeals < requiredMeals;
+
+        return `
+          <section class="day-card ${isIncomplete ? 'incomplete' : ''}" data-day="${index}">
+            <div class="day-header">
+              <div class="day-title">${day.name}, ${this.formatDate(day.date)}</div>
+              <div class="day-actions">
+                <button class="pill bread ${day.breadFlag ? 'is-on' : ''}" data-day="${index}">
+                  🍞 Bread
+                </button>
+              </div>
+            </div>
+
+            ${isWeekend ? `
+              <div class="meal ${!day.breakfast?.length ? 'empty' : ''}" data-meal="breakfast" data-day="${index}">
+                <div class="icon breakfast">${breakfastEmoji}</div>
+                <div class="content">
+                  <div class="title">Breakfast</div>
+                  <div class="desc">${breakfastDisplay}</div>
+                </div>
+              </div>` : ''}
+
+            <div class="meal ${!day.lunch?.length ? 'empty' : ''}" data-meal="lunch" data-day="${index}">
+              <div class="icon lunch">${lunchEmoji}</div>
+              <div class="content">
+                <div class="title">Lunch</div>
+                <div class="desc">${lunchDisplay}${sidesDisplay ? ` • ${sidesDisplay}` : ''}</div>
+              </div>
+            </div>
+
+            <div class="meal ${!day.dinner?.length ? 'empty' : ''}" data-meal="dinner" data-day="${index}">
+              <div class="icon dinner">${dinnerEmoji}</div>
+              <div class="content">
+                <div class="title">Dinner</div>
+                <div class="desc">${dinnerDisplay}${sidesDisplay ? ` • ${sidesDisplay}` : ''}</div>
+              </div>
+            </div>
+          </section>`;
+      }
+
+      bindDayEvents() {
+        document.querySelectorAll('.meal').forEach(el => {
+          el.onclick = () => {
+            const dayIndex = parseInt(el.dataset.day);
+            const mealType = el.dataset.meal;
+            
+            if (mealType === 'breakfast') this.openBreakfastModal(dayIndex);
+            else if (mealType === 'lunch') this.openLunchModal(dayIndex);
+            else this.openDinnerModal(dayIndex);
+          };
+        });
+
+        document.querySelectorAll('.pill.bread').forEach(btn => {
+          btn.onclick = (e) => {
+            e.stopPropagation();
+            const dayIndex = parseInt(btn.dataset.day);
+            this.state.days[dayIndex].breadFlag = !this.state.days[dayIndex].breadFlag;
+            this.saveState(); 
+            this.render();
+          };
+        });
+
+        const weekendToggle = document.getElementById('weekendToggle');
+        if (weekendToggle) {
+          weekendToggle.onclick = () => { 
+            this.state.showWeekend = !this.state.showWeekend; 
+            this.saveState(); 
+            this.render(); 
+          };
+        }
+      }
+
+      checkAndEnableBread(dayIndex) {
+        const day = this.state.days[dayIndex];
+        const allMeals = [...(day.lunch || []), ...(day.dinner || [])].filter(m => m && m !== 'Custom');
+        const needsBread = allMeals.some(meal => MEAL_BREAD[meal]);
+        if (needsBread) day.breadFlag = true;
+      }
+
+      createMealGrid(mealType, selectedMeals, availableMeals) {
+        const selected = Array.isArray(selectedMeals) ? selectedMeals : (selectedMeals ? [selectedMeals] : []);
+        
+        return `<div class="grid" data-type="${mealType}" id="grid-${mealType}">
+          ${availableMeals.map(mealName => {
+            const isDelivery = IS_DELIVERY[mealName];
+            const isSelected = selected.includes(mealName);
+            const needsBread = MEAL_BREAD[mealName];
+            const needsUnfreeze = MEAL_UNFREEZE[mealName];
+            
+            let badges = '';
+            if (needsBread || needsUnfreeze) {
+              badges = '<div class="tile-badges">';
+              if (needsBread) badges += '<div class="tile-badge" title="Needs bread">🍞</div>';
+              if (needsUnfreeze) badges += '<div class="tile-badge" title="Needs to be unfrozen">❄️</div>';
+              badges += '</div>';
+            }
+            
+            return `
+              <div class="tile ${isSelected ? 'selected' : ''} ${isDelivery ? 'delivery' : ''}" 
+                   data-meal="${mealName}" data-type="${mealType}">
+                ${badges}
+                <div class="emo">${MEAL_EMOJI[mealName] || '❓'}</div>
+                <div>${mealName}</div>
+                ${isDelivery ? '<div class="delivery-label">DELIVERY</div>' : ''}
+              </div>`;
+          }).join('')}
+        </div>`;
+      }
+
+      openBreakfastModal(dayIndex) {
+        const day = this.state.days[dayIndex];
+        if (!this.isWeekend(day.name)) return;
+        
+        this.currentDayIndex = dayIndex;
+        let body = this.createMealGrid('breakfast', day.breakfast, CATS.breakfast);
+        
+        if (day.breakfast.includes('Custom')) {
+          body += `<div class="field">
+            <div class="label">Custom Breakfast</div>
+            <input class="input" id="customBreakfastInput" 
+                   value="${day.customBreakfast.join(', ') || ''}" 
+                   placeholder="Enter custom breakfast (comma-separated)"/>
+          </div>`;
+        }
+
+        this.showModal({
+          title: `Breakfast — ${day.name}`,
+          subtitle: this.formatDate(day.date),
+          body,
+          footer: [
+            { label: '❌ Cancel', onClick: () => this.hideModal() },
+            { label: '✅ Save', onClick: () => this.saveBreakfast(dayIndex) }
+          ]
+        });
+      }
+      
+      saveBreakfast(dayIndex) {
+        const day = this.state.days[dayIndex];
+
+        if (day.breakfast.includes('Custom')) {
+          const input = document.getElementById('customBreakfastInput');
+          if (!input || !input.value.trim()) {
+            day.breakfast = day.breakfast.filter(m => m !== 'Custom');
+            day.customBreakfast = [];
+          } else {
+            day.customBreakfast = input.value.split(',').map(s => s.trim()).filter(Boolean);
+          }
+        }
+
+        this.saveState(); 
+        this.render(); 
+        this.hideModal(); 
+        this.showToast('Saved! ✓');
+      }
+
+      openLunchModal(dayIndex) {
+        const day = this.state.days[dayIndex]; 
+        this.currentDayIndex = dayIndex;
+        
+        let body = this.createMealGrid('lunch', day.lunch, CATS.lunch);
+        
+        if (day.lunch.includes('Custom')) {
+          body += `<div class="field">
+            <div class="label">Custom Lunch</div>
+            <input class="input" id="customLunchInput" 
+                   value="${day.customLunch.join(', ') || ''}" 
+                   placeholder="Enter custom lunch (comma-separated)"/>
+          </div>`;
+        }
+        
+        this.showModal({
+          title: `Lunch — ${day.name}`,
+          subtitle: this.formatDate(day.date),
+          body,
+          footer: [
+            { label: '❌ Cancel', onClick: () => this.hideModal() },
+            { label: '✅ Save', onClick: () => this.saveLunch(dayIndex) }
+          ]
+        });
+      }
+      
+      saveLunch(dayIndex) {
+        const day = this.state.days[dayIndex];
+
+        if (day.lunch.includes('Custom')) {
+          const input = document.getElementById('customLunchInput');
+          if (!input || !input.value.trim()) {
+            day.lunch = day.lunch.filter(m => m !== 'Custom');
+            day.customLunch = [];
+          } else {
+            day.customLunch = input.value.split(',').map(s => s.trim()).filter(Boolean);
+          }
+        }
+
+        if (!day.lunch.length && day.side?.length) {
+          alert('Please select a main dish before adding side dishes.');
+          return;
+        }
+
+        this.checkAndEnableBread(dayIndex);
+        this.saveState(); 
+        this.render(); 
+        this.hideModal(); 
+        this.showToast('Saved! ✓');
+      }
+
+      openDinnerModal(dayIndex) {
+        const day = this.state.days[dayIndex]; 
+        this.currentDayIndex = dayIndex;
+
+        const breadWrap = document.getElementById('modalBreadWrap');
+        if (breadWrap) {
+          breadWrap.innerHTML = `
+            <button class="pill bread ${day.breadFlag ? 'is-on' : ''}" 
+                    id="modalBread" data-day="${dayIndex}">
+              🍞 Bread
+            </button>`;
+        }
+
+        let body = this.createMealGrid('dinner', day.dinner, CATS.dinner);
+        body += '<div id="customDinnerContainer"></div>';
+        
+        if (day.dinner.includes('Custom')) {
+          body = body.replace('<div id="customDinnerContainer"></div>', 
+            `<div id="customDinnerContainer">
+              <div class="field">
+                <div class="label">Custom Dinner</div>
+                <input class="input" id="customDinnerInput" 
+                       value="${day.customDinner.join(', ') || ''}" 
+                       placeholder="Enter custom meal (comma-separated)"/>
+              </div>
+            </div>`);
+        }
+        
+        body += '<div class="field"><div class="label">Side Dishes</div></div>';
+        body += this.createMealGrid('side', day.side, CATS.side);
+        
+        if (day.side.includes('Custom')) {
+          body += `<div class="field">
+            <input class="input" id="customSideInput" 
+                   value="${day.customSide.join(', ') || ''}" 
+                   placeholder="Enter custom sides (comma-separated)"/>
+          </div>`;
+        }
+
+        this.showModal({
+          title: `Dinner — ${day.name}`,
+          subtitle: this.formatDate(day.date),
+          body,
+          footer: [
+            { label: '❌ Cancel', onClick: () => this.hideModal() },
+            { label: '✅ Save', onClick: () => this.saveDinner(dayIndex) }
+          ],
+          afterRender: () => {
+            const breadBtn = document.getElementById('modalBread');
+            if (breadBtn) {
+              breadBtn.onclick = () => {
+                day.breadFlag = !day.breadFlag;
+                this.openDinnerModal(dayIndex);
+              };
+            }
+          }
+        });
+      }
+
+      saveDinner(dayIndex) {
+        const day = this.state.days[dayIndex];
+
+        if (day.dinner.includes('Custom')) {
+          const input = document.getElementById('customDinnerInput');
+          if (!input || !input.value.trim()) {
+            day.dinner = day.dinner.filter(m => m !== 'Custom');
+            day.customDinner = [];
+          } else {
+            day.customDinner = input.value.split(',').map(s => s.trim()).filter(Boolean);
+          }
+        }
+
+        if (day.side.includes('Custom')) {
+          const input = document.getElementById('customSideInput');
+          if (!input || !input.value.trim()) {
+            day.side = day.side.filter(s => s !== 'Custom');
+            day.customSide = [];
+          } else {
+            day.customSide = input.value.split(',').map(s => s.trim()).filter(Boolean);
+          }
+        }
+
+        if (!day.dinner.length && day.side?.length) {
+          alert('Please select a main dish before adding side dishes.');
+          return;
+        }
+
+        this.checkAndEnableBread(dayIndex);
+        this.saveState(); 
+        this.render(); 
+        this.hideModal(); 
+        this.showToast('Saved! ✓');
+      }
+
+      showModal({ title, subtitle, body, footer, afterRender }) {
+        const overlay = document.getElementById('modalOverlay');
+        document.getElementById('modalTitle').textContent = title;
+        document.getElementById('modalSubtitle').textContent = subtitle || '';
+        document.getElementById('modalBody').innerHTML = body;
+        
+        const breadWrap = document.getElementById('modalBreadWrap');
+        if (breadWrap && !title.startsWith('Dinner')) {
+          breadWrap.innerHTML = '';
+        }
+        
+        const footerEl = document.getElementById('modalFooter');
+        footerEl.innerHTML = '';
+        
+        (footer || []).forEach(item => {
+          const btn = document.createElement('button');
+          btn.className = 'btn';
+          btn.textContent = item.label;
+          btn.onclick = item.onClick;
+          footerEl.appendChild(btn);
+        });
+        
+        overlay.classList.add('show');
+
+        setTimeout(() => {
+          this.bindTileEvents();
+          afterRender && afterRender();
+        }, 0);
+      }
+
+      bindTileEvents() {
+        document.querySelectorAll('.tile').forEach(tile => {
+          tile.onclick = () => {
+            const mealType = tile.dataset.type;
+            const mealName = tile.dataset.meal;
+            const day = this.state.days[this.currentDayIndex];
+
+            if (!Array.isArray(day[mealType])) day[mealType] = [];
+
+            const isSelected = day[mealType].includes(mealName);
+
+            if (isSelected) {
+              day[mealType] = day[mealType].filter(m => m !== mealName);
+              tile.classList.remove('selected');
+
+              if (mealName === 'Custom') {
+                const customKey = `custom${mealType.charAt(0).toUpperCase() + mealType.slice(1)}`;
+                day[customKey] = [];
+                
+                if (mealType === 'dinner') {
+                  const container = document.getElementById('customDinnerContainer');
+                  if (container) container.innerHTML = '';
+                }
+              }
+            } else {
+              day[mealType].push(mealName);
+              tile.classList.add('selected');
+
+              if (mealName === 'Custom' && mealType === 'dinner') {
+                const container = document.getElementById('customDinnerContainer');
+                if (container) {
+                  container.innerHTML = `
+                    <div class="field">
+                      <div class="label">Custom Dinner</div>
+                      <input class="input" id="customDinnerInput" 
+                             value="${day.customDinner.join(', ') || ''}" 
+                             placeholder="Enter custom meal (comma-separated)"/>
+                    </div>`;
+                }
+              }
+            }
+          };
+        });
+      }
+      
+      hideModal() { 
+        document.getElementById('modalOverlay').classList.remove('show'); 
+      }
+
+      clearWeek() {
+        if (!confirm('Clear all meals for this week?')) return;
+        
+        this.state.days.forEach(day => {
+          day.breakfast = [];
+          day.lunch = [];
+          day.dinner = [];
+          day.side = [];
+          day.customBreakfast = [];
+          day.customLunch = [];
+          day.customDinner = [];
+          day.customSide = [];
+          day.breadFlag = false;
+        });
+        
+        this.saveState(); 
+        this.render(); 
+        this.showToast('Week cleared');
+      }
+
+      buildGroceryList() {
+        const groceriesByStore = {}; 
+        
+        const addIngredient = (store, ingredient, emoji) => { 
+          if (!groceriesByStore[store]) groceriesByStore[store] = []; 
+          const exists = groceriesByStore[store].find(item => item.ingredient === ingredient);
+          if (!exists) {
+            groceriesByStore[store].push({ ingredient, emoji });
+          }
+        };
+        
+        this.state.days.forEach(day => {
+          const allMeals = [
+            ...(this.isWeekend(day.name) ? day.breakfast || [] : []),
+            ...(day.lunch || []),
+            ...(day.dinner || []),
+            ...(day.side || [])
+          ].filter(meal => meal && meal !== 'Custom');
+          
+          if (day.breadFlag) {
+            addIngredient('Wegmans', 'Bread', '🍞');
+          }
+          
+          allMeals.forEach(mealName => {
+            const ingredients = MEAL_ING[mealName] || [];
+            ingredients.forEach(ing => {
+              addIngredient(ing.store, ing.ingredient, ing.emoji);
+            });
+          });
+        });
+        
+        return groceriesByStore;
+      }
+
+      openShoppingList() {
+        const groceries = this.buildGroceryList();
+        const stores = Object.keys(groceries).sort();
+        
+        let body = stores.map(store => `
+          <div class="field">
+            <div class="label shopping-store">${store}</div>
+          </div>
+          <div class="shopping-grid">
+            ${groceries[store].map(item => `
+              <div class="shopping-item">
+                <div class="emo">${item.emoji || '🛒'}</div>
+                <div class="name">${item.ingredient}</div>
+              </div>
+            `).join('')}
+          </div>
+        `).join('');
+        
+        this.showModal({
+          title: 'Shopping List',
+          subtitle: 'Check off items as you shop',
+          body,
+          footer: [
+            { label: 'Close', onClick: () => this.hideModal() },
+            { label: 'Share', onClick: () => this.shareShopping(groceries) }
+          ]
+        });
+      }
+      
+      shareShopping(groceries) {
+        let text = '🛒 Shopping List\n\n';
+        Object.keys(groceries).sort().forEach(store => {
+          text += `${store}:\n`; 
+          groceries[store].forEach(item => text += `• ${item.emoji || ''} ${item.ingredient}\n`); 
+          text += '\n';
+        });
+        this.shareContent('Shopping List', text);
+      }
+
+      shareWeekRecap() {
+        let text = '🗓️ Weekly Meal Plan\n\n';
+        
+        this.state.days.forEach(day => {
+          text += `${day.name} (${this.formatDate(day.date)})\n`;
+
+          const breakfastText = this.getMealDisplay(day.breakfast, day.customBreakfast);
+          const lunchText = this.getMealDisplay(day.lunch, day.customLunch);
+          const dinnerText = this.getMealDisplay(day.dinner, day.customDinner);
+          const sidesText = this.getMealDisplay(day.side, day.customSide);
+
+          const breakfastEmoji = day.breakfast?.[0] ? (MEAL_EMOJI[day.breakfast[0]] || '❓') : '❓';
+          const lunchEmoji = day.lunch?.[0] ? (MEAL_EMOJI[day.lunch[0]] || '❓') : '❓';
+          const dinnerEmoji = day.dinner?.[0] ? (MEAL_EMOJI[day.dinner[0]] || '❓') : '❓';
+
+          if (this.isWeekend(day.name)) {
+            text += `  Breakfast: ${breakfastEmoji} ${breakfastText || '—'}\n`;
+          }
+          text += `  Lunch: ${lunchEmoji} ${lunchText || '—'}\n`;
+          text += `  Dinner: ${dinnerEmoji} ${dinnerText || '—'}`;
+
+          if (sidesText) {
+            text += `\n  Sides: ${sidesText}`;
+          }
+
+          if (day.breadFlag) text += '\n  Bread: yes';
+          text += '\n\n';
+        });
+
+        const groceries = this.buildGroceryList();
+        text += '\n🛒 Shopping List\n\n';
+        Object.keys(groceries).sort().forEach(store => {
+          text += `${store}:\n`;
+          groceries[store].forEach(item => text += `• ${item.emoji || ''} ${item.ingredient}\n`);
+          text += '\n';
+        });
+
+        const body = `<pre class="recap-pre">${text}</pre>`;
+
+```
+    this.showModal({
+      title: 'Share Meal Plan',
+      subtitle: 'Weekly recap + shopping list',
+      body,
+      footer: [
+        { label: 'Close', onClick: () => this.hideModal() },
+        { label: 'Calendar', onClick: () => this.exportCalendar() },
+        { label: 'Send', onClick: () => this.shareContent('Meal Plan & Shopping', text) }
+      ]
+    });
+  }
+
+  shareContent(title, text) { 
+    if (navigator.share) {
+      navigator.share({ title, text }).catch(() => {});
+    } else if (navigator.clipboard) { 
+      navigator.clipboard.writeText(text).then(() => {
+        this.showToast('Copied to clipboard! 📋'); 
+      }).catch(() => {
+        this.showToast('Failed to copy');
+      });
+    } 
+  }
+  
+  showToast(message) { 
+    const toast = document.getElementById('toast'); 
+    toast.textContent = message; 
+    toast.classList.add('show'); 
+    setTimeout(() => toast.classList.remove('show'), 1800); 
+  }
+
+  exportCalendar() {
+    const formatDateTime = (dateStr, hour, minute = 0) => {
+      const d = new Date(dateStr);
+      d.setHours(hour, minute, 0, 0);
+      return d.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
+    };
+    
+    const formatDate = (dateStr) => {
+      const d = new Date(dateStr);
+      d.setHours(0, 0, 0, 0);
+      return d.toISOString().split('T')[0].replace(/-/g, '');
+    };
+
+    let ics = 'BEGIN:VCALENDAR\nVERSION:2.0\nPRODID:-//MealPlannerApp//EN\nCALSCALE:GREGORIAN\nMETHOD:PUBLISH\n';
+
+    this.state.days.forEach(day => {
+      // Add unfreeze reminders for the day before
+      const allMeals = [...(day.lunch || []), ...(day.dinner || [])].filter(m => m && m !== 'Custom');
+      const unfreezeNeeded = allMeals.filter(meal => MEAL_UNFREEZE[meal]);
+      
+      if (unfreezeNeeded.length > 0) {
+        const dayBefore = new Date(new Date(day.date).getTime() - MS_PER_DAY);
+        unfreezeNeeded.forEach(meal => {
+          ics += 'BEGIN:VEVENT\n';
+          ics += `SUMMARY:Unfreeze ${meal}\n`;
+          ics += 'DTSTART;VALUE=DATE:' + formatDate(dayBefore) + '\n';
+          ics += 'DTEND;VALUE=DATE:' + formatDate(day.date) + '\n';
+          ics += 'END:VEVENT\n';
+        });
+      }
+
+      if (day.breakfast?.length) {
+        const meals = day.breakfast.map(m => 
+          m === 'Custom' ? day.customBreakfast?.join(', ') || 'Custom' : m
+        ).join(', ');
+        ics += 'BEGIN:VEVENT\n';
+        ics += `SUMMARY:Breakfast: ${meals}\n`;
+        ics += 'DTSTART:' + formatDateTime(day.date, 8, 0) + '\n';
+        ics += 'DTEND:' + formatDateTime(day.date, 9, 0) + '\n';
+        ics += 'END:VEVENT\n';
+      }
+
+      if (day.lunch?.length) {
+        const meals = day.lunch.map(m => 
+          m === 'Custom' ? day.customLunch?.join(', ') || 'Custom' : m
+        ).join(', ');
+        ics += 'BEGIN:VEVENT\n';
+        ics += `SUMMARY:Lunch: ${meals}\n`;
+        ics += 'DTSTART:' + formatDateTime(day.date, 13, 0) + '\n';
+        ics += 'DTEND:' + formatDateTime(day.date, 13, 45) + '\n';
+        ics += 'END:VEVENT\n';
+      }
+
+      if (day.dinner?.length) {
+        const meals = day.dinner.map(m => 
+          m === 'Custom' ? day.customDinner?.join(', ') || 'Custom' : m
+        ).join(', ');
+        let title = `Dinner: ${meals}`;
+        
+        if (day.side?.length) {
+          const sides = day.side.map(s => 
+            s === 'Custom' ? day.customSide?.join(', ') || 'Custom' : s
+          ).join(', ');
+          title += ' + ' + sides;
+        }
+        
+        ics += 'BEGIN:VEVENT\n';
+        ics += 'SUMMARY:' + title + '\n';
+        ics += 'DTSTART:' + formatDateTime(day.date, 19, 0) + '\n';
+        ics += 'DTEND:' + formatDateTime(day.date, 20, 0) + '\n';
+        ics += 'END:VEVENT\n';
+      }
+
+      if (day.breadFlag) {
+        ics += 'BEGIN:VEVENT\n';
+        ics += 'SUMMARY:Bread\n';
+        ics += 'DTSTART;VALUE=DATE:' + formatDate(day.date) + '\n';
+        ics += 'DTEND;VALUE=DATE:' + formatDate(new Date(new Date(day.date).getTime() + MS_PER_DAY)) + '\n';
+        ics += 'END:VEVENT\n';
+      }
+    });
+
+    ics += 'END:VCALENDAR';
+
+    const blob = new Blob([ics], { type: 'text/calendar' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'mealplan.ics';
+    a.click();
+    URL.revokeObjectURL(url);
+  }
+
+  bindGlobalEvents() {
+    document.getElementById('themeToggle').onclick = () => this.toggleTheme();
+    document.getElementById('prevWeek').onclick = () => this.navigateWeek('prev');
+    document.getElementById('nextWeek').onclick = () => this.navigateWeek('next');
+    document.getElementById('clearBtn').onclick = () => this.clearWeek();
+    document.getElementById('shareBtn').onclick = () => this.shareWeekRecap();
+
+    document.getElementById('modalOverlay').onclick = (e) => {
+      if (e.target.id === 'modalOverlay') this.hideModal();
+    };
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') this.hideModal();
+      
+      const modalOpen = document.getElementById('modalOverlay').classList.contains('show');
+      if (!modalOpen) {
+        if (e.key === 'ArrowLeft') this.navigateWeek('prev');
+        if (e.key === 'ArrowRight') this.navigateWeek('next');
+      }
+    });
+  }
+}
+
+document.addEventListener('DOMContentLoaded', () => { 
+  window.app = new MealPlanner(); 
+});
+```
+
+  </script>
+</body>
+
+</html>
