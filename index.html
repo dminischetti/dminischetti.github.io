@@ -753,16 +753,22 @@
       transform: scale(1.02) rotate(1deg);
     }
 
-    .hero-image-bg {
-      animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-      background: var(--gradient-primary);
-      border-radius: var(--radius-xl);
-      filter: blur(40px);
-      inset: -20px;
-      opacity: 0.15;
-      position: absolute;
-      z-index: 1;
-    }
+.hero-image-bg {
+  animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  background: linear-gradient(
+    135deg,
+    #1f2937 0%,   /* grigio scuro */
+    #4b5563 50%,  /* medio */
+    #9ca3af 100%  /* chiaro */
+  );
+  border-radius: var(--radius-xl);
+  filter: blur(40px);
+  inset: -20px;
+  opacity: 0.20;
+  position: absolute;
+  z-index: 1;
+}
+
 
     /* ============================================
        SECTION HEADERS
