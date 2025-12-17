@@ -7,8 +7,17 @@
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
+
     gtag('config', 'G-PS327TVEZ2', {
-      anonymize_ip: true
+      anonymize_ip: true,
+      send_page_view: true,
+      cookie_flags: 'SameSite=None;Secure',
+      cookie_expires: 63072000,
+      allow_google_signals: true,
+      allow_ad_personalization_signals: false,
+      page_title: document.title,
+      page_location: window.location.href,
+      page_path: window.location.pathname
     });
   </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
@@ -2528,6 +2537,171 @@
      * parallax scrolling, smooth interactions
      */
 
+        // ============================================
+    // 3. Add Scroll Depth Tracking
+    // ============================================
+    const ScrollTracking = {
+      tracked: new Set(),
+      thresholds: [25, 50, 75, 100],
+
+      init() {
+        window.addEventListener('scroll', () => {
+          const scrollPercent = Math.round(
+            (window.scrollY / (document.documentElement.scrollHeight - window.innerHeight)) * 100
+          );
+
+          this.thresholds.forEach(threshold => {
+            if (scrollPercent >= threshold && !this.tracked.has(threshold)) {
+              this.tracked.add(threshold);
+              gtag('event', 'scroll', {
+                event_category: 'engagement',
+                event_label: `${threshold}%`,
+                value: threshold
+              });
+            }
+          });
+        }, {
+          passive: true
+        });
+      }
+    };
+
+    // ============================================
+    // 7. Track Time on Page
+    // ============================================
+    const TimeTracking = {
+      startTime: Date.now(),
+
+      init() {
+        window.addEventListener('beforeunload', () => {
+          const timeOnPage = Math.round((Date.now() - this.startTime) / 1000);
+          gtag('event', 'time_on_page', {
+            event_category: 'engagement',
+            event_label: window.location.pathname,
+            value: timeOnPage
+          });
+        });
+      }
+    };
+
+    // ============================================
+    // 8. User Engagement Score
+    // ============================================
+    const EngagementTracking = {
+      score: 0,
+
+      init() {
+        // Track engaged time (visible + active)
+        let engagedTime = 0;
+        let lastActive = Date.now();
+
+        const checkEngagement = () => {
+          if (!document.hidden && (Date.now() - lastActive < 5000)) {
+            engagedTime += 1;
+
+            if (engagedTime % 30 === 0) { // Every 30 seconds
+              gtag('event', 'engaged_time', {
+                event_category: 'engagement',
+                event_label: `${engagedTime}s`,
+                value: engagedTime
+              });
+            }
+          }
+        };
+
+        setInterval(checkEngagement, 1000);
+
+        ['mousemove', 'keydown', 'scroll', 'click'].forEach(event => {
+          document.addEventListener(event, () => {
+            lastActive = Date.now();
+          }, {
+            passive: true
+          });
+        });
+      }
+    };
+
+    // ============================================
+    // 9. Performance Tracking (Core Web Vitals)
+    // ============================================
+    window.addEventListener('load', () => {
+      if ('PerformanceObserver' in window) {
+        // Largest Contentful Paint (LCP)
+        try {
+          new PerformanceObserver((list) => {
+            const entries = list.getEntries();
+            const lastEntry = entries[entries.length - 1];
+            gtag('event', 'LCP', {
+              event_category: 'performance',
+              value: Math.round(lastEntry.renderTime || lastEntry.loadTime),
+              metric_value: Math.round(lastEntry.renderTime || lastEntry.loadTime)
+            });
+          }).observe({ entryTypes: ['largest-contentful-paint'] });
+        } catch (e) {
+          console.warn('LCP observer not supported');
+        }
+
+        // First Input Delay (FID)
+        try {
+          new PerformanceObserver((list) => {
+            list.getEntries().forEach((entry) => {
+              gtag('event', 'FID', {
+                event_category: 'performance',
+                value: Math.round(entry.processingStart - entry.startTime),
+                metric_value: Math.round(entry.processingStart - entry.startTime)
+              });
+            });
+          }).observe({ entryTypes: ['first-input'] });
+        } catch (e) {
+          console.warn('FID observer not supported');
+        }
+
+        // Cumulative Layout Shift (CLS)
+        try {
+          let clsValue = 0;
+          new PerformanceObserver((list) => {
+            list.getEntries().forEach((entry) => {
+              if (!entry.hadRecentInput) {
+                clsValue += entry.value;
+              }
+            });
+            gtag('event', 'CLS', {
+              event_category: 'performance',
+              value: Math.round(clsValue * 1000),
+              metric_value: clsValue
+            });
+          }).observe({ entryTypes: ['layout-shift'] });
+        } catch (e) {
+          console.warn('CLS observer not supported');
+        }
+      }
+    });
+
+    // ============================================
+    // 5. Track External Link Clicks
+    // ============================================
+    const GlobalTracking = {
+      init() {
+        document.addEventListener('click', (e) => {
+          const link = e.target.closest('a');
+          if (!link) return;
+
+          const href = link.getAttribute('href');
+          const isExternal = href && (href.startsWith('http') || href.startsWith('//')) &&
+            !href.includes(window.location.hostname);
+
+          if (isExternal) {
+            gtag('event', 'click', {
+              event_category: 'outbound',
+              event_label: href,
+              link_text: link.textContent.trim(),
+              link_url: href
+            });
+          }
+        });
+      }
+    };
+
     // ============================================
     // Theme Management
     // ============================================
@@ -2586,6 +2760,12 @@
         const observer = new IntersectionObserver(entries => {
           entries.forEach(entry => {
             if (entry.isIntersecting) {
+              gtag('event', 'view_section', {
+                event_category: 'engagement',
+                event_label: entry.target.id,
+                section_name: entry.target.id
+              });
+
               navLinks.forEach(link => {
                 link.classList.remove("active");
                 if (link.getAttribute("href") === `#${entry.target.id}`) {
@@ -2743,6 +2923,27 @@
       init() {
         const form = document.getElementById("contactForm");
         if (form) {
+          form.addEventListener('focus', (e) => {
+            if (e.target.matches('input, textarea')) {
+              gtag('event', 'form_start', {
+                event_category: 'engagement',
+                event_label: 'contact_form'
+              });
+            }
+          }, { once: true, capture: true });
+
+          form.querySelectorAll('input, textarea').forEach(field => {
+            field.addEventListener('blur', () => {
+              if (field.value.trim()) {
+                gtag('event', 'form_field_complete', {
+                  event_category: 'engagement',
+                  event_label: field.name,
+                  field_name: field.name
+                });
+              }
+            });
+          });
+
           form.addEventListener("submit", this.handleSubmit.bind(this));
         }
       },
@@ -2769,10 +2970,18 @@
           });
 
           if (response.ok) {
-            gtag('event', 'contact_submit_success');
+            gtag('event', 'form_submit', {
+              event_category: 'conversion',
+              event_label: 'contact_form_success',
+              value: 10
+            });
             this.showSuccess();
             form.reset();
           } else {
+            gtag('event', 'form_error', {
+              event_category: 'engagement',
+              event_label: 'contact_form_failure'
+            });
             throw new Error("Form submission failed");
           }
         } catch (error) {
@@ -2915,6 +3124,10 @@
       ContactForm.init();
       HoverEffects.init();
       Performance.init();
+      ScrollTracking.init();
+      TimeTracking.init();
+      EngagementTracking.init();
+      GlobalTracking.init();
     });
 
     // ============================================
