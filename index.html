@@ -2553,11 +2553,9 @@
           this.thresholds.forEach(threshold => {
             if (scrollPercent >= threshold && !this.tracked.has(threshold)) {
               this.tracked.add(threshold);
-              gtag('event', 'scroll', {
-                event_category: 'engagement',
-                event_label: `${threshold}%`,
-                value: threshold
-              });
+                gtag('event', 'scroll_depth', {
+                  percent: threshold
+                });
             }
           });
         }, {
@@ -2576,9 +2574,8 @@
         window.addEventListener('beforeunload', () => {
           const timeOnPage = Math.round((Date.now() - this.startTime) / 1000);
           gtag('event', 'time_on_page', {
-            event_category: 'engagement',
-            event_label: window.location.pathname,
-            value: timeOnPage
+            page_path: window.location.pathname,
+            seconds: timeOnPage
           });
         });
       }
@@ -2601,9 +2598,7 @@
 
             if (engagedTime % 30 === 0) { // Every 30 seconds
               gtag('event', 'engaged_time', {
-                event_category: 'engagement',
-                event_label: `${engagedTime}s`,
-                value: engagedTime
+                seconds: engagedTime
               });
             }
           }
@@ -2631,11 +2626,9 @@
           new PerformanceObserver((list) => {
             const entries = list.getEntries();
             const lastEntry = entries[entries.length - 1];
-            gtag('event', 'LCP', {
-              event_category: 'performance',
-              value: Math.round(lastEntry.renderTime || lastEntry.loadTime),
-              metric_value: Math.round(lastEntry.renderTime || lastEntry.loadTime)
-            });
+              gtag('event', 'lcp', {
+                value: Math.round(lastEntry.renderTime || lastEntry.loadTime)
+              });
           }).observe({ entryTypes: ['largest-contentful-paint'] });
         } catch (e) {
           console.warn('LCP observer not supported');
@@ -2645,10 +2638,8 @@
         try {
           new PerformanceObserver((list) => {
             list.getEntries().forEach((entry) => {
-              gtag('event', 'FID', {
-                event_category: 'performance',
-                value: Math.round(entry.processingStart - entry.startTime),
-                metric_value: Math.round(entry.processingStart - entry.startTime)
+              gtag('event', 'fid', {
+                value: Math.round(entry.processingStart - entry.startTime)
               });
             });
           }).observe({ entryTypes: ['first-input'] });
@@ -2665,10 +2656,8 @@
                 clsValue += entry.value;
               }
             });
-            gtag('event', 'CLS', {
-              event_category: 'performance',
-              value: Math.round(clsValue * 1000),
-              metric_value: clsValue
+            gtag('event', 'cls', {
+              value: Math.round(clsValue * 1000)
             });
           }).observe({ entryTypes: ['layout-shift'] });
         } catch (e) {
@@ -2691,11 +2680,9 @@
             !href.includes(window.location.hostname);
 
           if (isExternal) {
-            gtag('event', 'click', {
-              event_category: 'outbound',
-              event_label: href,
-              link_text: link.textContent.trim(),
-              link_url: href
+            gtag('event', 'outbound_click', {
+              link_url: href,
+              link_text: link.textContent.trim()
             });
           }
         });
@@ -2761,9 +2748,7 @@
           entries.forEach(entry => {
             if (entry.isIntersecting) {
               gtag('event', 'view_section', {
-                event_category: 'engagement',
-                event_label: entry.target.id,
-                section_name: entry.target.id
+                section_id: entry.target.id
               });
 
               navLinks.forEach(link => {
@@ -2926,8 +2911,7 @@
           form.addEventListener('focus', (e) => {
             if (e.target.matches('input, textarea')) {
               gtag('event', 'form_start', {
-                event_category: 'engagement',
-                event_label: 'contact_form'
+                form_id: 'contact'
               });
             }
           }, { once: true, capture: true });
@@ -2936,8 +2920,7 @@
             field.addEventListener('blur', () => {
               if (field.value.trim()) {
                 gtag('event', 'form_field_complete', {
-                  event_category: 'engagement',
-                  event_label: field.name,
+                  form_id: 'contact',
                   field_name: field.name
                 });
               }
@@ -2971,16 +2954,16 @@
 
           if (response.ok) {
             gtag('event', 'form_submit', {
-              event_category: 'conversion',
-              event_label: 'contact_form_success',
+              form_id: 'contact',
+              success: true,
               value: 10
             });
             this.showSuccess();
             form.reset();
           } else {
             gtag('event', 'form_error', {
-              event_category: 'engagement',
-              event_label: 'contact_form_failure'
+              form_id: 'contact',
+              success: false
             });
             throw new Error("Form submission failed");
           }
