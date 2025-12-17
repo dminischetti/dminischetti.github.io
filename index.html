@@ -1544,11 +1544,13 @@
       backdrop-filter: blur(10px);
       background: rgba(255, 255, 255, 0.15);
       border-radius: var(--radius);
+      color: inherit;
       display: flex;
       gap: var(--space-md);
       height: 100%;
       padding: var(--space-md);
       transition: all var(--trans) var(--ease-out-expo);
+      text-decoration: none;
     }
 
     .contact-info-item:hover {
@@ -1557,6 +1559,25 @@
       color: white;
       transform: translateY(-4px);
       box-shadow: var(--shadow-lg);
+    }
+
+    .contact-info-item:focus-visible {
+      outline: 3px solid var(--c-primary);
+      outline-offset: 3px;
+    }
+
+    .contact-info-link {
+      color: rgba(255, 255, 255, 0.9);
+      font-size: var(--fs-sm);
+      margin: 0;
+      text-decoration: none;
+      transition: color var(--trans-fast);
+    }
+
+    .contact-info-item:hover .contact-info-link,
+    .contact-info-item:focus-visible .contact-info-link {
+      color: white;
+      text-decoration: underline;
     }
 
     .contact-info-icon {
@@ -1589,18 +1610,6 @@
       font-size: var(--fs-sm);
       font-weight: 700;
       margin-bottom: 4px;
-    }
-
-    .contact-info-details a {
-      color: rgba(255, 255, 255, 0.9);
-      font-size: var(--fs-sm);
-      text-decoration: none;
-      transition: color var(--trans-fast);
-    }
-
-    .contact-info-details a:hover {
-      color: white;
-      text-decoration: underline;
     }
 
     .availability-notice {
@@ -2459,7 +2468,7 @@
             <button type="submit" class="form-submit">Send Message →</button>
           </form>
           <div class="contact-info fade-in">
-            <div class="contact-info-item">
+            <a class="contact-info-item" href="https://linkedin.com/in/dminischetti/" target="_blank" rel="noopener">
               <div class="contact-info-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                   <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
@@ -2471,8 +2480,8 @@
                 <h4>LinkedIn</h4>
                 <a href="https://linkedin.com/in/dminischetti/" target="_blank" rel="noopener" onclick="gtag('event', 'click_linkedin');">Connect professionally</a>
               </div>
-            </div>
-            <div class="contact-info-item">
+            </a>
+            <a class="contact-info-item" href="/media/Dominic-Minischetti_Backend-PHP-Engineer_2025.pdf" download="Dominic-Minischetti_Backend-PHP-Engineer_2025.pdf">
               <div class="contact-info-icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
@@ -2486,7 +2495,7 @@
                 <h4>My Resume</h4>
                 <a href="/media/Dominic-Minischetti_Backend-PHP-Engineer_2025.pdf" download onclick="gtag('event', 'download_cv');">Download Resume</a>
               </div>
-            </div>
+            </a>
             <div class="availability-notice">
               ⚡ Available for new opportunities • Response within 24 hours
             </div>
