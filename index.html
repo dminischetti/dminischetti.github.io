@@ -2,6 +2,15 @@
 <html lang="en" dir="ltr">
 <head>
   <meta charset="UTF-8" />
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PS327TVEZ2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-PS327TVEZ2', {
+      anonymize_ip: true
+    });
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Dominic Minischetti • Backend PHP Engineer & Data Analyst | Scalable Systems & Insight-Driven Development</title>
@@ -1941,7 +1950,7 @@
   </nav>
 
   <!-- Floating CTA -->
-  <a href="#" class="floating-cta magnetic-cta" aria-label="Schedule a Call" onclick="Calendly.initPopupWidget({url: 'https://calendly.com/minischetti/meeting'}); return false;">
+  <a href="#" class="floating-cta magnetic-cta" aria-label="Schedule a Call" onclick="gtag('event', 'open_calendly'); Calendly.initPopupWidget({url: 'https://calendly.com/minischetti/meeting'}); return false;">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
       <path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" />
     </svg>
@@ -2231,10 +2240,10 @@
               <span class="skill-tag">SendGrid/Mailgun</span>
             </div>
             <div class="project-links">
-              <a class="project-link" href="https://github.com/dminischetti/passless" target="_blank" rel="noopener">
+              <a class="project-link" href="https://github.com/dminischetti/passless" target="_blank" rel="noopener" onclick="gtag('event', 'project_click', { project: 'passless', target: 'github'});">
                 View on GitHub →
               </a>
-              <a class="project-link" href="https://lab.minischetti.org/passless" target="_blank" rel="noopener">
+              <a class="project-link" href="https://lab.minischetti.org/passless" target="_blank" rel="noopener" onclick="gtag('event', 'project_click', { project: 'passless', target: 'demo'});">
                 Live Demo →
               </a>
             </div>
@@ -2257,10 +2266,10 @@
               <span class="skill-tag">Service Worker</span>
             </div>
             <div class="project-links">
-              <a class="project-link" href="https://github.com/dminischetti/narkly" target="_blank" rel="noopener">
+              <a class="project-link" href="https://github.com/dminischetti/markly" target="_blank" rel="noopener" onclick="gtag('event', 'project_click', { project: 'markly', target: 'github'});">
                 View on GitHub →
               </a>
-              <a class="project-link" href="https://lab.minischetti.org/markly" target="_blank" rel="noopener">
+              <a class="project-link" href="https://lab.minischetti.org/markly" target="_blank" rel="noopener" onclick="gtag('event', 'project_click', { project: 'markly', target: 'demo'});">
                 Live Demo →
               </a>
             </div>
@@ -2281,10 +2290,10 @@
               <span class="skill-tag">Monolog</span>
             </div>
             <div class="project-links">
-              <a class="project-link" href="https://github.com/dminischetti/echodb" target="_blank" rel="noopener">
+              <a class="project-link" href="https://github.com/dminischetti/echodb" target="_blank" rel="noopener" onclick="gtag('event', 'project_click', { project: 'echodb', target: 'github'});">
                 View on GitHub →
               </a>
-              <a class="project-link" href="https://lab.minischetti.org/echodb/" target="_blank" rel="noopener">
+              <a class="project-link" href="https://lab.minischetti.org/echodb/" target="_blank" rel="noopener" onclick="gtag('event', 'project_click', { project: 'echodb', target: 'demo'});">
                 View Project →
               </a>
             </div>
@@ -2306,10 +2315,10 @@
               <span class="skill-tag">Accessibility</span>
             </div>
             <div class="project-links">
-              <a class="project-link" href="https://github.com/dminischetti/devtoolbox" target="_blank" rel="noopener">
+              <a class="project-link" href="https://github.com/dminischetti/devtoolbox" target="_blank" rel="noopener" onclick="gtag('event', 'project_click', { project: 'devtoolbox', target: 'github'});">
                 View on GitHub →
               </a>
-              <a class="project-link" href="https://minischetti.org/devtoolbox/" target="_blank" rel="noopener">
+              <a class="project-link" href="https://minischetti.org/devtoolbox/" target="_blank" rel="noopener" onclick="gtag('event', 'project_click', { project: 'devtoolbox', target: 'demo'});">
                 View Project →
               </a>
             </div>
@@ -2331,10 +2340,10 @@
               <span class="skill-tag">Reproducible Analytics</span>
             </div>
             <div class="project-links">
-              <a class="project-link" href="https://github.com/dminischetti/insightlab" target="_blank" rel="noopener">
+              <a class="project-link" href="https://github.com/dminischetti/insightlab" target="_blank" rel="noopener" onclick="gtag('event', 'project_click', { project: 'insightlab', target: 'github'});">
                 View on GitHub →
               </a>
-              <a class="project-link" href="https://minischetti.org/insightlab/" target="_blank" rel="noopener">
+              <a class="project-link" href="https://minischetti.org/insightlab/" target="_blank" rel="noopener" onclick="gtag('event', 'project_click', { project: 'insightlab', target: 'demo'});">
                 View Project →
               </a>
             </div>
@@ -2460,7 +2469,7 @@
               </div>
               <div class="contact-info-details">
                 <h4>LinkedIn</h4>
-                <a href="https://linkedin.com/in/dminischetti/" target="_blank" rel="noopener">Connect professionally</a>
+                <a href="https://linkedin.com/in/dminischetti/" target="_blank" rel="noopener" onclick="gtag('event', 'click_linkedin');">Connect professionally</a>
               </div>
             </div>
             <div class="contact-info-item">
@@ -2475,7 +2484,7 @@
               </div>
               <div class="contact-info-details">
                 <h4>My Resume</h4>
-                <a href="/media/Dominic-Minischetti_Backend-PHP-Engineer_2025.pdf" download="Dominic-Minischetti_Backend-PHP-Engineer_2025.pdf">Download Resume</a>
+                <a href="/media/Dominic-Minischetti_Backend-PHP-Engineer_2025.pdf" download onclick="gtag('event', 'download_cv');">Download Resume</a>
               </div>
             </div>
             <div class="availability-notice">
@@ -2751,12 +2760,14 @@
           });
 
           if (response.ok) {
+            gtag('event', 'contact_submit_success');
             this.showSuccess();
             form.reset();
           } else {
             throw new Error("Form submission failed");
           }
         } catch (error) {
+          gtag('event', 'contact_submit_error');
           console.error("Form submission error:", error);
         }
       },
