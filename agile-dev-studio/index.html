@@ -38,6 +38,29 @@
             margin-bottom: 10px;
         }
 
+        h1 small {
+            font-size: 0.4em;
+            font-weight: 400;
+            color: #7f8c8d;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .byline {
+            margin-top: 15px;
+        }
+
+        .byline a {
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 500;
+        }
+
+        .byline a:hover {
+            text-decoration: underline;
+        }
+
         .subtitle {
             font-size: 1.3em;
             color: #7f8c8d;
@@ -247,34 +270,62 @@
             padding: 20px;
         }
 
-        .downloads {
+        .materials {
             background: #ecf0f1;
-            padding: 30px;
-            text-align: center;
+            padding: 40px 30px;
             margin-top: 40px;
         }
 
-        .downloads h3 {
-          font-size: 1.15em;
-          margin-top: 20px;
-          margin-bottom: 10px;
-          color: #2c3e50;
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
         }
 
-        .download-btn {
-            display: inline-block;
+        .materials-category {
+            background: white;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+        }
+
+        .materials-category h3 {
+            font-size: 1em;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            color: #7f8c8d;
+            margin: 0 0 15px 0;
+            font-weight: 600;
+        }
+
+        .materials-category a {
+            display: block;
             background: #3498db;
             color: white;
-            padding: 15px 30px;
+            padding: 12px 20px;
             text-decoration: none;
-            margin: 10px;
+            margin-bottom: 10px;
             border-radius: 5px;
-            font-weight: 600;
+            font-weight: 500;
+            font-size: 0.95em;
             transition: background 0.3s;
+            text-align: center;
         }
 
-        .download-btn:hover {
+        .materials-category a:hover {
             background: #2980b9;
+        }
+
+        .materials-category a:last-child {
+            margin-bottom: 0;
+        }
+
+        .materials-note {
+            margin-top: 25px;
+            font-size: 0.9em;
+            color: #5a6c7d;
+            text-align: center;
+            font-style: italic;
         }
 
         .phase-list {
@@ -310,6 +361,19 @@
             margin-top: 0;
         }
 
+        .checkpoint-badge {
+            display: inline-block;
+            background: #27ae60;
+            color: white;
+            font-size: 0.7em;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
         :focus-visible {
             outline: 3px solid #3498db;
             outline-offset: 3px;
@@ -332,6 +396,10 @@
             .role-grid {
                 grid-template-columns: 1fr;
             }
+
+            .materials-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         @media print {
@@ -349,8 +417,7 @@
                 border-bottom: 1px solid #000;
             }
 
-            .downloads,
-            .download-btn,
+            .materials,
             .accordion:after,
             .toc {
                 display: none !important;
@@ -396,7 +463,11 @@
 <body>
     <div class="container">
         <header>
-            <h1>The Agile Dev Studio</h1>
+            <h1>The Agile Dev Studio<small>by Dominic Minischetti</small></h1>
+            <p class="byline">
+                <a href="https://www.linkedin.com/in/dminischetti/" target="_blank" rel="noopener noreferrer">LinkedIn</a> •
+                <a href="https://minischetti.org" target="_blank" rel="noopener noreferrer">Portfolio</a>
+            </p>
             <p class="subtitle">From Concept to MVP</p>
 
             <div class="meta">
@@ -419,7 +490,7 @@
             </div>
 
             <div class="value-statement">
-                Students work as a junior development team to transform a real-world problem into a functional Minimum Viable Product (MVP). The project emphasizes professional workflow, collaboration, and technical communication, not just code.
+                Designed by a Backend Developer with NYS CTE certification, this project bridges the gap between code syntax and real-world business workflows (Agile, Git, QA). Students build technical skills while learning the professional practices that NYC employers expect from junior developers.
             </div>
 
             <div class="glance">
@@ -474,19 +545,19 @@
 
             <ul class="phase-list">
                 <li>
-                    <h3>Discovery & Design</h3>
+                    <h3>Discovery & Design<span class="checkpoint-badge">Checkpoint</span></h3>
                     <p>Students analyze user needs, define user stories, and create wireframes and data maps before writing code.</p>
                 </li>
                 <li>
-                    <h3>Development Sprints</h3>
+                    <h3>Development Sprints<span class="checkpoint-badge">Checkpoint</span></h3>
                     <p>Teams build the application in short, guided sprints with regular checkpoints and peer feedback.</p>
                 </li>
                 <li>
-                    <h3>Quality Assurance (QA)</h3>
+                    <h3>Quality Assurance (QA)<span class="checkpoint-badge">Checkpoint</span></h3>
                     <p>Students test each other's work to identify bugs, improve usability, and practice constructive technical feedback.</p>
                 </li>
                 <li>
-                    <h3>Demo Day</h3>
+                    <h3>Demo Day<span class="checkpoint-badge">Final</span></h3>
                     <p>Teams present their final product to classmates and stakeholders, explaining both the solution and the development process.</p>
                 </li>
             </ul>
@@ -657,6 +728,38 @@
                     </ul>
                 </div>
             </div>
+
+            <button type="button"
+                    class="accordion"
+                    aria-expanded="false"
+                    aria-controls="panel-nyc"
+                    id="accordion-nyc">
+                Why This Works for NYC CTE
+            </button>
+            <div class="panel" id="panel-nyc" role="region" aria-labelledby="accordion-nyc">
+                <div class="panel-content">
+                    <h4 style="margin-top: 0;">Danielson Framework Alignment</h4>
+                    <ul>
+                        <li><strong>Domain 1e (Designing Coherent Instruction):</strong> Multi-phase project structure with clear learning progression from design to deployment</li>
+                        <li><strong>Domain 3d (Using Assessment in Instruction):</strong> Regular checkpoints, peer review, and process-based rubric provide ongoing formative assessment</li>
+                        <li><strong>Domain 4a (Reflecting on Teaching):</strong> Student post-mortem reflections model professional growth mindset and metacognitive practice</li>
+                    </ul>
+
+                    <h4>Work-Based Learning (WBL) Integration</h4>
+                    <ul>
+                        <li><strong>Authentic Tools:</strong> Students use industry-standard workflows (Git, Kanban, sprint planning) that mirror real junior developer roles</li>
+                        <li><strong>Professional Communication:</strong> README documentation, technical writing, and demo presentations prepare students for workplace expectations</li>
+                        <li><strong>Quality Assurance:</strong> Peer testing and constructive feedback cycles reflect real QA processes in software companies</li>
+                    </ul>
+
+                    <h4>Technical Environment Management</h4>
+                    <ul>
+                        <li><strong>Cross-Platform Compatibility:</strong> Starter templates ensure consistent development environments across diverse student hardware</li>
+                        <li><strong>Scaffolded Setup:</strong> Pre-configured templates with clear documentation reduce technical barriers and maximize instructional time</li>
+                        <li><strong>Version Control:</strong> Git workflow teaches professional code management while providing teacher visibility into student progress</li>
+                    </ul>
+                </div>
+            </div>
         </section>
 
         <section id="middle-school">
@@ -670,21 +773,32 @@
             </ul>
         </section>
 
-        <section id="materials" class="downloads">
+        <section id="materials" class="materials">
             <h2>Materials</h2>
 
-            <h3 style="margin-top: 0;">Student-Facing</h3>
-            <a href="assets/project-packet.pdf" class="download-btn">Project Packet (PDF)</a>
+            <div class="materials-grid">
+                <div class="materials-category">
+                    <h3>Student-Facing</h3>
+                    <a href="assets/project-packet.pdf">Project Packet (PDF)</a>
+                    <a href="assets/backend-starter-template.zip">Backend Starter Template (ZIP)</a>
+                </div>
 
-            <h3>Assessment Tools</h3>
-            <a href="assets/mvp-requirements-checklist.pdf" class="download-btn">MVP Requirements Checklist (PDF)</a>
-            <a href="assets/rubric.pdf" class="download-btn">Assessment Rubric (PDF)</a>
+                <div class="materials-category">
+                    <h3>Assessment Tools</h3>
+                    <a href="assets/mvp-requirements-checklist.pdf">MVP Requirements Checklist (PDF)</a>
+                    <a href="assets/rubric.pdf">Assessment Rubric (PDF)</a>
+                    <a href="assets/debugging-log-template.pdf">Junior Dev Debugging Log (PDF)</a>
+                </div>
 
-            <h3>Teacher/Admin</h3>
-            <a href="assets/teachers-implementation-guide.pdf" class="download-btn">Teacher’s Implementation Guide (PDF)</a>
+                <div class="materials-category">
+                    <h3>Teacher/Admin</h3>
+                    <a href="assets/teachers-implementation-guide.pdf">Implementation Guide (PDF)</a>
+                    <a href="assets/environment-setup-guide.pdf">Environment Setup Guide (PDF)</a>
+                </div>
+            </div>
 
-            <p style="margin-top: 15px; font-size: 0.95em;">
-                The checklist verifies minimum technical readiness. The rubric evaluates quality and professional practice.
+            <p class="materials-note">
+                The checklist verifies minimum technical readiness. The rubric evaluates quality and professional practice. Backend starter template includes pre-configured database schema and API endpoints to accelerate development.
             </p>
         </section>
 
