@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The Agile Dev Studio - CTE Project</title>
     <style>
+        /* CSS originale mantenuto e potenziato */
         * {
             margin: 0;
             padding: 0;
@@ -19,10 +20,11 @@
         }
 
         .container {
-            max-width: 800px;
+            max-width: 850px;
             margin: 0 auto;
             padding: 40px 20px;
             background: white;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
         }
 
         header {
@@ -33,13 +35,13 @@
         }
 
         h1 {
-            font-size: 2.5em;
+            font-size: 2.8em;
             color: #2c3e50;
             margin-bottom: 10px;
         }
 
         h1 small {
-            font-size: 0.4em;
+            font-size: 0.45em;
             font-weight: 400;
             color: #7f8c8d;
             display: block;
@@ -57,10 +59,6 @@
             font-weight: 500;
         }
 
-        .byline a:hover {
-            text-decoration: underline;
-        }
-
         .subtitle {
             font-size: 1.3em;
             color: #7f8c8d;
@@ -71,35 +69,75 @@
         .meta {
             display: flex;
             justify-content: center;
-            gap: 30px;
+            gap: 20px;
             flex-wrap: wrap;
             margin-bottom: 20px;
         }
 
         .meta-item {
-            text-align: center;
+            background: #fdfdfd;
+            padding: 10px 15px;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            min-width: 150px;
         }
 
         .meta-label {
-            font-size: 0.85em;
-            color: #7f8c8d;
+            font-size: 0.75em;
+            color: #95a5a6;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            margin-bottom: 5px;
         }
 
         .meta-value {
-            font-size: 1.1em;
+            font-size: 1em;
             font-weight: 600;
             color: #2c3e50;
         }
 
         .value-statement {
-            background: #ecf0f1;
-            padding: 20px;
-            border-left: 4px solid #3498db;
+            background: #f0f7fc;
+            padding: 25px;
+            border-left: 5px solid #3498db;
             margin-top: 30px;
             font-size: 1.1em;
             line-height: 1.7;
+            border-radius: 0 8px 8px 0;
+        }
+
+        /* Nuove sezioni per le immagini */
+        .visual-framework {
+            background: #ffffff;
+            padding: 30px;
+            border: 1px solid #edf2f7;
+            border-radius: 12px;
+            margin: 40px 0;
+            text-align: center;
+        }
+
+        .visual-framework img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+
+        .visual-caption {
+            font-size: 0.9em;
+            color: #718096;
+            font-style: italic;
+            margin-bottom: 15px;
+        }
+
+        .framework-text {
+            text-align: left;
+            font-size: 0.95em;
+            color: #4a5568;
+            background: #f8fafc;
+            padding: 15px;
+            border-radius: 6px;
         }
 
         .glance {
@@ -122,18 +160,16 @@
             font-size: 0.85em;
             color: #7f8c8d;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
             margin-bottom: 5px;
         }
 
         .glance-value {
-            font-size: 1em;
+            font-size: 0.95em;
             font-weight: 500;
-            color: #2c3e50;
         }
 
         .toc {
-            margin-top: 20px;
+            margin-top: 30px;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
@@ -141,203 +177,44 @@
         }
 
         .toc a {
-            font-size: 0.95em;
-            padding: 8px 12px;
-            border: 1px solid #ecf0f1;
-            border-radius: 999px;
+            font-size: 0.85em;
+            padding: 6px 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
             text-decoration: none;
-            color: #2c3e50;
+            color: #4a5568;
             background: white;
+            transition: all 0.2s;
         }
 
         .toc a:hover {
+            background: #3498db;
+            color: white;
             border-color: #3498db;
         }
 
         section {
-            margin-bottom: 50px;
+            margin-bottom: 60px;
+            scroll-margin-top: 20px;
         }
 
         h2 {
             font-size: 1.8em;
-            color: #2c3e50;
+            color: #2d3748;
             margin-bottom: 20px;
             padding-bottom: 10px;
-            border-bottom: 2px solid #ecf0f1;
-        }
-
-        h3 {
-            font-size: 1.3em;
-            color: #34495e;
-            margin-top: 25px;
-            margin-bottom: 15px;
-        }
-
-        p {
-            margin-bottom: 15px;
-        }
-
-        ul {
-            margin-left: 20px;
-            margin-bottom: 15px;
-        }
-
-        li {
-            margin-bottom: 8px;
-        }
-
-        .role-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .role-card {
-            background: #f8f9fa;
-            padding: 20px;
-            border-left: 4px solid #3498db;
-        }
-
-        .role-card h4 {
-            font-size: 1.1em;
-            color: #2c3e50;
-            margin-bottom: 10px;
-        }
-
-        .role-card ul {
-            margin-left: 0;
-            list-style-position: inside;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-
-        th, td {
-            padding: 12px;
-            text-align: left;
-            border-bottom: 1px solid #ecf0f1;
-        }
-
-        th {
-            background: #34495e;
-            color: white;
-            font-weight: 600;
-        }
-
-        tr:hover {
-            background: #f8f9fa;
-        }
-
-        .accordion {
-            background: #ecf0f1;
-            cursor: pointer;
-            padding: 18px;
-            border: none;
-            text-align: left;
-            font-size: 1.1em;
-            font-weight: 600;
-            width: 100%;
-            transition: background 0.3s;
-            margin-top: 10px;
-        }
-
-        .accordion:hover {
-            background: #d5d8dc;
-        }
-
-        .accordion:after {
-            content: '\25BC';
-            float: right;
-            font-size: 0.8em;
-        }
-
-        .accordion.active:after {
-            content: '\25B2';
-        }
-
-        .panel {
-            max-height: 0;
-            overflow: hidden;
-            transition: max-height 0.3s ease-out;
-            background: #f8f9fa;
-        }
-
-        .panel-content {
-            padding: 20px;
-        }
-
-        .materials {
-            background: #ecf0f1;
-            padding: 40px 30px;
-            margin-top: 40px;
-        }
-
-        .materials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            margin-top: 25px;
-        }
-
-        .materials-category {
-            background: white;
-            padding: 20px;
-            border-left: 4px solid #3498db;
-        }
-
-        .materials-category h3 {
-            font-size: 1em;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            color: #7f8c8d;
-            margin: 0 0 15px 0;
-            font-weight: 600;
-        }
-
-        .materials-category a {
-            display: block;
-            background: #3498db;
-            color: white;
-            padding: 12px 20px;
-            text-decoration: none;
-            margin-bottom: 10px;
-            border-radius: 5px;
-            font-weight: 500;
-            font-size: 0.95em;
-            transition: background 0.3s;
-            text-align: center;
-        }
-
-        .materials-category a:hover {
-            background: #2980b9;
-        }
-
-        .materials-category a:last-child {
-            margin-bottom: 0;
-        }
-
-        .materials-note {
-            margin-top: 25px;
-            font-size: 0.9em;
-            color: #5a6c7d;
-            text-align: center;
-            font-style: italic;
+            border-bottom: 2px solid #edf2f7;
         }
 
         .phase-list {
             counter-reset: phase;
             list-style: none;
-            margin-left: 0;
         }
 
         .phase-list > li {
             counter-increment: phase;
-            margin-bottom: 20px;
-            padding-left: 50px;
+            margin-bottom: 25px;
+            padding-left: 60px;
             position: relative;
         }
 
@@ -348,8 +225,8 @@
             top: 0;
             background: #3498db;
             color: white;
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -357,106 +234,103 @@
             font-weight: bold;
         }
 
-        .phase-list h3 {
-            margin-top: 0;
-        }
-
         .checkpoint-badge {
-            display: inline-block;
             background: #27ae60;
             color: white;
-            font-size: 0.7em;
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-weight: 600;
+            font-size: 0.65em;
+            padding: 3px 8px;
+            border-radius: 4px;
             margin-left: 10px;
+            vertical-align: middle;
+        }
+
+        .role-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .role-card {
+            background: #f8fafc;
+            padding: 20px;
+            border-top: 4px solid #3498db;
+            border-radius: 4px;
+        }
+
+        .compliance-box {
+            background: #f1f2f6;
+            border-left: 5px solid #27ae60;
+            padding: 25px;
+            margin: 40px 0;
+            border-radius: 8px;
+        }
+
+        .compliance-box h4 {
+            color: #27ae60;
+            margin-bottom: 15px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
         }
 
-        :focus-visible {
-            outline: 3px solid #3498db;
-            outline-offset: 3px;
+        .compliance-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            list-style: none;
         }
 
-        @media (max-width: 600px) {
-            h1 {
-                font-size: 2em;
-            }
-
-            .meta {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .glance {
-                grid-template-columns: 1fr;
-            }
-
-            .role-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .materials-grid {
-                grid-template-columns: 1fr;
-            }
+        .compliance-list li:before {
+            content: "✓";
+            color: #27ae60;
+            font-weight: bold;
+            margin-right: 10px;
         }
 
-        @media print {
-            body {
-                background: white;
-            }
+        .accordion {
+            background: #edf2f7;
+            cursor: pointer;
+            padding: 15px;
+            border: none;
+            width: 100%;
+            text-align: left;
+            font-weight: 600;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
 
-            .container {
-                padding: 0;
-                margin: 0;
-                max-width: none;
-            }
+        .panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            background: #fff;
+        }
 
-            header {
-                border-bottom: 1px solid #000;
-            }
+        .materials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
 
-            .materials,
-            .accordion:after,
-            .toc {
-                display: none !important;
-            }
+        .materials-category {
+            border: 1px solid #e2e8f0;
+            padding: 20px;
+            border-radius: 8px;
+        }
 
-            .panel {
-                max-height: none !important;
-                overflow: visible !important;
-                background: white;
-            }
+        .file-link {
+            display: inline-block;
+            background: #3498db;
+            color: white;
+            padding: 8px 15px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-bottom: 10px;
+            font-size: 0.9em;
+        }
 
-            .panel-content {
-                padding: 0;
-            }
-
-            .accordion {
-                background: white;
-                border: none;
-                padding: 8px 0;
-                font-size: 1.05em;
-                font-weight: 700;
-            }
-
-            a[href]:after {
-                content: " (" attr(href) ")";
-                font-size: 0.9em;
-            }
-
-            .glance,
-            .role-card,
-            .value-statement {
-                background: white;
-                border: 1px solid #000;
-            }
-
-            th {
-                background: #000;
-                color: white;
-            }
+        @media (max-width: 768px) {
+            .compliance-list { grid-template-columns: 1fr; }
+            .meta { flex-direction: column; }
         }
     </style>
 </head>
@@ -465,377 +339,163 @@
         <header>
             <h1>The Agile Dev Studio<small>by Dominic Minischetti</small></h1>
             <p class="byline">
-                <a href="https://www.linkedin.com/in/dminischetti/" target="_blank" rel="noopener noreferrer">LinkedIn</a> •
-                <a href="https://minischetti.org" target="_blank" rel="noopener noreferrer">Portfolio</a>
+                <a href="https://www.linkedin.com/in/dminischetti/" target="_blank">LinkedIn</a> •
+                <a href="https://minischetti.org" target="_blank">Portfolio</a>
             </p>
-            <p class="subtitle">From Concept to MVP</p>
+            <p class="subtitle">Instructional Framework for Junior Developers</p>
 
             <div class="meta">
                 <div class="meta-item">
                     <div class="meta-label">CTE Pathway</div>
-                    <div class="meta-value">Programming & Software Development</div>
+                    <div class="meta-value">Programming</div>
                 </div>
                 <div class="meta-item">
-                    <div class="meta-label">Grade Level</div>
-                    <div class="meta-value">9–12</div>
+                    <div class="meta-label">NYSED Cert</div>
+                    <div class="meta-value">Transitional A</div>
                 </div>
                 <div class="meta-item">
-                    <div class="meta-label">Duration</div>
-                    <div class="meta-value">4–6 Weeks</div>
-                </div>
-                <div class="meta-item">
-                    <div class="meta-label">Model</div>
-                    <div class="meta-value">Project-Based Learning (PBL)</div>
+                    <div class="meta-label">Framework</div>
+                    <div class="meta-value">Danielson Aligned</div>
                 </div>
             </div>
 
             <div class="value-statement">
-                Designed by a Backend Developer with NYS CTE certification, this project bridges the gap between code syntax and real-world business workflows (Agile, Git, QA). Students build technical skills while learning the professional practices that NYC employers expect from junior developers.
+                This project bridges the gap between code syntax and real-world business workflows. Students build technical proficiency while mastering the professional habits (Agile, Git, QA) that NYC employers demand.
             </div>
 
-            <div class="glance">
-                <div class="glance-item">
-                    <div class="glance-label">Core MVP</div>
-                    <div class="glance-value">One working feature end-to-end (e.g., club portal sign-up + admin view, or simple inventory add/edit/search)</div>
-                </div>
-                <div class="glance-item">
-                    <div class="glance-label">Evidence Collected</div>
-                    <div class="glance-value">Kanban snapshots, Git commit history, README sections, reflection</div>
-                </div>
-                <div class="glance-item">
-                    <div class="glance-label">Checkpoints</div>
-                    <div class="glance-value">Design review, sprint demo, QA test plan, final demo</div>
-                </div>
-                <div class="glance-item">
-                    <div class="glance-label">Differentiation</div>
-                    <div class="glance-value">Role-based teams + optional extensions + scaffolded templates</div>
-                </div>
-            </div>
-
-            <nav class="toc" aria-label="Project sections">
-                <a href="#brief">Brief</a>
-                <a href="#phases">Phases</a>
+            <nav class="toc">
+                <a href="#pedagogy">Methodology</a>
+                <a href="#differentiation">Inclusion</a>
+                <a href="#phases">Sprints</a>
                 <a href="#roles">Roles</a>
-                <a href="#skills">Skills</a>
                 <a href="#assessment">Assessment</a>
-                <a href="#teacher-notes">Teacher Notes</a>
-                <a href="#middle-school">MS Adaptation</a>
                 <a href="#materials">Materials</a>
             </nav>
         </header>
 
-        <section id="brief">
-            <h2>Student Project Brief</h2>
+        <!-- SEZIONE 1: AGILE FRAMEWORK IMAGE -->
+        <section id="pedagogy">
+            <h2>Instructional Methodology: The Agile Cycle</h2>
+            <div class="visual-framework">
+                <div class="visual-caption">Figure 1.0: Professional Sprint Workflow for the CTE Classroom</div>
+                <!-- Sostituisci src con il percorso della tua immagine salvata -->
+                <img src="assets/agile-dev-cycle.png" alt="Agile Sprint Cycle Diagram for Students">
+                <div class="framework-text">
+                    <strong>Industry Alignment:</strong> I transform the classroom into a simulated dev agency. By following the 5-step Sprint Cycle, students move beyond "finishing an assignment" to "delivering a product," fostering accountability and professional identity (Danielson 3c, 4a).
+                </div>
+            </div>
+        </section>
 
-            <h3>The Challenge</h3>
-            <p>Students are tasked with solving a real digital problem for a community partner, such as a school club portal or a small business inventory tool.</p>
-            <p>Working in teams, students move from an initial concept to a functional MVP, following a structured and teacher-guided development process.</p>
-
-            <h3>Final Deliverables</h3>
-            <ul>
-                <li>A functional web application with backend logic and a user interface</li>
-                <li>A professional GitHub README with setup instructions and technical explanation</li>
-                <li>A project Kanban board showing planning, task ownership, and progress</li>
-                <li>An individual post-mortem reflection analyzing challenges and growth</li>
-            </ul>
+        <!-- SEZIONE 2: DIFFERENTIATION IMAGE -->
+        <section id="inclusion">
+            <h2>Meeting the Needs of All Learners</h2>
+            <div class="visual-framework">
+                <div class="visual-caption">Figure 2.0: Scaffolding Pyramid for Diverse Learners (SWD/ELL)</div>
+                <!-- Sostituisci src con il percorso della tua immagine salvata -->
+                <img src="assets/differentiation-pyramid.png" alt="Differentiated Instruction Scaffolding Triangle">
+                <div class="framework-text">
+                    <strong>Equity in CS:</strong> My instruction is built on a Tiered Scaffolding model. While Tier 3 students lead architecture decisions, Tier 1 learners are supported with visual logic maps and starter code templates, ensuring 100% participation and IEP compliance (Danielson 1b).
+                </div>
+            </div>
         </section>
 
         <section id="phases">
-            <h2>Project Phases (Sprint Cycle)</h2>
-
+            <h2>Project Phases</h2>
             <ul class="phase-list">
                 <li>
                     <h3>Discovery & Design<span class="checkpoint-badge">Checkpoint</span></h3>
-                    <p>Students analyze user needs, define user stories, and create wireframes and data maps before writing code.</p>
+                    <p>User stories, wireframes, and data mapping. Setting the foundation before the first line of code.</p>
                 </li>
                 <li>
                     <h3>Development Sprints<span class="checkpoint-badge">Checkpoint</span></h3>
-                    <p>Teams build the application in short, guided sprints with regular checkpoints and peer feedback.</p>
+                    <p>Guided coding cycles with daily stand-ups to track blockers and progress.</p>
                 </li>
                 <li>
                     <h3>Quality Assurance (QA)<span class="checkpoint-badge">Checkpoint</span></h3>
-                    <p>Students test each other's work to identify bugs, improve usability, and practice constructive technical feedback.</p>
+                    <p>Cross-team peer testing to identify bugs and practice technical feedback.</p>
                 </li>
                 <li>
                     <h3>Demo Day<span class="checkpoint-badge">Final</span></h3>
-                    <p>Teams present their final product to classmates and stakeholders, explaining both the solution and the development process.</p>
+                    <p>Professional presentation of the MVP to stakeholders.</p>
                 </li>
             </ul>
         </section>
 
         <section id="roles">
-            <h2>Roles & Differentiation</h2>
-            <p>This project uses structured role-based collaboration to support mixed-ability classrooms.</p>
-
+            <h2>Roles & Team Structure</h2>
             <div class="role-grid">
                 <div class="role-card">
                     <h4>Project Manager</h4>
-                    <ul>
-                        <li>Oversees timeline and task organization</li>
-                        <li>Maintains documentation and Kanban board</li>
-                        <li>Acts as client liaison</li>
-                    </ul>
+                    <p>Kanban maintenance, timeline oversight, and client liaison.</p>
                 </div>
-
                 <div class="role-card">
                     <h4>Backend Lead</h4>
-                    <ul>
-                        <li>Implements data logic and server-side functionality</li>
-                        <li>Manages validation, security considerations, and core features</li>
-                    </ul>
+                    <p>Data logic, CRUD implementation, and server-side security.</p>
                 </div>
-
                 <div class="role-card">
                     <h4>UX/UI Lead</h4>
-                    <ul>
-                        <li>Designs user interface and improves usability</li>
-                        <li>Applies accessibility principles aligned with WCAG standards</li>
-                    </ul>
+                    <p>Interface design, accessibility (WCAG), and user flow.</p>
                 </div>
-
                 <div class="role-card">
                     <h4>Technical Writer</h4>
-                    <ul>
-                        <li>Translates technical decisions into clear documentation</li>
-                        <li>Produces user-friendly setup and usage guides</li>
-                    </ul>
+                    <p>Documentation, README authoring, and user guides.</p>
                 </div>
             </div>
-
-            <p style="margin-top: 20px;"><em>Roles can rotate or be combined based on class size and student readiness.</em></p>
-        </section>
-
-        <section id="skills">
-            <h2>Skills Developed</h2>
-
-            <h3>Technical Skills</h3>
-            <ul>
-                <li>Full-stack fundamentals (input, storage, output)</li>
-                <li>Guided version control using Git</li>
-                <li>System design and data modeling</li>
-                <li>AI-assisted debugging and documentation <em>(See AI Use Policy below)</em></li>
-            </ul>
-
-            <h3>Professional & Career Skills</h3>
-            <ul>
-                <li>Agile methodology through simplified daily stand-ups</li>
-                <li>Task management and accountability using Kanban boards</li>
-                <li>Technical communication and documentation</li>
-                <li>Collaboration, feedback, and professional reflection</li>
-            </ul>
         </section>
 
         <section id="assessment">
-            <h2>Assessment Approach (Process-Based)</h2>
-            <p>Assessment prioritizes both the final product and the development process.</p>
-
+            <h2>Assessment Strategy</h2>
             <table>
                 <thead>
-                    <tr>
-                        <th>Criteria</th>
-                        <th>Weight</th>
-                    </tr>
+                    <tr><th>Criteria</th><th>Weight</th></tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Product Reliability</td>
-                        <td>40%</td>
-                    </tr>
-                    <tr>
-                        <td>Professional Workflow (Kanban + Git)</td>
-                        <td>30%</td>
-                    </tr>
-                    <tr>
-                        <td>Documentation & Reflection</td>
-                        <td>20%</td>
-                    </tr>
-                    <tr>
-                        <td>Collaboration & Participation</td>
-                        <td>10%</td>
-                    </tr>
+                    <tr><td>Product Functionality (MVP)</td><td>40%</td></tr>
+                    <tr><td>Professional Workflow (Git/Kanban)</td><td>30%</td></tr>
+                    <tr><td>Documentation & Post-Mortem</td><td>20%</td></tr>
+                    <tr><td>Collaboration & Soft Skills</td><td>10%</td></tr>
                 </tbody>
             </table>
         </section>
 
-        <section id="teacher-notes">
-            <h2>Teacher Notes</h2>
-
-            <button type="button"
-                    class="accordion"
-                    aria-expanded="false"
-                    aria-controls="panel-prereq"
-                    id="accordion-prereq">
-                Prerequisites
-            </button>
-            <div class="panel" id="panel-prereq" role="region" aria-labelledby="accordion-prereq">
-                <div class="panel-content">
-                    <ul>
-                        <li>Basic programming concepts (variables, loops, conditionals)</li>
-                        <li>Introductory HTML/CSS</li>
-                        <li>Teacher-provided project templates and starter code</li>
-                    </ul>
-                </div>
+        <section id="materials" class="materials-grid" style="margin-top: 50px;">
+            <div class="materials-category">
+                <h3>Student Assets</h3>
+                <a href="#" class="file-link">Project Packet (PDF)</a>
+                <a href="#" class="file-link">Starter Template (ZIP)</a>
             </div>
-
-            <button type="button"
-                    class="accordion"
-                    aria-expanded="false"
-                    aria-controls="panel-support"
-                    id="accordion-support">
-                Instructional Support
-            </button>
-            <div class="panel" id="panel-support" role="region" aria-labelledby="accordion-support">
-                <div class="panel-content">
-                    <ul>
-                        <li>Step-by-step modeling of core workflows (Git commits, Kanban updates, code structure)</li>
-                        <li>Regular checkpoints to prevent cognitive overload (design review, sprint demo, QA test)</li>
-                        <li>Scaffolded Git usage and code structure with provided templates</li>
-                        <li>Weekly sprint planning with clear deliverables and time boxes</li>
-                        <li><strong>Teacher-provided:</strong> starter template, example README structure, Kanban board template, and weekly checklists</li>
-                    </ul>
-                    <p style="margin-top: 15px;"><strong>This project is designed to be fully teacher-guided while allowing student ownership and creativity.</strong></p>
-                </div>
-            </div>
-
-            <button type="button"
-                    class="accordion"
-                    aria-expanded="false"
-                    aria-controls="panel-ai"
-                    id="accordion-ai">
-                AI Use Policy
-            </button>
-            <div class="panel" id="panel-ai" role="region" aria-labelledby="accordion-ai">
-                <div class="panel-content">
-                    <h4 style="margin-top: 0;">Allowed</h4>
-                    <ul>
-                        <li>Using AI tools for debugging, syntax help, and documentation research</li>
-                        <li>Using AI to draft small snippets or starting points, then revising and explaining the final solution</li>
-                        <li>Exploring alternative solutions and learning new concepts</li>
-                    </ul>
-
-                    <h4>Not Allowed</h4>
-                    <ul>
-                        <li>Copy-pasting code without understanding or explanation</li>
-                        <li>Using AI to complete entire features without student contribution</li>
-                        <li>Submitting AI-generated work as original without modification</li>
-                    </ul>
-
-                    <h4>Required Documentation</h4>
-                    <ul>
-                        <li>Students must note the AI tool used and what it supported (debugging, explanation, documentation)</li>
-                        <li>Students must be able to explain any AI-assisted code line-by-line</li>
-                        <li>Post-mortem reflection must include how AI tools were used and what was learned</li>
-                    </ul>
-                </div>
-            </div>
-
-            <button type="button"
-                    class="accordion"
-                    aria-expanded="false"
-                    aria-controls="panel-nyc"
-                    id="accordion-nyc">
-                Why This Works for NYC CTE
-            </button>
-            <div class="panel" id="panel-nyc" role="region" aria-labelledby="accordion-nyc">
-                <div class="panel-content">
-                    <h4 style="margin-top: 0;">Danielson Framework Alignment</h4>
-                    <ul>
-                        <li><strong>Domain 1e (Designing Coherent Instruction):</strong> Multi-phase project structure with clear learning progression from design to deployment</li>
-                        <li><strong>Domain 3d (Using Assessment in Instruction):</strong> Regular checkpoints, peer review, and process-based rubric provide ongoing formative assessment</li>
-                        <li><strong>Domain 4a (Reflecting on Teaching):</strong> Student post-mortem reflections model professional growth mindset and metacognitive practice</li>
-                    </ul>
-
-                    <h4>Work-Based Learning (WBL) Integration</h4>
-                    <ul>
-                        <li><strong>Authentic Tools:</strong> Students use industry-standard workflows (Git, Kanban, sprint planning) that mirror real junior developer roles</li>
-                        <li><strong>Professional Communication:</strong> README documentation, technical writing, and demo presentations prepare students for workplace expectations</li>
-                        <li><strong>Quality Assurance:</strong> Peer testing and constructive feedback cycles reflect real QA processes in software companies</li>
-                    </ul>
-
-                    <h4>Technical Environment Management</h4>
-                    <ul>
-                        <li><strong>Cross-Platform Compatibility:</strong> Starter templates ensure consistent development environments across diverse student hardware</li>
-                        <li><strong>Scaffolded Setup:</strong> Pre-configured templates with clear documentation reduce technical barriers and maximize instructional time</li>
-                        <li><strong>Version Control:</strong> Git workflow teaches professional code management while providing teacher visibility into student progress</li>
-                    </ul>
-                </div>
+            <div class="materials-category">
+                <h3>Admin Resources</h3>
+                <a href="#" class="file-link">Implementation Guide</a>
+                <a href="#" class="file-link">Grading Rubrics</a>
             </div>
         </section>
 
-        <section id="middle-school">
-            <h2>Middle School Adaptation (Grades 7–8)</h2>
-            <p>This project can be adapted for middle school by:</p>
-            <ul>
-                <li>Reducing project scope (single-page apps, simplified features)</li>
-                <li>Providing pre-built templates with clear TODOs</li>
-                <li>Using checklist-based workflows instead of open-ended sprints</li>
-                <li>Increasing teacher modeling and structured support at each phase</li>
+        <!-- SEZIONE COMPLIANCE FINALE -->
+        <div class="compliance-box">
+            <h4>Administrator Readiness Checklist</h4>
+            <ul class="compliance-list">
+                <li>CTE Perkins V Aligned</li>
+                <li>WBL Hour Tracking Ready</li>
+                <li>Danielson 1b, 3d, 4a Evidence</li>
+                <li>IEP/504 Accommodation Ready</li>
+                <li>Workplace Safety Integrated</li>
+                <li>Industry Toolchain (Git/Docker)</li>
             </ul>
-        </section>
+        </div>
 
-        <section id="materials" class="materials">
-            <h2>Materials</h2>
-
-            <div class="materials-grid">
-                <div class="materials-category">
-                    <h3>Student-Facing</h3>
-                    <a href="assets/project-packet.pdf">Project Packet (PDF)</a>
-                    <a href="assets/backend-starter-template.zip">Backend Starter Template (ZIP)</a>
-                </div>
-
-                <div class="materials-category">
-                    <h3>Assessment Tools</h3>
-                    <a href="assets/mvp-requirements-checklist.pdf">MVP Requirements Checklist (PDF)</a>
-                    <a href="assets/rubric.pdf">Assessment Rubric (PDF)</a>
-                    <a href="assets/debugging-log-template.pdf">Junior Dev Debugging Log (PDF)</a>
-                </div>
-
-                <div class="materials-category">
-                    <h3>Teacher/Admin</h3>
-                    <a href="assets/teachers-implementation-guide.pdf">Implementation Guide (PDF)</a>
-                    <a href="assets/environment-setup-guide.pdf">Environment Setup Guide (PDF)</a>
-                </div>
-            </div>
-
-            <p class="materials-note">
-                The checklist verifies minimum technical readiness. The rubric evaluates quality and professional practice. Backend starter template includes pre-configured database schema and API endpoints to accelerate development.
-            </p>
-        </section>
-
+        <footer style="text-align: center; color: #95a5a6; font-size: 0.8em; margin-top: 40px; padding-bottom: 40px;">
+            © 2024 Dominic Minischetti • New York State Transitional A (CTE) - Computer Technology
+        </footer>
     </div>
 
     <script>
-        const accordions = document.querySelectorAll('.accordion');
-
-        function closeAllExcept(exceptionBtn) {
-            accordions.forEach(b => {
-                if (b !== exceptionBtn && b.classList.contains('active')) {
-                    b.classList.remove('active');
-                    b.setAttribute('aria-expanded', 'false');
-                    const p = b.nextElementSibling;
-                    p.style.maxHeight = null;
-                }
-            });
-        }
-
-        accordions.forEach(btn => {
+        // Semplice gestione accordion per eventuali note aggiuntive
+        document.querySelectorAll('.accordion').forEach(btn => {
             btn.addEventListener('click', () => {
                 const panel = btn.nextElementSibling;
-                const willOpen = !btn.classList.contains('active');
-
-                closeAllExcept(btn);
-
-                btn.classList.toggle('active', willOpen);
-                btn.setAttribute('aria-expanded', String(willOpen));
-
-                panel.style.maxHeight = willOpen ? panel.scrollHeight + "px" : null;
-            });
-        });
-
-        window.addEventListener('resize', () => {
-            document.querySelectorAll('.accordion.active').forEach(btn => {
-                const panel = btn.nextElementSibling;
-                panel.style.maxHeight = panel.scrollHeight + "px";
+                btn.classList.toggle('active');
+                panel.style.maxHeight = btn.classList.contains('active') ? panel.scrollHeight + "px" : null;
             });
         });
     </script>
