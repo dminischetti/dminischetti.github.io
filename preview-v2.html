@@ -1,0 +1,850 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#080808">
+  <title>Dominic Minischetti | Software, Data, Systems</title>
+  <meta name="description" content="Dominic Minischetti builds technology, improves systems, and makes complex things easier to understand. Software engineering, data, automation, and technology operations in New York City.">
+  <style>
+    :root {
+      --ink: #080808;
+      --paper: #f0eee8;
+      --white: #fff;
+      --muted: #a7a7a7;
+      --line: rgba(255,255,255,.17);
+      --line-dark: rgba(8,8,8,.18);
+      --signal: #ff3f34;
+      --max: 1440px;
+      --gutter: clamp(18px, 3vw, 48px);
+      --display: clamp(4rem, 11.8vw, 11rem);
+      --headline: clamp(3rem, 8vw, 8.5rem);
+      --section-title: clamp(3.4rem, 8.7vw, 9rem);
+      --body-xl: clamp(1.45rem, 2.3vw, 2.45rem);
+      --body: clamp(1rem, 1.25vw, 1.18rem);
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      --sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial, sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; background: var(--ink); }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: var(--sans);
+      font-size: var(--body);
+      line-height: 1.45;
+      overflow-x: hidden;
+      text-rendering: optimizeLegibility;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    button, a { -webkit-tap-highlight-color: transparent; }
+    ::selection { background: var(--signal); color: var(--white); }
+    :focus-visible { outline: 2px solid var(--signal); outline-offset: 4px; }
+
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: 16px;
+      z-index: 1000;
+      transform: translateY(-180%);
+      background: var(--white);
+      color: var(--ink);
+      padding: 10px 14px;
+      font: 700 .8rem/1 var(--mono);
+      text-decoration: none;
+    }
+    .skip-link:focus { transform: translateY(0); }
+
+    .shell { width: min(100%, var(--max)); margin: 0 auto; padding-inline: var(--gutter); }
+    .kicker {
+      margin: 0;
+      font-family: var(--mono);
+      font-size: .74rem;
+      font-weight: 700;
+      letter-spacing: .11em;
+      line-height: 1.2;
+      text-transform: uppercase;
+    }
+    .eyebrow { display: flex; align-items: center; gap: 10px; }
+    .eyebrow::before { content: ""; width: 8px; height: 8px; background: var(--signal); display: inline-block; }
+
+    .site-header {
+      position: fixed;
+      inset: 0 0 auto 0;
+      z-index: 100;
+      color: var(--white);
+      mix-blend-mode: difference;
+      pointer-events: none;
+    }
+    .site-header__inner {
+      height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+    .brand, .nav a { pointer-events: auto; }
+    .brand {
+      font-family: var(--mono);
+      font-size: .78rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .nav { display: flex; gap: clamp(14px, 2vw, 28px); align-items: center; }
+    .nav a {
+      font-family: var(--mono);
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .nav a:hover { text-decoration: underline; text-underline-offset: 4px; }
+
+    .hero {
+      min-height: 100svh;
+      background: var(--ink);
+      color: var(--white);
+      position: relative;
+      isolation: isolate;
+      overflow: hidden;
+      display: flex;
+      align-items: flex-end;
+      padding: 112px 0 42px;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .14;
+      z-index: -2;
+      background-image:
+        radial-gradient(circle at 1px 1px, rgba(255,255,255,.85) 1px, transparent 1.2px);
+      background-size: 8px 8px;
+      mask-image: linear-gradient(to bottom, #000 0%, transparent 72%);
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      width: min(40vw, 540px);
+      aspect-ratio: 1;
+      right: 5vw;
+      top: 11vh;
+      border: 1px solid rgba(255,255,255,.24);
+      background:
+        linear-gradient(90deg, transparent 49.5%, rgba(255,255,255,.18) 50%, transparent 50.5%),
+        linear-gradient(transparent 49.5%, rgba(255,255,255,.18) 50%, transparent 50.5%);
+      transform: rotate(8deg);
+      z-index: -1;
+    }
+    .hero__inner { width: 100%; position: relative; }
+    .hero__topline {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: flex-start;
+      padding-bottom: clamp(40px, 7vh, 88px);
+      border-bottom: 1px solid var(--line);
+    }
+    .hero__meta { max-width: 28rem; color: #d4d4d4; font-size: .95rem; margin: 0; }
+    .hero__name {
+      margin: clamp(22px, 4vh, 48px) 0 0;
+      font-size: var(--display);
+      font-weight: 900;
+      letter-spacing: -.075em;
+      line-height: .78;
+      text-transform: uppercase;
+      max-width: 12ch;
+    }
+    .hero__statement {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(260px, .85fr);
+      gap: clamp(28px, 6vw, 100px);
+      align-items: end;
+      padding-top: clamp(34px, 6vh, 68px);
+    }
+    .hero__statement h1 {
+      margin: 0;
+      font-size: clamp(2rem, 4.6vw, 5.3rem);
+      line-height: .96;
+      letter-spacing: -.055em;
+      max-width: 15ch;
+    }
+    .hero__statement aside { border-left: 1px solid var(--line); padding-left: 22px; }
+    .hero__statement aside p { margin: 0 0 24px; color: #cfcfcf; max-width: 37rem; }
+    .text-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      font-family: var(--mono);
+      font-size: .75rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid currentColor;
+      padding-bottom: 5px;
+    }
+    .text-link::after { content: "↗"; font-size: 1.1em; transition: transform .18s ease; }
+    .text-link:hover::after { transform: translate(3px,-3px); }
+
+    .data-rail {
+      overflow: hidden;
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      background: #111;
+      color: #ccc;
+      font: 700 .67rem/1 var(--mono);
+      letter-spacing: .04em;
+      white-space: nowrap;
+    }
+    .data-rail__track {
+      width: max-content;
+      padding: 11px 0;
+      animation: rail 38s linear infinite;
+      will-change: transform;
+    }
+    .data-rail__track span { margin-right: 42px; }
+    .data-rail b { color: var(--signal); font-weight: 900; }
+    @keyframes rail { to { transform: translateX(-50%); } }
+
+    .manifesto {
+      min-height: 88svh;
+      display: flex;
+      align-items: center;
+      padding: clamp(90px, 13vw, 190px) 0;
+      position: relative;
+    }
+    .manifesto__grid { display: grid; grid-template-columns: .42fr 1.58fr; gap: clamp(28px, 6vw, 100px); }
+    .manifesto h2 {
+      margin: 0;
+      font-size: var(--headline);
+      letter-spacing: -.07em;
+      line-height: .86;
+      max-width: 11ch;
+    }
+    .manifesto h2 em { font-style: normal; color: var(--signal); }
+    .manifesto__copy { align-self: end; max-width: 42rem; padding-bottom: 1vw; }
+    .manifesto__copy p { margin: 0; font-size: var(--body-xl); line-height: 1.2; letter-spacing: -.025em; }
+
+    .work-principles {
+      background: var(--ink);
+      color: var(--white);
+      padding: clamp(80px, 9vw, 140px) 0 0;
+    }
+    .principles-intro { display: grid; grid-template-columns: .65fr 1.35fr; gap: 40px; padding-bottom: 46px; }
+    .principles-intro h2 {
+      margin: 0;
+      font-size: clamp(2.5rem, 6vw, 6.6rem);
+      letter-spacing: -.06em;
+      line-height: .9;
+      max-width: 9ch;
+    }
+    .principles-list { border-top: 1px solid var(--line); }
+    .principle {
+      display: grid;
+      grid-template-columns: 90px minmax(200px,.72fr) minmax(280px,1.28fr);
+      gap: clamp(24px, 4vw, 70px);
+      padding: clamp(34px, 4.5vw, 70px) 0;
+      border-bottom: 1px solid var(--line);
+      align-items: start;
+      position: relative;
+    }
+    .principle::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 calc(90px + clamp(24px, 4vw, 70px) - 1px);
+      width: 1px;
+      background: var(--line);
+    }
+    .principle__number { color: var(--signal); font: 800 .78rem/1.2 var(--mono); }
+    .principle h3 {
+      margin: 0;
+      font-size: clamp(2.7rem, 6.4vw, 7.2rem);
+      line-height: .8;
+      letter-spacing: -.065em;
+      text-transform: uppercase;
+    }
+    .principle p { margin: 0; color: #c2c2c2; font-size: clamp(1.05rem, 1.65vw, 1.4rem); max-width: 38rem; }
+    .principle__details { margin-top: 24px; display: flex; flex-wrap: wrap; gap: 8px; }
+    .tag { border: 1px solid var(--line); padding: 7px 9px; font: 700 .68rem/1 var(--mono); text-transform: uppercase; letter-spacing: .06em; }
+
+    .story-section {
+      min-height: 88svh;
+      padding: clamp(88px, 11vw, 170px) 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .story-section--light { background: var(--paper); color: var(--ink); }
+    .story-section--white { background: var(--white); color: var(--ink); }
+    .story-section--dark { background: var(--ink); color: var(--white); }
+    .story-grid { display: grid; grid-template-columns: minmax(0, 1.02fr) minmax(340px, .98fr); gap: clamp(46px, 7vw, 115px); align-items: center; }
+    .story-section .kicker { margin-bottom: 25px; }
+    .story-section h2 {
+      margin: 0 0 34px;
+      font-size: var(--section-title);
+      line-height: .83;
+      letter-spacing: -.07em;
+      text-transform: uppercase;
+      max-width: 10ch;
+    }
+    .story-copy { font-size: clamp(1.1rem, 1.7vw, 1.55rem); max-width: 38rem; }
+    .story-copy p { margin: 0 0 24px; }
+    .story-section--dark .story-copy { color: #c8c8c8; }
+
+    .system-map {
+      min-height: 480px;
+      border: 1px solid currentColor;
+      position: relative;
+      padding: clamp(22px, 3vw, 40px);
+      display: grid;
+      align-content: center;
+      gap: 20px;
+      overflow: hidden;
+    }
+    .system-map::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      opacity: .12;
+      background-image:
+        linear-gradient(currentColor 1px, transparent 1px),
+        linear-gradient(90deg, currentColor 1px, transparent 1px);
+      background-size: 28px 28px;
+    }
+    .system-node {
+      position: relative;
+      z-index: 1;
+      border: 1px solid currentColor;
+      padding: 16px 18px;
+      background: inherit;
+      font: 800 .73rem/1.1 var(--mono);
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .system-node b { color: var(--signal); }
+    .system-arrow { position: relative; z-index: 1; font: 800 1rem/1 var(--mono); text-align: center; }
+
+    .workflow {
+      border-top: 1px solid var(--line-dark);
+      border-bottom: 1px solid var(--line-dark);
+      position: relative;
+    }
+    .workflow__item {
+      display: grid;
+      grid-template-columns: 48px 1fr auto;
+      gap: 18px;
+      align-items: center;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line-dark);
+      font-family: var(--mono);
+    }
+    .workflow__item:last-child { border-bottom: 0; }
+    .workflow__item span:first-child { color: var(--signal); font-size: .72rem; font-weight: 900; }
+    .workflow__item strong { text-transform: uppercase; font-size: .78rem; letter-spacing: .04em; }
+    .workflow__item small { font-size: .68rem; color: #666; }
+
+    .explain-visual {
+      min-height: 500px;
+      border: 1px solid var(--line);
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+    .explain-visual::before {
+      content: "COMPLEXITY";
+      position: absolute;
+      right: -6px;
+      top: 10px;
+      font-size: clamp(3rem, 7vw, 7rem);
+      font-weight: 900;
+      letter-spacing: -.08em;
+      color: rgba(255,255,255,.055);
+    }
+    .chaos {
+      display: grid;
+      grid-template-columns: repeat(6,1fr);
+      gap: 7px;
+      height: 210px;
+      margin-bottom: 42px;
+      transform: rotate(-2deg);
+    }
+    .chaos i { display: block; border: 1px solid var(--line); min-height: 42px; }
+    .chaos i:nth-child(3n) { background: rgba(255,63,52,.14); }
+    .clarity {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 10px;
+    }
+    .clarity div { border: 1px solid var(--white); padding: 18px 12px; font: 800 .69rem/1.2 var(--mono); text-align: center; text-transform: uppercase; }
+    .clarity div:nth-child(2) { background: var(--signal); border-color: var(--signal); }
+
+    .selected-work { background: var(--white); padding: clamp(90px, 11vw, 160px) 0; }
+    .selected-work__header { display: grid; grid-template-columns: .65fr 1.35fr; gap: 40px; align-items: end; margin-bottom: 58px; }
+    .selected-work__header h2 { margin: 0; font-size: clamp(3rem, 7vw, 7.6rem); letter-spacing: -.065em; line-height: .86; max-width: 10ch; text-transform: uppercase; }
+    .selected-work__header p { margin: 0; font-size: var(--body-xl); line-height: 1.18; max-width: 42rem; }
+    .case { display: grid; grid-template-columns: 90px minmax(0, 1fr); border-top: 1px solid var(--line-dark); }
+    .case:last-child { border-bottom: 1px solid var(--line-dark); }
+    .case__number { font: 900 .75rem/1 var(--mono); color: var(--signal); padding-top: 34px; }
+    .case__body { padding: 30px 0 38px; display: grid; grid-template-columns: minmax(250px,.85fr) minmax(280px,1.15fr); gap: 45px; }
+    .case h3 { margin: 0; font-size: clamp(2.15rem, 4.4vw, 5rem); line-height: .88; letter-spacing: -.055em; text-transform: uppercase; }
+    .case__context { margin: 8px 0 0; font: 700 .68rem/1.3 var(--mono); text-transform: uppercase; letter-spacing: .05em; color: #555; }
+    .case__description { margin: 0; font-size: clamp(1.05rem,1.45vw,1.32rem); max-width: 42rem; }
+    .case__stack { margin-top: 18px; font: 700 .69rem/1.5 var(--mono); color: #505050; text-transform: uppercase; letter-spacing: .04em; }
+
+    .experience { background: var(--paper); padding: clamp(90px, 10vw, 150px) 0; }
+    .experience__headline { display: grid; grid-template-columns: .5fr 1.5fr; gap: 35px; align-items: start; margin-bottom: 70px; }
+    .experience h2 { margin: 0; font-size: clamp(3rem, 8vw, 8.5rem); line-height: .82; letter-spacing: -.07em; text-transform: uppercase; max-width: 10ch; }
+    .timeline { border-top: 1px solid var(--line-dark); }
+    .timeline__item { display: grid; grid-template-columns: 130px minmax(220px,.72fr) minmax(280px,1.28fr); gap: clamp(24px,4vw,70px); padding: 27px 0; border-bottom: 1px solid var(--line-dark); align-items: baseline; }
+    .timeline__year { font: 800 .75rem/1 var(--mono); color: #4f4f4f; }
+    .timeline__company { font-weight: 850; font-size: clamp(1.25rem,2vw,1.9rem); letter-spacing: -.035em; }
+    .timeline__role { font-size: clamp(1rem,1.35vw,1.2rem); color: #3c3c3c; }
+
+    .notes {
+      background: var(--ink);
+      color: var(--white);
+      padding: clamp(90px, 10vw, 150px) 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .notes::after {
+      content: "NOTES NOTES NOTES NOTES";
+      position: absolute;
+      bottom: -4vw;
+      left: -2vw;
+      font-size: clamp(6rem, 15vw, 15rem);
+      font-weight: 900;
+      line-height: .75;
+      white-space: nowrap;
+      letter-spacing: -.07em;
+      color: rgba(255,255,255,.035);
+      pointer-events: none;
+    }
+    .notes__grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 50px; position: relative; z-index: 1; }
+    .notes h2 { margin: 0; font-size: clamp(4rem,9vw,9rem); line-height: .82; letter-spacing: -.07em; text-transform: uppercase; }
+    .notes__copy { align-self: end; max-width: 44rem; }
+    .notes__copy p { margin: 0 0 32px; font-size: var(--body-xl); line-height: 1.2; color: #d2d2d2; }
+    .topics { display: flex; flex-wrap: wrap; gap: 8px; }
+    .topics span { border: 1px solid var(--line); padding: 9px 10px; font: 700 .7rem/1 var(--mono); letter-spacing: .05em; text-transform: uppercase; }
+
+    .about { background: var(--white); padding: clamp(90px, 10vw, 150px) 0; }
+    .about__grid { display: grid; grid-template-columns: .65fr 1.35fr; gap: clamp(40px,7vw,120px); }
+    .about h2 { margin: 0; font-size: clamp(3.2rem,7.2vw,7.8rem); line-height: .85; letter-spacing: -.065em; text-transform: uppercase; }
+    .about__copy { max-width: 50rem; }
+    .about__copy p { margin: 0 0 28px; font-size: clamp(1.2rem,1.9vw,1.75rem); line-height: 1.28; letter-spacing: -.02em; }
+    .about__facts { margin-top: 48px; border-top: 1px solid var(--line-dark); }
+    .about__fact { display: grid; grid-template-columns: 140px 1fr; gap: 20px; padding: 17px 0; border-bottom: 1px solid var(--line-dark); }
+    .about__fact dt { font: 800 .68rem/1.2 var(--mono); text-transform: uppercase; letter-spacing: .05em; color: #5c5c5c; }
+    .about__fact dd { margin: 0; font-size: .98rem; }
+
+    .contact {
+      background: var(--signal);
+      color: var(--ink);
+      min-height: 76svh;
+      display: flex;
+      align-items: center;
+      padding: clamp(90px, 10vw, 150px) 0;
+      overflow: hidden;
+      position: relative;
+    }
+    .contact::after {
+      content: "CONNECT";
+      position: absolute;
+      font-weight: 900;
+      font-size: 28vw;
+      letter-spacing: -.08em;
+      line-height: .8;
+      right: -4vw;
+      bottom: -10vw;
+      color: rgba(0,0,0,.08);
+      pointer-events: none;
+    }
+    .contact__inner { position: relative; z-index: 1; width: 100%; }
+    .contact h2 { margin: 0 0 36px; font-size: clamp(4.4rem, 13vw, 13rem); line-height: .74; letter-spacing: -.08em; text-transform: uppercase; max-width: 7ch; }
+    .contact p { font-size: var(--body-xl); max-width: 44rem; line-height: 1.15; margin: 0 0 38px; }
+    .contact__links { display: flex; flex-wrap: wrap; gap: 12px; }
+    .contact__links a {
+      border: 2px solid var(--ink);
+      padding: 13px 15px;
+      font: 900 .72rem/1 var(--mono);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      transition: background .16s ease, color .16s ease;
+    }
+    .contact__links a:hover { background: var(--ink); color: var(--white); }
+
+    footer { background: var(--ink); color: var(--white); padding: 25px 0 30px; }
+    .footer__inner { display: flex; justify-content: space-between; gap: 20px; align-items: center; font: 700 .66rem/1.2 var(--mono); text-transform: uppercase; letter-spacing: .05em; }
+    .footer__inner a { text-decoration: none; }
+
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .75s ease, transform .75s cubic-bezier(.2,.7,.2,1); }
+    .reveal.is-visible { opacity: 1; transform: translateY(0); }
+
+    @media (max-width: 900px) {
+      .hero__statement, .story-grid, .manifesto__grid, .principles-intro, .selected-work__header, .notes__grid, .about__grid, .experience__headline { grid-template-columns: 1fr; }
+      .hero__statement aside { border-left: 0; border-top: 1px solid var(--line); padding: 20px 0 0; }
+      .manifesto__copy { max-width: 50rem; }
+      .principle { grid-template-columns: 58px 1fr; }
+      .principle::before { display: none; }
+      .principle > div:last-child { grid-column: 2; }
+      .case__body { grid-template-columns: 1fr; gap: 18px; }
+      .timeline__item { grid-template-columns: 90px 1fr; }
+      .timeline__role { grid-column: 2; }
+      .site-header__inner { height: 62px; }
+      .hero { padding-top: 96px; }
+    }
+
+    @media (max-width: 640px) {
+      :root { --gutter: 18px; }
+      .nav a:nth-child(2), .nav a:nth-child(3) { display: none; }
+      .hero__topline { display: block; }
+      .hero__meta { margin-top: 18px; }
+      .hero__name { font-size: clamp(4.5rem, 24vw, 7.3rem); line-height: .78; }
+      .hero::after { width: 66vw; top: 17vh; right: -17vw; }
+      .principle { grid-template-columns: 44px 1fr; gap: 14px; }
+      .case { grid-template-columns: 46px 1fr; }
+      .timeline__item { grid-template-columns: 64px 1fr; gap: 15px; }
+      .about__fact { grid-template-columns: 105px 1fr; }
+      .footer__inner { align-items: flex-start; flex-direction: column; }
+      .system-map, .explain-visual { min-height: 390px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { animation-duration: .001ms !important; animation-iteration-count: 1 !important; transition-duration: .001ms !important; }
+      .reveal { opacity: 1; transform: none; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header" aria-label="Primary navigation">
+    <div class="shell site-header__inner">
+      <a class="brand" href="#top">Dominic Minischetti</a>
+      <nav class="nav" aria-label="Main menu">
+        <a href="#work">Work</a>
+        <a href="#experience">Experience</a>
+        <a href="#about">About</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top" aria-labelledby="hero-title">
+      <div class="shell hero__inner">
+        <div class="hero__topline reveal">
+          <p class="kicker eyebrow">Software / Data / Systems</p>
+          <p class="hero__meta">Technology professional with a strong engineering foundation, working across software, data, automation, and technology operations.</p>
+        </div>
+
+        <p class="hero__name reveal" aria-hidden="true">Dominic<br>Minischetti</p>
+
+        <div class="hero__statement reveal">
+          <h1 id="hero-title">I build technology, improve systems, and make complex things easier to understand.</h1>
+          <aside>
+            <p>Backend engineering, databases, integrations, automation, and cross-functional technology work. Based in Brooklyn, New York.</p>
+            <a class="text-link" href="#work">View selected work</a>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <div class="data-rail" aria-hidden="true">
+      <div class="data-rail__track">
+        <span>POST /api/v1/workflows <b>201 CREATED</b></span><span>SELECT * FROM systems WHERE friction = true;</span><span>QUEUE.PROCESS() <b>READY</b></span><span>DATA → STRUCTURE → DECISION</span><span>PHP · SQL · REST · AUTOMATION</span>
+        <span>POST /api/v1/workflows <b>201 CREATED</b></span><span>SELECT * FROM systems WHERE friction = true;</span><span>QUEUE.PROCESS() <b>READY</b></span><span>DATA → STRUCTURE → DECISION</span><span>PHP · SQL · REST · AUTOMATION</span>
+      </div>
+    </div>
+
+    <section class="manifesto">
+      <div class="shell manifesto__grid">
+        <p class="kicker reveal">A working principle</p>
+        <div>
+          <h2 class="reveal">Technology is rarely just a technology <em>problem.</em></h2>
+          <div class="manifesto__copy reveal">
+            <p>Good systems have to work for the software, the data, the process, and the people using them.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="work-principles" aria-labelledby="principles-title">
+      <div class="shell">
+        <div class="principles-intro reveal">
+          <p class="kicker">How I work</p>
+          <h2 id="principles-title">Build. Improve. Explain.</h2>
+        </div>
+
+        <div class="principles-list">
+          <article class="principle reveal">
+            <div class="principle__number">01</div>
+            <h3>Build</h3>
+            <div>
+              <p>Backend systems, integrations, databases, and automation designed around real requirements, not abstract technology for its own sake.</p>
+              <div class="principle__details" aria-label="Build technologies">
+                <span class="tag">PHP</span><span class="tag">SQL</span><span class="tag">REST APIs</span><span class="tag">Backend systems</span>
+              </div>
+            </div>
+          </article>
+          <article class="principle reveal">
+            <div class="principle__number">02</div>
+            <h3>Improve</h3>
+            <div>
+              <p>Understand operational friction, connect business needs to technology, and improve workflows, platforms, and the processes around them.</p>
+              <div class="principle__details" aria-label="Improve areas">
+                <span class="tag">Workflows</span><span class="tag">Automation</span><span class="tag">Integrations</span><span class="tag">Process design</span>
+              </div>
+            </div>
+          </article>
+          <article class="principle reveal">
+            <div class="principle__number">03</div>
+            <h3>Explain</h3>
+            <div>
+              <p>Turn technical complexity into structure: documentation, clear communication, knowledge sharing, and systems people can understand and use.</p>
+              <div class="principle__details" aria-label="Explain areas">
+                <span class="tag">Documentation</span><span class="tag">Technical communication</span><span class="tag">Knowledge sharing</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section story-section--white" aria-labelledby="build-title">
+      <div class="shell story-grid">
+        <div class="reveal">
+          <p class="kicker eyebrow">01 / Build</p>
+          <h2 id="build-title">Build systems that have a job to do.</h2>
+          <div class="story-copy">
+            <p>My background is rooted in backend engineering and databases, including enterprise applications, warehouse software, publishing platforms, and process-aware systems.</p>
+          </div>
+        </div>
+        <div class="system-map reveal" aria-label="Simplified backend system flow">
+          <div class="system-node"><span>01 / Request</span><b>Input</b></div>
+          <div class="system-arrow">↓</div>
+          <div class="system-node"><span>02 / API + Logic</span><b>Process</b></div>
+          <div class="system-arrow">↓</div>
+          <div class="system-node"><span>03 / Database</span><b>Persist</b></div>
+          <div class="system-arrow">↓</div>
+          <div class="system-node"><span>04 / Response</span><b>Useful output</b></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section story-section--light" aria-labelledby="improve-title">
+      <div class="shell story-grid">
+        <div class="reveal">
+          <p class="kicker eyebrow">02 / Improve</p>
+          <h2 id="improve-title">Software doesn't exist in isolation.</h2>
+          <div class="story-copy">
+            <p>Over time, my work expanded beyond implementation into workflow automation, system integrations, platform improvements, data-driven analysis, and translating operational needs into technology changes.</p>
+          </div>
+        </div>
+        <div class="workflow reveal" aria-label="Technology improvement workflow">
+          <div class="workflow__item"><span>01</span><strong>Business need</strong><small>UNDERSTAND</small></div>
+          <div class="workflow__item"><span>02</span><strong>Process</strong><small>STRUCTURE</small></div>
+          <div class="workflow__item"><span>03</span><strong>System</strong><small>DESIGN</small></div>
+          <div class="workflow__item"><span>04</span><strong>Data</strong><small>CONNECT</small></div>
+          <div class="workflow__item"><span>05</span><strong>People</strong><small>MAKE IT USABLE</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="story-section story-section--dark" aria-labelledby="explain-title">
+      <div class="shell story-grid">
+        <div class="reveal">
+          <p class="kicker eyebrow">03 / Explain</p>
+          <h2 id="explain-title">Complex doesn't have to mean confusing.</h2>
+          <div class="story-copy">
+            <p>I enjoy making technical concepts understandable, creating structured processes and documentation, and helping people use technology more effectively.</p>
+          </div>
+        </div>
+        <div class="explain-visual reveal" aria-hidden="true">
+          <div class="chaos">
+            <i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+          </div>
+          <div class="clarity"><div>Understand</div><div>Structure</div><div>Explain</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="selected-work" id="work" aria-labelledby="work-title">
+      <div class="shell">
+        <div class="selected-work__header reveal">
+          <p class="kicker">Selected work</p>
+          <div>
+            <h2 id="work-title">Problems, systems, outcomes.</h2>
+            <p>A selection of the kinds of systems and operational problems I have worked on across different industries.</p>
+          </div>
+        </div>
+
+        <article class="case reveal">
+          <div class="case__number">01</div>
+          <div class="case__body">
+            <div>
+              <h3>Operational software</h3>
+              <p class="case__context">Appliances Connection / Warehouse operations</p>
+            </div>
+            <div>
+              <p class="case__description">Built a Warehouse Management System around order fulfillment and inventory tracking, including interfaces for handheld devices used in operational workflows.</p>
+              <p class="case__stack">PHP / MySQL / JavaScript</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="case reveal">
+          <div class="case__number">02</div>
+          <div class="case__body">
+            <div>
+              <h3>Enterprise publishing</h3>
+              <p class="case__context">BLOX Digital / Media technology</p>
+            </div>
+            <div>
+              <p class="case__description">Backend development for a large-scale enterprise CMS, with work focused on PHP, SQL performance, reliability, deployments, and feature delivery.</p>
+              <p class="case__stack">PHP / SQL / Enterprise CMS</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="case reveal">
+          <div class="case__number">03</div>
+          <div class="case__body">
+            <div>
+              <h3>Data & automation</h3>
+              <p class="case__context">Call2U / Data systems</p>
+            </div>
+            <div>
+              <p class="case__description">Consolidated reporting into SQL Server solutions, maintained MySQL backends, developed automation tools and Power BI dashboards, and administered server environments.</p>
+              <p class="case__stack">SQL Server / MySQL / Power BI / Automation</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="case reveal">
+          <div class="case__number">04</div>
+          <div class="case__body">
+            <div>
+              <h3>Technology & process</h3>
+              <p class="case__context">Meditrial / Clinical technology</p>
+            </div>
+            <div>
+              <p class="case__description">Current work spans backend functionality, data-driven analysis, workflow automation, system integrations, platform improvements, and cross-functional technology initiatives in a regulated environment.</p>
+              <p class="case__stack">Backend / Data / Automation / Integrations / Process</p>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="experience" id="experience" aria-labelledby="experience-title">
+      <div class="shell">
+        <div class="experience__headline reveal">
+          <p class="kicker">Experience</p>
+          <h2 id="experience-title">From databases to software to systems.</h2>
+        </div>
+
+        <div class="timeline">
+          <div class="timeline__item reveal"><div class="timeline__year">2026 →</div><div class="timeline__company">Meditrial</div><div class="timeline__role">Data Solution Manager / Backend Software Developer</div></div>
+          <div class="timeline__item reveal"><div class="timeline__year">2025 →</div><div class="timeline__company">Humanetes</div><div class="timeline__role">Backend Engineering Contributor</div></div>
+          <div class="timeline__item reveal"><div class="timeline__year">2024–25</div><div class="timeline__company">BLOX Digital</div><div class="timeline__role">Backend PHP Developer</div></div>
+          <div class="timeline__item reveal"><div class="timeline__year">2022–24</div><div class="timeline__company">Appliances Connection</div><div class="timeline__role">Backend PHP Developer</div></div>
+          <div class="timeline__item reveal"><div class="timeline__year">2021–22</div><div class="timeline__company">Kingsleague</div><div class="timeline__role">Full Stack Developer</div></div>
+          <div class="timeline__item reveal"><div class="timeline__year">2010–15</div><div class="timeline__company">Call2U</div><div class="timeline__role">Data Analyst & Database Administrator</div></div>
+          <div class="timeline__item reveal"><div class="timeline__year">2006–08</div><div class="timeline__company">ASD Servizi</div><div class="timeline__role">Frontend Developer</div></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="notes" aria-labelledby="notes-title">
+      <div class="shell notes__grid">
+        <div class="reveal">
+          <p class="kicker eyebrow">Notes</p>
+          <h2 id="notes-title">Make it understandable.</h2>
+        </div>
+        <div class="notes__copy reveal">
+          <p>I use writing to clarify how software, data, and systems work. This section will grow with concise notes built around practical explanations, not content for content's sake.</p>
+          <div class="topics" aria-label="Planned note topics"><span>APIs</span><span>Databases</span><span>Automation</span><span>Systems</span><span>Technical communication</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="about" id="about" aria-labelledby="about-title">
+      <div class="shell about__grid">
+        <div class="reveal">
+          <p class="kicker">About</p>
+          <h2 id="about-title">A technical foundation. A wider lens.</h2>
+        </div>
+        <div class="about__copy reveal">
+          <p>I'm a technology professional based in Brooklyn, New York, with a background spanning database administration, software engineering, data, automation, and technology operations.</p>
+          <p>My career has moved through different kinds of systems and organizations, but the part of the work I continue to enjoy most is the same: understand the problem, create structure around it, and find a practical way to solve it.</p>
+          <dl class="about__facts">
+            <div class="about__fact"><dt>Education</dt><dd>Bachelor of Technology, Computer Information Systems, Database Track, CUNY New York City College of Technology</dd></div>
+            <div class="about__fact"><dt>Languages</dt><dd>English and Italian, bilingual; Spanish, elementary</dd></div>
+            <div class="about__fact"><dt>Location</dt><dd>Brooklyn, New York</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact" aria-labelledby="contact-title">
+      <div class="shell contact__inner reveal">
+        <p class="kicker">Get in touch</p>
+        <h2 id="contact-title">Let's connect.</h2>
+        <p>If my background seems relevant to something you're working on, I'd be glad to hear from you.</p>
+        <div class="contact__links">
+          <a href="mailto:dominic.minischetti@gmail.com">Email me ↗</a>
+          <a href="https://www.linkedin.com/in/dminischetti" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+          <a href="https://github.com/dminischetti" target="_blank" rel="noopener noreferrer">GitHub ↗</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="shell footer__inner">
+      <span>© <span id="year">2026</span> Dominic Minischetti</span>
+      <span>Brooklyn, New York</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+
+  <script>
+    (() => {
+      const year = document.getElementById('year');
+      if (year) year.textContent = new Date().getFullYear();
+
+      const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const revealItems = document.querySelectorAll('.reveal');
+
+      if (reduced || !('IntersectionObserver' in window)) {
+        revealItems.forEach((el) => el.classList.add('is-visible'));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add('is-visible');
+          obs.unobserve(entry.target);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -7% 0px' });
+
+      revealItems.forEach((el) => observer.observe(el));
+    })();
+  </script>
+</body>
+</html>
